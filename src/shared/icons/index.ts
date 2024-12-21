@@ -1,0 +1,5 @@
+export { Home } from './Home'
+export { Delivery } from './Delivery'
+export { Features } from './Features'
+export { Catalog } from './Catalog'
+export { Account } from './Account'
