@@ -1,0 +1,37 @@
+.wrapper {
+	--color: var(--white-200);
+	--inpColor: var(--grey-200);
+	--content-gap: 5px;
+}
+.input {
+	background-color: transparent;
+	flex-grow: 1;
+	color: var(--inpColor);
+	font-size: 16px;
+	font-family: Inter-M;
+	padding: 10px 0;
+	&::placeholder {
+		font-size: inherit;
+		font-family: inherit;
+		color: var(--color);
+	}
+}
+.content {
+	display: flex;
+	align-items: center;
+	padding: 0 14px;
+	border: 1px solid var(--color);
+	border-radius: var(--blocks-radius);
+	&.has_icon {
+		.input {
+			padding-left: 8px;
+		}
+	}
+}
+.label {
+	margin-bottom: var(--content-gap);
+}
+.error {
+	color: var(--red-100);
+	margin-top: var(--content-gap);
+}

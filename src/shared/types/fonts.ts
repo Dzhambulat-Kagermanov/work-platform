@@ -1,0 +1,11 @@
+export type TFontFamilies =
+	| 'Inter-R'
+	| 'Inter-M'
+	| 'Inter-SB'
+	| 'Inter-B'
+	| 'PlusJakartaSans-M'
+	| 'PlusJakartaSans-SB'
+	| 'PlusJakartaSans-B'
+	| 'PlusJakartaSans-EB'
+	| 'DMSans-R'
+	| 'DMSans-B'

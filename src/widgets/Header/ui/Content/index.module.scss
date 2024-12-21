@@ -1,0 +1,34 @@
+.content {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	column-gap: 45px;
+}
+.logo {
+}
+.inp_wrapper {
+	flex-grow: 1;
+	.inp_content {
+		padding: 0 16px;
+		border-width: 2px;
+		border-color: var(--purple-100);
+	}
+	.inp {
+		padding: 12px 0;
+		color: var(--white-100);
+		&::placeholder {
+			color: var(--purple-100);
+		}
+	}
+	.inp_icon {
+		cursor: pointer;
+		path {
+			transition: var(--tran-low);
+		}
+		&:hover {
+			path {
+				stroke: var(--white-100);
+			}
+		}
+	}
+}

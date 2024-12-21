@@ -1,21 +1,72 @@
 @font-face {
-	font-family: 'Muller-R';
+	font-family: 'Inter-R';
 	font-style: normal;
 	font-weight: 400;
 	font-display: swap;
-	src: url(/fonts/Muller-Regular.otf);
+	src: url(/fonts/Inter-Regular.otf);
 }
 @font-face {
-	font-family: 'Raleway-M';
+	font-family: 'Inter-M';
 	font-style: normal;
 	font-weight: 500;
 	font-display: swap;
-	src: url(/fonts/Raleway-Medium.ttf);
+	src: url(/fonts/Inter-Medium.otf);
 }
 @font-face {
-	font-family: 'Raleway-SB';
+	font-family: 'Inter-SB';
 	font-style: normal;
 	font-weight: 600;
 	font-display: swap;
-	src: url(/fonts/Raleway-SemiBold.ttf);
+	src: url(/fonts/Inter-SemiBold.otf);
+}
+@font-face {
+	font-family: 'Inter-B';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url(/fonts/Inter-Bold.otf);
+}
+
+@font-face {
+	font-family: 'PlusJakartaSans-M';
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url(/fonts/PlusJakartaSans-Medium.ttf);
+}
+@font-face {
+	font-family: 'PlusJakartaSans-SB';
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url(/fonts/PlusJakartaSans-SemiBold.ttf);
+}
+@font-face {
+	font-family: 'PlusJakartaSans-B';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url(/fonts/PlusJakartaSans-Bold.ttf);
+}
+@font-face {
+	font-family: 'PlusJakartaSans-EB';
+	font-style: normal;
+	font-weight: 800;
+	font-display: swap;
+	src: url(/fonts/PlusJakartaSans-ExtraBold.ttf);
+}
+
+@font-face {
+	font-family: 'DMSans-R';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url(/fonts/DMSans-Regular.ttf);
+}
+@font-face {
+	font-family: 'DMSans-B';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url(/fonts/DMSans-Bold.ttf);
 }

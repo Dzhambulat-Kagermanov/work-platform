@@ -1,10 +1,14 @@
 :root {
 	--purple-100: #9575d6;
 	--purple-200: #53389e;
-	--purple-300: #4a3aff;
-	--purple-400: #170f49;
+	--purple-300: #7f56d9;
+	--purple-400: #4a3aff;
+	--purple-500: #170f49;
+
+	--red-100: rgb(248, 53, 53);
 
 	--white-100: #fff;
+	--white-200: #d0d5dd;
 
 	--black-100: #000;
 
@@ -15,7 +19,11 @@
 
 	--header-height: 100px;
 
+	--tran-low: 0.2s ease;
+
 	--adaptive-container-width: 1350px;
+
+	--blocks-radius: 8px;
 }
 * {
 	scroll-behavior: smooth;
