@@ -3,8 +3,8 @@ import { TModuleClassName } from '@/shared/types'
 import { cn } from '@/shared/lib'
 import { Container, Typography } from '@/shared/ui'
 import { Content } from './Content'
-import cls from './index.module.scss'
 import Link from 'next/link'
+import cls from './index.module.scss'
 
 interface Props extends TModuleClassName {}
 const Header: FC<Props> = ({ className, wrapperClassName }) => {

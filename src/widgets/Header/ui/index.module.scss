@@ -1,4 +1,7 @@
 .wrapper {
+	position: sticky;
+	left: 0;
+	top: 0;
 	background-color: var(--purple-200);
 }
 .container {
@@ -13,5 +16,5 @@
 	}
 }
 .content {
-	margin-top: 5px;
+	margin-top: 11px;
 }
