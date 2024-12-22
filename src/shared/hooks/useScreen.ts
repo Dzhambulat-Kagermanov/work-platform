@@ -7,6 +7,7 @@ export const useScreen = (): number => {
 			setScreenWidth(event.target.innerWidth)
 		}
 		if (typeof window !== 'undefined') {
+			setScreenWidth(window.innerWidth)
 			window.addEventListener('resize', handleResize)
 		}
 		return () => {

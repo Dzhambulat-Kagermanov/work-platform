@@ -1,4 +1,5 @@
 import { TChildren } from '@/shared/types'
+import { Footer } from '@/widgets/Footer'
 import { Header } from '@/widgets/Header'
 import { FC } from 'react'
 
@@ -8,6 +9,7 @@ const HeaderFooter: FC<Props> = ({ children }) => {
 		<>
 			<Header />
 			{children}
+			<Footer />
 		</>
 	)
 }

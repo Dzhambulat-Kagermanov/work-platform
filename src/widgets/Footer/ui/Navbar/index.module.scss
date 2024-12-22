@@ -1,0 +1,19 @@
+.navbar {
+	display: flex;
+	column-gap: 170px;
+	.title {
+		color: var(--purple-500);
+	}
+	.row {
+		& > p {
+			color: var(--purple-500);
+		}
+		.content {
+			display: flex;
+			flex-flow: column;
+			row-gap: 18px;
+			margin-top: 40px;
+			color: var(--grey-200);
+		}
+	}
+}
