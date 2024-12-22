@@ -9,9 +9,10 @@
 .inp_wrapper {
 	flex-grow: 1;
 	.inp_content {
+		border-color: var(--purple-100);
+		background-color: var(--purple-600);
 		padding: 0 16px;
 		border-width: 2px;
-		border-color: var(--purple-100);
 	}
 	.inp {
 		padding: 12px 0;

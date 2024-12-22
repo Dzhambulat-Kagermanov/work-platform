@@ -1,0 +1,19 @@
+.btn {
+	display: flex;
+	row-gap: 4px;
+	flex-flow: column;
+	width: 24px;
+	justify-content: space-between;
+	height: 18px;
+	opacity: 0.7;
+	transition: var(--tran-low);
+	&:hover {
+		opacity: 1;
+	}
+	span {
+		width: 100%;
+		height: 2px;
+		border-radius: 20px;
+		background-color: var(--white-100);
+	}
+}

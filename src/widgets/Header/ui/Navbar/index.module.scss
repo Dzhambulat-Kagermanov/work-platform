@@ -2,11 +2,12 @@
 	display: flex;
 	column-gap: 45px;
 	align-items: center;
+	--icon-width: 24px;
 }
 .link {
 	transition: var(--tran-low);
 	opacity: 0.7;
-	padding: 12px;
+	padding: calc(var(--icon-width) / 2);
 	border-radius: 6px;
 	display: flex;
 	&:not(.active_link):hover {
@@ -17,7 +18,7 @@
 		background-color: var(--purple-300);
 	}
 	svg {
-		width: 24px;
-		height: 24px;
+		width: var(--icon-width);
+		height: var(--icon-width);
 	}
 }

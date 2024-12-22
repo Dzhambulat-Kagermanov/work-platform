@@ -10,11 +10,12 @@ import {
 	HomeIcon,
 } from '@/shared/icons'
 import cls from './index.module.scss'
+import adt from '../adaptive.module.scss'
 
 interface Props extends TClassName {}
 const Navbar: FC<Props> = ({ className }) => {
 	return (
-		<nav className={cn(cls.wrapper, [className])}>
+		<nav className={cn(cls.wrapper, [className, adt.navbar])}>
 			<ActiveLink
 				href='/'
 				className={cn(cls.link)}
@@ -34,7 +35,7 @@ const Navbar: FC<Props> = ({ className }) => {
 				className={cn(cls.link)}
 				activeCls={cn(cls.active_link)}
 			>
-				<FavoriteIcon color='white' />
+				<FavoriteIcon stroke='white' />
 			</ActiveLink>
 			<ActiveLink
 				href='/delivery'

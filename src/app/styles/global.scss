@@ -4,11 +4,14 @@
 	--purple-300: #7f56d9;
 	--purple-400: #4a3aff;
 	--purple-500: #170f49;
+	--purple-600: #6941c6;
+	--purple-700: #ac5dfb;
 
 	--red-100: rgb(248, 53, 53);
 
 	--white-100: #fff;
 	--white-200: #d0d5dd;
+	--white-300: #f2f4f7;
 
 	--black-100: #000;
 
@@ -18,8 +21,11 @@
 	--grey-400: #2a2e36;
 
 	--header-height: 100px;
+	--header-z: 10;
 
 	--tran-low: 0.2s ease;
+
+	--modules-gap: 25px;
 
 	--adaptive-container-width: 1350px;
 
@@ -34,41 +40,56 @@ html {
 body {
 }
 
+.modules-gap-bottom {
+	margin-bottom: var(--modules-gap) !important;
+}
+.modules-gap-top {
+	margin-top: var(--modules-gap) !important;
+}
+
+/* LG_BIG */
 @media screen and (max-width: 1370px) {
 	body {
 		--adaptive-container-width: 1280px;
 	}
 }
+/* LG_LOW */
 @media screen and (max-width: 1300px) {
 	body {
 		--adaptive-container-width: 1024px;
 	}
 }
+/* MD_BIG */
 @media screen and (max-width: 1044px) {
 	body {
 		--adaptive-container-width: 850px;
 	}
 }
+/* MD_LOW */
 @media screen and (max-width: 870px) {
 	body {
 		--adaptive-container-width: 768px;
 	}
 }
+/* SM_BIG */
 @media screen and (max-width: 788px) {
 	body {
 		--adaptive-container-width: 600px;
 	}
 }
+/* SM_MID */
 @media screen and (max-width: 620px) {
 	body {
 		--adaptive-container-width: 480px;
 	}
 }
+/* XS_BIG */
 @media screen and (max-width: 500px) {
 	body {
 		--adaptive-container-width: 360px;
 	}
 }
+/* XS_LOW */
 @media screen and (max-width: 380px) {
 	body {
 		--adaptive-container-width: 345px;
