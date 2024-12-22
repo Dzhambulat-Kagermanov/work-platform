@@ -72,7 +72,11 @@ const ProductItem: FC<Props> = memo(
 						<Typography font='Inter-SB' size={18} tag='h5'>
 							{!!disc ? Math.floor(prc - (prc / 100) * disc) : prc} ₽
 						</Typography>
-						{tip && <HelpIcon color='var(--grey-300)' />}
+						{tip && (
+							<div title={tip} className={cn(cls.tip)}>
+								<HelpIcon color='var(--grey-300)' />
+							</div>
+						)}
 						{!!disc && (
 							<Typography font='Inter-R' size={14} tag='h6'>
 								{prc} ₽

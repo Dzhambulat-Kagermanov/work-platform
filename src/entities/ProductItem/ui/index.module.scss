@@ -49,12 +49,16 @@
 		display: flex;
 		align-items: center;
 		column-gap: 8px;
-		svg {
-			margin: 0 19px 0 3px;
-			path {
+
+		.tip {
+			display: flex;
+			align-items: center;
+			margin: 0 19px 0 5px;
+			svg {
 			}
 		}
 		h5 {
+			color: var(--purple-500);
 		}
 		h6 {
 			color: var(--grey-200);
@@ -69,6 +73,7 @@
 		text-overflow: ellipsis;
 	}
 	h4 {
+		color: var(--purple-500);
 		margin-top: 4px;
 	}
 }
