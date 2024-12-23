@@ -1,0 +1,1 @@
+export { ProductCardInfo } from './ui'

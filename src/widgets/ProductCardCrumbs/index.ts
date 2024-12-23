@@ -1,0 +1,1 @@
+export { ProductCardCrumbs } from './ui'
