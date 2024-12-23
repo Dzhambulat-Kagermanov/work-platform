@@ -11,8 +11,8 @@ const HeadPart: FC<Props> = ({ className }) => {
 	return (
 		<div className={cn(cls.head, [className])}>
 			<Socialbar />
-			<Navbar />
-			<Contactsbar />
+			<Navbar className={cn(cls.navbar)} />
+			<Contactsbar className={cn(cls.contacts)} />
 		</div>
 	)
 }

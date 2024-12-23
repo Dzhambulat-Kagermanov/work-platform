@@ -3,6 +3,7 @@
 	display: flex;
 	justify-content: space-between;
 	h6 {
+		translate: 0 4px;
 		color: var(--grey-200);
 	}
 }
@@ -22,5 +23,23 @@
 			background-color: var(--purple-400);
 			position: absolute;
 		}
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.wrapper {
+		flex-flow: column;
+		& > h5 {
+			line-height: 220%;
+			text-align: center;
+			color: var(--grey-200);
+		}
+	}
+	.social {
+		justify-content: center;
+		margin: 35px 0;
+	}
+	.content {
+		justify-content: center;
 	}
 }

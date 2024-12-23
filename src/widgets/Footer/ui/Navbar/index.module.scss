@@ -17,3 +17,32 @@
 		}
 	}
 }
+
+@media screen and (max-width: 1300px) {
+	.navbar {
+		column-gap: 100px;
+	}
+}
+
+@media screen and (max-width: 1044px) {
+	.navbar {
+		column-gap: 40px;
+	}
+}
+
+@media screen and (max-width: 870px) {
+	.navbar {
+		column-gap: 80px;
+	}
+}
+
+@media screen and (max-width: 788px) {
+	.navbar {
+		column-gap: 40px;
+	}
+}
+@media screen and (max-width: 620px) {
+	.navbar {
+		column-gap: 80px;
+	}
+}
