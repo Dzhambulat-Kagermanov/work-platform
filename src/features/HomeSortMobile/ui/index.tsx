@@ -3,7 +3,7 @@ import cls from './index.module.scss'
 import { cn } from '@/shared/lib'
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {}
-const HomeSort: FC<Props> = ({ className, ...other }) => {
+const HomeSortMobile: FC<Props> = ({ className, ...other }) => {
 	return (
 		<button className={cn(cls.btn, [className])} {...other}>
 			<span></span>
@@ -13,4 +13,4 @@ const HomeSort: FC<Props> = ({ className, ...other }) => {
 	)
 }
 
-export { HomeSort }
+export { HomeSortMobile }

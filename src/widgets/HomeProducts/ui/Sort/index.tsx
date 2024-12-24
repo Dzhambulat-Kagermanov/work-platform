@@ -6,7 +6,7 @@ import { Dropdown, Typography } from '@/shared/ui'
 import cls from './index.module.scss'
 import { useScreen } from '@/shared/hooks'
 import { SM_MID } from '@/shared/constants'
-import { HomeSort } from '@/features/HomeSort'
+import { HomeSortMobile } from '@/features/HomeSortMobile'
 
 interface Props extends TClassName {}
 const Sort: FC<Props> = ({ className }) => {
@@ -107,7 +107,7 @@ const Sort: FC<Props> = ({ className }) => {
 					/>
 				</div>
 			) : (
-				<HomeSort />
+				<HomeSortMobile />
 			)}
 		</>
 	)
