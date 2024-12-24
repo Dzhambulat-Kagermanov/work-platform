@@ -39,7 +39,6 @@ const ProductCardInfo: FC<Props> = ({
 						data={{
 							name,
 							price,
-							quantities,
 							salesman,
 							tooltip,
 						}}
