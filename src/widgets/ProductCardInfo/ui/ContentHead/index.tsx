@@ -3,8 +3,8 @@ import { TClassName, TProductItemProps } from '@/shared/types'
 import { cn } from '@/shared/lib'
 import { Typography } from '@/shared/ui'
 import { Ratingbar } from '@/shared/ui'
+import { TooltipButton } from '@/shared/ui'
 import cls from './index.module.scss'
-import { TooltipButton } from '@/shared/ui/TooltipButton'
 
 interface Props
 	extends TClassName,

@@ -41,6 +41,8 @@ const ProductCardInfo: FC<Props> = ({
 							price,
 							salesman,
 							tooltip,
+							id,
+							isFavorite,
 						}}
 					/>
 				</div>
