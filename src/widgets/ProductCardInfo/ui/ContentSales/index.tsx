@@ -1,13 +1,15 @@
 import { FC } from 'react'
-import { TClassName, TProductItemProps } from '@/shared/types'
+import { TClassName, TSalesmanInfo } from '@/shared/types'
 import { cn } from '@/shared/lib'
 import { Typography } from '@/shared/ui'
 import cls from './index.module.scss'
 
-interface Props extends TClassName, Pick<TProductItemProps, 'salesman'> {}
+interface Props extends TClassName {
+	salesman: Pick<TSalesmanInfo, 'boughtOut' | 'productsWithCashback'>
+}
 const ContentSales: FC<Props> = ({
-	salesman: { boughtOut, productsWithCashback },
 	className,
+	salesman: { boughtOut, productsWithCashback },
 }) => {
 	return (
 		<div className={cn(cls.wrapper, [className])}>

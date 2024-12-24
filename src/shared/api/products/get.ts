@@ -29,12 +29,7 @@ export const getCashbackProducts = (): Promise<TGetCashbackProducts> => {
 					tooltip: 'Подсказка',
 					productDescription:
 						'Быстрая зарядка для iPhone 20W с разъемом TYPE-C. Представляем Вашему вниманию адаптер быстрой зарядки который сможет зарядить ваш смартфон за считан ...',
-					salesman: {
-						id: index + 1,
-						boughtOut: 12,
-						productsWithCashback: 0,
-						rating: 3.7,
-					},
+					salesmanId: index + 1,
 				}
 			})
 		)

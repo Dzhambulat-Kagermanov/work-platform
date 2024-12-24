@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import '@/app/styles/index.scss'
+import { QueryClientLayout } from '@/app/layouts/QueryClient'
 
 export const metadata: Metadata = {
 	title: 'Платформа',
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body>{children}</body>
+			<body>
+				<QueryClientLayout>{children}</QueryClientLayout>
+			</body>
 		</html>
 	)
 }

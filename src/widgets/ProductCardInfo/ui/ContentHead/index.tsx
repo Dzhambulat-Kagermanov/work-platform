@@ -1,5 +1,5 @@
 import { FC, memo } from 'react'
-import { TClassName, TProductItemProps } from '@/shared/types'
+import { TClassName, TProductItemProps, TSalesmanInfo } from '@/shared/types'
 import { cn } from '@/shared/lib'
 import { Typography } from '@/shared/ui'
 import { Ratingbar } from '@/shared/ui'
@@ -16,12 +16,15 @@ interface Props
 			| 'quantities'
 			| 'id'
 			| 'productDescription'
-		> {}
+			| 'salesmanId'
+		> {
+	salesman: Pick<TSalesmanInfo, 'rating'>
+}
 const ContentHead: FC<Props> = memo(
 	({
 		name,
 		price: { price, discount },
-		salesman: { boughtOut, productsWithCashback, rating },
+		salesman: { rating },
 		className,
 		tooltip,
 	}) => {

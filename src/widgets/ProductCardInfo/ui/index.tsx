@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { TClassName, TModuleClassName, TProductItemProps } from '@/shared/types'
+import { TModuleClassName, TProductItemProps } from '@/shared/types'
 import { cn } from '@/shared/lib'
 import { Container } from '@/shared/ui'
 import { Gallery } from './Gallery'
@@ -20,7 +20,7 @@ const ProductCardInfo: FC<Props> = ({
 		price,
 		productDescription,
 		quantities,
-		salesman,
+		salesmanId,
 		isFavorite,
 		tooltip,
 	},
@@ -39,7 +39,7 @@ const ProductCardInfo: FC<Props> = ({
 						data={{
 							name,
 							price,
-							salesman,
+							salesmanId,
 							tooltip,
 							id,
 							isFavorite,

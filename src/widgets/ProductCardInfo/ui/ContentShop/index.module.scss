@@ -1,0 +1,32 @@
+.wrapper {
+	width: 359px;
+	padding: 12px 14px;
+	border: 1px solid var(--black-opacity-10);
+	background-color: var(--white-300);
+	border-radius: var(--blocks-radius);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	h6 {
+	}
+	.link {
+		text-decoration: underline;
+		color: var(--black-opacity-60);
+		text-decoration-color: var(--black-opacity-60);
+		text-underline-offset: 4px;
+	}
+}
+.content {
+	display: flex;
+	align-items: center;
+	column-gap: 14px;
+}
+.rating {
+	display: flex;
+	align-items: center;
+	column-gap: 2px;
+	img {
+	}
+	p {
+	}
+}

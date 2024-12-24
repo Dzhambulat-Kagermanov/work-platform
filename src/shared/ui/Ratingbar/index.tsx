@@ -4,6 +4,7 @@ import { cn } from '@/shared/lib'
 import { Typography } from '../Typography'
 import { starsPosition } from './lib/starsPosition'
 import cls from './index.module.scss'
+import Image from 'next/image'
 
 interface Props extends TClassName {
 	rating: number
@@ -19,18 +20,22 @@ const Ratingbar: FC<Props> = ({ rating, className }) => {
 						case 'full':
 							return (
 								<li className={cn(cls.star, [cls.full])} key={index}>
-									<img
+									<Image
 										src={'/images/shared/rating/full-star.svg'}
 										alt='Полная звезда'
+										width={18}
+										height={18}
 									/>
 								</li>
 							)
 						case 'half':
 							return (
 								<li className={cn(cls.star, [cls.half])} key={index}>
-									<img
+									<Image
 										src={'/images/shared/rating/half-star.svg'}
 										alt='Половина звезды'
+										width={18}
+										height={18}
 									/>
 								</li>
 							)
