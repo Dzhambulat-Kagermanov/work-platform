@@ -12,7 +12,7 @@ interface Props extends TTag {
 		price: number
 		discount?: number
 	}
-	tip?: string
+	tooltip?: string
 	quantities?: number
 	name: string
 	image: string
@@ -29,7 +29,7 @@ const ProductItem: FC<Props> = memo(
 		name,
 		isFavorite,
 		quantities,
-		tip,
+		tooltip,
 		tag = 'div',
 		contentCls,
 		headCls,
@@ -37,13 +37,13 @@ const ProductItem: FC<Props> = memo(
 	}) => {
 		const Tag = tag
 		const disc = price.discount
-		const prc = Math.floor(price.price)
+		const prc = price.price
 
 		return (
 			<Tag
 				className={cn(cls.item, [wrapperCls], {
 					[cls.isFavorite]: !!isFavorite,
-					[cls.hasTip]: !!tip,
+					[cls.hasTooltip]: !!tooltip,
 					[cls.hasDiscount]: !!disc,
 				})}
 			>
@@ -80,12 +80,12 @@ const ProductItem: FC<Props> = memo(
 				<div className={cn(cls.content, [contentCls])}>
 					<div className={cn(cls.price)}>
 						<Typography font='Inter-SB' size={18} tag='h5'>
-							{!!disc ? Math.floor(prc - (prc / 100) * disc) : prc} ₽
+							{!!disc ? (prc - (prc / 100) * disc).toFixed(2) : prc} ₽
 						</Typography>
-						{tip && (
+						{tooltip && (
 							<div
-								title={tip}
-								className={cn(cls.tip)}
+								title={tooltip}
+								className={cn(cls.tooltip)}
 								onClick={e => {
 									e.preventDefault()
 								}}
@@ -95,7 +95,7 @@ const ProductItem: FC<Props> = memo(
 						)}
 						{!!disc && (
 							<Typography font='Inter-R' size={14} tag='h6'>
-								{prc} ₽
+								{prc.toFixed(2)} ₽
 							</Typography>
 						)}
 					</div>

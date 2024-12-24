@@ -6,6 +6,7 @@
 	--purple-500: #170f49;
 	--purple-600: #6941c6;
 	--purple-700: #ac5dfb;
+	--purple-800: #baa4ec;
 
 	--red-100: rgb(248, 53, 53);
 
@@ -39,6 +40,7 @@ html {
 	overflow-x: hidden;
 }
 body {
+	color: var(--grey-400);
 }
 
 .modules-gap-bottom {

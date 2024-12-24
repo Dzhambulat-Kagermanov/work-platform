@@ -13,7 +13,15 @@ const Products: FC<Props> = async ({ className }) => {
 	return (
 		<ul className={cn(cls.wrapper, [className])}>
 			{items.map(
-				({ previewImage, name, price, quantities, isFavorite, tip, id }) => {
+				({
+					previewImage,
+					name,
+					price,
+					quantities,
+					isFavorite,
+					tooltip,
+					id,
+				}) => {
 					return (
 						<Link href={`/${id}`} key={id}>
 							<ProductItem
@@ -21,7 +29,7 @@ const Products: FC<Props> = async ({ className }) => {
 								headCls={cn(cls.product_head)}
 								isFavorite={isFavorite}
 								name={name}
-								tip={tip}
+								tooltip={tooltip}
 								quantities={quantities}
 								image={previewImage}
 								price={price}

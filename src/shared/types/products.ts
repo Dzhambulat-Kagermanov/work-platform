@@ -9,8 +9,9 @@ export type TProductItemProps = {
 		price: number
 		discount?: number
 	}
-	tip?: string
+	tooltip?: string
 	salesman: {
+		id: number
 		rating: number
 		productsWithCashback: number
 		boughtOut: number

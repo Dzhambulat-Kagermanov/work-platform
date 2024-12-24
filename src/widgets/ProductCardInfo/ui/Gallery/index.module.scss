@@ -1,0 +1,29 @@
+.wrapper {
+	display: grid;
+	grid-template-columns: 126px 400px;
+	row-gap: 6px;
+	column-gap: 20px;
+	--item-radius: 20px;
+}
+.scrollbar {
+	display: flex;
+	flex-flow: column;
+	row-gap: 14px;
+	.item {
+		flex: 1;
+		overflow: hidden;
+		border-radius: var(--item-radius);
+	}
+	.stub {
+		border-radius: var(--item-radius);
+		background-color: var(--white-300);
+	}
+}
+.active {
+	overflow: hidden;
+	border-radius: var(--item-radius);
+}
+.next_images {
+	display: flex;
+	justify-content: center;
+}

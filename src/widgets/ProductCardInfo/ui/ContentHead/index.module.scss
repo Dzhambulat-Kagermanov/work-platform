@@ -1,0 +1,29 @@
+.head {
+	border-bottom: 1px solid var(--grey-100);
+	& > h2 {
+	}
+}
+.rating {
+	margin: 12px 0 17px 0;
+}
+.price {
+	display: flex;
+	align-items: center;
+	column-gap: 20px;
+	h5 {
+		translate: 0 2px;
+	}
+	h6 {
+		translate: 0 2px;
+		text-decoration: line-through;
+		color: var(--grey-100);
+	}
+	.tooltip {
+		translate: 0 4px;
+	}
+	&.hasDiscount {
+		h5 {
+			color: var(--purple-300);
+		}
+	}
+}

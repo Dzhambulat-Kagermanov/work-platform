@@ -3,9 +3,9 @@ import { TClassName } from '@/shared/types'
 import { cn } from '@/shared/lib'
 import { ProductCardCrumbs } from '@/widgets/ProductCardCrumbs'
 import { ProductCardInfo } from '@/widgets/ProductCardInfo'
-import cls from './index.module.scss'
 import { getCashbackProduct } from '@/shared/api/products/get'
 import { notFound } from 'next/navigation'
+import cls from './index.module.scss'
 
 interface Props extends TClassName {
 	id: number
@@ -34,7 +34,7 @@ const ProductCardPage: FC<Props> = async ({ className, id }) => {
 				]}
 				className={cn(cls.crumbs, ['modules-gap-top'])}
 			/>
-			<ProductCardInfo data={data} className={cn(cls.info)} />
+			<ProductCardInfo data={data} wrapperClassName={cn(cls.info)} />
 		</main>
 	)
 }

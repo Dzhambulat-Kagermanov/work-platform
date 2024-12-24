@@ -1,0 +1,21 @@
+.rating {
+	display: flex;
+	column-gap: 9px;
+	align-items: center;
+}
+.stars {
+	display: flex;
+	align-items: center;
+	column-gap: 7px;
+}
+.star {
+	width: 18px;
+	height: 18px;
+
+	&.full {
+	}
+	&.half {
+	}
+	&.empty {
+	}
+}

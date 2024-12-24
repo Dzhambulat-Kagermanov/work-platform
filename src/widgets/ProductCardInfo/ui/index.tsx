@@ -1,15 +1,17 @@
 import { FC } from 'react'
-import { TClassName, TProductItemProps } from '@/shared/types'
+import { TClassName, TModuleClassName, TProductItemProps } from '@/shared/types'
 import { cn } from '@/shared/lib'
 import { Container } from '@/shared/ui'
+import { Gallery } from './Gallery'
+import { Content } from './Content'
 import cls from './index.module.scss'
-import { Gallery } from '../Gallery'
 
-interface Props extends TClassName {
+interface Props extends TModuleClassName {
 	data: TProductItemProps
 }
 const ProductCardInfo: FC<Props> = ({
 	className,
+	wrapperClassName,
 	data: {
 		id,
 		images,
@@ -20,13 +22,31 @@ const ProductCardInfo: FC<Props> = ({
 		quantities,
 		salesman,
 		isFavorite,
-		tip,
+		tooltip,
 	},
 }) => {
 	return (
-		<Container className={cn(cls.container, [className])}>
-			<Gallery className={cn(cls.gallery)} images={images} />
-		</Container>
+		<div className={cn(cls.wrapper, [wrapperClassName])}>
+			<Container className={cn(cls.container, [className])}>
+				<div className={cn(cls.head)}>
+					<Gallery
+						className={cn(cls.gallery)}
+						images={images}
+						isFavorite={isFavorite}
+					/>
+					<Content
+						className={cn(cls.content)}
+						data={{
+							name,
+							price,
+							quantities,
+							salesman,
+							tooltip,
+						}}
+					/>
+				</div>
+			</Container>
+		</div>
 	)
 }
 

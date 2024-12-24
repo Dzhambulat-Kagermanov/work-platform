@@ -18,22 +18,22 @@ export const getCashbackProducts = (): Promise<TGetCashbackProducts> => {
 					images: [
 						'/images/stub/product-stub.png',
 						'/images/stub/product-stub-2.png',
-						'/images/stub/product-stub-3.png',
 					],
 					isFavorite: true,
-					name: 'Рюкзак школьный городск..',
+					name: 'Зарядка для iphone 20W type-c быстрое устройство',
 					price: {
 						price: (500 * (index + 1)) / (index + 2),
 						discount: 20,
 					},
 					quantities: 221,
-					tip: 'Подсказка',
+					tooltip: 'Подсказка',
 					productDescription:
 						'Быстрая зарядка для iPhone 20W с разъемом TYPE-C. Представляем Вашему вниманию адаптер быстрой зарядки который сможет зарядить ваш смартфон за считан ...',
 					salesman: {
+						id: index + 1,
 						boughtOut: 12,
 						productsWithCashback: 0,
-						rating: 4.7,
+						rating: 3.7,
 					},
 				}
 			})
