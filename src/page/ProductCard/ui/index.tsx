@@ -4,10 +4,16 @@ import { cn } from '@/shared/lib'
 import { ProductCardCrumbs } from '@/widgets/ProductCardCrumbs'
 import { ProductCardInfo } from '@/widgets/ProductCardInfo'
 import cls from './index.module.scss'
+import { getCashbackProduct } from '@/shared/api/products/get'
+import { notFound } from 'next/navigation'
 
-interface Props extends TClassName {}
-const ProductCardPage: FC<Props> = async ({ className }) => {
-	const data = []
+interface Props extends TClassName {
+	id: number
+}
+const ProductCardPage: FC<Props> = async ({ className, id }) => {
+	const data = await getCashbackProduct(id)
+
+	if (!data) return notFound()
 
 	return (
 		<main className={cn(cls.main, [className])}>
@@ -28,7 +34,7 @@ const ProductCardPage: FC<Props> = async ({ className }) => {
 				]}
 				className={cn(cls.crumbs, ['modules-gap-top'])}
 			/>
-			<ProductCardInfo className={cn(cls.info)} />
+			<ProductCardInfo data={data} className={cn(cls.info)} />
 		</main>
 	)
 }

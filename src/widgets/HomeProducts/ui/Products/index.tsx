@@ -12,22 +12,24 @@ const Products: FC<Props> = async ({ className }) => {
 
 	return (
 		<ul className={cn(cls.wrapper, [className])}>
-			{items.map(({ image, name, price, quantities, isFavorite, tip, id }) => {
-				return (
-					<Link href={`/${id}`}>
-						<ProductItem
-							key={id}
-							headCls={cn(cls.product_head)}
-							isFavorite={isFavorite}
-							name={name}
-							tip={tip}
-							quantities={quantities}
-							image={image}
-							price={price}
-						/>
-					</Link>
-				)
-			})}
+			{items.map(
+				({ previewImage, name, price, quantities, isFavorite, tip, id }) => {
+					return (
+						<Link href={`/${id}`} key={id}>
+							<ProductItem
+								key={id}
+								headCls={cn(cls.product_head)}
+								isFavorite={isFavorite}
+								name={name}
+								tip={tip}
+								quantities={quantities}
+								image={previewImage}
+								price={price}
+							/>
+						</Link>
+					)
+				}
+			)}
 		</ul>
 	)
 }

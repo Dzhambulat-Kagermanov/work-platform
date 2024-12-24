@@ -1,3 +1,5 @@
+import { TProductItemProps } from '@/shared/types'
+
 export type TGetCashbackProductsQnt = number
 export const getCashbackProductsQnt = (): Promise<TGetCashbackProductsQnt> => {
 	return new Promise((res, rej) => {
@@ -5,201 +7,51 @@ export const getCashbackProductsQnt = (): Promise<TGetCashbackProductsQnt> => {
 	})
 }
 
-export type TGetCashbackProduct = {
-	id: number
-	isFavorite?: boolean
-	name: string
-	quantities: number
-	image: string
-	price: {
-		price: number
-		discount?: number
-	}
-	tip?: string
-}
-export const getCashbackProducts = (): Promise<TGetCashbackProduct[]> => {
+type TGetCashbackProducts = TProductItemProps[]
+export const getCashbackProducts = (): Promise<TGetCashbackProducts> => {
 	return new Promise((res, rej) => {
-		res([
-			{
-				id: 1,
-				image: '/images/stub/product-stub.png',
-				isFavorite: true,
-				name: 'Рюкзак школьный городск..',
-				price: {
-					price: 500,
-					discount: 20,
-				},
-				quantities: 221,
-				tip: 'Подсказка',
-			},
-			{
-				id: 2,
-				image: '/images/stub/product-stub.png',
-				isFavorite: undefined,
-				name: 'Рюкзак школьный городск..',
-				price: {
-					price: 200,
-					discount: 30,
-				},
-				quantities: 21,
-				tip: 'Подсказка',
-			},
-			{
-				id: 3,
-				image: '/images/stub/product-stub.png',
-				isFavorite: false,
-				name: 'Рюкзак школьный городск..',
-				price: {
-					price: 650,
-					discount: 0,
-				},
-				quantities: 21,
-				tip: 'Подсказка',
-			},
-			{
-				id: 4,
-				image: '/images/stub/product-stub.png',
-				isFavorite: true,
-				name: 'Рюкзак школьный городск..',
-				price: {
-					price: 500,
-					discount: 20,
-				},
-				quantities: 221,
-				tip: 'Подсказка',
-			},
-			{
-				id: 5,
-				image: '/images/stub/product-stub.png',
-				isFavorite: undefined,
-				name: 'Рюкзак школьный городск..',
-				price: {
-					price: 200,
-					discount: 30,
-				},
-				quantities: 21,
-				tip: 'Подсказка',
-			},
-			{
-				id: 6,
-				image: '/images/stub/product-stub.png',
-				isFavorite: false,
-				name: 'Рюкзак школьный городск..',
-				price: {
-					price: 650,
-					discount: 0,
-				},
-				quantities: 21,
-				tip: 'Подсказка',
-			},
-			{
-				id: 7,
-				image: '/images/stub/product-stub.png',
-				isFavorite: true,
-				name: 'Рюкзак школьный городск..',
-				price: {
-					price: 500,
-					discount: 20,
-				},
-				quantities: 221,
-				tip: 'Подсказка',
-			},
-			{
-				id: 8,
-				image: '/images/stub/product-stub.png',
-				isFavorite: undefined,
-				name: 'Рюкзак школьный городск..',
-				price: {
-					price: 200,
-					discount: 30,
-				},
-				quantities: 21,
-				tip: 'Подсказка',
-			},
-			{
-				id: 9,
-				image: '/images/stub/product-stub.png',
-				isFavorite: false,
-				name: 'Рюкзак школьный городск..',
-				price: {
-					price: 650,
-					discount: 0,
-				},
-				quantities: 21,
-				tip: 'Подсказка',
-			},
-			{
-				id: 10,
-				image: '/images/stub/product-stub.png',
-				isFavorite: true,
-				name: 'Рюкзак школьный городск..',
-				price: {
-					price: 500,
-					discount: 20,
-				},
-				quantities: 221,
-				tip: 'Подсказка',
-			},
-			{
-				id: 11,
-				image: '/images/stub/product-stub.png',
-				isFavorite: undefined,
-				name: 'Рюкзак школьный городск..',
-				price: {
-					price: 200,
-					discount: 30,
-				},
-				quantities: 21,
-				tip: 'Подсказка',
-			},
-			{
-				id: 12,
-				image: '/images/stub/product-stub.png',
-				isFavorite: false,
-				name: 'Рюкзак школьный городск..',
-				price: {
-					price: 650,
-					discount: 0,
-				},
-				quantities: 21,
-				tip: 'Подсказка',
-			},
-			{
-				id: 13,
-				image: '/images/stub/product-stub.png',
-				isFavorite: true,
-				name: 'Рюкзак школьный городск..',
-				price: {
-					price: 500,
-					discount: 20,
-				},
-				quantities: 221,
-				tip: 'Подсказка',
-			},
-			{
-				id: 14,
-				image: '/images/stub/product-stub.png',
-				isFavorite: undefined,
-				name: 'Рюкзак школьный городск..',
-				price: {
-					price: 200,
-					discount: 30,
-				},
-				quantities: 21,
-				tip: 'Подсказка',
-			},
-			{
-				id: 15,
-				image: '/images/stub/product-stub.png',
-				isFavorite: false,
-				name: 'Рюкзак школьный городск..',
-				price: {
-					price: 650,
-					discount: 0,
-				},
-				quantities: 21,
-				tip: 'Подсказка',
-			},
-		])
+		res(
+			[...Array(18)].map((_, index) => {
+				return {
+					id: index + 1,
+					previewImage: '/images/stub/product-stub.png',
+					images: [
+						'/images/stub/product-stub.png',
+						'/images/stub/product-stub-2.png',
+						'/images/stub/product-stub-3.png',
+					],
+					isFavorite: true,
+					name: 'Рюкзак школьный городск..',
+					price: {
+						price: (500 * (index + 1)) / (index + 2),
+						discount: 20,
+					},
+					quantities: 221,
+					tip: 'Подсказка',
+					productDescription:
+						'Быстрая зарядка для iPhone 20W с разъемом TYPE-C. Представляем Вашему вниманию адаптер быстрой зарядки который сможет зарядить ваш смартфон за считан ...',
+					salesman: {
+						boughtOut: 12,
+						productsWithCashback: 0,
+						rating: 4.7,
+					},
+				}
+			})
+		)
+	})
+}
+
+type TGetCashbackProduct = TProductItemProps | undefined
+export const getCashbackProduct = async (
+	id: number
+): Promise<TGetCashbackProduct> => {
+	const data = await getCashbackProducts()
+
+	return new Promise((res, rej) => {
+		res(
+			data.find(el => {
+				return el.id === id
+			})
+		)
 	})
 }

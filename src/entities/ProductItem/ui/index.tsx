@@ -1,3 +1,4 @@
+'use client'
 import { FC, memo } from 'react'
 import { TTag } from '@/shared/types'
 import { cn } from '@/shared/lib'
@@ -36,7 +37,7 @@ const ProductItem: FC<Props> = memo(
 	}) => {
 		const Tag = tag
 		const disc = price.discount
-		const prc = price.price
+		const prc = Math.floor(price.price)
 
 		return (
 			<Tag
@@ -50,11 +51,20 @@ const ProductItem: FC<Props> = memo(
 					<Image src={image} alt='Товар' width={200} height={235} />
 					<div className={cn(cls.overlay)}>
 						{isFavorite !== undefined ? (
-							<FavoriteIcon
-								{...(isFavorite
-									? { stroke: 'var(--purple-600)', color: 'var(--purple-700)' }
-									: { stroke: 'var(--white-100)' })}
-							/>
+							<div
+								onClick={e => {
+									e.preventDefault()
+								}}
+							>
+								<FavoriteIcon
+									{...(isFavorite
+										? {
+												stroke: 'var(--purple-600)',
+												color: 'var(--purple-700)',
+										  }
+										: { stroke: 'var(--white-100)' })}
+								/>
+							</div>
 						) : (
 							<p />
 						)}
@@ -73,7 +83,13 @@ const ProductItem: FC<Props> = memo(
 							{!!disc ? Math.floor(prc - (prc / 100) * disc) : prc} ₽
 						</Typography>
 						{tip && (
-							<div title={tip} className={cn(cls.tip)}>
+							<div
+								title={tip}
+								className={cn(cls.tip)}
+								onClick={e => {
+									e.preventDefault()
+								}}
+							>
 								<HelpIcon color='var(--grey-300)' />
 							</div>
 						)}
