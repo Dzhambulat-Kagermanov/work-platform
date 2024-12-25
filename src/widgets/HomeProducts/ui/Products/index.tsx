@@ -23,7 +23,7 @@ const Products: FC<Props> = async ({ className }) => {
 					id,
 				}) => {
 					return (
-						<Link href={`/${id}`} key={id}>
+						<Link href={`/products/${id}`} key={id}>
 							<ProductItem
 								key={id}
 								headCls={cn(cls.product_head)}

@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query'
 import { getSimilarProducts } from '@/shared/api/products/get'
 import { ProductItem } from '@/entities/ProductItem'
 import cls from './index.module.scss'
+import Link from 'next/link'
 
 export const queryKey = ['productsCard', 'similar']
 
@@ -26,16 +27,17 @@ const SimilarProducts: FC<Props> = ({ id, className }) => {
 				{data &&
 					data.map(({ id, name, previewImage, price, isFavorite, tooltip }) => {
 						return (
-							<ProductItem
-								tag='li'
-								wrapperCls={cn(cls.item)}
-								key={id}
-								image={previewImage}
-								name={name}
-								price={price}
-								isFavorite={isFavorite}
-								tooltip={tooltip}
-							/>
+							<Link href={`/products/${id}`} key={id}>
+								<ProductItem
+									tag='li'
+									wrapperCls={cn(cls.item)}
+									image={previewImage}
+									name={name}
+									price={price}
+									isFavorite={isFavorite}
+									tooltip={tooltip}
+								/>
+							</Link>
 						)
 					})}
 			</ul>
