@@ -1,0 +1,28 @@
+.wrapper {
+	.group {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+		gap: 20px;
+	}
+	.item {
+		padding: 25px;
+		background-color: transparent !important;
+		color: var(--black-opacity-60);
+		display: flex;
+		flex-flow: column;
+		.rating {
+		}
+		h5 {
+			color: var(--black-100);
+			margin-top: 15px;
+		}
+		h4 {
+			margin: 12px 0 25px 0;
+		}
+		time {
+			display: flex;
+			align-items: flex-end;
+			flex-grow: 1;
+		}
+	}
+}

@@ -2,9 +2,9 @@ import { FC } from 'react'
 import { TClassName } from '@/shared/types'
 import { cn } from '@/shared/lib'
 import { ProductItem } from '@/entities/ProductItem'
-import cls from './index.module.scss'
 import { getCashbackProducts } from '@/shared/api/products/get'
 import Link from 'next/link'
+import cls from './index.module.scss'
 
 interface Props extends TClassName {}
 const Products: FC<Props> = async ({ className }) => {

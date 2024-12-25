@@ -8,8 +8,9 @@ import Image from 'next/image'
 
 interface Props extends TClassName {
 	rating: number
+	withoutNum?: boolean
 }
-const Ratingbar: FC<Props> = ({ rating, className }) => {
+const Ratingbar: FC<Props> = ({ rating, withoutNum, className }) => {
 	const { expandedRating, ratingPositions } = starsPosition(rating)
 
 	return (
@@ -44,9 +45,11 @@ const Ratingbar: FC<Props> = ({ rating, className }) => {
 					}
 				})}
 			</ul>
-			<Typography font='Inter-R' size={16}>
-				{expandedRating}
-			</Typography>
+			{!withoutNum && (
+				<Typography font='Inter-R' size={16}>
+					{expandedRating}
+				</Typography>
+			)}
 		</div>
 	)
 }

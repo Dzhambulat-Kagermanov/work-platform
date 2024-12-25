@@ -1,0 +1,14 @@
+.wrapper {
+	h2 {
+		text-align: center;
+	}
+}
+.group {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+	justify-content: space-between;
+	gap: 30px;
+	margin-top: 30px;
+	.item {
+	}
+}

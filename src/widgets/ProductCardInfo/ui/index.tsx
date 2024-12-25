@@ -4,6 +4,8 @@ import { cn } from '@/shared/lib'
 import { Container } from '@/shared/ui'
 import { Gallery } from './Gallery'
 import { Content } from './Content'
+import { Switcher } from './Switcher'
+import { SimilarProducts } from './SimilarProducts'
 import cls from './index.module.scss'
 
 interface Props extends TModuleClassName {
@@ -46,6 +48,12 @@ const ProductCardInfo: FC<Props> = ({
 						}}
 					/>
 				</div>
+				<Switcher
+					id={id}
+					productDescription={productDescription}
+					className={cn(cls.switcher)}
+				/>
+				<SimilarProducts id={id} className={cn(cls.similar_products)} />
 			</Container>
 		</div>
 	)
