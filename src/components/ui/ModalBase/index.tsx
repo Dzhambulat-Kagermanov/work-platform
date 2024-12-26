@@ -19,9 +19,11 @@ const ModalBase: FC<Props> = ({ children, className, slug }) => {
 	)
 
 	useEffect(() => {
-		const timeout = setTimeout(() => {
-			setVisibleTransition(!!modalState)
-		}, 1)
+		if (visibleTransition !== modalState) {
+			const timeout = setTimeout(() => {
+				setVisibleTransition(!!modalState)
+			}, 1)
+		}
 	}, [modalState])
 
 	const handleClick = () => {
@@ -40,7 +42,13 @@ const ModalBase: FC<Props> = ({ children, className, slug }) => {
 						[cls.visible]: visibleTransition,
 					})}
 				>
-					{children}
+					<div
+						onClick={e => {
+							e.stopPropagation()
+						}}
+					>
+						{children}
+					</div>
 				</div>
 			)}
 		</>

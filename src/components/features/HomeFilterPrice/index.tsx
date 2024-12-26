@@ -25,7 +25,7 @@ const HomeFilterSort: FC<Props> = ({ className, children, ...other }) => {
 			onClick={handleClick}
 		>
 			<Typography font='Inter-SB' size={14} className={cn(cls.text)}>
-				Сортировка
+				Цена, ₽
 			</Typography>
 			<ExpandArrowIcon color='var(--grey-300)' className={cn(cls.icon)} />
 		</button>

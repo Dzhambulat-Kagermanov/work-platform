@@ -1,11 +1,12 @@
 .wrapper {
+	flex-grow: 1;
 	--color: var(--white-200);
 	--inpColor: var(--grey-200);
 	--content-gap: 5px;
 }
 .input {
+	width: 100%;
 	background-color: transparent;
-	flex-grow: 1;
 	color: var(--inpColor);
 	font-size: 16px;
 	font-family: Inter-M;

@@ -6,7 +6,7 @@ import cls from './index.module.scss'
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 	theme: 'fill' | 'outline'
 	children: string
-	size?: 'big' | 'low'
+	size?: 'big' | 'mid' | 'low'
 }
 const Button: FC<Props> = ({
 	theme,
@@ -20,7 +20,10 @@ const Button: FC<Props> = ({
 			className={cn(cls.button, [className, cls[theme], cls[size]])}
 			{...other}
 		>
-			<Typography font='Inter-SB' size={size === 'big' ? 16 : 14}>
+			<Typography
+				font='Inter-SB'
+				size={size === 'big' || size === 'mid' ? 16 : 14}
+			>
 				{children}
 			</Typography>
 		</button>
