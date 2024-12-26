@@ -11,7 +11,6 @@ import { SM_BIG } from '@/constants'
 interface Props extends TClassName {}
 const HomePromo: FC<Props> = ({ className }) => {
 	const width = useScreen()
-
 	return (
 		<Container tag='section' className={cn(cls.container, [className])}>
 			{width > SM_BIG ? (

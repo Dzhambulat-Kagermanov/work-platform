@@ -1,0 +1,15 @@
+.wrapper {
+	position: fixed;
+	left: 0;
+	top: 0;
+	transition: var(--tran-mid);
+	z-index: var(--modals-z);
+	width: 100%;
+	height: 100%;
+	background-color: transparent;
+
+	&.visible {
+		background-color: var(--black-200-opacity-70);
+		backdrop-filter: blur(16px);
+	}
+}
