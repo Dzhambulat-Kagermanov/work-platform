@@ -12,3 +12,23 @@
 	border-radius: 10px;
 	color: var(--white-100);
 }
+
+@media screen and (max-width: 1044px) {
+	.container {
+		padding: 25px 50px !important;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.container {
+		padding: 50px 0 0 0 !important;
+		background: none;
+		flex-wrap: wrap;
+	}
+	.wrapper {
+		position: relative;
+	}
+	.info_mobile_content {
+		margin: 24px 0;
+	}
+}

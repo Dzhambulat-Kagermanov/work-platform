@@ -53,7 +53,7 @@ const AccountStatistic: FC<Props> = ({
 			<li className={cn(cls.item)}>
 				<div className={cn(cls.item_content)}>
 					<Typography font='Inter-B' size={20} tag='h3'>
-						{productsGrate.toFixed(1)}%
+						{productsGrate}
 					</Typography>
 					<Typography font='Inter-R' tag='h2' size={16}>
 						Оценок товаров
@@ -68,7 +68,7 @@ const AccountStatistic: FC<Props> = ({
 						tag='h3'
 						className={cn(cls.green)}
 					>
-						{productsRating}%
+						{productsRating}
 					</Typography>
 					<Typography font='Inter-R' tag='h2' size={16}>
 						Рейтинг товаров

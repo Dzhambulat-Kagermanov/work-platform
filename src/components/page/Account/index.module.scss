@@ -13,3 +13,49 @@
 	row-gap: 35px;
 	width: 420px;
 }
+
+@media screen and (max-width: 1044px) {
+	.dashboard {
+		flex-wrap: wrap;
+		row-gap: 40px;
+	}
+	.half {
+		display: contents;
+		width: 100%;
+	}
+	.form {
+		width: 100%;
+		order: 1;
+	}
+	.notifications {
+		width: 100%;
+		order: 2;
+	}
+	.balance {
+		width: 100%;
+		order: 0;
+	}
+	.statistic {
+		width: 100%;
+		order: 2;
+	}
+	.exit_btn_mobile {
+		order: 2;
+	}
+}
+
+@media screen and (max-width: 620px) {
+	.dashboard {
+		padding: 24px 30px 40px;
+		row-gap: 25px;
+	}
+}
+@media screen and (max-width: 500px) {
+	.dashboard {
+		padding: 0px;
+	}
+	.account {
+		margin-top: 0 !important;
+		background-color: var(--white-300);
+	}
+}

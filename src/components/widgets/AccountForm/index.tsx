@@ -1,18 +1,25 @@
+'use client'
 import { FC } from 'react'
 import { TClassName } from '@/types'
 import { cn } from '@/lib'
 import { AccountContentBlock, Button, Input } from '@/components/ui'
 import { AccountExit } from '@/components/features/AccountExit'
+import { useScreen } from '@/hooks'
+import { MD_BIG } from '@/constants'
 import cls from './index.module.scss'
 
 interface Props extends TClassName {}
 const AccountForm: FC<Props> = ({ className }) => {
+	const width = useScreen()
+
 	return (
 		<AccountContentBlock
 			tag='section'
 			title='Личная информация'
 			className={cn(cls.wrapper, [className])}
-			endChildren={<AccountExit className={cn(cls.exit_btn)} />}
+			endChildren={
+				width > MD_BIG && <AccountExit className={cn(cls.exit_btn)} />
+			}
 		>
 			<form className={cn(cls.form)}>
 				<div className={cn(cls.content)}>

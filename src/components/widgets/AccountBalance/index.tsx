@@ -5,8 +5,10 @@ import { AccountContentBlock, Typography } from '@/components/ui'
 import { AccountBalanceMore } from '@/components/features/AccountBalanceMore'
 import cls from './index.module.scss'
 
-interface Props extends TClassName {}
-const AccountBalance: FC<Props> = ({ className }) => {
+interface Props extends TClassName {
+	balance: number
+}
+const AccountBalance: FC<Props> = ({ className, balance }) => {
 	return (
 		<AccountContentBlock
 			tag='section'
@@ -15,7 +17,7 @@ const AccountBalance: FC<Props> = ({ className }) => {
 			contentWrapperCls={cn(cls.content)}
 		>
 			<Typography font='Inter-SB' size={24}>
-				1 700 ₽
+				{balance} ₽
 			</Typography>
 			<AccountBalanceMore className={cn(cls.more_btn)} />
 		</AccountContentBlock>
