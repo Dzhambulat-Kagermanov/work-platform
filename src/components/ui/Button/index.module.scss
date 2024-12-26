@@ -6,9 +6,15 @@
 	--primary-color: var(--white-100);
 	--second-color: var(--purple-300);
 }
-.button {
+.big {
 	min-width: 187px;
 	padding: 14px 20px;
+}
+.low {
+	min-width: 100px;
+	padding: 8px 14px;
+}
+.button {
 	background-color: var(--primary-color);
 	border: 1px solid var(--second-color);
 	color: var(--second-color);

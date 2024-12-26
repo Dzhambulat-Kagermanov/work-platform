@@ -1,4 +1,15 @@
 .dashboard {
 	padding: 24px 50px 50px;
 	background-color: var(--white-300);
+	display: flex;
+	column-gap: 45px;
+}
+.form {
+	flex-grow: 1;
+}
+.half {
+	display: flex;
+	flex-flow: column;
+	row-gap: 35px;
+	width: 420px;
 }

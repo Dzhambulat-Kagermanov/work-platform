@@ -1,0 +1,10 @@
+.btn {
+	--primary-color: var(--white-100);
+	--second-color: var(--green-100);
+}
+.content {
+	padding: 18px 25px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}

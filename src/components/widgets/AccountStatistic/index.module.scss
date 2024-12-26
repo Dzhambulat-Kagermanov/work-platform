@@ -1,0 +1,30 @@
+.wrapper {
+}
+.content {
+	padding: 24px;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 24px;
+}
+.item {
+	background-color: var(--white-300);
+	border-radius: 20px;
+	border: 1px solid var(--black-opacity-10);
+	height: 127px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.item_content {
+	width: 100%;
+
+	padding: 0 32px;
+	h3 {
+	}
+	h2 {
+		margin-top: 12px;
+	}
+}
+.green {
+	color: var(--green-200);
+}

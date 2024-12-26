@@ -1,16 +1,19 @@
 import { FC } from 'react'
 import { TClassName } from '@/types'
 import { cn } from '@/lib'
-import { Button, Input, Typography } from '@/components/ui'
+import { AccountContentBlock, Button, Input } from '@/components/ui'
+import { AccountExit } from '@/components/features/AccountExit'
 import cls from './index.module.scss'
 
 interface Props extends TClassName {}
 const AccountForm: FC<Props> = ({ className }) => {
 	return (
-		<section className={cn(cls.wrapper, [className])}>
-			<Typography font='Inter-SB' size={14} tag='h2'>
-				Личная информация
-			</Typography>
+		<AccountContentBlock
+			tag='section'
+			title='Личная информация'
+			className={cn(cls.wrapper, [className])}
+			endChildren={<AccountExit className={cn(cls.exit_btn)} />}
+		>
 			<form className={cn(cls.form)}>
 				<div className={cn(cls.content)}>
 					<Input
@@ -45,7 +48,7 @@ const AccountForm: FC<Props> = ({ className }) => {
 					</Button>
 				</div>
 			</form>
-		</section>
+		</AccountContentBlock>
 	)
 }
 
