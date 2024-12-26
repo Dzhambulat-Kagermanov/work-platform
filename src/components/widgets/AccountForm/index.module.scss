@@ -1,0 +1,39 @@
+.wrapper {
+	color: var(--grey-500);
+	h2 {
+	}
+}
+.form {
+	background-color: var(--white-100);
+	border-radius: 12px;
+	box-shadow: 0 1px 3px 0 rgba(16, 24, 40, 10%),
+		0 1px 2px 0 rgba(16, 24, 40, 6%);
+	margin-top: 13px;
+	.content {
+		display: flex;
+		flex-flow: column;
+		row-gap: 24px;
+		padding: 24px;
+	}
+	.inp_wrapper {
+	}
+	.inp {
+	}
+}
+.btn_wrapper {
+	display: flex;
+	justify-content: flex-end;
+	padding-top: 25px;
+	border-top: 1px solid var(--white-400);
+	padding: 16px 24px;
+	.btn_save {
+		min-width: auto;
+		padding: 10px 16px;
+		&:disabled {
+			opacity: 0.4;
+		}
+		p {
+			font-size: 14px;
+		}
+	}
+}
