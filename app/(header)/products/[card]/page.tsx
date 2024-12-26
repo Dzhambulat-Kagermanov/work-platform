@@ -1,4 +1,4 @@
-import { ProductCardPage } from '@/page/ProductCard'
+import { ProductCardPage } from '@/components/page/ProductCard'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
 

@@ -1,1 +1,0 @@
-export { ProductCardAddFavorite } from './ui'

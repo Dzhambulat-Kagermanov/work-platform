@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import { TChildren } from '@/shared/types'
-import { HeaderFooter } from '@/app/layouts/HeaderFooter'
+import { TChildren } from '@/types'
+import { HeaderFooter } from '@/components/layouts/HeaderFooter'
 
 interface Props extends TChildren {}
 const Layout: FC<Props> = ({ children }) => {

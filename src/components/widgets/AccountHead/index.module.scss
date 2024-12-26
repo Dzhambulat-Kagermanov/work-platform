@@ -1,0 +1,14 @@
+.wrapper {
+}
+.container {
+	background-color: var(--purple-300);
+	background-image: url('/images/account/head-background.png');
+	background-size: cover;
+	background-position: center center;
+	display: flex;
+	column-gap: 30px;
+	align-items: center;
+	padding: 25px 65px !important;
+	border-radius: 10px;
+	color: var(--white-100);
+}

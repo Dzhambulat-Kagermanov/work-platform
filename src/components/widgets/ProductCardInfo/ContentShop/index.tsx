@@ -1,0 +1,43 @@
+import { FC } from 'react'
+import { TClassName, TSalesmanInfo } from '@/types'
+import { cn } from '@/lib'
+import { Typography } from '@/components/ui'
+import Link from 'next/link'
+import Image from 'next/image'
+import cls from './index.module.scss'
+
+interface Props extends TClassName {
+	salesman: Pick<TSalesmanInfo, 'shopName' | 'rating'>
+}
+const ContentShop: FC<Props> = ({
+	salesman: { rating, shopName },
+	className,
+}) => {
+	return (
+		<div className={cn(cls.wrapper, [className])}>
+			<Typography font='Inter-SB' size={16} tag='h6'>
+				{shopName}
+			</Typography>
+			<div className={cn(cls.content)}>
+				<Link href='#' className={cn(cls.link)}>
+					<Typography font='Inter-R' size={16}>
+						Подробнее
+					</Typography>
+				</Link>
+				<div className={cn(cls.rating)}>
+					<Image
+						src={'/images/shared/rating/star-v2.svg'}
+						alt='Рейтинг'
+						width={15}
+						height={15}
+					/>
+					<Typography font='Inter-R' size={16}>
+						{rating}
+					</Typography>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+export { ContentShop }

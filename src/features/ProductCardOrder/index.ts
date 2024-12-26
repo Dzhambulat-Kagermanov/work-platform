@@ -1,1 +1,0 @@
-export { ProductCardOrder } from './ui'

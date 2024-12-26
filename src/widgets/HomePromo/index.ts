@@ -1,1 +1,0 @@
-export { HomePromo } from './ui'

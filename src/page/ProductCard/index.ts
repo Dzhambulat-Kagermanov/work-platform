@@ -1,1 +1,0 @@
-export { ProductCardPage } from './ui'

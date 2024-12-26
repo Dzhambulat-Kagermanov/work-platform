@@ -1,4 +1,4 @@
-import { AccountPage } from '@/page/Account'
+import { AccountPage } from '@/components/page/Account'
 import { FC } from 'react'
 
 interface Props {}

@@ -1,5 +1,5 @@
-import { TChildren } from '@/shared/types'
-import { HeaderLayout } from '@/app/layouts/Header'
+import { TChildren } from '@/types'
+import { HeaderLayout } from '@/components/layouts/Header'
 import { FC } from 'react'
 
 interface Props extends TChildren {}

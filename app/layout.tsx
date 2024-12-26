@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import '@/app/styles/index.scss'
-import { QueryClientLayout } from '@/app/layouts/QueryClient'
+import '@/styles/index.scss'
+import { QueryClientLayout } from '@/components/layouts/QueryClient'
 
 export const metadata: Metadata = {
 	title: 'Платформа',

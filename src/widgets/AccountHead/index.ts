@@ -1,1 +1,0 @@
-export { AccountHead } from './ui'
