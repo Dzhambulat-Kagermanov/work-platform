@@ -23,17 +23,22 @@ export type TDropdownItem = {
 }
 
 interface Props {
+	// Все элементы для отрисовки
 	items: TDropdownItem[]
+	// Обновить состояние на активный элемент
 	setActiveItem?: (val: TDropdownItem) => void
+	// Текст для заполнителя
 	placeholder?: string
+	// Отключение / Включение
+	disable?: boolean
+	// Плавность для расшаривания списка
+	expandTransition?: TDropdownTransition
 	wrapperCls?: string
 	placeholderCls?: string
 	activeItemCls?: string
 	contentCls?: string
 	itemCls?: string
 	iconCls?: string
-	disable?: boolean
-	expandTransition?: TDropdownTransition
 }
 const Dropdown: FC<Props> = ({
 	items,
