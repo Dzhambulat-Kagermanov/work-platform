@@ -4,11 +4,12 @@ import { TClassName } from '@/types'
 import Image from 'next/image'
 import { Typography } from '@/components/ui'
 import cls from './index.module.scss'
+import Link from 'next/link'
 
 interface Props extends TClassName {}
 const Logo: FC<Props> = ({ className }) => {
 	return (
-		<div className={cn(cls.wrapper, [className])}>
+		<Link href={'/'} className={cn(cls.wrapper, [className])}>
 			<Image
 				src={'/images/shared/logo.svg'}
 				alt='Логотип'
@@ -18,7 +19,7 @@ const Logo: FC<Props> = ({ className }) => {
 			<Typography font='PlusJakartaSans-EB' size={18} tag='h2'>
 				WBdiscount
 			</Typography>
-		</div>
+		</Link>
 	)
 }
 
