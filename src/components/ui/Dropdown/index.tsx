@@ -39,9 +39,13 @@ interface Props {
 	contentCls?: string
 	itemCls?: string
 	iconCls?: string
+	defaultActiveValue?: TDropdownValue
+	icon?: ReactNode
+	isExpandCls?: string
 }
 const Dropdown: FC<Props> = ({
 	items,
+	isExpandCls,
 	setActiveItem,
 	activeItemCls,
 	wrapperCls,
@@ -52,14 +56,23 @@ const Dropdown: FC<Props> = ({
 	iconCls,
 	expandTransition,
 	placeholderCls,
+	defaultActiveValue,
+	icon,
 }) => {
-	const [active, setActive] = useState<TDropdownItem | null>(null)
+	const [active, setActive] = useState<TDropdownItem | null>(
+		defaultActiveValue
+			? items.find(({ value }) => {
+					return value === defaultActiveValue
+			  }) || null
+			: null
+	)
 	const [isExpand, setIsExpand] = useState<boolean>(false)
 
 	return (
 		<div
 			className={cn(cls.dropdown, [wrapperCls], {
 				[cls.isExpand]: isExpand,
+				[cls[isExpandCls || 'isExpand']]: isExpand,
 				[cls.disable]: !!disable,
 			})}
 			style={
@@ -87,10 +100,12 @@ const Dropdown: FC<Props> = ({
 						{placeholder}
 					</Typography>
 				)}
-				<ExpandArrowIcon
-					color='var(--grey-300)'
-					className={cn(cls.icon, [iconCls])}
-				/>
+				{icon || (
+					<ExpandArrowIcon
+						color='var(--grey-300)'
+						className={cn(cls.icon, [iconCls])}
+					/>
+				)}
 			</button>
 			<ul className={cn(cls.content, [contentCls])}>
 				{items

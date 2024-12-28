@@ -10,21 +10,6 @@
 	border-radius: 20px;
 	border: 1px solid var(--black-opacity-30);
 }
-.title {
-}
-.inputs {
-	display: flex;
-	column-gap: 9px;
-	align-items: center;
-	margin: 20px 0;
-	input {
-		&::placeholder {
-		}
-	}
-	hr {
-		min-width: 10px;
-		max-width: 10px;
-		height: 1px;
-		background-color: var(--black-100);
-	}
+.apply_btn {
+	margin: 20px 0 0 0;
 }

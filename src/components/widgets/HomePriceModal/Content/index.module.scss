@@ -1,0 +1,18 @@
+.title {
+	margin: 0 0 20px 0;
+}
+.inputs {
+	display: flex;
+	column-gap: 9px;
+	align-items: center;
+	input {
+		&::placeholder {
+		}
+	}
+	hr {
+		min-width: 10px;
+		max-width: 10px;
+		height: 1px;
+		background-color: var(--black-100);
+	}
+}

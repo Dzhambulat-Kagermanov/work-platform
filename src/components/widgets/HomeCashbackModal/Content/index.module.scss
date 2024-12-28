@@ -1,0 +1,16 @@
+.inputs {
+	display: flex;
+	column-gap: 9px;
+	align-items: center;
+	margin: 20px 0;
+	input {
+		&::placeholder {
+		}
+	}
+	hr {
+		min-width: 10px;
+		max-width: 10px;
+		height: 1px;
+		background-color: var(--black-100);
+	}
+}

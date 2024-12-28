@@ -11,6 +11,7 @@ import {
 import { HOME_CASHBACK_MODAL } from '@/constants'
 import { cn } from '@/lib'
 import cls from './index.module.scss'
+import { Content } from './Content'
 
 interface Props extends TClassName {}
 const HomeCashbackModal: FC<Props> = ({ className }) => {
@@ -29,46 +30,13 @@ const HomeCashbackModal: FC<Props> = ({ className }) => {
 			className={cn(cls.wrapper, [className])}
 		>
 			<div className={cn(cls.content)}>
-				<Typography font='Inter-SB' size={18} tag='h2'>
-					Размер кэшбека
-				</Typography>
-				<div className={cn(cls.inputs)}>
-					<Input
-						onChange={e => {}}
-						tabIndex={1000}
-						value={range !== undefined ? `от ${range[0]}%` : `от 0%`}
-						onBlur={() => {}}
-					/>
-					<hr />
-					<Input
-						onChange={e => {}}
-						tabIndex={1000}
-						value={range !== undefined ? `до ${range[1]}%` : `до 0%`}
-						onBlur={() => {}}
-					/>
-				</div>
-				<SliderInput
-					className={cn(cls.slider_inp)}
-					min={MIN}
+				<Content
 					max={MAX}
-					steps={STEPS}
-					setValue={setRange}
-					value={range}
+					min={MIN}
 					minBetweenValue={MIN_BETWEEN_VALUE}
-					visibleValueMax={minValue => {
-						return (
-							<Typography font='Inter-M' size={16} tag='h5'>
-								{minValue}%
-							</Typography>
-						)
-					}}
-					visibleValueMin={minValue => {
-						return (
-							<Typography font='Inter-M' size={16} tag='h5'>
-								{minValue}%
-							</Typography>
-						)
-					}}
+					range={range}
+					setRange={setRange}
+					steps={STEPS}
 				/>
 				<Button theme='fill' size='mid' className={cn(cls.apply_btn)}>
 					Применить
