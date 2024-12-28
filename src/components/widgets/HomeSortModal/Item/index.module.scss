@@ -1,0 +1,27 @@
+.item {
+	transition: var(--tran-low);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 16px;
+	border: 1px solid var(--white-400);
+	border-radius: 8px;
+	cursor: pointer;
+	h4 {
+		color: var(--grey-500);
+	}
+}
+.circle {
+	width: 20px;
+	height: 20px;
+	border: 1px solid var(--purple-300);
+	transition: inherit;
+	border-radius: 50%;
+}
+.item {
+	&.active {
+		.circle {
+			background-color: var(--purple-300);
+		}
+	}
+}

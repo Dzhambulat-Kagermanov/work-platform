@@ -1,0 +1,18 @@
+.wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.content {
+	width: 385px;
+	background-color: var(--white-100);
+	border-radius: 20px;
+	border: 1px solid var(--black-opacity-30);
+	padding: 27px 20px;
+}
+.group {
+	margin-top: 22px;
+	display: flex;
+	flex-flow: column;
+	row-gap: 7px;
+}
