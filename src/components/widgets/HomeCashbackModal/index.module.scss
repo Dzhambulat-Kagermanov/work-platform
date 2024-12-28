@@ -1,0 +1,31 @@
+.wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.content {
+	width: 305px;
+	background-color: var(--white-100);
+	padding: 20px 23px;
+	border-radius: 20px;
+	border: 1px solid var(--black-opacity-30);
+}
+.inputs {
+	display: flex;
+	column-gap: 9px;
+	align-items: center;
+	margin: 20px 0;
+	input {
+		&::placeholder {
+		}
+	}
+	hr {
+		min-width: 10px;
+		max-width: 10px;
+		height: 1px;
+		background-color: var(--black-100);
+	}
+}
+.apply_btn {
+	margin-top: 55px;
+}

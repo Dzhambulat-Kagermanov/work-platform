@@ -3,8 +3,8 @@ import cls from './index.module.scss'
 import { TClassName } from '@/types'
 
 interface Props extends TClassName {}
-const HomeSortMobileModal: FC<Props> = ({ className }) => {
+const HomeComplexSortModal: FC<Props> = ({ className }) => {
 	return <></>
 }
 
-export { HomeSortMobileModal }
+export { HomeComplexSortModal }

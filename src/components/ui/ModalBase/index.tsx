@@ -43,6 +43,7 @@ const ModalBase: FC<Props> = ({ children, className, slug }) => {
 					})}
 				>
 					<div
+						className={cls.content}
 						onClick={e => {
 							e.stopPropagation()
 						}}

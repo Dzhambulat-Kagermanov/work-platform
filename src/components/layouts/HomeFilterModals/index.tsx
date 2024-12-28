@@ -5,7 +5,7 @@ import { HomePriceModal } from '@/components/widgets/HomePriceModal'
 import { HomeSortModal } from '@/components/widgets/HomeSortModal'
 import { useScreen } from '@/hooks'
 import { SM_MID } from '@/constants'
-import { HomeSortMobileModal } from '@/components/widgets/HomeSortMobileModal'
+import { HomeComplexSortModal } from '@/components/widgets/HomeComplexSortModal'
 
 interface Props {}
 const HomeFilterModalsLayout: FC<Props> = ({}) => {
@@ -20,7 +20,7 @@ const HomeFilterModalsLayout: FC<Props> = ({}) => {
 					<HomeSortModal />
 				</>
 			) : (
-				<HomeSortMobileModal />
+				<HomeComplexSortModal />
 			)}
 		</>
 	)
