@@ -1,30 +1,20 @@
 'use client'
-import { FC, useEffect, useState } from 'react'
+import { FC } from 'react'
 import { TChildren, TClassName } from '@/types'
 import { cn } from '@/lib'
 import { useModalState } from '@/hooks'
 import { TRAN_MID } from '@/constants'
 import { TModalSlug } from '@/hooks/zustand/useModalState'
 import cls from './index.module.scss'
+import { useModalBase } from '@/hooks/useModalBase'
 
 interface Props extends TClassName, TChildren, TModalSlug {}
 const ModalBasePlaque: FC<Props> = ({ className, slug, children }) => {
+	const { modalState, visibleTransition, setVisibleTransition } = useModalBase({
+		slug,
+	})
+
 	const hideModal = useModalState(state => state.hideModal)
-	const modalState = useModalState(
-		state => state.modalsStates[slug]?.modalState
-	)
-	const [visibleTransition, setVisibleTransition] = useState<boolean>(
-		!!modalState
-	)
-
-	useEffect(() => {
-		if (visibleTransition !== modalState) {
-			const timeout = setTimeout(() => {
-				setVisibleTransition(!!modalState)
-			}, 1)
-		}
-	}, [modalState])
-
 	const handleClick = () => {
 		setVisibleTransition(false)
 		const timeout = setTimeout(() => {
@@ -35,7 +25,7 @@ const ModalBasePlaque: FC<Props> = ({ className, slug, children }) => {
 	return (
 		<>
 			{modalState && (
-				<div
+				<section
 					className={cn(cls.wrapper, [className], {
 						[cls.visible]: visibleTransition,
 					})}
@@ -49,7 +39,7 @@ const ModalBasePlaque: FC<Props> = ({ className, slug, children }) => {
 					>
 						{children}
 					</div>
-				</div>
+				</section>
 			)}
 		</>
 	)

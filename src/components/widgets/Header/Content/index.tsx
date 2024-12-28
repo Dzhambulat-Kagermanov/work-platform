@@ -10,14 +10,13 @@ import { useScreen } from '@/hooks'
 import { BurgerMenu } from '@/components/features/BurgerMenu'
 import { MD_LOW, SM_BIG } from '@/constants'
 import cls from './index.module.scss'
-import adt from '../adaptive.module.scss'
 
 interface Props extends TClassName {}
 const Content: FC<Props> = ({ className }) => {
 	const width = useScreen()
 
 	return (
-		<div className={cn(cls.content, [className, adt.content, adt.cont])}>
+		<div className={cn(cls.content, [className, cls.cont])}>
 			{width > MD_LOW && <Logo className={cn(cls.logo)} />}
 			{width <= SM_BIG && <BurgerMenu />}
 			<Input

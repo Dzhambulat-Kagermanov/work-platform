@@ -33,3 +33,11 @@
 		}
 	}
 }
+@media screen and (max-width: 1044px) {
+	.cont.content {
+		column-gap: 25px;
+		.navbar {
+			column-gap: 25px;
+		}
+	}
+}

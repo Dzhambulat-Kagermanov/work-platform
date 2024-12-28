@@ -6,10 +6,15 @@ import { Typography } from '@/components/ui'
 import cls from './index.module.scss'
 import Link from 'next/link'
 
-interface Props extends TClassName {}
-const Logo: FC<Props> = ({ className }) => {
+interface Props extends TClassName {
+	hasNotLink?: true
+}
+const Logo: FC<Props> = ({ className, hasNotLink }) => {
 	return (
-		<Link href={'/'} className={cn(cls.wrapper, [className])}>
+		<Link
+			href={!hasNotLink ? '/' : '#'}
+			className={cn(cls.wrapper, [className])}
+		>
 			<Image
 				src={'/images/shared/logo.svg'}
 				alt='Логотип'
