@@ -13,7 +13,7 @@ import cls from './index.module.scss'
 
 export type TDropdownTransition = {
 	property?: string
-	speed: number
+	speedSeconds: number
 }
 export type TDropdownValue = string | number | boolean
 export type TDropdownItem = {
@@ -78,7 +78,9 @@ const Dropdown: FC<Props> = ({
 			style={
 				{
 					'--expandTransition': expandTransition
-						? `${expandTransition.speed} ${expandTransition.property}`
+						? `${expandTransition.speedSeconds}s ${
+								expandTransition.property || 'linear'
+						  }`
 						: '0.2s ease',
 				} as CSSProperties
 			}

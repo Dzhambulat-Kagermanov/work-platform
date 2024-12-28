@@ -13,6 +13,10 @@ const SortContent: FC<Props> = ({ className }) => {
 				Сортировка
 			</Typography>
 			<Dropdown
+				expandTransition={{
+					speedSeconds: 0.4,
+					property: 'ease',
+				}}
 				icon={<div className={cn(cls.circle)} />}
 				wrapperCls={cn(cls.drp_wrapper)}
 				defaultActiveValue={slugs[0]}
