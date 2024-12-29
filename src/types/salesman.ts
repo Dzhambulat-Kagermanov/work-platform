@@ -5,3 +5,9 @@ export type TSalesmanInfo = {
 	rating: number
 	shopName: string
 }
+export type TSalesmanStatistic = {
+	cashbackPaid: number
+	productsGrate: number
+	productsRating: number
+	successfulBuybacks: number
+}

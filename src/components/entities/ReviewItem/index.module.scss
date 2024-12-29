@@ -1,0 +1,27 @@
+.item {
+	padding: 25px;
+	background-color: transparent !important;
+	color: var(--black-opacity-60);
+	display: flex;
+	flex-flow: column;
+	border: 1px solid var(--black-opacity-10);
+	border-radius: 20px;
+	.rating {
+	}
+	h2 {
+		color: var(--purple-300);
+		margin: 12px 0;
+	}
+	h5 {
+		color: var(--black-100);
+		margin-top: 15px;
+	}
+	h4 {
+		margin: 12px 0 25px 0;
+	}
+	time {
+		display: flex;
+		align-items: flex-end;
+		flex-grow: 1;
+	}
+}

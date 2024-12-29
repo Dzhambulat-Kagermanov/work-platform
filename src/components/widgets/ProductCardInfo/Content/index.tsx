@@ -9,7 +9,7 @@ import { ContentShop } from '../ContentShop'
 import { getSalesmanInfo } from '@/api/salesman/get'
 import { useQuery } from '@tanstack/react-query'
 import { useScreen } from '@/hooks'
-import { SM_BIG } from '@/constants'
+import { SM_BIG, SM_MID } from '@/constants'
 import cls from './index.module.scss'
 
 interface Props extends TClassName {
@@ -53,7 +53,7 @@ const Content: FC<Props> = memo(
 					className={cn(cls.actions)}
 					isFavorite={isFavorite}
 				/>
-				{width > SM_BIG && (
+				{width > SM_MID && (
 					<ContentShop salesmanId={salesmanId} className={cn(cls.shop)} />
 				)}
 			</section>

@@ -1,0 +1,12 @@
+.wrapper {
+	padding: 35px 0;
+	border-bottom: 1px solid var(--black-opacity-10);
+}
+.group {
+	margin-top: 25px;
+	display: grid;
+	gap: 20px;
+	grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+}
+.item {
+}

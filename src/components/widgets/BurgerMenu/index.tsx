@@ -11,11 +11,12 @@ import { useModalState, useScreen } from '@/hooks'
 import { Footer } from './Footer'
 import cls from './index.module.scss'
 import { ExpandArrowIcon } from '@/icons'
+import { isAuth } from '@/constants/stub'
 
 interface Props extends TClassName {}
 const BurgerMenu: FC<Props> = ({ className }) => {
 	const screen = useScreen()
-	const isAuth = true
+
 	const { modalState, visibleTransition, setVisibleTransition } = useModalBase({
 		slug: SHARED_BURGER_MENU_MODAL,
 	})

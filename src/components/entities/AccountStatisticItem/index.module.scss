@@ -1,0 +1,23 @@
+.green {
+	color: var(--green-200);
+}
+
+.item {
+	background-color: var(--white-300);
+	border-radius: 20px;
+	border: 1px solid var(--black-opacity-10);
+	height: 127px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.item_content {
+	width: 100%;
+	color: var(--grey-400);
+	padding: 0 32px;
+	h3 {
+	}
+	h2 {
+		margin-top: 8px;
+	}
+}

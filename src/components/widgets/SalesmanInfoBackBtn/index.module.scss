@@ -1,0 +1,11 @@
+.wrapper {
+}
+.btn {
+	display: flex;
+	align-items: center;
+	column-gap: 4px;
+	color: var(--black-opacity-60);
+}
+.icon {
+	rotate: 90deg;
+}

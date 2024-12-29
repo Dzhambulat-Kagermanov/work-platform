@@ -26,7 +26,7 @@ const ContentShop: FC<Props> = ({ salesmanId, className }) => {
 				</Typography>
 			)}
 			<div className={cn(cls.content)}>
-				<Link href='#' className={cn(cls.link)}>
+				<Link href='/salesman/1' className={cn(cls.link)}>
 					<Typography font='Inter-R' size={16}>
 						Подробнее
 					</Typography>

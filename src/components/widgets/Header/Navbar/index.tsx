@@ -10,11 +10,10 @@ import {
 	HomeIcon,
 } from '@/icons'
 import cls from './index.module.scss'
+import { isAuth } from '@/constants/stub'
 
 interface Props extends TClassName {}
 const Navbar: FC<Props> = ({ className }) => {
-	const isAuth = false
-
 	return (
 		<nav className={cn(cls.wrapper, [className])}>
 			<ActiveLink
