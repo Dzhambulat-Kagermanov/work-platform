@@ -6,8 +6,8 @@ import { Typography } from '@/components/ui'
 import { useQuery } from '@tanstack/react-query'
 import { getSimilarProducts } from '@/api/products/get'
 import { ProductItem } from '@/components/entities/ProductItem'
-import cls from './index.module.scss'
 import Link from 'next/link'
+import cls from './index.module.scss'
 
 export const queryKey = ['productsCard', 'similar']
 

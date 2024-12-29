@@ -16,3 +16,31 @@
 .shop {
 	margin-top: 27px;
 }
+
+@media screen and (max-width: 1044px) {
+	.actions {
+		padding: 25px 0 32px 0;
+	}
+}
+
+@media screen and (max-width: 870px) {
+	.head {
+		padding: 0 0 20px 0;
+	}
+	.sales {
+		padding: 15px 0;
+	}
+	.actions {
+		padding: 20px 0;
+	}
+}
+
+@media screen and (max-width: 788px) {
+	.actions {
+		border: none;
+		padding: 10px 0;
+	}
+	.head {
+		border: none;
+	}
+}

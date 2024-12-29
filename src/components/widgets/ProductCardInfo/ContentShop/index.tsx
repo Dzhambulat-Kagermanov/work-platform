@@ -1,23 +1,30 @@
+'use client'
 import { FC } from 'react'
-import { TClassName, TSalesmanInfo } from '@/types'
+import { TClassName, TProductItemProps, TSalesmanInfo } from '@/types'
 import { cn } from '@/lib'
 import { Typography } from '@/components/ui'
 import Link from 'next/link'
 import Image from 'next/image'
 import cls from './index.module.scss'
+import { getSalesmanInfo } from '@/api/salesman/get'
+import { useQuery } from '@tanstack/react-query'
+import { queryKey } from '../Content'
 
-interface Props extends TClassName {
-	salesman: Pick<TSalesmanInfo, 'shopName' | 'rating'>
-}
-const ContentShop: FC<Props> = ({
-	salesman: { rating, shopName },
-	className,
-}) => {
+interface Props extends TClassName, Pick<TProductItemProps, 'salesmanId'> {}
+const ContentShop: FC<Props> = ({ salesmanId, className }) => {
+	const { data, error, isPending, isFetching } = useQuery({
+		queryKey,
+		queryFn: () => getSalesmanInfo(salesmanId),
+		refetchOnWindowFocus: false,
+	})
+
 	return (
 		<div className={cn(cls.wrapper, [className])}>
-			<Typography font='Inter-SB' size={16} tag='h6'>
-				{shopName}
-			</Typography>
+			{data && (
+				<Typography font='Inter-SB' size={16} tag='h6'>
+					{data.shopName}
+				</Typography>
+			)}
 			<div className={cn(cls.content)}>
 				<Link href='#' className={cn(cls.link)}>
 					<Typography font='Inter-R' size={16}>
@@ -31,9 +38,11 @@ const ContentShop: FC<Props> = ({
 						width={15}
 						height={15}
 					/>
-					<Typography font='Inter-R' size={16}>
-						{rating}
-					</Typography>
+					{data && (
+						<Typography font='Inter-R' size={16}>
+							{data.rating}
+						</Typography>
+					)}
 				</div>
 			</div>
 		</div>

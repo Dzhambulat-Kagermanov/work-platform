@@ -12,3 +12,10 @@
 	.item {
 	}
 }
+
+@media screen and (max-width: 620px) {
+	.group {
+		gap: 15px;
+		grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+	}
+}

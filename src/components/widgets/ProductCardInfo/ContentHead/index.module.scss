@@ -1,6 +1,4 @@
 .head {
-	& > h2 {
-	}
 }
 .rating {
 	margin: 12px 0 17px 0;
@@ -24,5 +22,44 @@
 		h5 {
 			color: var(--purple-300);
 		}
+	}
+}
+.products_info {
+	margin: 14px 0 18px 0;
+	color: var(--grey-300);
+	h5 {
+		&:last-child {
+			margin-top: 5px;
+		}
+	}
+}
+.discount_plaque {
+	padding: 4px 12px;
+	border-radius: 16px;
+	background-color: var(--white-300);
+	margin: 0 0 0 auto;
+}
+
+@media screen and (max-width: 788px) {
+	.head {
+		display: flex;
+		flex-direction: column;
+		padding: 0;
+	}
+	.price {
+		margin-bottom: 19px;
+		padding: 0 0 17px 0;
+		border-bottom: 1px solid var(--grey-100);
+		order: 0;
+	}
+	.title {
+		order: 1;
+	}
+	.rating {
+		order: 1;
+		margin-bottom: 0;
+	}
+	.products_info {
+		order: 1;
 	}
 }

@@ -13,13 +13,18 @@ export type TBreadCrumbProps = {
 
 interface Props extends TClassName {
 	items: TBreadCrumbProps[]
+	linkCls?: string
 }
-const BreadCrumbs: FC<Props> = ({ className, items }) => {
+const BreadCrumbs: FC<Props> = ({ className, items, linkCls }) => {
 	return (
 		<nav className={cn(cls.wrapper, [className])}>
 			{items.map(({ text, link }, index) => {
 				return (
-					<Link className={cn(cls.item)} href={link} key={`${text}${link}`}>
+					<Link
+						className={cn(cls.item, [linkCls])}
+						href={link}
+						key={`${text}${link}`}
+					>
 						<Typography font='Inter-R' size={14}>
 							{text}
 						</Typography>

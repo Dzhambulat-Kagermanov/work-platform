@@ -5,6 +5,8 @@ import { cn } from '@/lib'
 import { TContentType } from '../Switcher'
 import { Typography } from '@/components/ui'
 import cls from './index.module.scss'
+import { useScreen } from '@/hooks'
+import { SM_MID } from '@/constants'
 
 interface Props extends TClassName {
 	setContentType: (value: TContentType) => void
@@ -12,6 +14,8 @@ interface Props extends TClassName {
 }
 const SwitcherActions: FC<Props> = memo(
 	({ className, contentType, setContentType }) => {
+		const width = useScreen()
+
 		const handleConditions = () => {
 			setContentType('conditions')
 		}
@@ -30,7 +34,7 @@ const SwitcherActions: FC<Props> = memo(
 					})}
 					onClick={handleConditions}
 				>
-					<Typography font='Inter-SB' size={18}>
+					<Typography font='Inter-SB' size={width > SM_MID ? 18 : 16}>
 						Условия заказа
 					</Typography>
 				</button>
@@ -40,7 +44,7 @@ const SwitcherActions: FC<Props> = memo(
 					})}
 					onClick={handleDescription}
 				>
-					<Typography font='Inter-SB' size={18}>
+					<Typography font='Inter-SB' size={width > SM_MID ? 18 : 16}>
 						Описание товара
 					</Typography>
 				</button>
@@ -50,7 +54,7 @@ const SwitcherActions: FC<Props> = memo(
 					})}
 					onClick={handleReviews}
 				>
-					<Typography font='Inter-SB' size={18}>
+					<Typography font='Inter-SB' size={width > SM_MID ? 18 : 16}>
 						Отзывы
 					</Typography>
 				</button>

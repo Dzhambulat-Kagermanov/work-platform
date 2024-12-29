@@ -3,6 +3,7 @@ import { FC, MouseEvent } from 'react'
 import { TClassName, TProductItemProps } from '@/types'
 import { Button } from '@/components/ui'
 import cls from './index.module.scss'
+import { cn } from '@/lib'
 
 interface Props
 	extends TClassName,
@@ -14,6 +15,7 @@ const ProductCardAddFavorite: FC<Props> = ({ className, id, isFavorite }) => {
 			theme={isFavorite ? 'outline' : 'fill'}
 			onClick={handleClick}
 			disabled={isFavorite}
+			className={cn(cls.btn, [className])}
 		>
 			{isFavorite ? 'В избранном' : 'В избранное'}
 		</Button>

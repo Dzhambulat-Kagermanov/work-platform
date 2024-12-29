@@ -1,8 +1,11 @@
+'use client'
 import { FC } from 'react'
 import { TClassName, TSalesmanInfo } from '@/types'
 import { cn } from '@/lib'
 import { Typography } from '@/components/ui'
 import cls from './index.module.scss'
+import { useScreen } from '@/hooks'
+import { SM_BIG } from '@/constants'
 
 interface Props extends TClassName {
 	salesman: Pick<TSalesmanInfo, 'boughtOut' | 'productsWithCashback'>

@@ -11,7 +11,11 @@ interface Props extends TClassName {
 const ProductCardCrumbs: FC<Props> = ({ items, className }) => {
 	return (
 		<Container className={cn(cls.container, [className])}>
-			<BreadCrumbs items={items} />
+			<BreadCrumbs
+				items={items}
+				className={cn(cls.crumbs)}
+				linkCls={cn(cls.item)}
+			/>
 		</Container>
 	)
 }

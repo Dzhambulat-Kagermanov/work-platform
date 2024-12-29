@@ -2,10 +2,10 @@ import { FC } from 'react'
 import { TModuleClassName, TProductItemProps } from '@/types'
 import { cn } from '@/lib'
 import { Container } from '@/components/ui'
-import { Gallery } from './Gallery'
 import { Content } from './Content'
 import { Switcher } from './Switcher'
 import { SimilarProducts } from './SimilarProducts'
+import { GalleryAdaptive } from './GalleryAdaptive'
 import cls from './index.module.scss'
 
 interface Props extends TModuleClassName {
@@ -31,11 +31,7 @@ const ProductCardInfo: FC<Props> = ({
 		<div className={cn(cls.wrapper, [wrapperClassName])}>
 			<Container className={cn(cls.container, [className])}>
 				<div className={cn(cls.head)}>
-					<Gallery
-						className={cn(cls.gallery)}
-						images={images}
-						isFavorite={isFavorite}
-					/>
+					<GalleryAdaptive images={images} isFavorite={isFavorite} />
 					<Content
 						className={cn(cls.content)}
 						data={{
@@ -49,6 +45,7 @@ const ProductCardInfo: FC<Props> = ({
 					/>
 				</div>
 				<Switcher
+					salesmanId={salesmanId}
 					id={id}
 					productDescription={productDescription}
 					className={cn(cls.switcher)}
