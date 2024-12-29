@@ -10,8 +10,10 @@ import { XS_BIG } from '@/constants'
 import { InfoMobileBackground, InfoMobileContent } from './InfoMobile'
 import cls from './index.module.scss'
 
-interface Props extends TClassName {}
-const AccountHead: FC<Props> = ({ className }) => {
+interface Props extends TClassName {
+	withoutAvatarChange?: boolean
+}
+const AccountHead: FC<Props> = ({ className, withoutAvatarChange }) => {
 	const width = useScreen()
 
 	return (
@@ -24,7 +26,11 @@ const AccountHead: FC<Props> = ({ className }) => {
 				/>
 			)}
 			<Container className={cn(cls.container, [className])}>
-				<Avatar name='Анастасия К.' className={cn(cls.avatar)} />
+				<Avatar
+					name='Анастасия К.'
+					className={cn(cls.avatar)}
+					withoutAvatarChange={withoutAvatarChange}
+				/>
 				{width > XS_BIG && (
 					<Info
 						className={cn(cls.info)}

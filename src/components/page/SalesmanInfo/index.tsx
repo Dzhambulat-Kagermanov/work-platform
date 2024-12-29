@@ -13,7 +13,7 @@ const SalesmanInfoPage: FC<Props> = ({ className }) => {
 	return (
 		<main className={cn(cls.salesman, [className])}>
 			<SalesmanInfoBackBtn className={cn(cls.back_btn)} />
-			<AccountHead className={cn(cls.head)} />
+			<AccountHead className={cn(cls.head)} withoutAvatarChange />
 			<SalesmanInfoStatistic
 				className={cn(cls.statistic)}
 				cashbackPaid={10550}

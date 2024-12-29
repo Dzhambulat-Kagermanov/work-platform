@@ -6,6 +6,8 @@ import { cn } from '@/lib'
 import { ExpandArrowIcon } from '@/icons'
 import { Container, Typography } from '@/components/ui'
 import { useRouter } from 'next/navigation'
+import { useScreen } from '@/hooks'
+import { XS_BIG } from '@/constants'
 
 interface Props extends TClassName {}
 const SalesmanInfoBackBtn: FC<Props> = ({ className }) => {
@@ -13,19 +15,24 @@ const SalesmanInfoBackBtn: FC<Props> = ({ className }) => {
 	const handleClick = () => {
 		router.push('/')
 	}
+	const width = useScreen()
 
 	return (
-		<Container className={cn(cls.wrapper)}>
-			<button className={cn(cls.btn, [className])} onClick={handleClick}>
-				<ExpandArrowIcon
-					color='var(--black-opacity-60)'
-					className={cn(cls.icon)}
-				/>
-				<Typography tag='h4' font='Inter-R' size={16}>
-					Назад
-				</Typography>
-			</button>
-		</Container>
+		<>
+			{width > XS_BIG && (
+				<Container className={cn(cls.wrapper)}>
+					<button className={cn(cls.btn, [className])} onClick={handleClick}>
+						<ExpandArrowIcon
+							color='var(--black-opacity-60)'
+							className={cn(cls.icon)}
+						/>
+						<Typography tag='h4' font='Inter-R' size={16}>
+							Назад
+						</Typography>
+					</button>
+				</Container>
+			)}
+		</>
 	)
 }
 

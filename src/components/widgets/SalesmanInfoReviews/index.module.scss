@@ -42,3 +42,14 @@
 	translate: 0 -50%;
 	rotate: 90deg;
 }
+
+@media screen and (max-width: 788px) {
+	.slider {
+		width: 100%;
+	}
+}
+@media screen and (max-width: 380px) {
+	.title {
+		font-size: 20px;
+	}
+}

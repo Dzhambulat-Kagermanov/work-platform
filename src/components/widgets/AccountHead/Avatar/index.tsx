@@ -6,8 +6,15 @@ import Image from 'next/image'
 import { Typography } from '@/components/ui'
 import cls from './index.module.scss'
 
-interface Props extends TClassName, Pick<TUserInfo, 'avatarImage' | 'name'> {}
-const Avatar: FC<Props> = ({ avatarImage, name, className }) => {
+interface Props extends TClassName, Pick<TUserInfo, 'avatarImage' | 'name'> {
+	withoutAvatarChange?: boolean
+}
+const Avatar: FC<Props> = ({
+	avatarImage,
+	name,
+	className,
+	withoutAvatarChange,
+}) => {
 	const handleClick = () => {
 		alert('Load avatar')
 	}
@@ -31,14 +38,16 @@ const Avatar: FC<Props> = ({ avatarImage, name, className }) => {
 				</Typography>
 			)}
 
-			<div className={cn(cls.photo_overlay)} onClick={handleClick}>
-				<Image
-					src={'/images/shared/camera.svg'}
-					alt='Загрузить фото'
-					width={32}
-					height={32}
-				/>
-			</div>
+			{!withoutAvatarChange && (
+				<div className={cn(cls.photo_overlay)} onClick={handleClick}>
+					<Image
+						src={'/images/shared/camera.svg'}
+						alt='Загрузить фото'
+						width={32}
+						height={32}
+					/>
+				</div>
+			)}
 		</div>
 	)
 }

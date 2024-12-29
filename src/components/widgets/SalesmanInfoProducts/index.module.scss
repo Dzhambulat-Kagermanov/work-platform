@@ -10,3 +10,11 @@
 }
 .item {
 }
+@media screen and (max-width: 380px) {
+	.title {
+		font-size: 20px;
+	}
+	.group {
+		gap: 10px;
+	}
+}
