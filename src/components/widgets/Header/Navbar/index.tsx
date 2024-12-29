@@ -13,6 +13,8 @@ import cls from './index.module.scss'
 
 interface Props extends TClassName {}
 const Navbar: FC<Props> = ({ className }) => {
+	const isAuth = false
+
 	return (
 		<nav className={cn(cls.wrapper, [className])}>
 			<ActiveLink
@@ -44,7 +46,7 @@ const Navbar: FC<Props> = ({ className }) => {
 				<DeliveryIcon color='white' />
 			</ActiveLink>
 			<ActiveLink
-				href='/account'
+				href={isAuth ? '/account' : '/auth'}
 				className={cn(cls.link)}
 				activeCls={cn(cls.active_link)}
 			>

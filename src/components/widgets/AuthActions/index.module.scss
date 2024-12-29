@@ -1,0 +1,24 @@
+.wrapper {
+}
+.text {
+	text-align: center;
+}
+.link {
+	color: var(--purple-600);
+}
+.registration {
+}
+.forget_password {
+	display: block;
+	margin-top: 32px;
+}
+.info {
+	margin-top: 32px;
+	line-height: 130%;
+	.link {
+		text-decoration: underline;
+		text-decoration-color: var(--purple-300);
+		text-underline-offset: 2px;
+		color: var(--purple-300);
+	}
+}

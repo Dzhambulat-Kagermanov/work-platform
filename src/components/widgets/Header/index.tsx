@@ -5,9 +5,9 @@ import { cn } from '@/lib'
 import { Container, Typography } from '@/components/ui'
 import { Content } from './Content'
 import Link from 'next/link'
-import cls from './index.module.scss'
 import { useScreen } from '@/hooks'
 import { SM_BIG } from '@/constants'
+import cls from './index.module.scss'
 
 interface Props extends TModuleClassName {}
 const Header: FC<Props> = ({ className, wrapperClassName }) => {

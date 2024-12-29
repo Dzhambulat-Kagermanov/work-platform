@@ -7,8 +7,10 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 	theme: 'fill' | 'outline'
 	children: string
 	size?: 'big' | 'mid' | 'low'
+	wFull?: boolean
 }
 const Button: FC<Props> = ({
+	wFull,
 	theme,
 	className,
 	children,
@@ -17,7 +19,9 @@ const Button: FC<Props> = ({
 }) => {
 	return (
 		<button
-			className={cn(cls.button, [className, cls[theme], cls[size]])}
+			className={cn(cls.button, [className, cls[theme], cls[size]], {
+				[cls.wFull]: wFull,
+			})}
 			{...other}
 		>
 			<Typography

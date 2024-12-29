@@ -91,6 +91,7 @@ body {
 /* SM_BIG */
 @media screen and (max-width: 788px) {
 	body {
+		--header-height: 85px;
 		--adaptive-container-width: 600px;
 	}
 }
