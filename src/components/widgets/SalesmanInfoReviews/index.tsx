@@ -8,14 +8,11 @@ import { Navigation, Autoplay } from 'swiper/modules'
 import 'swiper/swiper-bundle.css'
 import { ReviewItem } from '@/components/entities/ReviewItem'
 import { ActionArrowIcon } from '@/icons'
-import { MD_BIG, SM_BIG, SM_MID } from '@/constants'
-import { useScreen } from '@/hooks'
+import { MD_BIG, SM_MID } from '@/constants'
 import cls from './index.module.scss'
 
 interface Props extends TClassName {}
 const SalesmanInfoReviews: FC<Props> = ({ className }) => {
-	const width = useScreen()
-
 	return (
 		<Container tag='section' className={cn(cls.wrapper, [className])}>
 			<div className={cn(cls.head)}>
@@ -93,22 +90,13 @@ const SalesmanInfoReviews: FC<Props> = ({ className }) => {
 						/>
 					</SwiperSlide>
 				</Swiper>
-				{width > SM_BIG && (
-					<>
-						<button className={cn(cls.btn, [cls.prev_btn])}>
-							<ActionArrowIcon
-								color='var(--black-100)'
-								className={cn(cls.icon)}
-							/>
-						</button>
-						<button className={cn(cls.btn, [cls.next_btn])}>
-							<ActionArrowIcon
-								color='var(--black-100)'
-								className={cn(cls.icon)}
-							/>
-						</button>
-					</>
-				)}
+
+				<button className={cn(cls.btn, [cls.prev_btn])}>
+					<ActionArrowIcon color='var(--black-100)' className={cn(cls.icon)} />
+				</button>
+				<button className={cn(cls.btn, [cls.next_btn])}>
+					<ActionArrowIcon color='var(--black-100)' className={cn(cls.icon)} />
+				</button>
 			</div>
 		</Container>
 	)

@@ -45,7 +45,11 @@
 
 @media screen and (max-width: 788px) {
 	.slider {
+		cursor: grab;
 		width: 100%;
+	}
+	.btn {
+		display: none;
 	}
 }
 @media screen and (max-width: 380px) {
