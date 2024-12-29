@@ -1,0 +1,30 @@
+.wrapper {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	justify-content: space-between;
+	gap: 20px 30px;
+}
+@media screen and (max-width: 1044px) {
+	.wrapper {
+		gap: 20px;
+		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+	}
+}
+@media screen and (max-width: 788px) {
+	.item_title {
+		font-size: 14px;
+	}
+}
+
+@media screen and (max-width: 620px) {
+	.item_title {
+		font-size: 16px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.wrapper {
+		gap: 15px;
+		grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+	}
+}

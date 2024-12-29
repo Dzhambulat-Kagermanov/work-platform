@@ -24,7 +24,7 @@ const Navbar: FC<Props> = ({ className }) => {
 				<HomeIcon color='white' />
 			</ActiveLink>
 			<ActiveLink
-				href='/catalog'
+				href='/category'
 				className={cn(cls.link)}
 				activeCls={cn(cls.active_link)}
 			>
