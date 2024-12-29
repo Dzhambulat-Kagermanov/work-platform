@@ -1,11 +1,17 @@
 .wrapper {
 	display: grid;
 	grid-template-columns: 126px 400px;
+	grid-template-rows: 530px auto;
 	row-gap: 6px;
 	column-gap: 20px;
 	--item-radius: 20px;
 }
+.scrollbar_wrapper {
+	overflow: hidden;
+	height: 100%;
+}
 .scrollbar {
+	transition: var(--tran-mid);
 	display: flex;
 	flex-flow: column;
 	row-gap: 14px;
@@ -13,6 +19,15 @@
 		flex: 1;
 		overflow: hidden;
 		border-radius: var(--item-radius);
+		background-color: var(--black-100);
+		img {
+			transition: var(--tran-low);
+		}
+		&.active_item {
+			img {
+				opacity: 0.8;
+			}
+		}
 	}
 	.stub {
 		border-radius: var(--item-radius);
@@ -23,7 +38,14 @@
 	overflow: hidden;
 	border-radius: var(--item-radius);
 }
-.next_images {
+.btn_wrapper {
+	cursor: default;
 	display: flex;
 	justify-content: center;
+	.next_images {
+		transition: var(--tran-low);
+	}
+	.next_images:hover {
+		scale: 1.1;
+	}
 }

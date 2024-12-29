@@ -18,6 +18,8 @@ export const getCashbackProducts = (): Promise<TGetCashbackProducts> => {
 					images: [
 						'/images/stub/product-stub.png',
 						'/images/stub/product-stub-2.png',
+						'/images/stub/product-stub-3.png',
+						'/images/stub/product-stub-4.png',
 					],
 					isFavorite: true,
 					name: 'Зарядка для iphone 20W type-c быстрое устройство',
