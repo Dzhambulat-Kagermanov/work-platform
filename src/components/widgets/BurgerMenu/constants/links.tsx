@@ -33,7 +33,7 @@ export const AUTH_LINKS: TAuthLink[] = [
 		icon: <CatalogIcon className={cls.icon} color='var(--purple-800)' />,
 	},
 	{
-		link: '/fe',
+		link: '/favorites',
 		text: 'Избранное',
 		icon: (
 			<FavoriteIcon
@@ -70,7 +70,7 @@ export const NOT_AUTH_LINKS: TAuthLink[] = [
 		icon: <CatalogIcon className={cls.icon} color='var(--purple-800)' />,
 	},
 	{
-		link: '/fe',
+		link: '/favorites',
 		text: 'Избранное',
 		icon: (
 			<FavoriteIcon
