@@ -5,8 +5,10 @@ import { Typography } from '@/components/ui'
 import Link from 'next/link'
 import cls from './index.module.scss'
 
-interface Props extends TClassName {}
-const AuthActions: FC<Props> = ({ className }) => {
+interface Props extends TClassName {
+	type: 'forRegistration' | 'forAuth'
+}
+const AuthActions: FC<Props> = ({ className, type }) => {
 	return (
 		<div className={cn(cls.wrapper, [className])}>
 			<Typography
@@ -14,21 +16,27 @@ const AuthActions: FC<Props> = ({ className }) => {
 				size={14}
 				className={cn(cls.text, [cls.registration])}
 			>
-				Нет аккаунта?{' '}
-				<Link href={'/registration'} className={cn(cls.link)}>
+				{type === 'forAuth' ? 'Нет аккаунта?' : 'Есть аккаунт?'}
+				<Link
+					href={type === 'forAuth' ? '/registration' : '/auth'}
+					className={cn(cls.link)}
+				>
 					<Typography tag='span' font='Inter-SB' size={14}>
-						Зарегистрироваться
+						{' '}
+						{type === 'forAuth' ? 'Зарегистрироваться?' : 'Войти'}
 					</Typography>
 				</Link>
 			</Typography>
-			<Link
-				href={'/forget-password'}
-				className={cn(cls.text, [cls.forget_password, cls.link])}
-			>
-				<Typography font='Inter-SB' size={14}>
-					Забыли пароль?
-				</Typography>
-			</Link>
+			{type === 'forAuth' && (
+				<Link
+					href={'/forget-password'}
+					className={cn(cls.text, [cls.forget_password, cls.link])}
+				>
+					<Typography font='Inter-SB' size={14}>
+						Забыли пароль?
+					</Typography>
+				</Link>
+			)}
 			<Typography font='Inter-R' size={10} className={cn(cls.info, [cls.text])}>
 				Продолжая, вы подтверждаете, что ознакомились с 
 				<Link

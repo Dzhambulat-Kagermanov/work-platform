@@ -28,7 +28,7 @@ const AuthPage: FC<Props> = ({ className }) => {
 					Авторизация покупателя
 				</Typography>
 				<AuthForm className={cn(cls.form)} />
-				<AuthActions className={cn(cls.actions)} />
+				<AuthActions type='forAuth' className={cn(cls.actions)} />
 			</div>
 		</main>
 	)
