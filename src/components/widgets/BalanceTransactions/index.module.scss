@@ -14,3 +14,10 @@
 	margin: 35px 0;
 	width: 450px;
 }
+
+@media screen and (max-width: 620px) {
+	.inp_wrapper {
+		width: 100%;
+		margin: 15px 0;
+	}
+}

@@ -43,7 +43,7 @@ export const AUTH_LINKS: TAuthLink[] = [
 		),
 	},
 	{
-		link: '/fe',
+		link: '/account/balance',
 		text: 'Финансы',
 		icon: <CreditCardIcon className={cls.icon} color='var(--purple-800)' />,
 	},

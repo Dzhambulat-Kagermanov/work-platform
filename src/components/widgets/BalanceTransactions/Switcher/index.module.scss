@@ -4,3 +4,8 @@
 	border-bottom: 2px solid var(--white-400);
 	padding-bottom: 17px;
 }
+@media screen and (max-width: 500px) {
+	.wrapper {
+		justify-content: space-between;
+	}
+}

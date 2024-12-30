@@ -7,16 +7,19 @@ import { Switcher } from './Switcher'
 import { SearchIcon } from '@/icons'
 import { Table } from './Table'
 import cls from './index.module.scss'
+import { useScreen } from '@/hooks'
+import { SM_MID } from '@/constants'
 
 export type TActiveSwitchItem = 'all' | 'replenishments' | 'withdrawals'
 
 interface Props extends TClassName {}
 const BalanceTransactions: FC<Props> = ({ className }) => {
+	const width = useScreen()
 	const [active, setActive] = useState<TActiveSwitchItem>('all')
 
 	return (
 		<section className={cn(cls.wrapper, [className])}>
-			<Typography font='Inter-SB' size={32} tag='h2'>
+			<Typography font='Inter-SB' size={width > SM_MID ? 32 : 20} tag='h2'>
 				Транзакции:
 			</Typography>
 			<Switcher

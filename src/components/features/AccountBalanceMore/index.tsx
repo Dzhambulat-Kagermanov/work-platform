@@ -14,6 +14,7 @@ const AccountBalanceMore: FC<Props> = ({ className, children, ...other }) => {
 
 	return (
 		<Button
+			secondColor='var(--green-100)'
 			theme='outline'
 			size='low'
 			className={cn(cls.btn, [className])}

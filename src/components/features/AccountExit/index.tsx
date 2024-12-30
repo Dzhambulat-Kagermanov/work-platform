@@ -11,6 +11,7 @@ const AccountExit: FC<Props> = ({ className, children, ...other }) => {
 	return (
 		<Button
 			{...other}
+			secondColor='var(--red-100)'
 			className={cn(cls.btn, [className])}
 			theme='outline'
 			size='low'
