@@ -7,8 +7,9 @@ import cls from './index.module.scss'
 
 interface Props extends TClassName {
 	isAuth: boolean
+	actionForLinkClick?: (value?: any) => void
 }
-const Group: FC<Props> = ({ className, isAuth }) => {
+const Group: FC<Props> = ({ className, isAuth, actionForLinkClick }) => {
 	const links = isAuth ? AUTH_LINKS : NOT_AUTH_LINKS
 
 	return (
@@ -16,6 +17,7 @@ const Group: FC<Props> = ({ className, isAuth }) => {
 			{links.map(({ icon, link, text }) => {
 				return (
 					<GroupItem
+						actionForLinkClick={actionForLinkClick}
 						key={`${text}${link}`}
 						icon={icon}
 						link={link}

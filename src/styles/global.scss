@@ -56,6 +56,11 @@ html {
 body {
 	color: var(--grey-400);
 }
+html {
+	&:has(> .hide-scrollbar) {
+		overflow: hidden;
+	}
+}
 
 .modules-gap-bottom {
 	margin-bottom: var(--modules-gap) !important;

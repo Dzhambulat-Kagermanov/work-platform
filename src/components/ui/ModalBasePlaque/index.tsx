@@ -1,8 +1,8 @@
 'use client'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { TChildren, TClassName } from '@/types'
 import { cn } from '@/lib'
-import { useModalState } from '@/hooks'
+import { useBodyClassName, useModalState } from '@/hooks'
 import { TRAN_MID } from '@/constants'
 import { TModalSlug } from '@/hooks/zustand/useModalState'
 import cls from './index.module.scss'
@@ -13,6 +13,13 @@ const ModalBasePlaque: FC<Props> = ({ className, slug, children }) => {
 	const { modalState, visibleTransition, setVisibleTransition } = useModalBase({
 		slug,
 	})
+
+	const bodyClassNameAction = useBodyClassName()
+	useEffect(() => {
+		if (modalState)
+			bodyClassNameAction({ className: 'hide-scrollbar', type: 'add' })
+		else bodyClassNameAction({ className: 'hide-scrollbar', type: 'remove' })
+	}, [modalState])
 
 	const hideModal = useModalState(state => state.hideModal)
 	const handleClick = () => {

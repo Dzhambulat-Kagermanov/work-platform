@@ -1,5 +1,5 @@
 'use client'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { TClassName } from '@/types'
 import { cn } from '@/lib'
 import { SHARED_BURGER_MENU_MODAL, SM_BIG, TRAN_MID } from '@/constants'
@@ -7,11 +7,11 @@ import { useModalBase } from '@/hooks/useModalBase'
 import { Container } from '@/components/ui'
 import { Logo } from '../Logo'
 import { Group } from './Group'
-import { useModalState, useScreen } from '@/hooks'
+import { useBodyClassName, useModalState, useScreen } from '@/hooks'
 import { Footer } from './Footer'
-import cls from './index.module.scss'
 import { ExpandArrowIcon } from '@/icons'
 import { isAuth } from '@/constants/stub'
+import cls from './index.module.scss'
 
 interface Props extends TClassName {}
 const BurgerMenu: FC<Props> = ({ className }) => {
@@ -20,6 +20,13 @@ const BurgerMenu: FC<Props> = ({ className }) => {
 	const { modalState, visibleTransition, setVisibleTransition } = useModalBase({
 		slug: SHARED_BURGER_MENU_MODAL,
 	})
+
+	const bodyClassNameAction = useBodyClassName()
+	useEffect(() => {
+		if (modalState)
+			bodyClassNameAction({ className: 'hide-scrollbar', type: 'add' })
+		else bodyClassNameAction({ className: 'hide-scrollbar', type: 'remove' })
+	}, [modalState])
 
 	const hideModal = useModalState(state => state.hideModal)
 	const handleClose = () => {
@@ -44,7 +51,11 @@ const BurgerMenu: FC<Props> = ({ className }) => {
 								<ExpandArrowIcon color='var(--purple-800)' />
 							</button>
 						</div>
-						<Group isAuth={isAuth} className={cn(cls.group)} />
+						<Group
+							isAuth={isAuth}
+							className={cn(cls.group)}
+							actionForLinkClick={handleClose}
+						/>
 						<Footer isAuth={isAuth} className={cn(cls.footer)} />
 					</Container>
 				</section>
