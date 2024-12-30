@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { TClassName } from '@/types'
 import { cn } from '@/lib'
-import { CATEGORIES } from '@/components/page/Category/constants/categories'
+import { CATEGORIES } from './constants/categories'
 import { CategoryItem } from '@/components/entities/CategoryItem'
 import cls from './index.module.scss'
 

@@ -1,0 +1,14 @@
+.item {
+	p {
+		transition: var(--tran-low);
+	}
+	&:hover {
+		color: var(--purple-900);
+	}
+}
+.active {
+	p {
+		font-family: Inter-B;
+	}
+	color: var(--purple-900);
+}

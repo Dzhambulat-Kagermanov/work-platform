@@ -1,9 +1,23 @@
 import { CategoryPage } from '@/components/page/Category'
+import { CategoryItemPage } from '@/components/page/CategoryItem'
+import { CategorySelectSubcategory } from '@/components/widgets/CategorySelectSubcategory'
 import { FC } from 'react'
 
-interface Props {}
-const Category: FC<Props> = ({}) => {
-	return <CategoryPage />
+interface Props {
+	searchParams: Promise<{ slug?: string; subcategory?: string }>
+}
+const Category: FC<Props> = async ({ searchParams }) => {
+	const { slug, subcategory } = await searchParams
+
+	return slug ? (
+		subcategory ? (
+			<CategoryItemPage slug={slug} subcategory={subcategory} />
+		) : (
+			<CategorySelectSubcategory slug={slug} subcategory={subcategory} />
+		)
+	) : (
+		<CategoryPage />
+	)
 }
 
 export default Category

@@ -3,7 +3,7 @@ import { TClassName } from '@/types'
 import { cn } from '@/lib'
 import { HomePromo } from '@/components/widgets/HomePromo'
 import { HomeProducts } from '@/components/widgets/HomeProducts'
-import { HomeFilterModalsLayout } from '@/components/layouts/HomeFilterModals'
+import { FilterModalsLayout } from '@/components/layouts/FilterModals'
 import cls from './index.module.scss'
 
 interface Props extends TClassName {}
@@ -12,7 +12,7 @@ const HomePage: FC<Props> = ({ className }) => {
 		<main className={cn(cls.home, [className])}>
 			<HomePromo className={cn('modules-gap-top', ['modules-gap-bottom'])} />
 			<HomeProducts className={cn('modules-gap-bottom')} />
-			<HomeFilterModalsLayout />
+			<FilterModalsLayout />
 		</main>
 	)
 }
