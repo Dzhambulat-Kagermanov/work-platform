@@ -1,0 +1,16 @@
+.wrapper {
+	h2 {
+	}
+	.switcher {
+		margin-top: 25px;
+	}
+}
+.inp {
+	&::placeholder {
+		color: var(--grey-200);
+	}
+}
+.inp_wrapper {
+	margin: 35px 0;
+	width: 450px;
+}

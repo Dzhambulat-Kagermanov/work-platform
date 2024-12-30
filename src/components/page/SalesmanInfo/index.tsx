@@ -12,7 +12,9 @@ interface Props extends TClassName {}
 const SalesmanInfoPage: FC<Props> = ({ className }) => {
 	return (
 		<main className={cn(cls.salesman, [className])}>
-			<SalesmanInfoBackBtn className={cn(cls.back_btn)} />
+			<SalesmanInfoBackBtn
+				className={cn(cls.back_btn, ['modules-gap-bottom'])}
+			/>
 			<AccountHead className={cn(cls.head)} withoutAvatarChange />
 			<SalesmanInfoStatistic
 				className={cn(cls.statistic)}

@@ -11,6 +11,8 @@
 
 	--red-100: rgb(248, 53, 53);
 
+	--blue-100: #0253ff;
+
 	--green-100: #0ec615;
 	--green-200: #19b400;
 
@@ -68,6 +70,10 @@ html {
 }
 .modules-gap-top {
 	margin-top: var(--modules-gap) !important;
+}
+.modules-gap-both {
+	margin-top: var(--modules-gap) !important;
+	margin-bottom: var(--modules-gap) !important;
 }
 
 /* LG_BIG */

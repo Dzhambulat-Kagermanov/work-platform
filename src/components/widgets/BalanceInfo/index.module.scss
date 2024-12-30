@@ -1,0 +1,19 @@
+.wrapper {
+	display: flex;
+	column-gap: 30px;
+	align-items: flex-start;
+}
+.item {
+	width: 280px;
+	padding: 30px;
+	border: 1px solid var(--black-opacity-10);
+	border-radius: 20px;
+	h2 {
+	}
+	h3 {
+		margin-top: 2px;
+	}
+}
+.order_withdrawal_btn {
+	margin-top: 17px;
+}

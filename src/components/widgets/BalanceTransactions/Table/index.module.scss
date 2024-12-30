@@ -1,0 +1,43 @@
+.wrapper {
+	max-width: 100%;
+	overflow: auto;
+	padding-bottom: 26px;
+
+	&::-webkit-scrollbar {
+		width: 17px;
+		background-color: transparent;
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: var(--white-200);
+	}
+}
+.table {
+	width: 1004px;
+	border-collapse: collapse;
+}
+.head {
+	.row {
+		border-bottom: 1px solid var(--white-400);
+	}
+	.column {
+		padding: 13px 24px;
+	}
+}
+.body {
+	.row {
+		border-bottom: 1px solid var(--white-400);
+		background-color: var(--white-300);
+	}
+	.column {
+		padding: 26px 24px;
+		&.blue {
+			color: var(--blue-100);
+		}
+	}
+	.type {
+		color: var(--red-100);
+		&.isReplenishment {
+			color: var(--green-100);
+		}
+	}
+}
