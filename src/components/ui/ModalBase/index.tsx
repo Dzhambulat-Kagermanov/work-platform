@@ -17,10 +17,10 @@ const ModalBase: FC<Props> = ({ children, className, slug }) => {
 
 	const bodyClassNameAction = useBodyClassName()
 	useEffect(() => {
-		if (modalState)
+		if (visibleTransition)
 			bodyClassNameAction({ className: 'hide-scrollbar', type: 'add' })
 		else bodyClassNameAction({ className: 'hide-scrollbar', type: 'remove' })
-	}, [modalState])
+	}, [visibleTransition])
 
 	const hideModal = useModalState(state => state.hideModal)
 	const handleClick = () => {

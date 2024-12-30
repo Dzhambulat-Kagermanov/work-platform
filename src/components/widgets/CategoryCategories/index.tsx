@@ -19,6 +19,7 @@ const CategoryCategories: FC<Props> = ({ className }) => {
 						title={title}
 						className={cn(cls.item)}
 						titleCls={cn(cls.item_title)}
+						plaqueCls={cn(cls.item_plaque)}
 					/>
 				)
 			})}

@@ -8,6 +8,7 @@ import cls from './index.module.scss'
 
 interface Props extends TClassName, TCategoryItemProps, TTag {
 	titleCls?: string
+	plaqueCls?: string
 }
 const CategoryItem: FC<Props> = ({
 	image,
@@ -15,6 +16,7 @@ const CategoryItem: FC<Props> = ({
 	title,
 	titleCls,
 	className,
+	plaqueCls,
 	tag = 'div',
 }) => {
 	const Tag = tag
@@ -25,7 +27,7 @@ const CategoryItem: FC<Props> = ({
 			<Typography font='Inter-M' size={16} tag='h2' className={titleCls}>
 				{title}
 			</Typography>
-			<Typography font='Inter-M' size={14}>
+			<Typography font='Inter-M' size={14} className={plaqueCls}>
 				{productsQnt} товара
 			</Typography>
 		</Tag>
