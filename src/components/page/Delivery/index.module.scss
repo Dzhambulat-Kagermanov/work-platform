@@ -25,3 +25,13 @@
 	min-height: 1px;
 	max-height: 100%;
 }
+
+@media screen and (max-width: 500px) {
+	.complex {
+		margin-top: 8px !important;
+		overflow: visible;
+	}
+	.content {
+		overflow: visible;
+	}
+}

@@ -8,10 +8,12 @@ import cls from './index.module.scss'
 interface Props extends TClassName, TTag, TChatMessageItemProps {
 	whomSend: 'user' | 'salesman'
 	isOnline: boolean
+	messageCls?: string
 }
 const ChatMessageItem: FC<Props> = ({
 	id,
 	className,
+	messageCls,
 	isOnline,
 	avatar,
 	message,
@@ -39,7 +41,11 @@ const ChatMessageItem: FC<Props> = ({
 					</Typography>
 				</div>
 				<div className={cn(cls.content)}>
-					<Typography font='Inter-M' size={16}>
+					<Typography
+						font='Inter-M'
+						size={16}
+						className={cn(cls.message, [messageCls])}
+					>
 						{message}
 					</Typography>
 				</div>

@@ -1,0 +1,32 @@
+.wrapper {
+	row-gap: 2px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	h2 {
+	}
+	time {
+		color: var(--grey-100);
+	}
+}
+
+.product_info {
+	display: flex;
+	align-items: center;
+	column-gap: 7px;
+	.plaque {
+	}
+	h5 {
+		color: var(--purple-900);
+	}
+	h6 {
+		color: var(--grey-100);
+		text-decoration: line-through;
+	}
+}
+
+@media screen and (max-width: 870px) {
+	.wrapper {
+		justify-content: center;
+	}
+}

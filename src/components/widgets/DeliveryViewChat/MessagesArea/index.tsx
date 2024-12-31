@@ -6,8 +6,8 @@ import { Typography } from '@/components/ui'
 import { DeliveryViewNotification } from '../../DeliveryViewNotification'
 import { MessagesAreaGroup } from '../MessagesAreaGroup'
 import { MESSAGES, SALESMAN_IS_ONLINE } from '../constants/messages'
-import cls from './index.module.scss'
 import { DeliveryReviewModal } from '../../DeliveryReviewModal'
+import cls from './index.module.scss'
 
 interface Props extends TClassName {}
 const MessagesArea: FC<Props> = ({ className }) => {

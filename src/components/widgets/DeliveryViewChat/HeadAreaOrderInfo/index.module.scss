@@ -1,0 +1,48 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	justify-content: space-between;
+	margin: 0 0 0 auto;
+	h6 {
+		color: var(--grey-100);
+	}
+}
+.shop_info {
+	display: flex;
+	column-gap: 15px;
+	align-items: center;
+	.link {
+		color: var(--black-opacity-60);
+		text-decoration: underline;
+		text-underline-offset: 2px;
+		text-decoration-color: var(--black-opacity-60);
+		p {
+		}
+	}
+	.rating {
+		display: flex;
+		column-gap: 3px;
+		align-items: center;
+
+		img {
+			translate: 0 -2px;
+		}
+		p {
+			color: var(--grey-400);
+		}
+	}
+}
+.modal_open_btn {
+	--clickable-area: 13px;
+	align-self: flex-end;
+	display: flex;
+	column-gap: 2px;
+	padding: var(--clickable-area);
+	span {
+		background-color: var(--grey-200);
+		width: 4px;
+		height: 4px;
+		border-radius: 50%;
+	}
+}

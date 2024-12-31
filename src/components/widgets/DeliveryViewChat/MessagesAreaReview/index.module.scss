@@ -14,3 +14,15 @@
 .open_modal_btn {
 	margin: 13px auto 0 auto;
 }
+
+@media screen and (max-width: 1044px) {
+	.content {
+		padding: 18px 22px;
+		h2 {
+			font-size: 18px;
+		}
+		h3 {
+			font-size: 14px;
+		}
+	}
+}

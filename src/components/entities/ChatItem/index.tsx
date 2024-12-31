@@ -8,7 +8,10 @@ import cls from './index.module.scss'
 
 interface Props extends TClassName, TTag, TChatPlaqueProps {
 	isActive: boolean
-	setIsActive: TState<number>
+	setIsActive: TState<number | undefined>
+	headCls?: string
+	footerCls?: string
+	contentCls?: string
 }
 const ChatItem: FC<Props> = ({
 	id,
@@ -19,6 +22,9 @@ const ChatItem: FC<Props> = ({
 	lastMessage,
 	lastOnlineTime,
 	className,
+	contentCls,
+	footerCls,
+	headCls,
 	isActive,
 	setIsActive,
 	tag = 'div',
@@ -39,8 +45,8 @@ const ChatItem: FC<Props> = ({
 				avatar={avatar}
 				isOnline={isOnline}
 			/>
-			<div className={cn(cls.content)}>
-				<div className={cn(cls.head)}>
+			<div className={cn(cls.content, [contentCls])}>
+				<div className={cn(cls.head, [headCls])}>
 					<Typography font='Inter-SB' size={14} tag='h2'>
 						{productName}
 					</Typography>
@@ -48,7 +54,7 @@ const ChatItem: FC<Props> = ({
 						{lastOnlineTime}
 					</Typography>
 				</div>
-				<div className={cn(cls.footer)}>
+				<div className={cn(cls.footer, [footerCls])}>
 					<Typography font='Inter-R' size={14} tag='h3'>
 						{lastMessage || 'Enter your message description here ...'}
 					</Typography>

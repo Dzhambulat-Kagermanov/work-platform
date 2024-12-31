@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { TClassName } from '@/types'
+import { TClassName, TState } from '@/types'
 import { cn } from '@/lib'
 import { Input, Typography } from '@/components/ui'
 import Image from 'next/image'
@@ -7,8 +7,15 @@ import { SearchIcon } from '@/icons'
 import { Chats } from './Chats'
 import cls from './index.module.scss'
 
-interface Props extends TClassName {}
-const DeliveryChats: FC<Props> = ({ className }) => {
+interface Props extends TClassName {
+	activeIdSTUB?: number
+	setActiveIdSTUB: TState<number | undefined>
+}
+const DeliveryChats: FC<Props> = ({
+	className,
+	activeIdSTUB,
+	setActiveIdSTUB,
+}) => {
 	return (
 		<section className={cn(cls.wrapper, [className])}>
 			<div className={cn(cls.head)}>
@@ -37,7 +44,11 @@ const DeliveryChats: FC<Props> = ({ className }) => {
 				/>
 			</div>
 			<div className={cn(cls.chat_wrapper)}>
-				<Chats className={cn(cls.chat)} />
+				<Chats
+					className={cn(cls.chat)}
+					activeIdSTUB={activeIdSTUB}
+					setActiveIdSTUB={setActiveIdSTUB}
+				/>
 			</div>
 		</section>
 	)

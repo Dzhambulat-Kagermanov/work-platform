@@ -1,9 +1,6 @@
 .wrapper {
-	z-index: 2;
-	position: absolute;
-	left: 6px;
-	right: 6px;
-	top: 4px;
+	margin: 5px 5px 0 5px;
+	padding: 5px;
 	border-radius: 12px;
 	color: var(--white-100);
 	padding: 15px;
@@ -24,6 +21,7 @@
 .waitingOrder {
 	background-color: var(--purple-600);
 	.plaque {
+		min-width: 155px;
 		color: var(--grey-500);
 	}
 }
@@ -62,5 +60,24 @@
 	justify-content: space-between;
 	p {
 		margin: 0 auto;
+	}
+}
+
+@media screen and (max-width: 1044px) {
+	.wrapper {
+		flex-wrap: wrap;
+		justify-content: center;
+		row-gap: 10px;
+		flex-direction: column-reverse;
+		text-align: center;
+	}
+	.confirmation {
+		.description {
+			flex-wrap: wrap;
+			row-gap: 5px;
+			justify-content: center;
+			time {
+			}
+		}
 	}
 }

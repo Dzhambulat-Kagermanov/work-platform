@@ -1,15 +1,16 @@
 'use client'
 import { FC, useState } from 'react'
-import { TClassName } from '@/types'
+import { TClassName, TState } from '@/types'
 import { cn } from '@/lib'
 import { CHATS } from '../constants/chats'
 import { ChatItem } from '@/components/entities/ChatItem'
 import cls from './index.module.scss'
 
-interface Props extends TClassName {}
-const Chats: FC<Props> = ({ className }) => {
-	const [activeId, setActiveId] = useState<number>(CHATS[0].id)
-
+interface Props extends TClassName {
+	activeIdSTUB?: number
+	setActiveIdSTUB: TState<number | undefined>
+}
+const Chats: FC<Props> = ({ className, activeIdSTUB, setActiveIdSTUB }) => {
 	return (
 		<ul className={cn(cls.wrapper, [className])}>
 			{CHATS.map(
@@ -25,9 +26,9 @@ const Chats: FC<Props> = ({ className }) => {
 					return (
 						<ChatItem
 							tag='li'
-							setIsActive={setActiveId}
+							setIsActive={setActiveIdSTUB}
 							newMessagesQnt={newMessagesQnt}
-							isActive={activeId === id}
+							isActive={activeIdSTUB === id}
 							key={id}
 							avatar={avatar}
 							isOnline={isOnline}
@@ -36,6 +37,9 @@ const Chats: FC<Props> = ({ className }) => {
 							productName={productName}
 							lastMessage={lastMessage}
 							className={cn(cls.item)}
+							footerCls={cn(cls.item_footer)}
+							headCls={cn(cls.item_head)}
+							contentCls={cn(cls.item_content)}
 						/>
 					)
 				}

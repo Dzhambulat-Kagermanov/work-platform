@@ -16,7 +16,7 @@
 }
 
 .messages_group_overlay {
-	margin: 70px 0 20px 0;
+	margin: 0 0 20px 0;
 	flex-grow: 1;
 	overflow: auto;
 
@@ -29,7 +29,7 @@
 	}
 }
 .messages_group_wrapper {
-	padding: 0 40px 0 50px;
+	padding: 15px 40px 0 50px;
 	height: 1px;
 	max-height: 100%;
 	display: flex;
@@ -37,4 +37,10 @@
 	row-gap: 40px;
 }
 .messages_group {
+}
+
+@media screen and (max-width: 1044px) {
+	.messages_group_wrapper {
+		padding: 15px 15px 0 15px;
+	}
 }

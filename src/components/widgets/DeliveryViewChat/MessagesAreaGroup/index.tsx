@@ -23,7 +23,7 @@ const MessagesAreaGroup: FC<Props> = ({
 				{date}
 			</Typography>
 			<ul className={cn(cls.group)}>
-				{messages.map(({ message, type }) => {
+				{messages.map(({ message, type }, idx) => {
 					if (type === 'user' || type === 'salesman')
 						return (
 							<ChatMessageItem
@@ -33,6 +33,7 @@ const MessagesAreaGroup: FC<Props> = ({
 								avatar={message.avatar}
 								className={cn(cls.item)}
 								message={message.message}
+								messageCls={cn(cls.item_message)}
 								messageGotTime={message.messageGotTime}
 								name={type === 'user' ? 'Вы' : message.name}
 								isOnline={type === 'user' || salesmanIsOnline}
@@ -42,6 +43,7 @@ const MessagesAreaGroup: FC<Props> = ({
 					if (type === 'confirm-action' || type === 'fail-action')
 						return (
 							<MessagesAreaActionType
+								key={idx + '/'}
 								tag='li'
 								className={cn(cls.action)}
 								type={type}
@@ -51,6 +53,7 @@ const MessagesAreaGroup: FC<Props> = ({
 					if (type === 'review')
 						return (
 							<MessagesAreaReview
+								key={idx + '/'}
 								message={message}
 								type={type}
 								className={cn(cls.review)}
@@ -60,6 +63,7 @@ const MessagesAreaGroup: FC<Props> = ({
 					if (type === 'review-creating')
 						return (
 							<MessagesAreaReviewCreating
+								key={idx + '/'}
 								tag='li'
 								className={cn(cls.review_creating)}
 							/>

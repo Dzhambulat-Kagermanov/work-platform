@@ -14,7 +14,7 @@ export type TViewChatNotification =
 
 interface Props extends TClassName {}
 const DeliveryViewNotification: FC<Props> = ({ className }) => {
-	let notificationType: TViewChatNotification = 'cashbackReceived'
+	let notificationType: TViewChatNotification = 'waitingOrder'
 	const { contentForDescription, contentForPlaque } =
 		returnContent(notificationType)
 	return (

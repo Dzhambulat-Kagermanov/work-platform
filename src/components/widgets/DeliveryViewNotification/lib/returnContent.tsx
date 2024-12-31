@@ -1,5 +1,4 @@
 import { Timer, Typography } from '@/components/ui'
-import { format } from 'path'
 import { TViewChatNotification } from '..'
 import { ReactNode } from 'react'
 
@@ -15,8 +14,7 @@ export const returnContent = (
 		case 'waitingOrder':
 			contentForPlaque = (
 				<Typography font='Inter-M' size={12} tag='h5'>
-					Ожидание заказа
-					<Timer second={1800} format='MM:SS' />
+					Ожидание заказа <Timer second={1800} format='MM:SS' />
 				</Typography>
 			)
 			contentForDescription = (
@@ -66,7 +64,7 @@ export const returnContent = (
 					<Typography font='Inter-M' size={14}>
 						Ожидание подтверждения ваших материалов продавцом
 					</Typography>
-					<Typography font='Inter-SB' size={20}>
+					<Typography font='Inter-SB' tag='time' size={20}>
 						<Timer format='HH:MM:SS' second={259200} />
 					</Typography>
 				</>
