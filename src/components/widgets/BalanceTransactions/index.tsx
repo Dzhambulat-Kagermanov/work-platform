@@ -6,9 +6,9 @@ import { Input, Typography } from '@/components/ui'
 import { Switcher } from './Switcher'
 import { SearchIcon } from '@/icons'
 import { Table } from './Table'
-import cls from './index.module.scss'
 import { useScreen } from '@/hooks'
 import { SM_MID } from '@/constants'
+import cls from './index.module.scss'
 
 export type TActiveSwitchItem = 'all' | 'replenishments' | 'withdrawals'
 
@@ -33,7 +33,7 @@ const BalanceTransactions: FC<Props> = ({ className }) => {
 				inpCls={cn(cls.inp)}
 				placeholder='Введите ID выкупа'
 			/>
-			<Table className={cn(cls.table)} />
+			<Table className={cn(cls.table)} active={active} />
 		</section>
 	)
 }

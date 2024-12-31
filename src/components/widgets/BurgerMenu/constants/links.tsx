@@ -23,7 +23,7 @@ export const AUTH_LINKS: TAuthLink[] = [
 		icon: <HomeIcon className={cls.icon} color='var(--purple-800)' />,
 	},
 	{
-		link: '/fe',
+		link: '/delivery',
 		text: 'Мои заказы',
 		icon: <DeliveryIcon className={cls.icon} color='var(--purple-800)' />,
 	},
@@ -60,7 +60,7 @@ export const NOT_AUTH_LINKS: TAuthLink[] = [
 		icon: <HomeIcon className={cls.icon} color='var(--purple-800)' />,
 	},
 	{
-		link: '/fe',
+		link: '/delivery',
 		text: 'Мои заказы',
 		icon: <DeliveryIcon className={cls.icon} color='var(--purple-800)' />,
 	},

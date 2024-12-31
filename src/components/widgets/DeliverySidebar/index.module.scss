@@ -1,0 +1,32 @@
+.wrapper {
+	min-width: 109px;
+	background-color: var(--white-300);
+	border: var(--chat-main-border, 1px solid var(--white-400));
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+.overlay {
+	overflow: auto;
+	flex-grow: 1;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+.nav_wrapper {
+	height: 1px;
+	max-height: 100%;
+}
+.nav {
+	height: auto;
+	display: flex;
+	row-gap: 2px;
+	padding: 9px 0;
+	flex-direction: column;
+}
+.item {
+	justify-content: center;
+	width: 100%;
+	aspect-ratio: 1;
+}

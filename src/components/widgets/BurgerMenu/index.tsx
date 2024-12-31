@@ -1,13 +1,13 @@
 'use client'
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import { TClassName } from '@/types'
 import { cn } from '@/lib'
-import { SHARED_BURGER_MENU_MODAL, SM_BIG, TRAN_MID } from '@/constants'
-import { useModalBase } from '@/hooks/useModalBase'
+import { SHARED_BURGER_MENU_MODAL, SM_BIG } from '@/constants'
+import { useModalBase } from '@/hooks'
 import { Container } from '@/components/ui'
 import { Logo } from '../Logo'
 import { Group } from './Group'
-import { useBodyClassName, useModalState, useScreen } from '@/hooks'
+import { useScreen } from '@/hooks'
 import { Footer } from './Footer'
 import { ExpandArrowIcon } from '@/icons'
 import { isAuth } from '@/constants/stub'
@@ -17,24 +17,9 @@ interface Props extends TClassName {}
 const BurgerMenu: FC<Props> = ({ className }) => {
 	const screen = useScreen()
 
-	const { modalState, visibleTransition, setVisibleTransition } = useModalBase({
+	const { modalState, visibleTransition, handleClose } = useModalBase({
 		slug: SHARED_BURGER_MENU_MODAL,
 	})
-
-	const bodyClassNameAction = useBodyClassName()
-	useEffect(() => {
-		if (visibleTransition)
-			bodyClassNameAction({ className: 'hide-scrollbar', type: 'add' })
-		else bodyClassNameAction({ className: 'hide-scrollbar', type: 'remove' })
-	}, [visibleTransition])
-
-	const hideModal = useModalState(state => state.hideModal)
-	const handleClose = () => {
-		setVisibleTransition(false)
-		const timeout = setTimeout(() => {
-			hideModal({ slug: SHARED_BURGER_MENU_MODAL })
-		}, TRAN_MID)
-	}
 
 	return (
 		<>

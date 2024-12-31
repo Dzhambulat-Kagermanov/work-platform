@@ -1,12 +1,11 @@
 import { CSSProperties, FC } from 'react'
-import cls from './index.module.scss'
 import { TChildren, TClassName, TFontFamilies, TTag } from '@/types'
 import { cn } from '@/lib'
+import cls from './index.module.scss'
 
-interface Props extends TTag, TClassName, TChildren {
-	size: number
-	font: TFontFamilies
-}
+export type TTypography = { size: number; font: TFontFamilies }
+
+interface Props extends TTag, TClassName, TChildren, TTypography {}
 const Typography: FC<Props> = ({
 	tag = 'p',
 	children,

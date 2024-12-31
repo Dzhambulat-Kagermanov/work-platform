@@ -21,7 +21,7 @@ const Logo: FC<Props> = ({ className, hasNotLink }) => {
 				width={32}
 				height={32}
 			/>
-			<Typography font='PlusJakartaSans-EB' size={18} tag='h2'>
+			<Typography font='Inter-B' size={18} tag='h2'>
 				WBdiscount
 			</Typography>
 		</Link>

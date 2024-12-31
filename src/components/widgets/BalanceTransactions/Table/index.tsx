@@ -4,9 +4,12 @@ import { cn } from '@/lib'
 import { Typography } from '@/components/ui'
 import { TRANSACTIONS } from '../constants/transactions'
 import cls from './index.module.scss'
+import { TActiveSwitchItem } from '..'
 
-interface Props extends TClassName {}
-const Table: FC<Props> = ({ className }) => {
+interface Props extends TClassName {
+	active: TActiveSwitchItem
+}
+const Table: FC<Props> = ({ className, active }) => {
 	return (
 		<div className={cn(cls.wrapper)}>
 			<table className={cn(cls.table, [className])}>
@@ -45,50 +48,51 @@ const Table: FC<Props> = ({ className }) => {
 					</tr>
 				</thead>
 				<tbody className={cn(cls.body)}>
-					{TRANSACTIONS.map(
-						({ date, description, idRansom, idTransaction, sum, type }) => {
-							return (
-								<tr className={cn(cls.row)} key={idTransaction}>
-									<th className={cn(cls.column, [cls.transaction_id])}>
-										<Typography font='Inter-R' size={14}>
-											{idTransaction}
-										</Typography>
-									</th>
-									<th className={cn(cls.column, [cls.blue, cls.sum])}>
-										<Typography font='Inter-R' size={14}>
-											{sum} ₽
-										</Typography>
-									</th>
-									<th
-										className={cn(cls.column, [cls.type], {
-											[cls.isReplenishment]: type === 'replenishment',
-										})}
-									>
-										<Typography font='Inter-R' size={14}>
-											{type === 'replenishment'
-												? 'Пополнение'
-												: 'Вывод средств'}
-										</Typography>
-									</th>
-									<th className={cn(cls.column, [cls.blue, cls.date])}>
-										<Typography font='Inter-R' size={14}>
-											{date}
-										</Typography>
-									</th>
-									<th className={cn(cls.column, [cls.blue, cls.description])}>
-										<Typography font='Inter-R' size={14}>
-											{description}
-										</Typography>
-									</th>
-									<th className={cn(cls.column, [cls.ransom_id])}>
-										<Typography font='Inter-R' size={14}>
-											{idRansom}
-										</Typography>
-									</th>
-								</tr>
-							)
-						}
-					)}
+					{(active === 'replenishments'
+						? TRANSACTIONS.filter(({ type }) => type === 'replenishment')
+						: active === 'withdrawals'
+						? TRANSACTIONS.filter(({ type }) => type === 'withdrawal')
+						: TRANSACTIONS
+					).map(({ date, description, idRansom, idTransaction, sum, type }) => {
+						return (
+							<tr className={cn(cls.row)} key={idTransaction}>
+								<th className={cn(cls.column, [cls.transaction_id])}>
+									<Typography font='Inter-R' size={14}>
+										{idTransaction}
+									</Typography>
+								</th>
+								<th className={cn(cls.column, [cls.blue, cls.sum])}>
+									<Typography font='Inter-R' size={14}>
+										{sum} ₽
+									</Typography>
+								</th>
+								<th
+									className={cn(cls.column, [cls.type], {
+										[cls.isReplenishment]: type === 'replenishment',
+									})}
+								>
+									<Typography font='Inter-R' size={14}>
+										{type === 'replenishment' ? 'Пополнение' : 'Вывод средств'}
+									</Typography>
+								</th>
+								<th className={cn(cls.column, [cls.blue, cls.date])}>
+									<Typography font='Inter-R' size={14}>
+										{date}
+									</Typography>
+								</th>
+								<th className={cn(cls.column, [cls.blue, cls.description])}>
+									<Typography font='Inter-R' size={14}>
+										{description}
+									</Typography>
+								</th>
+								<th className={cn(cls.column, [cls.ransom_id])}>
+									<Typography font='Inter-R' size={14}>
+										{idRansom}
+									</Typography>
+								</th>
+							</tr>
+						)
+					})}
 				</tbody>
 			</table>
 		</div>

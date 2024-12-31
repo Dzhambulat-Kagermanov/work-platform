@@ -41,7 +41,16 @@ const Ratingbar: FC<Props> = ({ rating, withoutNum, className }) => {
 								</li>
 							)
 						case 'empty':
-							return <li className={cn(cls.star, [cls.empty])} key={index} />
+							return (
+								<li className={cn(cls.star, [cls.empty])} key={index}>
+									<Image
+										src={'/images/shared/rating/empty-star.svg'}
+										alt='Пустая звезды'
+										width={18}
+										height={18}
+									/>
+								</li>
+							)
 					}
 				})}
 			</ul>

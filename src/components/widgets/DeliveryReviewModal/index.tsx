@@ -1,0 +1,99 @@
+'use client'
+import { FC } from 'react'
+import { TClassName } from '@/types'
+import { Button, Input, ModalBase, Typography } from '@/components/ui'
+import { DELIVERY_REVIEW_MODAL } from '@/constants'
+import { cn } from '@/lib'
+import { useModalState } from '@/hooks'
+import cls from './index.module.scss'
+import Image from 'next/image'
+
+interface Props extends TClassName {}
+const DeliveryReviewModal: FC<Props> = ({ className }) => {
+	const hideModal = useModalState(state => state.hideModal)
+
+	const handleCancel = () => {
+		hideModal({ slug: DELIVERY_REVIEW_MODAL })
+	}
+	const handleReviewing = () => {
+		hideModal({ slug: DELIVERY_REVIEW_MODAL })
+	}
+
+	return (
+		<ModalBase
+			slug={DELIVERY_REVIEW_MODAL}
+			className={cn(cls.wrapper, [className])}
+		>
+			<div className={cn(cls.content)}>
+				<Typography font='Inter-SB' size={18} tag='h2'>
+					Отзыв о продавце
+				</Typography>
+				<Typography font='Inter-M' size={14} tag='h3'>
+					Расскажите о том, как прошел выкуп.
+				</Typography>
+				<div className={cn(cls.rating_wrapper)}>
+					<Typography font='Inter-M' size={14} tag='h5'>
+						Оценка:
+					</Typography>
+					<div className={cn(cls.rating)}>
+						<Image
+							src={'/images/shared/rating/empty-star.svg'}
+							alt='Звезда'
+							width={20}
+							height={20}
+						/>
+						<Image
+							src={'/images/shared/rating/empty-star.svg'}
+							alt='Звезда'
+							width={20}
+							height={20}
+						/>
+						<Image
+							src={'/images/shared/rating/empty-star.svg'}
+							alt='Звезда'
+							width={20}
+							height={20}
+						/>
+						<Image
+							src={'/images/shared/rating/empty-star.svg'}
+							alt='Звезда'
+							width={20}
+							height={20}
+						/>
+						<Image
+							src={'/images/shared/rating/empty-star.svg'}
+							alt='Звезда'
+							width={20}
+							height={20}
+						/>
+					</div>
+				</div>
+				<Input
+					placeholder='Ваш отзыв'
+					wrapperCls={cn(cls.inp_wrapper)}
+					inpCls={cn(cls.inp)}
+				/>
+				<div className={cn(cls.btns)}>
+					<Button
+						size='mid'
+						theme='outline'
+						className={cn(cls.btn)}
+						onClick={handleCancel}
+					>
+						Отмена
+					</Button>
+					<Button
+						size='mid'
+						theme='fill'
+						className={cn(cls.btn)}
+						onClick={handleReviewing}
+					>
+						Оставить отзыв
+					</Button>
+				</div>
+			</div>
+		</ModalBase>
+	)
+}
+
+export { DeliveryReviewModal }

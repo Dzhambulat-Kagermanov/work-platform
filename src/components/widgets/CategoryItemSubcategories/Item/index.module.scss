@@ -2,7 +2,7 @@
 	width: 100%;
 	color: var(--grey-500);
 
-	border: 1px solid var(--white-400);
+	border: var(--chat-main-border, 1px solid var(--white-400));
 	border-radius: var(--blocks-radius);
 	cursor: pointer;
 }

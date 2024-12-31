@@ -1,0 +1,14 @@
+.wrapper {
+	width: 100%;
+}
+.group {
+	display: flex;
+	flex-direction: column;
+	row-gap: 30px;
+}
+.date {
+	display: block;
+	text-align: center;
+	color: var(--grey-200);
+	margin-bottom: 25px;
+}

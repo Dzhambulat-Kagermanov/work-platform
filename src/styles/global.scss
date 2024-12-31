@@ -11,10 +11,28 @@
 
 	--red-100: rgb(248, 53, 53);
 
+	--orange-100: #dc6803;
+
 	--blue-100: #0253ff;
+	--blue-200: #417bc6;
+	--blue-300: #164582;
+
+	--plaque-blue-100: #f0f9ff;
+	--plaque-blue-200: #026aa2;
+	--plaque-green-100: #ecfdf3;
+	--plaque-green-200: #027a48;
+	--plaque-red-100: #fef3f2;
+	--plaque-red-200: #b42318;
+	--plaque-orange-100: #fffaeb;
+	--plaque-orange-200: #b54708;
+	--plaque-black-100: #f2f4f7;
+	--plaque-black-200: #344054;
+	--plaque-purple-100: #f9f5ff;
+	--plaque-purple-200: #6941c6;
 
 	--green-100: #0ec615;
 	--green-200: #19b400;
+	--green-300: #12b76a;
 
 	--white-100: #fff;
 	--white-100-opacity-90: rgba(255, 255, 255, 90%);
@@ -28,6 +46,7 @@
 	--black-opacity-15: rgba(0, 0, 0, 15%);
 	--black-opacity-30: rgba(0, 0, 0, 30%);
 	--black-opacity-60: rgba(0, 0, 0, 60%);
+	--black-200: #101828;
 	--black-200-opacity-70: rgba(16, 24, 40, 70%);
 
 	--grey-100: #afb8c8;
@@ -63,6 +82,10 @@ html {
 	&:has(> .hide-scrollbar) {
 		overflow: hidden;
 	}
+}
+.body-flex-column {
+	display: flex;
+	flex-direction: column;
 }
 
 .modules-gap-bottom {

@@ -1,0 +1,9 @@
+.wrapper {
+	display: flex;
+	align-items: center;
+	column-gap: 15px;
+	justify-content: center;
+	h3 {
+		color: var(--grey-500);
+	}
+}

@@ -1,15 +1,34 @@
 import { useState, useEffect } from 'react'
 import { TModalSlug, useModalState } from './zustand/useModalState'
+import { TRAN_MID } from '@/constants'
+import { useBodyClassName } from './useBodyClassName'
 
-interface Params extends TModalSlug {}
+interface Params extends TModalSlug {
+	transitionSpeed?: number
+}
 
-export const useModalBase = ({ slug }: Params) => {
+export const useModalBase = ({ slug, transitionSpeed }: Params) => {
 	const modalState = useModalState(
 		state => state.modalsStates[slug]?.modalState
 	)
 	const [visibleTransition, setVisibleTransition] = useState<boolean>(
 		!!modalState
 	)
+	const hideModal = useModalState(state => state.hideModal)
+	const handleClose = () => {
+		setVisibleTransition(false)
+		const timeout = setTimeout(() => {
+			hideModal({ slug })
+		}, transitionSpeed || TRAN_MID)
+	}
+
+	// Скрыть скроллбар
+	const bodyClassNameAction = useBodyClassName()
+	useEffect(() => {
+		if (visibleTransition)
+			bodyClassNameAction({ className: 'hide-scrollbar', type: 'add' })
+		else bodyClassNameAction({ className: 'hide-scrollbar', type: 'remove' })
+	}, [visibleTransition])
 
 	useEffect(() => {
 		if (visibleTransition !== modalState) {
@@ -22,6 +41,6 @@ export const useModalBase = ({ slug }: Params) => {
 	return {
 		visibleTransition,
 		modalState,
-		setVisibleTransition,
+		handleClose,
 	}
 }

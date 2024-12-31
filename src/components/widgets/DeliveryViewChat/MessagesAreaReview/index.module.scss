@@ -1,0 +1,16 @@
+.content {
+	border: var(--chat-main-border);
+	border-radius: 20px;
+	padding: 23px 27px;
+	h2 {
+		margin: 7px 0;
+	}
+	h3 {
+		color: var(--black-opacity-60);
+	}
+}
+.rating {
+}
+.open_modal_btn {
+	margin: 13px auto 0 auto;
+}

@@ -1,0 +1,7 @@
+.item {
+	border: none;
+	border-top: var(--chat-main-border, 1px solid var(--white-400));
+	&:last-child {
+		border-bottom: var(--chat-main-border, 1px solid var(--white-400));
+	}
+}

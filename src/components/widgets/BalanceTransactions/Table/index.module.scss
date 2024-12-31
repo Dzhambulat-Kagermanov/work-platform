@@ -20,7 +20,7 @@
 }
 .head {
 	.row {
-		border-bottom: 1px solid var(--white-400);
+		border-bottom: var(--chat-main-border, 1px solid var(--white-400));
 	}
 	.column {
 		padding: 13px 24px;
@@ -28,7 +28,7 @@
 }
 .body {
 	.row {
-		border-bottom: 1px solid var(--white-400);
+		border-bottom: var(--chat-main-border, 1px solid var(--white-400));
 		background-color: var(--white-300);
 	}
 	.column {
