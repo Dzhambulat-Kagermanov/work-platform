@@ -29,7 +29,7 @@ const AuthActions: FC<Props> = ({ className, type }) => {
 			</Typography>
 			{type === 'forAuth' && (
 				<Link
-					href={'/forget-password'}
+					href={'/forgot-password'}
 					className={cn(cls.text, [cls.forget_password, cls.link])}
 				>
 					<Typography font='Inter-SB' size={14}>

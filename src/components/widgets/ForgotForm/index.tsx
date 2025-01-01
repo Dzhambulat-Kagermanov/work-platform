@@ -1,27 +1,22 @@
 'use client'
-import { FC, FormEvent } from 'react'
+import { FC } from 'react'
 import { TClassName } from '@/types'
 import { cn } from '@/lib'
-import { Input, MaskInput } from '@/components/ui'
-import { RegistrationFormSubmit } from '@/components/features/RegistrationFormSubmit'
+import { Button, Input, MaskInput, Timer, Typography } from '@/components/ui'
 import { PHONE_MASKS } from '@/constants'
 import cls from './index.module.scss'
 
 interface Props extends TClassName {}
-const RegistrationForm: FC<Props> = ({ className }) => {
-	const handleSubmit = (e: FormEvent) => {
-		e.preventDefault()
-	}
-
+const ForgotForm: FC<Props> = ({ className }) => {
 	return (
-		<form className={cn(cls.wrapper, [className])} onSubmit={handleSubmit}>
+		<form className={cn(cls.wrapper, [className])}>
 			<MaskInput
+				errorIcon
 				wrapperCls={cn(cls.inp_wrapper, [cls.phone])}
 				label='Номер телефона'
 				mask={PHONE_MASKS.ru}
 				lazy={false}
 				placeholderChar='_'
-				errorIcon
 				onComplete={value => {
 					console.log(value)
 				}}
@@ -29,8 +24,23 @@ const RegistrationForm: FC<Props> = ({ className }) => {
 			<Input
 				errorIcon
 				wrapperCls={cn(cls.inp_wrapper, [cls.password])}
-				label='Введите ваше имя'
+				label='Введите 4-значный код из СМС'
+				error={
+					<>
+						Неверный код.{' '}
+						<Typography
+							font='Inter-R'
+							size={14}
+							tag='span'
+							className={cn(cls.timer)}
+						>
+							Запросить новый код можно через{' '}
+							<Timer second={36} format={undefined} /> сек.
+						</Typography>
+					</>
+				}
 			/>
+
 			<Input
 				errorIcon
 				wrapperCls={cn(cls.inp_wrapper, [cls.password])}
@@ -41,9 +51,11 @@ const RegistrationForm: FC<Props> = ({ className }) => {
 				wrapperCls={cn(cls.inp_wrapper, [cls.password])}
 				label='Повторите пароль'
 			/>
-			<RegistrationFormSubmit className={cn(cls.submit_btn)} type='submit' />
+			<Button theme='fill' size='mid' className={cn(cls.next_btn)} wFull>
+				Далее
+			</Button>
 		</form>
 	)
 }
 
-export { RegistrationForm }
+export { ForgotForm }

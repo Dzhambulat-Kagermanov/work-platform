@@ -11,6 +11,8 @@ export const formatter = (seconds: number, format?: TFormat): string => {
 		const MIN = Math.floor((seconds - HOURS * 60 * 60) / 60)
 		const SEC = seconds - (MIN * 60 + HOURS * 60 * 60)
 		return `${prependZero(HOURS)}:${prependZero(MIN)}:${prependZero(SEC)}`
+	} else if (format === 'SS') {
+		return `${prependZero(seconds)}`
 	} else {
 		return seconds.toString()
 	}

@@ -7,8 +7,8 @@ import { TChatType } from '@/components/widgets/DeliverySidebar/types'
 import { DeliveryContent } from '@/components/widgets/DeliveryContent'
 import { BodyFlexColumnStub } from '@/components/widgets/BodyFlexColumnStub'
 import { MD_LOW } from '@/constants'
-import cls from './index.module.scss'
 import { DeliveryChatOrderInfoModal } from '@/components/widgets/DeliveryChatOrderInfoModal'
+import cls from './index.module.scss'
 
 interface Props extends TClassName {
 	chatType: TChatType

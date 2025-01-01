@@ -19,13 +19,11 @@
 	}
 }
 .content {
-	column-gap: 8px;
 	display: flex;
 	align-items: center;
 	padding: 0 14px;
 	border: 1px solid var(--inpColor);
 	border-radius: var(--blocks-radius);
-	transition: var(--tran-low);
 	&.has_icon {
 		.input {
 			padding-left: 8px;
@@ -39,6 +37,7 @@
 	color: var(--red-100);
 	margin-top: var(--content-gap);
 }
+
 .hasError {
 	.content {
 		border-color: var(--red-100);

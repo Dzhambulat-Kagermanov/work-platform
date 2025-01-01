@@ -1,20 +1,16 @@
-.auth {
-	padding: 20px 0;
+.telegram_sign_in {
+	width: 100%;
+}
+.separator {
+	margin: 24px 0;
 	display: flex;
+	justify-content: center;
+	column-gap: 5px;
 	align-items: center;
-	min-height: calc(100vh - var(--header-height));
-}
-.content {
-	max-width: 345px;
-	margin: 0 auto;
-}
-.logo {
-	margin: 0 auto;
-}
-.title {
-	text-align: center;
-	margin: 24px 0 32px 0;
-}
-.actions {
-	margin-top: 32px;
+	color: var(--grey-200);
+	hr {
+		flex: 1;
+		height: 1px;
+		background-color: var(--white-400);
+	}
 }

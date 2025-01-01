@@ -1,26 +1,32 @@
-import { FC, InputHTMLAttributes, ReactNode } from 'react'
+'use client'
+import { FC, ReactNode } from 'react'
 import { cn } from '@/lib'
 import { Typography } from '../Typography'
+import { IMaskInput, IMaskInputProps } from 'react-imask'
 import cls from './index.module.scss'
 import { ErrorIcon } from '@/icons'
 
 interface Props
-	extends Omit<InputHTMLAttributes<HTMLInputElement>, 'className'> {
+	extends Omit<IMaskInputProps<HTMLInputElement>, 'className' | 'value'> {
 	icon?: ReactNode
 	label?: string
-	error?: ReactNode
+	error?: string
 	wrapperCls?: string
 	inpCls?: string
 	contentCls?: string
 	labelCls?: string
 	errorCls?: string
+	value?: string
+	lazy?: boolean
+	placeholderChar?: string
 	errorIcon?: true | ReactNode
 }
-const Input: FC<Props> = ({
+const MaskInput: FC<Props> = ({
 	icon,
 	wrapperCls,
 	contentCls,
 	labelCls,
+	value,
 	inpCls,
 	errorCls,
 	label,
@@ -49,7 +55,12 @@ const Input: FC<Props> = ({
 				})}
 			>
 				{icon}
-				<input className={cn(cls.input, [inpCls])} {...other} />
+				{/*@ts-ignore*/}
+				<IMaskInput
+					value={value}
+					className={cn(cls.input, [inpCls])}
+					{...other}
+				/>
 				{error &&
 					(errorIcon === true ? (
 						<ErrorIcon className={cn(cls.error_icon)} />
@@ -59,7 +70,7 @@ const Input: FC<Props> = ({
 			</div>
 			{error && (
 				<Typography
-					font='Inter-R'
+					font='Inter-M'
 					size={14}
 					className={cn(cls.error, [errorCls])}
 				>
@@ -70,4 +81,4 @@ const Input: FC<Props> = ({
 	)
 }
 
-export { Input }
+export { MaskInput }
