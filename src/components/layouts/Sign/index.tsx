@@ -4,12 +4,16 @@ import { cn } from '@/lib'
 import Image from 'next/image'
 import { Typography } from '@/components/ui'
 import cls from './index.module.scss'
-import { AuthActions } from '@/components/widgets/AuthActions'
+import { AuthActions } from '@/components/widgets/Buyer/AuthActions'
 
 interface Props extends TClassName, TChildren {
 	logo: string
 	title: string
-	authActions?: 'forRegistration' | 'forAuth'
+	authActions?:
+		| 'forRegistration'
+		| 'forAuth'
+		| 'forSalesmanAuth'
+		| 'forSalesmanRegistration'
 }
 const SignLayout: FC<Props> = ({
 	className,

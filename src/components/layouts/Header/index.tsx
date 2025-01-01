@@ -1,7 +1,7 @@
 import { TChildren } from '@/types'
-import { Header } from '@/components/widgets/Header'
+import { Header } from '@/components/widgets/shared/Header'
 import { FC } from 'react'
-import { BurgerMenu } from '@/components/widgets/BurgerMenu'
+import { BurgerMenu } from '@/components/widgets/shared/BurgerMenu'
 
 interface Props extends TChildren {}
 const HeaderLayout: FC<Props> = ({ children }) => {

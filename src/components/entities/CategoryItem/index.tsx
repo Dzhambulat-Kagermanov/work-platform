@@ -29,7 +29,7 @@ const CategoryItem: FC<Props> = ({
 	return (
 		<Tag className={cn(cls.wrapper, [className])}>
 			<Link
-				href={`/category?slug=${title}${
+				href={`/buyer/category?slug=${title}${
 					width > SM_BIG ? '&subcategory=Все' : ''
 				}`}
 			>

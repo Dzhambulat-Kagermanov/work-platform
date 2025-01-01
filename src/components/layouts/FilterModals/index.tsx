@@ -1,9 +1,9 @@
 'use client'
 import { FC } from 'react'
-import { ModalCashback } from '@/components/widgets/ModalCashback'
-import { ModalPrice } from '@/components/widgets/ModalPrice'
-import { ModalSort } from '@/components/widgets/ModalSort'
-import { ModalComplexSort } from '@/components/widgets/ModalComplexSort'
+import { ModalCashback } from '@/components/widgets/Buyer/ModalCashback'
+import { ModalPrice } from '@/components/widgets/shared/ModalPrice'
+import { ModalSort } from '@/components/widgets/shared/ModalSort'
+import { ModalComplexSort } from '@/components/widgets/shared/ModalComplexSort'
 import { useScreen } from '@/hooks'
 import { SM_MID } from '@/constants'
 

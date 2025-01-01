@@ -9,7 +9,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {}
 const AccountBalanceMore: FC<Props> = ({ className, children, ...other }) => {
 	const router = useRouter()
 	const handleClick = () => {
-		router.push('/account/balance')
+		router.push('/buyer/account/balance')
 	}
 
 	return (
