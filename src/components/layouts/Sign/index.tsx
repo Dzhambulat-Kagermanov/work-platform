@@ -38,10 +38,7 @@ const SignLayout: FC<Props> = ({
 				</Typography>
 				{children}
 				{authActions && (
-					<AuthActions
-						className={cn(cls.actions)}
-						type={authActions ? 'forAuth' : 'forRegistration'}
-					/>
+					<AuthActions className={cn(cls.actions)} type={authActions} />
 				)}
 			</div>
 		</main>

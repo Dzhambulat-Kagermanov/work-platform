@@ -12,8 +12,8 @@ const RegistrationPage: FC<Props> = ({ className }) => {
 	return (
 		<SignLayout
 			logo='/images/shared/logo.svg'
-			title='Авторизация'
-			authActions='forAuth'
+			title='Регистрация'
+			authActions='forRegistration'
 			className={cn(cls.auth, [className])}
 		>
 			<RegistrationForm className={cn(cls.form)} />

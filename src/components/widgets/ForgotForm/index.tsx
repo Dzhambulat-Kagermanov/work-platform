@@ -2,7 +2,14 @@
 import { FC } from 'react'
 import { TClassName } from '@/types'
 import { cn } from '@/lib'
-import { Button, Input, MaskInput, Timer, Typography } from '@/components/ui'
+import {
+	Button,
+	Input,
+	InputMaskSwitcher,
+	MaskInput,
+	Timer,
+	Typography,
+} from '@/components/ui'
 import { PHONE_MASKS } from '@/constants'
 import cls from './index.module.scss'
 
@@ -10,11 +17,11 @@ interface Props extends TClassName {}
 const ForgotForm: FC<Props> = ({ className }) => {
 	return (
 		<form className={cn(cls.wrapper, [className])}>
-			<MaskInput
+			<InputMaskSwitcher
+				masks={PHONE_MASKS}
 				errorIcon
 				wrapperCls={cn(cls.inp_wrapper, [cls.phone])}
 				label='Номер телефона'
-				mask={PHONE_MASKS.ru}
 				lazy={false}
 				placeholderChar='_'
 				onComplete={value => {

@@ -6,8 +6,7 @@ import { IMaskInput, IMaskInputProps } from 'react-imask'
 import cls from './index.module.scss'
 import { ErrorIcon } from '@/icons'
 
-interface Props
-	extends Omit<IMaskInputProps<HTMLInputElement>, 'className' | 'value'> {
+export type TMaskInputProps = {
 	icon?: ReactNode
 	label?: string
 	error?: string
@@ -20,8 +19,9 @@ interface Props
 	lazy?: boolean
 	placeholderChar?: string
 	errorIcon?: true | ReactNode
-}
-const MaskInput: FC<Props> = ({
+} & Omit<IMaskInputProps<HTMLInputElement>, 'className' | 'value'>
+
+const MaskInput: FC<TMaskInputProps> = ({
 	icon,
 	wrapperCls,
 	contentCls,

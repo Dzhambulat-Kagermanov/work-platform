@@ -2,7 +2,7 @@
 import { FC, FormEvent } from 'react'
 import { TClassName } from '@/types'
 import { cn } from '@/lib'
-import { Input, MaskInput } from '@/components/ui'
+import { Input, InputMaskSwitcher } from '@/components/ui'
 import { AuthFormSubmit } from '@/components/features/AuthFormSubmit'
 import { PHONE_MASKS } from '@/constants'
 import cls from './index.module.scss'
@@ -15,11 +15,11 @@ const AuthForm: FC<Props> = ({ className }) => {
 
 	return (
 		<form className={cn(cls.wrapper, [className])} onSubmit={handleSubmit}>
-			<MaskInput
+			<InputMaskSwitcher
+				masks={PHONE_MASKS}
 				errorIcon
 				wrapperCls={cn(cls.inp_wrapper, [cls.phone])}
 				label='Номер телефона'
-				mask={PHONE_MASKS.ru}
 				lazy={false}
 				placeholderChar='_'
 				onComplete={value => {

@@ -72,7 +72,7 @@ const Dropdown: FC<Props> = ({
 		<div
 			className={cn(cls.dropdown, [wrapperCls], {
 				[cls.isExpand]: isExpand,
-				[cls[isExpandCls || 'isExpand']]: isExpand,
+				[isExpandCls || cls['isExpand']]: isExpand,
 				[cls.disable]: !!disable,
 			})}
 			style={
@@ -86,6 +86,7 @@ const Dropdown: FC<Props> = ({
 			}
 		>
 			<button
+				type='button'
 				className={cn(cls.active, [activeItemCls])}
 				onClick={() => {
 					if (!disable) setIsExpand(cur => !cur)
