@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { TChildren, TClassName } from '@/types'
+import { TClassName } from '@/types'
 import Link from 'next/link'
 import { Typography } from '@/components/ui'
 import { cn } from '@/lib'
@@ -7,10 +7,11 @@ import { FolderIcon } from '@/icons'
 import { TChatType } from '../types'
 import cls from './index.module.scss'
 
-interface Props extends TClassName, TChildren {
+interface Props extends TClassName {
 	messageQnt: number
 	type?: TChatType
 	activeType?: TChatType
+	children: string
 }
 const Item: FC<Props> = ({
 	children,

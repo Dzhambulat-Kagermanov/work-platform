@@ -37,3 +37,21 @@
 	width: auto;
 	flex: 1;
 }
+.star {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	path {
+		transition: var(--tran-low);
+	}
+	&:hover {
+		path {
+			fill: var(--yellow-100);
+		}
+	}
+	&.active {
+		path {
+			fill: var(--yellow-100);
+		}
+	}
+}

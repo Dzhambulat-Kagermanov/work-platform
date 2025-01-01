@@ -1,15 +1,16 @@
 'use client'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { TClassName } from '@/types'
 import { Button, Input, ModalBase, Typography } from '@/components/ui'
 import { DELIVERY_REVIEW_MODAL } from '@/constants'
 import { cn } from '@/lib'
 import { useModalState } from '@/hooks'
+import { StarIcon } from '@/icons'
 import cls from './index.module.scss'
-import Image from 'next/image'
 
 interface Props extends TClassName {}
 const DeliveryReviewModal: FC<Props> = ({ className }) => {
+	const [rating, setRating] = useState<number>(0)
 	const hideModal = useModalState(state => state.hideModal)
 
 	const handleCancel = () => {
@@ -17,6 +18,13 @@ const DeliveryReviewModal: FC<Props> = ({ className }) => {
 	}
 	const handleReviewing = () => {
 		hideModal({ slug: DELIVERY_REVIEW_MODAL })
+	}
+	const handleStarClick = (thisRating: number) => {
+		if (rating === thisRating && thisRating === 1) {
+			setRating(0)
+		} else {
+			setRating(thisRating)
+		}
 	}
 
 	return (
@@ -36,36 +44,21 @@ const DeliveryReviewModal: FC<Props> = ({ className }) => {
 						Оценка:
 					</Typography>
 					<div className={cn(cls.rating)}>
-						<Image
-							src={'/images/shared/rating/empty-star.svg'}
-							alt='Звезда'
-							width={20}
-							height={20}
-						/>
-						<Image
-							src={'/images/shared/rating/empty-star.svg'}
-							alt='Звезда'
-							width={20}
-							height={20}
-						/>
-						<Image
-							src={'/images/shared/rating/empty-star.svg'}
-							alt='Звезда'
-							width={20}
-							height={20}
-						/>
-						<Image
-							src={'/images/shared/rating/empty-star.svg'}
-							alt='Звезда'
-							width={20}
-							height={20}
-						/>
-						<Image
-							src={'/images/shared/rating/empty-star.svg'}
-							alt='Звезда'
-							width={20}
-							height={20}
-						/>
+						{[...Array(5)].map((_, idx) => {
+							const thisRating = idx + 1
+							return (
+								<StarIcon
+									onClick={() => {
+										handleStarClick(thisRating)
+									}}
+									color='var(--white-300)'
+									className={cn(cls.star, [], {
+										[cls.active]: rating >= thisRating,
+									})}
+									key={idx}
+								/>
+							)
+						})}
 					</div>
 				</div>
 				<Input

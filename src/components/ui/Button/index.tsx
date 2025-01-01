@@ -1,15 +1,17 @@
-import { ButtonHTMLAttributes, CSSProperties, FC } from 'react'
+import { ButtonHTMLAttributes, CSSProperties, FC, ReactNode } from 'react'
 import { cn } from '@/lib'
 import { Typography } from '../Typography'
 import cls from './index.module.scss'
+import { TTag } from '@/types'
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement>, TTag {
 	theme: 'fill' | 'outline'
 	children: string
 	size?: 'big' | 'mid' | 'low'
 	wFull?: boolean
 	primaryColor?: string
 	secondColor?: string
+	beforeIcon?: ReactNode
 }
 const Button: FC<Props> = ({
 	wFull,
@@ -18,11 +20,18 @@ const Button: FC<Props> = ({
 	primaryColor,
 	secondColor,
 	children,
+	type,
 	size = 'big',
+	tag = 'button',
+	beforeIcon,
 	...other
 }) => {
+	const Tag = tag
+
 	return (
-		<button
+		//@ts-ignore
+		<Tag
+			{...(tag === 'button' ? { type: type || 'button' } : {})}
 			className={cn(cls.button, [className, cls[theme], cls[size]], {
 				[cls.wFull]: wFull,
 			})}
@@ -38,15 +47,16 @@ const Button: FC<Props> = ({
 							: secondColor || 'var(--white-100)',
 				} as CSSProperties
 			}
-			{...other}
+			{...(tag === 'button' ? other : {})}
 		>
+			{beforeIcon}
 			<Typography
 				font='Inter-SB'
 				size={size === 'big' || size === 'mid' ? 16 : 14}
 			>
 				{children}
 			</Typography>
-		</button>
+		</Tag>
 	)
 }
 

@@ -27,7 +27,7 @@ const DeliveryPage: FC<Props> = ({ className, chatType }) => {
 				</BackButton>
 				<div className={cn(cls.complex, ['modules-gap-top'])}>
 					<DeliverySidebar className={cn(cls.sidebar)} chatType={chatType} />
-					<DeliveryContent className={cn(cls.content)} />
+					<DeliveryContent className={cn(cls.content)} chatType={chatType} />
 				</div>
 			</Container>
 			<DeliveryChatOrderInfoModal className={cn(cls.order_info_modal)} />

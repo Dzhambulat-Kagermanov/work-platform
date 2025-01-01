@@ -65,7 +65,10 @@
 
 @media screen and (max-width: 500px) {
 	.head {
-		padding: 0 0 30px 0;
+		padding: 0 0 10px 0;
+	}
+	.inp_wrapper {
+		margin-bottom: 20px;
 	}
 	.chat_wrapper {
 		&::-webkit-scrollbar {

@@ -44,6 +44,10 @@ export type TChatMessageFailActionProps = {
 	type: 'fail-action'
 	message: string
 }
+export type TChatMessageUploadFormProps = {
+	type: 'upload-form'
+	message: undefined
+}
 export type TViewChatMessageGroupProps = {
 	date: string
 	messages: (
@@ -53,6 +57,7 @@ export type TViewChatMessageGroupProps = {
 		| TChatMessageUserProps
 		| TChatMessageReviewCreatingProps
 		| TChatMessageConfirmActionProps
+		| TChatMessageUploadFormProps
 	)[]
 }
 ///////////////////////////////////////////////

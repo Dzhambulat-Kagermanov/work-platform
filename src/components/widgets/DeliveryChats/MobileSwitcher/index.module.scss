@@ -1,0 +1,10 @@
+.wrapper {
+	max-width: var(--adaptive-container-width);
+	overflow: auto;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+.switcher {
+	display: flex;
+}

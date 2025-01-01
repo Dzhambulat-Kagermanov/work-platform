@@ -7,6 +7,7 @@ import { MessagesAreaReviewCreating } from '../MessagesAreaReviewCreating'
 import { MessagesAreaActionType } from '../MessagesAreaActionType'
 import { MessagesAreaReview } from '../MessagesAreaReview'
 import cls from './index.module.scss'
+import { MessagesAreaUploadForm } from '../MessagesAreaUploadForm'
 
 interface Props extends TClassName, TViewChatMessageGroupProps {
 	salesmanIsOnline: boolean
@@ -66,6 +67,13 @@ const MessagesAreaGroup: FC<Props> = ({
 								key={idx + '/'}
 								tag='li'
 								className={cn(cls.review_creating)}
+							/>
+						)
+					if (type === 'upload-form')
+						return (
+							<MessagesAreaUploadForm
+								className={cn(cls.form)}
+								key={idx + '/'}
 							/>
 						)
 				})}

@@ -5,16 +5,20 @@ import { Input, Typography } from '@/components/ui'
 import Image from 'next/image'
 import { SearchIcon } from '@/icons'
 import { Chats } from './Chats'
+import { MobileSwitcher } from './MobileSwitcher'
+import { TChatType } from '../DeliverySidebar/types'
 import cls from './index.module.scss'
 
 interface Props extends TClassName {
 	activeIdSTUB?: number
 	setActiveIdSTUB: TState<number | undefined>
+	chatType: TChatType
 }
 const DeliveryChats: FC<Props> = ({
 	className,
-	activeIdSTUB,
+	chatType,
 	setActiveIdSTUB,
+	activeIdSTUB,
 }) => {
 	return (
 		<section className={cn(cls.wrapper, [className])}>
@@ -42,6 +46,7 @@ const DeliveryChats: FC<Props> = ({
 					placeholder='Поиск...'
 					icon={<SearchIcon color='var(--grey-300)' />}
 				/>
+				<MobileSwitcher className={cn(cls.switcher)} chatType={chatType} />
 			</div>
 			<div className={cn(cls.chat_wrapper)}>
 				<Chats

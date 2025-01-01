@@ -97,6 +97,10 @@ export const MESSAGES: TViewChatMessageGroupProps[] = [
 				},
 			},
 			{
+				type: 'upload-form',
+				message: undefined,
+			},
+			{
 				type: 'salesman',
 				message: {
 					avatar: '/images/stub/avatar.png',
