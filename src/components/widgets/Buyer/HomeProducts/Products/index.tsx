@@ -2,17 +2,15 @@ import { FC } from 'react'
 import { TClassName } from '@/types'
 import { cn } from '@/lib'
 import { ProductItem } from '@/components/entities/ProductItem'
-import { getCashbackProducts } from '@/api/products/get'
 import Link from 'next/link'
+import { PRODUCTS } from '../constants/products'
 import cls from './index.module.scss'
 
 interface Props extends TClassName {}
-const Products: FC<Props> = async ({ className }) => {
-	const items = await getCashbackProducts()
-
+const Products: FC<Props> = ({ className }) => {
 	return (
 		<ul className={cn(cls.wrapper, [className])}>
-			{items.map(
+			{PRODUCTS.map(
 				({
 					previewImage,
 					name,

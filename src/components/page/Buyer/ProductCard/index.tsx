@@ -3,17 +3,14 @@ import { TClassName } from '@/types'
 import { cn } from '@/lib'
 import { ProductCardCrumbs } from '@/components/widgets/Buyer/ProductCardCrumbs'
 import { ProductCardInfo } from '@/components/widgets/Buyer/ProductCardInfo'
-import { getCashbackProduct } from '@/api/products/get'
-import { notFound } from 'next/navigation'
+import { PRODUCT } from './constants/product'
 import cls from './index.module.scss'
 
 interface Props extends TClassName {
 	id: number
 }
-const ProductCardPage: FC<Props> = async ({ className, id }) => {
-	const data = await getCashbackProduct(id)
-
-	if (!data) return notFound()
+const ProductCardPage: FC<Props> = ({ className, id }) => {
+	const data = PRODUCT
 
 	return (
 		<main className={cn(cls.main, [className])}>
