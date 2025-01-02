@@ -4,8 +4,10 @@ import { TClassName, TTag } from '@/types'
 import { cn } from '@/lib'
 import { Typography } from '@/components/ui'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import cls from './index.module.scss'
+
+export type TSalesmanHomePageType = 'products' | 'advertisements' | 'ransoms'
 
 interface Props extends TClassName, TTag {
 	text: string
@@ -14,9 +16,11 @@ interface Props extends TClassName, TTag {
 	additionalInfo?: ReactNode
 	sidebarIsExpand: boolean
 	textOverlayCls?: string
+	slug?: string
 }
 const Item: FC<Props> = ({
 	icon,
+	slug,
 	sidebarIsExpand,
 	link,
 	text,
@@ -27,17 +31,23 @@ const Item: FC<Props> = ({
 }) => {
 	const Tag = tag
 	const path = usePathname()
-	console.log(sidebarIsExpand)
+	const queryParams = useSearchParams()
+	const pageType: TSalesmanHomePageType = queryParams.get(
+		'pageType'
+	) as TSalesmanHomePageType
 
 	return (
 		<Tag
 			className={cn(cls.wrapper, [className], {
-				[cls.active]: path === link,
+				[cls.active]: slug ? pageType === slug : path === link,
 				[cls.isExpand]: sidebarIsExpand,
 			})}
 		>
-			{link ? (
-				<Link className={cn(cls.item)} href={link}>
+			{link || slug ? (
+				<Link
+					className={cn(cls.item)}
+					href={link ? link : `/salesman?pageType=${slug}`}
+				>
 					{icon}
 					<div className={cn(cls.text_overlay, [textOverlayCls])}>
 						<div className={cn(cls.text_wrapper)}>
