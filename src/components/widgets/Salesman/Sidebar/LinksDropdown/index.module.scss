@@ -40,18 +40,17 @@
 .subitem {
 	svg {
 		transition: var(--tran-low);
-		opacity: 1;
 	}
 }
 .sidebarIsExpand {
+	.text_overlay {
+		display: grid;
+		grid-template-columns: 1fr;
+	}
 	.subitem {
 		svg {
 			opacity: 0;
 		}
-	}
-	.text_overlay {
-		display: grid;
-		grid-template-columns: 1fr;
 	}
 }
 

@@ -13,10 +13,10 @@ const LinksDropdown: FC<Props> = ({ className, sidebarIsExpand }) => {
 	return (
 		<li className={cn(cls.wrapper, [className])}>
 			<Dropdown
-				wrapperCls={cn(cls.dropdown_wrapper, [])}
-				activeItemCls={cn(cls.dropdown_active, [], {
+				wrapperCls={cn(cls.dropdown_wrapper, [], {
 					[cls.sidebarIsExpand]: sidebarIsExpand,
 				})}
+				activeItemCls={cn(cls.dropdown_active)}
 				contentCls={cn(cls.dropdown_content)}
 				itemCls={cn(cls.dropdown_item)}
 				isExpandCls={cn(cls.dropdown_isExpand)}

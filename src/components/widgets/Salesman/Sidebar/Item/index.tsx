@@ -27,6 +27,7 @@ const Item: FC<Props> = ({
 }) => {
 	const Tag = tag
 	const path = usePathname()
+	console.log(sidebarIsExpand)
 
 	return (
 		<Tag
