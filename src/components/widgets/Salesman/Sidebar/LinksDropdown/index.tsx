@@ -55,7 +55,7 @@ const LinksDropdown: FC<Props> = ({ className, sidebarIsExpand }) => {
 										19
 									</Typography>
 								}
-								slug='products'
+								link='/salesman'
 								text='Товары'
 								className={cn(cls.item, [cls.subitem])}
 							/>
@@ -78,7 +78,7 @@ const LinksDropdown: FC<Props> = ({ className, sidebarIsExpand }) => {
 										5
 									</Typography>
 								}
-								slug='advertisements'
+								link='/salesman/advertisements'
 								text='Объявления'
 								className={cn(cls.item, [cls.subitem])}
 							/>
@@ -101,7 +101,7 @@ const LinksDropdown: FC<Props> = ({ className, sidebarIsExpand }) => {
 										37
 									</Typography>
 								}
-								slug='ransoms'
+								link='/salesman/ransoms'
 								text='Выкупы'
 								className={cn(cls.item, [cls.subitem])}
 							/>

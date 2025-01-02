@@ -1,0 +1,32 @@
+.wrapper {
+	display: flex;
+	justify-content: space-between;
+}
+.inp_wrapper {
+	max-width: 316px;
+}
+.content {
+	display: flex;
+	column-gap: 20px;
+}
+.add_btn {
+	padding: 3px 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	column-gap: 5px;
+	p {
+		font-size: 14px;
+	}
+	path {
+		transition: var(--tran-low);
+	}
+	&:hover {
+		path {
+			stroke: var(--purple-300);
+		}
+	}
+}
+.inp_wrapper {
+	--placeholderColor: var(--grey-200);
+}

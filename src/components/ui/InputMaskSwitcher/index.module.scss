@@ -19,11 +19,13 @@
 .switcher_item_text {
 	text-transform: uppercase;
 }
-.switcher_active_area {
-	column-gap: 5px;
-	border-radius: var(--blocks-radius) 0 0 var(--blocks-radius);
-	border: none;
-	outline: var(--mask-switcher-border);
+.switcher {
+	.switcher_active_area {
+		column-gap: 5px;
+		border-radius: var(--blocks-radius) 0 0 var(--blocks-radius);
+		border: none;
+		outline: var(--mask-switcher-border);
+	}
 }
 .switcher_expand {
 	.switcher_active_area {

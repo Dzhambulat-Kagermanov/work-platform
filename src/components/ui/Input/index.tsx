@@ -1,8 +1,8 @@
 import { FC, InputHTMLAttributes, ReactNode } from 'react'
 import { cn } from '@/lib'
 import { Typography } from '../Typography'
-import cls from './index.module.scss'
 import { ErrorIcon } from '@/icons'
+import cls from './index.module.scss'
 
 interface Props
 	extends Omit<InputHTMLAttributes<HTMLInputElement>, 'className'> {

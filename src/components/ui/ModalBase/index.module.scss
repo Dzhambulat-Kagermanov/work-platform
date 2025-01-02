@@ -10,11 +10,24 @@
 	opacity: 0;
 	background-color: var(--black-200-opacity-70);
 	backdrop-filter: blur(16px);
+	max-height: 100vh;
+	padding: 20px;
+	overflow: auto;
+	display: grid !important;
+
+	&::-webkit-scrollbar {
+		width: 4;
+		background-color: transparent;
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: var(--grey-100);
+	}
 
 	&.visible {
 		opacity: 1;
 	}
 }
 .content {
+	max-height: 100%;
 	cursor: default;
 }

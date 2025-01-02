@@ -65,6 +65,7 @@
 }
 
 .absolute {
+	border: none;
 	.content_wrapper {
 		z-index: 2;
 		width: 100%;
@@ -75,6 +76,20 @@
 		display: grid;
 		transition: var(--expandTransition);
 		grid-template-rows: 0fr;
+	}
+	.item {
+		border: var(--border);
+		border-bottom: none;
+		&:first-child {
+			border-top: none;
+		}
+		&:last-child {
+			border-bottom: var(--border);
+			border-radius: 0 0 var(--border-radius) var(--border-radius);
+		}
+	}
+	.active {
+		border: var(--border);
 	}
 }
 .inline {

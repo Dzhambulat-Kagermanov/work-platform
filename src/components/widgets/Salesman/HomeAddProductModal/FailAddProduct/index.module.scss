@@ -1,0 +1,25 @@
+.wrapper {
+	img {
+		margin: 0 auto;
+	}
+	h2 {
+		margin-top: 32px;
+	}
+	h3 {
+		color: var(--grey-500);
+		margin: 8px 0 20px 0;
+	}
+}
+.inp_label {
+	color: var(--grey-500);
+}
+.inp_wrapper {
+}
+.actions {
+	display: flex;
+	column-gap: 12px;
+	margin-top: 32px;
+	.btn {
+		flex: 1;
+	}
+}

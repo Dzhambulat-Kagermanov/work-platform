@@ -1,0 +1,22 @@
+.wrapper {
+	position: relative;
+	transition: var(--tran-low);
+	color: var(--grey-200);
+	&::before {
+		content: '';
+		position: absolute;
+		left: 50%;
+		translate: -50% 0;
+		bottom: -16px;
+		height: 2px;
+		width: 0;
+		transition: inherit;
+		background-color: var(--purple-300);
+	}
+	&.active {
+		color: var(--purple-300);
+		&::before {
+			width: 100%;
+		}
+	}
+}

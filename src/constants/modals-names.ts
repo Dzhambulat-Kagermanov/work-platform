@@ -7,3 +7,5 @@ export const SHARED_BURGER_MENU_MODAL = 'shared-burger-menu'
 
 export const DELIVERY_REVIEW_MODAL = 'delivery-review'
 export const DELIVERY_CHAT_ORDER_INFO_MODAL = 'delivery-chat-order-info'
+
+export const SALESMAN_ADD_PRODUCT_MODAL = 'salesman-add-product'
