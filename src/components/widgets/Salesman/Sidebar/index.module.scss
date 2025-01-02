@@ -8,6 +8,15 @@
 	justify-content: space-between;
 	flex-direction: column;
 	padding: 15px;
+	overflow: auto;
+
+	&::-webkit-scrollbar {
+		width: 3px;
+		background-color: transparent;
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: var(--white-300);
+	}
 }
 .content {
 }

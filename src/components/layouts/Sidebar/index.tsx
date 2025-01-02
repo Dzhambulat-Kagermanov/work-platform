@@ -9,7 +9,7 @@ const SidebarLayout: FC<Props> = ({ children }) => {
 	return (
 		<div className={cn(cls.wrapper)}>
 			<Sidebar />
-			{children}
+			<main className={cn(cls.main)}>{children}</main>
 		</div>
 	)
 }

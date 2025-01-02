@@ -23,36 +23,38 @@ const UserInfo: FC<Props> = ({ className, sidebarIsExpand }) => {
 				width={45}
 				height={45}
 			/>
-			<div className={cn(cls.content)}>
-				<Typography font='Inter-SB' size={16} tag='h2'>
-					Анастасия К
-				</Typography>
-				<Typography font='Inter-R' size={14} tag='h3'>
-					+7 977 587 00 00
-				</Typography>
-				<Typography font='Inter-R' size={14} tag='h4'>
-					Баланс: 550 ₽
-				</Typography>
-				<Button
-					size='mid'
-					primaryColor='var(--green-100)'
-					wFull
-					theme='fill'
-					className={cn(cls.btn)}
-					onClick={handleBalanceUp}
-				>
-					Пополнить
-				</Button>
-				<div className={cn(cls.ransoms)}>
-					<Typography font='Inter-R' size={12}>
-						Выкупы:
+			<div className={cn(cls.content_wrapper)}>
+				<div className={cn(cls.content)}>
+					<Typography font='Inter-SB' size={16} tag='h2'>
+						Анастасия К
 					</Typography>
-					<Typography font='Inter-R' size={12}>
-						84 шт
+					<Typography font='Inter-R' size={14} tag='h3'>
+						+7 977 587 00 00
 					</Typography>
-					<button className={cn(cls.plus_btn)}>
-						<PlusIcon color='var(--grey-300)' />
-					</button>
+					<Typography font='Inter-R' size={14} tag='h4'>
+						Баланс: 550 ₽
+					</Typography>
+					<Button
+						size='mid'
+						primaryColor='var(--green-100)'
+						wFull
+						theme='fill'
+						className={cn(cls.btn)}
+						onClick={handleBalanceUp}
+					>
+						Пополнить
+					</Button>
+					<div className={cn(cls.ransoms)}>
+						<Typography font='Inter-R' size={12}>
+							Выкупы:
+						</Typography>
+						<Typography font='Inter-R' size={12}>
+							84 шт
+						</Typography>
+						<button className={cn(cls.plus_btn)}>
+							<PlusIcon color='var(--grey-300)' />
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>

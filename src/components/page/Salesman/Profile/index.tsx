@@ -5,7 +5,7 @@ import { cn } from '@/lib'
 
 interface Props extends TClassName {}
 const ProfilePage: FC<Props> = ({ className }) => {
-	return <main className={cn(cls.main, [className])}>1</main>
+	return <div className={cn(cls.main, [className])}>1</div>
 }
 
 export { ProfilePage }
