@@ -13,6 +13,9 @@
 .low {
 	min-width: 100px;
 	padding: 8px 14px;
+	p {
+		font-size: 12px;
+	}
 }
 .button {
 	background-color: var(--primary-color);

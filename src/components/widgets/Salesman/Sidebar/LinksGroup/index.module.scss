@@ -1,0 +1,14 @@
+.group {
+	display: flex;
+	flex-direction: column;
+	row-gap: 8px;
+	margin-top: 24px;
+}
+
+.icon {
+	min-width: 24px;
+	width: 24px;
+}
+.notifications_addition {
+	color: var(--purple-300);
+}

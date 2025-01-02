@@ -1,8 +1,8 @@
 import { ButtonHTMLAttributes, CSSProperties, FC, ReactNode } from 'react'
 import { cn } from '@/lib'
 import { Typography } from '../Typography'
-import cls from './index.module.scss'
 import { TTag } from '@/types'
+import cls from './index.module.scss'
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement>, TTag {
 	theme: 'fill' | 'outline'

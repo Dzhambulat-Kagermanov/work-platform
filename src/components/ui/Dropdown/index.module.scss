@@ -2,22 +2,25 @@
 	--width: 200px;
 	--height: 48px;
 	--expandTransition: 0.2s ease;
-	--x-margins: 0 16px 0 12px;
+	--x-margins: 12px;
 	--border: 1px solid var(--white-200);
 	--backg: var(--white-100);
+	--border-radius: var(--blocks-radius);
+
 	position: relative;
 	width: var(--width);
-	height: var(--height);
+	min-height: var(--height);
+	border-radius: var(--border-radius);
+	border: var(--border);
 }
 .active {
 	background-color: var(--backg);
-	border-radius: var(--blocks-radius);
-	border: var(--border);
+	border-radius: var(--border-radius);
 	width: 100%;
-	height: 100%;
+	min-height: var(--height);
 	display: flex;
 	align-items: center;
-	padding: var(--x-margins);
+	padding: 0 var(--x-margins);
 	column-gap: 16px;
 	.active_content {
 		flex-grow: 1;
@@ -33,43 +36,64 @@
 		height: 8px;
 	}
 }
+.content_wrapper {
+	display: grid;
+	grid-template-rows: 0fr;
+	transition: var(--expandTransition);
+}
 .content {
+	min-height: 0;
 	overflow: hidden;
-	z-index: 2;
-	width: 100%;
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	translate: 0 100%;
 	background-color: var(--backg);
-	transition: var(--expandTransition) clip-path;
-	clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-	border-radius: 0 0 var(--blocks-radius) var(--blocks-radius);
+	border-radius: 0 0 var(--border-radius) var(--border-radius);
 	.item {
 		cursor: pointer;
 		display: flex;
 		align-items: center;
-		border: var(--border);
 		border-bottom: none;
-		height: var(--height);
-		padding: var(--x-margins);
-		&:first-child {
-			border-top: none;
-		}
-		&:last-child {
-			border-bottom: var(--border);
-			border-radius: 0 0 var(--blocks-radius) var(--blocks-radius);
-		}
+		min-height: var(--height);
+		padding: 0 var(--x-margins);
 	}
 }
 .isExpand {
 	.active {
-		border-radius: var(--blocks-radius) var(--blocks-radius) 0 0;
+		border-radius: var(--border-radius) var(--border-radius) 0 0;
 	}
 	.icon {
 		rotate: -180deg;
 	}
-	.content {
-		clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.absolute {
+	.content_wrapper {
+		z-index: 2;
+		width: 100%;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		translate: 0 100%;
+		display: grid;
+		transition: var(--expandTransition);
+		grid-template-rows: 0fr;
+	}
+}
+.inline {
+	.item {
+		border-bottom: var(--border);
+		&:first-child {
+			border-top: var(--border);
+		}
+		&:last-child {
+			border-bottom: none;
+		}
+	}
+}
+.isExpand {
+	.content_wrapper {
+		grid-template-rows: 1fr;
+	}
+	&.inline {
+	}
+	&.absolute {
 	}
 }

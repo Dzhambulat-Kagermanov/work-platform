@@ -3,16 +3,17 @@ import { cn } from '@/lib'
 import { TClassName } from '@/types'
 import Image from 'next/image'
 import { Typography } from '@/components/ui'
-import cls from './index.module.scss'
 import Link from 'next/link'
+import cls from './index.module.scss'
 
 interface Props extends TClassName {
 	hasNotLink?: true
+	link?: string
 }
-const Logo: FC<Props> = ({ className, hasNotLink }) => {
+const Logo: FC<Props> = ({ className, hasNotLink, link }) => {
 	return (
 		<Link
-			href={!hasNotLink ? '/' : '#'}
+			href={link ? link : !hasNotLink ? '/' : '#'}
 			className={cn(cls.wrapper, [className])}
 		>
 			<Image

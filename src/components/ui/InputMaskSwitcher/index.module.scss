@@ -4,9 +4,10 @@
 }
 .switcher {
 	--width: auto;
+	border: none;
+	border-radius: 0;
 
 	.switcher_content {
-		outline: var(--mask-switcher-border);
 	}
 	.switcher_item {
 		border: none;

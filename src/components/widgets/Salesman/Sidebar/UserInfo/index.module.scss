@@ -1,0 +1,45 @@
+.wrapper {
+	width: 100%;
+	padding: 25px 0;
+	border-top: 1px solid var(--white-400);
+	display: flex;
+	column-gap: 10px;
+	overflow: hidden;
+}
+.content_wrapper {
+	transition: var(--tran-low);
+	display: grid;
+	grid-template-columns: 0fr;
+}
+.content {
+	display: flex;
+	flex-direction: column;
+	row-gap: 4px;
+	h2 {
+		color: var(--grey-500);
+	}
+	h3 {
+		color: var(--grey-600);
+	}
+	h4 {
+		color: var(--grey-600);
+	}
+}
+.btn {
+	width: 150px;
+	padding: 8px 10px;
+}
+.ransoms {
+	padding: 3px 10px;
+	background-color: var(--white-300);
+	border: 1px solid var(--white-200);
+	border-radius: 5px;
+	align-items: center;
+	justify-content: space-between;
+	display: flex;
+	p {
+		color: var(--grey-600);
+	}
+}
+.sidebarIsExpand {
+}
