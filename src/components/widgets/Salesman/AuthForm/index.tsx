@@ -6,9 +6,11 @@ import { AuthFormSubmit } from '@/components/features/AuthFormSubmit'
 import { InputMaskSwitcher, Input } from '@/components/ui'
 import { PHONE_MASKS } from '@/constants'
 import cls from './index.module.scss'
+import { useRouter } from 'next/navigation'
 
 interface Props extends TClassName {}
 const AuthForm: FC<Props> = ({ className }) => {
+	const routerSTUB = useRouter()
 	const handleSubmit: FormEventHandler = e => {
 		e.preventDefault()
 	}
@@ -31,7 +33,13 @@ const AuthForm: FC<Props> = ({ className }) => {
 				wrapperCls={cn(cls.inp_wrapper, [cls.password])}
 				label='Пароль'
 			/>
-			<AuthFormSubmit className={cn(cls.submit_btn)} type='submit' />
+			<AuthFormSubmit
+				className={cn(cls.submit_btn)}
+				onClick={() => {
+					routerSTUB.push('/salesman')
+				}}
+				type='submit'
+			/>
 		</form>
 	)
 }

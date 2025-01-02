@@ -1,5 +1,5 @@
 import { TChildren } from '@/types'
-import { Header } from '@/components/widgets/shared/Header'
+import { Header } from '@/components/widgets/Buyer/Header'
 import { FC } from 'react'
 import { BurgerMenu } from '@/components/widgets/shared/BurgerMenu'
 

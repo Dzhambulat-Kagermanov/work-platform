@@ -1,5 +1,5 @@
 'use client'
-import { FC } from 'react'
+import { FC, FormEventHandler } from 'react'
 import { TClassName } from '@/types'
 import {
 	InputMaskSwitcher,
@@ -14,8 +14,12 @@ import cls from './index.module.scss'
 
 interface Props extends TClassName {}
 const ForgotPasswordForm: FC<Props> = ({ className }) => {
+	const handleSubmit: FormEventHandler = e => {
+		e.preventDefault()
+	}
+
 	return (
-		<form className={cn(cls.wrapper, [className])}>
+		<form className={cn(cls.wrapper, [className])} onSubmit={handleSubmit}>
 			<InputMaskSwitcher
 				masks={PHONE_MASKS}
 				errorIcon

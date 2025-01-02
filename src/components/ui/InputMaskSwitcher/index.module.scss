@@ -4,6 +4,16 @@
 }
 .switcher {
 	--width: auto;
+
+	.switcher_content {
+		outline: var(--mask-switcher-border);
+	}
+	.switcher_item {
+		border: none;
+		&:first-child {
+			border-top: var(--mask-switcher-border);
+		}
+	}
 }
 .switcher_item_text {
 	text-transform: uppercase;
@@ -30,6 +40,9 @@
 	.switcher_item {
 		border: none;
 		border-top: var(--mask-switcher-border);
+		&:first-child {
+			border-top: var(--mask-switcher-border);
+		}
 		&:last-child {
 			border-bottom: none;
 		}

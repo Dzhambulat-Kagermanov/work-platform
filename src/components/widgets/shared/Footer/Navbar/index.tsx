@@ -14,17 +14,17 @@ const Navbar: FC<Props> = ({ className }) => {
 					Покупателям
 				</Typography>
 				<div className={cn(cls.content)}>
-					<Link href='#'>
+					<Link href='/'>
 						<Typography font='Inter-R' size={14}>
 							Главная
 						</Typography>
 					</Link>
-					<Link href='#'>
+					<Link href='/buyer/category'>
 						<Typography font='Inter-R' size={14}>
 							Категории
 						</Typography>
 					</Link>
-					<Link href='#'>
+					<Link href='/buyer/auth'>
 						<Typography font='Inter-R' size={14}>
 							Вход
 						</Typography>
@@ -36,12 +36,12 @@ const Navbar: FC<Props> = ({ className }) => {
 					Продавцам
 				</Typography>
 				<div className={cn(cls.content)}>
-					<Link href='#'>
+					<Link href='/salesman/auth'>
 						<Typography font='Inter-R' size={14}>
 							Вход
 						</Typography>
 					</Link>
-					<Link href='#'>
+					<Link href='/salesman/support'>
 						<Typography font='Inter-R' size={14}>
 							Поддержка
 						</Typography>

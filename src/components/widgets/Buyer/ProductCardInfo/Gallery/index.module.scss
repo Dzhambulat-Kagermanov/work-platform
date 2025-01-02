@@ -16,7 +16,6 @@
 	flex-flow: column;
 	row-gap: 14px;
 	.item {
-		flex: 1;
 		overflow: hidden;
 		border-radius: var(--item-radius);
 		background-color: var(--black-100);
@@ -32,6 +31,7 @@
 		}
 	}
 	.stub {
+		height: 167px;
 		border-radius: var(--item-radius);
 		background-color: var(--white-300);
 	}
@@ -67,6 +67,9 @@
 				height: 144px;
 			}
 		}
+		.stub {
+			height: 144px;
+		}
 	}
 }
 
@@ -85,6 +88,9 @@
 				height: 136px;
 			}
 		}
+		.stub {
+			height: 136px;
+		}
 	}
 }
 
@@ -101,6 +107,9 @@
 				object-fit: cover;
 				height: 146px;
 			}
+		}
+		.stub {
+			height: 146px;
 		}
 	}
 }
@@ -122,6 +131,9 @@
 				height: 176px;
 			}
 		}
+		.stub {
+			height: 176px;
+		}
 	}
 }
 
@@ -135,6 +147,9 @@
 			img {
 				height: 150px;
 			}
+		}
+		.stub {
+			height: 150px;
 		}
 	}
 }

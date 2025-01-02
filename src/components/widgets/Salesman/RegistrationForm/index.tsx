@@ -1,16 +1,21 @@
 'use client'
-import { FC } from 'react'
+import { FC, FormEventHandler } from 'react'
 import { TClassName } from '@/types'
 import { cn } from '@/lib'
 import { RegistrationFormSubmit } from '@/components/features/RegistrationFormSubmit'
 import { InputMaskSwitcher, Input, Timer, Typography } from '@/components/ui'
 import { PHONE_MASKS } from '@/constants'
 import cls from './index.module.scss'
+import { useRouter } from 'next/navigation'
 
 interface Props extends TClassName {}
-const SalesmanRegistrationForm: FC<Props> = ({ className }) => {
+const RegistrationForm: FC<Props> = ({ className }) => {
+	const routerSTUB = useRouter()
+	const handleSubmit: FormEventHandler = e => {
+		e.preventDefault()
+	}
 	return (
-		<form className={cn(cls.wrapper, [className])}>
+		<form className={cn(cls.wrapper, [className])} onSubmit={handleSubmit}>
 			<InputMaskSwitcher
 				masks={PHONE_MASKS}
 				errorIcon
@@ -57,9 +62,15 @@ const SalesmanRegistrationForm: FC<Props> = ({ className }) => {
 				wrapperCls={cn(cls.inp_wrapper, [cls.password])}
 				label='Повторите пароль'
 			/>
-			<RegistrationFormSubmit className={cn(cls.submit_btn)} type='submit' />
+			<RegistrationFormSubmit
+				className={cn(cls.submit_btn)}
+				onClick={() => {
+					routerSTUB.push('/salesman')
+				}}
+				type='submit'
+			/>
 		</form>
 	)
 }
 
-export { SalesmanRegistrationForm }
+export { RegistrationForm }

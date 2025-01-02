@@ -1,0 +1,29 @@
+.wrapper {
+	display: flex;
+	justify-content: space-between;
+}
+.content {
+	box-shadow: 2px 0 15px 0 var(--black-opacity-60);
+	position: relative;
+	row-gap: 10px;
+	justify-content: center;
+	display: flex;
+	padding: 30px 40px;
+	max-height: 100vh;
+	overflow: auto;
+	min-width: 425px;
+	flex-grow: 1;
+
+	&::-webkit-scrollbar {
+		width: 5px;
+		background-color: transparent;
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: var(--white-400);
+	}
+}
+.logo {
+	position: absolute;
+	left: 40px;
+	top: 30px;
+}

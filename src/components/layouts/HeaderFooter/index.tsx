@@ -1,6 +1,6 @@
 import { TChildren } from '@/types'
-import { Footer } from '@/components/widgets/Buyer/Footer'
-import { Header } from '@/components/widgets/shared/Header'
+import { Footer } from '@/components/widgets/shared/Footer'
+import { Header } from '@/components/widgets/Buyer/Header'
 import { FC } from 'react'
 import { BurgerMenu } from '@/components/widgets/shared/BurgerMenu'
 

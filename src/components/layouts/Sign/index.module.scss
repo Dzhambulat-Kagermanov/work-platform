@@ -5,6 +5,7 @@
 	min-height: calc(100vh - var(--header-height));
 }
 .content {
+	max-height: 100%;
 	max-width: 345px;
 	margin: 0 auto;
 }

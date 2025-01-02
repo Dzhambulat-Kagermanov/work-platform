@@ -18,7 +18,7 @@ export type TAuthLink = {
 }
 export const AUTH_LINKS: TAuthLink[] = [
 	{
-		link: '/buyer',
+		link: '/',
 		text: 'Главная',
 		icon: <HomeIcon className={cls.icon} color='var(--purple-800)' />,
 	},
@@ -55,7 +55,7 @@ export const AUTH_LINKS: TAuthLink[] = [
 ]
 export const NOT_AUTH_LINKS: TAuthLink[] = [
 	{
-		link: '/buyer',
+		link: '/',
 		text: 'Главная',
 		icon: <HomeIcon className={cls.icon} color='var(--purple-800)' />,
 	},

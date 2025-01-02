@@ -1,6 +1,6 @@
 import { TProductItemProps } from '@/types'
 
-export const isAuth = false
+export const isAuth = true
 export const salesmanProducts: TProductItemProps[] = [
 	{
 		id: 1,

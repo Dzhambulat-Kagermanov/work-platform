@@ -9,6 +9,7 @@ import { AuthActions } from '@/components/widgets/Buyer/AuthActions'
 interface Props extends TClassName, TChildren {
 	logo: string
 	title: string
+	paddingStubCls?: string
 	authActions?:
 		| 'forRegistration'
 		| 'forAuth'
@@ -17,6 +18,7 @@ interface Props extends TClassName, TChildren {
 }
 const SignLayout: FC<Props> = ({
 	className,
+	paddingStubCls,
 	children,
 	logo,
 	title,
@@ -44,6 +46,7 @@ const SignLayout: FC<Props> = ({
 				{authActions && (
 					<AuthActions className={cn(cls.actions)} type={authActions} />
 				)}
+				<div className={cn(cls.padding_stub, [paddingStubCls])} />
 			</div>
 		</main>
 	)

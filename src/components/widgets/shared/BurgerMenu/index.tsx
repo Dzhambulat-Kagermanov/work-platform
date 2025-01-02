@@ -41,7 +41,11 @@ const BurgerMenu: FC<Props> = ({ className }) => {
 							className={cn(cls.group)}
 							actionForLinkClick={handleClose}
 						/>
-						<Footer isAuth={isAuth} className={cn(cls.footer)} />
+						<Footer
+							isAuth={isAuth}
+							className={cn(cls.footer)}
+							actionForLinkClick={handleClose}
+						/>
 					</Container>
 				</section>
 			)}
