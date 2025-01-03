@@ -7,9 +7,10 @@ import { ExpandArrowIcon } from '@/icons'
 import { LinksGroup } from './LinksGroup'
 import { UserInfo } from './UserInfo'
 import cls from './index.module.scss'
+import { TSalesmanHomePageType } from '../HomePagesSwitcher'
 
 interface Props extends TClassName {
-	homePageType?: string
+	homePageType: TSalesmanHomePageType
 }
 const Sidebar: FC<Props> = ({ className, homePageType }) => {
 	const [isExpand, setIsExpand] = useState<boolean>(false)
