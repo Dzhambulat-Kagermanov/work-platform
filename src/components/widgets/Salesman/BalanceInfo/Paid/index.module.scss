@@ -1,0 +1,15 @@
+.wrapper {
+	h3 {
+		color: var(--grey-500);
+	}
+}
+.content {
+	display: inline-grid;
+	grid-template-columns: repeat(2, 1fr);
+	column-gap: 23px;
+	row-gap: 5px;
+	margin-top: 8px;
+	p:nth-child(odd) {
+		color: var(--black-200-opacity-50);
+	}
+}

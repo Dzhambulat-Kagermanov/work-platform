@@ -6,6 +6,7 @@ import { Typography } from '@/components/ui'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import cls from './index.module.scss'
+import { TSalesmanHomePageType } from '../../HomePagesSwitcher'
 
 interface Props extends TClassName, TTag {
 	text: string
@@ -14,6 +15,9 @@ interface Props extends TClassName, TTag {
 	additionalInfo?: ReactNode
 	sidebarIsExpand?: boolean
 	textOverlayCls?: string
+	linkOnClick?: () => void
+	activeSlug?: TSalesmanHomePageType
+	slug?: string | null
 }
 const Item: FC<Props> = ({
 	icon,
@@ -23,6 +27,9 @@ const Item: FC<Props> = ({
 	className,
 	additionalInfo,
 	textOverlayCls,
+	activeSlug,
+	slug,
+	linkOnClick,
 	tag = 'div',
 }) => {
 	const Tag = tag
@@ -30,13 +37,17 @@ const Item: FC<Props> = ({
 
 	return (
 		<Tag
+			onClick={linkOnClick}
 			className={cn(cls.wrapper, [className], {
-				[cls.active]: path === link,
+				[cls.active]: slug !== undefined ? activeSlug === slug : path === link,
 				[cls.isExpand]: sidebarIsExpand === undefined || sidebarIsExpand,
 			})}
 		>
 			{link ? (
-				<Link className={cn(cls.item)} href={link}>
+				<Link
+					className={cn(cls.item)}
+					href={slug ? `${link}?homePageType=${slug}` : link}
+				>
 					{icon}
 					<div className={cn(cls.text_overlay, [textOverlayCls])}>
 						<div className={cn(cls.text_wrapper)}>

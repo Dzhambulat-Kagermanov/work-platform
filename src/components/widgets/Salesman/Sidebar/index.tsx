@@ -8,8 +8,10 @@ import { LinksGroup } from './LinksGroup'
 import { UserInfo } from './UserInfo'
 import cls from './index.module.scss'
 
-interface Props extends TClassName {}
-const Sidebar: FC<Props> = ({ className }) => {
+interface Props extends TClassName {
+	homePageType?: string
+}
+const Sidebar: FC<Props> = ({ className, homePageType }) => {
 	const [isExpand, setIsExpand] = useState<boolean>(false)
 
 	const handleExpand: MouseEventHandler = () => {
@@ -24,7 +26,11 @@ const Sidebar: FC<Props> = ({ className }) => {
 		>
 			<div className={cn(cls.content)}>
 				<Logo className={cn(cls.logo)} link='/salesman' />
-				<LinksGroup sidebarIsExpand={isExpand} className={cn(cls.group)} />
+				<LinksGroup
+					sidebarIsExpand={isExpand}
+					className={cn(cls.group)}
+					homePageType={homePageType}
+				/>
 				<UserInfo className={cn(cls.info)} sidebarIsExpand={isExpand} />
 			</div>
 

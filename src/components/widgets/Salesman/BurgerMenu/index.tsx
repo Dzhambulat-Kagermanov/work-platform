@@ -8,9 +8,12 @@ import { Logo } from '../../shared/Logo'
 import { ExpandArrowIcon } from '@/icons'
 import { LinksGroup } from '../Sidebar/LinksGroup'
 import cls from './index.module.scss'
+import { TSalesmanHomePageType } from '../HomePagesSwitcher'
 
-interface Props extends TClassName {}
-const BurgerMenu: FC<Props> = ({ className }) => {
+interface Props extends TClassName {
+	homePageType: TSalesmanHomePageType
+}
+const BurgerMenu: FC<Props> = ({ className, homePageType }) => {
 	const { modalState, visibleTransition, handleClose } = useModalBase({
 		slug: SALESMAN_BURGER_MENU,
 	})
@@ -28,7 +31,12 @@ const BurgerMenu: FC<Props> = ({ className }) => {
 							<ExpandArrowIcon color='var(--grey-300)' />
 						</button>
 					</div>
-					<LinksGroup sidebarIsExpand={undefined} className={cn(cls.content)} />
+					<LinksGroup
+						homePageType={homePageType}
+						linkOnClick={handleClose}
+						sidebarIsExpand={undefined}
+						className={cn(cls.content)}
+					/>
 				</section>
 			)}
 		</>

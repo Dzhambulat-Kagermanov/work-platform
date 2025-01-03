@@ -29,7 +29,7 @@ interface Props {
 	// Обновить состояние на активный элемент
 	setActiveItem?: (val: TDropdownItem) => void
 	// Текст для заполнителя
-	placeholder?: string
+	placeholder?: string | ReactNode
 	// Отключение / Включение
 	disable?: boolean
 	// Плавность для расшаривания списка
@@ -115,7 +115,7 @@ const Dropdown: FC<Props> = ({
 			>
 				{active ? (
 					<div className={cn(cls.active_content)}>{active.content}</div>
-				) : (
+				) : typeof placeholder === 'string' ? (
 					<Typography
 						font='Inter-SB'
 						size={14}
@@ -123,6 +123,8 @@ const Dropdown: FC<Props> = ({
 					>
 						{placeholder}
 					</Typography>
+				) : (
+					placeholder
 				)}
 				{icon || (
 					<ExpandArrowIcon

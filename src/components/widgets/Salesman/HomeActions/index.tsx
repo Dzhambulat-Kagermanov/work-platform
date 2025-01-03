@@ -4,7 +4,7 @@ import { TClassName } from '@/types'
 import { cn } from '@/lib'
 import { Button, Input } from '@/components/ui'
 import { PlusIcon, SearchIcon } from '@/icons'
-import { Action } from './Action'
+import { Action } from '@/components/ui'
 import { useModalState } from '@/hooks'
 import { SALESMAN_ADD_PRODUCT_MODAL } from '@/constants'
 import cls from './index.module.scss'
@@ -35,17 +35,14 @@ const HomeActions: FC<Props> = ({ className }) => {
 					actionBtnText='Действия'
 					actions={[
 						{ link: '#', text: 'Остановить' },
-						{ link: '#', text: 'Редактировать' },
-						{ link: '#', text: 'Дублировать' },
 						{ link: '#', text: 'Архивировать' },
-						{ link: '#', text: 'Скопировать ссылку' },
 					]}
 				/>
 				<Action
 					className={cn(cls.action)}
 					actionBtnText='Все товары'
 					actions={[
-						{ link: '#', text: 'Все объявления' },
+						{ link: '#', text: 'Все товары' },
 						{ link: '#', text: 'Активные' },
 						{ link: '#', text: 'Остановленные' },
 						{ link: '#', text: 'Архивированные' },

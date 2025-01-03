@@ -6,28 +6,35 @@ import { Item } from './Item'
 import { useSearchParams } from 'next/navigation'
 import cls from './index.module.scss'
 
-export type TSalesmanHomePageType = 'products' | 'advertisements' | 'ransoms'
+export type TSalesmanHomePageType =
+	| 'products'
+	| 'advertisements'
+	| 'ransoms'
+	| null
 
 interface Props extends TClassName {}
 const HomePagesSwitcher: FC<Props> = ({ className }) => {
 	const queryParams = useSearchParams()
-	const activeSlug = queryParams.get('pageType') as TSalesmanHomePageType
+	const activeSlug = queryParams.get('homePageType') as TSalesmanHomePageType
 
 	return (
 		<nav className={cn(cls.wrapper, [className])}>
 			<Item
+				slug={null}
+				selectedProducts={1}
 				className={cn(cls.item)}
 				activeSlug={activeSlug}
-				slug='products'
 				text='Товары (10)'
 			/>
 			<Item
+				selectedProducts={0}
 				className={cn(cls.item)}
 				activeSlug={activeSlug}
 				slug='advertisements'
 				text='Объявления'
 			/>
 			<Item
+				selectedProducts={0}
 				className={cn(cls.item)}
 				activeSlug={activeSlug}
 				slug='ransoms'

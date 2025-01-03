@@ -5,11 +5,19 @@ import { HomeIcon } from '@/icons'
 import { cn } from '@/lib'
 import { Item } from '../Item'
 import cls from './index.module.scss'
+import { TSalesmanHomePageType } from '../../HomePagesSwitcher'
 
 interface Props extends TClassName {
 	sidebarIsExpand?: boolean
+	linkOnClick?: () => void
+	homePageType: TSalesmanHomePageType
 }
-const LinksDropdown: FC<Props> = ({ className, sidebarIsExpand }) => {
+const LinksDropdown: FC<Props> = ({
+	className,
+	sidebarIsExpand,
+	homePageType,
+	linkOnClick,
+}) => {
 	return (
 		<li className={cn(cls.wrapper, [className])}>
 			<Dropdown
@@ -17,6 +25,15 @@ const LinksDropdown: FC<Props> = ({ className, sidebarIsExpand }) => {
 					[cls.sidebarIsExpand]:
 						sidebarIsExpand || sidebarIsExpand === undefined,
 				})}
+				placeholder={
+					<Item
+						textOverlayCls={cn(cls.text_overlay)}
+						sidebarIsExpand={sidebarIsExpand}
+						icon={<HomeIcon color='var(--grey-200)' className={cn(cls.icon)} />}
+						text='Продвижение'
+						className={cn(cls.item)}
+					/>
+				}
 				activeItemCls={cn(cls.dropdown_active)}
 				contentCls={cn(cls.dropdown_content)}
 				itemCls={cn(cls.dropdown_item)}
@@ -29,20 +46,9 @@ const LinksDropdown: FC<Props> = ({ className, sidebarIsExpand }) => {
 					{
 						content: (
 							<Item
-								textOverlayCls={cn(cls.text_overlay)}
-								sidebarIsExpand={sidebarIsExpand}
-								icon={
-									<HomeIcon color='var(--grey-200)' className={cn(cls.icon)} />
-								}
-								text='Продвижение'
-								className={cn(cls.item)}
-							/>
-						),
-						value: 'title',
-					},
-					{
-						content: (
-							<Item
+								slug={null}
+								activeSlug={homePageType}
+								linkOnClick={linkOnClick}
 								sidebarIsExpand={sidebarIsExpand}
 								icon={
 									<HomeIcon color='var(--grey-200)' className={cn(cls.icon)} />
@@ -56,7 +62,7 @@ const LinksDropdown: FC<Props> = ({ className, sidebarIsExpand }) => {
 										19
 									</Typography>
 								}
-								link='#'
+								link='/salesman'
 								text='Товары'
 								className={cn(cls.item, [cls.subitem])}
 							/>
@@ -66,6 +72,9 @@ const LinksDropdown: FC<Props> = ({ className, sidebarIsExpand }) => {
 					{
 						content: (
 							<Item
+								slug='advertisements'
+								activeSlug={homePageType}
+								linkOnClick={linkOnClick}
 								sidebarIsExpand={sidebarIsExpand}
 								icon={
 									<HomeIcon color='var(--grey-200)' className={cn(cls.icon)} />
@@ -79,7 +88,7 @@ const LinksDropdown: FC<Props> = ({ className, sidebarIsExpand }) => {
 										5
 									</Typography>
 								}
-								link='#'
+								link='/salesman'
 								text='Объявления'
 								className={cn(cls.item, [cls.subitem])}
 							/>
@@ -89,6 +98,9 @@ const LinksDropdown: FC<Props> = ({ className, sidebarIsExpand }) => {
 					{
 						content: (
 							<Item
+								slug='ransoms'
+								activeSlug={homePageType}
+								linkOnClick={linkOnClick}
 								sidebarIsExpand={sidebarIsExpand}
 								icon={
 									<HomeIcon color='var(--grey-200)' className={cn(cls.icon)} />
@@ -102,7 +114,7 @@ const LinksDropdown: FC<Props> = ({ className, sidebarIsExpand }) => {
 										37
 									</Typography>
 								}
-								link='#'
+								link='/salesman'
 								text='Выкупы'
 								className={cn(cls.item, [cls.subitem])}
 							/>

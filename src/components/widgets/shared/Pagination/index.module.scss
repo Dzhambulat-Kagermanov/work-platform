@@ -1,0 +1,23 @@
+.wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	column-gap: 10px;
+	color: var(--grey-500);
+}
+.actions {
+	display: flex;
+	column-gap: 10px;
+}
+.btn {
+	transition: var(--tran-low);
+	padding: 8px 14px;
+	border-radius: var(--blocks-radius);
+	border: 1px solid var(--white-200);
+	&:hover {
+		scale: 1.05;
+	}
+	&:active {
+		opacity: 0.7;
+	}
+}

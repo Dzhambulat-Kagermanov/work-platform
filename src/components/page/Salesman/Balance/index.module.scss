@@ -1,0 +1,26 @@
+.main {
+	& > h1 {
+		color: var(--black-200);
+	}
+	& > h2 {
+		color: var(--grey-600);
+	}
+}
+.info {
+	margin-top: 45px;
+}
+.transactions {
+	margin-top: 65px;
+}
+
+@media screen and (max-width: 788px) {
+	.transactions {
+		margin-top: 40px;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.info {
+		margin-top: 20px;
+	}
+}

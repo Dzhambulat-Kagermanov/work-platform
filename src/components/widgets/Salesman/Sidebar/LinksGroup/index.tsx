@@ -11,18 +11,29 @@ import { cn } from '@/lib'
 import { Item } from '../Item'
 import { LinksDropdown } from '../LinksDropdown'
 import cls from './index.module.scss'
+import { TSalesmanHomePageType } from '../../HomePagesSwitcher'
 
 interface Props extends TClassName {
 	sidebarIsExpand?: boolean
+	linkOnClick?: () => void
+	homePageType: TSalesmanHomePageType
 }
-const LinksGroup: FC<Props> = ({ sidebarIsExpand, className }) => {
+const LinksGroup: FC<Props> = ({
+	sidebarIsExpand,
+	className,
+	linkOnClick,
+	homePageType,
+}) => {
 	return (
 		<ul className={cn(cls.group, [className])}>
 			<LinksDropdown
+				homePageType={homePageType}
+				linkOnClick={linkOnClick}
 				className={cn(cls.dropdown)}
 				sidebarIsExpand={sidebarIsExpand}
 			/>
 			<Item
+				linkOnClick={linkOnClick}
 				sidebarIsExpand={sidebarIsExpand}
 				tag='li'
 				text='Поддержка'
@@ -31,6 +42,7 @@ const LinksGroup: FC<Props> = ({ sidebarIsExpand, className }) => {
 				className={cn(cls.item)}
 			/>
 			<Item
+				linkOnClick={linkOnClick}
 				sidebarIsExpand={sidebarIsExpand}
 				tag='li'
 				text='Профиль'
@@ -39,6 +51,7 @@ const LinksGroup: FC<Props> = ({ sidebarIsExpand, className }) => {
 				className={cn(cls.item)}
 			/>
 			<Item
+				linkOnClick={linkOnClick}
 				sidebarIsExpand={sidebarIsExpand}
 				tag='li'
 				text='Баланс'
@@ -58,6 +71,7 @@ const LinksGroup: FC<Props> = ({ sidebarIsExpand, className }) => {
 				}
 			/>
 			<Item
+				linkOnClick={linkOnClick}
 				sidebarIsExpand={sidebarIsExpand}
 				tag='li'
 				text='Уведомления'
