@@ -1,0 +1,14 @@
+.button {
+	border: 1px solid var(--white-200);
+	min-width: 240px;
+	padding: 10px 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	column-gap: 12px;
+	border-radius: var(--blocks-radius);
+	transition: var(--tran-low);
+	&:hover {
+		scale: 1.03;
+	}
+}

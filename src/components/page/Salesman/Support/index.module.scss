@@ -1,0 +1,26 @@
+.main {
+	& > h1 {
+		color: var(--black-200);
+	}
+	& > h2 {
+		margin-top: 5px;
+		color: var(--grey-600);
+	}
+}
+.content {
+	margin-top: 25px;
+}
+.faq {
+	margin-top: 40px;
+}
+
+@media screen and (max-width: 500px) {
+	.main {
+		& > h1 {
+			font-size: 28px;
+		}
+		& > h2 {
+			font-size: 16px;
+		}
+	}
+}

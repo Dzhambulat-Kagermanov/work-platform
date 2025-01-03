@@ -5,13 +5,9 @@ import { cn } from '@/lib'
 import { SALESMAN_BURGER_MENU } from '@/constants'
 import { useModalBase } from '@/hooks'
 import { Logo } from '../../shared/Logo'
-import { Dropdown } from '@/components/ui'
 import { ExpandArrowIcon } from '@/icons'
-import cls from './index.module.scss'
-import { LinksDropdown } from '../Sidebar/LinksDropdown'
-import { Item } from '../Sidebar/Item'
 import { LinksGroup } from '../Sidebar/LinksGroup'
-import { UserInfo } from '../Sidebar/UserInfo'
+import cls from './index.module.scss'
 
 interface Props extends TClassName {}
 const BurgerMenu: FC<Props> = ({ className }) => {

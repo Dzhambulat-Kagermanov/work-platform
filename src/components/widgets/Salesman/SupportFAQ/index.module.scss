@@ -1,0 +1,28 @@
+.wrapper {
+	& > h2 {
+		text-align: center;
+		color: var(--black-200);
+	}
+	& > h3 {
+		text-align: center;
+		color: var(--grey-600);
+	}
+}
+.accordions {
+	display: flex;
+	flex-direction: column;
+	row-gap: 25px;
+	max-width: 768px;
+	margin: 0 auto;
+	margin-top: 60px;
+}
+@media screen and (max-width: 500px) {
+	.wrapper {
+		& > h2 {
+			font-size: 30px;
+		}
+		& > h3 {
+			font-size: 16px;
+		}
+	}
+}

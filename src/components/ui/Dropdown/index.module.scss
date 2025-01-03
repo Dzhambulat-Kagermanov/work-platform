@@ -23,6 +23,7 @@
 	padding: 0 var(--x-margins);
 	column-gap: 16px;
 	.active_content {
+		width: 100%;
 		flex-grow: 1;
 		text-align: start;
 	}
