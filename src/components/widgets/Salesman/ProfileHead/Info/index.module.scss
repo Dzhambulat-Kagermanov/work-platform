@@ -1,0 +1,22 @@
+.wrapper {
+}
+.rating {
+	display: flex;
+	align-items: center;
+	column-gap: 5px;
+	img {
+	}
+	p {
+		color: var(--white-100-opacity-90);
+		translate: 0 2px;
+	}
+}
+.name {
+	margin: 6px 0 4px 0;
+}
+.id {
+}
+.date {
+	color: var(--white-100-opacity-60);
+	margin-top: 2px;
+}

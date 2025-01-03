@@ -1,11 +1,39 @@
 import { TClassName } from '@/types'
 import { FC } from 'react'
-import cls from './index.module.scss'
 import { cn } from '@/lib'
+import { Container } from '@/components/ui'
+import { ProfileForm } from '@/components/widgets/Salesman/ProfileForm'
+import { ProfileHead } from '@/components/widgets/Salesman/ProfileHead'
+import { ProfileNotifications } from '@/components/widgets/Salesman/ProfileNotifications'
+import { ProfileStatistic } from '@/components/widgets/Salesman/ProfileStatistic'
+import { ExitBtnMobile } from './ExitBtnMobile'
+import { ProfileStatisticInfo } from '@/components/widgets/Salesman/ProfileStatisticInfo'
+import cls from './index.module.scss'
 
 interface Props extends TClassName {}
 const ProfilePage: FC<Props> = ({ className }) => {
-	return <div className={cn(cls.main, [className])}>1</div>
+	return (
+		<div className={cn(cls.main)}>
+			<div className={cn(cls.account, [className])}>
+				<ProfileHead className={cn(cls.head)} />
+				<Container className={cn(cls.dashboard)}>
+					<ProfileForm className={cn(cls.form)} />
+					<div className={cn(cls.half)}>
+						<ProfileNotifications className={cn(cls.notifications)} />
+						<ProfileStatisticInfo className={cn(cls.statistic_info)} />
+						<ProfileStatistic
+							className={cn(cls.statistic)}
+							cashbackPaid={10550}
+							productsGrate={342}
+							productsRating={4.7}
+							successfulBuybacks={91}
+						/>
+					</div>
+					<ExitBtnMobile className={cn(cls.exit_btn_mobile)} />
+				</Container>
+			</div>
+		</div>
+	)
 }
 
 export { ProfilePage }

@@ -19,16 +19,19 @@
 	padding-right: 20px;
 }
 .content {
+	height: 100%;
+}
+.content:not(.noPadding) {
 	padding: 32px 13px 32px 45px;
 }
 
 @media screen and (max-width: 870px) {
-	.content {
+	.content:not(.noPadding) {
 		padding: 32px 20px;
 	}
 }
 @media screen and (max-width: 788px) {
-	.content {
+	.content:not(.noPadding) {
 		padding: 12px 20px;
 	}
 }

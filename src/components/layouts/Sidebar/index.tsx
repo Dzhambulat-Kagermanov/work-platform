@@ -8,7 +8,7 @@ import { SM_BIG } from '@/constants'
 import { MobileHeader } from '@/components/widgets/Salesman/MobileHeader'
 import { BurgerMenu } from '@/components/widgets/Salesman/BurgerMenu'
 import cls from './index.module.scss'
-import { useSearchParams } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { TSalesmanHomePageType } from '@/components/widgets/Salesman/HomePagesSwitcher'
 
 interface Props extends TChildren {}
@@ -16,6 +16,8 @@ const SidebarLayout: FC<Props> = ({ children }) => {
 	const queryParams = useSearchParams()
 	const homePageType = queryParams.get('homePageType') as TSalesmanHomePageType
 	const width = useScreen()
+	const path = usePathname()
+
 	return (
 		<div className={cn(cls.wrapper)}>
 			{width > SM_BIG && <Sidebar homePageType={homePageType} />}
@@ -26,7 +28,13 @@ const SidebarLayout: FC<Props> = ({ children }) => {
 						<MobileHeader className={cn(cls.header)} />
 					</>
 				)}
-				<div className={cn(cls.content)}>{children}</div>
+				<div
+					className={cn(cls.content, [], {
+						[cls.noPadding]: path === '/salesman/profile',
+					})}
+				>
+					{children}
+				</div>
 			</main>
 		</div>
 	)

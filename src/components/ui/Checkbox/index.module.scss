@@ -8,15 +8,19 @@
 	border: 2px solid var(--purple-300);
 	-webkit-appearance: none;
 	appearance: none;
-	border-radius: 8px;
-	padding: 3px;
+	border-radius: 6px;
+	width: 21px;
+	height: 21px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	&::before {
+		width: calc(100% - 2px);
+		height: calc(100% - 2px);
 		display: block;
 		content: '';
 		background-image: url('/images/shared/checkbox-checked.svg');
 		background-size: contain;
-		width: 18px;
-		height: 18px;
 		transition: 120ms transform ease-in-out;
 		transform-origin: bottom left;
 		transform: scale(0);
