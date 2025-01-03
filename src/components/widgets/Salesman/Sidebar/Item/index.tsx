@@ -12,7 +12,7 @@ interface Props extends TClassName, TTag {
 	icon?: ReactNode
 	link?: string
 	additionalInfo?: ReactNode
-	sidebarIsExpand: boolean
+	sidebarIsExpand?: boolean
 	textOverlayCls?: string
 }
 const Item: FC<Props> = ({
@@ -32,7 +32,7 @@ const Item: FC<Props> = ({
 		<Tag
 			className={cn(cls.wrapper, [className], {
 				[cls.active]: path === link,
-				[cls.isExpand]: sidebarIsExpand,
+				[cls.isExpand]: sidebarIsExpand === undefined || sidebarIsExpand,
 			})}
 		>
 			{link ? (

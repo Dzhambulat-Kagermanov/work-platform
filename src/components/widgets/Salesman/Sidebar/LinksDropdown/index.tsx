@@ -7,14 +7,15 @@ import { Item } from '../Item'
 import cls from './index.module.scss'
 
 interface Props extends TClassName {
-	sidebarIsExpand: boolean
+	sidebarIsExpand?: boolean
 }
 const LinksDropdown: FC<Props> = ({ className, sidebarIsExpand }) => {
 	return (
 		<li className={cn(cls.wrapper, [className])}>
 			<Dropdown
 				wrapperCls={cn(cls.dropdown_wrapper, [], {
-					[cls.sidebarIsExpand]: sidebarIsExpand,
+					[cls.sidebarIsExpand]:
+						sidebarIsExpand || sidebarIsExpand === undefined,
 				})}
 				activeItemCls={cn(cls.dropdown_active)}
 				contentCls={cn(cls.dropdown_content)}

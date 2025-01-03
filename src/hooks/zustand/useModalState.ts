@@ -7,6 +7,7 @@ interface Props {
 		| undefined
 		| {
 				modalState: boolean
+				setModalStateTransition?: () => void
 		  }
 	>
 	showModal: (params: TModalSlug) => void

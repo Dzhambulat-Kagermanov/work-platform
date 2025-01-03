@@ -1,0 +1,43 @@
+.toggle {
+	position: relative;
+	display: inline-block;
+}
+
+.toggle_input {
+	display: none;
+}
+
+.toggle_label {
+	display: block;
+	width: 53px;
+	height: 22px;
+	border-radius: 99px;
+	background-color: var(--white-200);
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+.toggle_label::after {
+	content: '';
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	height: calc(100% - 4px);
+	aspect-ratio: 1;
+	background-color: #ffffff;
+	border-radius: 50%;
+	transition: var(--tran-low);
+	box-shadow: 0 1px 3px 0 var(--black-200-opacity-30),
+		0 1px 2px 0 var(--black-200-opacity-5);
+}
+.toggle_label:has(.toggle_input:checked) {
+	background-color: var(--purple-300);
+	&::after {
+		left: 100%;
+		translate: calc(-100% - 2px);
+		box-shadow: none;
+	}
+}
+
+.toggle_input:checked + .toggle_label::after {
+	left: 32px;
+}

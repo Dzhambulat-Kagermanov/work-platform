@@ -13,7 +13,7 @@ import { LinksDropdown } from '../LinksDropdown'
 import cls from './index.module.scss'
 
 interface Props extends TClassName {
-	sidebarIsExpand: boolean
+	sidebarIsExpand?: boolean
 }
 const LinksGroup: FC<Props> = ({ sidebarIsExpand, className }) => {
 	return (

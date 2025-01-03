@@ -31,6 +31,7 @@ const HomeActions: FC<Props> = ({ className }) => {
 					Добавить товар
 				</Button>
 				<Action
+					className={cn(cls.action)}
 					actionBtnText='Действия'
 					actions={[
 						{ link: '#', text: 'Остановить' },
@@ -41,6 +42,7 @@ const HomeActions: FC<Props> = ({ className }) => {
 					]}
 				/>
 				<Action
+					className={cn(cls.action)}
 					actionBtnText='Все товары'
 					actions={[
 						{ link: '#', text: 'Все объявления' },

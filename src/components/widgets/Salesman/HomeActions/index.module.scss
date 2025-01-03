@@ -1,15 +1,30 @@
 .wrapper {
+	z-index: 2;
+	position: relative;
 	display: flex;
 	justify-content: space-between;
+	gap: 20px;
 }
 .inp_wrapper {
 	max-width: 316px;
+	--placeholderColor: var(--grey-200);
 }
 .content {
 	display: flex;
-	column-gap: 20px;
+	gap: 20px;
+	flex-wrap: wrap;
+}
+.action {
+	z-index: 2;
+	position: relative;
+	min-height: 45px;
+	&:last-child {
+		z-index: 0;
+	}
 }
 .add_btn {
+	min-width: 190px;
+	min-height: 45px;
 	padding: 3px 16px;
 	display: flex;
 	align-items: center;
@@ -27,6 +42,19 @@
 		}
 	}
 }
-.inp_wrapper {
-	--placeholderColor: var(--grey-200);
+
+@media screen and (max-width: 1151px) {
+	.wrapper {
+		flex-direction: column;
+	}
+	.inp_wrapper {
+		max-width: none;
+	}
+	.add_btn {
+		flex: 1;
+	}
+	.action {
+		min-width: 190px;
+		flex: 1;
+	}
 }
