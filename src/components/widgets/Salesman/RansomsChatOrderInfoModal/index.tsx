@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { TClassName } from '@/types'
 import { DiscountPlaque, ModalBase, Typography } from '@/components/ui'
 import { cn } from '@/lib'
-import { DELIVERY_CHAT_ORDER_INFO_MODAL, MD_LOW } from '@/constants'
+import { BUYER_DELIVERY_CHAT_ORDER_INFO_MODAL, MD_LOW } from '@/constants'
 import { useScreen } from '@/hooks'
 import cls from './index.module.scss'
 
@@ -15,7 +15,7 @@ const RansomsChatOrderInfoModal: FC<Props> = ({ className }) => {
 			{width <= MD_LOW && (
 				<ModalBase
 					className={cn(cls.wrapper, [className])}
-					slug={DELIVERY_CHAT_ORDER_INFO_MODAL}
+					slug={BUYER_DELIVERY_CHAT_ORDER_INFO_MODAL}
 				>
 					<div className={cn(cls.content)}>
 						<Typography font='Inter-SB' size={14} tag='h2'>

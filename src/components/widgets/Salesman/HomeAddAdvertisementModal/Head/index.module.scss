@@ -1,0 +1,18 @@
+.head {
+	display: flex;
+
+	padding-bottom: 15px;
+	border-bottom: 1px solid var(--white-400);
+	h2 {
+		margin: 0 auto;
+		translate: 40px 0;
+	}
+}
+.close_btn {
+	margin: 0 0 0 auto;
+	rotate: 45deg;
+	.icon {
+		width: 20px;
+		height: 20px;
+	}
+}

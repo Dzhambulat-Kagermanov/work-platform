@@ -1,0 +1,18 @@
+.wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.content {
+	padding: 24px;
+	border-radius: 12px;
+	min-width: 400px;
+	max-width: 400px;
+	background-color: var(--white-100);
+}
+@media screen and (max-width: 500px) {
+	.content {
+		max-width: 345px;
+		min-width: 345px;
+	}
+}

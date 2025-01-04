@@ -13,6 +13,9 @@ import { HomeProductsContent } from '@/components/widgets/Salesman/HomeProductsC
 import { TChatType } from '@/components/widgets/Buyer/DeliverySidebar/types'
 import { HomeRansomsContent } from '@/components/widgets/Salesman/HomeRansomsContent'
 import { HomeAdvertisementsContent } from '@/components/widgets/Salesman/HomeAdvertisementsContent'
+import { HomeAdvertisementArchiveModal } from '@/components/widgets/Salesman/HomeAdvertisementArchiveModal'
+import { HomeAdvertisementStopModal } from '@/components/widgets/Salesman/HomeAdvertisementStopModal'
+import { HomeAddAdvertisementModal } from '@/components/widgets/Salesman/HomeAddAdvertisementModal'
 import cls from './index.module.scss'
 
 interface Props extends TClassName {
@@ -31,13 +34,22 @@ const HomePage: FC<Props> = ({ className, homePageType, chatType }) => {
 			</Suspense>
 			<HomeActions homePageType={homePageType} className={cn(cls.actions)} />
 			{homePageType === null ? (
-				<HomeProductsContent className={cn(cls.products)} />
+				<>
+					<HomeProductsContent className={cn(cls.products)} />
+					<HomeAddProductModal className={cn(cls.add_product_modal)} />
+				</>
 			) : homePageType === 'ransoms' ? (
 				<HomeRansomsContent className={cn(cls.ransoms)} chatType={chatType} />
 			) : (
-				<HomeAdvertisementsContent className={cn(cls.advertisement)} />
+				<>
+					<HomeAdvertisementsContent className={cn(cls.advertisement)} />
+					<HomeAdvertisementArchiveModal
+						className={cn(cls.advertisement_action_modal)}
+					/>
+					<HomeAdvertisementStopModal className={cn(cls.stop)} />
+					<HomeAddAdvertisementModal className={cn(cls.add_advertisement)} />
+				</>
 			)}
-			<HomeAddProductModal className={cn(cls.add_product_modal)} />
 		</div>
 	)
 }

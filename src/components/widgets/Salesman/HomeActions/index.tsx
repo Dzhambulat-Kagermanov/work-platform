@@ -6,9 +6,13 @@ import { Button, Input } from '@/components/ui'
 import { PlusIcon, SearchIcon } from '@/icons'
 import { Action } from '@/components/ui'
 import { useModalState } from '@/hooks'
-import { SALESMAN_ADD_PRODUCT_MODAL } from '@/constants'
-import cls from './index.module.scss'
+import {
+	SALESMAN_ADD_ADVERTISEMENT_MODAL,
+	SALESMAN_ADD_PRODUCT_MODAL,
+} from '@/constants'
 import { TSalesmanHomePageType } from '../HomePagesSwitcher'
+import { ACTION_CONTENT } from './constants'
+import cls from './index.module.scss'
 
 interface Props extends TClassName {
 	homePageType: TSalesmanHomePageType
@@ -18,37 +22,11 @@ const HomeActions: FC<Props> = ({ className, homePageType }) => {
 	const handleAddProduct: MouseEventHandler = () => {
 		showModal({ slug: SALESMAN_ADD_PRODUCT_MODAL })
 	}
-	const handleAddAdvertisements: MouseEventHandler = () => {}
+	const handleAddAdvertisements: MouseEventHandler = () => {
+		showModal({ slug: SALESMAN_ADD_ADVERTISEMENT_MODAL })
+	}
 
-	const actionContent =
-		homePageType === null
-			? [
-					[
-						{ link: '#', text: 'Остановить' },
-						{ link: '#', text: 'Архивировать' },
-					],
-					[
-						{ link: '#', text: 'Все товары' },
-						{ link: '#', text: 'Активные' },
-						{ link: '#', text: 'Остановленные' },
-						{ link: '#', text: 'Архивированные' },
-					],
-			  ]
-			: [
-					[
-						{ link: '#', text: 'Остановить' },
-						{ link: '#', text: 'Редактировать' },
-						{ link: '#', text: 'Дублировать' },
-						{ link: '#', text: 'Архивировать' },
-						{ link: '#', text: 'Скопировать ссылку' },
-					],
-					[
-						{ link: '#', text: 'Все объявления' },
-						{ link: '#', text: 'Активные' },
-						{ link: '#', text: 'Остановленные' },
-						{ link: '#', text: 'Архивированные' },
-					],
-			  ]
+	const actionContent = ACTION_CONTENT(showModal, homePageType)
 
 	return (
 		<>

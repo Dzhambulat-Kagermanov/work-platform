@@ -18,6 +18,9 @@
 	z-index: 2;
 	position: relative;
 	min-height: 45px;
+	&:last-child {
+		z-index: 0;
+	}
 }
 .add_btn {
 	min-width: 190px;

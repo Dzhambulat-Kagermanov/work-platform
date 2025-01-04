@@ -2,7 +2,7 @@
 import { FC, useState } from 'react'
 import { TClassName } from '@/types'
 import { Button, Input, ModalBase, Typography } from '@/components/ui'
-import { DELIVERY_REVIEW_MODAL } from '@/constants'
+import { BUYER_DELIVERY_REVIEW_MODAL } from '@/constants'
 import { cn } from '@/lib'
 import { useModalState } from '@/hooks'
 import { StarIcon } from '@/icons'
@@ -14,10 +14,10 @@ const DeliveryReviewModal: FC<Props> = ({ className }) => {
 	const hideModal = useModalState(state => state.hideModal)
 
 	const handleCancel = () => {
-		hideModal({ slug: DELIVERY_REVIEW_MODAL })
+		hideModal({ slug: BUYER_DELIVERY_REVIEW_MODAL })
 	}
 	const handleReviewing = () => {
-		hideModal({ slug: DELIVERY_REVIEW_MODAL })
+		hideModal({ slug: BUYER_DELIVERY_REVIEW_MODAL })
 	}
 	const handleStarClick = (thisRating: number) => {
 		if (rating === thisRating && thisRating === 1) {
@@ -29,7 +29,7 @@ const DeliveryReviewModal: FC<Props> = ({ className }) => {
 
 	return (
 		<ModalBase
-			slug={DELIVERY_REVIEW_MODAL}
+			slug={BUYER_DELIVERY_REVIEW_MODAL}
 			className={cn(cls.wrapper, [className])}
 		>
 			<div className={cn(cls.content)}>

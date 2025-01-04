@@ -2,7 +2,7 @@
 import { FC } from 'react'
 import { TClassName } from '@/types'
 import { cn } from '@/lib'
-import { SHARED_BURGER_MENU_MODAL, SM_BIG } from '@/constants'
+import { BUYER_BURGER_MENU, SM_BIG } from '@/constants'
 import { useModalBase } from '@/hooks'
 import { Container } from '@/components/ui'
 import { Logo } from '../../shared/Logo'
@@ -18,7 +18,7 @@ const BurgerMenu: FC<Props> = ({ className }) => {
 	const screen = useScreen()
 
 	const { modalState, visibleTransition, handleClose } = useModalBase({
-		slug: SHARED_BURGER_MENU_MODAL,
+		slug: BUYER_BURGER_MENU,
 	})
 
 	return (

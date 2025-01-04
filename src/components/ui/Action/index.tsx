@@ -7,12 +7,14 @@ import { cn } from '@/lib'
 import Link from 'next/link'
 import cls from './index.module.scss'
 
+export type TActionItemProps = {
+	text: string
+	link?: string
+	onClick?: MouseEventHandler
+}
+
 interface Props extends TClassName {
-	actions: {
-		text: string
-		link?: string
-		onClick?: MouseEventHandler
-	}[]
+	actions: TActionItemProps[]
 	actionBtnText: string
 }
 const Action: FC<Props> = ({ actionBtnText, actions, className }) => {

@@ -28,9 +28,14 @@
 	display: flex;
 	flex-direction: column;
 	row-gap: 15px;
-	a {
+	p {
+		cursor: pointer;
 		display: block;
 		width: 100%;
+		a {
+			display: block;
+			width: 100%;
+		}
 	}
 }
 .actions_btn {
