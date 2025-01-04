@@ -1,108 +1,104 @@
 'use client'
-import { Dispatch, FC, memo, ReactNode, SetStateAction } from 'react'
-import { TClassName } from '@/types'
-import { cn } from '@/lib'
+import {
+	CSSProperties,
+	FC,
+	InputHTMLAttributes,
+	ReactNode,
+	useState,
+} from 'react'
 import cls from './index.module.scss'
+import { cn } from '@/lib'
 
-interface Props extends TClassName {
+interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
+	visibleValue?: boolean
+	visibleMinValue?: boolean
+	visibleMaxValue?: boolean
+	customVisibleValue?: (val: string) => ReactNode
+	customVisibleMinValue?: (val: string) => ReactNode
+	customVisibleMaxValue?: (val: string) => ReactNode
+	inpCls?: string
 	min: number
 	max: number
-	value: [number, number]
-	minBetweenValue: number
 	steps: number
-	visibleValueMin?: (param: string) => ReactNode
-	visibleValueMax?: (param: string) => ReactNode
-	setValue: Dispatch<SetStateAction<[number, number]>>
+	thumbSize?: number
 }
-const SliderInput: FC<Props> = memo(
-	({
-		max,
-		min,
-		steps,
-		className,
-		minBetweenValue,
-		value,
-		setValue,
-		visibleValueMax,
-		visibleValueMin,
-	}) => {
-		return (
-			<div className={cn(cls.wrapper, [className])}>
-				<div className={cn(cls.progress_wrapper)}>
-					<div
-						className={cn(cls.progress)}
-						style={{
-							left: `${(value[0] / max) * 100}%`,
-							right: `${100 - (value[1] / max) * 100}%`,
-						}}
-					/>
-				</div>
-				<div className={cn(cls.ranges)}>
-					<div className={cn(cls.value_info_wrapper)}>
-						{visibleValueMin && (
-							<div
-								className={cn(cls.value_info, [cls.min_value_info])}
-								style={{
-									left: `${(value[0] / max) * 100}%`,
-									right: `auto`,
-								}}
-							>
-								{visibleValueMin(value[0].toString())}
-							</div>
-						)}
-						{visibleValueMax && (
-							<div
-								className={cn(cls.value_info, [cls.max_value_info])}
-								style={{
-									left: `auto`,
-									right: `${100 - (value[1] / max) * 100}%`,
-								}}
-							>
-								{visibleValueMax(value[1].toString())}
-							</div>
-						)}
-					</div>
-					<input
-						onChange={e => {
-							const VALUE = +e.target.value
+const SliderInput: FC<Props> = ({
+	customVisibleMaxValue,
+	customVisibleMinValue,
+	customVisibleValue,
+	visibleMaxValue,
+	visibleMinValue,
+	visibleValue,
+	thumbSize = 24,
+	className,
+	max,
+	min,
+	steps,
+	...other
+}) => {
+	const [value, setValue] = useState<number>(min)
+	console.log(value)
 
-							setValue(cur => {
-								if (VALUE + minBetweenValue > cur[1]) {
-									return cur
-								}
-
-								return [VALUE, cur[1]]
-							})
-						}}
-						value={value[0]}
-						className={cn(cls.range, [cls.min])}
-						type='range'
-						min={min}
-						max={max}
-						step={steps / max}
-					/>
-					<input
-						onChange={e => {
-							const VALUE = +e.target.value
-							setValue(cur => {
-								if (VALUE - minBetweenValue < cur[0]) {
-									return cur
-								}
-
-								return [cur[0], VALUE]
-							})
-						}}
-						value={value[1]}
-						className={cn(cls.range, [cls.max])}
-						type='range'
-						min={min}
-						max={max}
-						step={steps / max}
-					/>
-				</div>
+	return (
+		<div
+			className={cn(cls.wrapper, [className])}
+			style={
+				{
+					'--thumb-size': `${thumbSize}px`,
+				} as CSSProperties
+			}
+		>
+			<div className={cn(cls.progress_wrapper)}>
+				<div
+					className={cn(cls.progress)}
+					style={{
+						right: `calc(${100 - (value / max) * 100}% - ${thumbSize}px)`,
+					}}
+				/>
 			</div>
-		)
-	}
-)
+			<div className={cn(cls.visible_values)}>
+				{visibleMaxValue && (
+					<div className={cn(cls.val, [cls.min_val])}>
+						{customVisibleMaxValue
+							? customVisibleMaxValue(min.toString())
+							: min}
+					</div>
+				)}
+				{visibleMinValue && (
+					<div className={cn(cls.val, [cls.max_val])}>
+						{customVisibleMaxValue
+							? customVisibleMaxValue(max.toString())
+							: max}
+					</div>
+				)}
+				{visibleValue && (
+					<div
+						className={cn(cls.val, [cls.cur_val])}
+						style={{
+							right: `${100 - (value / max) * 100}%`,
+						}}
+					>
+						{customVisibleMaxValue
+							? customVisibleMaxValue(value.toString())
+							: value}
+					</div>
+				)}
+			</div>
+			<input
+				onChange={e => {
+					const VALUE = +e.target.value
+					setValue(VALUE)
+				}}
+				value={value}
+				min={min}
+				max={max}
+				step={max / steps}
+				type='range'
+				{...other}
+				className={cn(cls.inp)}
+			/>
+		</div>
+	)
+}
 
 export { SliderInput }

@@ -1,0 +1,34 @@
+.main {
+	--elements-max-width: 495px;
+	padding-bottom: 25px;
+	color: var(--grey-500);
+	& > h1 {
+	}
+	& > h2 {
+	}
+}
+.content {
+	display: flex;
+	flex-direction: column;
+	row-gap: 45px;
+}
+.card_wrapper {
+	max-width: var(--elements-max-width);
+	margin-top: 60px;
+}
+.name_inp_wrapper {
+	max-width: var(--elements-max-width);
+}
+.cashback {
+	padding-bottom: 43px;
+	border-bottom: 1px solid var(--white-400);
+	max-width: var(--elements-max-width);
+}
+.edit_area {
+}
+.ransoms_qnt {
+	padding: 48px 0;
+	max-width: var(--elements-max-width);
+	border-top: 1px solid var(--white-400);
+	border-bottom: 1px solid var(--white-400);
+}

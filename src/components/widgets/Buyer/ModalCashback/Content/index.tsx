@@ -1,7 +1,7 @@
 'use client'
 import { Dispatch, FC, SetStateAction } from 'react'
 import cls from './index.module.scss'
-import { Typography, Input, SliderInput } from '@/components/ui'
+import { Typography, Input, RangeInput } from '@/components/ui'
 import { cn } from '@/lib'
 
 interface Props {
@@ -42,7 +42,7 @@ const Content: FC<Props> = ({
 					onBlur={() => {}}
 				/>
 			</div>
-			<SliderInput
+			<RangeInput
 				className={cn(cls.slider_inp, [sliderInpCls])}
 				min={min}
 				max={max}

@@ -3,7 +3,6 @@
 	--second-color: var(--white-100);
 	--third-color: var(--white-400);
 	--line-height: 8px;
-	--thumb-size: 24px;
 
 	position: relative;
 	width: 260px;
@@ -12,10 +11,10 @@
 	background-color: var(--third-color);
 }
 .progress_wrapper {
+	border-radius: inherit;
+	height: 100%;
 	position: absolute;
 	width: calc(100% - var(--thumb-size));
-	left: 50%;
-	translate: -50% 0;
 	top: 0;
 	bottom: 0;
 }
@@ -26,57 +25,57 @@
 	inset: 0;
 	background-color: var(--primary-color);
 }
-.ranges {
-	inset: 0;
+.inp {
 	position: absolute;
-	.range {
-		position: absolute;
-		inset: 0;
-		width: 100%;
+	inset: 0;
+	width: 100%;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background-color: transparent;
+	pointer-events: none;
+	&::-webkit-slider-thumb {
+		cursor: pointer;
+		width: var(--thumb-size);
+		height: var(--thumb-size);
+		background-color: var(--second-color);
+		border: 1px solid var(--primary-color);
+		border-radius: 50%;
+		pointer-events: auto;
 		-webkit-appearance: none;
+		background-color: var(--white-100);
+	}
+	&::-moz-range-thumb {
+		cursor: pointer;
+		width: var(--thumb-size);
+		height: var(--thumb-size);
+		background-color: var(--second-color);
+		border: 1px solid var(--primary-color);
+		border-radius: 50%;
+		pointer-events: auto;
 		-moz-appearance: none;
-		background-color: transparent;
-		pointer-events: none;
-		&::-webkit-slider-thumb {
-			cursor: pointer;
-			width: var(--thumb-size);
-			height: var(--thumb-size);
-			background-color: var(--second-color);
-			border: 1px solid var(--primary-color);
-			border-radius: 50%;
-			pointer-events: auto;
-			-webkit-appearance: none;
-			background-color: var(--white-100);
-		}
-		&::-moz-range-thumb {
-			cursor: pointer;
-			width: var(--thumb-size);
-			height: var(--thumb-size);
-			background-color: var(--second-color);
-			border: 1px solid var(--primary-color);
-			border-radius: 50%;
-			pointer-events: auto;
-			-moz-appearance: none;
-			background-color: var(--white-100);
-		}
+		background-color: var(--white-100);
 	}
 }
-.value_info_wrapper {
+.val {
+	position: absolute;
+	bottom: -30px;
+}
+.min_val {
+	left: 0;
+	translate: -50% 0;
+}
+.max_val {
+	right: 0;
+	translate: 50% 0;
+}
+.cur_val {
+	translate: 50% 0;
+}
+.visible_values {
 	position: absolute;
 	left: 50%;
 	top: 0;
 	bottom: 0;
 	translate: -50% 0;
 	width: calc(100% - var(--thumb-size));
-}
-.value_info {
-	position: absolute;
-
-	top: 20px;
-}
-.min_value_info {
-	translate: -50% 0;
-}
-.max_value_info {
-	translate: 50% 0;
 }

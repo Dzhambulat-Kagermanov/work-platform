@@ -1,13 +1,7 @@
 'use client'
 import { FC, useState } from 'react'
 import { TClassName } from '@/types'
-import {
-	Button,
-	Input,
-	ModalBase,
-	SliderInput,
-	Typography,
-} from '@/components/ui'
+import { Button, ModalBase } from '@/components/ui'
 import { CASHBACK_MODAL } from '@/constants'
 import { cn } from '@/lib'
 import cls from './index.module.scss'
