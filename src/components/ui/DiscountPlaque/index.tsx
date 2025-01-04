@@ -7,9 +7,9 @@ import cls from './index.module.scss'
 type TColors = 'red' | 'blue' | 'green' | 'orange' | 'black' | 'purple'
 
 interface Props extends TClassName {
-	children: number
+	children: number | string
 	customColor?: TColors
-	customContent?: (number: number) => string
+	customContent?: (number: number | string) => string
 }
 const DiscountPlaque: FC<Props> = ({
 	className,
@@ -17,21 +17,23 @@ const DiscountPlaque: FC<Props> = ({
 	customColor,
 	customContent,
 }) => {
-	let color: TColors
+	let color: TColors = 'black'
 	if (customColor) {
 		color = customColor
-	} else if (children === 100) {
-		color = 'green'
-	} else if (children >= 90) {
-		color = 'blue'
-	} else if (children >= 80) {
-		color = 'orange'
-	} else if (children >= 70) {
-		color = 'purple'
-	} else if (children >= 60) {
-		color = 'red'
-	} else {
-		color = 'black'
+	} else if (typeof children === 'number') {
+		if (children === 100) {
+			color = 'green'
+		} else if (children >= 90) {
+			color = 'blue'
+		} else if (children >= 80) {
+			color = 'orange'
+		} else if (children >= 70) {
+			color = 'purple'
+		} else if (children >= 60) {
+			color = 'red'
+		} else {
+			color = 'black'
+		}
 	}
 
 	return (

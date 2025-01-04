@@ -1,0 +1,14 @@
+.wrapper {
+	display: flex;
+	align-items: flex-start;
+	column-gap: 8px;
+	h3 {
+		color: var(--black-200);
+		max-width: 600px;
+		span {
+			color: var(--grey-600);
+		}
+	}
+}
+.checkbox {
+}

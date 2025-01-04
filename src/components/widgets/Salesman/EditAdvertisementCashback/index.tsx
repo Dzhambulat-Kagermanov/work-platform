@@ -6,7 +6,7 @@ import { cn } from '@/lib'
 import cls from './index.module.scss'
 
 interface Props extends TClassName {}
-const CreateAdvertisementCashback: FC<Props> = ({ className }) => {
+const EditAdvertisementCashback: FC<Props> = ({ className }) => {
 	return (
 		<section className={cn(cls.wrapper, [className])}>
 			<Typography font='Inter-M' size={14} tag='h2'>
@@ -20,6 +20,7 @@ const CreateAdvertisementCashback: FC<Props> = ({ className }) => {
 				visibleMaxValue
 				visibleMinValue
 				visibleValue
+				defaultValue={30}
 				customVisibleMaxValue={val => (
 					<Typography font='Inter-R' size={16}>
 						{val}%
@@ -43,4 +44,4 @@ const CreateAdvertisementCashback: FC<Props> = ({ className }) => {
 	)
 }
 
-export { CreateAdvertisementCashback }
+export { EditAdvertisementCashback }

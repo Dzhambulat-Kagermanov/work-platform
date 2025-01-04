@@ -1,0 +1,26 @@
+.wrapper {
+	& > h2 {
+		margin-bottom: 10px;
+	}
+	& > h3 {
+		margin-top: 15px;
+		color: var(--grey-400);
+		span {
+			color: var(--purple-200);
+		}
+	}
+}
+.card {
+}
+.plaques {
+	margin: 8px 0;
+	display: flex;
+	column-gap: 2px;
+}
+@media screen and (max-width: 500px) {
+	.wrapper {
+		& > h2 {
+			font-size: 24px;
+		}
+	}
+}

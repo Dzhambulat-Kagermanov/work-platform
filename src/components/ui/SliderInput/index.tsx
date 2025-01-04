@@ -9,7 +9,8 @@ import {
 import cls from './index.module.scss'
 import { cn } from '@/lib'
 
-interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
+interface Props
+	extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'value'> {
 	visibleValue?: boolean
 	visibleMinValue?: boolean
 	visibleMaxValue?: boolean
@@ -21,6 +22,7 @@ interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
 	max: number
 	steps: number
 	thumbSize?: number
+	defaultValue?: number
 }
 const SliderInput: FC<Props> = ({
 	customVisibleMaxValue,
@@ -33,11 +35,14 @@ const SliderInput: FC<Props> = ({
 	className,
 	max,
 	min,
+	defaultValue,
 	steps,
+	onChange,
 	...other
 }) => {
-	const [value, setValue] = useState<number>(min)
-	console.log(value)
+	const [value, setValue] = useState<number>(
+		defaultValue ? (defaultValue > max ? max : defaultValue) : min
+	)
 
 	return (
 		<div
@@ -88,6 +93,7 @@ const SliderInput: FC<Props> = ({
 				onChange={e => {
 					const VALUE = +e.target.value
 					setValue(VALUE)
+					onChange && onChange(e)
 				}}
 				value={value}
 				min={min}

@@ -32,3 +32,20 @@
 	border-top: 1px solid var(--white-400);
 	border-bottom: 1px solid var(--white-400);
 }
+
+@media screen and (max-width: 500px) {
+	.card_wrapper {
+		margin-top: 25px;
+	}
+	.content {
+		grid-template-rows: 25px;
+	}
+	.main {
+		& > h1 {
+			font-size: 18px;
+		}
+		& > h2 {
+			font-size: 12px;
+		}
+	}
+}

@@ -6,7 +6,7 @@ import { Typography } from '@/components/ui'
 import cls from './index.module.scss'
 
 interface Props extends TClassName {}
-const CreateAdvertisementRansomsQnt: FC<Props> = ({ className }) => {
+const EditAdvertisementRansomsQnt: FC<Props> = ({ className }) => {
 	const [count, setCount] = useState<number>(0)
 
 	const handleMinus: MouseEventHandler = () => {
@@ -47,4 +47,4 @@ const CreateAdvertisementRansomsQnt: FC<Props> = ({ className }) => {
 	)
 }
 
-export { CreateAdvertisementRansomsQnt }
+export { EditAdvertisementRansomsQnt }

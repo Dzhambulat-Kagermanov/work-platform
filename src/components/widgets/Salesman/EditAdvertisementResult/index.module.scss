@@ -1,0 +1,26 @@
+.wrapper {
+	& > h2 {
+		span {
+			color: var(--purple-300);
+		}
+	}
+}
+.content {
+	margin: 10px 0 32px 0;
+	p {
+		color: var(--black-opacity-40);
+		span {
+			color: var(--black-100);
+		}
+	}
+}
+.actions {
+	display: flex;
+	column-gap: 12px;
+}
+.btn {
+	padding: 10px 16px;
+	p {
+		font-size: 14px;
+	}
+}
