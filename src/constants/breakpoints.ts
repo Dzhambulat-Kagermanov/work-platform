@@ -1,6 +1,7 @@
 export const LG_BIG = 1370
 export const LG_LOW = 1300
 export const MD_BIG = 1044
+export const MD_BIG_BETWEEN_MD_LOW = 1000
 export const MD_LOW = 870
 export const SM_BIG = 788
 export const SM_MID = 620

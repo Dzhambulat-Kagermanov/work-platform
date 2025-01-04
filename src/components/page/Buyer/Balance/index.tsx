@@ -12,7 +12,7 @@ const BalancePage: FC<Props> = ({ className }) => {
 		<main className={cn(cls.balance, [className])}>
 			<Container className={cn(cls.content)}>
 				<BackButton
-					href='/account'
+					href='/buyer/account'
 					className={cn(cls.back_btn, ['modules-gap-both'])}
 				>
 					Баланс / Финансы

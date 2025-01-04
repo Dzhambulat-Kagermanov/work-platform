@@ -1,0 +1,16 @@
+.wrapper {
+	overflow: hidden;
+	background-color: var(--white-300);
+	border: var(--chat-main-border, 1px solid var(--white-400));
+	border-radius: 10px;
+	display: flex;
+}
+.view {
+	flex-grow: 1;
+}
+
+@media screen and (max-width: 500px) {
+	.wrapper {
+		border: none;
+	}
+}

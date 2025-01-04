@@ -8,10 +8,19 @@ type TColors = 'red' | 'blue' | 'green' | 'orange' | 'black' | 'purple'
 
 interface Props extends TClassName {
 	children: number
+	customColor?: TColors
+	customContent?: (number: number) => string
 }
-const DiscountPlaque: FC<Props> = ({ className, children }) => {
+const DiscountPlaque: FC<Props> = ({
+	className,
+	children,
+	customColor,
+	customContent,
+}) => {
 	let color: TColors
-	if (children === 100) {
+	if (customColor) {
+		color = customColor
+	} else if (children === 100) {
 		color = 'green'
 	} else if (children >= 90) {
 		color = 'blue'
@@ -31,7 +40,7 @@ const DiscountPlaque: FC<Props> = ({ className, children }) => {
 			size={12}
 			className={cn(cls.discount, [className, cls[color]])}
 		>
-			-{children}%
+			{customContent ? customContent(children) : `-${children}%`}
 		</Typography>
 	)
 }

@@ -1,5 +1,5 @@
 'use client'
-import { FC, MouseEventHandler, useState } from 'react'
+import { FC, MouseEvent, MouseEventHandler, useState } from 'react'
 import { TClassName } from '@/types'
 import { Typography } from '@/components/ui'
 import { ExpandArrowIcon } from '@/icons'
@@ -10,7 +10,8 @@ import cls from './index.module.scss'
 interface Props extends TClassName {
 	actions: {
 		text: string
-		link: string
+		link?: string
+		onClick?: MouseEventHandler
 	}[]
 	actionBtnText: string
 }
@@ -39,16 +40,21 @@ const Action: FC<Props> = ({ actionBtnText, actions, className }) => {
 			<div className={cn(cls.actions_overlay)}>
 				<div className={cn(cls.actions_wrapper)}>
 					<nav className={cn(cls.actions)}>
-						{actions.map(({ link, text }) => {
+						{actions.map(({ link, text, onClick }) => {
 							return (
 								<Typography
-									other={{ onClick: handleLinkClick }}
+									other={{
+										onClick: (e: MouseEvent) => {
+											handleLinkClick(e)
+											onClick && onClick(e)
+										},
+									}}
 									key={`${text}${link}`}
 									font='Inter-SB'
 									size={12}
 									className={cn(cls.action)}
 								>
-									<Link href={link}>{text}</Link>
+									{link ? <Link href={link}>{text}</Link> : text}
 								</Typography>
 							)
 						})}

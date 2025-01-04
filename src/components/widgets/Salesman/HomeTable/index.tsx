@@ -1,79 +1,68 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import { TClassName } from '@/types'
-import { cn } from '@/lib'
 import { Typography } from '@/components/ui'
-import { PRODUCTS } from './constants/products'
-import { BodyRow } from './BodyRow'
-import { Pagination } from '../../shared/Pagination'
+import { cn } from '@/lib'
+import { Pagination, TPaginationProps } from '../../shared/Pagination'
 import cls from './index.module.scss'
 
-interface Props extends TClassName {}
-const HomeTable: FC<Props> = ({ className }) => {
+interface Props extends TClassName {
+	head: (string | ReactNode)[]
+	body: ReactNode[]
+	pagination: TPaginationProps
+	headCls?: string
+	headRowCls?: string
+	headCol?: string
+	bodyCls?: string
+	bodyRowCls?: string
+	tableCls?: string
+	tableWrapperCls?: string
+}
+const HomeTable: FC<Props> = ({
+	className,
+	body,
+	head,
+	pagination,
+	bodyCls,
+	bodyRowCls,
+	headCls,
+	headCol,
+	headRowCls,
+	tableCls,
+	tableWrapperCls,
+}) => {
 	return (
 		<div className={cn(cls.wrapper, [className])}>
-			<div className={cn(cls.table_wrapper)}>
-				<table className={cn(cls.table)}>
-					<thead className={cn(cls.head)}>
-						<tr className={cn(cls.row)}>
-							<td className={cn(cls.column)}>
-								<Typography font='Inter-M' size={12}>
-									Товар
-								</Typography>
-							</td>
-							<td className={cn(cls.column)}>
-								<Typography font='Inter-M' size={12}>
-									Статус
-								</Typography>
-							</td>
-							<td className={cn(cls.column)}>
-								<Typography font='Inter-M' size={12}>
-									Выкупов
-								</Typography>
-							</td>
-							<td className={cn(cls.column)}>
-								<Typography font='Inter-M' size={12}>
-									Просмотры
-								</Typography>
-							</td>
-							<td className={cn(cls.column)}>
-								<Typography font='Inter-M' size={12}>
-									Выкупы
-								</Typography>
-							</td>
-							<td className={cn(cls.column)}>
-								<Typography font='Inter-M' size={12}>
-									Конверсия
-								</Typography>
-							</td>
-							<td className={cn(cls.column)}>
-								<Typography font='Inter-M' size={12}>
-									Объявлений
-								</Typography>
-							</td>
+			<div className={cn(cls.table_wrapper, [tableWrapperCls])}>
+				<table className={cn(cls.table, [tableCls])}>
+					<thead className={cn(cls.head, [headCls])}>
+						<tr className={cn(cls.row, [headRowCls])}>
+							{head.map((item, idx) => {
+								return (
+									<td className={cn(cls.column, [headCol])} key={idx}>
+										{typeof item === 'string' ? (
+											<Typography font='Inter-M' size={12}>
+												{item}
+											</Typography>
+										) : (
+											item
+										)}
+									</td>
+								)
+							})}
 						</tr>
 					</thead>
-					<tbody className={cn(cls.body)}>
-						{PRODUCTS.map(({ id, ...props }) => {
+					<tbody className={cn(cls.body, [bodyCls])}>
+						{body.map((item, index) => {
 							return (
-								<BodyRow
-									id={id}
-									key={id}
-									{...props}
-									className={cn(cls.row)}
-									columnCls={cn(cls.column)}
-								/>
+								<tr className={cn(cls.row, [bodyRowCls])} key={index + '/'}>
+									{item}
+								</tr>
 							)
 						})}
 					</tbody>
 				</table>
 			</div>
-			<Pagination
-				className={cn(cls.pagination)}
-				pages={{
-					current: 1,
-					max: 10,
-				}}
-			/>
+			<Pagination className={cn(cls.pagination)} {...pagination} />
 		</div>
 	)
 }

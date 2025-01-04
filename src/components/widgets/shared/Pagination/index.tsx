@@ -5,7 +5,7 @@ import { cn } from '@/lib'
 import { Typography } from '@/components/ui'
 import cls from './index.module.scss'
 
-interface Props extends TClassName {
+export type TPaginationProps = {
 	onPrev?: MouseEventHandler
 	onNext?: MouseEventHandler
 	pages: {
@@ -13,6 +13,8 @@ interface Props extends TClassName {
 		max: number
 	}
 }
+
+interface Props extends TClassName, TPaginationProps {}
 const Pagination: FC<Props> = ({
 	className,
 	onNext,

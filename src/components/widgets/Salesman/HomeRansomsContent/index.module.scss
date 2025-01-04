@@ -1,0 +1,42 @@
+.wrapper {
+	flex-grow: 1;
+	min-height: 750px;
+	padding-bottom: 20px;
+	display: flex;
+}
+.delivery {
+	--chat-main-border: 1px solid var(--white-400);
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+.complex {
+	display: flex;
+	overflow: hidden;
+	column-gap: 5px;
+}
+.content {
+	flex-grow: 1;
+	min-height: 1px;
+	max-height: 100%;
+}
+.sidebar {
+	min-height: 1px;
+	max-height: 100%;
+}
+
+@media screen and (max-width: 1000px) {
+	.complex {
+		flex-grow: 1;
+	}
+}
+@media screen and (max-width: 500px) {
+	.complex {
+		width: 100%;
+		margin-top: 8px !important;
+		overflow: visible;
+	}
+	.content {
+		overflow: visible;
+	}
+}

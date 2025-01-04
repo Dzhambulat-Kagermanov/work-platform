@@ -1,0 +1,29 @@
+.wrapper {
+	display: flex;
+	align-items: flex-end;
+	margin: 0 0 0 auto;
+	h6 {
+		white-space: nowrap;
+		color: var(--grey-100);
+	}
+}
+.modal_open_btn {
+	--clickable-area: 13px;
+	align-self: flex-end;
+	display: flex;
+	column-gap: 2px;
+	padding: var(--clickable-area);
+	span {
+		background-color: var(--grey-200);
+		width: 4px;
+		height: 4px;
+		border-radius: 50%;
+	}
+}
+@media screen and (max-width: 500px) {
+	.modal_open_btn {
+		right: 0;
+		top: 0;
+		position: absolute;
+	}
+}

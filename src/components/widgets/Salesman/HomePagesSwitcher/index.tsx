@@ -6,11 +6,7 @@ import { Item } from './Item'
 import { useSearchParams } from 'next/navigation'
 import cls from './index.module.scss'
 
-export type TSalesmanHomePageType =
-	| 'products'
-	| 'advertisements'
-	| 'ransoms'
-	| null
+export type TSalesmanHomePageType = 'advertisements' | 'ransoms' | null
 
 interface Props extends TClassName {}
 const HomePagesSwitcher: FC<Props> = ({ className }) => {

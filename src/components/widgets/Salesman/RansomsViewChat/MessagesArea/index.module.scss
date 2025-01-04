@@ -1,0 +1,46 @@
+.wrapper {
+	position: relative;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+.empty {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	translate: -50% -50%;
+	display: flex;
+	align-items: center;
+	flex-flow: column;
+	row-gap: 10px;
+}
+
+.messages_group_overlay {
+	margin: 0 0 20px 0;
+	flex-grow: 1;
+	overflow: auto;
+
+	&::-webkit-scrollbar {
+		width: 3px;
+		background-color: transparent;
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: var(--grey-100);
+	}
+}
+.messages_group_wrapper {
+	padding: 15px 40px 0 50px;
+	height: 1px;
+	max-height: 100%;
+	display: flex;
+	flex-direction: column;
+	row-gap: 40px;
+}
+.messages_group {
+}
+
+@media screen and (max-width: 1044px) {
+	.messages_group_wrapper {
+		padding: 15px 15px 0 15px;
+	}
+}

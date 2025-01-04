@@ -1,14 +1,14 @@
 import { FC } from 'react'
-import { TClassName, TSalesmanTableProduct } from '@/types'
+import { TSalesmanTableProduct } from '@/types'
 import { Checkbox, Toggle, Typography } from '@/components/ui'
 import { cn } from '@/lib'
 import Image from 'next/image'
 import cls from './index.module.scss'
 
-interface Props extends TClassName, TSalesmanTableProduct {
+interface Props extends TSalesmanTableProduct {
 	columnCls?: string
 }
-const BodyRow: FC<Props> = ({
+const ProductsTableBodyItem: FC<Props> = ({
 	advertisements,
 	conversion,
 	id,
@@ -16,13 +16,12 @@ const BodyRow: FC<Props> = ({
 	ransoms,
 	ransomsQnt,
 	views,
-	className,
 	defaultCheckboxValue,
 	defaultStatusValue,
 	columnCls,
 }) => {
 	return (
-		<tr className={cn(cls.row, [className])}>
+		<>
 			<td className={cn(cls.column, [cls.product, columnCls])}>
 				<Checkbox
 					className={cn(cls.checkbox)}
@@ -69,8 +68,8 @@ const BodyRow: FC<Props> = ({
 					{advertisements}
 				</Typography>
 			</td>
-		</tr>
+		</>
 	)
 }
 
-export { BodyRow }
+export { ProductsTableBodyItem }

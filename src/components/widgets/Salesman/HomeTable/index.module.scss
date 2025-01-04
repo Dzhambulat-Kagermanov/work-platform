@@ -15,7 +15,6 @@
 }
 .table {
 	width: 100%;
-	min-width: 1300px;
 	border-collapse: collapse;
 }
 .head {
@@ -34,9 +33,6 @@
 		&:nth-child(odd) {
 			background-color: var(--black-200-opacity-5);
 		}
-	}
-	.column {
-		padding: 16px 9px 16px 24px;
 	}
 }
 .pagination {

@@ -39,7 +39,12 @@ const Item: FC<Props> = ({
 		<Tag
 			onClick={linkOnClick}
 			className={cn(cls.wrapper, [className], {
-				[cls.active]: slug !== undefined ? activeSlug === slug : path === link,
+				[cls.active]:
+					slug !== undefined
+						? slug === null
+							? path === link && slug === activeSlug
+							: activeSlug === slug
+						: path === link,
 				[cls.isExpand]: sidebarIsExpand === undefined || sidebarIsExpand,
 			})}
 		>

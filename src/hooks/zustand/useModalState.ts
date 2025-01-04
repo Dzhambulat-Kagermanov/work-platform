@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { devtools } from 'zustand/middleware'
 
 export type TModalSlug = { slug: string }
 interface Props {
@@ -15,33 +16,37 @@ interface Props {
 	toggleModal: (params: TModalSlug) => void
 }
 
-export const useModalState = create<Props>()(set => ({
-	modalsStates: {},
-	modalState: false,
-	hideModal: ({ slug }) => {
-		set(state => ({
-			modalsStates: {
-				[slug]: { modalState: false },
-			},
-		}))
-	},
-	showModal: ({ slug }) => {
-		set(state => ({
-			modalsStates: {
-				[slug]: { modalState: true },
-			},
-		}))
-	},
-	toggleModal: ({ slug }) => {
-		set(({ modalsStates }) => ({
-			modalsStates: {
-				[slug]:
-					modalsStates[slug] !== undefined
-						? {
-								modalState: !modalsStates[slug].modalState,
-						  }
-						: { modalState: true },
-			},
-		}))
-	},
-}))
+export const useModalState = create<Props>()(
+	devtools(set => ({
+		modalsStates: {},
+		hideModal: ({ slug }) => {
+			set(({ modalsStates }) => ({
+				modalsStates: {
+					...modalsStates,
+					[slug]: { modalState: false },
+				},
+			}))
+		},
+		showModal: ({ slug }) => {
+			set(({ modalsStates }) => ({
+				modalsStates: {
+					...modalsStates,
+					[slug]: { modalState: true },
+				},
+			}))
+		},
+		toggleModal: ({ slug }) => {
+			set(({ modalsStates }) => ({
+				modalsStates: {
+					...modalsStates,
+					[slug]:
+						modalsStates[slug] !== undefined
+							? {
+									modalState: !modalsStates[slug].modalState,
+							  }
+							: { modalState: true },
+				},
+			}))
+		},
+	}))
+)

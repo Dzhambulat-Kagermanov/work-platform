@@ -1,22 +1,28 @@
 'use client'
-import { FC, MouseEventHandler, useState } from 'react'
+import { FC, MouseEventHandler } from 'react'
 import { TClassName } from '@/types'
 import { cn } from '@/lib'
 import { Logo } from '../../shared/Logo'
 import { ExpandArrowIcon } from '@/icons'
 import { LinksGroup } from './LinksGroup'
 import { UserInfo } from './UserInfo'
-import cls from './index.module.scss'
 import { TSalesmanHomePageType } from '../HomePagesSwitcher'
+import { useModalState } from '@/hooks'
+import { SALESMAN_SIDEBAR_MENU } from '@/constants'
+import cls from './index.module.scss'
 
 interface Props extends TClassName {
 	homePageType: TSalesmanHomePageType
 }
 const Sidebar: FC<Props> = ({ className, homePageType }) => {
-	const [isExpand, setIsExpand] = useState<boolean>(false)
+	const isExpand = useModalState(
+		state => state.modalsStates[SALESMAN_SIDEBAR_MENU]?.modalState
+	)
+
+	const setIsExpand = useModalState(state => state.toggleModal)
 
 	const handleExpand: MouseEventHandler = () => {
-		setIsExpand(cur => !cur)
+		setIsExpand({ slug: SALESMAN_SIDEBAR_MENU })
 	}
 
 	return (
@@ -32,7 +38,7 @@ const Sidebar: FC<Props> = ({ className, homePageType }) => {
 					className={cn(cls.group)}
 					homePageType={homePageType}
 				/>
-				<UserInfo className={cn(cls.info)} sidebarIsExpand={isExpand} />
+				<UserInfo className={cn(cls.info)} sidebarIsExpand={!!isExpand} />
 			</div>
 
 			<button onClick={handleExpand} className={cn(cls.expand_btn)}>

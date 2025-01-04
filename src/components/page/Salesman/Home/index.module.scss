@@ -1,18 +1,21 @@
 .main {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
 }
 
 .switcher {
 	margin-top: 60px;
 }
-
+.advertisement,
+.products {
+	margin-top: 25px;
+}
 .crumbs {
 	margin-top: 5px;
 }
 .actions {
 	margin-top: 30px;
-}
-.table {
-	margin-top: 25px;
 }
 @media screen and (max-width: 620px) {
 	.main {
