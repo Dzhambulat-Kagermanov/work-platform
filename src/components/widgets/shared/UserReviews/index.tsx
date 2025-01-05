@@ -11,11 +11,18 @@ import { ActionArrowIcon } from '@/icons'
 import { MD_BIG, SM_MID } from '@/constants'
 import cls from './index.module.scss'
 import { TReviewItemProps } from '@/types/reviews'
+import { SwiperOptions } from 'swiper/types'
 
 interface Props extends TClassName {
 	reviews: TReviewItemProps[]
+	customBreakPoints?:
+		| {
+				[width: number]: SwiperOptions
+				[ratio: string]: SwiperOptions
+		  }
+		| undefined
 }
-const UserReviews: FC<Props> = ({ className, reviews }) => {
+const UserReviews: FC<Props> = ({ className, reviews, customBreakPoints }) => {
 	return (
 		<Container tag='section' className={cn(cls.wrapper, [className])}>
 			<div className={cn(cls.head)}>
@@ -28,17 +35,19 @@ const UserReviews: FC<Props> = ({ className, reviews }) => {
 			</div>
 			<div className={cn(cls.content)}>
 				<Swiper
-					breakpoints={{
-						0: {
-							slidesPerView: 1,
-						},
-						[SM_MID + 1]: {
-							slidesPerView: 2,
-						},
-						[MD_BIG + 1]: {
-							slidesPerView: 3,
-						},
-					}}
+					breakpoints={
+						customBreakPoints || {
+							0: {
+								slidesPerView: 1,
+							},
+							[SM_MID + 1]: {
+								slidesPerView: 2,
+							},
+							[MD_BIG + 1]: {
+								slidesPerView: 3,
+							},
+						}
+					}
 					className={cn(cls.slider)}
 					slidesPerView={3}
 					loop

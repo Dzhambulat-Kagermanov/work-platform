@@ -4,7 +4,7 @@
 }
 .group {
 	display: flex;
-	gap: 10px;
+	gap: 20px;
 }
 .item {
 	background-color: var(--white-100);
@@ -21,11 +21,6 @@
 @media screen and (max-width: 1044px) {
 	.content {
 		padding: 0 17px;
-	}
-}
-@media screen and (max-width: 870px) {
-	.group {
-		flex-wrap: wrap;
 	}
 }
 @media screen and (max-width: 788px) {

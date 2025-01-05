@@ -4,7 +4,7 @@ import { TTag } from '@/types'
 import { cn } from '@/lib'
 import Image from 'next/image'
 import { FavoriteIcon, HelpIcon } from '@/icons'
-import { Typography } from '@/components/ui'
+import { DiscountPlaque, Typography } from '@/components/ui'
 import cls from './index.module.scss'
 
 interface Props extends TTag {
@@ -70,9 +70,7 @@ const ProductItem: FC<Props> = memo(
 						)}
 						{!!disc && (
 							<div className={cn(cls.discount)}>
-								<Typography font='Inter-M' size={12} tag='h4'>
-									-{disc}%
-								</Typography>
+								<DiscountPlaque>{disc}</DiscountPlaque>
 							</div>
 						)}
 					</div>

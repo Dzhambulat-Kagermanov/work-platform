@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { TClassName, TSalesmanStatistic } from '@/types'
 import { cn } from '@/lib'
 import { AccountStatisticItem } from '@/components/entities/AccountStatisticItem'
+import { Container } from '@/components/ui'
 import cls from './index.module.scss'
 
 interface Props extends TClassName, TSalesmanStatistic {}
@@ -13,7 +14,7 @@ const SalesmanStatistic: FC<Props> = ({
 	successfulBuybacks,
 }) => {
 	return (
-		<section className={cn(cls.wrapper, [className])}>
+		<Container tag='section' className={cn(cls.wrapper, [className])}>
 			<ul className={cn(cls.group)}>
 				<AccountStatisticItem
 					isTitleGreen
@@ -46,7 +47,7 @@ const SalesmanStatistic: FC<Props> = ({
 					tag='li'
 				/>
 			</ul>
-		</section>
+		</Container>
 	)
 }
 

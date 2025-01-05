@@ -7,9 +7,9 @@ import { useScreen } from '@/hooks'
 import { SM_BIG } from '@/constants'
 import { MobileHeader } from '@/components/widgets/Salesman/MobileHeader'
 import { BurgerMenu } from '@/components/widgets/Salesman/BurgerMenu'
-import cls from './index.module.scss'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { TSalesmanHomePageType } from '@/components/widgets/Salesman/HomePagesSwitcher'
+import cls from './index.module.scss'
 
 interface Props extends TChildren {}
 const SidebarLayout: FC<Props> = ({ children }) => {
@@ -18,6 +18,10 @@ const SidebarLayout: FC<Props> = ({ children }) => {
 	const width = useScreen()
 	const path = usePathname()
 	const isBuyerProfilePath = pathValidating(path, '/salesman/buyer-profile/?')
+	const isSalesmanProfilePath = pathValidating(
+		path,
+		'/salesman/salesman-profile/?'
+	)
 
 	return (
 		<div className={cn(cls.wrapper)}>
@@ -31,7 +35,10 @@ const SidebarLayout: FC<Props> = ({ children }) => {
 				)}
 				<div
 					className={cn(cls.content, [], {
-						[cls.noPadding]: path === '/salesman/profile' || isBuyerProfilePath,
+						[cls.noPadding]:
+							path === '/salesman/profile' ||
+							isBuyerProfilePath ||
+							isSalesmanProfilePath,
 					})}
 				>
 					{children}
