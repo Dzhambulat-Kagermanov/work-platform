@@ -6,9 +6,21 @@
 	margin-top: 25px;
 	display: grid;
 	gap: 20px;
-	grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
 }
 .item {
+	min-width: auto;
+}
+
+@media screen and (max-width: 870px) {
+	.group {
+		grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+	}
+}
+@media screen and (max-width: 780px) {
+	.group {
+		grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+	}
 }
 @media screen and (max-width: 380px) {
 	.title {

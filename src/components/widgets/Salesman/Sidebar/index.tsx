@@ -34,7 +34,7 @@ const Sidebar: FC<Props> = ({ className, homePageType }) => {
 			<div className={cn(cls.content)}>
 				<Logo className={cn(cls.logo)} link='/salesman' />
 				<LinksGroup
-					sidebarIsExpand={isExpand}
+					sidebarIsExpand={!!isExpand}
 					className={cn(cls.group)}
 					homePageType={homePageType}
 				/>

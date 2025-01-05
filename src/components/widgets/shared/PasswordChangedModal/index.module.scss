@@ -5,15 +5,15 @@
 }
 .content {
 	background-color: var(--white-100);
+	padding: 16px;
 	border-radius: 16px;
-	max-width: 400px;
-	min-width: 400px;
-	padding: 24px;
-}
-
-@media screen and (max-width: 500px) {
-	.content {
-		min-width: auto;
-		max-width: 100%;
+	width: 345px;
+	text-align: center;
+	color: var(--black-200);
+	img {
+		margin: 0 auto;
+	}
+	& > h2 {
+		margin: 16px 0 24px 0;
 	}
 }

@@ -15,6 +15,8 @@ interface Props
 		Omit<TUserInfo, 'balance' | 'email' | 'phoneNumber' | ''> {
 	withoutAvatarChange?: boolean
 	infoMobileContentCls?: string
+	contentContainerCls?: string
+	infoMobileBackgContentCls?: string
 }
 const ProfileHead: FC<Props> = ({
 	className,
@@ -25,6 +27,8 @@ const ProfileHead: FC<Props> = ({
 	registerDate,
 	avatarImage,
 	infoMobileContentCls,
+	contentContainerCls,
+	infoMobileBackgContentCls,
 	background,
 }) => {
 	const width = useScreen()
@@ -43,11 +47,14 @@ const ProfileHead: FC<Props> = ({
 			{width <= XS_BIG && (
 				<InfoMobileBackground
 					className={cn(cls.info_mobile_backg)}
+					contentCls={infoMobileBackgContentCls}
 					id={id}
 					registerDate={registerDate}
 				/>
 			)}
-			<Container className={cn(cls.container, [className])}>
+			<Container
+				className={cn(cls.container, [className, contentContainerCls])}
+			>
 				<Avatar
 					avatarImage={avatarImage}
 					name={name}

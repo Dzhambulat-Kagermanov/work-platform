@@ -10,7 +10,7 @@ import cls from './index.module.scss'
 interface Props extends TClassName {}
 const SalesmanProducts: FC<Props> = ({ className }) => {
 	return (
-		<section className={cn(cls.wrapper, [className])}>
+		<Container tag='section' className={cn(cls.wrapper, [className])}>
 			<Typography font='Inter-B' size={25} tag='h2' className={cn(cls.title)}>
 				Товары продавца
 			</Typography>
@@ -43,7 +43,7 @@ const SalesmanProducts: FC<Props> = ({ className }) => {
 					}
 				)}
 			</ul>
-		</section>
+		</Container>
 	)
 }
 

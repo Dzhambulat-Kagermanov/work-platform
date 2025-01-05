@@ -1,19 +1,20 @@
 'use client'
-import { FC } from 'react'
-import { useScreen } from '@/hooks'
+import { FC, MouseEventHandler } from 'react'
 import { AccountExit } from '@/components/features/AccountExit'
-import { MD_BIG } from '@/constants'
 import { cn } from '@/lib'
-import cls from './index.module.scss'
 import { TClassName } from '@/types'
+import { EXIT_ACCOUNT_MODAL } from '@/constants'
+import { useModalState } from '@/hooks'
+import cls from './index.module.scss'
 
 interface Props extends TClassName {}
 const ExitBtnMobile: FC<Props> = ({ className }) => {
-	const width = useScreen()
+	const showModal = useModalState(state => state.showModal)
+	const handelClick: MouseEventHandler = () => {
+		showModal({ slug: EXIT_ACCOUNT_MODAL })
+	}
 	return (
-		<>
-			{width <= MD_BIG && <AccountExit className={cn(cls.btn, [className])} />}
-		</>
+		<AccountExit className={cn(cls.btn, [className])} onClick={handelClick} />
 	)
 }
 

@@ -20,7 +20,7 @@ interface Props extends TClassName {}
 const HomeAddAdvertisementModal: FC<Props> = ({ className }) => {
 	const router = useRouter()
 	const handleClick: MouseEventHandler = () => {
-		router.push('/salesman/create-advertisement/1')
+		router.push('/salesman/create-advertisement')
 	}
 	return (
 		<ModalBase

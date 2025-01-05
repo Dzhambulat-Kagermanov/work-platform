@@ -1,0 +1,21 @@
+.wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.content {
+	background-color: var(--white-100);
+	padding: 16px;
+	border-radius: 16px;
+	width: 345px;
+	text-align: center;
+	color: var(--black-200);
+	& > h2 {
+		margin: 16px 0 24px 0;
+	}
+}
+.actions {
+	display: flex;
+	flex-direction: column;
+	row-gap: 12px;
+}

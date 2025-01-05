@@ -21,6 +21,7 @@ export default function RootLayout({
 		<html lang='en'>
 			<body>
 				<QueryClientLayout>{children}</QueryClientLayout>
+				<div id='modals'></div>
 			</body>
 		</html>
 	)

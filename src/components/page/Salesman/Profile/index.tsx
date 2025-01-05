@@ -1,3 +1,4 @@
+'use client'
 import { TClassName } from '@/types'
 import { FC } from 'react'
 import { cn } from '@/lib'
@@ -8,10 +9,14 @@ import { ProfileNotifications } from '@/components/widgets/Salesman/ProfileNotif
 import { ProfileStatistic } from '@/components/widgets/Salesman/ProfileStatistic'
 import { ExitBtnMobile } from './ExitBtnMobile'
 import { ProfileStatisticInfo } from '@/components/widgets/Salesman/ProfileStatisticInfo'
+import { ExitAccountModal } from '@/components/widgets/shared/ExitAccountModal'
+import { useScreen } from '@/hooks'
+import { MD_BIG } from '@/constants'
 import cls from './index.module.scss'
 
 interface Props extends TClassName {}
 const ProfilePage: FC<Props> = ({ className }) => {
+	const width = useScreen()
 	return (
 		<div className={cn(cls.main)}>
 			<div className={cn(cls.account, [className])}>
@@ -37,7 +42,10 @@ const ProfilePage: FC<Props> = ({ className }) => {
 							successfulBuybacks={91}
 						/>
 					</div>
-					<ExitBtnMobile className={cn(cls.exit_btn_mobile)} />
+					{width <= MD_BIG && (
+						<ExitBtnMobile className={cn(cls.exit_btn_mobile)} />
+					)}
+					<ExitAccountModal className={cn(cls.exit_account_modal)} />
 				</Container>
 			</div>
 		</div>

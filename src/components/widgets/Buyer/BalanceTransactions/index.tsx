@@ -35,7 +35,11 @@ const BalanceTransactions: FC<Props> = ({ className }) => {
 				placeholder='Введите ID выкупа'
 			/>
 			<div className={cn(cls.table_wrapper)}>
-				<Table wrapperCls={cn(cls.table)} active={active} />
+				<Table
+					wrapperCls={cn(cls.table)}
+					className={cn(cls.table_content)}
+					active={active}
+				/>
 				<Pagination
 					className={cn(cls.pagination)}
 					pages={{

@@ -7,15 +7,18 @@ import cls from './index.module.scss'
 
 interface InfoMobileBackgroundProps
 	extends TClassName,
-		Pick<TUserInfo, 'id' | 'registerDate'> {}
+		Pick<TUserInfo, 'id' | 'registerDate'> {
+	contentCls?: string
+}
 const InfoMobileBackground: FC<InfoMobileBackgroundProps> = ({
 	id,
 	registerDate,
 	className,
+	contentCls,
 }) => {
 	return (
 		<div className={cn(cls.info_mobile_backg, [className])}>
-			<Container className={cn(cls.content)}>
+			<Container className={cn(cls.content, [contentCls])}>
 				<Typography font='Inter-R' size={14} tag='h4'>
 					ID {id}
 				</Typography>

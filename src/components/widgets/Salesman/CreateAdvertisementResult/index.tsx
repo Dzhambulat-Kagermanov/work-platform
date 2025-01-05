@@ -3,16 +3,22 @@ import { FC, MouseEventHandler } from 'react'
 import { TClassName } from '@/types'
 import { cn } from '@/lib'
 import { Button, Typography } from '@/components/ui'
-import { useRouter } from 'next/navigation'
+import { useModalState } from '@/hooks'
+import {
+	SALESMAN_CREATE_ADVERTISEMENT_CANCEL_MODAL,
+	SALESMAN_CREATE_ADVERTISEMENT_PUBLISH_MODAL,
+} from '@/constants'
 import cls from './index.module.scss'
 
 interface Props extends TClassName {}
 const CreateAdvertisementResult: FC<Props> = ({ className }) => {
-	const router = useRouter()
+	const showModal = useModalState(state => state.showModal)
 	const handleCancel: MouseEventHandler = () => {
-		router.push('/salesman?homePageType=advertisements')
+		showModal({ slug: SALESMAN_CREATE_ADVERTISEMENT_CANCEL_MODAL })
 	}
-	const handlePublish: MouseEventHandler = () => {}
+	const handlePublish: MouseEventHandler = () => {
+		showModal({ slug: SALESMAN_CREATE_ADVERTISEMENT_PUBLISH_MODAL })
+	}
 
 	return (
 		<section className={cn(cls.wrapper, [className])}>

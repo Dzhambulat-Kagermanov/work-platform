@@ -13,7 +13,7 @@
 
 @media screen and (max-width: 500px) {
 	.content {
-		max-width: 345px;
-		min-width: 345px;
+		min-width: auto;
+		max-width: 100%;
 	}
 }

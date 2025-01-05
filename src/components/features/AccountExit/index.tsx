@@ -3,10 +3,15 @@ import { ButtonHTMLAttributes, FC } from 'react'
 import { Button } from '@/components/ui'
 import { cn } from '@/lib'
 import cls from './index.module.scss'
+import { useModalState } from '@/hooks'
+import { EXIT_ACCOUNT_MODAL } from '@/constants'
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {}
 const AccountExit: FC<Props> = ({ className, children, ...other }) => {
-	const handleClick = () => {}
+	const showModal = useModalState(state => state.showModal)
+	const handleClick = () => {
+		showModal({ slug: EXIT_ACCOUNT_MODAL })
+	}
 
 	return (
 		<Button

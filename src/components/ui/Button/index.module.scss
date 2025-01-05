@@ -27,11 +27,15 @@
 		cursor: default;
 		opacity: 0.4;
 	}
-	&:not(:disabled):hover {
+	&:not(:disabled):not(.cancel):hover {
 		background-color: var(--second-color);
 		border-color: var(--primary-color);
 		color: var(--primary-color);
 	}
+}
+.cancel {
+	border: 1px solid var(--white-200);
+	color: var(--grey-500);
 }
 .wFull {
 	width: 100%;

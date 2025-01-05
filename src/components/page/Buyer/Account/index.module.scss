@@ -53,9 +53,19 @@
 @media screen and (max-width: 500px) {
 	.dashboard {
 		padding: 0px;
+		margin-bottom: 10px;
 	}
 	.account {
 		margin-top: 0 !important;
 		background-color: var(--white-300);
+	}
+}
+@media screen and (max-width: 359px) {
+	.head_content_container,
+	.head_info_mobile_backg_content {
+		margin: 0 10px;
+	}
+	.dashboard {
+		margin: 0 10px 10px 10px;
 	}
 }

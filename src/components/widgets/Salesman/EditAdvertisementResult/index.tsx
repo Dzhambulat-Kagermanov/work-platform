@@ -3,16 +3,17 @@ import { FC, MouseEventHandler } from 'react'
 import { TClassName } from '@/types'
 import { cn } from '@/lib'
 import { Button, Typography } from '@/components/ui'
-import { useRouter } from 'next/navigation'
+import { useModalState } from '@/hooks'
+import { SALESMAN_EDIT_ADVERTISEMENT_LIMIT_UP } from '@/constants'
 import cls from './index.module.scss'
 
 interface Props extends TClassName {}
 const EditAdvertisementResult: FC<Props> = ({ className }) => {
-	const router = useRouter()
-	const handleCancel: MouseEventHandler = () => {
-		router.push('/salesman?homePageType=advertisements')
+	const showModal = useModalState(state => state.showModal)
+	const handleCancel: MouseEventHandler = () => {}
+	const handleSave: MouseEventHandler = () => {
+		showModal({ slug: SALESMAN_EDIT_ADVERTISEMENT_LIMIT_UP })
 	}
-	const handleSave: MouseEventHandler = () => {}
 
 	return (
 		<section className={cn(cls.wrapper, [className])}>

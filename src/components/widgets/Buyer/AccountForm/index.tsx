@@ -1,16 +1,21 @@
 'use client'
-import { FC } from 'react'
+import { FC, MouseEventHandler } from 'react'
 import { TClassName } from '@/types'
 import { cn } from '@/lib'
 import { AccountContentBlock, Button, Input } from '@/components/ui'
 import { AccountExit } from '@/components/features/AccountExit'
-import { useScreen } from '@/hooks'
-import { MD_BIG } from '@/constants'
+import { useModalState, useScreen } from '@/hooks'
+import { MD_BIG, PASSWORD_CHANGED_MODAL } from '@/constants'
+import { PasswordChangedModal } from '../../shared/PasswordChangedModal'
 import cls from './index.module.scss'
 
 interface Props extends TClassName {}
 const AccountForm: FC<Props> = ({ className }) => {
 	const width = useScreen()
+	const showModal = useModalState(state => state.showModal)
+	const handleSave: MouseEventHandler = () => {
+		showModal({ slug: PASSWORD_CHANGED_MODAL })
+	}
 
 	return (
 		<AccountContentBlock
@@ -49,12 +54,13 @@ const AccountForm: FC<Props> = ({ className }) => {
 						label='Новый пароль еще раз'
 					/>
 				</div>
-				<div className={cn(cls.btn_wrapper)}>
-					<Button theme='fill' className={cn(cls.btn_save)} disabled>
+				<div className={cn(cls.btn_wrapper)} onClick={handleSave}>
+					<Button theme='fill' className={cn(cls.btn_save)}>
 						Сохранить
 					</Button>
 				</div>
 			</form>
+			<PasswordChangedModal className={cn(cls.password_changed_modal)} />
 		</AccountContentBlock>
 	)
 }

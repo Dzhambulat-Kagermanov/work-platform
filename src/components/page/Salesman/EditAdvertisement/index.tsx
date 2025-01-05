@@ -12,6 +12,8 @@ import Link from 'next/link'
 import { ExpandArrowIcon } from '@/icons'
 import { EditAdvertisementStatistic } from '@/components/widgets/Salesman/EditAdvertisementStatistic'
 import cls from './index.module.scss'
+import { EditAdvertisementLimitUp } from '@/components/widgets/Salesman/EditAdvertisementLimitUp'
+import { EditAdvertisementLimitLow } from '@/components/widgets/Salesman/EditAdvertisementLimitLow'
 
 interface Props extends TClassName {}
 const EditAdvertisementPage: FC<Props> = ({ className }) => {
@@ -49,6 +51,8 @@ const EditAdvertisementPage: FC<Props> = ({ className }) => {
 					<EditAdvertisementRansomsQnt className={cn(cls.ransoms_qnt)} />
 				</div>
 				<EditAdvertisementResult className={cn(cls.result)} />
+				<EditAdvertisementLimitUp className={cn(cls.limits_up_modal)} />
+				<EditAdvertisementLimitLow className={cn(cls.limit_low_modal)} />
 			</div>
 		</div>
 	)

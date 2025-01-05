@@ -6,8 +6,10 @@ import { CreateAdvertisementCardInfo } from '@/components/widgets/Salesman/Creat
 import { CreateAdvertisementCashback } from '@/components/widgets/Salesman/CreateAdvertisementCashback'
 import { CreateAdvertisementEditArea } from '@/components/widgets/Salesman/CreateAdvertisementEditArea'
 import { CreateAdvertisementRansomsQnt } from '@/components/widgets/Salesman/CreateAdvertisementRansomsQnt'
-import cls from './index.module.scss'
 import { CreateAdvertisementResult } from '@/components/widgets/Salesman/CreateAdvertisementResult'
+import cls from './index.module.scss'
+import { CreateAdvertisementPublishModal } from '@/components/widgets/Salesman/CreateAdvertisementPublishModal'
+import { CreateAdvertisementCancelModal } from '@/components/widgets/Salesman/CreateAdvertisementCancelModal'
 
 interface Props extends TClassName {}
 const CreateAdvertisementPage: FC<Props> = ({ className }) => {
@@ -30,6 +32,8 @@ const CreateAdvertisementPage: FC<Props> = ({ className }) => {
 				<CreateAdvertisementEditArea className={cn(cls.edit_area)} />
 				<CreateAdvertisementRansomsQnt className={cn(cls.ransoms_qnt)} />
 				<CreateAdvertisementResult className={cn(cls.result)} />
+				<CreateAdvertisementPublishModal className={cn(cls.publish_modal)} />
+				<CreateAdvertisementCancelModal className={cn(cls.cancel_modal)} />
 			</div>
 		</div>
 	)

@@ -26,6 +26,9 @@
 	}
 }
 @media screen and (max-width: 500px) {
+	.wrapper {
+		min-height: auto;
+	}
 	.complex {
 		width: 100%;
 		margin-top: 8px !important;

@@ -5,7 +5,7 @@ import { TTag } from '@/types'
 import cls from './index.module.scss'
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement>, TTag {
-	theme: 'fill' | 'outline'
+	theme: 'fill' | 'outline' | 'cancel'
 	children: string
 	size?: 'big' | 'mid' | 'low'
 	wFull?: boolean

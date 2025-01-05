@@ -1,3 +1,4 @@
+'use client'
 import { FC } from 'react'
 import { TClassName } from '@/types'
 import { cn } from '@/lib'
@@ -8,13 +9,19 @@ import { AccountNotifications } from '@/components/widgets/Buyer/AccountNotifica
 import { AccountStatistic } from '@/components/widgets/Buyer/AccountStatistic'
 import { ExitBtnMobile } from './ExitBtnMobile'
 import { ProfileHead } from '@/components/entities/ProfileHead'
+import { ExitAccountModal } from '@/components/widgets/shared/ExitAccountModal'
+import { useScreen } from '@/hooks'
+import { MD_BIG } from '@/constants'
 import cls from './index.module.scss'
 
 interface Props extends TClassName {}
 const AccountPage: FC<Props> = ({ className }) => {
+	const width = useScreen()
 	return (
 		<main className={cn(cls.account, [className, 'modules-gap-top'])}>
 			<ProfileHead
+				contentContainerCls={cn(cls.head_content_container)}
+				infoMobileBackgContentCls={cn(cls.head_info_mobile_backg_content)}
 				className={cn(cls.head)}
 				id={21834}
 				name='Екатерина М.'
@@ -36,7 +43,10 @@ const AccountPage: FC<Props> = ({ className }) => {
 						successfulBuybacks={91}
 					/>
 				</div>
-				<ExitBtnMobile className={cn(cls.exit_btn_mobile)} />
+				{width > MD_BIG && (
+					<ExitBtnMobile className={cn(cls.exit_btn_mobile)} />
+				)}
+				<ExitAccountModal className={cn(cls.exit_account_modal)} />
 			</Container>
 		</main>
 	)

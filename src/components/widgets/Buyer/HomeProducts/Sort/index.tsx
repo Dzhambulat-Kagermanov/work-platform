@@ -13,6 +13,7 @@ import cls from './index.module.scss'
 interface Props extends TClassName {}
 const Sort: FC<Props> = ({ className }) => {
 	const width = useScreen()
+
 	return (
 		<>
 			{width > SM_MID ? (
