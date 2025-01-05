@@ -25,24 +25,51 @@
 	p {
 	}
 }
-.user {
-	margin: 0 0 0 auto;
-	.content {
-		border: var(--chat-main-border);
-		border-radius: 10px 0 10px 10px;
+.reading-salesman {
+	&.user {
+		.content {
+			background-color: var(--white-300);
+			border-radius: 0 10px 10px;
+		}
 	}
-	.avatar {
-		order: 1;
-	}
-	.head {
-		h3 {
+	&.salesman {
+		margin: 0 0 0 auto;
+		.content {
+			color: var(--white-100);
+			background-color: var(--purple-300);
+			border: var(--chat-main-border);
+			border-radius: 10px 0 10px 10px;
+		}
+		.avatar {
 			order: 1;
+		}
+		.head {
+			h3 {
+				order: 1;
+			}
 		}
 	}
 }
-.salesman {
-	.content {
-		background-color: var(--white-300);
-		border-radius: 0 10px 10px;
+.reading-user {
+	&.user {
+		margin: 0 0 0 auto;
+		.content {
+			border: var(--chat-main-border);
+			border-radius: 10px 0 10px 10px;
+		}
+		.avatar {
+			order: 1;
+		}
+		.head {
+			h3 {
+				order: 1;
+			}
+		}
+	}
+	&.salesman {
+		.content {
+			background-color: var(--white-300);
+			border-radius: 0 10px 10px;
+		}
 	}
 }

@@ -1,0 +1,29 @@
+.wrapper {
+	& > h2 {
+		margin: 0 0 8px 0;
+		color: var(--black-200);
+	}
+	& > h3 {
+		color: var(--grey-600);
+	}
+}
+.btns {
+	margin-top: 32px;
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap;
+	.btn {
+		min-width: 170px;
+		padding: 10px 18px;
+		flex: 1;
+		p {
+			font-size: 15px;
+		}
+	}
+}
+.inp_wrapper {
+	margin-top: 20px;
+}
+.inp_label {
+	color: var(--grey-500);
+}

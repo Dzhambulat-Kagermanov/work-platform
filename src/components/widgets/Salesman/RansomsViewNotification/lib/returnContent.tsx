@@ -14,29 +14,16 @@ export const returnContent = (
 		case 'waitingOrder':
 			contentForPlaque = (
 				<Typography font='Inter-M' size={12} tag='h5'>
-					Ожидание заказа <Timer second={1800} format='MM:SS' />
+					Ожидание заказа
+					<time>
+						<Timer second={1800} format='MM:SS' />
+					</time>
 				</Typography>
 			)
 			contentForDescription = (
 				<Typography font='Inter-M' size={14}>
 					У вас есть 30 минут, чтобы сделать заказ по инструкции продавца, иначе
 					заказ будет отменен.
-				</Typography>
-			)
-			break
-		case 'canceled':
-			contentForPlaque = (
-				<Typography font='Inter-M' size={12} tag='h5'>
-					Отменен /{' '}
-					<Typography font='Inter-B' size={12} tag='strong'>
-						<Timer second={43200} format='HH:MM:SS' />
-					</Typography>
-				</Typography>
-			)
-			contentForDescription = (
-				<Typography font='Inter-M' size={14}>
-					Вы не успели сделать заказ в установленный срок. Вы сможете повторить
-					заказ через 12 часов.
 				</Typography>
 			)
 			break
@@ -47,10 +34,15 @@ export const returnContent = (
 				</Typography>
 			)
 			contentForDescription = (
-				<Typography font='Inter-M' size={14}>
-					Получите товар и выполните условия продавца в течение 10 дней или
-					заказ будет отменен
-				</Typography>
+				<>
+					<Typography font='Inter-M' size={14}>
+						У покупателя есть 10 дней, чтобы получить товар и выполнить ваши
+						условия или заказ будет отменен автоматически.
+					</Typography>
+					<Typography font='Inter-SB' size={20} tag='time'>
+						<Timer second={864000} format={'DD:HH:MM:SS'} />
+					</Typography>
+				</>
 			)
 			break
 		case 'confirmation':
@@ -62,7 +54,7 @@ export const returnContent = (
 			contentForDescription = (
 				<>
 					<Typography font='Inter-M' size={14}>
-						Ожидание подтверждения ваших материалов продавцом
+						Ожидание вашего подтверждения материалов покупателя
 					</Typography>
 					<Typography font='Inter-SB' tag='time' size={20}>
 						<Timer format='HH:MM:SS' second={259200} />
@@ -78,7 +70,7 @@ export const returnContent = (
 			)
 			contentForDescription = (
 				<Typography font='Inter-M' size={14}>
-					Кэшбек в размере 300Р был зачислен на ваш основной баланс
+					Кэшбек в размере 300Р был зачислен на баланс покупателя
 				</Typography>
 			)
 			break

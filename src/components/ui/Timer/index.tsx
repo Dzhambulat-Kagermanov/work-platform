@@ -2,7 +2,7 @@
 import { FC, useEffect, useState } from 'react'
 import { formatter } from './lib/formatter'
 
-export type TFormat = 'HH:MM:SS' | 'MM:SS' | 'SS'
+export type TFormat = 'HH:MM:SS' | 'MM:SS' | 'SS' | 'DD:HH:MM:SS'
 
 type TGeneral = {
 	second: number

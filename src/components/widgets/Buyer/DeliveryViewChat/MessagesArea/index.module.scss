@@ -16,7 +16,6 @@
 }
 
 .messages_group_overlay {
-	margin: 0 0 20px 0;
 	flex-grow: 1;
 	overflow: auto;
 
@@ -37,6 +36,9 @@
 	row-gap: 40px;
 }
 .messages_group {
+	&:last-child {
+		padding-bottom: 20px;
+	}
 }
 
 @media screen and (max-width: 1044px) {

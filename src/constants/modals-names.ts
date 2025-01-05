@@ -14,3 +14,5 @@ export const SALESMAN_ADVERTISEMENT_ARCHIVE_MODAL =
 	'salesman-advertisement-archive'
 export const SALESMAN_ADVERTISEMENT_STOP_MODAL = 'salesman-advertisement-stop'
 export const SALESMAN_ADD_ADVERTISEMENT_MODAL = 'salesman-add-advertisement'
+export const SALESMAN_RANSOMS_USER_UPLOAD_FILE_MODAL =
+	'salesman-ransoms-user-upload-file'

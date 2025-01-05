@@ -64,6 +64,11 @@
 	}
 }
 @media screen and (max-width: 500px) {
+	.wrapper {
+		h3 {
+			max-width: calc(100% - 30px);
+		}
+	}
 	.head {
 		column-gap: 10px;
 	}

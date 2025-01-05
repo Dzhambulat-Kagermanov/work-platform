@@ -10,7 +10,8 @@
 	background-color: transparent;
 	color: var(--valueColor);
 	font-size: 16px;
-	font-family: Inter-M;
+	font-family: Inter;
+	font-weight: 500;
 	resize: none;
 
 	&::-webkit-scrollbar {
@@ -22,7 +23,8 @@
 	}
 	&::placeholder {
 		font-size: inherit;
-		font-family: Inter-R;
+		font-family: Inter;
+		font-weight: 400;
 		color: var(--placeholderColor);
 	}
 }

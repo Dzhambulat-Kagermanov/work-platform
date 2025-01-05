@@ -30,8 +30,14 @@
 		padding: 32px 20px;
 	}
 }
+
 @media screen and (max-width: 788px) {
 	.content:not(.noPadding) {
 		padding: 12px 20px;
+	}
+}
+@media screen and (max-width: 500px) {
+	.content:not(.noPadding) {
+		padding: 12px 5px;
 	}
 }

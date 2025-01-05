@@ -1,4 +1,4 @@
-import { TViewChatMessageGroupProps } from '@/types'
+import { TViewChatMessageGroupProps } from '@/types/buyer/chat'
 
 export const SALESMAN_IS_ONLINE = true
 
@@ -109,6 +109,29 @@ export const MESSAGES: TViewChatMessageGroupProps[] = [
 						'Здравствуйте. Для участия в акции просим Вас:\n\n✅ Заказать кофе. Для поиска обязательно использовать следующие слова: Lacofe кофе зерновой. Далее выбираем кофе LACOFE GOLD (белая пачка на зеленом фоне). \n\n✅ Добавить магазин и товар в избранное\n\n✅ При получении товара выслать его фото с разрезанным (разорванным) штрих-кодом\n\n✅✅✅ Написать отзыв 5 звезд тогда, когда мы Вас попросим. Обычно, сразу или в течении нескольких дней после выкупа.',
 					messageGotTime: '12:20',
 					name: 'Продавец №389',
+				},
+			},
+			{
+				type: 'uploaded-file',
+				message: {
+					files: [
+						{
+							fileURL:
+								'https://storage01.sb.by/iblock/852/8520b92fb1eccdbd3a10b3b5203c1a6b.jpg',
+							name: 'file-djfidewq-21393.png',
+							size: '200 KB',
+						},
+						{
+							fileURL:
+								'https://storage01.sb.by/iblock/852/8520b92fb1eccdbd3a10b3b5203c1a6b.jpg',
+							name: 'file-2311idewq-21393.png',
+							size: '200 KB',
+						},
+					],
+					userInfo: {
+						avatarImage: '/images/stub/avatar.png',
+						name: 'Екатерина М.',
+					},
 				},
 			},
 			{

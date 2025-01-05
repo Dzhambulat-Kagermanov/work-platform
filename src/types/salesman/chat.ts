@@ -10,15 +10,11 @@ import {
 
 export type TChatMessageSalesmanProps = {
 	type: 'salesman'
-	message: TChatMessageItemProps
+	message: Omit<TChatMessageItemProps, 'name'> & { name?: string }
 }
 export type TChatMessageUserProps = {
 	type: 'user'
-	message: Omit<TChatMessageItemProps, 'name'> & { name?: string }
-}
-export type TChatMessageUploadFormProps = {
-	type: 'upload-form'
-	message: undefined
+	message: TChatMessageItemProps
 }
 export type TViewChatMessageGroupProps = {
 	date: string
@@ -30,7 +26,6 @@ export type TViewChatMessageGroupProps = {
 		| TChatMessageUserProps
 		| TChatMessageReviewCreatingProps
 		| TChatMessageConfirmActionProps
-		| TChatMessageUploadFormProps
 	)[]
 }
 ///////////////////////////////////////////////

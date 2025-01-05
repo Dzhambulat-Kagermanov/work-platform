@@ -1,5 +1,10 @@
 .wrapper {
-	margin: 5px 5px 0 5px;
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	left: 50%;
+	translate: -50% 0;
+	margin: 5px auto 0 auto;
 	padding: 5px;
 	border-radius: 12px;
 	color: var(--white-100);
@@ -7,6 +12,13 @@
 	display: flex;
 	column-gap: 20px;
 	align-items: center;
+	flex-direction: row-reverse;
+	justify-content: center;
+	flex-wrap: wrap;
+	row-gap: 10px;
+	text-align: center;
+	max-width: calc(100% - 10px);
+	width: 100%;
 }
 .plaque {
 	text-align: center;

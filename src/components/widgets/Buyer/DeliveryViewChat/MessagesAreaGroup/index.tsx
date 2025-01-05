@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { TClassName, TViewChatMessageGroupProps } from '@/types'
+import { TViewChatMessageGroupProps } from '@/types/buyer/chat'
 import { cn } from '@/lib'
 import { Typography } from '@/components/ui'
 import { ChatMessageItem } from '@/components/entities/ChatMessageItem'
@@ -8,6 +8,8 @@ import { MessagesAreaActionType } from '../MessagesAreaActionType'
 import { MessagesAreaReview } from '../MessagesAreaReview'
 import cls from './index.module.scss'
 import { MessagesAreaUploadForm } from '../MessagesAreaUploadForm'
+import { TClassName } from '@/types'
+import { ChatUploadFilesItem } from '@/components/entities/MessagesAreaUploadFiles'
 
 interface Props extends TClassName, TViewChatMessageGroupProps {
 	salesmanIsOnline: boolean
@@ -28,6 +30,7 @@ const MessagesAreaGroup: FC<Props> = ({
 					if (type === 'user' || type === 'salesman')
 						return (
 							<ChatMessageItem
+								whoReading='reading-user'
 								tag='li'
 								id={message.id}
 								key={message.id}
@@ -76,6 +79,18 @@ const MessagesAreaGroup: FC<Props> = ({
 								key={idx + '/'}
 							/>
 						)
+					if (type === 'uploaded-file') {
+						return (
+							<ChatUploadFilesItem
+								whoReading='reading-user'
+								className={cn(cls.item, [cls.upload_files])}
+								message={message}
+								key={idx + '/'}
+								type='uploaded-file'
+								userIsOnline={salesmanIsOnline}
+							/>
+						)
+					}
 				})}
 			</ul>
 		</div>

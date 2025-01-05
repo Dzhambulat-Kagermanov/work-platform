@@ -1,11 +1,12 @@
 import { FC } from 'react'
-import cls from './index.module.scss'
 import { TClassName } from '@/types'
 import { cn } from '@/lib'
 import { RansomsChatOrderInfoModal } from '../RansomsChatOrderInfoModal'
 import { RansomsContent } from '../RansomsContent'
 import { RansomsSidebar } from '../RansomsSidebar'
 import { TChatType } from '../RansomsSidebar/types'
+import { RansomsViewFileModal } from '../RansomsViewFileModal'
+import cls from './index.module.scss'
 
 interface Props extends TClassName {
 	chatType: TChatType
@@ -18,6 +19,7 @@ const HomeRansomsContent: FC<Props> = ({ className, chatType }) => {
 				<RansomsContent className={cn(cls.content)} chatType={chatType} />
 			</div>
 			<RansomsChatOrderInfoModal className={cn(cls.order_info_modal)} />
+			<RansomsViewFileModal className={cn(cls.view_file_modal)} />
 		</div>
 	)
 }

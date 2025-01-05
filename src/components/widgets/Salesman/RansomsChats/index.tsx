@@ -8,9 +8,9 @@ import { SearchIcon } from '@/icons'
 import { Chats } from './Chats'
 import { MobileSwitcher } from './MobileSwitcher'
 import { TChatType } from '../RansomsSidebar/types'
-import cls from './index.module.scss'
 import { useScreen } from '@/hooks'
 import { XS_BIG } from '@/constants'
+import cls from './index.module.scss'
 
 interface Props extends TClassName {
 	activeIdSTUB?: number

@@ -1,22 +1,23 @@
 import { FC } from 'react'
-import { TClassName, TViewChatMessageGroupProps } from '@/types'
+import { TClassName } from '@/types'
 import { cn } from '@/lib'
 import { Typography } from '@/components/ui'
 import { ChatMessageItem } from '@/components/entities/ChatMessageItem'
 import { MessagesAreaReviewCreating } from '../MessagesAreaReviewCreating'
 import { MessagesAreaActionType } from '../MessagesAreaActionType'
 import { MessagesAreaReview } from '../MessagesAreaReview'
+import { TViewChatMessageGroupProps } from '@/types/salesman/chat'
+import { ChatUploadFilesItem } from '@/components/entities/MessagesAreaUploadFiles'
 import cls from './index.module.scss'
-import { MessagesAreaUploadForm } from '../MessagesAreaUploadForm'
 
 interface Props extends TClassName, TViewChatMessageGroupProps {
-	salesmanIsOnline: boolean
+	userIsOnline: boolean
 }
 const MessagesAreaGroup: FC<Props> = ({
 	date,
 	className,
 	messages,
-	salesmanIsOnline,
+	userIsOnline,
 }) => {
 	return (
 		<div className={cn(cls.wrapper, [className])}>
@@ -28,6 +29,7 @@ const MessagesAreaGroup: FC<Props> = ({
 					if (type === 'user' || type === 'salesman')
 						return (
 							<ChatMessageItem
+								whoReading='reading-salesman'
 								tag='li'
 								id={message.id}
 								key={message.id}
@@ -36,8 +38,8 @@ const MessagesAreaGroup: FC<Props> = ({
 								message={message.message}
 								messageCls={cn(cls.item_message)}
 								messageGotTime={message.messageGotTime}
-								name={type === 'user' ? 'Вы' : message.name}
-								isOnline={type === 'user' || salesmanIsOnline}
+								name={type === 'salesman' ? 'Вы' : message.name}
+								isOnline={type === 'salesman' || userIsOnline}
 								whomSend={type === 'salesman' ? 'salesman' : 'user'}
 							/>
 						)
@@ -69,13 +71,19 @@ const MessagesAreaGroup: FC<Props> = ({
 								className={cn(cls.review_creating)}
 							/>
 						)
-					if (type === 'upload-form')
+
+					if (type === 'uploaded-file') {
 						return (
-							<MessagesAreaUploadForm
-								className={cn(cls.form)}
+							<ChatUploadFilesItem
+								whoReading='reading-salesman'
+								className={cn(cls.item, [cls.upload_files])}
+								message={message}
 								key={idx + '/'}
+								type='uploaded-file'
+								userIsOnline={userIsOnline}
 							/>
 						)
+					}
 				})}
 			</ul>
 		</div>

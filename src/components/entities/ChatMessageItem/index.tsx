@@ -9,6 +9,7 @@ interface Props extends TClassName, TTag, TChatMessageItemProps {
 	whomSend: 'user' | 'salesman'
 	isOnline: boolean
 	messageCls?: string
+	whoReading: 'reading-user' | 'reading-salesman'
 }
 const ChatMessageItem: FC<Props> = ({
 	id,
@@ -20,12 +21,13 @@ const ChatMessageItem: FC<Props> = ({
 	messageGotTime,
 	name,
 	whomSend,
+	whoReading,
 	tag = 'div',
 }) => {
 	const Tag = tag
 
 	return (
-		<Tag className={cn(cls.item, [className, cls[whomSend]])}>
+		<Tag className={cn(cls.item, [className, cls[whomSend], cls[whoReading]])}>
 			<ChatAvatarItem
 				className={cn(cls.avatar)}
 				avatar={avatar}
