@@ -1,3 +1,4 @@
+'use client'
 import { ButtonHTMLAttributes, FC, MouseEvent } from 'react'
 import { Button } from '@/components/ui'
 import cls from './index.module.scss'

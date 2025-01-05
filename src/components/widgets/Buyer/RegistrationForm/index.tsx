@@ -2,7 +2,7 @@
 import { FC, FormEvent } from 'react'
 import { TClassName } from '@/types'
 import { cn } from '@/lib'
-import { Input, InputMaskSwitcher, MaskInput } from '@/components/ui'
+import { Input, InputMaskSwitcher } from '@/components/ui'
 import { RegistrationFormSubmit } from '@/components/features/RegistrationFormSubmit'
 import { PHONE_MASKS } from '@/constants'
 import cls from './index.module.scss'

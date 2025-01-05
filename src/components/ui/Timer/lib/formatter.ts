@@ -29,6 +29,6 @@ export const formatter = (seconds: number, format?: TFormat): string => {
 				'0'
 			)} : ${String(secs).padStart(2, '0')}`
 		default:
-			throw new Error('Invalid format')
+			return `${String(seconds).padStart(2, '0')}`
 	}
 }

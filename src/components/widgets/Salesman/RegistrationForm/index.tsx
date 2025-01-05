@@ -34,14 +34,14 @@ const RegistrationForm: FC<Props> = ({ className }) => {
 				label='Введите 4-значный код из СМС'
 				error={
 					<>
-						Неверный код.{' '}
+						Неверный код.
 						<Typography
 							font='Inter-R'
 							size={14}
 							tag='span'
 							className={cn(cls.timer)}
 						>
-							Запросить новый код можно через{' '}
+							Запросить новый код можно через
 							<Timer second={36} format={undefined} /> сек.
 						</Typography>
 					</>
