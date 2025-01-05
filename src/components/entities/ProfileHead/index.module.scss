@@ -2,7 +2,7 @@
 }
 .container {
 	background-color: var(--purple-300);
-	background-image: url('/images/account/head-background.png');
+	background-image: var(--backgroundImage);
 	background-size: cover;
 	background-position: center center;
 	display: flex;

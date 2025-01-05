@@ -48,7 +48,7 @@ const InfoMobileContent: FC<InfoMobileContentProps> = ({
 					height={21}
 				/>
 				<Typography font='Inter-B' size={16} tag='h5'>
-					{rating}
+					{rating.toFixed(1)}
 				</Typography>
 			</div>
 		</div>

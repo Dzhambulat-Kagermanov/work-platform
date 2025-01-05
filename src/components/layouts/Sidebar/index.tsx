@@ -2,7 +2,7 @@
 import { FC } from 'react'
 import { TChildren } from '@/types'
 import { Sidebar } from '@/components/widgets/Salesman/Sidebar'
-import { cn } from '@/lib'
+import { cn, pathValidating } from '@/lib'
 import { useScreen } from '@/hooks'
 import { SM_BIG } from '@/constants'
 import { MobileHeader } from '@/components/widgets/Salesman/MobileHeader'
@@ -17,6 +17,7 @@ const SidebarLayout: FC<Props> = ({ children }) => {
 	const homePageType = queryParams.get('homePageType') as TSalesmanHomePageType
 	const width = useScreen()
 	const path = usePathname()
+	const isBuyerProfilePath = pathValidating(path, '/salesman/buyer-profile/?')
 
 	return (
 		<div className={cn(cls.wrapper)}>
@@ -30,7 +31,7 @@ const SidebarLayout: FC<Props> = ({ children }) => {
 				)}
 				<div
 					className={cn(cls.content, [], {
-						[cls.noPadding]: path === '/salesman/profile',
+						[cls.noPadding]: path === '/salesman/profile' || isBuyerProfilePath,
 					})}
 				>
 					{children}

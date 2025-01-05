@@ -3,14 +3,9 @@ import { TClassName } from '@/types'
 import { Ratingbar, Typography } from '@/components/ui'
 import { cn } from '@/lib'
 import cls from './index.module.scss'
+import { TReviewItemProps } from '@/types/reviews'
 
-interface Props extends TClassName {
-	subtitle: string
-	title: string
-	date: string
-	rating: number
-	productName?: string
-}
+interface Props extends TClassName, TReviewItemProps {}
 const ReviewItem: FC<Props> = ({
 	className,
 	date,

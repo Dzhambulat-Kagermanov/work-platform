@@ -1,0 +1,33 @@
+.wrapper {
+	padding: 32px 13px 32px 45px;
+}
+.head {
+	max-width: none;
+	margin-top: 15px;
+}
+.statistic {
+	margin: 25px 0 40px 0;
+}
+.reviews {
+	max-width: none;
+}
+@media screen and (max-width: 768px) {
+	.wrapper {
+		padding: 12px 20px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.head {
+		margin-top: 0;
+	}
+	.reviews,
+	.statistic,
+	.head_mobile_content {
+		padding: 0 20px;
+	}
+	.wrapper {
+		padding: 0;
+		padding-bottom: 20px;
+	}
+}

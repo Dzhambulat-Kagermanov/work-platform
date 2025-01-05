@@ -14,7 +14,7 @@ export type TViewChatNotification =
 interface Props extends TClassName {}
 const RansomsViewNotification: FC<Props> = forwardRef(
 	({ className }, ref: Ref<HTMLDivElement> | undefined) => {
-		let notificationType: TViewChatNotification = 'waitingReceive'
+		let notificationType: TViewChatNotification = 'confirmation'
 		const { contentForDescription, contentForPlaque } =
 			returnContent(notificationType)
 		return (

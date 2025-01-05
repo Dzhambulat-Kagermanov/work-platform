@@ -5,8 +5,8 @@ import { Typography } from '@/components/ui'
 import { useRouter } from 'next/navigation'
 import { FC } from 'react'
 import { TChildren, TClassName } from '@/types'
-import cls from './index.module.scss'
 import { useScreen } from '@/hooks'
+import cls from './index.module.scss'
 
 interface Props extends TClassName, TChildren {
 	href?: string

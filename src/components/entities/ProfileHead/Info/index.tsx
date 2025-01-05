@@ -19,7 +19,7 @@ const Info: FC<Props> = ({ className, rating, id, name, registerDate }) => {
 					height={21}
 				/>
 				<Typography font='Inter-B' size={16}>
-					{rating}
+					{rating.toFixed(1)}
 				</Typography>
 			</div>
 			<Typography className={cn(cls.name)} size={24} font='Inter-SB' tag='h2'>

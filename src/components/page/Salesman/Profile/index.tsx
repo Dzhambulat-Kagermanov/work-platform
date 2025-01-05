@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { cn } from '@/lib'
 import { Container } from '@/components/ui'
 import { ProfileForm } from '@/components/widgets/Salesman/ProfileForm'
-import { ProfileHead } from '@/components/widgets/Salesman/ProfileHead'
+import { ProfileHead } from '@/components/entities/ProfileHead'
 import { ProfileNotifications } from '@/components/widgets/Salesman/ProfileNotifications'
 import { ProfileStatistic } from '@/components/widgets/Salesman/ProfileStatistic'
 import { ExitBtnMobile } from './ExitBtnMobile'
@@ -15,7 +15,15 @@ const ProfilePage: FC<Props> = ({ className }) => {
 	return (
 		<div className={cn(cls.main)}>
 			<div className={cn(cls.account, [className])}>
-				<ProfileHead className={cn(cls.head)} />
+				<ProfileHead
+					className={cn(cls.head)}
+					id={21834}
+					name='Екатерина М.'
+					rating={4.7}
+					registerDate='19.08.2024'
+					avatarImage=''
+					background='/images/account/head-background.png'
+				/>
 				<Container className={cn(cls.dashboard)}>
 					<ProfileForm className={cn(cls.form)} />
 					<div className={cn(cls.half)}>

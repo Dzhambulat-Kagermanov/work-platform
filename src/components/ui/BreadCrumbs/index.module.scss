@@ -4,8 +4,8 @@
 	column-gap: 7px;
 	flex-wrap: wrap;
 	row-gap: 10px;
+	color: var(--black-opacity-60);
 	.item {
-		color: var(--black-opacity-60);
 		display: flex;
 		align-items: center;
 		column-gap: 5px;

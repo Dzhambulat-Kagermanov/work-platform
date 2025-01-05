@@ -7,4 +7,5 @@ export type TUserInfo = {
 	rating: number
 	avatarImage?: string
 	balance: number
+	background?: string
 }
