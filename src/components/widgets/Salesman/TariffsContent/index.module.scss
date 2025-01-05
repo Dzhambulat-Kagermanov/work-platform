@@ -6,3 +6,36 @@
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 }
+
+@media screen and (max-width: 620px) {
+	.tariffs {
+		grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+	}
+}
+@media screen and (max-width: 500px) {
+	.wrapper {
+		& > h2 {
+			padding: 0 10px;
+		}
+	}
+	.tariffs_wrapper {
+		width: 100%;
+		overflow: auto;
+		padding-bottom: 20px;
+
+		&::-webkit-scrollbar {
+			height: 10px;
+			background-color: transparent;
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: var(--white-200);
+		}
+		.tariffs {
+			padding-left: 10px;
+			display: flex;
+			.item {
+				min-width: 240px;
+			}
+		}
+	}
+}

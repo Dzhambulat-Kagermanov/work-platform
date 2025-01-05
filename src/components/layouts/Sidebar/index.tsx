@@ -17,11 +17,13 @@ const SidebarLayout: FC<Props> = ({ children }) => {
 	const homePageType = queryParams.get('homePageType') as TSalesmanHomePageType
 	const width = useScreen()
 	const path = usePathname()
+	const isProfilePath = path === '/salesman/profile'
 	const isBuyerProfilePath = pathValidating(path, '/salesman/buyer-profile/?')
 	const isSalesmanProfilePath = pathValidating(
 		path,
 		'/salesman/salesman-profile/?'
 	)
+	const isTariffsPath = path === '/salesman/balance/tariffs'
 
 	return (
 		<div className={cn(cls.wrapper)}>
@@ -36,9 +38,10 @@ const SidebarLayout: FC<Props> = ({ children }) => {
 				<div
 					className={cn(cls.content, [], {
 						[cls.noPadding]:
-							path === '/salesman/profile' ||
+							isProfilePath ||
 							isBuyerProfilePath ||
-							isSalesmanProfilePath,
+							isSalesmanProfilePath ||
+							isTariffsPath,
 					})}
 				>
 					{children}

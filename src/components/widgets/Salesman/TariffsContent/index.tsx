@@ -13,18 +13,20 @@ const TariffsContent: FC<Props> = ({ className }) => {
 			<Typography font='Inter-R' size={16} tag='h2'>
 				Приобретайте тарифы с выгодой до 20%
 			</Typography>
-			<ul className={cn(cls.tariffs)}>
-				{TARIFFS.map(({ name, ...other }) => {
-					return (
-						<TariffsItem
-							name={name}
-							{...other}
-							key={name}
-							className={cn(cls.item)}
-						/>
-					)
-				})}
-			</ul>
+			<div className={cn(cls.tariffs_wrapper)}>
+				<ul className={cn(cls.tariffs)}>
+					{TARIFFS.map(({ name, ...other }) => {
+						return (
+							<TariffsItem
+								name={name}
+								{...other}
+								key={name}
+								className={cn(cls.item)}
+							/>
+						)
+					})}
+				</ul>
+			</div>
 		</div>
 	)
 }
