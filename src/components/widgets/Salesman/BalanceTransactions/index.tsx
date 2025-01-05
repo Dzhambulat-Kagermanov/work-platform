@@ -8,6 +8,7 @@ import { SearchIcon } from '@/icons'
 import { Table } from './Table'
 import { useScreen } from '@/hooks'
 import { SM_MID } from '@/constants'
+import { Pagination } from '../../shared/Pagination'
 import cls from './index.module.scss'
 
 export type TActiveSwitchItem = 'all' | 'replenishments' | 'withdrawals'
@@ -45,7 +46,16 @@ const BalanceTransactions: FC<Props> = ({ className }) => {
 					placeholder='Введите ID выкупа'
 				/>
 			</div>
-			<Table className={cn(cls.table)} active={active} />
+			<div className={cn(cls.table_wrapper)}>
+				<Table wrapperCls={cn(cls.table)} active={active} />
+				<Pagination
+					className={cn(cls.pagination)}
+					pages={{
+						current: 1,
+						max: 10,
+					}}
+				/>
+			</div>
 		</section>
 	)
 }

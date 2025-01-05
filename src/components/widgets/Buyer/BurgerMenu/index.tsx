@@ -31,7 +31,7 @@ const BurgerMenu: FC<Props> = ({ className }) => {
 				>
 					<Container className={cn(cls.content)}>
 						<div className={cn(cls.head)}>
-							<Logo hasNotLink className={cn(cls.logo)} />
+							<Logo hasNotLink className={cn(cls.logo)} onClick={handleClose} />
 							<button className={cn(cls.close_btn)} onClick={handleClose}>
 								<ExpandArrowIcon color='var(--purple-800)' />
 							</button>

@@ -27,8 +27,10 @@
 .actions {
 	margin-top: 32px;
 	display: flex;
-	column-gap: 12px;
+	flex-wrap: wrap;
+	gap: 12px;
 	.btn {
+		min-width: 170px;
 		flex: 1;
 	}
 }

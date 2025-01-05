@@ -15,7 +15,21 @@
 	width: 450px;
 }
 
+.table {
+	padding-bottom: 0;
+}
+.table_wrapper {
+	padding-bottom: 20px;
+}
+.pagination {
+	padding: 12px 24px;
+}
+
 @media screen and (max-width: 620px) {
+	.pagination {
+		margin-top: 15px;
+		border-top: 1px solid var(--white-400);
+	}
 	.inp_wrapper {
 		width: 100%;
 		margin: 15px 0;

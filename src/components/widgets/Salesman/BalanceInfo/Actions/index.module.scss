@@ -29,18 +29,6 @@
 .promocode {
 	padding: 0 10px;
 	width: 145px;
-	font-family: Inter-R;
-	font-size: 12px;
-	&:focus::placeholder {
-		color: transparent;
-	}
-	&::placeholder {
-		transition: var(--tran-low);
-		font-size: inherit;
-		font-family: inherit;
-		color: var(--black-100);
-		text-align: center;
-	}
 }
 
 @media screen and (max-width: 1044px) {

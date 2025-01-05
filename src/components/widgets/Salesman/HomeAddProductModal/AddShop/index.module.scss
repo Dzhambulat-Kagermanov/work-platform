@@ -25,9 +25,11 @@
 }
 .actions {
 	display: flex;
-	column-gap: 12px;
+	flex-wrap: wrap;
+	gap: 12px;
 	margin-top: 32px;
 	.btn {
 		flex: 1;
+		min-width: 170px;
 	}
 }

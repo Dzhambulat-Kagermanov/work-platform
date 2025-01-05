@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, MouseEventHandler } from 'react'
 import { cn } from '@/lib'
 import { TClassName } from '@/types'
 import Image from 'next/image'
@@ -9,10 +9,12 @@ import cls from './index.module.scss'
 interface Props extends TClassName {
 	hasNotLink?: true
 	link?: string
+	onClick?: MouseEventHandler
 }
-const Logo: FC<Props> = ({ className, hasNotLink, link }) => {
+const Logo: FC<Props> = ({ className, hasNotLink, link, onClick }) => {
 	return (
 		<Link
+			onClick={onClick}
 			href={link ? link : !hasNotLink ? '/' : '#'}
 			className={cn(cls.wrapper, [className])}
 		>

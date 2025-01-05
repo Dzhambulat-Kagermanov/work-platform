@@ -17,3 +17,5 @@ export const SALESMAN_ADD_ADVERTISEMENT_MODAL = 'salesman-add-advertisement'
 export const SALESMAN_RANSOMS_USER_UPLOAD_FILE_MODAL =
 	'salesman-ransoms-user-upload-file'
 export const SALESMAN_TARIFFS_MODAL = 'salesman-tariffs'
+export const SALESMAN_BALANCE_PROMOCODE_MODAL = 'salesman-balance-promocode'
+export const SALESMAN_BALANCE_UP_MODAL = 'salesman-balance-up'

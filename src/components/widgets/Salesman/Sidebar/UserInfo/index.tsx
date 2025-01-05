@@ -4,6 +4,7 @@ import { cn } from '@/lib'
 import Image from 'next/image'
 import { Button, Typography } from '@/components/ui'
 import { PlusIcon } from '@/icons'
+import Link from 'next/link'
 import cls from './index.module.scss'
 
 interface Props extends TClassName {
@@ -17,12 +18,14 @@ const UserInfo: FC<Props> = ({ className, sidebarIsExpand }) => {
 				[cls.sidebarIsExpand]: sidebarIsExpand,
 			})}
 		>
-			<Image
-				src='/images/stub/avatar.png'
-				alt='Аватар'
-				width={45}
-				height={45}
-			/>
+			<Link href={'/salesman/profile'} className={cn(cls.link)}>
+				<Image
+					src='/images/stub/avatar.png'
+					alt='Аватар'
+					width={45}
+					height={45}
+				/>
+			</Link>
 			<div className={cn(cls.content_wrapper)}>
 				<div className={cn(cls.content)}>
 					<Typography font='Inter-SB' size={16} tag='h2'>
@@ -44,7 +47,7 @@ const UserInfo: FC<Props> = ({ className, sidebarIsExpand }) => {
 					>
 						Пополнить
 					</Button>
-					<div className={cn(cls.ransoms)}>
+					<Link href={'/salesman/balance/tariffs'} className={cn(cls.ransoms)}>
 						<Typography font='Inter-R' size={12}>
 							Выкупы:
 						</Typography>
@@ -54,7 +57,7 @@ const UserInfo: FC<Props> = ({ className, sidebarIsExpand }) => {
 						<button className={cn(cls.plus_btn)}>
 							<PlusIcon color='var(--grey-300)' />
 						</button>
-					</div>
+					</Link>
 				</div>
 			</div>
 		</div>

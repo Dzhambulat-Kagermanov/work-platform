@@ -5,13 +5,19 @@ import { cn } from '@/lib'
 import { Typography } from '@/components/ui'
 import { PlusIcon } from '@/icons'
 import Link from 'next/link'
-import { useScreen } from '@/hooks'
+import { useModalState, useScreen } from '@/hooks'
 import { Paid } from '../Paid'
 import cls from './index.module.scss'
+import { SALESMAN_BALANCE_PROMOCODE_MODAL } from '@/constants'
 
 interface Props extends TClassName {}
 const Actions: FC<Props> = ({ className }) => {
 	const width = useScreen()
+	const showModal = useModalState(state => state.showModal)
+	const handlePromocode = () => {
+		showModal({ slug: SALESMAN_BALANCE_PROMOCODE_MODAL })
+	}
+
 	return (
 		<div className={cn(cls.wrapper, [className])}>
 			<Link
@@ -30,10 +36,15 @@ const Actions: FC<Props> = ({ className }) => {
 					</button>
 				</div>
 			</Link>
-			<input
+
+			<button
 				className={cn(cls.item, [cls.promocode])}
-				placeholder='Ввести промокод'
-			/>
+				onClick={handlePromocode}
+			>
+				<Typography font='Inter-R' size={12}>
+					Ввести промокод
+				</Typography>
+			</button>
 			{width <= 700 && width > 550 && <Paid className={cn(cls.paid)} />}
 		</div>
 	)

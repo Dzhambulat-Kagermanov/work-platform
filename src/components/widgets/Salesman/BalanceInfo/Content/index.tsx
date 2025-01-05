@@ -1,11 +1,18 @@
-import { FC } from 'react'
+'use client'
+import { FC, MouseEventHandler } from 'react'
 import { TClassName } from '@/types'
 import { cn } from '@/lib'
 import { Button, Typography } from '@/components/ui'
 import cls from './index.module.scss'
+import { useModalState } from '@/hooks'
+import { SALESMAN_BALANCE_UP_MODAL } from '@/constants'
 
 interface Props extends TClassName {}
 const Content: FC<Props> = ({ className }) => {
+	const showModal = useModalState(state => state.showModal)
+	const handleClick: MouseEventHandler = () => {
+		showModal({ slug: SALESMAN_BALANCE_UP_MODAL })
+	}
 	return (
 		<div className={cn(cls.wrapper, [className])}>
 			<div className={cn(cls.content)}>
@@ -27,6 +34,7 @@ const Content: FC<Props> = ({ className }) => {
 				</div>
 			</div>
 			<Button
+				onClick={handleClick}
 				size='mid'
 				theme='fill'
 				primaryColor='var(--green-100)'

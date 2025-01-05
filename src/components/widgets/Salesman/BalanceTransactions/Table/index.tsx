@@ -8,10 +8,11 @@ import cls from './index.module.scss'
 
 interface Props extends TClassName {
 	active: TActiveSwitchItem
+	wrapperCls?: string
 }
-const Table: FC<Props> = ({ className, active }) => {
+const Table: FC<Props> = ({ className, active, wrapperCls }) => {
 	return (
-		<div className={cn(cls.wrapper)}>
+		<div className={cn(cls.wrapper, [wrapperCls])}>
 			<table className={cn(cls.table, [className])}>
 				<thead className={cn(cls.head)}>
 					<tr className={cn(cls.row)}>

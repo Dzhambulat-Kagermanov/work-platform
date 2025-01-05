@@ -26,7 +26,11 @@ const BurgerMenu: FC<Props> = ({ className, homePageType }) => {
 					})}
 				>
 					<div className={cn(cls.head)}>
-						<Logo className={cn(cls.logo)} link='/salesman' />
+						<Logo
+							className={cn(cls.logo)}
+							link='/salesman'
+							onClick={handleClose}
+						/>
 						<button className={cn(cls.close_btn)} onClick={handleClose}>
 							<ExpandArrowIcon color='var(--grey-300)' />
 						</button>

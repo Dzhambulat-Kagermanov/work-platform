@@ -6,10 +6,10 @@ import { cn } from '@/lib'
 import { TClassName } from '@/types'
 import { AddProduct } from './AddProduct'
 import { FailAddProduct } from './FailAddProduct'
-import cls from './index.module.scss'
 import { AddShop } from './AddShop'
 import { FailAddShop } from './FailAddShop'
 import { AddProductConfirmation } from './AddProductConfirmation'
+import cls from './index.module.scss'
 
 export type TModalStep =
 	| 'failAddShop'
