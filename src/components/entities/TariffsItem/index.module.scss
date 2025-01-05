@@ -1,0 +1,38 @@
+.wrapper {
+	border: 1px solid var(--white-400);
+	border-radius: 16px;
+	box-shadow: 0 12px 16px -4px var(--black-200-opacity-5),
+		0 4px 6px -2px var(--black-200-opacity-3);
+	padding: 18px 16px 16px 13px;
+}
+.head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.advantages {
+	margin: 30px 0;
+	display: flex;
+	flex-direction: column;
+	row-gap: 8px;
+}
+.item {
+	color: var(--grey-600);
+	display: flex;
+	column-gap: 12px;
+	align-items: flex-start;
+}
+.price {
+	h2 {
+	}
+	h3 {
+		color: var(--grey-600);
+	}
+}
+.footer {
+	column-gap: 6px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
+}
