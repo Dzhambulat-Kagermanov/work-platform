@@ -11,10 +11,11 @@
 	background-color: var(--black-200-opacity-70);
 	backdrop-filter: blur(16px);
 	max-height: 100vh;
-	padding: 20px 0;
 	overflow: auto;
 	display: grid !important;
 	grid-template-columns: 1fr;
+	align-items: center;
+	padding: 20px 10px;
 
 	&::-webkit-scrollbar {
 		width: 4;
@@ -29,9 +30,6 @@
 	}
 }
 .content {
-	display: flex;
-	justify-content: center;
-	margin: 0 10px;
-	max-height: 100%;
+	display: contents;
 	cursor: default;
 }

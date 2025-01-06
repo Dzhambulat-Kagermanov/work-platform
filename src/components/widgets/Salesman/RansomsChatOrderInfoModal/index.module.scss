@@ -1,12 +1,11 @@
 .wrapper {
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
 .content {
 	background-color: var(--white-100);
 	border-radius: 16px;
-	width: 255px;
+	margin: 0 auto;
+	width: 100%;
+	max-width: 255px;
 	padding: 23px 19px;
 	h2 {
 		color: var(--grey-500);

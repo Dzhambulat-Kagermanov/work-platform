@@ -1,12 +1,12 @@
 'use client'
 import { FC, useState } from 'react'
-import cls from './index.module.scss'
 import { TClassName } from '@/types'
 import { ModalBase } from '@/components/ui'
 import { SALESMAN_BALANCE_UP_MODAL } from '@/constants'
 import { cn } from '@/lib'
 import { Action } from './Action'
 import { Success } from './Success'
+import cls from './index.module.scss'
 
 export type TModalStep = 'action' | 'success'
 

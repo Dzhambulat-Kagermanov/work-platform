@@ -4,8 +4,8 @@ import { TClassName } from '@/types'
 import { Button, ModalBase } from '@/components/ui'
 import { CASHBACK_MODAL } from '@/constants'
 import { cn } from '@/lib'
-import cls from './index.module.scss'
 import { Content } from './Content'
+import cls from './index.module.scss'
 
 interface Props extends TClassName {}
 const ModalCashback: FC<Props> = ({ className }) => {

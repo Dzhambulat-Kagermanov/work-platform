@@ -4,19 +4,17 @@ import { TChildren, TClassName } from '@/types'
 import { cn } from '@/lib'
 import { TModalSlug } from '@/hooks/zustand/useModalState'
 import { useModalBase } from '@/hooks'
-import { createPortal } from 'react-dom'
-import dynamic from 'next/dynamic'
+import { PortalWrapper } from '../PortalWrapper'
 import cls from './index.module.scss'
 
 interface Props extends TClassName, TChildren, TModalSlug {
 	onClose?: () => void
 }
 // slug - Уникальный идентификатор для конкретной модалки (ID)
-const ModalBaseFC: FC<Props> = ({ children, className, slug, onClose }) => {
+const ModalBase: FC<Props> = ({ children, className, slug, onClose }) => {
 	const { modalState, visibleTransition, handleClose } = useModalBase({
 		slug,
 	})
-	const modalsContainer = document.getElementById('modals') as Element
 
 	const handleWrapperClick = () => {
 		onClose && onClose()
@@ -24,30 +22,25 @@ const ModalBaseFC: FC<Props> = ({ children, className, slug, onClose }) => {
 	}
 
 	return (
-		<>
-			{modalState &&
-				createPortal(
-					<section
-						onClick={handleWrapperClick}
-						className={cn(cls.wrapper, [className], {
-							[cls.visible]: visibleTransition,
-						})}
+		<PortalWrapper selector='#modals'>
+			{modalState && (
+				<section
+					onClick={handleWrapperClick}
+					className={cn(cls.wrapper, [className], {
+						[cls.visible]: visibleTransition,
+					})}
+				>
+					<div
+						className={cls.content}
+						onClick={e => {
+							e.stopPropagation()
+						}}
 					>
-						<div
-							className={cls.content}
-							onClick={e => {
-								e.stopPropagation()
-							}}
-						>
-							{children}
-						</div>
-					</section>,
-					modalsContainer
-				)}
-		</>
+						{children}
+					</div>
+				</section>
+			)}
+		</PortalWrapper>
 	)
 }
-
-export const ModalBase = dynamic(() => Promise.resolve(ModalBaseFC), {
-	ssr: false,
-})
+export { ModalBase }

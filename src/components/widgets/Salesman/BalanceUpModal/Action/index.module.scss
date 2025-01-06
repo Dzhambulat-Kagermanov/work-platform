@@ -8,9 +8,9 @@
 	align-items: center;
 }
 .info {
-	min-width: 300px;
 	flex: 1;
 	h3 {
+		white-space: nowrap;
 		margin-top: 8px;
 		color: var(--grey-600);
 	}
