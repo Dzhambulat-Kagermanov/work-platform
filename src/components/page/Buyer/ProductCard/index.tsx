@@ -9,6 +9,7 @@ import cls from "./index.module.scss";
 interface Props extends TClassName {
     id: number;
 }
+
 const ProductCardPage: FC<Props> = ({ className, id }) => {
     const data = PRODUCT;
 
