@@ -1,160 +1,160 @@
 :root {
-	--purple-100: #9575d6;
-	--purple-200: #53389e;
-	--purple-300: #7f56d9;
-	--purple-400: #4a3aff;
-	--purple-500: #170f49;
-	--purple-600: #6941c6;
-	--purple-700: #ac5dfb;
-	--purple-800: #baa4ec;
-	--purple-900: #8000ff;
+    --purple-100: #9575d6;
+    --purple-200: #53389e;
+    --purple-300: #7f56d9;
+    --purple-400: #4a3aff;
+    --purple-500: #170f49;
+    --purple-600: #6941c6;
+    --purple-700: #ac5dfb;
+    --purple-800: #baa4ec;
+    --purple-900: #8000ff;
 
-	--red-100: rgb(248, 53, 53);
+    --red-100: rgb(248, 53, 53);
 
-	--orange-100: #dc6803;
+    --orange-100: #dc6803;
 
-	--yellow-100: #ffc633;
+    --yellow-100: #ffc633;
 
-	--blue-100: #0253ff;
-	--blue-200: #417bc6;
-	--blue-300: #164582;
+    --blue-100: #0253ff;
+    --blue-200: #417bc6;
+    --blue-300: #164582;
 
-	--plaque-blue-100: #f0f9ff;
-	--plaque-blue-200: #026aa2;
-	--plaque-green-100: #ecfdf3;
-	--plaque-green-200: #027a48;
-	--plaque-red-100: #fef3f2;
-	--plaque-red-200: #b42318;
-	--plaque-orange-100: #fffaeb;
-	--plaque-orange-200: #b54708;
-	--plaque-black-100: #f2f4f7;
-	--plaque-black-200: #344054;
-	--plaque-purple-100: #f9f5ff;
-	--plaque-purple-200: #6941c6;
+    --plaque-blue-100: #f0f9ff;
+    --plaque-blue-200: #026aa2;
+    --plaque-green-100: #ecfdf3;
+    --plaque-green-200: #027a48;
+    --plaque-red-100: #fef3f2;
+    --plaque-red-200: #b42318;
+    --plaque-orange-100: #fffaeb;
+    --plaque-orange-200: #b54708;
+    --plaque-black-100: #f2f4f7;
+    --plaque-black-200: #344054;
+    --plaque-purple-100: #f9f5ff;
+    --plaque-purple-200: #6941c6;
 
-	--green-100: #0ec615;
-	--green-200: #19b400;
-	--green-300: #12b76a;
+    --green-100: #0ec615;
+    --green-200: #19b400;
+    --green-300: #12b76a;
 
-	--white-100: #fff;
-	--white-100-opacity-90: rgba(255, 255, 255, 90%);
-	--white-100-opacity-60: rgba(255, 255, 255, 60%);
-	--white-200: #d0d5dd;
-	--white-300: #f2f4f7;
-	--white-400: #e4e7ec;
+    --white-100: #fff;
+    --white-100-opacity-90: rgba(255, 255, 255, 90%);
+    --white-100-opacity-60: rgba(255, 255, 255, 60%);
+    --white-200: #d0d5dd;
+    --white-300: #f2f4f7;
+    --white-400: #e4e7ec;
 
-	--black-100: #000;
-	--black-opacity-10: rgba(0, 0, 0, 10%);
-	--black-opacity-15: rgba(0, 0, 0, 15%);
-	--black-opacity-30: rgba(0, 0, 0, 30%);
-	--black-opacity-40: rgba(0, 0, 0, 40%);
-	--black-opacity-60: rgba(0, 0, 0, 0.411);
-	--black-200: #101828;
-	--black-200-opacity-3: rgba(16, 24, 40, 3%);
-	--black-200-opacity-5: rgba(16, 24, 40, 5%);
-	--black-200-opacity-10: rgba(16, 24, 40, 10%);
-	--black-200-opacity-50: rgba(16, 24, 40, 50%);
-	--black-200-opacity-70: rgba(16, 24, 40, 70%);
+    --black-100: #000;
+    --black-opacity-10: rgba(0, 0, 0, 10%);
+    --black-opacity-15: rgba(0, 0, 0, 15%);
+    --black-opacity-30: rgba(0, 0, 0, 30%);
+    --black-opacity-40: rgba(0, 0, 0, 40%);
+    --black-opacity-60: rgba(0, 0, 0, 0.411);
+    --black-200: #101828;
+    --black-200-opacity-3: rgba(16, 24, 40, 3%);
+    --black-200-opacity-5: rgba(16, 24, 40, 5%);
+    --black-200-opacity-10: rgba(16, 24, 40, 10%);
+    --black-200-opacity-50: rgba(16, 24, 40, 50%);
+    --black-200-opacity-70: rgba(16, 24, 40, 70%);
 
-	--grey-100: #afb8c8;
-	--grey-200: #6f6c90;
-	--grey-300: #616770;
-	--grey-400: #2a2e36;
-	--grey-500: #344054;
-	--grey-600: #475467;
+    --grey-100: #afb8c8;
+    --grey-200: #6f6c90;
+    --grey-300: #616770;
+    --grey-400: #2a2e36;
+    --grey-500: #344054;
+    --grey-600: #475467;
 
-	--header-height: 100px;
-	--header-z: 10;
+    --header-height: 100px;
+    --header-z: 10;
 
-	--tran-low: 0.2s ease;
-	--tran-mid: 0.4s ease;
+    --tran-low: 0.2s ease;
+    --tran-mid: 0.4s ease;
 
-	--modules-gap: 25px;
+    --modules-gap: 25px;
 
-	--adaptive-container-width: 1350px;
+    --adaptive-container-width: 1350px;
 
-	--blocks-radius: 8px;
+    --blocks-radius: 8px;
 
-	--modals-z: 20;
+    --modals-z: 20;
 
-	--burger-menu-z: 30;
+    --burger-menu-z: 30;
 }
 * {
-	scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 html {
-	overflow-x: hidden;
+    overflow-x: hidden;
 }
 body {
-	color: var(--grey-400);
+    color: var(--grey-400);
 }
 html {
-	&:has(> .hide-scrollbar) {
-		overflow: hidden;
-	}
+    &:has(> .hide-scrollbar) {
+        overflow: hidden;
+    }
 }
 .body-flex-column {
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .modules-gap-bottom {
-	margin-bottom: var(--modules-gap) !important;
+    margin-bottom: var(--modules-gap) !important;
 }
 .modules-gap-top {
-	margin-top: var(--modules-gap) !important;
+    margin-top: var(--modules-gap) !important;
 }
 .modules-gap-both {
-	margin-top: var(--modules-gap) !important;
-	margin-bottom: var(--modules-gap) !important;
+    margin-top: var(--modules-gap) !important;
+    margin-bottom: var(--modules-gap) !important;
 }
 
 /* LG_BIG */
 @media screen and (max-width: 1370px) {
-	body {
-		--adaptive-container-width: 1280px;
-	}
+    body {
+        --adaptive-container-width: 1280px;
+    }
 }
 /* LG_LOW */
 @media screen and (max-width: 1300px) {
-	body {
-		--adaptive-container-width: 1024px;
-	}
+    body {
+        --adaptive-container-width: 1024px;
+    }
 }
 /* MD_BIG */
 @media screen and (max-width: 1044px) {
-	body {
-		--adaptive-container-width: 850px;
-	}
+    body {
+        --adaptive-container-width: 850px;
+    }
 }
 /* MD_LOW */
 @media screen and (max-width: 870px) {
-	body {
-		--adaptive-container-width: 768px;
-	}
+    body {
+        --adaptive-container-width: 768px;
+    }
 }
 /* SM_BIG */
 @media screen and (max-width: 788px) {
-	body {
-		--header-height: 85px;
-		--adaptive-container-width: 600px;
-	}
+    body {
+        --header-height: 85px;
+        --adaptive-container-width: 600px;
+    }
 }
 /* SM_MID */
 @media screen and (max-width: 620px) {
-	body {
-		--adaptive-container-width: 480px;
-	}
+    body {
+        --adaptive-container-width: 480px;
+    }
 }
 /* XS_BIG */
 @media screen and (max-width: 500px) {
-	body {
-		--adaptive-container-width: 360px;
-	}
+    body {
+        --adaptive-container-width: 360px;
+    }
 }
 /* XS_LOW */
 @media screen and (max-width: 380px) {
-	body {
-		--adaptive-container-width: 345px;
-	}
+    body {
+        --adaptive-container-width: 345px;
+    }
 }

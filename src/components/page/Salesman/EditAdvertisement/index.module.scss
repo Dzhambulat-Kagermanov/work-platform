@@ -1,87 +1,87 @@
 .main {
-	--elements-max-width: 495px;
-	padding-bottom: 25px;
-	color: var(--grey-500);
+    --elements-max-width: 495px;
+    padding-bottom: 25px;
+    color: var(--grey-500);
 }
 .content {
-	display: flex;
-	flex-direction: column;
-	row-gap: 45px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 45px;
 }
 .head {
-	.link {
-		display: none;
-	}
-	.text {
-	}
+    .link {
+        display: none;
+    }
+    .text {
+    }
 }
 .card_wrapper {
-	max-width: var(--elements-max-width);
-	margin-top: 60px;
+    max-width: var(--elements-max-width);
+    margin-top: 60px;
 }
 .name_inp_wrapper {
-	max-width: var(--elements-max-width);
+    max-width: var(--elements-max-width);
 }
 .cashback {
-	padding-bottom: 43px;
-	border-bottom: 1px solid var(--white-400);
-	max-width: var(--elements-max-width);
+    padding-bottom: 43px;
+    border-bottom: 1px solid var(--white-400);
+    max-width: var(--elements-max-width);
 }
 .statistic {
-	max-width: var(--elements-max-width);
+    max-width: var(--elements-max-width);
 }
 .edit_area {
 }
 .ransoms_qnt {
-	max-width: var(--elements-max-width);
-	width: 100%;
-	padding: 28px 0;
-	border-bottom: 1px solid var(--white-400);
+    max-width: var(--elements-max-width);
+    width: 100%;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--white-400);
 }
 .ransoms_qnt_wrapper {
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
-	gap: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 @media screen and (max-width: 500px) {
-	.content {
-		row-gap: 25px;
-	}
-	.card_wrapper {
-		margin-top: 20px;
-	}
-	.head {
-		display: flex;
-		align-items: center;
-		column-gap: 20px;
-		position: relative;
-		padding-bottom: 18px;
-		.text {
-			h1 {
-				font-size: 18px;
-			}
-			h2 {
-				font-size: 12px;
-			}
-		}
-		&::before {
-			content: '';
-			position: absolute;
-			left: 50%;
-			translate: -50% 0;
-			bottom: 0;
-			width: calc(100vw - 5px);
-			height: 1px;
-			background-color: var(--white-400);
-		}
-		.link {
-			rotate: 90deg;
-			display: block;
-			svg {
-				width: 20px;
-				height: 12px;
-			}
-		}
-	}
+    .content {
+        row-gap: 25px;
+    }
+    .card_wrapper {
+        margin-top: 20px;
+    }
+    .head {
+        display: flex;
+        align-items: center;
+        column-gap: 20px;
+        position: relative;
+        padding-bottom: 18px;
+        .text {
+            h1 {
+                font-size: 18px;
+            }
+            h2 {
+                font-size: 12px;
+            }
+        }
+        &::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            translate: -50% 0;
+            bottom: 0;
+            width: calc(100vw - 5px);
+            height: 1px;
+            background-color: var(--white-400);
+        }
+        .link {
+            rotate: 90deg;
+            display: block;
+            svg {
+                width: 20px;
+                height: 12px;
+            }
+        }
+    }
 }

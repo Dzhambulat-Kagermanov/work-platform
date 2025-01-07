@@ -1,14 +1,14 @@
 .wrapper {
-	.group {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-		gap: 20px;
-	}
+    .group {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+        gap: 20px;
+    }
 }
 @media screen and (max-width: 788px) {
-	.wrapper {
-		.group {
-			grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
-		}
-	}
+    .wrapper {
+        .group {
+            grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+        }
+    }
 }

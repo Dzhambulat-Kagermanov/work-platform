@@ -1,72 +1,72 @@
 .dropdown_wrapper {
-	--width: 100%;
-	--height: 45px;
-	--x-margins: 0;
-	--border: none;
-	--border-radius: none;
+    --width: 100%;
+    --height: 45px;
+    --x-margins: 0;
+    --border: none;
+    --border-radius: none;
 }
 .dropdown_wrapper {
-	.dropdown_active {
-		width: 100%;
-		padding-right: 11px;
-		border-radius: var(--blocks-radius);
-		transition: var(--tran-low);
-		&:hover {
-			background-color: var(--white-300);
-		}
-	}
-	.dropdown_item {
-		transition: var(--tran-low);
-		border-radius: var(--blocks-radius);
-		&.active {
-			background-color: var(--white-300);
-		}
-		&:first-child {
-			margin-top: 8px;
-		}
-		&:hover {
-			background-color: var(--white-300);
-		}
-	}
-	.dropdown_content {
-		display: flex;
-		flex-direction: column;
-		row-gap: 8px;
-	}
+    .dropdown_active {
+        width: 100%;
+        padding-right: 11px;
+        border-radius: var(--blocks-radius);
+        transition: var(--tran-low);
+        &:hover {
+            background-color: var(--white-300);
+        }
+    }
+    .dropdown_item {
+        transition: var(--tran-low);
+        border-radius: var(--blocks-radius);
+        &.active {
+            background-color: var(--white-300);
+        }
+        &:first-child {
+            margin-top: 8px;
+        }
+        &:hover {
+            background-color: var(--white-300);
+        }
+    }
+    .dropdown_content {
+        display: flex;
+        flex-direction: column;
+        row-gap: 8px;
+    }
 }
 .item {
-	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 }
 .subitem {
-	svg {
-		transition: var(--tran-low);
-	}
+    svg {
+        transition: var(--tran-low);
+    }
 }
 .sidebarIsExpand {
-	.text_overlay {
-		display: grid;
-		grid-template-columns: 1fr;
-	}
-	.subitem {
-		svg {
-			opacity: 0;
-		}
-	}
+    .text_overlay {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .subitem {
+        svg {
+            opacity: 0;
+        }
+    }
 }
 
 .dropdown_isExpand {
-	.dropdown_active {
-		background-color: var(--white-300);
-	}
+    .dropdown_active {
+        background-color: var(--white-300);
+    }
 }
 .additional {
-	flex-grow: 1;
-	text-align: end;
-	color: var(--purple-300);
+    flex-grow: 1;
+    text-align: end;
+    color: var(--purple-300);
 }
 
 .icon {
-	min-width: 24px;
-	width: 24px;
+    min-width: 24px;
+    width: 24px;
 }

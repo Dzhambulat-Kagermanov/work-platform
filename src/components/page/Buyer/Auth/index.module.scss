@@ -1,16 +1,16 @@
 .telegram_sign_in {
-	width: 100%;
+    width: 100%;
 }
 .separator {
-	margin: 24px 0;
-	display: flex;
-	justify-content: center;
-	column-gap: 5px;
-	align-items: center;
-	color: var(--grey-200);
-	hr {
-		flex: 1;
-		height: 1px;
-		background-color: var(--white-400);
-	}
+    margin: 24px 0;
+    display: flex;
+    justify-content: center;
+    column-gap: 5px;
+    align-items: center;
+    color: var(--grey-200);
+    hr {
+        flex: 1;
+        height: 1px;
+        background-color: var(--white-400);
+    }
 }

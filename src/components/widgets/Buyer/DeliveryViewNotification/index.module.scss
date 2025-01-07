@@ -1,95 +1,95 @@
 .wrapper {
-	position: absolute;
-	z-index: 2;
-	top: 0;
-	left: 50%;
-	translate: -50% 0;
-	margin: 5px auto 0 auto;
-	padding: 5px;
-	border-radius: 12px;
-	color: var(--white-100);
-	padding: 15px;
-	display: flex;
-	column-gap: 20px;
-	align-items: center;
-	flex-direction: row-reverse;
-	justify-content: center;
-	flex-wrap: wrap;
-	row-gap: 10px;
-	text-align: center;
-	max-width: calc(100% - 10px);
-	width: 100%;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 50%;
+    translate: -50% 0;
+    margin: 5px auto 0 auto;
+    padding: 5px;
+    border-radius: 12px;
+    color: var(--white-100);
+    padding: 15px;
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+    flex-direction: row-reverse;
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    text-align: center;
+    max-width: calc(100% - 10px);
+    width: 100%;
 }
 .plaque {
-	text-align: center;
-	display: inline-block;
-	padding: 2px 6px;
-	border-radius: 16px;
-	background-color: var(--white-300);
-	h5 {
-		text-wrap: nowrap;
-	}
+    text-align: center;
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 16px;
+    background-color: var(--white-300);
+    h5 {
+        text-wrap: nowrap;
+    }
 }
 .waitingOrder {
-	background-color: var(--purple-600);
-	.plaque {
-		min-width: 155px;
-		color: var(--grey-500);
-	}
+    background-color: var(--purple-600);
+    .plaque {
+        min-width: 155px;
+        color: var(--grey-500);
+    }
 }
 .canceled {
-	background-color: var(--grey-500);
-	.plaque {
-		min-width: 140px;
-		color: var(--grey-500);
-	}
+    background-color: var(--grey-500);
+    .plaque {
+        min-width: 140px;
+        color: var(--grey-500);
+    }
 }
 .waitingReceive {
-	background-color: var(--blue-200);
-	.plaque {
-		color: var(--blue-300);
-	}
+    background-color: var(--blue-200);
+    .plaque {
+        color: var(--blue-300);
+    }
 }
 .confirmation {
-	background-color: var(--orange-100);
-	.plaque {
-		background-color: var(--black-opacity-60);
-		color: var(--white-100);
-	}
+    background-color: var(--orange-100);
+    .plaque {
+        background-color: var(--black-opacity-60);
+        color: var(--white-100);
+    }
 }
 .cashbackReceived {
-	background-color: var(--green-300);
-	.plaque {
-		color: var(--green-300);
-	}
+    background-color: var(--green-300);
+    .plaque {
+        color: var(--green-300);
+    }
 }
 
 .description {
-	flex-grow: 1;
-	display: flex;
-	column-gap: 5px;
-	align-items: center;
-	justify-content: space-between;
-	p {
-		margin: 0 auto;
-	}
+    flex-grow: 1;
+    display: flex;
+    column-gap: 5px;
+    align-items: center;
+    justify-content: space-between;
+    p {
+        margin: 0 auto;
+    }
 }
 
 @media screen and (max-width: 1044px) {
-	.wrapper {
-		flex-wrap: wrap;
-		justify-content: center;
-		row-gap: 10px;
-		flex-direction: column-reverse;
-		text-align: center;
-	}
-	.confirmation {
-		.description {
-			flex-wrap: wrap;
-			row-gap: 5px;
-			justify-content: center;
-			time {
-			}
-		}
-	}
+    .wrapper {
+        flex-wrap: wrap;
+        justify-content: center;
+        row-gap: 10px;
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+    .confirmation {
+        .description {
+            flex-wrap: wrap;
+            row-gap: 5px;
+            justify-content: center;
+            time {
+            }
+        }
+    }
 }

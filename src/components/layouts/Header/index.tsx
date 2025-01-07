@@ -1,17 +1,17 @@
-import { TChildren } from '@/types'
-import { Header } from '@/components/widgets/Buyer/Header'
-import { FC } from 'react'
-import { BurgerMenu } from '@/components/widgets/Buyer/BurgerMenu'
+import { TChildren } from "@/types";
+import { Header } from "@/components/widgets/Buyer/Header";
+import { FC } from "react";
+import { BurgerMenu } from "@/components/widgets/Buyer/BurgerMenu";
 
 interface Props extends TChildren {}
 const HeaderLayout: FC<Props> = ({ children }) => {
-	return (
-		<>
-			<Header />
-			<BurgerMenu />
-			{children}
-		</>
-	)
-}
+    return (
+        <>
+            <Header />
+            <BurgerMenu />
+            {children}
+        </>
+    );
+};
 
-export { HeaderLayout }
+export { HeaderLayout };

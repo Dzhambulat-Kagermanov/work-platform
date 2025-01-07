@@ -1,9 +1,9 @@
-import { AuthPage } from '@/components/page/Salesman/Auth'
-import { FC } from 'react'
+import { AuthPage } from "@/components/page/Salesman/Auth";
+import { FC } from "react";
 
 interface Props {}
 const Auth: FC<Props> = ({}) => {
-	return <AuthPage />
-}
+    return <AuthPage />;
+};
 
-export default Auth
+export default Auth;

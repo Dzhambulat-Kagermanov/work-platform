@@ -1,14 +1,14 @@
 .wrapper {
-	display: flex;
-	column-gap: 30px;
+    display: flex;
+    column-gap: 30px;
 }
 
 @media screen and (max-width: 788px) {
-	.wrapper {
-		justify-content: space-between;
-		column-gap: 20px;
-	}
-	.btn {
-		--width: 180px;
-	}
+    .wrapper {
+        justify-content: space-between;
+        column-gap: 20px;
+    }
+    .btn {
+        --width: 180px;
+    }
 }

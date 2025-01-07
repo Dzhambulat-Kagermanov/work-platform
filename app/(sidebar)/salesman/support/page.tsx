@@ -1,9 +1,9 @@
-import { SupportPage } from '@/components/page/Salesman/Support'
-import { FC } from 'react'
+import { SupportPage } from "@/components/page/Salesman/Support";
+import { FC } from "react";
 
 interface Props {}
 const Support: FC<Props> = ({}) => {
-	return <SupportPage />
-}
+    return <SupportPage />;
+};
 
-export default Support
+export default Support;

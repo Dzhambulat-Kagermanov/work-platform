@@ -1,26 +1,26 @@
 .wrapper {
 }
 .drp_wrapper {
-	width: 100%;
-	margin-top: 20px;
+    width: 100%;
+    margin-top: 20px;
 }
 .drp_item {
 }
 .circle {
-	min-width: 20px;
-	width: 20px;
-	height: 20px;
-	border-radius: 50%;
-	border: 1px solid var(--purple-300);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	&::before {
-		content: '';
-		display: block;
-		width: 8px;
-		height: 8px;
-		background-color: var(--purple-300);
-		border-radius: inherit;
-	}
+    min-width: 20px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid var(--purple-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &::before {
+        content: "";
+        display: block;
+        width: 8px;
+        height: 8px;
+        background-color: var(--purple-300);
+        border-radius: inherit;
+    }
 }

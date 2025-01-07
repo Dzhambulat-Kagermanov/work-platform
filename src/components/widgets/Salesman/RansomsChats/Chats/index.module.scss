@@ -1,21 +1,21 @@
 .item {
-	border: none;
-	border-top: var(--chat-main-border, 1px solid var(--white-400));
-	&:first-child {
-		border-top: none;
-	}
-	&:last-child {
-		border-bottom: var(--chat-main-border, 1px solid var(--white-400));
-	}
+    border: none;
+    border-top: var(--chat-main-border, 1px solid var(--white-400));
+    &:first-child {
+        border-top: none;
+    }
+    &:last-child {
+        border-bottom: var(--chat-main-border, 1px solid var(--white-400));
+    }
 }
 .item_content {
-	flex-grow: 1;
+    flex-grow: 1;
 }
 .item_footer {
-	column-gap: 8px;
-	justify-content: space-between;
+    column-gap: 8px;
+    justify-content: space-between;
 }
 .item_head {
-	column-gap: 8px;
-	justify-content: space-between;
+    column-gap: 8px;
+    justify-content: space-between;
 }

@@ -1,46 +1,46 @@
 .content {
-	--border-bottom: 1px solid var(--grey-100);
+    --border-bottom: 1px solid var(--grey-100);
 }
 .head {
-	border-bottom: var(--border-bottom);
-	padding: 28px 0 17px 0;
+    border-bottom: var(--border-bottom);
+    padding: 28px 0 17px 0;
 }
 .sales {
-	border-bottom: var(--border-bottom);
-	padding: 25px 0 35px 0;
+    border-bottom: var(--border-bottom);
+    padding: 25px 0 35px 0;
 }
 .actions {
-	border-bottom: var(--border-bottom);
-	padding: 35px 0 45px 0;
+    border-bottom: var(--border-bottom);
+    padding: 35px 0 45px 0;
 }
 .shop {
-	margin-top: 27px;
+    margin-top: 27px;
 }
 
 @media screen and (max-width: 1044px) {
-	.actions {
-		padding: 25px 0 32px 0;
-	}
+    .actions {
+        padding: 25px 0 32px 0;
+    }
 }
 
 @media screen and (max-width: 870px) {
-	.head {
-		padding: 0 0 20px 0;
-	}
-	.sales {
-		padding: 15px 0;
-	}
-	.actions {
-		padding: 20px 0;
-	}
+    .head {
+        padding: 0 0 20px 0;
+    }
+    .sales {
+        padding: 15px 0;
+    }
+    .actions {
+        padding: 20px 0;
+    }
 }
 
 @media screen and (max-width: 788px) {
-	.actions {
-		border: none;
-		padding: 10px 0;
-	}
-	.head {
-		border: none;
-	}
+    .actions {
+        border: none;
+        padding: 10px 0;
+    }
+    .head {
+        border: none;
+    }
 }

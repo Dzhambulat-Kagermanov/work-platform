@@ -1,24 +1,25 @@
 .wrapper {
-	color: var(--grey-500);
+    color: var(--grey-500);
 }
 .title {
 }
 .content_wrapper {
-	margin-top: 13px;
-	box-shadow: 0 1px 3px 0 rgba(16, 24, 40, 10%),
-		0 1px 2px 0 rgba(16, 24, 40, 6%);
-	background-color: var(--white-100);
-	border-radius: 12px;
+    margin-top: 13px;
+    box-shadow:
+        0 1px 3px 0 rgba(16, 24, 40, 10%),
+        0 1px 2px 0 rgba(16, 24, 40, 6%);
+    background-color: var(--white-100);
+    border-radius: 12px;
 }
 
 @media screen and (max-width: 1044px) {
-	.title {
-		font-size: 20px;
-	}
+    .title {
+        font-size: 20px;
+    }
 }
 
 @media screen and (max-width: 620px) {
-	.title {
-		font-size: 16px;
-	}
+    .title {
+        font-size: 16px;
+    }
 }

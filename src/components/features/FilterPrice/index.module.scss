@@ -1,31 +1,31 @@
 .btn {
-	--width: 200px;
-	--height: 48px;
-	--expandTransition: 0.2s ease;
-	--x-margins: 0 16px 0 12px;
-	--border: 1px solid var(--white-200);
-	--backg: var(--white-100);
-	width: var(--width);
-	height: var(--height);
-	background-color: var(--backg);
-	border-radius: var(--blocks-radius);
-	border: var(--border);
-	display: flex;
-	align-items: center;
-	padding: var(--x-margins);
-	column-gap: 16px;
-	.text {
-		text-align: start;
-		flex: 1;
-	}
-	.icon {
-		transition: var(--expandTransition);
-		width: 13px;
-		height: 8px;
-	}
-	&.expand {
-		.icon {
-			rotate: -180deg;
-		}
-	}
+    --width: 200px;
+    --height: 48px;
+    --expandTransition: 0.2s ease;
+    --x-margins: 0 16px 0 12px;
+    --border: 1px solid var(--white-200);
+    --backg: var(--white-100);
+    width: var(--width);
+    height: var(--height);
+    background-color: var(--backg);
+    border-radius: var(--blocks-radius);
+    border: var(--border);
+    display: flex;
+    align-items: center;
+    padding: var(--x-margins);
+    column-gap: 16px;
+    .text {
+        text-align: start;
+        flex: 1;
+    }
+    .icon {
+        transition: var(--expandTransition);
+        width: 13px;
+        height: 8px;
+    }
+    &.expand {
+        .icon {
+            rotate: -180deg;
+        }
+    }
 }

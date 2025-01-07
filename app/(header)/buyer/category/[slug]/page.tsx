@@ -1,16 +1,16 @@
-import { CategoryItemPage } from '@/components/page/Buyer/CategoryItem'
-import { FC } from 'react'
+import { CategoryItemPage } from "@/components/page/Buyer/CategoryItem";
+import { FC } from "react";
 
 interface Props {
-	searchParams: Promise<{
-		category: string
-		subcategory: string
-	}>
+    searchParams: Promise<{
+        category: string;
+        subcategory: string;
+    }>;
 }
 const CategoryItem: FC<Props> = async ({ searchParams }) => {
-	const { category, subcategory } = await searchParams
+    const { category, subcategory } = await searchParams;
 
-	return <CategoryItemPage slug={category} subcategory={subcategory} />
-}
+    return <CategoryItemPage slug={category} subcategory={subcategory} />;
+};
 
-export default CategoryItem
+export default CategoryItem;

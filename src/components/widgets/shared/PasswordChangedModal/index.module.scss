@@ -1,18 +1,18 @@
 .wrapper {
 }
 .content {
-	background-color: var(--white-100);
-	padding: 16px;
-	border-radius: 16px;
-	max-width: 345px;
-	margin: 0 auto;
-	width: 100%;
-	text-align: center;
-	color: var(--black-200);
-	img {
-		margin: 0 auto;
-	}
-	& > h2 {
-		margin: 16px 0 24px 0;
-	}
+    background-color: var(--white-100);
+    padding: 16px;
+    border-radius: 16px;
+    max-width: 345px;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    color: var(--black-200);
+    img {
+        margin: 0 auto;
+    }
+    & > h2 {
+        margin: 16px 0 24px 0;
+    }
 }

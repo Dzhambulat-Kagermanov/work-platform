@@ -1,28 +1,28 @@
 .head {
-	display: flex;
-	column-gap: 30px;
-	justify-content: space-between;
-	.content {
-		max-width: 590px;
-	}
+    display: flex;
+    column-gap: 30px;
+    justify-content: space-between;
+    .content {
+        max-width: 590px;
+    }
 }
 .switcher {
-	margin: 37px 0 43px 0;
+    margin: 37px 0 43px 0;
 }
 .similar_products {
-	margin-bottom: 40px;
+    margin-bottom: 40px;
 }
 
 @media screen and (max-width: 788px) {
-	.head {
-		display: block;
-		.content {
-			margin-top: 20px;
-		}
-	}
+    .head {
+        display: block;
+        .content {
+            margin-top: 20px;
+        }
+    }
 }
 @media screen and (max-width: 620px) {
-	.switcher {
-		margin-top: 26px;
-	}
+    .switcher {
+        margin-top: 26px;
+    }
 }

@@ -1,59 +1,59 @@
 .wrapper {
-	padding: 32px 0;
-	--btn-size: 48px;
+    padding: 32px 0;
+    --btn-size: 48px;
 }
 .head {
-	margin-bottom: 32px;
-	display: flex;
-	align-items: center;
-	column-gap: 15px;
-	p {
-		color: var(--black-opacity-60);
-	}
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+    p {
+        color: var(--black-opacity-60);
+    }
 }
 .content {
-	position: relative;
+    position: relative;
 }
 .slider {
-	width: calc(100% - var(--btn-size) * 2 - 15px);
-	margin: 0 auto;
+    width: calc(100% - var(--btn-size) * 2 - 15px);
+    margin: 0 auto;
 }
 .item {
 }
 .review {
 }
 .btn {
-	width: var(--btn-size);
-	height: var(--btn-size);
-	top: 50%;
-	position: absolute;
-	transition: var(--tran-low);
-	&:hover {
-		scale: 1.05;
-	}
+    width: var(--btn-size);
+    height: var(--btn-size);
+    top: 50%;
+    position: absolute;
+    transition: var(--tran-low);
+    &:hover {
+        scale: 1.05;
+    }
 }
 .next_btn {
-	right: 0;
-	translate: 0 -50%;
-	rotate: -90deg;
+    right: 0;
+    translate: 0 -50%;
+    rotate: -90deg;
 }
 .prev_btn {
-	left: 0;
-	translate: 0 -50%;
-	rotate: 90deg;
+    left: 0;
+    translate: 0 -50%;
+    rotate: 90deg;
 }
 
 @media screen and (max-width: 788px) {
-	.slider {
-		cursor: grab;
-		width: 100%;
-	}
-	.btn {
-		display: none;
-	}
+    .slider {
+        cursor: grab;
+        width: 100%;
+    }
+    .btn {
+        display: none;
+    }
 }
 @media screen and (max-width: 380px) {
-	.title {
-		font-size: 20px;
-	}
+    .title {
+        font-size: 20px;
+    }
 }

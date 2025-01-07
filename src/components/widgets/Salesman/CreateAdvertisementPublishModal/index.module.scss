@@ -1,78 +1,78 @@
 .wrapper {
 }
 .content {
-	max-width: 512px;
-	margin: 0 auto;
-	width: 100%;
-	background-color: var(--white-100);
-	border-radius: 12px;
-	padding: 24px;
-	& > img {
-	}
-	& > h2 {
-		color: var(--black-200);
-		margin: 20px 0 8px 0;
-	}
-	& > h3 {
-		color: var(--grey-600);
-		margin: 20px 0 32px 0;
-	}
+    max-width: 512px;
+    margin: 0 auto;
+    width: 100%;
+    background-color: var(--white-100);
+    border-radius: 12px;
+    padding: 24px;
+    & > img {
+    }
+    & > h2 {
+        color: var(--black-200);
+        margin: 20px 0 8px 0;
+    }
+    & > h3 {
+        color: var(--grey-600);
+        margin: 20px 0 32px 0;
+    }
 }
 
 .link_wrapper {
-	margin: 20px 0 32px 0;
-	& > h2 {
-		margin-bottom: 6px;
-	}
+    margin: 20px 0 32px 0;
+    & > h2 {
+        margin-bottom: 6px;
+    }
 }
 .link {
-	display: flex;
-	column-gap: 5px;
+    display: flex;
+    column-gap: 5px;
 
-	.btn {
-		width: 44px;
-		&:active {
-			.icon {
-				scale: 1.1;
-				path {
-					stroke: var(--purple-700);
-				}
-			}
-		}
-		.icon {
-			translate: 0 2px;
-			transition: var(--tran-low);
-			path {
-				transition: inherit;
-			}
-		}
-	}
+    .btn {
+        width: 44px;
+        &:active {
+            .icon {
+                scale: 1.1;
+                path {
+                    stroke: var(--purple-700);
+                }
+            }
+        }
+        .icon {
+            translate: 0 2px;
+            transition: var(--tran-low);
+            path {
+                transition: inherit;
+            }
+        }
+    }
 }
 .link_content {
-	flex: 1;
-	overflow: hidden;
-	border: 1px solid var(--white-200);
-	border-radius: var(--blocks-radius);
-	padding: 10px 14px;
-	& > h3 {
-		max-width: 100%;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
+    flex: 1;
+    overflow: hidden;
+    border: 1px solid var(--white-200);
+    border-radius: var(--blocks-radius);
+    padding: 10px 14px;
+    & > h3 {
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 
 @media screen and (max-width: 530px) {
-	.link_wrapper {
-		margin: 16px 0 24px 0;
-	}
-	.content {
-		padding: 20px 16px 16px 16px;
-		max-width: 345px;
-		min-width: 345px;
-		& > h2 {
-			color: var(--black-200);
-			margin-top: 15px;
-		}
-	}
+    .link_wrapper {
+        margin: 16px 0 24px 0;
+    }
+    .content {
+        padding: 20px 16px 16px 16px;
+        max-width: 345px;
+        min-width: 345px;
+        & > h2 {
+            color: var(--black-200);
+            margin-top: 15px;
+        }
+    }
 }

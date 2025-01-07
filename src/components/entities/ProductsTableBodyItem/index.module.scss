@@ -1,25 +1,25 @@
 .column {
-	padding: 16px 9px 16px 24px;
+    padding: 16px 9px 16px 24px;
 }
 .product {
-	display: flex;
-	align-items: center;
-	column-gap: 15px;
-	img {
-		border-radius: 50%;
-	}
-	.content {
-		flex-grow: 1;
-		text-align: start;
-		h2 {
-			max-width: 100%;
-			-webkit-line-clamp: 1;
-			display: -webkit-box;
-			-webkit-box-orient: vertical;
-			overflow: hidden;
-		}
-		h3 {
-			color: var(--grey-600);
-		}
-	}
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+    img {
+        border-radius: 50%;
+    }
+    .content {
+        flex-grow: 1;
+        text-align: start;
+        h2 {
+            max-width: 100%;
+            -webkit-line-clamp: 1;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        h3 {
+            color: var(--grey-600);
+        }
+    }
 }

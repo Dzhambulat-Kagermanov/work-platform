@@ -1,42 +1,42 @@
 .wrapper {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-	justify-content: space-between;
-	gap: 20px 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    justify-content: space-between;
+    gap: 20px 30px;
 }
 @media screen and (max-width: 1044px) {
-	.wrapper {
-		gap: 20px;
-		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-	}
+    .wrapper {
+        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
 }
 @media screen and (max-width: 788px) {
-	.item_title {
-		font-size: 14px;
-	}
+    .item_title {
+        font-size: 14px;
+    }
 }
 
 @media screen and (max-width: 620px) {
-	.item_title {
-		font-size: 16px;
-	}
+    .item_title {
+        font-size: 16px;
+    }
 }
 
 @media screen and (max-width: 500px) {
-	.wrapper {
-		gap: 10px;
-		grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
-	}
-	.item {
-		--text-border-margins: 7px;
-		overflow: hidden;
-		border-radius: 15px;
-	}
-	.item_title {
-		font-size: 14px;
-	}
-	.item_plaque {
-		padding: 6px 14px;
-		font-size: 8px;
-	}
+    .wrapper {
+        gap: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+    }
+    .item {
+        --text-border-margins: 7px;
+        overflow: hidden;
+        border-radius: 15px;
+    }
+    .item_title {
+        font-size: 14px;
+    }
+    .item_plaque {
+        padding: 6px 14px;
+        font-size: 8px;
+    }
 }

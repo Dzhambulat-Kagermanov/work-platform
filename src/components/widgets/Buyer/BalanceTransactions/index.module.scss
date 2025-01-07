@@ -1,41 +1,41 @@
 .wrapper {
-	h2 {
-	}
-	.switcher {
-		margin-top: 25px;
-	}
+    h2 {
+    }
+    .switcher {
+        margin-top: 25px;
+    }
 }
 .inp {
-	&::placeholder {
-		color: var(--grey-200);
-	}
+    &::placeholder {
+        color: var(--grey-200);
+    }
 }
 .inp_wrapper {
-	margin: 35px 0;
-	width: 450px;
+    margin: 35px 0;
+    width: 450px;
 }
 
 .table_content {
-	width: 100%;
+    width: 100%;
 }
 .table {
-	padding-bottom: 0;
+    padding-bottom: 0;
 }
 .table_wrapper {
-	width: 100%;
-	padding-bottom: 20px;
+    width: 100%;
+    padding-bottom: 20px;
 }
 .pagination {
-	padding: 12px 24px;
+    padding: 12px 24px;
 }
 
 @media screen and (max-width: 620px) {
-	.pagination {
-		margin-top: 15px;
-		border-top: 1px solid var(--white-400);
-	}
-	.inp_wrapper {
-		width: 100%;
-		margin: 15px 0;
-	}
+    .pagination {
+        margin-top: 15px;
+        border-top: 1px solid var(--white-400);
+    }
+    .inp_wrapper {
+        width: 100%;
+        margin: 15px 0;
+    }
 }

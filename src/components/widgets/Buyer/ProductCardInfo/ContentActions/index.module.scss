@@ -1,23 +1,23 @@
 .wrapper {
-	display: flex;
-	column-gap: 10px;
-	align-items: center;
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
 }
 
 @media screen and (max-width: 870px) {
-	.wrapper {
-		flex-wrap: wrap;
-		row-gap: 10px;
-	}
-	.btn {
-		width: 100%;
-	}
+    .wrapper {
+        flex-wrap: wrap;
+        row-gap: 10px;
+    }
+    .btn {
+        width: 100%;
+    }
 }
 @media screen and (max-width: 788px) {
-	.wrapper {
-		.btn {
-			width: auto;
-			flex: 1;
-		}
-	}
+    .wrapper {
+        .btn {
+            width: auto;
+            flex: 1;
+        }
+    }
 }

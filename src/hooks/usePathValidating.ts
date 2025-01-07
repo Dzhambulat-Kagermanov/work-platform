@@ -1,8 +1,8 @@
-import { pathValidating } from '@/lib'
-import { usePathname } from 'next/navigation'
+import { pathValidating } from "@/lib";
+import { usePathname } from "next/navigation";
 
 export const usePathValidating = (validator: string): boolean => {
-	const path = usePathname()
+    const path = usePathname();
 
-	return pathValidating(path, validator)
-}
+    return pathValidating(path, validator);
+};

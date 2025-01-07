@@ -1,16 +1,16 @@
 .wrapper {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-	justify-content: space-between;
-	gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    justify-content: space-between;
+    gap: 30px;
 }
 @media screen and (max-width: 870px) {
-	.wrapper {
-		gap: 20px;
-	}
+    .wrapper {
+        gap: 20px;
+    }
 }
 @media screen and (max-width: 380px) {
-	.wrapper {
-		gap: 5px;
-	}
+    .wrapper {
+        gap: 5px;
+    }
 }

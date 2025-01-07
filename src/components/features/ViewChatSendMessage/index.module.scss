@@ -1,14 +1,14 @@
 .btn {
-	min-width: 44px;
-	max-width: 44px;
-	height: 44px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: var(--purple-300);
-	transition: var(--tran-low);
-	border-radius: var(--blocks-radius);
-	&:hover {
-		opacity: 0.8;
-	}
+    min-width: 44px;
+    max-width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--purple-300);
+    transition: var(--tran-low);
+    border-radius: var(--blocks-radius);
+    &:hover {
+        opacity: 0.8;
+    }
 }

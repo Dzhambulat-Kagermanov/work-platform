@@ -1,36 +1,36 @@
 .wrapper {
-	h2 {
-	}
-	& > h3 {
-		color: var(--grey-300);
-		margin: 8px 0 20px 0;
-	}
+    h2 {
+    }
+    & > h3 {
+        color: var(--grey-300);
+        margin: 8px 0 20px 0;
+    }
 }
 .product {
-	display: flex;
-	column-gap: 9px;
-	align-items: center;
-	img {
-		border-radius: 50%;
-	}
+    display: flex;
+    column-gap: 9px;
+    align-items: center;
+    img {
+        border-radius: 50%;
+    }
 }
 .info {
-	max-width: 100%;
-	h3 {
-		color: var(--grey-500);
-	}
-	h4 {
-		color: var(--grey-600);
-	}
+    max-width: 100%;
+    h3 {
+        color: var(--grey-500);
+    }
+    h4 {
+        color: var(--grey-600);
+    }
 }
 
 .actions {
-	margin-top: 32px;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 12px;
-	.btn {
-		min-width: 170px;
-		flex: 1;
-	}
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    .btn {
+        min-width: 170px;
+        flex: 1;
+    }
 }

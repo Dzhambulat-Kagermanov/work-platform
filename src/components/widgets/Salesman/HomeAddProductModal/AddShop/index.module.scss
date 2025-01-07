@@ -1,35 +1,35 @@
 .wrapper {
-	img {
-		margin: 0 auto;
-	}
-	h2 {
-		margin-top: 32px;
-	}
-	h3 {
-		color: var(--grey-500);
-		margin: 8px 0 20px 0;
-		span {
-			color: var(--grey-100);
-		}
-	}
+    img {
+        margin: 0 auto;
+    }
+    h2 {
+        margin-top: 32px;
+    }
+    h3 {
+        color: var(--grey-500);
+        margin: 8px 0 20px 0;
+        span {
+            color: var(--grey-100);
+        }
+    }
 }
 .inps {
-	display: flex;
-	flex-direction: column;
-	row-gap: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
 }
 .inp_label {
-	color: var(--grey-500);
+    color: var(--grey-500);
 }
 .inp_wrapper {
 }
 .actions {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 12px;
-	margin-top: 32px;
-	.btn {
-		flex: 1;
-		min-width: 170px;
-	}
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+    .btn {
+        flex: 1;
+        min-width: 170px;
+    }
 }

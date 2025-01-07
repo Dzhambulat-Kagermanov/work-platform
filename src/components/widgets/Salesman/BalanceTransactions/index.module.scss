@@ -1,35 +1,35 @@
 .wrapper {
-	h2 {
-	}
-	.switcher {
-		margin-top: 25px;
-	}
+    h2 {
+    }
+    .switcher {
+        margin-top: 25px;
+    }
 }
 .inp {
-	&::placeholder {
-		color: var(--grey-200);
-	}
+    &::placeholder {
+        color: var(--grey-200);
+    }
 }
 .actions {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin: 35px 0;
-	gap: 20px;
-	flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 35px 0;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 .action {
-	--btn-bckg: var(--white-300);
+    --btn-bckg: var(--white-300);
 }
 .inp_wrapper {
-	max-width: 450px;
+    max-width: 450px;
 }
 .table {
-	padding-bottom: 0;
+    padding-bottom: 0;
 }
 .table_wrapper {
-	padding-bottom: 20px;
+    padding-bottom: 20px;
 }
 .pagination {
-	padding: 12px 24px;
+    padding: 12px 24px;
 }

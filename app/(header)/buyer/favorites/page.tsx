@@ -1,9 +1,9 @@
-import { FC } from 'react'
-import { FavoritesPage } from '@/components/page/Buyer/Favorites'
+import { FC } from "react";
+import { FavoritesPage } from "@/components/page/Buyer/Favorites";
 
 interface Props {}
 const Favorites: FC<Props> = ({}) => {
-	return <FavoritesPage />
-}
+    return <FavoritesPage />;
+};
 
-export default Favorites
+export default Favorites;

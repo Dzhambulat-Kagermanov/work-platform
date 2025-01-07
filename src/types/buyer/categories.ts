@@ -1,9 +1,9 @@
 export type TCategoryItemProps = {
-	title: string
-	productsQnt: number
-	image: string
-}
+    title: string;
+    productsQnt: number;
+    image: string;
+};
 export type TSubcategoryItemProps = {
-	title: string
-	productsQnt: number
-}
+    title: string;
+    productsQnt: number;
+};

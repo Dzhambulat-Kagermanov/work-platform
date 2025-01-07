@@ -1,75 +1,75 @@
 .wrapper {
-	row-gap: 1px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	& > h3 {
-		max-width: 368px;
-		-webkit-line-clamp: 1;
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
-		overflow: hidden;
-	}
+    row-gap: 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    & > h3 {
+        max-width: 368px;
+        -webkit-line-clamp: 1;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
 }
 .head {
-	display: flex;
-	align-items: center;
-	column-gap: 30px;
-	time {
-		transition: var(--tran-low);
-		color: var(--green-100);
-		display: flex;
-		align-items: center;
-		column-gap: 6px;
-		&::before {
-			content: '';
-			transition: inherit;
-			display: block;
-			width: 7px;
-			height: 7px;
-			border-radius: 50%;
-			background-color: var(--green-100);
-		}
-	}
+    display: flex;
+    align-items: center;
+    column-gap: 30px;
+    time {
+        transition: var(--tran-low);
+        color: var(--green-100);
+        display: flex;
+        align-items: center;
+        column-gap: 6px;
+        &::before {
+            content: "";
+            transition: inherit;
+            display: block;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: var(--green-100);
+        }
+    }
 }
 .isOffline {
-	.head {
-		time {
-			color: var(--grey-100);
-			&::before {
-				background-color: var(--grey-100);
-			}
-		}
-	}
+    .head {
+        time {
+            color: var(--grey-100);
+            &::before {
+                background-color: var(--grey-100);
+            }
+        }
+    }
 }
 
 .product_info {
-	display: flex;
-	align-items: center;
-	column-gap: 7px;
-	.plaque {
-	}
-	h5 {
-		color: var(--purple-900);
-	}
-	h6 {
-		color: var(--grey-100);
-		text-decoration: line-through;
-	}
+    display: flex;
+    align-items: center;
+    column-gap: 7px;
+    .plaque {
+    }
+    h5 {
+        color: var(--purple-900);
+    }
+    h6 {
+        color: var(--grey-100);
+        text-decoration: line-through;
+    }
 }
 
 @media screen and (max-width: 870px) {
-	.wrapper {
-		justify-content: center;
-	}
+    .wrapper {
+        justify-content: center;
+    }
 }
 @media screen and (max-width: 500px) {
-	.wrapper {
-		h3 {
-			max-width: calc(100% - 30px);
-		}
-	}
-	.head {
-		column-gap: 10px;
-	}
+    .wrapper {
+        h3 {
+            max-width: calc(100% - 30px);
+        }
+    }
+    .head {
+        column-gap: 10px;
+    }
 }

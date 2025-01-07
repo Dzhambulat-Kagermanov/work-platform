@@ -1,27 +1,27 @@
 .wrapper {
-	cursor: pointer;
-	position: relative;
-	padding: 0 5px;
-	&::before {
-		content: '';
-		transition: var(--tran-low);
-		position: absolute;
-		left: 50%;
-		translate: -50% 0;
-		height: 2px;
-		width: 0;
-		bottom: -19px;
-	}
-	p {
-		transition: var(--tran-low);
-	}
+    cursor: pointer;
+    position: relative;
+    padding: 0 5px;
+    &::before {
+        content: "";
+        transition: var(--tran-low);
+        position: absolute;
+        left: 50%;
+        translate: -50% 0;
+        height: 2px;
+        width: 0;
+        bottom: -19px;
+    }
+    p {
+        transition: var(--tran-low);
+    }
 }
 .active {
-	p {
-		color: var(--purple-600);
-	}
-	&::before {
-		width: 100%;
-		background-color: var(--purple-600);
-	}
+    p {
+        color: var(--purple-600);
+    }
+    &::before {
+        width: 100%;
+        background-color: var(--purple-600);
+    }
 }

@@ -1,16 +1,16 @@
-import { TSalesmanInfo } from '@/types'
+import { TSalesmanInfo } from "@/types";
 
-type TGetSalesmanInfo = TSalesmanInfo
+type TGetSalesmanInfo = TSalesmanInfo;
 export const getSalesmanInfo = async (
-	id: number
+    id: number,
 ): Promise<TGetSalesmanInfo> => {
-	return new Promise((res, rej) => {
-		res({
-			id: 1,
-			boughtOut: 12,
-			productsWithCashback: 0,
-			rating: 3.7,
-			shopName: 'Магазин',
-		})
-	})
-}
+    return new Promise((res, rej) => {
+        res({
+            id: 1,
+            boughtOut: 12,
+            productsWithCashback: 0,
+            rating: 3.7,
+            shopName: "Магазин",
+        });
+    });
+};

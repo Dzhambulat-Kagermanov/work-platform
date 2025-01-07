@@ -1,56 +1,56 @@
 .wrapper {
-	max-width: 100%;
-	overflow: auto;
-	padding-bottom: 26px;
+    max-width: 100%;
+    overflow: auto;
+    padding-bottom: 26px;
 
-	&::-webkit-scrollbar {
-		width: 12px;
-		background-color: transparent;
-	}
-	&::-webkit-scrollbar-thumb {
-		background-color: var(--white-200);
-	}
+    &::-webkit-scrollbar {
+        width: 12px;
+        background-color: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--white-200);
+    }
 }
 .table {
-	min-width: 1004px;
-	width: 100%;
-	border-collapse: collapse;
-	p {
-		text-align: start;
-	}
+    min-width: 1004px;
+    width: 100%;
+    border-collapse: collapse;
+    p {
+        text-align: start;
+    }
 }
 .head {
-	color: var(--grey-600);
-	.row {
-		border-bottom: var(--chat-main-border, 1px solid var(--white-400));
-	}
-	.column {
-		padding: 13px 24px;
-	}
+    color: var(--grey-600);
+    .row {
+        border-bottom: var(--chat-main-border, 1px solid var(--white-400));
+    }
+    .column {
+        padding: 13px 24px;
+    }
 }
 .body {
-	.row {
-		border-bottom: var(--chat-main-border, 1px solid var(--white-400));
-		background-color: var(--white-300);
-	}
-	.column {
-		padding: 26px 24px;
-		&.blue {
-			color: var(--blue-100);
-		}
-	}
-	.sum {
-		color: var(--red-100);
-	}
-	.type {
-		color: var(--red-100);
-	}
+    .row {
+        border-bottom: var(--chat-main-border, 1px solid var(--white-400));
+        background-color: var(--white-300);
+    }
+    .column {
+        padding: 26px 24px;
+        &.blue {
+            color: var(--blue-100);
+        }
+    }
+    .sum {
+        color: var(--red-100);
+    }
+    .type {
+        color: var(--red-100);
+    }
 }
 .isReplenishment {
-	.sum {
-		color: var(--green-100);
-	}
-	.type {
-		color: var(--green-100);
-	}
+    .sum {
+        color: var(--green-100);
+    }
+    .type {
+        color: var(--green-100);
+    }
 }

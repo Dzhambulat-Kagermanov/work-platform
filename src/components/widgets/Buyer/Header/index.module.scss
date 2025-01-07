@@ -1,22 +1,22 @@
 .wrapper {
-	position: sticky;
-	left: 0;
-	top: 0;
-	background-color: var(--purple-200);
-	z-index: var(--header-z);
-	height: var(--header-height);
+    position: sticky;
+    left: 0;
+    top: 0;
+    background-color: var(--purple-200);
+    z-index: var(--header-z);
+    height: var(--header-height);
 }
 .container {
-	padding: 7px 0 16px 0;
-	color: var(--white-100);
+    padding: 7px 0 16px 0;
+    color: var(--white-100);
 }
 .entrance_link {
-	opacity: 0.7;
-	transition: var(--tran-low);
-	&:hover {
-		opacity: 1;
-	}
+    opacity: 0.7;
+    transition: var(--tran-low);
+    &:hover {
+        opacity: 1;
+    }
 }
 .content {
-	margin-top: 11px;
+    margin-top: 11px;
 }

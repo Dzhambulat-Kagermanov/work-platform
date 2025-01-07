@@ -1,45 +1,45 @@
 .item {
-	cursor: pointer;
-	display: flex;
-	transition: var(--tran-low);
-	column-gap: 12px;
-	border: 1px solid var(--white-400);
-	padding: 16px;
-	border-radius: var(--blocks-radius);
-	.content {
-		h2 {
-			color: var(--grey-500);
-		}
-		h3 {
-			color: var(--grey-600);
-		}
-	}
-	.indicator {
-		transition: inherit;
-		border: 1px solid var(--white-200);
-		border-radius: 50%;
-		min-width: 20px;
-		width: 20px;
-		height: 20px;
-	}
-	img {
-		min-width: 40px;
-		border-radius: 50%;
-	}
-	&.active {
-		background-color: var(--white-300);
-		border-color: var(--purple-800);
-		.content {
-			h2 {
-				color: var(--purple-200);
-			}
-			h3 {
-				color: var(--purple-300);
-			}
-		}
-		.indicator {
-			background-color: var(--purple-300);
-			border-color: var(--purple-300);
-		}
-	}
+    cursor: pointer;
+    display: flex;
+    transition: var(--tran-low);
+    column-gap: 12px;
+    border: 1px solid var(--white-400);
+    padding: 16px;
+    border-radius: var(--blocks-radius);
+    .content {
+        h2 {
+            color: var(--grey-500);
+        }
+        h3 {
+            color: var(--grey-600);
+        }
+    }
+    .indicator {
+        transition: inherit;
+        border: 1px solid var(--white-200);
+        border-radius: 50%;
+        min-width: 20px;
+        width: 20px;
+        height: 20px;
+    }
+    img {
+        min-width: 40px;
+        border-radius: 50%;
+    }
+    &.active {
+        background-color: var(--white-300);
+        border-color: var(--purple-800);
+        .content {
+            h2 {
+                color: var(--purple-200);
+            }
+            h3 {
+                color: var(--purple-300);
+            }
+        }
+        .indicator {
+            background-color: var(--purple-300);
+            border-color: var(--purple-300);
+        }
+    }
 }

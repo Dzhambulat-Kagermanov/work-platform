@@ -1,23 +1,23 @@
 .wrapper {
-	display: flex;
-	flex-direction: column;
-	row-gap: 30px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
 }
 .item {
-	column-gap: 50px;
-	display: flex;
-	flex-wrap: wrap;
-	& > p {
-		max-width: 352px;
-		color: var(--grey-100);
-		margin-top: 23px;
-	}
+    column-gap: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    & > p {
+        max-width: 352px;
+        color: var(--grey-100);
+        margin-top: 23px;
+    }
 }
 .textarea_wrapper {
-	max-width: var(--elements-max-width);
-	width: 100%;
+    max-width: var(--elements-max-width);
+    width: 100%;
 }
 .textarea {
-	min-height: 170px;
-	font-size: 14px;
+    min-height: 170px;
+    font-size: 14px;
 }

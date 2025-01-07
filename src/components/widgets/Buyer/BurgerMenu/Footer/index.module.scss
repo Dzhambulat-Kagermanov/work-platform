@@ -1,36 +1,36 @@
 .wrapper {
-	display: flex;
-	flex-flow: column;
-	.link {
-		display: flex;
-		align-items: center;
-		column-gap: 12px;
-		padding: 0 0 0 12px;
-		transition: var(--tran-low);
+    display: flex;
+    flex-flow: column;
+    .link {
+        display: flex;
+        align-items: center;
+        column-gap: 12px;
+        padding: 0 0 0 12px;
+        transition: var(--tran-low);
 
-		.icon {
-			transition: inherit;
-			path {
-				transition: inherit;
-			}
-		}
-		& > p {
-			translate: 0 1px;
-			opacity: 0.7;
-			transition: inherit;
-		}
-		&:hover {
-			p {
-				opacity: 1;
-			}
-			.icon {
-				path {
-					stroke: var(--white-100);
-				}
-			}
-		}
-	}
+        .icon {
+            transition: inherit;
+            path {
+                transition: inherit;
+            }
+        }
+        & > p {
+            translate: 0 1px;
+            opacity: 0.7;
+            transition: inherit;
+        }
+        &:hover {
+            p {
+                opacity: 1;
+            }
+            .icon {
+                path {
+                    stroke: var(--white-100);
+                }
+            }
+        }
+    }
 }
 .user_info {
-	margin-top: 32px;
+    margin-top: 32px;
 }

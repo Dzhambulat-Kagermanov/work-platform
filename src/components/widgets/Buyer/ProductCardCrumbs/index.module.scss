@@ -1,13 +1,13 @@
 .container {
 }
 @media screen and (max-width: 500px) {
-	.crumbs {
-		column-gap: 6px;
-	}
-	.item {
-		column-gap: 3px;
-		p {
-			font-size: 11px;
-		}
-	}
+    .crumbs {
+        column-gap: 6px;
+    }
+    .item {
+        column-gap: 3px;
+        p {
+            font-size: 11px;
+        }
+    }
 }

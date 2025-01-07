@@ -1,9 +1,9 @@
-import { FC } from 'react'
-import { SalesmanInfoPage } from '@/components/page/Salesman/SalesmanInfo'
+import { FC } from "react";
+import { SalesmanInfoPage } from "@/components/page/Salesman/SalesmanInfo";
 
 interface Props {}
 const SalesmanProfile: FC<Props> = ({}) => {
-	return <SalesmanInfoPage />
-}
+    return <SalesmanInfoPage />;
+};
 
-export default SalesmanProfile
+export default SalesmanProfile;

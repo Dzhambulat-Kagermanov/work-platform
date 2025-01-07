@@ -1,17 +1,17 @@
 .group {
-	display: flex;
-	flex-direction: column;
-	row-gap: 8px;
-	margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    margin-top: 24px;
 }
 
 .icon {
-	min-width: 24px;
-	width: 24px;
+    min-width: 24px;
+    width: 24px;
 }
 .notifications_addition {
-	color: var(--purple-300);
+    color: var(--purple-300);
 }
 .balance_addition {
-	color: var(--green-100);
+    color: var(--green-100);
 }

@@ -1,9 +1,9 @@
-import { RegistrationPage } from '@/components/page/Salesman/Registration'
-import { FC } from 'react'
+import { RegistrationPage } from "@/components/page/Salesman/Registration";
+import { FC } from "react";
 
 interface Props {}
 const Registration: FC<Props> = ({}) => {
-	return <RegistrationPage />
-}
+    return <RegistrationPage />;
+};
 
-export default Registration
+export default Registration;

@@ -1,22 +1,22 @@
 .wrapper {
-	row-gap: 5px;
-	display: flex;
-	flex-flow: column;
-	.item {
-		h4 {
-			line-height: 25px;
-		}
-		display: flex;
-		column-gap: 8px;
-		&::before {
-			translate: 0 10px;
-			content: '';
-			min-width: 5.5px;
-			max-width: 5.5px;
-			max-height: 5.5px;
-			min-height: 5.5px;
-			background-color: var(--grey-200);
-			border-radius: 50%;
-		}
-	}
+    row-gap: 5px;
+    display: flex;
+    flex-flow: column;
+    .item {
+        h4 {
+            line-height: 25px;
+        }
+        display: flex;
+        column-gap: 8px;
+        &::before {
+            translate: 0 10px;
+            content: "";
+            min-width: 5.5px;
+            max-width: 5.5px;
+            max-height: 5.5px;
+            min-height: 5.5px;
+            background-color: var(--grey-200);
+            border-radius: 50%;
+        }
+    }
 }

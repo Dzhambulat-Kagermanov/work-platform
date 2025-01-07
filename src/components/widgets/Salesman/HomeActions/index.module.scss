@@ -1,86 +1,86 @@
 .wrapper {
-	z-index: 2;
-	position: relative;
-	display: flex;
-	justify-content: space-between;
-	gap: 20px;
+    z-index: 2;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
 }
 .inp_wrapper {
-	max-width: 316px;
-	--placeholderColor: var(--grey-200);
+    max-width: 316px;
+    --placeholderColor: var(--grey-200);
 }
 .content {
-	display: flex;
-	gap: 20px;
-	flex-wrap: wrap;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 .action {
-	z-index: 2;
-	position: relative;
-	min-height: 45px;
-	&:last-child {
-		z-index: 0;
-	}
+    z-index: 2;
+    position: relative;
+    min-height: 45px;
+    &:last-child {
+        z-index: 0;
+    }
 }
 .add_btn {
-	min-width: 190px;
-	min-height: 45px;
-	padding: 3px 16px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	column-gap: 5px;
-	p {
-		font-size: 14px;
-	}
-	path {
-		transition: var(--tran-low);
-	}
-	&:hover {
-		path {
-			stroke: var(--purple-300);
-		}
-	}
+    min-width: 190px;
+    min-height: 45px;
+    padding: 3px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 5px;
+    p {
+        font-size: 14px;
+    }
+    path {
+        transition: var(--tran-low);
+    }
+    &:hover {
+        path {
+            stroke: var(--purple-300);
+        }
+    }
 }
 
 @media screen and (max-width: 1151px) {
-	.wrapper {
-		flex-direction: column;
-	}
-	.inp_wrapper {
-		max-width: none;
-	}
-	.add_btn {
-		flex: 1;
-	}
-	.action {
-		min-width: 190px;
-		flex: 1;
-	}
+    .wrapper {
+        flex-direction: column;
+    }
+    .inp_wrapper {
+        max-width: none;
+    }
+    .add_btn {
+        flex: 1;
+    }
+    .action {
+        min-width: 190px;
+        flex: 1;
+    }
 }
 @media screen and (max-width: 450px) {
-	.content {
-		order: 1;
-		column-gap: 10px;
-	}
-	.add_btn {
-		min-height: 42px;
-		min-width: 40px;
-		flex: none;
-		p {
-			display: none;
-		}
-	}
+    .content {
+        order: 1;
+        column-gap: 10px;
+    }
+    .add_btn {
+        min-height: 42px;
+        min-width: 40px;
+        flex: none;
+        p {
+            display: none;
+        }
+    }
 
-	.action {
-		min-height: 42px;
-		min-width: auto;
-		button {
-			padding: 8px 12px;
-			column-gap: 10px;
-			p {
-				font-size: 12px;
-			}
-		}
-	}
+    .action {
+        min-height: 42px;
+        min-width: auto;
+        button {
+            padding: 8px 12px;
+            column-gap: 10px;
+            p {
+                font-size: 12px;
+            }
+        }
+    }
 }

@@ -1,29 +1,29 @@
 .wrapper {
-	cursor: pointer;
-	--text-border-margins: 15px;
-	position: relative;
-	transition: var(--tran-low);
-	box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 5%);
+    cursor: pointer;
+    --text-border-margins: 15px;
+    position: relative;
+    transition: var(--tran-low);
+    box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 5%);
 
-	&:hover {
-		scale: 1.04;
-	}
-	img {
-		width: 100%;
-		height: 100%;
-	}
-	h2 {
-		position: absolute;
-		left: var(--text-border-margins);
-		top: var(--text-border-margins);
-	}
-	p {
-		padding: 2px 10px;
-		background-color: var(--white-100-opacity-60);
-		backdrop-filter: blur(4px);
-		border-radius: 16px;
-		position: absolute;
-		left: var(--text-border-margins);
-		bottom: var(--text-border-margins);
-	}
+    &:hover {
+        scale: 1.04;
+    }
+    img {
+        width: 100%;
+        height: 100%;
+    }
+    h2 {
+        position: absolute;
+        left: var(--text-border-margins);
+        top: var(--text-border-margins);
+    }
+    p {
+        padding: 2px 10px;
+        background-color: var(--white-100-opacity-60);
+        backdrop-filter: blur(4px);
+        border-radius: 16px;
+        position: absolute;
+        left: var(--text-border-margins);
+        bottom: var(--text-border-margins);
+    }
 }

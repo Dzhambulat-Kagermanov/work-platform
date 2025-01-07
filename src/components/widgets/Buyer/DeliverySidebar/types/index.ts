@@ -1,7 +1,7 @@
 export type TChatType =
-	| 'waitingOrder'
-	| 'waitingReceive'
-	| 'confirmation'
-	| 'cashbackReceived'
-	| 'canceled'
-	| 'archive'
+    | "waitingOrder"
+    | "waitingReceive"
+    | "confirmation"
+    | "cashbackReceived"
+    | "canceled"
+    | "archive";

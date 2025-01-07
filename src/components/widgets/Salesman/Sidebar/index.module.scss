@@ -1,57 +1,57 @@
 .wrapper {
-	min-width: 77px;
-	max-width: 77px;
-	height: 100vh;
-	transition: var(--tran-low);
-	border-right: 2px solid var(--white-300);
-	display: flex;
-	justify-content: space-between;
-	flex-direction: column;
-	padding: 15px;
-	overflow: auto;
+    min-width: 77px;
+    max-width: 77px;
+    height: 100vh;
+    transition: var(--tran-low);
+    border-right: 2px solid var(--white-300);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 15px;
+    overflow: auto;
 
-	&::-webkit-scrollbar {
-		width: 3px;
-		background-color: transparent;
-	}
-	&::-webkit-scrollbar-thumb {
-		background-color: var(--white-300);
-	}
+    &::-webkit-scrollbar {
+        width: 3px;
+        background-color: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--white-300);
+    }
 }
 .content {
 }
 
 .logo {
-	overflow: hidden;
-	padding: 0 7px;
+    overflow: hidden;
+    padding: 0 7px;
 }
 
 .expand_btn {
-	align-self: flex-end;
-	width: 40px;
-	aspect-ratio: 1;
-	border-radius: var(--blocks-radius);
-	background-color: var(--white-400);
-	rotate: -90deg;
-	transition: var(--tran-low);
-	svg {
-		transition: inherit;
-		width: 20px;
-		height: 9px;
-	}
-	&:hover {
-		scale: 1.1;
-	}
+    align-self: flex-end;
+    width: 40px;
+    aspect-ratio: 1;
+    border-radius: var(--blocks-radius);
+    background-color: var(--white-400);
+    rotate: -90deg;
+    transition: var(--tran-low);
+    svg {
+        transition: inherit;
+        width: 20px;
+        height: 9px;
+    }
+    &:hover {
+        scale: 1.1;
+    }
 }
 .isExpand {
-	min-width: 300px;
-	max-width: 400px;
-	.expand_btn {
-		svg {
-			scale: 1 -1;
-		}
-	}
+    min-width: 300px;
+    max-width: 400px;
+    .expand_btn {
+        svg {
+            scale: 1 -1;
+        }
+    }
 }
 .info {
-	margin-top: 24px;
+    margin-top: 24px;
 }

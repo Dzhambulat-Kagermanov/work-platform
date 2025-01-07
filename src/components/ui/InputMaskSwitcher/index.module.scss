@@ -1,53 +1,53 @@
 .inp_content {
-	--mask-switcher-border: 1px solid var(--white-200);
-	padding-left: 0;
+    --mask-switcher-border: 1px solid var(--white-200);
+    padding-left: 0;
 }
 .switcher {
-	--width: auto;
-	border: none;
-	border-radius: 0;
+    --width: auto;
+    border: none;
+    border-radius: 0;
 
-	.switcher_content {
-	}
-	.switcher_item {
-		border: none;
-		&:first-child {
-			border-top: var(--mask-switcher-border);
-		}
-	}
+    .switcher_content {
+    }
+    .switcher_item {
+        border: none;
+        &:first-child {
+            border-top: var(--mask-switcher-border);
+        }
+    }
 }
 .switcher_item_text {
-	text-transform: uppercase;
+    text-transform: uppercase;
 }
 .switcher {
-	.switcher_active_area {
-		column-gap: 5px;
-		border-radius: var(--blocks-radius) 0 0 var(--blocks-radius);
-		border: none;
-		outline: var(--mask-switcher-border);
-	}
+    .switcher_active_area {
+        column-gap: 5px;
+        border-radius: var(--blocks-radius) 0 0 var(--blocks-radius);
+        border: none;
+        outline: var(--mask-switcher-border);
+    }
 }
 .switcher_expand {
-	.switcher_active_area {
-		border-radius: var(--blocks-radius) 0 0 0;
-	}
-	.switcher_content {
-		outline: var(--mask-switcher-border);
-		clip-path: polygon(
-			-2px 1px,
-			calc(100% + 2px) 1px,
-			calc(100% + 2px) calc(100% + 2px),
-			-2px calc(100% + 2px)
-		);
-	}
-	.switcher_item {
-		border: none;
-		border-top: var(--mask-switcher-border);
-		&:first-child {
-			border-top: var(--mask-switcher-border);
-		}
-		&:last-child {
-			border-bottom: none;
-		}
-	}
+    .switcher_active_area {
+        border-radius: var(--blocks-radius) 0 0 0;
+    }
+    .switcher_content {
+        outline: var(--mask-switcher-border);
+        clip-path: polygon(
+            -2px 1px,
+            calc(100% + 2px) 1px,
+            calc(100% + 2px) calc(100% + 2px),
+            -2px calc(100% + 2px)
+        );
+    }
+    .switcher_item {
+        border: none;
+        border-top: var(--mask-switcher-border);
+        &:first-child {
+            border-top: var(--mask-switcher-border);
+        }
+        &:last-child {
+            border-bottom: none;
+        }
+    }
 }

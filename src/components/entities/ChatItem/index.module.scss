@@ -1,63 +1,63 @@
 .item {
-	position: relative;
-	cursor: pointer;
-	border: var(--chat-main-border, 1px solid var(--white-400));
-	display: flex;
-	column-gap: 12px;
-	align-items: flex-start;
-	padding: 16px;
-	background-color: var(--white-100);
-	transition: var(--tran-low);
-	&::before {
-		content: '';
-		position: absolute;
-		left: 0;
-		top: 50%;
-		translate: 0 -50%;
-		height: calc(100% + 2px);
-		width: 2px;
-		transition: var(--tran-low);
-	}
-	&.active {
-		background-color: var(--white-300);
-		&::before {
-			background-color: var(--purple-600);
-		}
-	}
+    position: relative;
+    cursor: pointer;
+    border: var(--chat-main-border, 1px solid var(--white-400));
+    display: flex;
+    column-gap: 12px;
+    align-items: flex-start;
+    padding: 16px;
+    background-color: var(--white-100);
+    transition: var(--tran-low);
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        translate: 0 -50%;
+        height: calc(100% + 2px);
+        width: 2px;
+        transition: var(--tran-low);
+    }
+    &.active {
+        background-color: var(--white-300);
+        &::before {
+            background-color: var(--purple-600);
+        }
+    }
 }
 .avatar {
-	min-width: 48px;
-	height: 48px;
+    min-width: 48px;
+    height: 48px;
 }
 .content {
 }
 .head {
-	margin-bottom: 4px;
-	display: flex;
-	column-gap: 4px;
-	align-items: center;
-	h2 {
-	}
-	time {
-		color: var(--grey-200);
-	}
+    margin-bottom: 4px;
+    display: flex;
+    column-gap: 4px;
+    align-items: center;
+    h2 {
+    }
+    time {
+        color: var(--grey-200);
+    }
 }
 .footer {
-	display: flex;
-	justify-content: space-between;
-	column-gap: 4px;
-	align-items: flex-start;
-	h3 {
-		color: var(--grey-200);
-		display: -webkit-box;
-		-webkit-line-clamp: 1;
-		-webkit-box-orient: vertical;
-		overflow: hidden;
-	}
-	p {
-		background-color: var(--blue-100);
-		padding: 2px 6px;
-		color: var(--white-100);
-		border-radius: 20px;
-	}
+    display: flex;
+    justify-content: space-between;
+    column-gap: 4px;
+    align-items: flex-start;
+    h3 {
+        color: var(--grey-200);
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    p {
+        background-color: var(--blue-100);
+        padding: 2px 6px;
+        color: var(--white-100);
+        border-radius: 20px;
+    }
 }

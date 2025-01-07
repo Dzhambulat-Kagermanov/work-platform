@@ -1,11 +1,11 @@
 .wrapper {
-	& > h3 {
-		margin-top: 15px;
-		color: var(--grey-400);
-		span {
-			color: var(--purple-200);
-		}
-	}
+    & > h3 {
+        margin-top: 15px;
+        color: var(--grey-400);
+        span {
+            color: var(--purple-200);
+        }
+    }
 }
 .card {
 }

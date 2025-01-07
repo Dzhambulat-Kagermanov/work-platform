@@ -1,75 +1,75 @@
 .item {
-	display: flex;
-	column-gap: 12px;
-	width: 85%;
+    display: flex;
+    column-gap: 12px;
+    width: 85%;
 }
 .avatar {
-	width: 40px;
+    width: 40px;
 }
 .message {
 }
 .head {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	h3 {
-		color: var(--grey-500);
-	}
-	time {
-		color: var(--grey-500);
-	}
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h3 {
+        color: var(--grey-500);
+    }
+    time {
+        color: var(--grey-500);
+    }
 }
 .content {
-	padding: 14px;
-	margin-top: 7px;
-	p {
-	}
+    padding: 14px;
+    margin-top: 7px;
+    p {
+    }
 }
 .reading-salesman {
-	&.user {
-		.content {
-			background-color: var(--white-300);
-			border-radius: 0 10px 10px;
-		}
-	}
-	&.salesman {
-		margin: 0 0 0 auto;
-		.content {
-			color: var(--white-100);
-			background-color: var(--purple-300);
-			border: var(--chat-main-border);
-			border-radius: 10px 0 10px 10px;
-		}
-		.avatar {
-			order: 1;
-		}
-		.head {
-			h3 {
-				order: 1;
-			}
-		}
-	}
+    &.user {
+        .content {
+            background-color: var(--white-300);
+            border-radius: 0 10px 10px;
+        }
+    }
+    &.salesman {
+        margin: 0 0 0 auto;
+        .content {
+            color: var(--white-100);
+            background-color: var(--purple-300);
+            border: var(--chat-main-border);
+            border-radius: 10px 0 10px 10px;
+        }
+        .avatar {
+            order: 1;
+        }
+        .head {
+            h3 {
+                order: 1;
+            }
+        }
+    }
 }
 .reading-user {
-	&.user {
-		margin: 0 0 0 auto;
-		.content {
-			border: var(--chat-main-border);
-			border-radius: 10px 0 10px 10px;
-		}
-		.avatar {
-			order: 1;
-		}
-		.head {
-			h3 {
-				order: 1;
-			}
-		}
-	}
-	&.salesman {
-		.content {
-			background-color: var(--white-300);
-			border-radius: 0 10px 10px;
-		}
-	}
+    &.user {
+        margin: 0 0 0 auto;
+        .content {
+            border: var(--chat-main-border);
+            border-radius: 10px 0 10px 10px;
+        }
+        .avatar {
+            order: 1;
+        }
+        .head {
+            h3 {
+                order: 1;
+            }
+        }
+    }
+    &.salesman {
+        .content {
+            background-color: var(--white-300);
+            border-radius: 0 10px 10px;
+        }
+    }
 }
