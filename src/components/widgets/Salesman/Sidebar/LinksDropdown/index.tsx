@@ -21,6 +21,7 @@ const LinksDropdown: FC<Props> = ({
 	return (
 		<li className={cn(cls.wrapper, [className])}>
 			<Dropdown
+				isExpandState
 				wrapperCls={cn(cls.dropdown_wrapper, [], {
 					[cls.sidebarIsExpand]:
 						sidebarIsExpand || sidebarIsExpand === undefined,

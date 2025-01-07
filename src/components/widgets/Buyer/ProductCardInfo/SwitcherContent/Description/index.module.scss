@@ -1,5 +1,21 @@
 .wrapper {
+	display: grid;
+	transition: var(--tran-low);
 	h2 {
-		line-height: 25px;
+		overflow: hidden;
+		line-height: var(--line-height);
 	}
+}
+.text_wrapper {
+	transition: var(--tran-low);
+	transition-delay: 0.1s;
+	overflow: hidden;
+}
+.expand_btn {
+	margin: 5px 0;
+	text-align: center;
+	color: var(--purple-300);
+	text-decoration: underline;
+	text-decoration-color: var(--purple-300);
+	text-underline-offset: 3px;
 }
