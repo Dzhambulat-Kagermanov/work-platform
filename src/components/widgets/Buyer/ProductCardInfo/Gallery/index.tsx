@@ -28,9 +28,10 @@ const Gallery: FC<Props> = memo(({ className, images }) => {
     const handleSwipeClick = () => {
         if (scrollbarRef.current) {
             const parentHeight = scrollbarRef.current.offsetHeight;
-            //@ts-ignore
             const childrenHeight =
+            //@ts-ignore
                 scrollbarRef.current.children[0].offsetHeight;
+            console.log(childrenHeight)
             const translateOffset =
                 (parentHeight - childrenHeight * images.length) /
                     (images.length - 1) +
@@ -59,34 +60,36 @@ const Gallery: FC<Props> = memo(({ className, images }) => {
                         translate: `0 -${scrollbarPos[1]}px`,
                     }}
                 >
-                    {imagesForRender.map((image, index) => {
-                        if (image === null) {
+                    <div className="">
+                        {imagesForRender.map((image, index) => {
+                            if (image === null) {
+                                return (
+                                    <div
+                                        className={cn(cls.stub, [cls.item])}
+                                        key={index}
+                                    />
+                                );
+                            }
                             return (
-                                <div
-                                    className={cn(cls.stub, [cls.item])}
-                                    key={index}
-                                />
+                                <button
+                                    className={cn(cls.item, [], {
+                                        [cls.active_item]: active === image,
+                                    })}
+                                    onClick={() => {
+                                        setActive(image);
+                                    }}
+                                    key={image}
+                                >
+                                    <Image
+                                        width={126}
+                                        height={167}
+                                        src={image}
+                                        alt="Продукт"
+                                    />
+                                </button>
                             );
-                        }
-                        return (
-                            <button
-                                className={cn(cls.item, [], {
-                                    [cls.active_item]: active === image,
-                                })}
-                                onClick={() => {
-                                    setActive(image);
-                                }}
-                                key={image}
-                            >
-                                <Image
-                                    width={126}
-                                    height={167}
-                                    src={image}
-                                    alt="Продукт"
-                                />
-                            </button>
-                        );
-                    })}
+                        })}
+                    </div>
                 </div>
             </div>
             <div className={cn(cls.active)}>
