@@ -4,10 +4,11 @@ import Product from "@/types/api/Product";
 import { QueryItem } from "@/types/client";
 
 class ProductsService {
-
     async getProductsList(query: QueryItem[]) {
         //TODO: добавить тип ответа
-        const res = await axios.get<{ data: Product[] }>(`/products${queryStringHandler(query)}`);
+        const res = await axios.get<{ data: Product[] }>(
+            `/products${queryStringHandler(query)}`,
+        );
 
         return res.data.data;
     }
@@ -17,15 +18,14 @@ class ProductsService {
         const res = await axios.get<Product>(`/product/${id}`);
 
         return res.data;
-    }    
-
-    async getProductsRelated(id: string) {
-         //TODO: добавить тип ответа
-         const res = await axios.get<any[]>(`/products/related/${id}`);
-
-         return res.data;
     }
 
+    async getProductsRelated(id: string) {
+        //TODO: добавить тип ответа
+        const res = await axios.get<Product[]>(`/product/related/${id}`);
+
+        return res.data;
+    }
 }
 
 export default ProductsService;

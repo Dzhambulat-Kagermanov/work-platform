@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { apiService } from "@/services";
-const useProductsRelatedQuery = (id: string) => (
+const useProductsRelatedQuery = (id: string) =>
     useQuery({
         queryKey: ["products-related", `products-related-${id}`],
         queryFn: async () => {
@@ -10,7 +10,6 @@ const useProductsRelatedQuery = (id: string) => (
         },
         retry: false,
         staleTime: 60_000,
-    })
-);
+    });
 
 export default useProductsRelatedQuery;

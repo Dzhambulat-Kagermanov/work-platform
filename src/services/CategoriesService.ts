@@ -3,7 +3,7 @@ import { CategoryItem } from "@/types/api";
 class CategoriesService {
     async getCategories() {
         const res = await axios.get<CategoryItem[]>("/category");
-        
+
         return res.data;
     }
 

@@ -5,21 +5,25 @@ import { cn } from "@/lib";
 import { AuthForm } from "@/components/widgets/Salesman/AuthForm";
 import { SalesmanAuthBackgroundLayout } from "@/components/layouts/SalesmanAuthBackground";
 import cls from "./index.module.scss";
+import { AuthWrapper } from "@/components/widgets/shared/auth-wrapper";
+import { ROUTES } from "@/constants";
 
 interface Props extends TClassName {}
 const AuthPage: FC<Props> = ({ className }) => {
     return (
-        <SalesmanAuthBackgroundLayout>
-            <SignLayout
-                logo="/images/shared/logo-v2.svg"
-                title="Авторизация продавца"
-                authActions="forSalesmanAuth"
-                className={cn(cls.main, [className])}
-                paddingStubCls={cn(cls.padding_stub)}
-            >
-                <AuthForm className={cn(cls.form)} />
-            </SignLayout>
-        </SalesmanAuthBackgroundLayout>
+        <AuthWrapper reverse redirectLink={ROUTES.MAIN}>
+            <SalesmanAuthBackgroundLayout>
+                <SignLayout
+                    logo="/images/shared/logo-v2.svg"
+                    title="Авторизация продавца"
+                    authActions="forSalesmanAuth"
+                    className={cn(cls.main, [className])}
+                    paddingStubCls={cn(cls.padding_stub)}
+                >
+                    <AuthForm className={cn(cls.form)} />
+                </SignLayout>
+            </SalesmanAuthBackgroundLayout>
+        </AuthWrapper>
     );
 };
 

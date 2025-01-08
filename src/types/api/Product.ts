@@ -33,13 +33,14 @@ type Product = {
     review_criteria: string;
     redemption_count: number;
     views_count: number;
-    one_per_user:number;
+    one_per_user: number;
     is_archived: BoolNumber;
     status: number;
     balance: string;
     user_id: number;
     product: WbProduct;
     shop: Shop;
+    price_without_cashback: number;
     reviews: Review[];
 } & Timestamps;
 

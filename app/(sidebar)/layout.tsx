@@ -1,12 +1,16 @@
 import { FC, Suspense } from "react";
 import { SidebarLayout } from "@/components/layouts/Sidebar";
 import { TChildren } from "@/types";
+import { AuthWrapper } from "@/components/widgets/shared/auth-wrapper";
+import { ROUTES } from "@/constants";
 
 interface Props extends TChildren {}
 const Sidebar: FC<Props> = ({ children }) => {
     return (
         <Suspense fallback={<></>}>
-            <SidebarLayout>{children}</SidebarLayout>
+            <AuthWrapper roles={["seller"]} redirectLink={ROUTES.SALESMAN.AUTH}>
+                <SidebarLayout>{children}</SidebarLayout>
+            </AuthWrapper>
         </Suspense>
     );
 };

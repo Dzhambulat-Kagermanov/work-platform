@@ -10,7 +10,9 @@ interface Props {
 const CategoryItem: FC<Props> = async ({ searchParams }) => {
     const { categoryId, subcategory } = await searchParams;
 
-    return <CategoryItemPage categoryId={categoryId} subcategory={subcategory} />;
+    return (
+        <CategoryItemPage categoryId={categoryId} subcategory={subcategory} />
+    );
 };
 
 export default CategoryItem;

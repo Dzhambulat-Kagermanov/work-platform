@@ -11,18 +11,20 @@ import { SM_MID } from "@/constants";
 import { Typography } from "@/components/ui";
 import { ContentShop } from "../ContentShop";
 import cls from "./index.module.scss";
+import Product from "@/types/api/Product";
 
 interface Props
     extends TClassName,
-        Pick<TProductItemProps, "id" | "productDescription" | "salesmanId"> {
+        Pick<TProductItemProps, "productDescription" | "salesmanId"> {
     contentType: TContentType;
+    product: Product;
 }
 const SwitcherContent: FC<Props> = ({
     salesmanId,
-    id,
     productDescription,
     contentType,
     className,
+    product,
 }) => {
     const width = useScreen();
 
@@ -38,6 +40,7 @@ const SwitcherContent: FC<Props> = ({
                     />
                 ) : (
                     <Reviews
+                        reviews={product.reviews}
                         className={cn(cls.reviews)}
                         itemCls={cn(cls.content)}
                     />
@@ -72,6 +75,8 @@ const SwitcherContent: FC<Props> = ({
                         />
                     </div>
                     <ContentShop
+                        shopName={product.shop.legal_name}
+                        rating={product.product.rating}
                         salesmanId={salesmanId}
                         className={cn(cls.salesman_info, [cls.content_wrapper])}
                     />
@@ -82,9 +87,10 @@ const SwitcherContent: FC<Props> = ({
                             className={cn(cls.title)}
                             tag="h2"
                         >
-                            Отзывы (4)
+                            Отзывы ({product.reviews.length})
                         </Typography>
                         <Reviews
+                            reviews={product.reviews}
                             className={cn(cls.reviews)}
                             itemCls={cn(cls.content)}
                         />

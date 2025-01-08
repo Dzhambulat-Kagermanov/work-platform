@@ -12,7 +12,11 @@ interface Props extends TClassName {
     categoryId: string;
     subcategory?: string;
 }
-const CategoryItemPage: FC<Props> = ({ className, categoryId, subcategory }) => {
+const CategoryItemPage: FC<Props> = ({
+    className,
+    categoryId,
+    subcategory,
+}) => {
     return (
         <main className={cn(cls.category, [className])}>
             <CategoryItemCrumbs

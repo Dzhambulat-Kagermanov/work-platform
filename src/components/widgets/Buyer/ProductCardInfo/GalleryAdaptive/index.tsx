@@ -9,6 +9,7 @@ import { XS_BIG } from "@/constants";
 interface Props extends Pick<TProductItemProps, "images" | "isFavorite"> {}
 const GalleryAdaptive: FC<Props> = ({ images, isFavorite }) => {
     const width = useScreen();
+    return <></>;
     return (
         <>
             {width > XS_BIG ? (

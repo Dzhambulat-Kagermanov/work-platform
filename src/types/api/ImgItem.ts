@@ -1,4 +1,3 @@
-
 type ImgItem = {
     id: number;
     src: string;

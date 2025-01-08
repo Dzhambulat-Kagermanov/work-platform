@@ -19,7 +19,8 @@ const Socialbar: FC<Props> = ({ className }) => {
             {width > XS_BIG && (
                 <>
                     <Typography font="Inter-R" size={14} tag="h5">
-                        ИП Клягин Владимир Александрович ИНН 632100726934
+                        ИП Клягин Владимир Александрович <br />
+                        ИНН 632100726934
                     </Typography>
                     <Social className={cn(cls.social)} />
                 </>

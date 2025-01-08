@@ -5,6 +5,6 @@ type CategoryItem = {
     category_name: string;
     product_count: number;
     img: ImgItem;
-}
+};
 
 export default CategoryItem;

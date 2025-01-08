@@ -3,20 +3,18 @@ import { FC } from "react";
 import { TClassName, TProductItemProps } from "@/types";
 import { cn } from "@/lib";
 import { Typography } from "@/components/ui";
-import { useQuery } from "@tanstack/react-query";
-import { getSimilarProducts } from "@/api/products/get";
 import { ProductItem } from "@/components/entities/ProductItem";
 import Link from "next/link";
 import cls from "./index.module.scss";
-
-export const queryKey = ["productsCard", "similar"];
+import { useProductsRelatedQuery } from "@/hooks/api/products";
 
 interface Props extends TClassName, Pick<TProductItemProps, "id"> {}
 const SimilarProducts: FC<Props> = ({ id, className }) => {
-    const { data, isFetching, isPending, error } = useQuery({
-        queryKey,
-        queryFn: () => getSimilarProducts(id),
-    });
+    const { data, isLoading, isError } = useProductsRelatedQuery(`${id}`);
+
+    if (isLoading || isError || !data || !data.length) {
+        return <></>;
+    }
 
     return (
         <div className={cn(cls.wrapper, [className])}>
@@ -29,31 +27,24 @@ const SimilarProducts: FC<Props> = ({ id, className }) => {
                 Смотрите также
             </Typography>
             <ul className={cn(cls.group)}>
-                {data &&
-                    data.map(
-                        ({
-                            id,
-                            name,
-                            previewImage,
-                            price,
-                            isFavorite,
-                            tooltip,
-                        }) => {
-                            return (
-                                <Link href={`/buyer/products/${id}`} key={id}>
-                                    <ProductItem
-                                        tag="li"
-                                        wrapperCls={cn(cls.item)}
-                                        image={previewImage}
-                                        name={name}
-                                        price={price}
-                                        isFavorite={isFavorite}
-                                        tooltip={tooltip}
-                                    />
-                                </Link>
-                            );
-                        },
-                    )}
+                {data.map((item, index) => {
+                    return (
+                        <Link href={`/buyer/products/${id}`} key={index}>
+                            <ProductItem
+                                tag="li"
+                                wrapperCls={cn(cls.item)}
+                                // image={item.product.images.length ? item.product.images[0] : null}
+                                image={null}
+                                name={item.product.name}
+                                price={{
+                                    price: item.price_without_cashback,
+                                    discount: Number(item.product.discount),
+                                }}
+                                tooltip={""}
+                            />
+                        </Link>
+                    );
+                })}
             </ul>
         </div>
     );

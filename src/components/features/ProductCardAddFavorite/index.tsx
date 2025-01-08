@@ -8,7 +8,8 @@ import { cn } from "@/lib";
 interface Props
     extends TClassName,
         Pick<TProductItemProps, "id" | "isFavorite"> {}
-const ProductCardAddFavorite: FC<Props> = ({ className, id, isFavorite }) => {
+const ProductCardAddFavorite: FC<Props> = ({ className, id }) => {
+    const isFavorite = false;
     const handleClick = (e: MouseEvent) => {};
     return (
         <Button

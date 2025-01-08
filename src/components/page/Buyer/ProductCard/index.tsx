@@ -1,10 +1,9 @@
-'use client'
+"use client";
 import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { ProductCardCrumbs } from "@/components/widgets/Buyer/ProductCardCrumbs";
 import { ProductCardInfo } from "@/components/widgets/Buyer/ProductCardInfo";
-import { PRODUCT } from "./constants/product";
 import cls from "./index.module.scss";
 import Product from "@/types/api/Product";
 import { useCategoriesQuery } from "@/hooks/api/categories";
@@ -15,11 +14,14 @@ interface Props extends TClassName {
 }
 
 const ProductCardPage: FC<Props> = ({ className, product }) => {
-    const data = PRODUCT;
-
     const { data: categories } = useCategoriesQuery();
 
-    const productCategory = categories && categories.length ? categories.find(el => el.category_id === product.product.category_id) : null
+    const productCategory =
+        categories && categories.length
+            ? categories.find(
+                  (el) => el.category_id === product.product.category_id,
+              )
+            : null;
 
     return (
         <main className={cn(cls.main, [className])}>
@@ -29,17 +31,16 @@ const ProductCardPage: FC<Props> = ({ className, product }) => {
                         link: ROUTES.MAIN,
                         text: "Главная",
                     },
-                    ...(
-                        productCategory ?
-                            [{
-                                link: `${ROUTES.BUYER.CATEGORY}?categoryId=${productCategory.category_id}`,
-                                text: "Кабели и зарядные устройства",
-                            }]
-                        : 
-                            []
-                    ),
+                    ...(productCategory
+                        ? [
+                              {
+                                  link: `${ROUTES.BUYER.CATEGORY}?categoryId=${productCategory.category_id}`,
+                                  text: productCategory.category_name,
+                              },
+                          ]
+                        : []),
                     {
-                        link: "#",
+                        link: `${ROUTES.BUYER.SALESMAN.ID(product.shop.user_id.toString())}`,
                         text: product.shop.wb_name,
                     },
                     {
@@ -49,7 +50,10 @@ const ProductCardPage: FC<Props> = ({ className, product }) => {
                 ]}
                 className={cn(cls.crumbs, ["modules-gap-top"])}
             />
-            <ProductCardInfo data={data} wrapperClassName={cn(cls.info)} />
+            <ProductCardInfo
+                product={product}
+                wrapperClassName={cn(cls.info)}
+            />
         </main>
     );
 };

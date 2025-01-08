@@ -16,9 +16,8 @@ const CategoryPage: FC<Props> = ({ categories, className }) => {
                 tag="section"
                 className={cn(cls.container, ["modules-gap-top"])}
             >
-                {
-                    categories && categories.length ?
-                        <>
+                {categories && categories.length ? (
+                    <>
                         <Typography
                             tag="h1"
                             className={cn(cls.title, ["modules-gap-bottom"])}
@@ -27,18 +26,21 @@ const CategoryPage: FC<Props> = ({ categories, className }) => {
                         >
                             Категории:
                         </Typography>
-                        <CategoryCategories categories={categories} className={cn(cls.categories)} />
-                        </> 
-                    : 
-                        <Typography
-                            tag="p"
-                            className={cn(cls.title, ["modules-gap-bottom"])}
-                            font="Inter-SB"
-                            size={20}
-                        >
-                            Категории не найдены
-                        </Typography>
-                }
+                        <CategoryCategories
+                            categories={categories}
+                            className={cn(cls.categories)}
+                        />
+                    </>
+                ) : (
+                    <Typography
+                        tag="p"
+                        className={cn(cls.title, ["modules-gap-bottom"])}
+                        font="Inter-SB"
+                        size={20}
+                    >
+                        Категории не найдены
+                    </Typography>
+                )}
             </Container>
         </main>
     );

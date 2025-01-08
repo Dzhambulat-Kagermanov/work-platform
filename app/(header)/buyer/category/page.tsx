@@ -20,9 +20,15 @@ const Category: FC<Props> = async ({ searchParams }) => {
 
     return categoryId ? (
         subcategory ? (
-            <CategoryItemPage categoryId={categoryId} subcategory={subcategory} />
+            <CategoryItemPage
+                categoryId={categoryId}
+                subcategory={subcategory}
+            />
         ) : (
-            <CategorySelectSubcategory slug={categoryId} subcategory={subcategory} />
+            <CategorySelectSubcategory
+                slug={categoryId}
+                subcategory={subcategory}
+            />
         )
     ) : (
         <CategoryPage categories={categories} />

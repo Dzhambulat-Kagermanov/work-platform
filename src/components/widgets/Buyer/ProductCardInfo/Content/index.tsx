@@ -6,35 +6,21 @@ import { ContentHead } from "../ContentHead";
 import { ContentSales } from "../ContentSales";
 import { ContentActions } from "../ContentActions";
 import { ContentShop } from "../ContentShop";
-import { getSalesmanInfo } from "@/api/salesman/get";
-import { useQuery } from "@tanstack/react-query";
 import { useScreen } from "@/hooks";
 import { SM_BIG, SM_MID } from "@/constants";
 import cls from "./index.module.scss";
+import Product from "@/types/api/Product";
 
 interface Props extends TClassName {
-    data: Omit<
-        TProductItemProps,
-        "previewImage" | "productDescription" | "images" | "quantities"
-    >;
+    product: Product;
 }
-export const queryKey = ["productCard", "salesman"];
 
-const Content: FC<Props> = memo(
-    ({
-        className,
-        data: { name, price, salesmanId, tooltip, id, isFavorite },
-    }) => {
-        const width = useScreen();
-        const { data, error, isPending, isFetching } = useQuery({
-            queryKey,
-            queryFn: () => getSalesmanInfo(salesmanId),
-            refetchOnWindowFocus: false,
-        });
+const Content: FC<Props> = memo(({ className, product }) => {
+    const width = useScreen();
 
-        return (
-            <section className={cn(cls.content, [className])}>
-                {data && (
+    return (
+        <section className={cn(cls.content, [className])}>
+            {/* {data && (
                     <>
                         <ContentHead
                             salesman={data}
@@ -50,21 +36,18 @@ const Content: FC<Props> = memo(
                             />
                         )}
                     </>
-                )}
-                <ContentActions
-                    id={id}
-                    className={cn(cls.actions)}
-                    isFavorite={isFavorite}
+                )} */}
+            <ContentActions id={product.id} className={cn(cls.actions)} />
+            {width > SM_MID && (
+                <ContentShop
+                    salesmanId={product.user_id}
+                    shopName={product.shop.legal_name}
+                    rating={product.product.rating}
+                    className={cn(cls.shop)}
                 />
-                {width > SM_MID && (
-                    <ContentShop
-                        salesmanId={salesmanId}
-                        className={cn(cls.shop)}
-                    />
-                )}
-            </section>
-        );
-    },
-);
+            )}
+        </section>
+    );
+});
 
 export { Content };

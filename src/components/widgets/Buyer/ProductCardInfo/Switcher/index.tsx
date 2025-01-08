@@ -7,17 +7,21 @@ import { SwitcherContent } from "../SwitcherContent";
 import { useScreen } from "@/hooks";
 import { SM_MID } from "@/constants";
 import cls from "./index.module.scss";
+import Product from "@/types/api/Product";
 
 export type TContentType = "conditions" | "description" | "reviews";
 
 interface Props
     extends TClassName,
-        Pick<TProductItemProps, "id" | "productDescription" | "salesmanId"> {}
+        Pick<TProductItemProps, "id" | "productDescription" | "salesmanId"> {
+    product: Product;
+}
 const Switcher: FC<Props> = ({
     id,
     productDescription,
     className,
     salesmanId,
+    product,
 }) => {
     const width = useScreen();
     const [contentType, setContentType] = useState<TContentType>("conditions");
@@ -34,7 +38,7 @@ const Switcher: FC<Props> = ({
             <SwitcherContent
                 salesmanId={salesmanId}
                 contentType={contentType}
-                id={id}
+                product={product}
                 productDescription={productDescription}
                 className={cn(cls.content)}
             />

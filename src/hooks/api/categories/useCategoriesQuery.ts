@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { apiService } from "@/services";
-const useCategoriesQuery = () => (
+const useCategoriesQuery = () =>
     useQuery({
         queryKey: ["categories"],
         queryFn: async () => {
@@ -10,7 +10,6 @@ const useCategoriesQuery = () => (
         },
         staleTime: Infinity,
         retry: false,
-    })
-)
+    });
 
 export default useCategoriesQuery;

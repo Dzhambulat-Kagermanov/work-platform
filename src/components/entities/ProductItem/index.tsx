@@ -6,6 +6,7 @@ import Image from "next/image";
 import { FavoriteIcon, HelpIcon } from "@/icons";
 import { DiscountPlaque, Typography } from "@/components/ui";
 import cls from "./index.module.scss";
+import Product from "@/types/api/Product";
 
 interface Props extends TTag {
     price: {
@@ -15,8 +16,7 @@ interface Props extends TTag {
     tooltip?: string;
     quantities?: number;
     name: string;
-    image: string;
-    isFavorite?: boolean;
+    image: string | null;
 
     wrapperCls?: string;
     headCls?: string;
@@ -27,7 +27,6 @@ const ProductItem: FC<Props> = memo(
         image,
         price,
         name,
-        isFavorite,
         quantities,
         tooltip,
         tag = "div",
@@ -39,6 +38,8 @@ const ProductItem: FC<Props> = memo(
         const disc = price.discount;
         const prc = price.price;
 
+        const isFavorite = false;
+
         return (
             <Tag
                 className={cn(cls.item, [wrapperCls], {
@@ -48,7 +49,16 @@ const ProductItem: FC<Props> = memo(
                 })}
             >
                 <div className={cn(cls.head, [headCls])}>
-                    <Image src={image} alt="Товар" width={200} height={235} />
+                    {image ? (
+                        <Image
+                            src={image}
+                            alt="Товар"
+                            width={200}
+                            height={235}
+                        />
+                    ) : (
+                        <></>
+                    )}
                     <div className={cn(cls.overlay)}>
                         {isFavorite !== undefined ? (
                             <div
