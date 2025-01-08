@@ -3,14 +3,14 @@ import { FC } from "react";
 
 interface Props {
     searchParams: Promise<{
-        category: string;
+        categoryId: string;
         subcategory: string;
     }>;
 }
 const CategoryItem: FC<Props> = async ({ searchParams }) => {
-    const { category, subcategory } = await searchParams;
+    const { categoryId, subcategory } = await searchParams;
 
-    return <CategoryItemPage slug={category} subcategory={subcategory} />;
+    return <CategoryItemPage categoryId={categoryId} subcategory={subcategory} />;
 };
 
 export default CategoryItem;

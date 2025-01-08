@@ -2,7 +2,7 @@ import { QueryItem } from "@/types/client";
 import { useQuery } from "@tanstack/react-query";
 import { apiService } from "@/services";
 
-const useProductsList = (query: QueryItem[]) => (
+const useProductsListQuery = (query: QueryItem[]) => (
     useQuery({
         queryKey: ["products-list", ...query.map((el) => (`products-list-${el.key}=${el.value}`))],
         queryFn: async () => {
@@ -14,4 +14,4 @@ const useProductsList = (query: QueryItem[]) => (
     })
 );
 
-export default useProductsList;
+export default useProductsListQuery;

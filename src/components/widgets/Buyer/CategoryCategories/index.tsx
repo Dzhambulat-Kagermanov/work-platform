@@ -2,21 +2,25 @@ import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { CATEGORIES } from "./constants/categories";
-import { CategoryItem } from "@/components/entities/CategoryItem";
 import cls from "./index.module.scss";
+import { CategoryItem as CategoryItemType } from "@/types/api";
+import { CategoryItem } from "@/components/entities/CategoryItem";
 
-interface Props extends TClassName {}
-const CategoryCategories: FC<Props> = ({ className }) => {
+interface Props extends TClassName {
+    categories: CategoryItemType[];
+}
+const CategoryCategories: FC<Props> = ({ categories, className }) => {
     return (
         <ul className={cn(cls.wrapper, [className])}>
-            {CATEGORIES.map(({ image, productsQnt, title }) => {
+            {categories.map((item, key) => {
                 return (
                     <CategoryItem
-                        key={title}
+                        key={key}
                         tag="li"
-                        image={image}
-                        productsQnt={productsQnt}
-                        title={title}
+                        image={item.img?.src ?? ""}
+                        productsQnt={item.product_count}
+                        title={item.category_name}
+                        categoryId={item.category_id}
                         className={cn(cls.item)}
                         titleCls={cn(cls.item_title)}
                         plaqueCls={cn(cls.item_plaque)}

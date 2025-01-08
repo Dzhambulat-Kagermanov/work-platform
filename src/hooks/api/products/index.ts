@@ -1,3 +1,3 @@
-export { default as useProductsList } from "./useProductsList";
-export { default as useProductItem } from "./useProductItem";
-export { default as useProductsRelated } from "./useProductsRelated";
+export { default as useProductsListQuery } from "./useProductsListQuery";
+export { default as useProductItemQuery } from "./useProductItemQuery";
+export { default as useProductsRelatedQuery } from "./useProductsRelatedQuery";

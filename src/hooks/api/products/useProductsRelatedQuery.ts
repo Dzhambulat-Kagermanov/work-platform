@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { apiService } from "@/services";
-const useProductsRelated = (id: string) => (
+const useProductsRelatedQuery = (id: string) => (
     useQuery({
         queryKey: ["products-related", `products-related-${id}`],
         queryFn: async () => {
@@ -13,4 +13,4 @@ const useProductsRelated = (id: string) => (
     })
 );
 
-export default useProductsRelated;
+export default useProductsRelatedQuery;

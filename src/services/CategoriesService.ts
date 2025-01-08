@@ -1,7 +1,8 @@
 import axios from "@/axios";
+import { CategoryItem } from "@/types/api";
 class CategoriesService {
     async getCategories() {
-        const res = await axios.get("/category");
+        const res = await axios.get<CategoryItem[]>("/category");
         
         return res.data;
     }

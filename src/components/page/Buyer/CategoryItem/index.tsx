@@ -9,21 +9,21 @@ import { FilterModalsLayout } from "@/components/layouts/FilterModals";
 import cls from "./index.module.scss";
 
 interface Props extends TClassName {
-    slug: string;
+    categoryId: string;
     subcategory?: string;
 }
-const CategoryItemPage: FC<Props> = ({ className, slug, subcategory }) => {
+const CategoryItemPage: FC<Props> = ({ className, categoryId, subcategory }) => {
     return (
         <main className={cn(cls.category, [className])}>
             <CategoryItemCrumbs
                 className={cn(cls.crumbs, ["modules-gap-top"])}
-                slug={slug}
+                slug={categoryId}
                 subcategory={subcategory}
             />
             <Container className={cn(cls.content)}>
                 <CategoryItemSidebar
                     className={cn(cls.sidebar)}
-                    slug={slug}
+                    slug={categoryId}
                     subcategory={subcategory}
                 />
                 <CategoryItemProducts

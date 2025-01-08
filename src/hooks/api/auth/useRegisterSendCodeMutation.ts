@@ -4,7 +4,7 @@ import axios from "@/axios";
 
 type RegisterSendCodeData = Pick<User, 'phone'>;
 
-const useRegisterSendCode = () => (
+const useRegisterSendCodeMutation = () => (
     useMutation({
         mutationKey: ["register-send-code"],
         mutationFn: async (data: RegisterSendCodeData) => {
@@ -15,4 +15,4 @@ const useRegisterSendCode = () => (
     })
 );
 
-export default useRegisterSendCode;
+export default useRegisterSendCodeMutation;
