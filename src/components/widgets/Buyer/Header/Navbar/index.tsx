@@ -10,10 +10,14 @@ import {
     HomeIcon,
 } from "@/icons";
 import cls from "./index.module.scss";
-import { isAuth } from "@/constants/stub";
+import { useSessionQuery } from "@/hooks/api/auth";
+import { ROUTES } from "@/constants";
 
 interface Props extends TClassName {}
 const Navbar: FC<Props> = ({ className }) => {
+
+    const { data: user } = useSessionQuery();
+
     return (
         <nav className={cn(cls.wrapper, [className])}>
             <ActiveLink
@@ -30,22 +34,29 @@ const Navbar: FC<Props> = ({ className }) => {
             >
                 <CatalogIcon color="white" />
             </ActiveLink>
+            {
+                user && user.role.slug === "buyer" ?
+                    <>
+                        <ActiveLink
+                            href="/buyer/favorites"
+                            className={cn(cls.link)}
+                            activeCls={cn(cls.active_link)}
+                        >
+                            <FavoriteIcon stroke="white" />
+                        </ActiveLink>
+                        <ActiveLink
+                            href="/buyer/delivery"
+                            className={cn(cls.link)}
+                            activeCls={cn(cls.active_link)}
+                        >
+                            <DeliveryIcon color="white" />
+                        </ActiveLink>
+                    </>
+                : 
+                    <></>
+            }
             <ActiveLink
-                href="/buyer/favorites"
-                className={cn(cls.link)}
-                activeCls={cn(cls.active_link)}
-            >
-                <FavoriteIcon stroke="white" />
-            </ActiveLink>
-            <ActiveLink
-                href="/buyer/delivery"
-                className={cn(cls.link)}
-                activeCls={cn(cls.active_link)}
-            >
-                <DeliveryIcon color="white" />
-            </ActiveLink>
-            <ActiveLink
-                href={isAuth ? "/buyer/account" : "/buyer/auth"}
+                href={user ? user.role.slug === "buyer" ? ROUTES.BUYER.ACCOUNT : ROUTES.SALESMAN.MAIN : ROUTES.BUYER.AUTH}
                 className={cn(cls.link)}
                 activeCls={cn(cls.active_link)}
             >

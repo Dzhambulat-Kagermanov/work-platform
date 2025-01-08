@@ -6,11 +6,11 @@ import { QueryItem } from "@/types/client";
 class ProductsService {
     async getProductsList(query: QueryItem[]) {
         //TODO: добавить тип ответа
-        const res = await axios.get<{ data: Product[] }>(
+        const res = await axios.get< Product[]>(
             `/products${queryStringHandler(query)}`,
         );
 
-        return res.data.data;
+        return res.data;
     }
 
     async getProductItem(id: string) {

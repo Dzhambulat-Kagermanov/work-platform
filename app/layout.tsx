@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "@/styles/index.scss";
 import { QueryClientLayout } from "@/components/layouts/QueryClient";
+import { Toaster } from "react-hot-toast";
 
 export const dynamic = "auto";
 export const dynamicParams = true;
@@ -20,6 +21,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
+                <Toaster />
                 <QueryClientLayout>{children}</QueryClientLayout>
                 <div id="modals"></div>
             </body>

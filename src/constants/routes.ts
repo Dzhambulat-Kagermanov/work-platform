@@ -14,6 +14,7 @@ export const ROUTES = {
         },
     },
     SALESMAN: {
+        MAIN: "/salesman",
         AUTH: "/salesman/auth",
         REGISTRATION: "/salesman/registration",
         FORGOT_PASSWORD: "/salesman/forgot-password",

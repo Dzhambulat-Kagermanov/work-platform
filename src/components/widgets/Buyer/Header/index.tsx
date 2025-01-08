@@ -10,9 +10,13 @@ import { SM_BIG } from "@/constants";
 import { usePathname } from "next/navigation";
 import { pathValidating } from "@/lib";
 import cls from "./index.module.scss";
+import { useSessionQuery } from "@/hooks/api/auth";
 
 interface Props extends TModuleClassName {}
 const Header: FC<Props> = ({ className, wrapperClassName }) => {
+
+    const { data: user } = useSessionQuery();
+
     const width = useScreen();
     const path = usePathname();
 
@@ -21,7 +25,7 @@ const Header: FC<Props> = ({ className, wrapperClassName }) => {
     return (
         <header className={cn(cls.wrapper, [wrapperClassName])}>
             <Container className={cn(cls.container, [className])}>
-                {width > SM_BIG && (
+                {width > SM_BIG && !user ? (
                     <Link
                         href={
                             isSalesmanPages ? "/buyer/auth" : "/salesman/auth"
@@ -37,7 +41,7 @@ const Header: FC<Props> = ({ className, wrapperClassName }) => {
                                 : "Вход для продавцов"}
                         </Typography>
                     </Link>
-                )}
+                ) : <></>}
                 <Content className={cn(cls.content)} />
             </Container>
         </header>

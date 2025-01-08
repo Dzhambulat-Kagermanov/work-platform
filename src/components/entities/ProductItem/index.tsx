@@ -6,7 +6,6 @@ import Image from "next/image";
 import { FavoriteIcon, HelpIcon } from "@/icons";
 import { DiscountPlaque, Typography } from "@/components/ui";
 import cls from "./index.module.scss";
-import Product from "@/types/api/Product";
 
 interface Props extends TTag {
     price: {

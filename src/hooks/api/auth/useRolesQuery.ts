@@ -1,13 +1,11 @@
 import { apiService } from "@/services";
 import { useQuery } from "@tanstack/react-query";
 
-export const sessionQueryKeys = ["auth-session"];
-
-const useSessionQuery = () =>
+const useRolesQuery = () =>
     useQuery({
-        queryKey: sessionQueryKeys,
+        queryKey: ["user-roles"],
         queryFn: async () => {
-            const res = await apiService.auth.getSession();
+            const res = await apiService.auth.getRoles();
 
             return res;
         },
@@ -15,4 +13,4 @@ const useSessionQuery = () =>
         retry: false,
     });
 
-export default useSessionQuery;
+export default useRolesQuery;

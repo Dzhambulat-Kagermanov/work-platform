@@ -1,16 +1,24 @@
-import { useMutation } from "@tanstack/react-query";
-import axios from "@/axios";
-
-type LoginData = Record<"phone" | "password", string>;
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiService } from "@/services";
+import { LoginData } from "@/services/AuthService";
+import { sessionQueryKeys } from "./useSessionQuery";
 
 const useLoginMutation = () =>
-    useMutation({
+   {
+
+    const queryClient = useQueryClient();
+
+    return useMutation({
         mutationKey: ["auth-login"],
         mutationFn: async (data: LoginData) => {
-            const res = await axios.post("/login", data);
+            const res = await apiService.auth.login(data);
 
-            return res.data;
+            return res;
         },
+        onSuccess: (data) => {
+            queryClient.setQueryData(sessionQueryKeys, data.user);
+        }
     });
+   }
 
 export default useLoginMutation;

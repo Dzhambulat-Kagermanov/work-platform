@@ -1,4 +1,5 @@
-import { FC } from "react";
+"use client";
+import { FC, useState } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { ProductItem } from "@/components/entities/ProductItem";
@@ -6,10 +7,13 @@ import Link from "next/link";
 import cls from "./index.module.scss";
 import { apiService } from "@/services";
 import { ROUTES } from "@/constants";
+import Product from "@/types/api/Product";
+import { useProductsListQuery } from "@/hooks/api/products";
 
 interface Props extends TClassName {}
-const Products: FC<Props> = async ({ className }) => {
-    const products = await apiService.products.getProductsList([]);
+const Products: FC<Props> = ({ className }) => {
+
+    const { data: products } = useProductsListQuery();
 
     if (!products || !products.length) {
         return <></>;
