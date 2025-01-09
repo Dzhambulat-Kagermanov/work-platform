@@ -48,7 +48,7 @@ const NotificationsLayout: FC<Props> = ({ children }) => {
 
     return (
         <>
-            {layoutState !== "isHidden" && (
+            {layoutState !== "isHidden" && notifications.length ? (
                 <div
                     className={cn(cls.wrapper, [], {
                         [cls.isHiding]: layoutState === "isHiding",
@@ -72,7 +72,7 @@ const NotificationsLayout: FC<Props> = ({ children }) => {
                         })}
                     </ul>
                 </div>
-            )}
+            ) : null}
             {children}
         </>
     );
