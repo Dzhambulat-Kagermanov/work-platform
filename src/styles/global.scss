@@ -8,6 +8,7 @@
     --purple-700: #ac5dfb;
     --purple-800: #baa4ec;
     --purple-900: #8000ff;
+    --purple-1000: #dfd0ff;
 
     --red-100: rgb(248, 53, 53);
 
@@ -78,6 +79,10 @@
     --modals-z: 20;
 
     --burger-menu-z: 30;
+
+    --sidebar-active-width: 300px;
+    --sidebar-passive-width: 77px;
+    --notifications-z: 10;
 }
 * {
     scroll-behavior: smooth;

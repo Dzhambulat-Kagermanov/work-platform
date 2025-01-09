@@ -10,6 +10,7 @@ import { BurgerMenu } from "@/components/widgets/Salesman/BurgerMenu";
 import { usePathname, useSearchParams } from "next/navigation";
 import { TSalesmanHomePageType } from "@/components/widgets/Salesman/HomePagesSwitcher";
 import cls from "./index.module.scss";
+import { NotificationMenu } from "@/components/widgets/Salesman/NotificationMenu";
 
 interface Props extends TChildren {}
 const SidebarLayout: FC<Props> = ({ children }) => {
@@ -33,6 +34,7 @@ const SidebarLayout: FC<Props> = ({ children }) => {
     return (
         <div className={cn(cls.wrapper)}>
             {width > SM_BIG && <Sidebar homePageType={homePageType} />}
+            <NotificationMenu className={cn(cls.notifications_menu)} />
             <main className={cn(cls.main)}>
                 {width <= SM_BIG && (
                     <>

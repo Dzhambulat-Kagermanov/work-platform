@@ -23,3 +23,4 @@ export { Action } from "./Action";
 export { SliderInput } from "./SliderInput";
 export { Textarea } from "./Textarea/";
 export { Counter } from "./Counter";
+export { PortalWrapper } from "./PortalWrapper";

@@ -6,7 +6,7 @@ type Shop = {
     supplier_id: string;
     inn: string;
     legal_name: string;
-    wb_name: string; 
+    wb_name: string;
 } & Timestamps;
 
 export default Shop;

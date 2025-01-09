@@ -5,6 +5,6 @@ type User = {
     phone: string;
     name: string;
     is_configured: 0 | 1;
-} & Pick<Timestamps, 'created_at'>
+} & Pick<Timestamps, "created_at">;
 
 export default User;

@@ -1,0 +1,33 @@
+.wrapper {
+    transition: 5s ease;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: var(--notifications-z);
+    pointer-events: none;
+    padding: 10px;
+    text-align: end;
+}
+.isHiding {
+    opacity: 0;
+}
+.isVisible {
+    transition: var(--tran-mid);
+    opacity: 1;
+}
+.group {
+    display: inline-block;
+    pointer-events: auto;
+    padding-right: 5px;
+}
+.item {
+    margin-top: 10px;
+    &:first-child {
+        margin-top: 0;
+    }
+}
+.isHidden {
+    margin-top: 0px;
+}

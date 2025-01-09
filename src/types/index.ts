@@ -8,3 +8,4 @@ export * from "./buyer/balance";
 export * from "./salesman/products";
 export * from "./salesman/advertisements";
 export * from "./chat";
+export * from "./salesman/notifications";

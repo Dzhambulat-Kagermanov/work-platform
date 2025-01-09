@@ -1,5 +1,5 @@
 "use client";
-import { FC, ReactNode } from "react";
+import { FC, MouseEventHandler, ReactNode } from "react";
 import { TClassName, TTag } from "@/types";
 import { cn } from "@/lib";
 import { Typography } from "@/components/ui";
@@ -15,7 +15,7 @@ interface Props extends TClassName, TTag {
     additionalInfo?: ReactNode;
     sidebarIsExpand?: boolean;
     textOverlayCls?: string;
-    linkOnClick?: () => void;
+    linkOnClick?: MouseEventHandler;
     activeSlug?: TSalesmanHomePageType;
     slug?: string | null;
 }

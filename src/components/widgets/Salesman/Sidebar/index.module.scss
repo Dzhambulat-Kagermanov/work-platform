@@ -1,6 +1,6 @@
 .wrapper {
-    min-width: 77px;
-    max-width: 77px;
+    min-width: var(--sidebar-passive-width);
+    max-width: var(--sidebar-passive-width);
     height: 100vh;
     transition: var(--tran-low);
     border-right: 2px solid var(--white-300);
@@ -44,8 +44,8 @@
     }
 }
 .isExpand {
-    min-width: 300px;
-    max-width: 400px;
+    min-width: var(--sidebar-active-width);
+    max-width: calc(var(--sidebar-active-width) + 100px);
     .expand_btn {
         svg {
             scale: 1 -1;

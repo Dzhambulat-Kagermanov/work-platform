@@ -1,4 +1,5 @@
-import { FC } from "react";
+"use client";
+import { FC, MouseEventHandler } from "react";
 import { TClassName } from "@/types";
 import { Typography } from "@/components/ui";
 import {
@@ -12,6 +13,8 @@ import { Item } from "../Item";
 import { LinksDropdown } from "../LinksDropdown";
 import cls from "./index.module.scss";
 import { TSalesmanHomePageType } from "../../HomePagesSwitcher";
+import { useModalStore } from "@/store";
+import { SALESMAN_NOTIFICATIONS_MODAL } from "@/constants";
 
 interface Props extends TClassName {
     sidebarIsExpand?: boolean;
@@ -24,6 +27,10 @@ const LinksGroup: FC<Props> = ({
     linkOnClick,
     homePageType,
 }) => {
+    const showModal = useModalStore((state) => state.showModal);
+    const handleNotifications: MouseEventHandler = () => {
+        showModal({ slug: SALESMAN_NOTIFICATIONS_MODAL });
+    };
     return (
         <ul className={cn(cls.group, [className])}>
             <LinksDropdown
@@ -84,7 +91,10 @@ const LinksGroup: FC<Props> = ({
                 }
             />
             <Item
-                linkOnClick={linkOnClick}
+                linkOnClick={(e) => {
+                    linkOnClick && linkOnClick();
+                    handleNotifications(e);
+                }}
                 sidebarIsExpand={sidebarIsExpand}
                 tag="li"
                 text="Уведомления"
@@ -94,7 +104,6 @@ const LinksGroup: FC<Props> = ({
                         className={cn(cls.icon)}
                     />
                 }
-                link="/salesman/notification"
                 className={cn(cls.item)}
                 additionalInfo={
                     <Typography

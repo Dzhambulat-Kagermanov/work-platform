@@ -30,3 +30,4 @@ export const SALESMAN_EDIT_ADVERTISEMENT_LIMIT_UP =
     "salesman-advertisement-limit-up";
 export const SALESMAN_EDIT_ADVERTISEMENT_LIMIT_LOW =
     "salesman-advertisement-limit-low";
+export const SALESMAN_NOTIFICATIONS_MODAL = "salesman-notifications";
