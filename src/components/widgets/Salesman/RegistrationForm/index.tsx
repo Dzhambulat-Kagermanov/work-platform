@@ -41,8 +41,8 @@ const RegistrationForm: FC<Props> = ({ className }) => {
                             tag="span"
                             className={cn(cls.timer)}
                         >
-                            Запросить новый код можно через
-                            <Timer second={36} format={undefined} /> сек.
+                            Запросить новый код можно через {" "}
+                            <Timer second={3} format={undefined} /> сек.
                         </Typography>
                     </>
                 }

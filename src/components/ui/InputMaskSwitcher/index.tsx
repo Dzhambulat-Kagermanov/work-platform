@@ -10,7 +10,7 @@ interface Props extends Omit<TMaskInputProps, "icon" | "mask"> {
     masks: Record<string, string>;
     switchCls?: string;
 }
-const InputMaskSwitcher: FC<Props> = ({ masks, switchCls, ...other }) => {
+const InputMaskSwitcher: FC<Props> = ({ masks, switchCls, ...props }) => {
     const keys = Object.keys(masks);
     const [mask, setMask] = useState<string>(keys[0]);
 
@@ -45,7 +45,7 @@ const InputMaskSwitcher: FC<Props> = ({ masks, switchCls, ...other }) => {
                     })}
                 />
             }
-            {...other}
+            {...props}
         />
     );
 };

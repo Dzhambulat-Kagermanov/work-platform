@@ -18,5 +18,6 @@ export const ROUTES = {
         AUTH: "/salesman/auth",
         REGISTRATION: "/salesman/registration",
         FORGOT_PASSWORD: "/salesman/forgot-password",
+        PROFILE: "/salesman/profile",
     },
 };

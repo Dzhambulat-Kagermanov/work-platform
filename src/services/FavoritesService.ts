@@ -16,7 +16,7 @@ class FavoritesService {
         return res.data;
     }
     async addToFavorites(data: AddToFavoriteData) {
-        const res = await axios.post("/add-to-favorite", data);
+        const res = await axios.post<{ ad: Product }>("/add-to-favorite", data);
 
         return res;
     }

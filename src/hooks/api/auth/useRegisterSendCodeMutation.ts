@@ -7,7 +7,9 @@ const useRegisterSendCodeMutation = () =>
     useMutation({
         mutationKey: ["register-send-code"],
         mutationFn: async (data: RegisterSendCodeData) => {
-            const res = await apiService.auth.sendCode(data)
+            const res = await apiService.auth.sendCode(data);
+
+            return res;
         },
     });
 

@@ -1,38 +1,69 @@
 "use client";
-import { FC, FormEvent } from "react";
+import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { Input, InputMaskSwitcher } from "@/components/ui";
 import { AuthFormSubmit } from "@/components/features/AuthFormSubmit";
 import { PHONE_MASKS } from "@/constants";
 import cls from "./index.module.scss";
+import { useLoginMutation } from "@/hooks/api/auth";
+import { Formik } from "formik";
 
 interface Props extends TClassName {}
 const AuthForm: FC<Props> = ({ className }) => {
-    const handleSubmit = (e: FormEvent) => {
-        e.preventDefault();
-    };
+
+    const loginMutation = useLoginMutation();
 
     return (
-        <form className={cn(cls.wrapper, [className])} onSubmit={handleSubmit}>
-            <InputMaskSwitcher
-                masks={PHONE_MASKS}
-                errorIcon
-                wrapperCls={cn(cls.inp_wrapper, [cls.phone])}
-                label="Номер телефона"
-                lazy={false}
-                placeholderChar="_"
-                onComplete={(value) => {
-                    console.log(value);
-                }}
-            />
-            <Input
-                errorIcon
-                wrapperCls={cn(cls.inp_wrapper, [cls.password])}
-                label="Пароль"
-            />
-            <AuthFormSubmit className={cn(cls.submit_btn)} type="submit" />
-        </form>
+        <Formik
+            initialValues={{
+                phone: "",
+                password: "",
+            }}
+            onSubmit={(values, { setSubmitting }) => {
+                setSubmitting(true);
+                loginMutation.mutate(values, {
+                    onSettled: () => {
+                        setSubmitting(false);
+                    }
+                })
+
+            }}
+        >
+            {
+                ({
+                    handleSubmit,
+                    isSubmitting,
+                    handleChange,
+                    values,
+                    setFieldValue,
+                }) => (
+                    <form className={cn(cls.wrapper, [className])} onSubmit={handleSubmit}>
+                        <InputMaskSwitcher
+                            masks={PHONE_MASKS}
+                            errorIcon
+                            wrapperCls={cn(cls.inp_wrapper, [cls.phone])}
+                            label="Номер телефона"
+                            lazy={false}
+                            placeholderChar="_"
+                            onComplete={(value) => {
+                                setFieldValue("phone", value);
+                            }}
+                        />
+                        <Input
+                            type="password"
+                            errorIcon
+                            wrapperCls={cn(cls.inp_wrapper, [cls.password])}
+                            label="Пароль"
+                            name="password"
+                            value={values.password}
+                            onChange={handleChange}
+                        />
+                        <AuthFormSubmit disabled={isSubmitting || (!values.password || !values.phone)} className={cn(cls.submit_btn)} type="submit" />
+                    </form>
+                )
+            }
+        </Formik>
     );
 };
 

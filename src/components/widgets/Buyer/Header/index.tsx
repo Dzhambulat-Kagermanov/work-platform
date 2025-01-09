@@ -23,7 +23,7 @@ const Header: FC<Props> = ({ className, wrapperClassName }) => {
     const isSalesmanPages = pathValidating(path, "/salesman/...");
 
     return (
-        <header className={cn(cls.wrapper, [wrapperClassName])}>
+        <header className={cn(cls.wrapper, [wrapperClassName, ...(user ? [cls.userHeader] : [])])}>
             <Container className={cn(cls.container, [className])}>
                 {width > SM_BIG && !user ? (
                     <Link

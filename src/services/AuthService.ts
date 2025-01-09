@@ -36,7 +36,7 @@ class AuthService {
         return res.data;
     }
 
-    async verifyCode(data: RegisterSendCodeData) {
+    async verifyCode(data: RegisterVerifyCodeData) {
         const res = await axios.post<{
             user: User,
             token: string;

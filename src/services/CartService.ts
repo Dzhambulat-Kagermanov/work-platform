@@ -17,7 +17,7 @@ class CartService {
         return res.data;
     }
     async addToCart(data: AddToCartData) {
-        const res = await axios.post("/add-to-cart", data);
+        const res = await axios.post<{ ad: Product }>("/add-to-cart", data);
 
         return res;
     }
