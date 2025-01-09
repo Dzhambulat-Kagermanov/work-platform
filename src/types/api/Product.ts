@@ -42,6 +42,7 @@ type Product = {
     shop: Shop;
     price_without_cashback: number;
     reviews: Review[];
+    quantity?: number;
 } & Timestamps;
 
 export default Product;
