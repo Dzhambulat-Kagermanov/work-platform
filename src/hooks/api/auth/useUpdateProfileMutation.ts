@@ -1,10 +1,14 @@
+import { setQuerySessionDataHandler } from "@/lib";
 import { apiService } from "@/services";
 import { UpdateProfileData } from "@/services/AuthService";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 
 const useUpdateProfileMutation = () => {
+
+    const queryClient = useQueryClient();
+
     return useMutation({
         mutationKey: ["update-profile"],
         mutationFn: async (data: UpdateProfileData) => {
@@ -12,7 +16,8 @@ const useUpdateProfileMutation = () => {
 
             return res;
         },
-        onSuccess: () => {
+        onSuccess: (data) => {
+            setQuerySessionDataHandler(queryClient, data);
             toast.success("Данные успешно обновлены");
         },
         onError: (e: Error) => {

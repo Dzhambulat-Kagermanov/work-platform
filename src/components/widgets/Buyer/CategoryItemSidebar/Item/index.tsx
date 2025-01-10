@@ -4,30 +4,33 @@ import { Typography } from "@/components/ui";
 import { cn } from "@/lib";
 import Link from "next/link";
 import cls from "./index.module.scss";
+import { ROUTES } from "@/constants";
 
 interface Props extends TClassName, TSubcategoryItemProps {
-    slug: string;
     subcategory?: string;
     linkCls?: string;
+    id: number;
+    categoryId: string;
 }
 const Item: FC<Props> = ({
     className,
-    slug,
+    id,
     subcategory,
     productsQnt,
     title,
     linkCls,
+    categoryId,
 }) => {
     return (
         <li
             className={cn(cls.item, [className], {
                 [cls.active]:
-                    !!subcategory && decodeURIComponent(subcategory) === title,
+                subcategory && Number(subcategory) === id ? true : false,
             })}
             key={title}
         >
             <Link
-                href={`/buyer/category?slug=${slug}&subcategory=${title}`}
+                href={`${ROUTES.BUYER.CATEGORY}?categoryId=${categoryId}&subcategory=${id}`}
                 className={linkCls}
             >
                 <Typography font="Inter-R" size={18}>

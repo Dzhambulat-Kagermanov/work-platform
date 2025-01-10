@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiService } from "@/services";
 import { LoginData } from "@/services/AuthService";
-import { sessionQueryKeys } from "./useSessionQuery";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants";
+import { setQuerySessionDataHandler } from "@/lib";
 
 const useLoginMutation = () => {
     const router = useRouter();
@@ -24,7 +24,7 @@ const useLoginMutation = () => {
                     ? ROUTES.BUYER.ACCOUNT.VALUE
                     : ROUTES.SALESMAN.PROFILE,
             );
-            queryClient.setQueryData(sessionQueryKeys, data.user);
+            setQuerySessionDataHandler(queryClient, data.user);
             toast.success("Авторизация прошла успешно");
         },
         onError: () => {

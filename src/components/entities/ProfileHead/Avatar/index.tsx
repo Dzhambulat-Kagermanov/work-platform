@@ -1,10 +1,11 @@
 "use client";
-import { FC } from "react";
+import { FC, useRef } from "react";
 import { TClassName, TUserInfo } from "@/types";
 import { cn } from "@/lib";
 import Image from "next/image";
 import { Typography } from "@/components/ui";
 import cls from "./index.module.scss";
+import { useUpdateProfileMutation } from "@/hooks/api/auth";
 
 interface Props extends TClassName, Pick<TUserInfo, "avatarImage" | "name"> {
     withoutAvatarChange?: boolean;
@@ -15,8 +16,27 @@ const Avatar: FC<Props> = ({
     className,
     withoutAvatarChange,
 }) => {
-    const handleClick = () => {
-        alert("Load avatar");
+
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const { mutate: mutateUpdateUser, isPending } = useUpdateProfileMutation();
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (isPending) {
+            return;
+        }
+
+        const files = e.target.files;
+
+        if (!files || !files.length) {
+            return;
+        }
+
+
+        mutateUpdateUser({
+            avatar: files[0],
+        });
+
     };
 
     return (
@@ -25,6 +45,7 @@ const Avatar: FC<Props> = ({
                 [cls.hasAvatar]: !!avatarImage,
             })}
         >
+            <input type="file" hidden accept=".jpg,.png,.jpeg" ref={inputRef} onChange={handleChange} />
             {avatarImage ? (
                 <Image src={avatarImage} alt={name} width={126} height={126} />
             ) : (
@@ -39,7 +60,7 @@ const Avatar: FC<Props> = ({
             )}
 
             {!withoutAvatarChange && (
-                <div className={cn(cls.photo_overlay)} onClick={handleClick}>
+                <div className={cn(cls.photo_overlay)} onClick={() => inputRef.current?.click()}>
                     <Image
                         src={"/images/shared/camera.svg"}
                         alt="Загрузить фото"

@@ -21,13 +21,13 @@ const CategoryItemPage: FC<Props> = ({
         <main className={cn(cls.category, [className])}>
             <CategoryItemCrumbs
                 className={cn(cls.crumbs, ["modules-gap-top"])}
-                slug={categoryId}
+                categoryId={categoryId}
                 subcategory={subcategory}
             />
             <Container className={cn(cls.content)}>
                 <CategoryItemSidebar
                     className={cn(cls.sidebar)}
-                    slug={categoryId}
+                    categoryId={categoryId}
                     subcategory={subcategory}
                 />
                 <CategoryItemProducts

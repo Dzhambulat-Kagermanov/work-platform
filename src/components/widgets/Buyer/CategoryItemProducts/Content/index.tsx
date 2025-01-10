@@ -5,6 +5,7 @@ import { PRODUCTS } from "../constants/products";
 import { ProductItem } from "@/components/entities/ProductItem";
 import Link from "next/link";
 import cls from "./index.module.scss";
+import { ROUTES } from "@/constants";
 
 interface Props extends TClassName {}
 const Content: FC<Props> = ({ className }) => {
@@ -24,12 +25,11 @@ const Content: FC<Props> = ({ className }) => {
                     tooltip,
                 }) => {
                     return (
-                        <Link href={`/buyer/products/${id}`} key={id}>
+                        <Link href={`${ROUTES.BUYER.PRODUCTS.ID(String(id))}`} key={id}>
                             <ProductItem
                                 image={previewImage}
                                 name={name}
                                 price={price}
-                                isFavorite={isFavorite}
                                 quantities={quantities}
                                 tooltip={tooltip}
                                 tag="li"

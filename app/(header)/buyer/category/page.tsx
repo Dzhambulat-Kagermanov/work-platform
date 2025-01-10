@@ -26,7 +26,7 @@ const Category: FC<Props> = async ({ searchParams }) => {
             />
         ) : (
             <CategorySelectSubcategory
-                slug={categoryId}
+                categoryId={categoryId}
                 subcategory={subcategory}
             />
         )
