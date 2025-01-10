@@ -5,7 +5,7 @@ import { cn } from "@/lib";
 import { AuthForm } from "@/components/widgets/Salesman/AuthForm";
 import { SalesmanAuthBackgroundLayout } from "@/components/layouts/SalesmanAuthBackground";
 import cls from "./index.module.scss";
-import { AuthWrapper } from "@/components/widgets/shared/auth-wrapper";
+import { AuthWrapper } from "@/components/widgets/shared/wrappers";
 import { ROUTES } from "@/constants";
 
 interface Props extends TClassName {}

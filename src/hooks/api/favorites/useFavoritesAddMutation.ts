@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiService } from "@/services";
 import { AddToFavoriteData } from "@/services/FavoritesService";
 import Product from "@/types/api/Product";
@@ -21,7 +21,8 @@ const useFavoritesAddMutation = () => {
                 return;
             }
 
-            const oldData = queryClient.getQueryData<Product[]>(getFavoritesKey);
+            const oldData =
+                queryClient.getQueryData<Product[]>(getFavoritesKey);
 
             if (!oldData) {
                 return;
@@ -34,9 +35,8 @@ const useFavoritesAddMutation = () => {
             ]);
 
             toast.success("Товар успешно добавлен в избранное");
-
-        }
-    })
-}
+        },
+    });
+};
 
 export default useFavoritesAddMutation;

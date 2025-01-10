@@ -4,11 +4,11 @@ import Product from "@/types/api/Product";
 export type AddToCartData = {
     product_id: number;
     quantity: number;
-}
+};
 
 export type RemoveFromCartData = {
     product_id: number;
-}
+};
 
 class CartService {
     async getCart() {

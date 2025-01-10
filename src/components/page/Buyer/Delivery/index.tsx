@@ -9,7 +9,7 @@ import { BodyFlexColumnStub } from "@/components/widgets/shared/BodyFlexColumnSt
 import { MD_LOW, ROUTES } from "@/constants";
 import { DeliveryChatOrderInfoModal } from "@/components/widgets/Buyer/DeliveryChatOrderInfoModal";
 import cls from "./index.module.scss";
-import { AuthWrapper } from "@/components/widgets/shared/auth-wrapper";
+import { AuthWrapper } from "@/components/widgets/shared/wrappers";
 
 interface Props extends TClassName {
     chatType: TChatType;

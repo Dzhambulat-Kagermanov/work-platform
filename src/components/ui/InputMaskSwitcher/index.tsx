@@ -9,8 +9,9 @@ import cls from "./index.module.scss";
 interface Props extends Omit<TMaskInputProps, "icon" | "mask"> {
     masks: Record<string, string>;
     switchCls?: string;
+    hideDropdown?: boolean;
 }
-const InputMaskSwitcher: FC<Props> = ({ masks, switchCls, ...props }) => {
+const InputMaskSwitcher: FC<Props> = ({ masks, switchCls, hideDropdown, ...props }) => {
     const keys = Object.keys(masks);
     const [mask, setMask] = useState<string>(keys[0]);
 
@@ -19,6 +20,7 @@ const InputMaskSwitcher: FC<Props> = ({ masks, switchCls, ...props }) => {
             mask={masks[mask]}
             contentCls={cn(cls.inp_content)}
             icon={
+                !hideDropdown ? 
                 <Dropdown
                     setActiveItem={({ value }) => {
                         setMask(value as string);
@@ -43,7 +45,7 @@ const InputMaskSwitcher: FC<Props> = ({ masks, switchCls, ...props }) => {
                             value: mask,
                         };
                     })}
-                />
+                /> : <></>
             }
             {...props}
         />

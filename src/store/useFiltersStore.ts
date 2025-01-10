@@ -9,16 +9,15 @@ type FiltersStore = {
         sortBy: SortType;
     };
     categoryPage: {};
-}
+};
 
-const useFiltersStore = () => create<FiltersStore>(() => ({
-    mainPage: {
-        sortBy: "",
-    },
-    categoryPage: {
-
-    }
-}));
+const useFiltersStore = () =>
+    create<FiltersStore>(() => ({
+        mainPage: {
+            sortBy: "",
+        },
+        categoryPage: {},
+    }));
 
 export default useFiltersStore;
 

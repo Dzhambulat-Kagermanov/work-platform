@@ -15,7 +15,6 @@ import { ROUTES } from "@/constants";
 
 interface Props extends TClassName {}
 const Navbar: FC<Props> = ({ className }) => {
-
     const { data: user } = useSessionQuery();
 
     return (
@@ -34,29 +33,34 @@ const Navbar: FC<Props> = ({ className }) => {
             >
                 <CatalogIcon color="white" />
             </ActiveLink>
-            {
-                user && user.role.slug === "buyer" ?
-                    <>
-                        <ActiveLink
-                            href="/buyer/favorites"
-                            className={cn(cls.link)}
-                            activeCls={cn(cls.active_link)}
-                        >
-                            <FavoriteIcon stroke="white" />
-                        </ActiveLink>
-                        <ActiveLink
-                            href="/buyer/delivery"
-                            className={cn(cls.link)}
-                            activeCls={cn(cls.active_link)}
-                        >
-                            <DeliveryIcon color="white" />
-                        </ActiveLink>
-                    </>
-                : 
-                    <></>
-            }
+            {user && user.role.slug === "buyer" ? (
+                <>
+                    <ActiveLink
+                        href="/buyer/favorites"
+                        className={cn(cls.link)}
+                        activeCls={cn(cls.active_link)}
+                    >
+                        <FavoriteIcon stroke="white" />
+                    </ActiveLink>
+                    <ActiveLink
+                        href="/buyer/delivery"
+                        className={cn(cls.link)}
+                        activeCls={cn(cls.active_link)}
+                    >
+                        <DeliveryIcon color="white" />
+                    </ActiveLink>
+                </>
+            ) : (
+                <></>
+            )}
             <ActiveLink
-                href={user ? user.role.slug === "buyer" ? ROUTES.BUYER.ACCOUNT : ROUTES.SALESMAN.MAIN : ROUTES.BUYER.AUTH}
+                href={
+                    user
+                        ? user.role.slug === "buyer"
+                            ? ROUTES.BUYER.ACCOUNT.VALUE
+                            : ROUTES.SALESMAN.MAIN
+                        : ROUTES.BUYER.AUTH
+                }
                 className={cn(cls.link)}
                 activeCls={cn(cls.active_link)}
             >

@@ -14,7 +14,6 @@ interface Props extends TClassName {
     actionForLinkClick: () => void;
 }
 const Footer: FC<Props> = ({ className, actionForLinkClick }) => {
-
     const { data: user } = useSessionQuery();
 
     const isSalesmanPage = usePathValidating("/salesman/...");
@@ -36,14 +35,16 @@ const Footer: FC<Props> = ({ className, actionForLinkClick }) => {
                         : "Вход для продавцов"}
                 </Typography>
             </Link>
-            {user ?(
+            {user ? (
                 <FooterUserInfo
                     image={user.avatar ?? ""}
                     name={user.name}
                     phone={user.phone}
                     className={cn(cls.user_info)}
                 />
-            ) : <></>}
+            ) : (
+                <></>
+            )}
         </div>
     );
 };

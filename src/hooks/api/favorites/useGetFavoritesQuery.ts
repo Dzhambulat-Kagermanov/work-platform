@@ -3,7 +3,7 @@ import { apiService } from "@/services";
 
 export const getFavoritesKey = ["favorites-list"];
 
-const useGetFavoritesQuery = () => (
+const useGetFavoritesQuery = () =>
     useQuery({
         queryKey: getFavoritesKey,
         queryFn: async () => {
@@ -13,7 +13,6 @@ const useGetFavoritesQuery = () => (
         },
         staleTime: Infinity,
         retry: false,
-    })
-);
+    });
 
 export default useGetFavoritesQuery;

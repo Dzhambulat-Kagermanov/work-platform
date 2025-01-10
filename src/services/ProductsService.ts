@@ -6,7 +6,7 @@ import { QueryItem } from "@/types/client";
 class ProductsService {
     async getProductsList(query: QueryItem[]) {
         //TODO: добавить тип ответа
-        const res = await axios.get< Product[]>(
+        const res = await axios.get<Product[]>(
             `/products${queryStringHandler(query)}`,
         );
 

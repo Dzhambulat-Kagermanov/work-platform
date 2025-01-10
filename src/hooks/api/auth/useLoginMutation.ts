@@ -6,8 +6,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants";
 
-const useLoginMutation = () =>
-   {
+const useLoginMutation = () => {
     const router = useRouter();
     const queryClient = useQueryClient();
 
@@ -20,14 +19,18 @@ const useLoginMutation = () =>
         },
         onSuccess: (data) => {
             const role = data.user.role.slug;
-            router.push(role === "buyer" ? ROUTES.BUYER.ACCOUNT : ROUTES.SALESMAN.PROFILE);
+            router.push(
+                role === "buyer"
+                    ? ROUTES.BUYER.ACCOUNT.VALUE
+                    : ROUTES.SALESMAN.PROFILE,
+            );
             queryClient.setQueryData(sessionQueryKeys, data.user);
             toast.success("Авторизация прошла успешно");
         },
         onError: () => {
-            toast.error("Не удалось авторизоваться")
-        }
+            toast.error("Не удалось авторизоваться");
+        },
     });
-   }
+};
 
 export default useLoginMutation;

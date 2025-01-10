@@ -4,12 +4,13 @@ import { Button } from "@/components/ui";
 import { cn } from "@/lib";
 import { useRouter } from "next/navigation";
 import cls from "./index.module.scss";
+import { ROUTES } from "@/constants";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {}
 const AccountBalanceMore: FC<Props> = ({ className, children, ...other }) => {
     const router = useRouter();
     const handleClick = () => {
-        router.push("/buyer/account/balance");
+        router.push(ROUTES.BUYER.ACCOUNT.BALANCE);
     };
 
     return (

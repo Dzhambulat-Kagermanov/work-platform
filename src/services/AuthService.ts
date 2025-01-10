@@ -14,8 +14,12 @@ export type RegisterCompleteData = Pick<User, "name"> & {
     password_confirmation: string;
 };
 
+export type UpdateProfileData = Partial<Pick<User, 'name' | 'phone' | 'email'> & {
+    password: string;
+    password_conformation: string;
+    avatar: File;
+}>
 class AuthService {
-
     async login(data: LoginData) {
         const res = await axios.post<{
             user: User;
@@ -38,12 +42,9 @@ class AuthService {
 
     async verifyCode(data: RegisterVerifyCodeData) {
         const res = await axios.post<{
-            user: User,
+            user: User;
             token: string;
-        }>(
-            "/register/verify-code",
-            data,
-        );
+        }>("/register/verify-code", data);
 
         localStorage.setItem(authTokenKey, res.data.token);
 
@@ -52,22 +53,29 @@ class AuthService {
 
     async registerComplete(data: RegisterCompleteData) {
         const res = await axios.post<{
-            user: Pick<User, "phone" | "name" | "is_configured">
-        }>(
-            "/register/complete",
-            data,
-        );
+            user: Pick<User, "phone" | "name" | "is_configured">;
+        }>("/register/complete", data);
 
         return res.data;
     }
-    
 
     async getSession() {
         const res = await axios.get<User>("/profile");
 
         return res.data;
     }
-    async updateProfile(formData: FormData) {
+    async updateProfile(data: UpdateProfileData) {
+
+        const formData = new FormData();
+
+        for (const key in data) {
+            //@ts-ignore
+            const element = data[key];
+            if (element) {
+                formData.append(key, element);
+            }
+        }
+
         const res = await axios.post<User>("/profile", formData);
 
         return res.data;

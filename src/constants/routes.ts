@@ -4,7 +4,10 @@ export const ROUTES = {
         AUTH: "/buyer/auth",
         REGISTRATION: "/buyer/registration",
         FORGOT_PASSWORD: "/buyer/forgot-password",
-        ACCOUNT: "/buyer/account",
+        ACCOUNT: {
+            VALUE: "/buyer/account",
+            BALANCE: "/buyer/account/balance"
+        },
         CATEGORY: "/buyer/category",
         SALESMAN: {
             ID: (id: string) => `/buyer/salesman/${id}`,

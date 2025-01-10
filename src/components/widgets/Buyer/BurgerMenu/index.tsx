@@ -15,7 +15,6 @@ import { useSessionQuery } from "@/hooks/api/auth";
 
 interface Props extends TClassName {}
 const BurgerMenu: FC<Props> = ({ className }) => {
-
     const { data: user } = useSessionQuery();
 
     const screen = useScreen();

@@ -3,7 +3,7 @@ import { apiService } from "@/services";
 
 export const getCartKey = ["cart-list"];
 
-const useGetCartQuery = () => (
+const useGetCartQuery = () =>
     useQuery({
         queryKey: getCartKey,
         queryFn: async () => {
@@ -13,7 +13,6 @@ const useGetCartQuery = () => (
         },
         staleTime: Infinity,
         retry: false,
-    })
-);
+    });
 
 export default useGetCartQuery;

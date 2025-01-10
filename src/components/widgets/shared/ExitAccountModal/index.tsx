@@ -2,15 +2,20 @@
 import { FC, MouseEventHandler } from "react";
 import { TClassName } from "@/types";
 import { Button, ModalBase, Typography } from "@/components/ui";
-import { EXIT_ACCOUNT_MODAL } from "@/constants";
+import { authTokenKey, EXIT_ACCOUNT_MODAL } from "@/constants";
 import { cn } from "@/lib";
 import { useModalStore } from "@/store";
 import cls from "./index.module.scss";
+import { useQueryClient } from "@tanstack/react-query";
+import { sessionQueryKeys } from "@/hooks/api/auth/useSessionQuery";
 
 interface Props extends TClassName {}
 const ExitAccountModal: FC<Props> = ({ className }) => {
+    const queryClient = useQueryClient();
     const hideModal = useModalStore((state) => state.hideModal);
     const handleClick: MouseEventHandler = () => {
+        localStorage.removeItem(authTokenKey);
+        queryClient.invalidateQueries({ queryKey: sessionQueryKeys });
         hideModal({ slug: EXIT_ACCOUNT_MODAL });
     };
 

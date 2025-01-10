@@ -1,10 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { apiService } from "@/services";
 
-const useProductsListQuery = () =>
-{
-    
-
+const useProductsListQuery = () => {
     return useQuery({
         queryKey: [
             "products-list",
@@ -16,6 +13,6 @@ const useProductsListQuery = () =>
         },
         staleTime: 30_000,
     });
-}
+};
 
 export default useProductsListQuery;

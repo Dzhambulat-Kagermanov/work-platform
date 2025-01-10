@@ -14,7 +14,6 @@ import { useSessionQuery } from "@/hooks/api/auth";
 
 interface Props extends TModuleClassName {}
 const Header: FC<Props> = ({ className, wrapperClassName }) => {
-
     const { data: user } = useSessionQuery();
 
     const width = useScreen();
@@ -23,7 +22,12 @@ const Header: FC<Props> = ({ className, wrapperClassName }) => {
     const isSalesmanPages = pathValidating(path, "/salesman/...");
 
     return (
-        <header className={cn(cls.wrapper, [wrapperClassName, ...(user ? [cls.userHeader] : [])])}>
+        <header
+            className={cn(cls.wrapper, [
+                wrapperClassName,
+                ...(user ? [cls.userHeader] : []),
+            ])}
+        >
             <Container className={cn(cls.container, [className])}>
                 {width > SM_BIG && !user ? (
                     <Link
@@ -41,7 +45,9 @@ const Header: FC<Props> = ({ className, wrapperClassName }) => {
                                 : "Вход для продавцов"}
                         </Typography>
                     </Link>
-                ) : <></>}
+                ) : (
+                    <></>
+                )}
                 <Content className={cn(cls.content)} />
             </Container>
         </header>

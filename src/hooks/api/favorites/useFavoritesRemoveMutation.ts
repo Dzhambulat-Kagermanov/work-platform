@@ -1,11 +1,10 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiService } from "@/services";
 import { RemoveFromFavoriteData } from "@/services/FavoritesService";
 import { getFavoritesKey } from "./useGetFavoritesQuery";
 import Product from "@/types/api/Product";
 import toast from "react-hot-toast";
 const useFavoritesRemoveMutation = () => {
-
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -23,18 +22,21 @@ const useFavoritesRemoveMutation = () => {
                 return;
             }
 
-            const oldData = queryClient.getQueryData<Product[]>(getFavoritesKey);
+            const oldData =
+                queryClient.getQueryData<Product[]>(getFavoritesKey);
 
             if (!oldData) {
                 return;
             }
 
-            queryClient.setQueryData(getFavoritesKey, oldData.filter((el) => el.id !== data.req.product_id));
+            queryClient.setQueryData(
+                getFavoritesKey,
+                oldData.filter((el) => el.id !== data.req.product_id),
+            );
 
             toast.success("Товар успешно убран из избранного");
-
-        }
-    })
-}
+        },
+    });
+};
 
 export default useFavoritesRemoveMutation;

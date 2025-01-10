@@ -12,6 +12,7 @@ type User = {
     avatar: string;
     shop: Shop;
     role: Role;
+    email: string | null;
 } & Pick<Timestamps, "created_at">;
 
 export default User;

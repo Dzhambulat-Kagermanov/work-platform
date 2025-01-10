@@ -12,7 +12,6 @@ import { useProductsListQuery } from "@/hooks/api/products";
 
 interface Props extends TClassName {}
 const Products: FC<Props> = ({ className }) => {
-
     const { data: products } = useProductsListQuery();
 
     if (!products || !products.length) {

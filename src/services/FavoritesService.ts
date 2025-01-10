@@ -3,11 +3,11 @@ import Product from "@/types/api/Product";
 
 export type AddToFavoriteData = {
     product_id: number;
-}
+};
 
 export type RemoveFromFavoriteData = {
     product_id: number;
-}
+};
 
 class FavoritesService {
     async getFavorites() {

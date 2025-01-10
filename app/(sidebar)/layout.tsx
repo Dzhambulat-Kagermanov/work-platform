@@ -1,7 +1,7 @@
 import { FC, Suspense } from "react";
 import { SidebarLayout } from "@/components/layouts/Sidebar";
 import { TChildren } from "@/types";
-import { AuthWrapper } from "@/components/widgets/shared/auth-wrapper";
+import { AuthWrapper } from "@/components/widgets/shared/wrappers";
 import { ROUTES } from "@/constants";
 
 interface Props extends TChildren {}

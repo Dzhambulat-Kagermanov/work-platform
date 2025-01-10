@@ -9,7 +9,6 @@ import cls from "./index.module.scss";
 
 interface Props extends TClassName {}
 const HomeProducts: FC<Props> = async ({ className }) => {
-
     return (
         <Container tag="section" className={cn(cls.container, [className])}>
             <div className={cn(cls.content)}>

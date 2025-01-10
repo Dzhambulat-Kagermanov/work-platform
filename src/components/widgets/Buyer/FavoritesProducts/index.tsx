@@ -1,3 +1,4 @@
+"use client";
 import { FC } from "react";
 import { TClassName } from "@/types";
 import { Container } from "@/components/ui";
@@ -6,40 +7,36 @@ import cls from "./index.module.scss";
 import { favoriteProducts } from "@/constants/stub";
 import { ProductItem } from "@/components/entities/ProductItem";
 import Link from "next/link";
+import { useGetFavoritesQuery } from "@/hooks/api/favorites";
 
 interface Props extends TClassName {}
 const FavoritesProducts: FC<Props> = ({ className }) => {
+    const { data: favoritesData } = useGetFavoritesQuery();
+    if (!favoritesData) {
+        return <></>
+    }
     return (
         <Container tag="section" className={cn(cls.wrapper, [className])}>
             <ul className={cn(cls.group)}>
-                {favoriteProducts.map(
-                    ({
-                        id,
-                        images,
-                        name,
-                        previewImage,
-                        price,
-                        productDescription,
-                        quantities,
-                        salesmanId,
-                        isFavorite,
-                        tooltip,
-                    }) => {
+                {favoritesData.map(
+                    (item, index) => {
                         return (
                             <Link
-                                href={`/buyer/products/${id}`}
-                                key={id}
+                                href={`/buyer/products/${item.id}`}
+                                key={index}
                                 className={cn(cls.link)}
                             >
                                 <ProductItem
                                     wrapperCls={cn(cls.item)}
-                                    image={previewImage}
-                                    name={name}
-                                    price={price}
-                                    isFavorite={isFavorite}
-                                    quantities={quantities}
+                                    image={item.product.images.length ? item.product.images[0] : ""}
+                                    name={item.product.name}
+                                    price={{
+                                        price: Number(item.product.price),
+                                        discount: Number(item.product.discount)
+                                    }}
+                                    quantities={item.quantity}
                                     tag="li"
-                                    tooltip={tooltip}
+                                    tooltip={""}
                                 />
                             </Link>
                         );

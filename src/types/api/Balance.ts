@@ -1,7 +1,6 @@
-
 type Balance = {
-    accessBalance: string; 
+    accessBalance: string;
     onConfirmation: string;
-}
+};
 
 export default Balance;

@@ -5,7 +5,7 @@ import { cn } from "@/lib";
 import { RegistrationForm } from "@/components/widgets/Salesman/RegistrationForm";
 import { SalesmanAuthBackgroundLayout } from "@/components/layouts/SalesmanAuthBackground";
 import cls from "./index.module.scss";
-import { AuthWrapper } from "@/components/widgets/shared/auth-wrapper";
+import { AuthWrapper } from "@/components/widgets/shared/wrappers";
 
 interface Props extends TClassName {}
 const RegistrationPage: FC<Props> = ({ className }) => {

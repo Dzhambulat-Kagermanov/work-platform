@@ -7,5 +7,9 @@ export type { default as BoolNumber } from "./BoolNumber";
 export type { default as ImgItem } from "./ImgItem";
 export type { default as CategoryItem } from "./CategoryItem";
 export type { default as Balance } from "./Balance";
-export type { default as Transaction, TransactionType, CurrencyType } from "./Transaction";
+export type {
+    default as Transaction,
+    TransactionType,
+    CurrencyType,
+} from "./Transaction";
 export type { default as Product } from "./Product";

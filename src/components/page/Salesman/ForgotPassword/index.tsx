@@ -6,7 +6,7 @@ import { ForgotPasswordForm } from "@/components/widgets/Salesman/ForgotPassword
 import { SalesmanAuthBackgroundLayout } from "@/components/layouts/SalesmanAuthBackground";
 import { AuthActions } from "@/components/widgets/Buyer/AuthActions";
 import cls from "./index.module.scss";
-import { AuthWrapper } from "@/components/widgets/shared/auth-wrapper";
+import { AuthWrapper } from "@/components/widgets/shared/wrappers";
 import { ROUTES } from "@/constants";
 
 interface Props extends TClassName {}

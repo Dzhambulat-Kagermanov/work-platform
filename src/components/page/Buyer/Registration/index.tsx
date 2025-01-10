@@ -4,13 +4,13 @@ import { cn } from "@/lib";
 import { RegistrationForm } from "@/components/widgets/Buyer/RegistrationForm";
 import { SignLayout } from "@/components/layouts/Sign";
 import cls from "./index.module.scss";
-import { AuthWrapper } from "@/components/widgets/shared/auth-wrapper";
+import { AuthWrapper } from "@/components/widgets/shared/wrappers";
 import { ROUTES } from "@/constants";
 
 interface Props extends TClassName {}
 const RegistrationPage: FC<Props> = ({ className }) => {
     return (
-        <AuthWrapper reverse redirectLink={ROUTES.BUYER.ACCOUNT}>
+        <AuthWrapper reverse redirectLink={ROUTES.BUYER.ACCOUNT.VALUE} isRegister>
             <SignLayout
                 logo="/images/shared/logo.svg"
                 title="Регистрация"

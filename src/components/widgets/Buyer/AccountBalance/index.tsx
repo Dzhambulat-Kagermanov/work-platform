@@ -4,11 +4,15 @@ import { cn } from "@/lib";
 import { AccountContentBlock, Typography } from "@/components/ui";
 import { AccountBalanceMore } from "@/components/features/AccountBalanceMore";
 import cls from "./index.module.scss";
+import { useGetBalanceQuery } from "@/hooks/api/auth";
 
 interface Props extends TClassName {
     balance: number;
 }
-const AccountBalance: FC<Props> = ({ className, balance }) => {
+const AccountBalance: FC<Props> = ({ className }) => {
+
+    const { data: balance } = useGetBalanceQuery();
+
     return (
         <AccountContentBlock
             tag="section"
@@ -17,7 +21,7 @@ const AccountBalance: FC<Props> = ({ className, balance }) => {
             contentWrapperCls={cn(cls.content)}
         >
             <Typography font="Inter-SB" size={24}>
-                {balance} ₽
+                {balance?.accessBalance} ₽
             </Typography>
             <AccountBalanceMore className={cn(cls.more_btn)} />
         </AccountContentBlock>
