@@ -27,6 +27,7 @@ export type OrderWithdrawalData = {
 export type UpdateProfileAvatarData = {
     avatar: File;
 }
+
 class AuthService {
     async login(data: LoginData) {
         const res = await axios.post<{
@@ -100,8 +101,8 @@ class AuthService {
         return res.data;
     }
 
-    async getTransactions() {
-        const res = await axios.get<Transaction[]>("/transactions");
+    async getTransactions(query?: string) {
+        const res = await axios.get<Transaction[]>(`/transactions${query}`);
 
         return res.data;
     }

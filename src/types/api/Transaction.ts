@@ -1,6 +1,6 @@
 import Timestamps from "./Timestamps";
 
-export type TransactionType = "withdraw";
+export type TransactionType = "withdraw" | "deposit";
 export type CurrencyType = "cash";
 
 type Transaction = {

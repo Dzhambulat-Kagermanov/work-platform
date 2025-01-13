@@ -13,12 +13,14 @@ import { useScreen } from "@/hooks";
 import { MD_BIG, ROUTES } from "@/constants";
 import cls from "./index.module.scss";
 import { AuthWrapper } from "@/components/widgets/shared/wrappers";
-import { useSessionQuery } from "@/hooks/api/auth";
+import { useGetStatisticsQuery, useSessionQuery } from "@/hooks/api/auth";
+import { dateParserHandler } from "@/handlers";
 
 const AccountPageContent: FC<Props> = ({ className }) => {
     const width = useScreen();
     
     const { data: user } = useSessionQuery();
+    const { data: statistic } = useGetStatisticsQuery();
     
     if (!user) {
         return <></>;
@@ -32,11 +34,11 @@ const AccountPageContent: FC<Props> = ({ className }) => {
                 cls.head_info_mobile_backg_content,
             )}
             className={cn(cls.head)}
-            id={user.id}
-            name={user.name}
-            rating={user.rating}
-            registerDate="19.08.2024"
-            avatarImage={user.avatar}
+            id={user?.id ?? 0}
+            name={user?.name ?? ""}
+            rating={user?.rating ?? 0}
+            registerDate={user ? dateParserHandler(user.created_at) : ""}
+            avatarImage={user?.avatar ?? ""}
             background="/images/account/head-background.png"
         />
         <Container className={cn(cls.dashboard)}>
@@ -51,10 +53,10 @@ const AccountPageContent: FC<Props> = ({ className }) => {
                 /> */}
                 <AccountStatistic
                     className={cn(cls.statistic)}
-                    cashbackPaid={10550}
-                    productsGrate={342}
-                    productsRating={4.7}
-                    successfulBuybacks={91}
+                    cashbackPaid={statistic?.cashback_paid ?? 0}
+                    productsGrate={statistic?.total_reviews ?? 0}
+                    productsRating={statistic?.product_rating ?? 0}
+                    successfulBuybacks={statistic?.success_buybacks ?? 0}
                 />
             </div>
             {width > MD_BIG && (

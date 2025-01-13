@@ -5,7 +5,7 @@ import { cn } from "@/lib";
 import Image from "next/image";
 import { Typography } from "@/components/ui";
 import cls from "./index.module.scss";
-import { useUpdateProfileMutation } from "@/hooks/api/auth";
+import { useUpdateAvatarMutation } from "@/hooks/api/auth";
 
 interface Props extends TClassName, Pick<TUserInfo, "avatarImage" | "name"> {
     withoutAvatarChange?: boolean;
@@ -19,7 +19,7 @@ const Avatar: FC<Props> = ({
 
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const { mutate: mutateUpdateUser, isPending } = useUpdateProfileMutation();
+    const { mutate: mutateUpdateAvatar, isPending } = useUpdateAvatarMutation();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (isPending) {
@@ -33,7 +33,7 @@ const Avatar: FC<Props> = ({
         }
 
 
-        mutateUpdateUser({
+        mutateUpdateAvatar({
             avatar: files[0],
         });
 
