@@ -1,7 +1,7 @@
 import { apiService } from "@/services";
 import { useQuery } from "@tanstack/react-query";
 
-const useGetBalanceQuery = () => (
+const useGetBalanceQuery = () =>
     useQuery({
         queryKey: ["profile-balance"],
         queryFn: async () => {
@@ -11,7 +11,6 @@ const useGetBalanceQuery = () => (
         },
         staleTime: 45_000,
         retry: false,
-    })
-);
+    });
 
 export default useGetBalanceQuery;

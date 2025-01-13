@@ -32,8 +32,7 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
     useEffect(() => {
         if (
             !reverse &&
-            (isError ||
-                (roles && data && roles.indexOf(data.role.slug) === -1))
+            (isError || (roles && data && roles.indexOf(data.role.slug) === -1))
         ) {
             if (!data?.is_configured) {
                 pushToRegEnd();
@@ -41,8 +40,10 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
                 router.push(redirectLink ?? ROUTES.MAIN);
             }
         } else if (data) {
-           if (!data.is_configured) {
+            if (!data.is_configured) {
                 pushToRegEnd();
+            } else if (reverse) {
+                router.push(redirectLink ?? ROUTES.MAIN);
             }
         }
         if (!isLoading) {
@@ -50,9 +51,7 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
     }, [isError, data, isLoading]);
 
     if (isLoading && !reverse) {
-        return (
-            <PageLoader />
-        )
+        return <PageLoader />;
     }
 
     if (!reverse && (isError || !data)) {

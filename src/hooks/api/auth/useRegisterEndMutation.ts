@@ -5,8 +5,7 @@ import toast from "react-hot-toast";
 import { sessionQueryKeys } from "./useSessionQuery";
 import { setQuerySessionDataHandler } from "@/lib";
 
-const useRegisterEndMutation = () =>
-{
+const useRegisterEndMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationKey: ["auth-register-end"],
@@ -15,13 +14,14 @@ const useRegisterEndMutation = () =>
             return res;
         },
         onSuccess: (data) => {
+            queryClient.invalidateQueries({ queryKey: sessionQueryKeys });
             queryClient.setQueryData(sessionQueryKeys, data.user);
             toast.success("Регистрация завершена успешно");
         },
         onError: () => {
             toast.error("Не удалось завершить регистрацию");
-        }
+        },
     });
-}
+};
 
 export default useRegisterEndMutation;

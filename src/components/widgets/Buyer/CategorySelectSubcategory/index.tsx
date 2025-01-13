@@ -16,7 +16,6 @@ const CategorySelectSubcategory: FC<Props> = ({
     categoryId,
     subcategory,
 }) => {
-
     return (
         <Container tag="section" className={cn(cls.wrapper, [className])}>
             <CategoryItemCrumbs

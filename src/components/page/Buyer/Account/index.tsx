@@ -18,59 +18,55 @@ import { dateParserHandler } from "@/handlers";
 
 const AccountPageContent: FC<Props> = ({ className }) => {
     const width = useScreen();
-    
+
     const { data: user } = useSessionQuery();
     const { data: statistic } = useGetStatisticsQuery();
-    
+
     if (!user) {
         return <></>;
     }
 
     return (
         <main className={cn(cls.account, [className, "modules-gap-top"])}>
-        <ProfileHead
-            contentContainerCls={cn(cls.head_content_container)}
-            infoMobileBackgContentCls={cn(
-                cls.head_info_mobile_backg_content,
-            )}
-            className={cn(cls.head)}
-            id={user?.id ?? 0}
-            name={user?.name ?? ""}
-            rating={user?.rating ?? 0}
-            registerDate={user ? dateParserHandler(user.created_at) : ""}
-            avatarImage={user?.avatar ?? ""}
-            background="/images/account/head-background.png"
-        />
-        <Container className={cn(cls.dashboard)}>
-            <AccountForm className={cn(cls.form)} />
-            <div className={cn(cls.half)}>
-                <AccountBalance
-                    className={cn(cls.balance)}
-                    balance={1}
-                />
-                {/* <AccountNotifications
+            <ProfileHead
+                contentContainerCls={cn(cls.head_content_container)}
+                infoMobileBackgContentCls={cn(
+                    cls.head_info_mobile_backg_content,
+                )}
+                className={cn(cls.head)}
+                id={user?.id ?? 0}
+                name={user?.name ?? ""}
+                rating={user?.rating ?? 0}
+                registerDate={user ? dateParserHandler(user.created_at) : ""}
+                avatarImage={user?.avatar ?? ""}
+                background="/images/account/head-background.png"
+            />
+            <Container className={cn(cls.dashboard)}>
+                <AccountForm className={cn(cls.form)} />
+                <div className={cn(cls.half)}>
+                    <AccountBalance className={cn(cls.balance)} balance={1} />
+                    {/* <AccountNotifications
                     className={cn(cls.notifications)}
                 /> */}
-                <AccountStatistic
-                    className={cn(cls.statistic)}
-                    cashbackPaid={statistic?.cashback_paid ?? 0}
-                    productsGrate={statistic?.total_reviews ?? 0}
-                    productsRating={statistic?.product_rating ?? 0}
-                    successfulBuybacks={statistic?.success_buybacks ?? 0}
-                />
-            </div>
-            {width > MD_BIG && (
-                <ExitBtnMobile className={cn(cls.exit_btn_mobile)} />
-            )}
-            <ExitAccountModal className={cn(cls.exit_account_modal)} />
-        </Container>
-    </main>
-    )
-}
+                    <AccountStatistic
+                        className={cn(cls.statistic)}
+                        cashbackPaid={statistic?.cashback_paid ?? 0}
+                        productsGrate={statistic?.total_reviews ?? 0}
+                        productsRating={statistic?.product_rating ?? 0}
+                        successfulBuybacks={statistic?.success_buybacks ?? 0}
+                    />
+                </div>
+                {width > MD_BIG && (
+                    <ExitBtnMobile className={cn(cls.exit_btn_mobile)} />
+                )}
+                <ExitAccountModal className={cn(cls.exit_account_modal)} />
+            </Container>
+        </main>
+    );
+};
 
 interface Props extends TClassName {}
 const AccountPage: FC<Props> = (props) => {
-
     return (
         <AuthWrapper roles={["buyer"]} redirectLink={ROUTES.BUYER.AUTH}>
             <AccountPageContent {...props} />

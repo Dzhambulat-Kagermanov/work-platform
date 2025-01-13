@@ -1,6 +1,12 @@
 import axios from "@/axios";
 import { authTokenKey } from "@/constants";
-import { Balance, ProfileStatistic, Role, Transaction, User } from "@/types/api";
+import {
+    Balance,
+    ProfileStatistic,
+    Role,
+    Transaction,
+    User,
+} from "@/types/api";
 
 export type LoginData = Record<"phone" | "password", string>;
 
@@ -14,19 +20,23 @@ export type RegisterCompleteData = Pick<User, "name"> & {
     password_confirmation: string;
 };
 
-export type UpdateProfileData = Partial<Pick<User, 'name' | 'phone' | 'email'> & {
-    password: string;
-    password_confirmation: string;
-}>
+export type UpdateProfileData = Partial<
+    Pick<User, "name" | "phone" | "email"> & {
+        password: string;
+        password_confirmation: string;
+    }
+>;
 
 export type OrderWithdrawalData = {
     amount: number;
     card_number: number;
-}
+};
 
 export type UpdateProfileAvatarData = {
     avatar: File;
-}
+};
+
+export type PasswordResetData = Record<"phone" | "code", string>;
 
 class AuthService {
     async login(data: LoginData) {
@@ -74,7 +84,6 @@ class AuthService {
         return res.data;
     }
     async updateProfile(data: UpdateProfileData) {
-
         const formData = new FormData();
 
         for (const key in data) {
@@ -91,10 +100,9 @@ class AuthService {
     }
 
     async updateAvatar(data: UpdateProfileAvatarData) {
-
         const formData = new FormData();
 
-        formData.append("avatar", data.avatar)
+        formData.append("avatar", data.avatar);
 
         const res = await axios.post("/profile/avatar", formData);
 
@@ -140,6 +148,18 @@ class AuthService {
         const res = await axios.get<Role[]>("/roles");
 
         return res.data;
+    }
+    async passwordResetSendCode(phone: string) {
+        const res = await axios.post("/password/reset/send-code", {
+            phone
+        });
+
+        return res;
+    }
+    async passwordReset(data: PasswordResetData) {
+        const res = await axios.post("/password/reset", data);
+
+        return res;
     }
 }
 

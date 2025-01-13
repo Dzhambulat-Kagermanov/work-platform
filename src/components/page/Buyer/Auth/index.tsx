@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
-import { AuthForm } from "@/components/widgets/Buyer/AuthForm";
+import { AuthForm } from "@/components";
 import { SignLayout } from "@/components/layouts/Sign";
 import cls from "./index.module.scss";
 import { AuthWrapper } from "@/components/widgets/shared/wrappers";

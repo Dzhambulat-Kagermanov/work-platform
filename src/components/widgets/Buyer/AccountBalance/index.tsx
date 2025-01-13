@@ -10,7 +10,6 @@ interface Props extends TClassName {
     balance: number;
 }
 const AccountBalance: FC<Props> = ({ className }) => {
-
     const { data: balance } = useGetBalanceQuery();
 
     return (

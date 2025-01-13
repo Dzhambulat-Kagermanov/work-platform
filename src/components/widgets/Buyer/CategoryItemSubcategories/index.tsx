@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { FC } from "react";
 import { TClassName } from "@/types";
 import { Container } from "@/components/ui";
@@ -14,16 +14,19 @@ interface Props extends TClassName {
     categoryId: string;
 }
 const CategoryItemSubcategories: FC<Props> = ({ className, categoryId }) => {
-    const { data: subcategories, isLoading } = useSubcategoriesQuery(+categoryId);
+    const { data: subcategories, isLoading } =
+        useSubcategoriesQuery(+categoryId);
 
     const router = useRouter();
 
     if (isLoading) {
-        return <PageLoader />
+        return <PageLoader />;
     }
 
     if (!subcategories || !subcategories.length) {
-        router.push(`${ROUTES.BUYER.CATEGORY}?categoryId=${categoryId}&subcategory=-1`)
+        router.push(
+            `${ROUTES.BUYER.CATEGORY}?categoryId=${categoryId}&subcategory=-1`,
+        );
         return <></>;
     }
     return (

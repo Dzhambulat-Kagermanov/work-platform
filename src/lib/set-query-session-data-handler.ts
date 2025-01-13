@@ -4,6 +4,6 @@ import { QueryClient } from "@tanstack/react-query";
 
 const setQuerySessionDataHandler = (queryClient: QueryClient, user: User) => {
     queryClient.setQueryData(sessionQueryKeys, user);
-}
+};
 
 export default setQuerySessionDataHandler;

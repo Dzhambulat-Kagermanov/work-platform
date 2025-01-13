@@ -25,7 +25,6 @@ const BalanceTransactions: FC<Props> = ({ className }) => {
     const timeout = useRef<NodeJS.Timeout>(null);
 
     const query = () => {
-
         const items = [];
 
         if (active !== "all") {
@@ -41,8 +40,7 @@ const BalanceTransactions: FC<Props> = ({ className }) => {
         const result = items.join("&");
 
         return `${items.length ? "?" : ""}${result}`;
-
-    }
+    };
 
     const { data: transactions } = useGetTransactionsQuery(query());
 
@@ -82,7 +80,6 @@ const BalanceTransactions: FC<Props> = ({ className }) => {
                     timeout.current = setTimeout(() => {
                         setBuybackId(value);
                     }, 600);
-
                 }}
             />
             <div className={cn(cls.table_wrapper)}>

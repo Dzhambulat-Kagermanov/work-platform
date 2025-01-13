@@ -57,13 +57,13 @@ const BalanceTransactions: FC<Props> = ({ className }) => {
             </div>
             <div className={cn(cls.table_wrapper)}>
                 <Table wrapperCls={cn(cls.table)} active={active} />
-                <Pagination
+                {/* <Pagination
                     className={cn(cls.pagination)}
                     pages={{
                         current: 1,
                         max: 10,
                     }}
-                />
+                /> */}
             </div>
         </section>
     );

@@ -31,7 +31,9 @@ const ProfilePage: FC<Props> = ({ className }) => {
                     id={user?.id ?? 0}
                     name={user?.name ?? ""}
                     rating={user?.rating ?? 0}
-                    registerDate={user ? dateParserHandler(user?.created_at) : ""}
+                    registerDate={
+                        user ? dateParserHandler(user?.created_at) : ""
+                    }
                     avatarImage={user?.avatar ?? ""}
                     background="/images/account/head-background.png"
                 />
@@ -49,7 +51,9 @@ const ProfilePage: FC<Props> = ({ className }) => {
                             cashbackPaid={statistic?.cashback_paid ?? 0}
                             productsGrate={statistic?.total_reviews ?? 0}
                             productsRating={statistic?.product_rating ?? 0}
-                            successfulBuybacks={statistic?.success_buybacks ?? 0}
+                            successfulBuybacks={
+                                statistic?.success_buybacks ?? 0
+                            }
                         />
                     </div>
                     {width <= MD_BIG && (

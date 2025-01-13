@@ -2,7 +2,7 @@ import { FC } from "react";
 import { TClassName } from "@/types";
 import { SignLayout } from "@/components/layouts/Sign";
 import { cn } from "@/lib";
-import { AuthForm } from "@/components/widgets/Salesman/AuthForm";
+import { AuthForm } from "@/components";
 import { SalesmanAuthBackgroundLayout } from "@/components/layouts/SalesmanAuthBackground";
 import cls from "./index.module.scss";
 import { AuthWrapper } from "@/components/widgets/shared/wrappers";

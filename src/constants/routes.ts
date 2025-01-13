@@ -6,7 +6,7 @@ export const ROUTES = {
         FORGOT_PASSWORD: "/buyer/forgot-password",
         ACCOUNT: {
             VALUE: "/buyer/account",
-            BALANCE: "/buyer/account/balance"
+            BALANCE: "/buyer/account/balance",
         },
         CATEGORY: "/buyer/category",
         SALESMAN: {

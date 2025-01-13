@@ -8,7 +8,9 @@ class CategoriesService {
     }
 
     async getSubCategories(categoryId: string) {
-        const res = await axios.get<CategoryItem[]>(`/sub-category/${categoryId}`);
+        const res = await axios.get<CategoryItem[]>(
+            `/sub-category/${categoryId}`,
+        );
 
         return res.data;
     }

@@ -7,14 +7,20 @@ import { RegistrationFormSubmit } from "@/components/features/RegistrationFormSu
 import { PHONE_MASKS } from "@/constants";
 import cls from "./index.module.scss";
 import { Formik } from "formik";
-import { useRegisterEndMutation, useRegisterSendCodeMutation } from "@/hooks/api/auth";
+import {
+    useRegisterEndMutation,
+    useRegisterSendCodeMutation,
+} from "@/hooks/api/auth";
 import useRegisterVerifyCodeMutation from "@/hooks/api/auth/useRegisterVerifyCodeMutation";
 import toast from "react-hot-toast";
 import useRolesQuery from "@/hooks/api/auth/useRolesQuery";
-import { useParams, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { RoleSlug } from "@/types/api";
 
-interface Props extends TClassName {}
-const RegistrationForm: FC<Props> = ({ className }) => {
+interface Props extends TClassName {
+    role: RoleSlug;
+}
+const RegistrationForm: FC<Props> = ({ className, role }) => {
     const params = useSearchParams();
 
     const [currentStep, setCurrentStep] = useState<"send" | "verify" | "end">(
@@ -57,8 +63,7 @@ const RegistrationForm: FC<Props> = ({ className }) => {
 
                 return errors;
             }}
-            onSubmit={(values, { setSubmitting }) => {
-
+            onSubmit={(values, { setSubmitting, setErrors }) => {
                 const onSettled = () => setSubmitting(false);
 
                 if (currentStep === "send") {
@@ -78,12 +83,12 @@ const RegistrationForm: FC<Props> = ({ className }) => {
                 }
 
                 if (currentStep === "verify") {
-                    const role = roles?.find((el) => el.slug === "buyer");
+                    const selectedRole = roles?.find((el) => el.slug === role);
                     registerVerifyCodeMutation.mutate(
                         {
                             phone: values.phone,
                             code: values.code,
-                            role_id: role?.id ?? -1,
+                            role_id: selectedRole?.id ?? -1,
                         },
                         {
                             onSuccess: () => {
@@ -91,22 +96,27 @@ const RegistrationForm: FC<Props> = ({ className }) => {
                                 setCurrentStep("end");
                             },
                             onError: () => {
-                                toast.error("Неверный код");
+                                setErrors({
+                                    code: "Неверный код",
+                                });
                             },
-                            onSettled
+                            onSettled,
                         },
                     );
                     return;
                 }
 
                 if (currentStep === "end") {
-                    registerEndMutation.mutate({
-                        name: values.name,
-                        password: values.password,
-                        password_confirmation: values.passwordAgain,
-                    }, {
-                        onSettled
-                    });
+                    registerEndMutation.mutate(
+                        {
+                            name: values.name,
+                            password: values.password,
+                            password_confirmation: values.passwordAgain,
+                        },
+                        {
+                            onSettled,
+                        },
+                    );
                 }
             }}
         >
@@ -168,7 +178,12 @@ const RegistrationForm: FC<Props> = ({ className }) => {
                                     сек.
                                 </Typography>
                             ) : (
-                                <></>
+                                <button
+                                    onClick={() => handleSubmit()}
+                                    className="underline text-left text-sm opacity-80"
+                                >
+                                    Запросить новый код
+                                </button>
                             )}
                         </div>
                     ) : (
@@ -217,4 +232,4 @@ const RegistrationForm: FC<Props> = ({ className }) => {
     );
 };
 
-export { RegistrationForm };
+export default RegistrationForm;

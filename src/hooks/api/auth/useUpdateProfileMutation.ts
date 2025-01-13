@@ -6,7 +6,6 @@ import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 
 const useUpdateProfileMutation = () => {
-
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -22,9 +21,11 @@ const useUpdateProfileMutation = () => {
         },
         onError: (e: Error) => {
             const error = e as AxiosError<{ message: string }>;
-            toast.error(error.response?.data?.message ?? "Не удалось обновить данные");
+            toast.error(
+                error.response?.data?.message ?? "Не удалось обновить данные",
+            );
         },
-    })
-}
+    });
+};
 
 export default useUpdateProfileMutation;

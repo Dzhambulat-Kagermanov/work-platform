@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const RegisterWrapper: React.FC = () => {
-  return (
-    <>
-        
-    </>
-  )
-}
+    return <></>;
+};
 
-export default RegisterWrapper
+export default RegisterWrapper;

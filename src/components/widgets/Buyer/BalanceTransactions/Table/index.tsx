@@ -51,81 +51,80 @@ const Table: FC<Props> = ({ className, active, wrapperCls, transactions }) => {
                         </th>
                     </tr>
                 </thead>
-                {
-                    transactions && transactions.length ? 
-                        <tbody className={cn(cls.body)}>
-                            {transactions.map(
-                                (item, index) => {
-                                    return (
-                                        <tr className={cn(cls.row)} key={index}>
-                                            <th
-                                                className={cn(cls.column, [
-                                                    cls.transaction_id,
-                                                ])}
-                                            >
-                                                <Typography font="Inter-R" size={14}>
-                                                    {item.id}
-                                                </Typography>
-                                            </th>
-                                            <th
-                                                className={cn(cls.column, [
-                                                    cls.blue,
-                                                    cls.sum,
-                                                ])}
-                                            >
-                                                <Typography font="Inter-R" size={14}>
-                                                    {item.amount} ₽
-                                                </Typography>
-                                            </th>
-                                            <th
-                                                className={cn(cls.column, [cls.type], {
-                                                    [cls.isReplenishment]:
-                                                        item.transaction_type !== "withdraw",
-                                                })}
-                                            >
-                                                <Typography font="Inter-R" size={14}>
-                                                    {item.transaction_type !== "withdraw"
-                                                        ? "Пополнение"
-                                                        : "Вывод средств"}
-                                                </Typography>
-                                            </th>
-                                            <th
-                                                className={cn(cls.column, [
-                                                    cls.blue,
-                                                    cls.date,
-                                                ])}
-                                            >
-                                                <Typography font="Inter-R" size={14}>
-                                                    {dateParserHandler(item.created_at)}
-                                                </Typography>
-                                            </th>
-                                            <th
-                                                className={cn(cls.column, [
-                                                    cls.blue,
-                                                    cls.description,
-                                                ])}
-                                            >
-                                                <Typography font="Inter-R" size={14}>
-                                                    {item.description}
-                                                </Typography>
-                                            </th>
-                                            <th
-                                                className={cn(cls.column, [
-                                                    cls.ransom_id,
-                                                ])}
-                                            >
-                                                <Typography font="Inter-R" size={14}>
-                                                    {item.ads_id}
-                                                </Typography>
-                                            </th>
-                                        </tr>
-                                    );
-                                },
-                            )}
-                        </tbody>
-                    : 
-                        <></>
-                }
+                {transactions && transactions.length ? (
+                    <tbody className={cn(cls.body)}>
+                        {transactions.map((item, index) => {
+                            return (
+                                <tr className={cn(cls.row)} key={index}>
+                                    <th
+                                        className={cn(cls.column, [
+                                            cls.transaction_id,
+                                        ])}
+                                    >
+                                        <Typography font="Inter-R" size={14}>
+                                            {item.id}
+                                        </Typography>
+                                    </th>
+                                    <th
+                                        className={cn(cls.column, [
+                                            cls.blue,
+                                            cls.sum,
+                                        ])}
+                                    >
+                                        <Typography font="Inter-R" size={14}>
+                                            {item.amount} ₽
+                                        </Typography>
+                                    </th>
+                                    <th
+                                        className={cn(cls.column, [cls.type], {
+                                            [cls.isReplenishment]:
+                                                item.transaction_type !==
+                                                "withdraw",
+                                        })}
+                                    >
+                                        <Typography font="Inter-R" size={14}>
+                                            {item.transaction_type !==
+                                            "withdraw"
+                                                ? "Пополнение"
+                                                : "Вывод средств"}
+                                        </Typography>
+                                    </th>
+                                    <th
+                                        className={cn(cls.column, [
+                                            cls.blue,
+                                            cls.date,
+                                        ])}
+                                    >
+                                        <Typography font="Inter-R" size={14}>
+                                            {dateParserHandler(item.created_at)}
+                                        </Typography>
+                                    </th>
+                                    <th
+                                        className={cn(cls.column, [
+                                            cls.blue,
+                                            cls.description,
+                                        ])}
+                                    >
+                                        <Typography font="Inter-R" size={14}>
+                                            {item.description}
+                                        </Typography>
+                                    </th>
+                                    <th
+                                        className={cn(cls.column, [
+                                            cls.ransom_id,
+                                        ])}
+                                    >
+                                        <Typography font="Inter-R" size={14}>
+                                            {item.ads_id}
+                                        </Typography>
+                                    </th>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                ) : (
+                    <></>
+                )}
             </table>
         </div>
     );

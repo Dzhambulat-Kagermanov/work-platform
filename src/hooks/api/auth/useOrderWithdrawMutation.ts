@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 
-const useOrderWithdrawMutation = () => (
+const useOrderWithdrawMutation = () =>
     useMutation({
         mutationKey: ["create-withdraw"],
         mutationFn: async (data: OrderWithdrawalData) => {
@@ -14,9 +14,11 @@ const useOrderWithdrawMutation = () => (
         },
         onError: (e: Error) => {
             const error = e as AxiosError<{ message: string }>;
-            toast.error(error.response?.data?.message ?? "Не удалось создать заявку на вывод")
-        }
-    })
-);
+            toast.error(
+                error.response?.data?.message ??
+                    "Не удалось создать заявку на вывод",
+            );
+        },
+    });
 
 export default useOrderWithdrawMutation;

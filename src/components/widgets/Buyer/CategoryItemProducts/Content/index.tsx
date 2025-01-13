@@ -25,7 +25,10 @@ const Content: FC<Props> = ({ className }) => {
                     tooltip,
                 }) => {
                     return (
-                        <Link href={`${ROUTES.BUYER.PRODUCTS.ID(String(id))}`} key={id}>
+                        <Link
+                            href={`${ROUTES.BUYER.PRODUCTS.ID(String(id))}`}
+                            key={id}
+                        >
                             <ProductItem
                                 image={previewImage}
                                 name={name}

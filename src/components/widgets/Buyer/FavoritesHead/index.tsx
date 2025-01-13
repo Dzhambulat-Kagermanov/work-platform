@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { FC } from "react";
 import { TClassName } from "@/types";
 import { Container, Typography } from "@/components/ui";
@@ -8,7 +8,6 @@ import { useGetFavoritesQuery } from "@/hooks/api/favorites";
 
 interface Props extends TClassName {}
 const FavoritesHead: FC<Props> = ({ className }) => {
-
     const { data: favoritesData } = useGetFavoritesQuery();
 
     return (

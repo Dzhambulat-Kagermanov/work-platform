@@ -5,7 +5,6 @@ import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 
 const useUpdateAvatarMutation = () => {
-
     return useMutation({
         mutationKey: ["update-profile"],
         mutationFn: async (data: UpdateProfileAvatarData) => {
@@ -18,9 +17,11 @@ const useUpdateAvatarMutation = () => {
         },
         onError: (e: Error) => {
             const error = e as AxiosError<{ message: string }>;
-            toast.error(error.response?.data?.message ?? "Не удалось обновить аватар");
+            toast.error(
+                error.response?.data?.message ?? "Не удалось обновить аватар",
+            );
         },
-    })
-}
+    });
+};
 
 export default useUpdateAvatarMutation;

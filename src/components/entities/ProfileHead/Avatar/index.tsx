@@ -16,7 +16,6 @@ const Avatar: FC<Props> = ({
     className,
     withoutAvatarChange,
 }) => {
-
     const inputRef = useRef<HTMLInputElement>(null);
 
     const { mutate: mutateUpdateAvatar, isPending } = useUpdateAvatarMutation();
@@ -32,11 +31,9 @@ const Avatar: FC<Props> = ({
             return;
         }
 
-
         mutateUpdateAvatar({
             avatar: files[0],
         });
-
     };
 
     return (
@@ -45,9 +42,15 @@ const Avatar: FC<Props> = ({
                 [cls.hasAvatar]: !!avatarImage,
             })}
         >
-            <input type="file" hidden accept=".jpg,.png,.jpeg" ref={inputRef} onChange={handleChange} />
+            <input
+                type="file"
+                hidden
+                accept=".jpg,.png,.jpeg"
+                ref={inputRef}
+                onChange={handleChange}
+            />
             {avatarImage ? (
-                <Image src={avatarImage} alt={name} width={126} height={126} />
+                <img src={avatarImage} alt={name} width={126} height={126} />
             ) : (
                 <Typography font="Inter-M" size={60} tag="h2">
                     {name
@@ -60,7 +63,10 @@ const Avatar: FC<Props> = ({
             )}
 
             {!withoutAvatarChange && (
-                <div className={cn(cls.photo_overlay)} onClick={() => inputRef.current?.click()}>
+                <div
+                    className={cn(cls.photo_overlay)}
+                    onClick={() => inputRef.current?.click()}
+                >
                     <Image
                         src={"/images/shared/camera.svg"}
                         alt="Загрузить фото"

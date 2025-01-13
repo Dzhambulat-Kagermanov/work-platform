@@ -1,7 +1,7 @@
 import { apiService } from "@/services";
 import { useQuery } from "@tanstack/react-query";
 
-const useGetTransactionsQuery = (query?: string) => (
+const useGetTransactionsQuery = (query?: string) =>
     useQuery({
         queryKey: ["transactions", `transactions-${query}`],
         queryFn: async () => {
@@ -11,7 +11,6 @@ const useGetTransactionsQuery = (query?: string) => (
         },
         staleTime: 180_000,
         retry: false,
-    })
-);
+    });
 
 export default useGetTransactionsQuery;

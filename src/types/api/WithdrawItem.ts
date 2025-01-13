@@ -8,6 +8,6 @@ type WithdrawItem = {
     amount: string;
     status: WithdrawStatus;
     card_number: string;
-} & Timestamps
+} & Timestamps;
 
 export default WithdrawItem;

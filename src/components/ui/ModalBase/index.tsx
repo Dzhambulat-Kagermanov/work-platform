@@ -39,7 +39,9 @@ const ModalBase: FC<Props> = ({ children, className, slug, onClose }) => {
                         {children}
                     </div>
                 </section>
-            ) : <></>}
+            ) : (
+                <></>
+            )}
         </PortalWrapper>
     );
 };

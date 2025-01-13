@@ -49,6 +49,7 @@ const AuthForm: FC<Props> = ({ className }) => {
                         onComplete={(value) => {
                             setFieldValue("phone", value);
                         }}
+                        disabled={isSubmitting}
                     />
                     <Input
                         type="password"
@@ -58,6 +59,7 @@ const AuthForm: FC<Props> = ({ className }) => {
                         name="password"
                         value={values.password}
                         onChange={handleChange}
+                        disabled={isSubmitting}
                     />
                     <AuthFormSubmit
                         disabled={
@@ -72,4 +74,4 @@ const AuthForm: FC<Props> = ({ className }) => {
     );
 };
 
-export { AuthForm };
+export default AuthForm;

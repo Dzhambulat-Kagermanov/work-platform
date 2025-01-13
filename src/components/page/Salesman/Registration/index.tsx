@@ -2,7 +2,7 @@ import { FC } from "react";
 import { TClassName } from "@/types";
 import { SignLayout } from "@/components/layouts/Sign";
 import { cn } from "@/lib";
-import { RegistrationForm } from "@/components/widgets/Salesman/RegistrationForm";
+import { RegistrationForm } from "@/components";
 import { SalesmanAuthBackgroundLayout } from "@/components/layouts/SalesmanAuthBackground";
 import cls from "./index.module.scss";
 import { AuthWrapper } from "@/components/widgets/shared/wrappers";
@@ -19,7 +19,7 @@ const RegistrationPage: FC<Props> = ({ className }) => {
                     className={cn(cls.main, [className])}
                     paddingStubCls={cn(cls.padding_stub)}
                 >
-                    <RegistrationForm className={cn(cls.form)} />
+                    <RegistrationForm role="seller" className={cn(cls.form)} />
                 </SignLayout>
             </SalesmanAuthBackgroundLayout>
         </AuthWrapper>
