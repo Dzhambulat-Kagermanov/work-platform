@@ -13,3 +13,5 @@ export type {
     CurrencyType,
 } from "./Transaction";
 export type { default as Product } from "./Product";
+export type { default as WithdrawItem, WithdrawStatus } from "./WithdrawItem";
+export type { default as ProfileStatistic } from "./ProfileStatistic";

@@ -4,3 +4,8 @@ export { default as useSessionQuery } from "./useSessionQuery";
 export { default as useRegisterEndMutation } from "./useRegisterEndMutation";
 export { default as useUpdateProfileMutation } from "./useUpdateProfileMutation";
 export { default as useGetBalanceQuery } from "./useGetBalanceQuery";
+export { default as useGetWithdrawsListQuery } from "./useGetWithdrawsListQuery";
+export { default as useGetStatisticsQuery } from "./useGetStatisticsQuery";
+export { default as useUpdateAvatarMutation } from "./useUpdateAvatarMutation";
+export { default as useOrderWithdrawMutation } from "./useOrderWithdrawMutation";
+export { default as useCancelWithdrawMutation } from "./useCancelWithdrawMutation";

@@ -23,7 +23,7 @@ const ModalBase: FC<Props> = ({ children, className, slug, onClose }) => {
 
     return (
         <PortalWrapper selector="#modals">
-            {modalState && (
+            {modalState ? (
                 <section
                     onClick={handleWrapperClick}
                     className={cn(cls.wrapper, [className], {
@@ -39,7 +39,7 @@ const ModalBase: FC<Props> = ({ children, className, slug, onClose }) => {
                         {children}
                     </div>
                 </section>
-            )}
+            ) : <></>}
         </PortalWrapper>
     );
 };

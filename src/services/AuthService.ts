@@ -1,6 +1,6 @@
 import axios from "@/axios";
 import { authTokenKey } from "@/constants";
-import { Balance, Role, Transaction, User } from "@/types/api";
+import { Balance, ProfileStatistic, Role, Transaction, User } from "@/types/api";
 
 export type LoginData = Record<"phone" | "password", string>;
 
@@ -16,9 +16,17 @@ export type RegisterCompleteData = Pick<User, "name"> & {
 
 export type UpdateProfileData = Partial<Pick<User, 'name' | 'phone' | 'email'> & {
     password: string;
-    password_conformation: string;
-    avatar: File;
+    password_confirmation: string;
 }>
+
+export type OrderWithdrawalData = {
+    amount: number;
+    card_number: number;
+}
+
+export type UpdateProfileAvatarData = {
+    avatar: File;
+}
 class AuthService {
     async login(data: LoginData) {
         const res = await axios.post<{
@@ -80,6 +88,18 @@ class AuthService {
 
         return res.data;
     }
+
+    async updateAvatar(data: UpdateProfileAvatarData) {
+
+        const formData = new FormData();
+
+        formData.append("avatar", data.avatar)
+
+        const res = await axios.post("/profile/avatar", formData);
+
+        return res.data;
+    }
+
     async getTransactions() {
         const res = await axios.get<Transaction[]>("/transactions");
 
@@ -87,6 +107,30 @@ class AuthService {
     }
     async getBalance() {
         const res = await axios.get<Balance>("/balance");
+
+        return res.data;
+    }
+
+    async orderWithdrawal(data: OrderWithdrawalData) {
+        const res = await axios.post("/withdraw", data);
+
+        return res.data;
+    }
+
+    async cancelWithdrawal(id: string) {
+        const res = await axios.post(`/withdraw/${id}`);
+
+        return res.data;
+    }
+
+    async getWithdraws() {
+        const res = await axios.get("/withdraws");
+
+        return res.data;
+    }
+
+    async getStatistic() {
+        const res = await axios.get<ProfileStatistic>("/profile/statistic");
 
         return res.data;
     }

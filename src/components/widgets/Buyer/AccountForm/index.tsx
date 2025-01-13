@@ -65,7 +65,7 @@ const AccountForm: FC<Props> = ({ className }) => {
                         phone: values.phone,
                         email: values.email,
                         password: values.password,
-                        password_conformation: values.passwordAgain
+                        password_confirmation: values.passwordAgain
                     }, {
                         onSettled: () => {
                             setSubmitting(false);

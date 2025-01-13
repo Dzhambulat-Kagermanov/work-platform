@@ -12,8 +12,12 @@ import { useGetFavoritesQuery } from "@/hooks/api/favorites";
 interface Props extends TClassName {}
 const FavoritesProducts: FC<Props> = ({ className }) => {
     const { data: favoritesData } = useGetFavoritesQuery();
-    if (!favoritesData) {
-        return <></>
+    if (!favoritesData || !favoritesData.length) {
+        return (
+            <div className="flex items-center justify-center text-center h-[80dvh] min-h-[250px]">
+                Товары не найдены
+            </div>
+        )
     }
     return (
         <Container tag="section" className={cn(cls.wrapper, [className])}>
