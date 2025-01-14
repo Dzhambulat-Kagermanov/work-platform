@@ -4,17 +4,18 @@ import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { Container } from "@/components/ui";
 import { AccountForm } from "@/components/widgets/Buyer/AccountForm";
-import { AccountBalance } from "@/components/widgets/Buyer/AccountBalance";
+import { AccountBalance } from "@/components/widgets/account-balance";
 import { AccountStatistic } from "@/components/widgets/Buyer/AccountStatistic";
 import { ExitBtnMobile } from "./ExitBtnMobile";
 import { ProfileHead } from "@/components/entities/ProfileHead";
 import { ExitAccountModal } from "@/components/widgets/shared/ExitAccountModal";
 import { useScreen } from "@/hooks";
 import { MD_BIG, ROUTES } from "@/constants";
-import cls from "./index.module.scss";
+import cls from "./account-page.module.scss";
 import { AuthWrapper } from "@/components/widgets/shared/wrappers";
 import { useGetStatisticsQuery, useSessionQuery } from "@/hooks/api/auth";
 import { dateParserHandler } from "@/handlers";
+import { RoleSlug } from "@/types/api";
 
 const AccountPageContent: FC<Props> = ({ className }) => {
     const width = useScreen();
@@ -65,13 +66,15 @@ const AccountPageContent: FC<Props> = ({ className }) => {
     );
 };
 
-interface Props extends TClassName {}
+interface Props extends TClassName {
+    role: RoleSlug;
+}
 const AccountPage: FC<Props> = (props) => {
     return (
-        <AuthWrapper roles={["buyer"]} redirectLink={ROUTES.BUYER.AUTH}>
+        <AuthWrapper roles={[props.role]} redirectLink={ROUTES[props.role === "buyer" ? "BUYER" : "SALESMAN"].AUTH}>
             <AccountPageContent {...props} />
         </AuthWrapper>
     );
 };
 
-export { AccountPage };
+export default AccountPage;

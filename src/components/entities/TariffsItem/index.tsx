@@ -8,15 +8,14 @@ import Image from "next/image";
 import { useModalStore } from "@/store";
 import { SALESMAN_TARIFFS_MODAL } from "@/constants";
 import cls from "./index.module.scss";
+import { TariffItem } from "@/types/api";
 
-interface Props extends TClassName, TTag, TTariffsItemProps {}
+interface Props extends TClassName, TTag {
+    tariff: TariffItem;
+}
 const TariffsItem: FC<Props> = ({
     className,
-    advantages,
-    duration,
-    name,
-    price,
-    ransoms: { priceForOne, qnt },
+    tariff,
     tag = "div",
 }) => {
     const showModal = useModalStore((state) => state.showModal);
@@ -30,16 +29,16 @@ const TariffsItem: FC<Props> = ({
         <Tag className={cn(cls.wrapper, [className])}>
             <div className={cn(cls.head)}>
                 <Typography font="Inter-M" size={20} tag="h2">
-                    {name}
+                    {tariff.name}
                 </Typography>
                 <DiscountPlaque
                     customColor="blue"
                     customContent={(val) => val + ""}
                 >
-                    {duration}
+                    Бессрочно
                 </DiscountPlaque>
             </div>
-            <ul className={cn(cls.advantages)}>
+            {/* <ul className={cn(cls.advantages)}>
                 {advantages.map((el, idx) => {
                     return (
                         <li className={cn(cls.item)} key={idx + "/"}>
@@ -55,18 +54,18 @@ const TariffsItem: FC<Props> = ({
                         </li>
                     );
                 })}
-            </ul>
+            </ul> */}
             <div className={cn(cls.price)}>
                 <Typography font="Inter-M" size={16} tag="h2">
-                    {qnt} шт.
+                    {tariff.buybacks_count} шт.
                 </Typography>
-                <Typography font="Inter-R" size={10} tag="h3">
-                    {priceForOne}₽ / за выкуп товара
-                </Typography>
+                {/* <Typography font="Inter-R" size={10} tag="h3">
+                    {tariff.}₽ / за выкуп товара
+                </Typography> */}
             </div>
             <div className={cn(cls.footer)}>
                 <Typography font="Inter-M" size={16}>
-                    {price} ₽
+                    {tariff.price} ₽
                 </Typography>
                 <Button
                     size="low"

@@ -4,7 +4,7 @@ import { TChildren } from "@/types";
 import { Sidebar } from "@/components/widgets/Salesman/Sidebar";
 import { cn, pathValidating } from "@/lib";
 import { useScreen } from "@/hooks";
-import { SM_BIG } from "@/constants";
+import { ROUTES, SM_BIG } from "@/constants";
 import { MobileHeader } from "@/components/widgets/Salesman/MobileHeader";
 import { BurgerMenu } from "@/components/widgets/Salesman/BurgerMenu";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -19,7 +19,7 @@ const SidebarLayout: FC<Props> = ({ children }) => {
     ) as TSalesmanHomePageType;
     const width = useScreen();
     const path = usePathname();
-    const isProfilePath = path === "/salesman/profile";
+    const isProfilePath = path === ROUTES.SALESMAN.PROFILE;
     const isBuyerProfilePath = pathValidating(
         path,
         "/salesman/buyer-profile/?",

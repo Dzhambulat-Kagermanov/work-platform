@@ -15,3 +15,5 @@ export type {
 export type { default as Product } from "./Product";
 export type { default as WithdrawItem, WithdrawStatus } from "./WithdrawItem";
 export type { default as ProfileStatistic } from "./ProfileStatistic";
+export type { default as ChatStatusItem, ChatStatus } from "./ChatStatusItem";
+export type { default as TariffItem } from "./TariffItem";

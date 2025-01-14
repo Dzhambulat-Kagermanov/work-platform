@@ -1,9 +1,9 @@
-import { ProfilePage } from "@/components/page/Salesman/Profile";
+import { AccountPage } from "@/components/page/account-page";
 import { FC } from "react";
 
 interface Props {}
 const Profile: FC<Props> = ({}) => {
-    return <ProfilePage />;
+    return <AccountPage role="seller" />;
 };
 
 export default Profile;

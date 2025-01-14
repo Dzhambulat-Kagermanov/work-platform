@@ -6,11 +6,16 @@ import { Button, Typography } from "@/components/ui";
 import { PlusIcon } from "@/icons";
 import Link from "next/link";
 import cls from "./index.module.scss";
+import { useGetBalanceQuery, useSessionQuery } from "@/hooks/api/auth";
 
 interface Props extends TClassName {
     sidebarIsExpand: boolean;
 }
 const UserInfo: FC<Props> = ({ className, sidebarIsExpand }) => {
+
+    const { data: userData } = useSessionQuery();
+    const { data: balance } = useGetBalanceQuery();
+
     const handleBalanceUp: MouseEventHandler = () => {};
     return (
         <div
@@ -29,13 +34,13 @@ const UserInfo: FC<Props> = ({ className, sidebarIsExpand }) => {
             <div className={cn(cls.content_wrapper)}>
                 <div className={cn(cls.content)}>
                     <Typography font="Inter-SB" size={16} tag="h2">
-                        Анастасия К
+                        {userData?.name}
                     </Typography>
                     <Typography font="Inter-R" size={14} tag="h3">
-                        +7 977 587 00 00
+                        {userData?.phone}
                     </Typography>
                     <Typography font="Inter-R" size={14} tag="h4">
-                        Баланс: 550 ₽
+                        Баланс: {balance?.accessBalance} ₽
                     </Typography>
                     <Button
                         size="mid"

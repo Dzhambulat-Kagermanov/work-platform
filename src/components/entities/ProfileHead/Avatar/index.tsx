@@ -6,6 +6,8 @@ import Image from "next/image";
 import { Typography } from "@/components/ui";
 import cls from "./index.module.scss";
 import { useUpdateAvatarMutation } from "@/hooks/api/auth";
+import { useQueryClient } from "@tanstack/react-query";
+import { sessionQueryKeys } from "@/hooks/api/auth/useSessionQuery";
 
 interface Props extends TClassName, Pick<TUserInfo, "avatarImage" | "name"> {
     withoutAvatarChange?: boolean;
@@ -17,6 +19,8 @@ const Avatar: FC<Props> = ({
     withoutAvatarChange,
 }) => {
     const inputRef = useRef<HTMLInputElement>(null);
+
+    const queryClient = useQueryClient();
 
     const { mutate: mutateUpdateAvatar, isPending } = useUpdateAvatarMutation();
 
@@ -33,6 +37,10 @@ const Avatar: FC<Props> = ({
 
         mutateUpdateAvatar({
             avatar: files[0],
+        }, {
+            onSuccess: () => {
+                queryClient.invalidateQueries({ queryKey: sessionQueryKeys });
+            }
         });
     };
 

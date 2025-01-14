@@ -3,7 +3,7 @@ import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { AccountContentBlock, Typography } from "@/components/ui";
 import { AccountBalanceMore } from "@/components/features/AccountBalanceMore";
-import cls from "./index.module.scss";
+import cls from "./account-balance.module.scss";
 import { useGetBalanceQuery } from "@/hooks/api/auth";
 
 interface Props extends TClassName {
@@ -27,4 +27,4 @@ const AccountBalance: FC<Props> = ({ className }) => {
     );
 };
 
-export { AccountBalance };
+export default AccountBalance;
