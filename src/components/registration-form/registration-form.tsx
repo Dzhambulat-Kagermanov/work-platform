@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { Input, InputMaskSwitcher, Timer, Typography } from "@/components/ui";
@@ -10,6 +10,7 @@ import { Formik } from "formik";
 import {
     useRegisterEndMutation,
     useRegisterSendCodeMutation,
+    useSessionQuery,
 } from "@/hooks/api/auth";
 import useRegisterVerifyCodeMutation from "@/hooks/api/auth/useRegisterVerifyCodeMutation";
 import toast from "react-hot-toast";
@@ -23,6 +24,8 @@ interface Props extends TClassName {
 const RegistrationForm: FC<Props> = ({ className, role }) => {
     const params = useSearchParams();
 
+    const { data: userData } = useSessionQuery();
+
     const [currentStep, setCurrentStep] = useState<"send" | "verify" | "end">(
         params.get("currentStep") === "end" ? "end" : "send",
     );
@@ -32,6 +35,21 @@ const RegistrationForm: FC<Props> = ({ className, role }) => {
     const registerEndMutation = useRegisterEndMutation();
 
     const { data: roles } = useRolesQuery();
+
+    useEffect(() => {
+
+        (() => {
+            if (!userData) {
+                setCurrentStep("send");
+                return;
+            }
+
+            if (!userData.is_configured) {
+                setCurrentStep("end");
+            }
+        })()
+
+    }, [userData])
 
     return (
         <Formik
@@ -169,7 +187,6 @@ const RegistrationForm: FC<Props> = ({ className, role }) => {
                                 >
                                     Запросить новый код можно через{" "}
                                     <Timer
-                                        second={60}
                                         format={undefined}
                                         onComplete={() =>
                                             setCodeSendAgain(true)
@@ -179,7 +196,20 @@ const RegistrationForm: FC<Props> = ({ className, role }) => {
                                 </Typography>
                             ) : (
                                 <button
-                                    onClick={() => handleSubmit()}
+                                    type="button"
+                                    onClick={() => {
+                                        registerSendCodeMutation.mutate(
+                                            {
+                                                phone: values.phone,
+                                            },
+                                            {
+                                                onSuccess: () => {
+                                                    toast.success("Код успешно отправлен");
+                                                    setCodeSendAgain(false);
+                                                },
+                                            },
+                                        );
+                                    }}
                                     className="underline text-left text-sm opacity-80"
                                 >
                                     Запросить новый код

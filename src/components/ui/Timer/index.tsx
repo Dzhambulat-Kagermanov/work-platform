@@ -5,7 +5,7 @@ import { formatter } from "./lib/formatter";
 export type TFormat = "HH:MM:SS" | "MM:SS" | "SS" | "DD:HH:MM:SS";
 
 type TGeneral = {
-    second: number;
+    second?: number;
     onComplete?: () => void;
 };
 type Props =
@@ -18,7 +18,7 @@ type Props =
           format?: TFormat;
       } & TGeneral);
 
-const Timer: FC<Props> = ({ format, second, customFormatter, onComplete }) => {
+const Timer: FC<Props> = ({ format, second = 60, customFormatter, onComplete }) => {
     const [seconds, setSeconds] = useState<number>(second);
     let isFirst = true;
     useEffect(() => {

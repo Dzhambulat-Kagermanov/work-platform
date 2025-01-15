@@ -29,13 +29,18 @@ const CategoryItem: FC<Props> = ({
     const Tag = tag;
 
     return (
-        <Tag className={cn(cls.wrapper, [className])}>
+        <Tag className={cn(cls.wrapper, [className, 'bg-stone-100'])}>
             <Link
                 href={`${ROUTES.BUYER.CATEGORY}?categoryId=${categoryId}${
                     width > SM_BIG ? "&subcategory=-1" : ""
                 }`}
             >
-                <Image src={image} alt={title} width={200} height={235} />
+                {
+                    image ? 
+                    <img src={image} alt={title} width={200} height={235} className="w-full h-full object-cover" />
+                    : 
+                    <></>
+                }
                 <Typography
                     font="Inter-M"
                     size={16}

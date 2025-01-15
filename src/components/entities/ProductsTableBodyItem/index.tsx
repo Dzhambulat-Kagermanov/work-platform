@@ -27,7 +27,7 @@ const ProductsTableBodyItem: FC<Props> = ({
                     className={cn(cls.checkbox)}
                     defaultChecked={defaultCheckboxValue}
                 />
-                <Image src={image} alt="product" width={40} height={40} />
+                <Image src={image} alt="product" width={40} className="min-w-12 h-12 w-12 object-cover" height={40} />
                 <div className={cn(cls.content)}>
                     <Typography font="Inter-R" tag="h2" size={14}>
                         {name}

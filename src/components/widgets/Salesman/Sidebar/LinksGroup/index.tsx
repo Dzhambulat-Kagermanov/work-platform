@@ -12,6 +12,8 @@ import { Item } from "../Item";
 import { LinksDropdown } from "../LinksDropdown";
 import cls from "./index.module.scss";
 import { TSalesmanHomePageType } from "../../HomePagesSwitcher";
+import { ROUTES } from "@/constants";
+import { useGetBalanceQuery } from "@/hooks/api/auth";
 
 interface Props extends TClassName {
     sidebarIsExpand?: boolean;
@@ -24,6 +26,9 @@ const LinksGroup: FC<Props> = ({
     linkOnClick,
     homePageType,
 }) => {
+
+    const { data: balance } = useGetBalanceQuery();
+
     return (
         <ul className={cn(cls.group, [className])}>
             <LinksDropdown
@@ -43,7 +48,7 @@ const LinksGroup: FC<Props> = ({
                         className={cn(cls.icon)}
                     />
                 }
-                link="/salesman/support"
+                link={ROUTES.SALESMAN.SUPPORT}
                 className={cn(cls.item)}
             />
             <Item
@@ -57,7 +62,7 @@ const LinksGroup: FC<Props> = ({
                         className={cn(cls.icon)}
                     />
                 }
-                link="/salesman/profile"
+                link={ROUTES.SALESMAN.PROFILE}
                 className={cn(cls.item)}
             />
             <Item
@@ -71,7 +76,7 @@ const LinksGroup: FC<Props> = ({
                         className={cn(cls.icon)}
                     />
                 }
-                link="/salesman/balance"
+                link={ROUTES.SALESMAN.BALANCE.VALUE}
                 className={cn(cls.item)}
                 additionalInfo={
                     <Typography
@@ -79,7 +84,7 @@ const LinksGroup: FC<Props> = ({
                         size={16}
                         className={cn(cls.balance_addition)}
                     >
-                        9550₽
+                        {balance?.accessBalance ?? 0}₽
                     </Typography>
                 }
             />

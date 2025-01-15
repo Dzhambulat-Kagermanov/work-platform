@@ -8,6 +8,7 @@ const useProductItemQuery = (id: string) =>
             return res;
         },
         staleTime: 60_000,
+        retry: 3,
     });
 
 export default useProductItemQuery;

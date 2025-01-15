@@ -1,0 +1,1 @@
+export { default as useAddWbProductMutation } from "./useAddWbProductMutation";

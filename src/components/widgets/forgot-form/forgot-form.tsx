@@ -10,19 +10,20 @@ import {
     Typography,
 } from "@/components/ui";
 import { PHONE_MASKS } from "@/constants";
-import cls from "./index.module.scss";
+import cls from "./forgot-form.module.scss";
 import { Formik } from "formik";
-import { usePasswordResetMutation, usePasswordResetSendCodeMutation } from "@/hooks/api/auth";
+import { usePasswordResetMutation, usePasswordResetSendCodeMutation, usePasswordResetVerifyCodeMutation } from "@/hooks/api/auth";
 
 interface Props extends TClassName {}
 const ForgotForm: FC<Props> = ({ className }) => {
 
     const { mutate: passwordResetSendCode } = usePasswordResetSendCodeMutation();
+    const { mutate: passwordResetVerifyCode } = usePasswordResetVerifyCodeMutation();
     const { mutate: passwordReset } = usePasswordResetMutation();
-
     const [codeSendAgain, setCodeSendAgain] = useState(false);
     const [currentStep, setCurrentStep] = useState<
-        "phone" | "password"
+        "phone" 
+        | "code" | "password"
     >("phone");
 
     return (
@@ -63,6 +64,21 @@ const ForgotForm: FC<Props> = ({ className }) => {
 
                     passwordResetSendCode(values.phone, {
                         onSuccess: () => {
+                            setCurrentStep("code");
+                        },
+                        onSettled,
+                    });
+
+                    return;
+                }
+
+                if (currentStep === "code") {
+
+                    passwordResetVerifyCode({
+                        code: values.code,
+                        phone: values.phone,
+                    }, {
+                        onSuccess: () => {
                             setCurrentStep("password");
                         },
                         onSettled,
@@ -75,6 +91,7 @@ const ForgotForm: FC<Props> = ({ className }) => {
 
                     passwordReset({
                         code: values.code,
+                        phone: values.phone,
                         password: values.password,
                         password_confirmation: values.passwordAgain
                     }, {
@@ -118,7 +135,7 @@ const ForgotForm: FC<Props> = ({ className }) => {
                                 }
                                 error={errors.code}
                             />
-                            {!codeSendAgain && currentStep === "code" ? (
+                            {!codeSendAgain ? (
                                 <Typography
                                     font="Inter-R"
                                     size={14}
@@ -127,7 +144,6 @@ const ForgotForm: FC<Props> = ({ className }) => {
                                 >
                                     Запросить новый код можно через{" "}
                                     <Timer
-                                        second={60}
                                         onComplete={() =>
                                             setCodeSendAgain(true)
                                         }
@@ -136,6 +152,7 @@ const ForgotForm: FC<Props> = ({ className }) => {
                                 </Typography>
                             ) : (
                                 <button
+                                    type="button"
                                     onClick={() => handleSubmit()}
                                     className="underline text-left text-sm opacity-80"
                                 >
@@ -189,4 +206,4 @@ const ForgotForm: FC<Props> = ({ className }) => {
     );
 };
 
-export { ForgotForm };
+export default ForgotForm;

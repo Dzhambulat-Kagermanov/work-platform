@@ -7,6 +7,7 @@ import Image from "next/image";
 import { TModalStep } from "..";
 import Link from "next/link";
 import cls from "./index.module.scss";
+import { ROUTES } from "@/constants";
 
 interface Props extends TClassName {
     setStep: TState<TModalStep>;
@@ -32,7 +33,7 @@ const FailAddShop: FC<Props> = ({ className, setStep }) => {
                 <br />
                 <br />
                 Если вам кажется, что произошла ошибка,{" "}
-                <Link href={"/salesman/support"} className={cn(cls.link)}>
+                <Link href={ROUTES.SALESMAN.SUPPORT} className={cn(cls.link)}>
                     свяжитесь с нами
                 </Link>
             </Typography>

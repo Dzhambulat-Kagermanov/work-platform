@@ -28,13 +28,13 @@ const SidebarLayout: FC<Props> = ({ children }) => {
         path,
         "/salesman/salesman-profile/?",
     );
-    const isTariffsPath = path === "/salesman/balance/tariffs";
+    const isTariffsPath = path === ROUTES.SALESMAN.BALANCE.TARIFFS;
 
     return (
         <div className={cn(cls.wrapper)}>
-            {width > SM_BIG && <Sidebar homePageType={homePageType} />}
+            {width > SM_BIG ? <Sidebar homePageType={homePageType} /> : <></>}
             <main className={cn(cls.main)}>
-                {width <= SM_BIG && (
+                {width <= SM_BIG ? (
                     <>
                         <BurgerMenu
                             homePageType={homePageType}
@@ -42,7 +42,7 @@ const SidebarLayout: FC<Props> = ({ children }) => {
                         />
                         <MobileHeader className={cn(cls.header)} />
                     </>
-                )}
+                ) : <></>}
                 <div
                     className={cn(cls.content, [], {
                         [cls.noPadding]:

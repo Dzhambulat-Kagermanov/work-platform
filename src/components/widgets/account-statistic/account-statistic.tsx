@@ -3,7 +3,7 @@ import { TClassName, TSalesmanStatistic } from "@/types";
 import { cn } from "@/lib";
 import { AccountContentBlock } from "@/components/ui";
 import { AccountStatisticItem } from "@/components/entities/AccountStatisticItem";
-import cls from "./index.module.scss";
+import cls from "./account-statistic.module.scss";
 
 interface Props extends TClassName, TSalesmanStatistic {}
 const AccountStatistic: FC<Props> = ({
@@ -55,4 +55,4 @@ const AccountStatistic: FC<Props> = ({
     );
 };
 
-export { AccountStatistic };
+export default AccountStatistic;

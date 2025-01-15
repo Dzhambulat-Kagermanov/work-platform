@@ -36,7 +36,8 @@ export type UpdateProfileAvatarData = {
     avatar: File;
 };
 
-export type PasswordResetData = Record<"phone" | "code", string>;
+export type PasswordResetVerifyCodeData = Record<'phone' | 'code', string>
+export type PasswordResetData = PasswordResetVerifyCodeData & Record<"password" | "password_confirmation", string>;
 
 class AuthService {
     async login(data: LoginData) {
@@ -153,6 +154,11 @@ class AuthService {
         const res = await axios.post("/password/reset/send-code", {
             phone
         });
+
+        return res;
+    }
+    async passwordResetVerifyCode(data: PasswordResetVerifyCodeData) {
+        const res = await axios.post("/password/reset/check-code", data);
 
         return res;
     }

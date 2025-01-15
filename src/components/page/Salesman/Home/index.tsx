@@ -1,3 +1,4 @@
+"use client";
 import { FC, Suspense } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
@@ -17,16 +18,20 @@ import { HomeAdvertisementArchiveModal } from "@/components/widgets/Salesman/Hom
 import { HomeAdvertisementStopModal } from "@/components/widgets/Salesman/HomeAdvertisementStopModal";
 import { HomeAddAdvertisementModal } from "@/components/widgets/Salesman/HomeAddAdvertisementModal";
 import cls from "./index.module.scss";
+import { useSessionQuery } from "@/hooks/api/auth";
 
 interface Props extends TClassName {
     homePageType: TSalesmanHomePageType;
     chatType: TChatType;
 }
 const HomePage: FC<Props> = ({ className, homePageType, chatType }) => {
+
+    const { data: userData } = useSessionQuery();
+
     return (
         <div className={cn(cls.main, [className])}>
             <Typography tag="h1" font="Inter-SB" size={30}>
-                Привет, Продавец №1
+                Привет, {userData?.name}
             </Typography>
             <HomeCrumbs
                 homePageType={homePageType}

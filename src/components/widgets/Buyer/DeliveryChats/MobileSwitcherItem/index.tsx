@@ -1,15 +1,15 @@
 import { FC } from "react";
 import { TClassName, TTag } from "@/types";
-import { TChatType } from "../../DeliverySidebar/types";
 import { cn } from "@/lib";
 import { Typography } from "@/components/ui";
 import Link from "next/link";
 import cls from "./index.module.scss";
+import { ChatStatus } from "@/types/api";
 
 interface Props extends TClassName, TTag {
     messageQnt: number;
-    activeType: TChatType;
-    type?: TChatType;
+    activeType: ChatStatus;
+    type?: ChatStatus;
     children: string;
 }
 const MobileSwitcherItem: FC<Props> = ({

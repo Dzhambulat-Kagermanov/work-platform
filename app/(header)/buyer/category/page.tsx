@@ -12,12 +12,6 @@ interface Props {
 const Category: FC<Props> = async ({ searchParams }) => {
     const { categoryId, subcategory } = await searchParams;
 
-    const categories = await apiService.categories.getCategories();
-
-    if (!categories) {
-        return notFound();
-    }
-
     return categoryId ? (
         subcategory ? (
             <CategoryItemPage
@@ -31,7 +25,7 @@ const Category: FC<Props> = async ({ searchParams }) => {
             />
         )
     ) : (
-        <CategoryPage categories={categories} />
+        <CategoryPage />
     );
 };
 

@@ -4,6 +4,7 @@ import CategoriesService from "./CategoriesService";
 import ChatService from "./ChatService";
 import FavoritesService from "./FavoritesService";
 import ProductsService from "./ProductsService";
+import SellerService from "./SellerService";
 import TariffsService from "./TariffsService";
 
 class ApiService {
@@ -14,6 +15,7 @@ class ApiService {
     favorites: FavoritesService = new FavoritesService();
     chat: ChatService = new ChatService();
     tariffs: TariffsService = new TariffsService();
+    seller: SellerService = new SellerService();
 
     constructor() {
         return this;

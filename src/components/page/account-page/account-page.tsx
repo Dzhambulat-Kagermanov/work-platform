@@ -5,7 +5,6 @@ import { cn } from "@/lib";
 import { Container } from "@/components/ui";
 import { AccountForm } from "@/components/widgets/Buyer/AccountForm";
 import { AccountBalance } from "@/components/widgets/account-balance";
-import { AccountStatistic } from "@/components/widgets/Buyer/AccountStatistic";
 import { ExitBtnMobile } from "./ExitBtnMobile";
 import { ProfileHead } from "@/components/entities/ProfileHead";
 import { ExitAccountModal } from "@/components/widgets/shared/ExitAccountModal";
@@ -16,6 +15,7 @@ import { AuthWrapper } from "@/components/widgets/shared/wrappers";
 import { useGetStatisticsQuery, useSessionQuery } from "@/hooks/api/auth";
 import { dateParserHandler } from "@/handlers";
 import { RoleSlug } from "@/types/api";
+import { AccountStatistic } from "@/components/widgets/account-statistic";
 
 const AccountPageContent: FC<Props> = ({ className }) => {
     const width = useScreen();

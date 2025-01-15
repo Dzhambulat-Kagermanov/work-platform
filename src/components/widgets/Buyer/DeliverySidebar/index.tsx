@@ -3,16 +3,23 @@ import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { Item } from "./Item";
-import { TChatType } from "./types";
 import { useScreen } from "@/hooks";
 import { XS_BIG } from "@/constants";
 import cls from "./index.module.scss";
+import { useGetChatStatusesQuery } from "@/hooks/api/chat";
+import { ChatStatus } from "@/types/api";
 
 interface Props extends TClassName {
-    chatType?: TChatType;
+    chatType?: ChatStatus;
 }
 const DeliverySidebar: FC<Props> = ({ className, chatType }) => {
     const width = useScreen();
+
+    const { data: chatStatuses, isLoading } = useGetChatStatusesQuery();
+
+    if (isLoading || !chatStatuses || !chatStatuses.length) {
+        return <></>
+    }
 
     return (
         <>
@@ -21,62 +28,19 @@ const DeliverySidebar: FC<Props> = ({ className, chatType }) => {
                     <div className={cn(cls.overlay)}>
                         <div className={cn(cls.nav_wrapper)}>
                             <nav className={cn(cls.nav)}>
-                                <Item
-                                    messageQnt={10}
-                                    type={undefined}
-                                    className={cn(cls.item)}
-                                    activeType={chatType}
-                                >
-                                    Все чаты
-                                </Item>
-                                <Item
-                                    messageQnt={10}
-                                    type="waitingOrder"
-                                    className={cn(cls.item)}
-                                    activeType={chatType}
-                                >
-                                    Ожидание заказа
-                                </Item>
-                                <Item
-                                    messageQnt={10}
-                                    type="waitingReceive"
-                                    className={cn(cls.item)}
-                                    activeType={chatType}
-                                >
-                                    Ожидание получения товара
-                                </Item>
-                                <Item
-                                    messageQnt={10}
-                                    type="confirmation"
-                                    className={cn(cls.item)}
-                                    activeType={chatType}
-                                >
-                                    Подтверждение
-                                </Item>
-                                <Item
-                                    messageQnt={10}
-                                    type="cashbackReceived"
-                                    className={cn(cls.item)}
-                                    activeType={chatType}
-                                >
-                                    Кэшбек получен
-                                </Item>
-                                <Item
-                                    messageQnt={10}
-                                    type="canceled"
-                                    className={cn(cls.item)}
-                                    activeType={chatType}
-                                >
-                                    Отменен
-                                </Item>
-                                <Item
-                                    messageQnt={10}
-                                    type="archive"
-                                    className={cn(cls.item)}
-                                    activeType={chatType}
-                                >
-                                    Архив
-                                </Item>
+                                {
+                                    chatStatuses.map((item, index) => (
+                                        <Item
+                                            key={index}
+                                            messageQnt={item.not_read}
+                                            type={item.slug}
+                                            className={cn(cls.item)}
+                                            activeType={chatType}
+                                        >
+                                            {item.title}
+                                        </Item>
+                                    ))
+                                }
                             </nav>
                         </div>
                     </div>

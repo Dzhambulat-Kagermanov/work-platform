@@ -12,6 +12,7 @@ const useProductsListQuery = () => {
             return res;
         },
         staleTime: 30_000,
+        retry: 3,
     });
 };
 

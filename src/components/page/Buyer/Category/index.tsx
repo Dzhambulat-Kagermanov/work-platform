@@ -1,15 +1,27 @@
+"use client";
 import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import cls from "./index.module.scss";
 import { Container, Typography } from "@/components/ui";
 import { CategoryCategories } from "@/components/widgets/Buyer/CategoryCategories";
-import { CategoryItem } from "@/types/api";
+import { useCategoriesQuery } from "@/hooks/api/categories";
+import { PageLoader } from "@/components/ui/loaders";
 
 interface Props extends TClassName {
-    categories: CategoryItem[];
 }
-const CategoryPage: FC<Props> = ({ categories, className }) => {
+const CategoryPage: FC<Props> = ({ className }) => {
+
+    const { data: categories, isLoading } = useCategoriesQuery();
+
+    if (isLoading) {
+        <PageLoader />
+    }
+
+    if (!categories || !categories.length) {
+        return <></>;
+    }
+ 
     return (
         <main className={cn(cls.category, [className])}>
             <Container

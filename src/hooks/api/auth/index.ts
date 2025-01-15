@@ -11,3 +11,4 @@ export { default as useOrderWithdrawMutation } from "./useOrderWithdrawMutation"
 export { default as useCancelWithdrawMutation } from "./useCancelWithdrawMutation";
 export { default as usePasswordResetSendCodeMutation } from "./usePasswordResetSendCodeMutation";
 export { default as usePasswordResetMutation } from "./usePasswordResetMutation";
+export { default as usePasswordResetVerifyCodeMutation } from "./usePasswordResetVerifyCodeMutation";

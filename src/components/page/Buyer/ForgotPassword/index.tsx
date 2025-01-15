@@ -2,7 +2,7 @@ import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { SignLayout } from "@/components/layouts/Sign";
-import { ForgotForm } from "@/components/widgets/Buyer/ForgotForm";
+import { ForgotForm } from "@/components/widgets";
 import { AuthActions } from "@/components/widgets/Buyer/AuthActions";
 import cls from "./index.module.scss";
 import { AuthWrapper } from "@/components/widgets/shared/wrappers";

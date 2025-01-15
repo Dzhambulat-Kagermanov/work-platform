@@ -22,6 +22,7 @@ export const ROUTES = {
         REGISTRATION: "/salesman/registration",
         FORGOT_PASSWORD: "/salesman/forgot-password",
         PROFILE: "/salesman/profile",
+        SUPPORT: "/salesman/support",
         BALANCE: {
             VALUE: "/salesman/balance",
             TARIFFS: "/salesman/balance/tariffs",
