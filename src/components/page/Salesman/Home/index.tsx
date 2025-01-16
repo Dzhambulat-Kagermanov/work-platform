@@ -19,13 +19,13 @@ import { HomeAdvertisementStopModal } from "@/components/widgets/Salesman/HomeAd
 import { HomeAddAdvertisementModal } from "@/components/widgets/Salesman/HomeAddAdvertisementModal";
 import cls from "./index.module.scss";
 import { useSessionQuery } from "@/hooks/api/auth";
+import { ChatStatus } from "@/types/api";
 
 interface Props extends TClassName {
     homePageType: TSalesmanHomePageType;
-    chatType: TChatType;
+    chatType: ChatStatus;
 }
 const HomePage: FC<Props> = ({ className, homePageType, chatType }) => {
-
     const { data: userData } = useSessionQuery();
 
     return (

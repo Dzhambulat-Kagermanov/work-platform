@@ -10,6 +10,7 @@ import { AddShop } from "./AddShop";
 import { FailAddShop } from "./FailAddShop";
 import { AddProductConfirmation } from "./AddProductConfirmation";
 import cls from "./index.module.scss";
+import { WbProduct } from "@/types/api/Product";
 
 export type TModalStep =
     | "failAddShop"
@@ -22,6 +23,8 @@ export type TModalStep =
 interface Props extends TClassName {}
 const HomeAddProductModal: FC<Props> = ({ className }) => {
     const [step, setStep] = useState<TModalStep>("addProduct");
+    const [art, setArt] = useState("");
+    const [productInfo, setProductInfo] = useState<WbProduct | null>(null);
 
     return (
         <ModalBase
@@ -34,6 +37,9 @@ const HomeAddProductModal: FC<Props> = ({ className }) => {
             <div className={cn(cls.content)}>
                 {step === "addProduct" || step === null ? (
                     <AddProduct
+                        art={art}
+                        setArt={setArt}
+                        setProductInfo={setProductInfo}
                         className={cn(cls.add_product)}
                         setStep={setStep}
                     />

@@ -9,9 +9,10 @@ import { MD_LOW } from "@/constants";
 import { CHATS } from "../DeliveryChats/constants/chats";
 import cls from "./index.module.scss";
 import { TChatType } from "../DeliverySidebar/types";
+import { ChatStatus } from "@/types/api";
 
 interface Props extends TClassName {
-    chatType: TChatType;
+    chatType: ChatStatus;
 }
 const DeliveryContent: FC<Props> = ({ className, chatType }) => {
     const width = useScreen();

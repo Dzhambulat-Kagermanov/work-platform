@@ -1,6 +1,6 @@
 import { apiService } from "@/services";
 import { PasswordResetVerifyCodeData } from "@/services/AuthService";
-import { useMutation } from "@tanstack/react-query"
+import { useMutation } from "@tanstack/react-query";
 
 const usePasswordResetVerifyCodeMutation = () => {
     return useMutation({
@@ -9,8 +9,8 @@ const usePasswordResetVerifyCodeMutation = () => {
             const res = await apiService.auth.passwordResetVerifyCode(data);
 
             return res;
-        }
-    })
+        },
+    });
 };
 
 export default usePasswordResetVerifyCodeMutation;

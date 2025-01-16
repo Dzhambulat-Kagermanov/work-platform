@@ -24,31 +24,29 @@ const MobileSwitcher: FC<Props> = ({ className, chatType }) => {
     const sidebarState = useModalStore(
         (state) => state.modalsStates[SALESMAN_SIDEBAR_MENU]?.modalState,
     );
-    
+
     const IS_SWITCHER_RENDER =
-    (sidebarState && width <= LG_LOW) || width <= MD_BIG_BETWEEN_MD_LOW;
-    
+        (sidebarState && width <= LG_LOW) || width <= MD_BIG_BETWEEN_MD_LOW;
+
     if (isLoading || !chatStatuses || !chatStatuses.length) {
-        return <></>
+        return <></>;
     }
     return (
         <>
             {IS_SWITCHER_RENDER && (
                 <div className={cn(cls.wrapper, [className])}>
                     <ul className={cn(cls.switcher)}>
-                        {
-                            chatStatuses.map((item, index) => (
-                                <MobileSwitcherItem
-                                    key={index}
-                                    messageQnt={item.not_read}
-                                    type={item.slug}
-                                    className={cn(cls.item)}
-                                    activeType={chatType}
-                                >
-                                    {item.title}
-                                </MobileSwitcherItem>
-                            ))
-                        }
+                        {chatStatuses.map((item, index) => (
+                            <MobileSwitcherItem
+                                key={index}
+                                messageQnt={item.not_read}
+                                type={item.slug}
+                                className={cn(cls.item)}
+                                activeType={chatType}
+                            >
+                                {item.title}
+                            </MobileSwitcherItem>
+                        ))}
                     </ul>
                 </div>
             )}

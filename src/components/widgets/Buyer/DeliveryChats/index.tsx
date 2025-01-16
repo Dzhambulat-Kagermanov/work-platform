@@ -6,13 +6,13 @@ import Image from "next/image";
 import { SearchIcon } from "@/icons";
 import { Chats } from "./Chats";
 import { MobileSwitcher } from "./MobileSwitcher";
-import { TChatType } from "../DeliverySidebar/types";
 import cls from "./index.module.scss";
+import { ChatStatus } from "@/types/api";
 
 interface Props extends TClassName {
     activeIdSTUB?: number;
     setActiveIdSTUB: TState<number | undefined>;
-    chatType: TChatType;
+    chatType: ChatStatus;
 }
 const DeliveryChats: FC<Props> = ({
     className,

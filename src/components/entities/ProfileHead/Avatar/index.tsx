@@ -35,13 +35,18 @@ const Avatar: FC<Props> = ({
             return;
         }
 
-        mutateUpdateAvatar({
-            avatar: files[0],
-        }, {
-            onSuccess: () => {
-                queryClient.invalidateQueries({ queryKey: sessionQueryKeys });
-            }
-        });
+        mutateUpdateAvatar(
+            {
+                avatar: files[0],
+            },
+            {
+                onSuccess: () => {
+                    queryClient.invalidateQueries({
+                        queryKey: sessionQueryKeys,
+                    });
+                },
+            },
+        );
     };
 
     return (

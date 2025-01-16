@@ -27,6 +27,5 @@ export const ROUTES = {
             VALUE: "/salesman/balance",
             TARIFFS: "/salesman/balance/tariffs",
         },
-
     },
 };

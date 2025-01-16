@@ -52,7 +52,13 @@ const AdvertisementsTableBodyItem: FC<Props> = ({
             {/* ТОВАР */}
             <td className={cn(cls.column, [cls.product, columnCls])}>
                 <div className={cn(cls.product_content)}>
-                    <Image src={image} alt="product" width={40} className="w-10 h-10 min-w-10 object-cover" height={40} />
+                    <Image
+                        src={image}
+                        alt="product"
+                        width={40}
+                        className="w-10 h-10 min-w-10 object-cover"
+                        height={40}
+                    />
                     <div className={cn(cls.content)}>
                         <Typography font="Inter-R" tag="h2" size={14}>
                             {name}

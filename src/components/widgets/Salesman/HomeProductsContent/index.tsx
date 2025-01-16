@@ -5,13 +5,29 @@ import { PRODUCTS } from "./constants/products";
 import cls from "./index.module.scss";
 import { HomeTable } from "../HomeTable";
 import { ProductsTableBodyItem } from "@/components/entities/ProductsTableBodyItem";
+import { useGetSellerProductsQuery } from "@/hooks/api/seller";
+import { PageLoader } from "@/components/ui/loaders";
 
 interface Props extends TClassName {}
 const HomeProductsContent: FC<Props> = ({ className }) => {
+    const { data: products, isLoading } = useGetSellerProductsQuery();
+
+    if (isLoading) {
+        return <PageLoader />;
+    }
+
+    if (!products || !products.length) {
+        return (
+            <div className="p-2 text-center flex items-center justify-center">
+                <p>В данный момент товаров нет</p>
+            </div>
+        );
+    }
+
     return (
         <HomeTable
-            body={PRODUCTS.map(({ id, ...other }) => (
-                <ProductsTableBodyItem id={id} key={id} {...other} />
+            body={products.map((item, index) => (
+                <ProductsTableBodyItem item={item} key={index} />
             ))}
             head={[
                 "Товар",

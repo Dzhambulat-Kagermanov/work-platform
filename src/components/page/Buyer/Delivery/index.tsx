@@ -10,9 +10,10 @@ import { MD_LOW, ROUTES } from "@/constants";
 import { DeliveryChatOrderInfoModal } from "@/components/widgets/Buyer/DeliveryChatOrderInfoModal";
 import cls from "./index.module.scss";
 import { AuthWrapper } from "@/components/widgets/shared/wrappers";
+import { ChatStatus } from "@/types/api";
 
 interface Props extends TClassName {
-    chatType: TChatType;
+    chatType: ChatStatus;
 }
 const DeliveryPage: FC<Props> = ({ className, chatType }) => {
     return (

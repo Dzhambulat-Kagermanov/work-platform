@@ -12,7 +12,6 @@ interface Props extends TClassName {
     sidebarIsExpand: boolean;
 }
 const UserInfo: FC<Props> = ({ className, sidebarIsExpand }) => {
-
     const { data: userData } = useSessionQuery();
     const { data: balance } = useGetBalanceQuery();
 
@@ -60,7 +59,7 @@ const UserInfo: FC<Props> = ({ className, sidebarIsExpand }) => {
                             Выкупы:
                         </Typography>
                         <Typography font="Inter-R" size={12}>
-                            84 шт
+                            {balance?.redemption_count ?? 0} шт
                         </Typography>
                         <button className={cn(cls.plus_btn)}>
                             <PlusIcon color="var(--grey-300)" />

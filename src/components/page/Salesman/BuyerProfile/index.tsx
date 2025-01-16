@@ -24,7 +24,7 @@ const BuyerProfilePage: FC<Props> = ({ className }) => {
                 withoutAvatarChange
             />
             <BuyerProfileStatistic className={cn(cls.statistic)} />
-            <UserReviews reviews={REVIEWS} className={cn(cls.reviews)} />
+            <UserReviews role="buyer" reviews={REVIEWS} className={cn(cls.reviews)} />
         </div>
     );
 };

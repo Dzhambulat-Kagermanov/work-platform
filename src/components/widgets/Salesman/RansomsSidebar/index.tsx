@@ -27,7 +27,7 @@ const RansomsSidebar: FC<Props> = ({ className, chatType }) => {
         (!sidebarState && width > MD_BIG_BETWEEN_MD_LOW) || width > LG_LOW;
 
     if (isLoading || !chatStatuses || !chatStatuses.length) {
-        return <></>
+        return <></>;
     }
 
     return (
@@ -37,19 +37,17 @@ const RansomsSidebar: FC<Props> = ({ className, chatType }) => {
                     <div className={cn(cls.overlay)}>
                         <div className={cn(cls.nav_wrapper)}>
                             <nav className={cn(cls.nav)}>
-                                {
-                                    chatStatuses.map((item, index) => (
-                                        <Item
-                                            key={index}
-                                            messageQnt={item.not_read}
-                                            type={item.slug}
-                                            className={cn(cls.item)}
-                                            activeType={chatType}
-                                        >
-                                            {item.title}
-                                        </Item>
-                                    ))
-                                }
+                                {chatStatuses.map((item, index) => (
+                                    <Item
+                                        key={index}
+                                        messageQnt={item.not_read}
+                                        type={item.slug}
+                                        className={cn(cls.item)}
+                                        activeType={chatType}
+                                    >
+                                        {item.title}
+                                    </Item>
+                                ))}
                             </nav>
                         </div>
                     </div>

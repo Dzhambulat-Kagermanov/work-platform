@@ -11,10 +11,10 @@ import {
     SALESMAN_SIDEBAR_MENU,
 } from "@/constants";
 import cls from "./index.module.scss";
-import { TChatType } from "../RansomsSidebar/types";
+import { ChatStatus } from "@/types/api";
 
 interface Props extends TClassName {
-    chatType: TChatType;
+    chatType: ChatStatus;
 }
 const RansomsContent: FC<Props> = ({ className, chatType }) => {
     const [activeId, setActiveId] = useState<number | undefined>(undefined);

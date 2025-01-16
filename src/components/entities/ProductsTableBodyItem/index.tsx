@@ -1,71 +1,60 @@
 import { FC } from "react";
-import { TSalesmanTableProduct } from "@/types";
 import { Checkbox, Toggle, Typography } from "@/components/ui";
 import { cn } from "@/lib";
-import Image from "next/image";
 import cls from "./index.module.scss";
+import { WbProduct } from "@/types/api/Product";
 
-interface Props extends TSalesmanTableProduct {
+interface Props {
     columnCls?: string;
+    item: WbProduct;
 }
-const ProductsTableBodyItem: FC<Props> = ({
-    advertisements,
-    conversion,
-    id,
-    product: { image, name, number },
-    ransoms,
-    ransomsQnt,
-    views,
-    defaultCheckboxValue,
-    defaultStatusValue,
-    columnCls,
-}) => {
+const ProductsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
     return (
         <>
             <td className={cn(cls.column, [cls.product, columnCls])}>
-                <Checkbox
-                    className={cn(cls.checkbox)}
-                    defaultChecked={defaultCheckboxValue}
+                <Checkbox className={cn(cls.checkbox)} defaultChecked={false} />
+                <img
+                    src={item.images[0] ?? ""}
+                    alt="product"
+                    width={40}
+                    className="min-w-12 h-12 w-12 object-cover"
+                    height={40}
                 />
-                <Image src={image} alt="product" width={40} className="min-w-12 h-12 w-12 object-cover" height={40} />
                 <div className={cn(cls.content)}>
                     <Typography font="Inter-R" tag="h2" size={14}>
-                        {name}
+                        {item.name}
                     </Typography>
                     <Typography font="Inter-R" tag="h3" size={14}>
-                        {number}
+                        {item.quantity_available}
                     </Typography>
                 </div>
             </td>
             <td className={cn(cls.column, [columnCls])}>
-                <Toggle
-                    className={cn(cls.toggle)}
-                    defaultChecked={defaultStatusValue}
-                />
+                <Toggle className={cn(cls.toggle)} defaultChecked={false} />
             </td>
             <td className={cn(cls.column, [columnCls])}>
                 <Typography font="Inter-R" size={14} tag="h4">
-                    {ransoms[0]}шт. / {ransoms[1]}шт.
+                    {item.quantity_available}шт. / {25}шт.
                 </Typography>
             </td>
             <td className={cn(cls.column, [columnCls])}>
                 <Typography font="Inter-R" size={14} tag="h3">
-                    {views}
+                    {25}
                 </Typography>
             </td>
             <td className={cn(cls.column, [columnCls])}>
                 <Typography font="Inter-R" size={14} tag="h3">
-                    {ransomsQnt}
+                    {item.quantity_available}
                 </Typography>
             </td>
             <td className={cn(cls.column, [columnCls])}>
                 <Typography font="Inter-R" size={14} tag="h3">
-                    {conversion}%
+                    {25}%
                 </Typography>
             </td>
             <td className={cn(cls.column, [columnCls])}>
                 <Typography font="Inter-R" size={14} tag="h3">
-                    {advertisements}
+                    {25}
                 </Typography>
             </td>
         </>

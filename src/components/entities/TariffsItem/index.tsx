@@ -13,11 +13,7 @@ import { TariffItem } from "@/types/api";
 interface Props extends TClassName, TTag {
     tariff: TariffItem;
 }
-const TariffsItem: FC<Props> = ({
-    className,
-    tariff,
-    tag = "div",
-}) => {
+const TariffsItem: FC<Props> = ({ className, tariff, tag = "div" }) => {
     const showModal = useModalStore((state) => state.showModal);
     const handleClick: MouseEventHandler = () => {
         showModal({

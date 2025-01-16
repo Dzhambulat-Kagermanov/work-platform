@@ -18,7 +18,7 @@ const DeliverySidebar: FC<Props> = ({ className, chatType }) => {
     const { data: chatStatuses, isLoading } = useGetChatStatusesQuery();
 
     if (isLoading || !chatStatuses || !chatStatuses.length) {
-        return <></>
+        return <></>;
     }
 
     return (
@@ -28,19 +28,17 @@ const DeliverySidebar: FC<Props> = ({ className, chatType }) => {
                     <div className={cn(cls.overlay)}>
                         <div className={cn(cls.nav_wrapper)}>
                             <nav className={cn(cls.nav)}>
-                                {
-                                    chatStatuses.map((item, index) => (
-                                        <Item
-                                            key={index}
-                                            messageQnt={item.not_read}
-                                            type={item.slug}
-                                            className={cn(cls.item)}
-                                            activeType={chatType}
-                                        >
-                                            {item.title}
-                                        </Item>
-                                    ))
-                                }
+                                {chatStatuses.map((item, index) => (
+                                    <Item
+                                        key={index}
+                                        messageQnt={item.not_read}
+                                        type={item.slug}
+                                        className={cn(cls.item)}
+                                        activeType={chatType}
+                                    >
+                                        {item.title}
+                                    </Item>
+                                ))}
                             </nav>
                         </div>
                     </div>

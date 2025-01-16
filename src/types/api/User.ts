@@ -2,6 +2,7 @@ import Timestamps from "./Timestamps";
 import BoolNumber from "./BoolNumber";
 import Shop from "./Shop";
 import Role from "./Role";
+import Review from "./Review";
 
 type User = {
     id: number;
@@ -14,5 +15,13 @@ type User = {
     role: Role;
     email: string | null;
 } & Pick<Timestamps, "created_at">;
+
+export type Seller = {
+    reviews: Review[];
+} & Record<
+    "product_rating" | "seller_rating" | "total_reviews" | "success_buybacks",
+    number
+> &
+    User;
 
 export default User;

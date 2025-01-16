@@ -19,7 +19,7 @@ const MobileSwitcher: FC<Props> = ({ className, chatType }) => {
     const { data: chatStatuses, isLoading } = useGetChatStatusesQuery();
 
     if (isLoading || !chatStatuses || !chatStatuses.length) {
-        return <></>
+        return <></>;
     }
 
     return (
@@ -27,19 +27,17 @@ const MobileSwitcher: FC<Props> = ({ className, chatType }) => {
             {width <= XS_BIG && (
                 <div className={cn(cls.wrapper, [className])}>
                     <ul className={cn(cls.switcher)}>
-                        {
-                            chatStatuses.map((item, index) => (
-                                <MobileSwitcherItem
-                                    key={index}
-                                    messageQnt={item.not_read}
-                                    type={item.slug}
-                                    className={cn(cls.item)}
-                                    activeType={chatType}
-                                >
-                                   {item.title}
-                                </MobileSwitcherItem>
-                            ))
-                        }
+                        {chatStatuses.map((item, index) => (
+                            <MobileSwitcherItem
+                                key={index}
+                                messageQnt={item.not_read}
+                                type={item.slug}
+                                className={cn(cls.item)}
+                                activeType={chatType}
+                            >
+                                {item.title}
+                            </MobileSwitcherItem>
+                        ))}
                     </ul>
                 </div>
             )}

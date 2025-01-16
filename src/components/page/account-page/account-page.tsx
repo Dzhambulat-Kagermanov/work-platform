@@ -71,7 +71,12 @@ interface Props extends TClassName {
 }
 const AccountPage: FC<Props> = (props) => {
     return (
-        <AuthWrapper roles={[props.role]} redirectLink={ROUTES[props.role === "buyer" ? "BUYER" : "SALESMAN"].AUTH}>
+        <AuthWrapper
+            roles={[props.role]}
+            redirectLink={
+                ROUTES[props.role === "buyer" ? "BUYER" : "SALESMAN"].AUTH
+            }
+        >
             <AccountPageContent {...props} />
         </AuthWrapper>
     );

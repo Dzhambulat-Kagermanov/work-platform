@@ -4,12 +4,12 @@ import { cn } from "@/lib";
 import { RansomsChatOrderInfoModal } from "../RansomsChatOrderInfoModal";
 import { RansomsContent } from "../RansomsContent";
 import { RansomsSidebar } from "../RansomsSidebar";
-import { TChatType } from "../RansomsSidebar/types";
 import { RansomsViewFileModal } from "../RansomsViewFileModal";
 import cls from "./index.module.scss";
+import { ChatStatus } from "@/types/api";
 
 interface Props extends TClassName {
-    chatType: TChatType;
+    chatType: ChatStatus;
 }
 const HomeRansomsContent: FC<Props> = ({ className, chatType }) => {
     return (

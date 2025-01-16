@@ -1,9 +1,9 @@
 import { DeliveryPage } from "@/components/page/Buyer/Delivery";
-import { TChatType } from "@/components/widgets/Buyer/DeliverySidebar/types";
+import { ChatStatus } from "@/types/api";
 import { FC } from "react";
 
 interface Props {
-    searchParams: Promise<{ chatType: TChatType }>;
+    searchParams: Promise<{ chatType: ChatStatus }>;
 }
 const Delivery: FC<Props> = async ({ searchParams }) => {
     const { chatType } = await searchParams;

@@ -9,12 +9,15 @@ import { useSessionQuery } from "@/hooks/api/auth";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {}
 const AccountBalanceMore: FC<Props> = ({ className, children, ...other }) => {
-
     const { data: userData } = useSessionQuery();
 
     const router = useRouter();
     const handleClick = () => {
-        router.push(userData && userData.role.slug === "seller" ? ROUTES.SALESMAN.BALANCE.VALUE : ROUTES.BUYER.ACCOUNT.BALANCE);
+        router.push(
+            userData && userData.role.slug === "seller"
+                ? ROUTES.SALESMAN.BALANCE.VALUE
+                : ROUTES.BUYER.ACCOUNT.BALANCE,
+        );
     };
 
     return (

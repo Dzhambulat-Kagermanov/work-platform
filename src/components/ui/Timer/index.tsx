@@ -18,7 +18,12 @@ type Props =
           format?: TFormat;
       } & TGeneral);
 
-const Timer: FC<Props> = ({ format, second = 60, customFormatter, onComplete }) => {
+const Timer: FC<Props> = ({
+    format,
+    second = 60,
+    customFormatter,
+    onComplete,
+}) => {
     const [seconds, setSeconds] = useState<number>(second);
     let isFirst = true;
     useEffect(() => {
@@ -27,8 +32,8 @@ const Timer: FC<Props> = ({ format, second = 60, customFormatter, onComplete }) 
                 if (cur - 1 >= 0) return cur - 1;
                 if (cur === 0) {
                     if (isFirst) {
-                        onComplete && onComplete();
                         clearInterval(interval);
+                        onComplete && onComplete();
                     }
                     isFirst = false;
                 }

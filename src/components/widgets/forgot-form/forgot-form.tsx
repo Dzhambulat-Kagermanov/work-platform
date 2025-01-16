@@ -12,18 +12,22 @@ import {
 import { PHONE_MASKS } from "@/constants";
 import cls from "./forgot-form.module.scss";
 import { Formik } from "formik";
-import { usePasswordResetMutation, usePasswordResetSendCodeMutation, usePasswordResetVerifyCodeMutation } from "@/hooks/api/auth";
+import {
+    usePasswordResetMutation,
+    usePasswordResetSendCodeMutation,
+    usePasswordResetVerifyCodeMutation,
+} from "@/hooks/api/auth";
 
 interface Props extends TClassName {}
 const ForgotForm: FC<Props> = ({ className }) => {
-
-    const { mutate: passwordResetSendCode } = usePasswordResetSendCodeMutation();
-    const { mutate: passwordResetVerifyCode } = usePasswordResetVerifyCodeMutation();
+    const { mutate: passwordResetSendCode } =
+        usePasswordResetSendCodeMutation();
+    const { mutate: passwordResetVerifyCode } =
+        usePasswordResetVerifyCodeMutation();
     const { mutate: passwordReset } = usePasswordResetMutation();
     const [codeSendAgain, setCodeSendAgain] = useState(false);
     const [currentStep, setCurrentStep] = useState<
-        "phone" 
-        | "code" | "password"
+        "phone" | "code" | "password"
     >("phone");
 
     return (
@@ -55,13 +59,11 @@ const ForgotForm: FC<Props> = ({ className }) => {
                 return errors;
             }}
             onSubmit={(values, { setSubmitting, setErrors }) => {
-
                 const onSettled = () => {
                     setSubmitting(false);
-                }
+                };
 
                 if (currentStep === "phone") {
-
                     passwordResetSendCode(values.phone, {
                         onSuccess: () => {
                             setCurrentStep("code");
@@ -73,37 +75,40 @@ const ForgotForm: FC<Props> = ({ className }) => {
                 }
 
                 if (currentStep === "code") {
-
-                    passwordResetVerifyCode({
-                        code: values.code,
-                        phone: values.phone,
-                    }, {
-                        onSuccess: () => {
-                            setCurrentStep("password");
+                    passwordResetVerifyCode(
+                        {
+                            code: values.code,
+                            phone: values.phone,
                         },
-                        onSettled,
-                    });
+                        {
+                            onSuccess: () => {
+                                setCurrentStep("password");
+                            },
+                            onSettled,
+                        },
+                    );
 
                     return;
                 }
 
                 if (currentStep === "password") {
-
-                    passwordReset({
-                        code: values.code,
-                        phone: values.phone,
-                        password: values.password,
-                        password_confirmation: values.passwordAgain
-                    }, {
-                        onSuccess: () => {
-                            setCurrentStep("password");
+                    passwordReset(
+                        {
+                            code: values.code,
+                            phone: values.phone,
+                            password: values.password,
+                            password_confirmation: values.passwordAgain,
                         },
-                        onSettled,
-                    });
+                        {
+                            onSuccess: () => {
+                                setCurrentStep("password");
+                            },
+                            onSettled,
+                        },
+                    );
 
                     return;
                 }
-
             }}
         >
             {({ handleSubmit, isSubmitting, values, errors, handleChange }) => (

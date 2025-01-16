@@ -7,15 +7,15 @@ import Image from "next/image";
 import { SearchIcon } from "@/icons";
 import { Chats } from "./Chats";
 import { MobileSwitcher } from "./MobileSwitcher";
-import { TChatType } from "../RansomsSidebar/types";
 import { useScreen } from "@/hooks";
 import { XS_BIG } from "@/constants";
 import cls from "./index.module.scss";
+import { ChatStatus } from "@/types/api";
 
 interface Props extends TClassName {
     activeIdSTUB?: number;
     setActiveIdSTUB: TState<number | undefined>;
-    chatType: TChatType;
+    chatType: ChatStatus;
 }
 const RansomsChats: FC<Props> = ({
     className,

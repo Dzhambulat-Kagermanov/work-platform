@@ -1,5 +1,5 @@
 "use client";
-import { FC, memo } from "react";
+import { FC, memo, useState } from "react";
 import { TTag } from "@/types";
 import { cn } from "@/lib";
 import Image from "next/image";
@@ -20,6 +20,7 @@ interface Props extends TTag {
     wrapperCls?: string;
     headCls?: string;
     contentCls?: string;
+    isFavoriteInitial?: boolean;
 }
 const ProductItem: FC<Props> = memo(
     ({
@@ -30,6 +31,7 @@ const ProductItem: FC<Props> = memo(
         tooltip,
         tag = "div",
         contentCls,
+        isFavoriteInitial,
         headCls,
         wrapperCls,
     }) => {
@@ -37,7 +39,9 @@ const ProductItem: FC<Props> = memo(
         const disc = price.discount;
         const prc = price.price;
 
-        const isFavorite = false;
+        const [isFavorite] = useState(!!isFavoriteInitial);
+
+        const addToFavorite = () => {};
 
         return (
             <Tag
@@ -59,10 +63,11 @@ const ProductItem: FC<Props> = memo(
                         <></>
                     )}
                     <div className={cn(cls.overlay)}>
-                        {isFavorite !== undefined ? (
+                        {isFavorite ? (
                             <div
                                 onClick={(e) => {
                                     e.preventDefault();
+                                    addToFavorite();
                                 }}
                             >
                                 <FavoriteIcon

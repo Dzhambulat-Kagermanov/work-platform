@@ -17,7 +17,7 @@ const ExitAccountModal: FC<Props> = ({ className }) => {
     const hideModal = useModalStore((state) => state.hideModal);
     const handleClick: MouseEventHandler = () => {
         localStorage.removeItem(authTokenKey);
-        router.push(ROUTES.MAIN)
+        router.push(ROUTES.MAIN);
         queryClient.setQueriesData({ queryKey: sessionQueryKeys }, null);
         hideModal({ slug: EXIT_ACCOUNT_MODAL });
     };

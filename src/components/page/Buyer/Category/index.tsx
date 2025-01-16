@@ -8,20 +8,18 @@ import { CategoryCategories } from "@/components/widgets/Buyer/CategoryCategorie
 import { useCategoriesQuery } from "@/hooks/api/categories";
 import { PageLoader } from "@/components/ui/loaders";
 
-interface Props extends TClassName {
-}
+interface Props extends TClassName {}
 const CategoryPage: FC<Props> = ({ className }) => {
-
     const { data: categories, isLoading } = useCategoriesQuery();
 
     if (isLoading) {
-        <PageLoader />
+        <PageLoader />;
     }
 
     if (!categories || !categories.length) {
         return <></>;
     }
- 
+
     return (
         <main className={cn(cls.category, [className])}>
             <Container

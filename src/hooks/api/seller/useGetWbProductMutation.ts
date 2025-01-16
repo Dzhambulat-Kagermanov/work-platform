@@ -2,14 +2,14 @@ import { apiService } from "@/services";
 import { AddWbProductData } from "@/services/SellerService";
 import { useMutation } from "@tanstack/react-query";
 
-const useAddWbProductMutation = () =>
+const useGetWbProductMutation = () =>
     useMutation({
-        mutationKey: ["wb-add-product"],
+        mutationKey: ["wb-get-product"],
         mutationFn: async (data: AddWbProductData) => {
-            const res = await apiService.seller.addWbProduct(data);
+            const res = await apiService.seller.fetchWbProduct(data);
 
             return res;
         },
     });
 
-export default useAddWbProductMutation;
+export default useGetWbProductMutation;

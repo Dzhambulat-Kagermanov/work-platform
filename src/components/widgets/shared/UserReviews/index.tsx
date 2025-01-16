@@ -12,9 +12,11 @@ import { MD_BIG, SM_MID } from "@/constants";
 import cls from "./index.module.scss";
 import { TReviewItemProps } from "@/types/reviews";
 import { SwiperOptions } from "swiper/types";
+import { RoleSlug } from "@/types/api";
 
 interface Props extends TClassName {
     reviews: TReviewItemProps[];
+    role?: RoleSlug;
     customBreakPoints?:
         | {
               [width: number]: SwiperOptions;
@@ -22,7 +24,12 @@ interface Props extends TClassName {
           }
         | undefined;
 }
-const UserReviews: FC<Props> = ({ className, reviews, customBreakPoints }) => {
+const UserReviews: FC<Props> = ({
+    className,
+    reviews,
+    role,
+    customBreakPoints,
+}) => {
     return (
         <Container tag="section" className={cn(cls.wrapper, [className])}>
             <div className={cn(cls.head)}>
@@ -32,7 +39,7 @@ const UserReviews: FC<Props> = ({ className, reviews, customBreakPoints }) => {
                     tag="h2"
                     className={cn(cls.title)}
                 >
-                    Отзывы о продавце
+                    Отзывы о {role === "buyer" ? "покупателе" : "продавце"}
                 </Typography>
                 <Typography font="Inter-R" size={25} className={cn(cls.title)}>
                     ({reviews.length})

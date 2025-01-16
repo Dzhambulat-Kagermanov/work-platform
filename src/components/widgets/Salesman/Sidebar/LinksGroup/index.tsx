@@ -26,7 +26,6 @@ const LinksGroup: FC<Props> = ({
     linkOnClick,
     homePageType,
 }) => {
-
     const { data: balance } = useGetBalanceQuery();
 
     return (

@@ -10,39 +10,36 @@ import { PageLoader } from "@/components/ui/loaders";
 
 interface Props extends TClassName {}
 const TariffsContent: FC<Props> = ({ className }) => {
-
     const { data: tariffs, isLoading } = useGetTariffsListQuery();
 
     if (isLoading) {
-        return <PageLoader />
+        return <PageLoader />;
     }
 
     return (
         <div className={cn(cls.wrapper, [className])}>
-            {
-                tariffs && tariffs.length ? 
-                    <>
-                        <Typography font="Inter-R" size={16} tag="h2">
-                            Приобретайте тарифы с выгодой до 20%
-                        </Typography>
-                        <div className={cn(cls.tariffs_wrapper)}>
-                            <ul className={cn(cls.tariffs)}>
-                                {tariffs.map((item, index) => {
-                                    return (
-                                        <TariffsItem
-                                            tariff={item}
-                                            key={index}
-                                            className={cn(cls.item)}
-                                        />
-                                    );
-                                })}
-                            </ul>
-                        </div>
-                    
-                    </>
-                : 
-                    <></>
-            }
+            {tariffs && tariffs.length ? (
+                <>
+                    <Typography font="Inter-R" size={16} tag="h2">
+                        Приобретайте тарифы с выгодой до 20%
+                    </Typography>
+                    <div className={cn(cls.tariffs_wrapper)}>
+                        <ul className={cn(cls.tariffs)}>
+                            {tariffs.map((item, index) => {
+                                return (
+                                    <TariffsItem
+                                        tariff={item}
+                                        key={index}
+                                        className={cn(cls.item)}
+                                    />
+                                );
+                            })}
+                        </ul>
+                    </div>
+                </>
+            ) : (
+                <></>
+            )}
         </div>
     );
 };

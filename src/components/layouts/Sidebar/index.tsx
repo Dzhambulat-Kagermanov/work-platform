@@ -42,7 +42,9 @@ const SidebarLayout: FC<Props> = ({ children }) => {
                         />
                         <MobileHeader className={cn(cls.header)} />
                     </>
-                ) : <></>}
+                ) : (
+                    <></>
+                )}
                 <div
                     className={cn(cls.content, [], {
                         [cls.noPadding]:

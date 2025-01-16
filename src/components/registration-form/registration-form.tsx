@@ -37,7 +37,6 @@ const RegistrationForm: FC<Props> = ({ className, role }) => {
     const { data: roles } = useRolesQuery();
 
     useEffect(() => {
-
         (() => {
             if (!userData) {
                 setCurrentStep("send");
@@ -47,9 +46,8 @@ const RegistrationForm: FC<Props> = ({ className, role }) => {
             if (!userData.is_configured) {
                 setCurrentStep("end");
             }
-        })()
-
-    }, [userData])
+        })();
+    }, [userData]);
 
     return (
         <Formik
@@ -91,7 +89,6 @@ const RegistrationForm: FC<Props> = ({ className, role }) => {
                         },
                         {
                             onSuccess: () => {
-                                toast.success("Код успешно отправлен");
                                 setCurrentStep("verify");
                             },
                             onSettled,
@@ -187,7 +184,6 @@ const RegistrationForm: FC<Props> = ({ className, role }) => {
                                 >
                                     Запросить новый код можно через{" "}
                                     <Timer
-                                        format={undefined}
                                         onComplete={() =>
                                             setCodeSendAgain(true)
                                         }
@@ -204,7 +200,9 @@ const RegistrationForm: FC<Props> = ({ className, role }) => {
                                             },
                                             {
                                                 onSuccess: () => {
-                                                    toast.success("Код успешно отправлен");
+                                                    toast.success(
+                                                        "Код успешно отправлен",
+                                                    );
                                                     setCodeSendAgain(false);
                                                 },
                                             },

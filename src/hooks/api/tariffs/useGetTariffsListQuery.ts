@@ -1,7 +1,7 @@
 import { apiService } from "@/services";
 import { useQuery } from "@tanstack/react-query";
 
-const useGetTariffsListQuery = () => (
+const useGetTariffsListQuery = () =>
     useQuery({
         queryKey: ["tariffs"],
         queryFn: async () => {
@@ -11,7 +11,6 @@ const useGetTariffsListQuery = () => (
         },
         retry: 3,
         staleTime: Infinity,
-    })
-);
+    });
 
 export default useGetTariffsListQuery;

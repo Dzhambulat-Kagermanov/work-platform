@@ -1,3 +1,4 @@
+"use client";
 import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
@@ -8,9 +9,31 @@ import { UserReviews } from "@/components/widgets/shared/UserReviews";
 import { REVIEWS } from "./constants/reviews";
 import { BackButton } from "@/components/ui";
 import cls from "./index.module.scss";
+import { useGetSellerQuery } from "@/hooks/api/users";
+import { useParams } from "next/navigation";
+import { PageLoader } from "@/components/ui/loaders";
+import { dateParserHandler } from "@/handlers";
 
 interface Props extends TClassName {}
 const SalesmanInfoPage: FC<Props> = ({ className }) => {
+    const { slug } = useParams();
+
+    const {
+        data: profile,
+        isLoading,
+        isError,
+    } = useGetSellerQuery(typeof slug === "string" ? slug : "");
+
+    if (isLoading) {
+        return <PageLoader />;
+    }
+
+    if (isError || !profile) {
+        return <div>Не удалось загрузить страницу.</div>;
+    }
+
+    // TODO: Вывести все поля пользователя
+
     return (
         <main className={cn(cls.main, [className])}>
             <BackButton
@@ -22,11 +45,11 @@ const SalesmanInfoPage: FC<Props> = ({ className }) => {
             <ProfileHead
                 infoMobileContentCls={cn(cls.head_mobile_content)}
                 className={cn(cls.head)}
-                id={21834}
-                name="Екатерина М."
-                rating={4.7}
-                registerDate="19.08.2024"
-                avatarImage=""
+                id={profile.id}
+                name={profile.name ?? ""}
+                rating={profile.rating}
+                registerDate={dateParserHandler(profile.created_at)}
+                avatarImage={profile.avatar ?? ""}
                 background="/images/account/head-background.png"
                 withoutAvatarChange
             />
@@ -34,11 +57,12 @@ const SalesmanInfoPage: FC<Props> = ({ className }) => {
                 className={cn(cls.statistic)}
                 cashbackPaid={10550}
                 productsGrate={342}
-                productsRating={4.7}
+                productsRating={profile.product_rating}
                 successfulBuybacks={91}
             />
             <SalesmanProducts className={cn(cls.products)} />
             <UserReviews
+                role="seller"
                 reviews={REVIEWS}
                 className={cn(cls.reviews)}
                 customBreakPoints={{
