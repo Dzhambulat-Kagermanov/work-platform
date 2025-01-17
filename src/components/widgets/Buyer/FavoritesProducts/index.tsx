@@ -8,6 +8,7 @@ import { favoriteProducts } from "@/constants/stub";
 import { ProductItem } from "@/components/entities/ProductItem";
 import Link from "next/link";
 import { useGetFavoritesQuery } from "@/hooks/api/favorites";
+import { ROUTES } from "@/constants";
 
 interface Props extends TClassName {}
 const FavoritesProducts: FC<Props> = ({ className }) => {
@@ -25,21 +26,22 @@ const FavoritesProducts: FC<Props> = ({ className }) => {
                 {favoritesData.map((item, index) => {
                     return (
                         <Link
-                            href={`/buyer/products/${item.id}`}
+                            href={ROUTES.BUYER.PRODUCTS.ID(`${item.id}`)}
                             key={index}
                             className={cn(cls.link)}
                         >
                             <ProductItem
+                                id={item.id}
                                 wrapperCls={cn(cls.item)}
                                 image={
                                     item.product.images.length
                                         ? item.product.images[0]
-                                        : ""
+                                        : null
                                 }
                                 name={item.product.name}
                                 price={{
-                                    price: Number(item.product.price),
-                                    discount: Number(item.product.discount),
+                                    price: +item.product.price,
+                                    discount: +item.product.discount,
                                 }}
                                 quantities={item.quantity}
                                 tag="li"

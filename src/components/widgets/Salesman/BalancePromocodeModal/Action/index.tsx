@@ -1,22 +1,21 @@
-import { FC, MouseEventHandler } from "react";
+import { FC, MouseEventHandler, useState } from "react";
 import { TClassName, TState } from "@/types";
 import { cn } from "@/lib";
 import { Typography, Input, Button } from "@/components/ui";
 import { SALESMAN_BALANCE_PROMOCODE_MODAL } from "@/constants";
 import { useModalStore } from "@/store";
 import cls from "./index.module.scss";
-import { TModalStep } from "..";
 
 interface Props extends TClassName {
-    setStep: TState<TModalStep>;
+    error?: string;
+    onSubmit: (value: string) => void;
+    disabledClose?: boolean;
 }
-const Action: FC<Props> = ({ className, setStep }) => {
+const Action: FC<Props> = ({ className, error, onSubmit, disabledClose }) => {
+    const [promocode, setPromocode] = useState("");
     const hideModal = useModalStore((state) => state.hideModal);
     const handleCancel: MouseEventHandler = () => {
         hideModal({ slug: SALESMAN_BALANCE_PROMOCODE_MODAL });
-    };
-    const handleConfirmation: MouseEventHandler = () => {
-        setStep("success");
     };
     return (
         <div className={cn(cls.wrapper, [className])}>
@@ -24,7 +23,9 @@ const Action: FC<Props> = ({ className, setStep }) => {
                 Введите промокод
             </Typography>
             <Input
-                error="Промокод недействителен"
+                error={error}
+                value={promocode}
+                onChange={(e) => setPromocode(e.target.value.trim())}
                 wrapperCls={cn(cls.inp_wrapper)}
             />
             <div className={cn(cls.actions)}>
@@ -32,7 +33,8 @@ const Action: FC<Props> = ({ className, setStep }) => {
                     size="mid"
                     theme="fill"
                     className={cn(cls.btn)}
-                    onClick={handleConfirmation}
+                    onClick={() => onSubmit(promocode)}
+                    disabled={!promocode || disabledClose}
                 >
                     Подтвердить
                 </Button>
@@ -40,6 +42,7 @@ const Action: FC<Props> = ({ className, setStep }) => {
                     size="mid"
                     theme="outline"
                     className={cn(cls.btn)}
+                    disabled={disabledClose}
                     onClick={handleCancel}
                 >
                     Отмена

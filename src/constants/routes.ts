@@ -15,6 +15,7 @@ export const ROUTES = {
         PRODUCTS: {
             ID: (id: string) => `/buyer/products/${id}`,
         },
+        DELIVERY: "/buyer/delivery",
     },
     SALESMAN: {
         MAIN: "/salesman",

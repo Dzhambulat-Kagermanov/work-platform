@@ -80,7 +80,7 @@ const Gallery: FC<Props> = memo(({ className, images }) => {
                                     }}
                                     key={image}
                                 >
-                                    <Image
+                                    <img
                                         width={126}
                                         height={167}
                                         src={image}
@@ -93,7 +93,7 @@ const Gallery: FC<Props> = memo(({ className, images }) => {
                 </div>
             </div>
             <div className={cn(cls.active)}>
-                <Image src={active} alt="Продукт" width={400} height={530} />
+                <img src={active} alt="Продукт" width={400} height={530} />
             </div>
             {imagesForRender.length > MAX_ITEMS_SCROLLBAR && (
                 <div className={cn(cls.btn_wrapper)}>

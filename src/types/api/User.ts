@@ -3,6 +3,7 @@ import BoolNumber from "./BoolNumber";
 import Shop from "./Shop";
 import Role from "./Role";
 import Review from "./Review";
+import { WbProduct } from "./Product";
 
 type User = {
     id: number;
@@ -18,8 +19,14 @@ type User = {
 
 export type Seller = {
     reviews: Review[];
+    products: WbProduct[];
 } & Record<
-    "product_rating" | "seller_rating" | "total_reviews" | "success_buybacks",
+    | "product_rating"
+    | "seller_rating"
+    | "total_reviews"
+    | "success_buybacks"
+    | "total_reviews"
+    | "cashback_paid",
     number
 > &
     User;

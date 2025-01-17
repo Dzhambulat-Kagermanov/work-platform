@@ -4,14 +4,12 @@ import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { Typography } from "@/components/ui";
 import cls from "./index.module.scss";
+import { PaginationValue } from "@/hooks/client/usePagination";
 
 export type TPaginationProps = {
     onPrev?: MouseEventHandler;
     onNext?: MouseEventHandler;
-    pages: {
-        current: number;
-        max: number;
-    };
+    pagination: PaginationValue;
 };
 
 interface Props extends TClassName, TPaginationProps {}
@@ -19,12 +17,19 @@ const Pagination: FC<Props> = ({
     className,
     onNext,
     onPrev,
-    pages: { current, max },
+    pagination: { current, max },
 }) => {
     const handlePrev: MouseEventHandler = (e) => {
+        if (current - 1 <= 0) {
+            return;
+        }
+
         onPrev && onPrev(e);
     };
     const handleNext: MouseEventHandler = (e) => {
+        if (current + 1 > max) {
+            return;
+        }
         onNext && onNext(e);
     };
 

@@ -25,21 +25,7 @@ const ProductCardInfo: FC<Props> = ({
                         images={product.product.images ?? []}
                         isFavorite={false}
                     />
-                    <Content
-                        product={product}
-                        className={cn(cls.content)}
-                        // data={{
-                        //     name: product.name,
-                        //     price: {
-                        //         price: product.price_without_cashback,
-                        //         discount: Number(product.price_with_cashback),
-                        //     },
-                        //     salesmanId: product.user_id,
-                        //     tooltip: "asda",
-                        //     id: product.id,
-                        //     isFavorite: false,
-                        // }}
-                    />
+                    <Content product={product} className={cn(cls.content)} />
                 </div>
                 <Switcher
                     salesmanId={product.user_id}

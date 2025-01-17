@@ -1,8 +1,12 @@
 import axios from "@/axios";
-import { Seller } from "@/types/api/User";
+import User, { Seller } from "@/types/api/User";
 class UsersService {
     async getSellerById(id: string) {
         const res = await axios.get<Seller>(`/seller/${id}`);
+        return res.data;
+    }
+    async getBuyerById(id: string) {
+        const res = await axios.get<User>(`/buyer/${id}`);
         return res.data;
     }
 }

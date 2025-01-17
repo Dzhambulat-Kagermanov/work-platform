@@ -18,6 +18,8 @@ interface Props extends TClassName {}
 const BalanceTransactions: FC<Props> = ({ className }) => {
     const width = useScreen();
 
+    const [currentPage, setCurrentPage] = useState(1);
+
     const [active, setActive] = useState<TActiveSwitchItem>("all");
     const [searchValue, setSearchValue] = useState("");
     const [buybackId, setBuybackId] = useState("");

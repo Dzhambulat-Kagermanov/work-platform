@@ -9,10 +9,14 @@ import { useModalStore, useScreen } from "@/hooks";
 import { Paid } from "../Paid";
 import cls from "./index.module.scss";
 import { SALESMAN_BALANCE_PROMOCODE_MODAL } from "@/constants";
+import { useGetBalanceQuery } from "@/hooks/api/auth";
 
 interface Props extends TClassName {}
 const Actions: FC<Props> = ({ className }) => {
     const width = useScreen();
+
+    const { data: balance } = useGetBalanceQuery();
+
     const showModal = useModalStore((state) => state.showModal);
     const handlePromocode = () => {
         showModal({ slug: SALESMAN_BALANCE_PROMOCODE_MODAL });
@@ -29,7 +33,7 @@ const Actions: FC<Props> = ({ className }) => {
                 </Typography>
                 <div className={cn(cls.info)}>
                     <Typography font="Inter-R" size={12}>
-                        10 шт
+                        {balance?.redemption_count ?? 0} шт
                     </Typography>
                     <button className={cn(cls.plus_btn)}>
                         <PlusIcon color="var(--grey-100)" />

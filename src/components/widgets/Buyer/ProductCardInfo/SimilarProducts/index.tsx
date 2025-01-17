@@ -7,6 +7,7 @@ import { ProductItem } from "@/components/entities/ProductItem";
 import Link from "next/link";
 import cls from "./index.module.scss";
 import { useProductsRelatedQuery } from "@/hooks/api/products";
+import { ROUTES } from "@/constants";
 
 interface Props extends TClassName, Pick<TProductItemProps, "id"> {}
 const SimilarProducts: FC<Props> = ({ id, className }) => {
@@ -29,16 +30,23 @@ const SimilarProducts: FC<Props> = ({ id, className }) => {
             <ul className={cn(cls.group)}>
                 {data.map((item, index) => {
                     return (
-                        <Link href={`/buyer/products/${id}`} key={index}>
+                        <Link
+                            href={ROUTES.BUYER.PRODUCTS.ID(`${item.id}`)}
+                            key={index}
+                        >
                             <ProductItem
+                                id={id}
                                 tag="li"
                                 wrapperCls={cn(cls.item)}
-                                // image={item.product.images.length ? item.product.images[0] : null}
-                                image={null}
+                                image={
+                                    item.product.images.length
+                                        ? item.product.images[0]
+                                        : null
+                                }
                                 name={item.product.name}
                                 price={{
                                     price: item.price_without_cashback,
-                                    discount: Number(item.product.discount),
+                                    discount: +item.product.discount,
                                 }}
                                 tooltip={""}
                             />

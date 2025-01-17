@@ -5,26 +5,35 @@ import { QueryItem } from "@/types/client";
 
 class ProductsService {
     async getProductsList(query: QueryItem[]) {
-        //TODO: добавить тип ответа
-        const res = await axios.get<Product[]>(
-            `/products${queryStringHandler(query)}`,
-        );
+        try {
+            const res = await axios.get<Product[]>(
+                `/products${queryStringHandler(query)}`,
+            );
 
-        return res.data;
+            return res.data;
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     async getProductItem(id: string) {
-        //TODO: добавить тип ответа
-        const res = await axios.get<Product>(`/product/${id}`);
+        try {
+            const res = await axios.get<Product>(`/product/${id}`);
 
-        return res.data;
+            return res.data;
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     async getProductsRelated(id: string) {
-        //TODO: добавить тип ответа
-        const res = await axios.get<Product[]>(`/product/related/${id}`);
+        try {
+            const res = await axios.get<Product[]>(`/product/related/${id}`);
 
-        return res.data;
+            return res.data;
+        } catch (error) {
+            console.error(error);
+        }
     }
 }
 

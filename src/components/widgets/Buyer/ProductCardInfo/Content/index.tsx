@@ -1,6 +1,6 @@
 "use client";
 import { FC, memo } from "react";
-import { TClassName, TProductItemProps } from "@/types";
+import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { ContentHead } from "../ContentHead";
 import { ContentSales } from "../ContentSales";
@@ -20,23 +20,19 @@ const Content: FC<Props> = memo(({ className, product }) => {
 
     return (
         <section className={cn(cls.content, [className])}>
-            {/* {data && (
-                    <>
-                        <ContentHead
-                            salesman={data}
-                            className={cn(cls.head)}
-                            name={name}
-                            price={price}
-                            tooltip={tooltip}
+            {product ? (
+                <>
+                    <ContentHead product={product} className={cn(cls.head)} />
+                    {width > SM_BIG && (
+                        <ContentSales
+                            className={cn(cls.sales)}
+                            product={product}
                         />
-                        {width > SM_BIG && (
-                            <ContentSales
-                                className={cn(cls.sales)}
-                                salesman={data}
-                            />
-                        )}
-                    </>
-                )} */}
+                    )}
+                </>
+            ) : (
+                <></>
+            )}
             <ContentActions id={product.id} className={cn(cls.actions)} />
             {width > SM_MID && (
                 <ContentShop

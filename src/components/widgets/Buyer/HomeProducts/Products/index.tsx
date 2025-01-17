@@ -27,6 +27,7 @@ const Products: FC<Props> = ({ className }) => {
                         key={index}
                     >
                         <ProductItem
+                            id={item.id}
                             headCls={cn(cls.product_head)}
                             name={item.product.name}
                             tooltip={""}

@@ -45,6 +45,16 @@ class SellerService {
         );
         return res.data;
     }
+    async applyPromocode(promocode: string) {
+        const res = await axios.post<{ message: string }>(
+            "/seller/promocode/apply",
+            {
+                promocode,
+            },
+        );
+
+        return res;
+    }
 }
 
 export default SellerService;

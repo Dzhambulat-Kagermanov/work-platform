@@ -24,7 +24,7 @@ const DeliveryPage: FC<Props> = ({ className, chatType }) => {
                     className={cn(cls.container, ["modules-gap-bottom"])}
                 >
                     <BackButton
-                        href="/"
+                        href={ROUTES.MAIN}
                         className={cn(cls.back_btn, ["modules-gap-top"])}
                         hideWhen={MD_LOW}
                     >

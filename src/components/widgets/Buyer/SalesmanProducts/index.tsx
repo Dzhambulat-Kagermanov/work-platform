@@ -34,11 +34,11 @@ const SalesmanProducts: FC<Props> = ({ className }) => {
                         return (
                             <Link href={`/buyer/products/${id}`} key={id}>
                                 <ProductItem
+                                    id={id}
                                     wrapperCls={cn(cls.item)}
                                     image={previewImage}
                                     name={name}
                                     price={price}
-                                    isFavorite={isFavorite}
                                     quantities={quantities}
                                     tag="li"
                                     tooltip={tooltip}

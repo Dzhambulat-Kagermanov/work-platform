@@ -1,13 +1,19 @@
 "use client";
-import { FC, memo, useState } from "react";
+import { FC, memo, useEffect, useState } from "react";
 import { TTag } from "@/types";
 import { cn } from "@/lib";
-import Image from "next/image";
 import { FavoriteIcon, HelpIcon } from "@/icons";
 import { DiscountPlaque, Typography } from "@/components/ui";
 import cls from "./index.module.scss";
+import {
+    useFavoritesAddMutation,
+    useFavoritesRemoveMutation,
+    useGetFavoritesQuery,
+} from "@/hooks/api/favorites";
+import { useSessionQuery } from "@/hooks/api/auth";
 
 interface Props extends TTag {
+    id: number;
     price: {
         price: number;
         discount?: number;
@@ -20,7 +26,6 @@ interface Props extends TTag {
     wrapperCls?: string;
     headCls?: string;
     contentCls?: string;
-    isFavoriteInitial?: boolean;
 }
 const ProductItem: FC<Props> = memo(
     ({
@@ -31,15 +36,28 @@ const ProductItem: FC<Props> = memo(
         tooltip,
         tag = "div",
         contentCls,
-        isFavoriteInitial,
         headCls,
         wrapperCls,
+        id,
     }) => {
         const Tag = tag;
         const disc = price.discount;
         const prc = price.price;
 
-        const [isFavorite] = useState(!!isFavoriteInitial);
+        const { data: userData } = useSessionQuery();
+
+        const { data: favorites } = useGetFavoritesQuery();
+
+        const favoritesAddMutation = useFavoritesAddMutation();
+        const favoritesRemoveMutation = useFavoritesRemoveMutation();
+
+        const [isFavorite, setIsFavorite] = useState(false);
+
+        useEffect(() => {
+            if (favorites) {
+                setIsFavorite(favorites.some((el) => el.id === id));
+            }
+        }, [favorites]);
 
         const addToFavorite = () => {};
 
@@ -53,17 +71,12 @@ const ProductItem: FC<Props> = memo(
             >
                 <div className={cn(cls.head, [headCls])}>
                     {image ? (
-                        <Image
-                            src={image}
-                            alt="Товар"
-                            width={200}
-                            height={235}
-                        />
+                        <img src={image} alt="Товар" width={200} height={235} />
                     ) : (
                         <></>
                     )}
                     <div className={cn(cls.overlay)}>
-                        {isFavorite ? (
+                        {userData && userData.role.slug === "buyer" ? (
                             <div
                                 onClick={(e) => {
                                     e.preventDefault();
@@ -80,7 +93,7 @@ const ProductItem: FC<Props> = memo(
                                 />
                             </div>
                         ) : (
-                            <p />
+                            <></>
                         )}
                         {!!disc && (
                             <div className={cn(cls.discount)}>

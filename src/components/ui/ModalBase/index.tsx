@@ -9,14 +9,24 @@ import cls from "./index.module.scss";
 
 interface Props extends TClassName, TChildren, TModalSlug {
     onClose?: () => void;
+    disableClose?: boolean;
 }
 // slug - Уникальный идентификатор для конкретной модалки (ID)
-const ModalBase: FC<Props> = ({ children, className, slug, onClose }) => {
+const ModalBase: FC<Props> = ({
+    children,
+    className,
+    slug,
+    onClose,
+    disableClose,
+}) => {
     const { modalState, visibleTransition, handleClose } = useModalBase({
         slug,
     });
 
     const handleWrapperClick = () => {
+        if (disableClose) {
+            return;
+        }
         onClose && onClose();
         handleClose();
     };

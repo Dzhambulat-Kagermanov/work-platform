@@ -6,38 +6,36 @@ import { SalesmanStatistic } from "@/components/widgets/Salesman/SalesmanStatist
 import { SalesmanProducts } from "@/components/widgets/Salesman/SalesmanProducts";
 import { ProfileHead } from "@/components/entities/ProfileHead";
 import { UserReviews } from "@/components/widgets/shared/UserReviews";
-import { REVIEWS } from "./constants/reviews";
 import { BackButton } from "@/components/ui";
-import cls from "./index.module.scss";
+import cls from "./salesman-page.module.scss";
 import { useGetSellerQuery } from "@/hooks/api/users";
 import { useParams } from "next/navigation";
 import { PageLoader } from "@/components/ui/loaders";
-import { dateParserHandler } from "@/handlers";
+import { ROUTES } from "@/constants";
+import { PageErrorStub } from "@/components/ui/page-error-stub";
 
 interface Props extends TClassName {}
 const SalesmanInfoPage: FC<Props> = ({ className }) => {
-    const { slug } = useParams();
+    const { id } = useParams();
 
     const {
         data: profile,
         isLoading,
         isError,
-    } = useGetSellerQuery(typeof slug === "string" ? slug : "");
+    } = useGetSellerQuery(typeof id === "string" ? id : "");
 
     if (isLoading) {
         return <PageLoader />;
     }
 
     if (isError || !profile) {
-        return <div>Не удалось загрузить страницу.</div>;
+        return <PageErrorStub />;
     }
-
-    // TODO: Вывести все поля пользователя
 
     return (
         <main className={cn(cls.main, [className])}>
             <BackButton
-                href="/salesman?homePageType=advertisement"
+                href={`${ROUTES.SALESMAN.MAIN}?homePageType=advertisement`}
                 className={cn(cls.back_btn, ["modules-gap-bottom"])}
             >
                 Назад
@@ -48,22 +46,25 @@ const SalesmanInfoPage: FC<Props> = ({ className }) => {
                 id={profile.id}
                 name={profile.name ?? ""}
                 rating={profile.rating}
-                registerDate={dateParserHandler(profile.created_at)}
+                registerDate={profile.created_at ?? ""}
                 avatarImage={profile.avatar ?? ""}
                 background="/images/account/head-background.png"
                 withoutAvatarChange
             />
             <SalesmanStatistic
                 className={cn(cls.statistic)}
-                cashbackPaid={10550}
-                productsGrate={342}
+                cashbackPaid={profile.cashback_paid}
+                productsGrate={profile.total_reviews}
                 productsRating={profile.product_rating}
-                successfulBuybacks={91}
+                successfulBuybacks={profile.success_buybacks}
             />
-            <SalesmanProducts className={cn(cls.products)} />
+            <SalesmanProducts
+                products={profile.products}
+                className={cn(cls.products)}
+            />
             <UserReviews
                 role="seller"
-                reviews={REVIEWS}
+                reviews={profile.reviews}
                 className={cn(cls.reviews)}
                 customBreakPoints={{
                     0: {
@@ -81,4 +82,4 @@ const SalesmanInfoPage: FC<Props> = ({ className }) => {
     );
 };
 
-export { SalesmanInfoPage };
+export default SalesmanInfoPage;

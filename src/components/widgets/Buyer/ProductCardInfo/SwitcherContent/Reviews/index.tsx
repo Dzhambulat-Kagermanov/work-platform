@@ -18,35 +18,8 @@ const Reviews: FC<Props> = ({ className, reviews }) => {
         <div className={cn(cls.wrapper, [className])}>
             <ul className={cn(cls.group)}>
                 {reviews.map((item, index) => (
-                    <ReviewItem
-                        key={index}
-                        rating={item.rating}
-                        date={item.created_at ?? ""}
-                        subtitle={item.text}
-                        title={item.user_name}
-                    />
+                    <ReviewItem key={index} item={item} />
                 ))}
-                <ReviewItem
-                    rating={4}
-                    date="29 июля, 2023"
-                    subtitle="Все прошло отлично! Я сразу получила кешбэк после того как продацев
-						подтвердил мои действия."
-                    title="Анна"
-                />
-                <ReviewItem
-                    rating={4}
-                    date="29 июля, 2023"
-                    subtitle="Все прошло отлично! Я сразу получила кешбэк после того как продацев
-					подтвердил мои действия."
-                    title="Анна"
-                />
-                <ReviewItem
-                    rating={4}
-                    date="29 июля, 2023"
-                    subtitle="Все прошло отлично! Я сразу получила кешбэк после того как продацев
-				подтвердил мои действия."
-                    title="Анна"
-                />
             </ul>
         </div>
     );

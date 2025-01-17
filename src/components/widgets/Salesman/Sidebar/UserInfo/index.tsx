@@ -7,6 +7,8 @@ import { PlusIcon } from "@/icons";
 import Link from "next/link";
 import cls from "./index.module.scss";
 import { useGetBalanceQuery, useSessionQuery } from "@/hooks/api/auth";
+import { ROUTES } from "@/constants";
+import { useRouter } from "next/navigation";
 
 interface Props extends TClassName {
     sidebarIsExpand: boolean;
@@ -15,6 +17,8 @@ const UserInfo: FC<Props> = ({ className, sidebarIsExpand }) => {
     const { data: userData } = useSessionQuery();
     const { data: balance } = useGetBalanceQuery();
 
+    const router = useRouter();
+
     const handleBalanceUp: MouseEventHandler = () => {};
     return (
         <div
@@ -22,7 +26,7 @@ const UserInfo: FC<Props> = ({ className, sidebarIsExpand }) => {
                 [cls.sidebarIsExpand]: sidebarIsExpand,
             })}
         >
-            <Link href={"/salesman/profile"} className={cn(cls.link)}>
+            <Link href={ROUTES.SALESMAN.PROFILE} className={cn(cls.link)}>
                 <Image
                     src="/images/stub/avatar.png"
                     alt="Аватар"
@@ -47,7 +51,9 @@ const UserInfo: FC<Props> = ({ className, sidebarIsExpand }) => {
                         wFull
                         theme="fill"
                         className={cn(cls.btn)}
-                        onClick={handleBalanceUp}
+                        onClick={() =>
+                            router.push(ROUTES.SALESMAN.BALANCE.VALUE)
+                        }
                     >
                         Пополнить
                     </Button>

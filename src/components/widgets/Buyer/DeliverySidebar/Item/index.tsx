@@ -6,6 +6,7 @@ import { cn } from "@/lib";
 import { FolderIcon } from "@/icons";
 import cls from "./index.module.scss";
 import { ChatStatus } from "@/types/api";
+import { ROUTES } from "@/constants";
 
 interface Props extends TClassName {
     messageQnt: number;
@@ -24,7 +25,7 @@ const Item: FC<Props> = ({
 
     return (
         <Link
-            href={`/buyer/delivery${type ? `?chatType=${type}` : ""}`}
+            href={`${ROUTES.BUYER.DELIVERY}${type ? `?chatType=${type}` : ""}`}
             className={cn(cls.link, [className])}
         >
             <div className={cn(cls.folder)}>
