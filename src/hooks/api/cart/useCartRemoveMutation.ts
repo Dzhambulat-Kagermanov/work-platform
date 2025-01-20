@@ -4,6 +4,7 @@ import { RemoveFromCartData } from "@/services/CartService";
 import Product from "@/types/api/Product";
 import { getCartKey } from "./useGetCartQuery";
 import toast from "react-hot-toast";
+import { serverErrorToastHandler } from "@/handlers";
 const useFavoritesRemoveMutation = () => {
     const queryClient = useQueryClient();
 
@@ -34,6 +35,9 @@ const useFavoritesRemoveMutation = () => {
             );
 
             toast.success("Товар успешно убран из корзины");
+        },
+        onError: (e) => {
+            serverErrorToastHandler(e, "Не удалось удалить товар из корзины");
         },
     });
 };

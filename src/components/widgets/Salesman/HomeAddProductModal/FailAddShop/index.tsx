@@ -1,21 +1,17 @@
 "use client";
-import { FC, MouseEventHandler } from "react";
-import { TClassName, TState } from "@/types";
+import { FC } from "react";
+import { TClassName } from "@/types";
 import { Typography, Button } from "@/components/ui";
 import { cn } from "@/lib";
 import Image from "next/image";
-import { TModalStep } from "..";
 import Link from "next/link";
 import cls from "./index.module.scss";
 import { ROUTES } from "@/constants";
 
 interface Props extends TClassName {
-    setStep: TState<TModalStep>;
+    closeModal: () => void;
 }
-const FailAddShop: FC<Props> = ({ className, setStep }) => {
-    const handleConfirmClick: MouseEventHandler = () => {
-        setStep(null);
-    };
+const FailAddShop: FC<Props> = ({ className, closeModal }) => {
     return (
         <div className={cn(cls.wrapper, [className])}>
             <Image
@@ -40,11 +36,11 @@ const FailAddShop: FC<Props> = ({ className, setStep }) => {
             <Button
                 wFull
                 size="mid"
-                onClick={handleConfirmClick}
+                onClick={closeModal}
                 theme="fill"
                 className={cn(cls.btn, [cls.cancel_btn])}
             >
-                Подтвердить
+                Закрыть
             </Button>
         </div>
     );

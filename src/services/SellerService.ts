@@ -1,17 +1,20 @@
 import axios from "@/axios";
-import { WbProduct } from "@/types/api/Product";
+import { PaginationData, Shop } from "@/types/api";
+import Product, { WbProduct } from "@/types/api/Product";
 
 export type AddWbProductData = {
     id: string;
 };
 
+export type AdsIdsData = {
+    ad_ids: number[];
+};
+
 class SellerService {
     async getProducts(query?: string) {
-        const res = await axios.get<{
-            data: WbProduct[];
-            current_page: number;
-            last_page: number;
-        }>(`/seller/product${query || ""}`);
+        const res = await axios.get<PaginationData<WbProduct[]>>(
+            `/seller/product${query ?? ""}`,
+        );
 
         return res.data.data;
     }
@@ -34,7 +37,7 @@ class SellerService {
         return res;
     }
     async fetchWbProduct(data: AddWbProductData) {
-        const res = await axios.get<{ product: WbProduct }>(
+        const res = await axios.get<{ product: WbProduct; shop: Shop }>(
             `/wb/fetch-product/${data.id}`,
         );
         return res.data;
@@ -53,6 +56,28 @@ class SellerService {
             },
         );
 
+        return res;
+    }
+    async getAdsList(query?: string) {
+        const res = await axios.get<PaginationData<Product[]>>(
+            `/seller/ads${query ?? ""}`,
+        );
+        return res.data;
+    }
+    async getAd(id: number) {
+        const res = await axios.get<Product>(`/seller/ads/${id}`);
+        return res.data;
+    }
+    async archiveAds(data: AdsIdsData) {
+        const res = await axios.post("/seller/ads/archive", data);
+        return res;
+    }
+    async stopAds(data: AdsIdsData) {
+        const res = await axios.post("/seller/ads/stop", data);
+        return res;
+    }
+    async duplicateAds(data: AdsIdsData) {
+        const res = await axios.post("/seller/ads/duplicate", data);
         return res;
     }
 }

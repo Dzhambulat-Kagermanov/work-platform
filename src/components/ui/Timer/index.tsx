@@ -25,8 +25,8 @@ const Timer: FC<Props> = ({
     onComplete,
 }) => {
     const [seconds, setSeconds] = useState<number>(second);
-    let isFirst = true;
     useEffect(() => {
+        let isFirst = true;
         const interval = setInterval(() => {
             setSeconds((cur) => {
                 if (cur - 1 >= 0) return cur - 1;

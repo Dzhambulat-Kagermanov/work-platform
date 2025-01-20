@@ -1,15 +1,18 @@
+import { serverErrorToastHandler } from "@/handlers";
 import { apiService } from "@/services";
-import { OrderWithdrawalData } from "@/services/AuthService";
 import { useMutation } from "@tanstack/react-query";
 
-const useOrderWithdrawMutation = () =>
+const useCancelWithdrawMutation = () =>
     useMutation({
-        mutationKey: ["create-withdraw"],
+        mutationKey: ["cancel-withdraw"],
         mutationFn: async (id: string) => {
             const res = await apiService.auth.cancelWithdrawal(id);
 
             return res;
         },
+        onError: (e) => {
+            serverErrorToastHandler(e, "Не удалось отменить запрос на вывод");
+        },
     });
 
-export default useOrderWithdrawMutation;
+export default useCancelWithdrawMutation;

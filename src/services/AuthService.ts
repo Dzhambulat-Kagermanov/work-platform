@@ -112,7 +112,7 @@ class AuthService {
     }
 
     async getTransactions(query?: string) {
-        const res = await axios.get<Transaction[]>(`/transactions${query}`);
+        const res = await axios.get<Transaction[]>(`/transactions${query || ""}`);
 
         return res.data;
     }

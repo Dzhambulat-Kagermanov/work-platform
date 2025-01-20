@@ -28,5 +28,6 @@ export const ROUTES = {
             VALUE: "/salesman/balance",
             TARIFFS: "/salesman/balance/tariffs",
         },
+        CREATE_ADVERTISEMENTS: "/salesman/create-advertisement",
     },
 };

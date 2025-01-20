@@ -1,8 +1,8 @@
+import { serverErrorToastHandler } from "@/handlers";
 import { setQuerySessionDataHandler } from "@/lib";
 import { apiService } from "@/services";
 import { UpdateProfileData } from "@/services/AuthService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 
 const useUpdateProfileMutation = () => {
@@ -19,11 +19,8 @@ const useUpdateProfileMutation = () => {
             setQuerySessionDataHandler(queryClient, data);
             toast.success("Данные успешно обновлены");
         },
-        onError: (e: Error) => {
-            const error = e as AxiosError<{ message: string }>;
-            toast.error(
-                error.response?.data?.message ?? "Не удалось обновить данные",
-            );
+        onError: (e) => {
+            serverErrorToastHandler(e, "Не удалось обновить данные");
         },
     });
 };

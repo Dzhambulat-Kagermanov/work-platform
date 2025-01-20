@@ -2,15 +2,18 @@ import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { Typography } from "@/components/ui";
-import { TRANSACTIONS } from "../constants/transactions";
 import { TActiveSwitchItem } from "..";
 import cls from "./index.module.scss";
+import { Transaction } from "@/types/api";
+import { dateParserHandler } from "@/handlers";
 
 interface Props extends TClassName {
     active: TActiveSwitchItem;
+    transactions: Transaction[];
     wrapperCls?: string;
 }
-const Table: FC<Props> = ({ className, active, wrapperCls }) => {
+const Table: FC<Props> = ({ className, active, wrapperCls, transactions }) => {
+
     return (
         <div className={cn(cls.wrapper, [wrapperCls])}>
             <table className={cn(cls.table, [className])}>
@@ -49,31 +52,16 @@ const Table: FC<Props> = ({ className, active, wrapperCls }) => {
                     </tr>
                 </thead>
                 <tbody className={cn(cls.body)}>
-                    {(active === "replenishments"
-                        ? TRANSACTIONS.filter(
-                              ({ type }) => type === "replenishment",
-                          )
-                        : active === "withdrawals"
-                          ? TRANSACTIONS.filter(
-                                ({ type }) => type === "withdrawal",
-                            )
-                          : TRANSACTIONS
-                    ).map(
-                        ({
-                            date,
-                            description,
-                            idRansom,
-                            idTransaction,
-                            sum,
-                            type,
-                        }) => {
+                    {transactions.map(
+                        (item, index) => {
+                            const isDeposit = item.transaction_type === "deposit";
                             return (
                                 <tr
                                     className={cn(cls.row, [], {
                                         [cls.isReplenishment]:
-                                            type === "replenishment",
+                                        isDeposit,
                                     })}
-                                    key={idTransaction}
+                                    key={index}
                                 >
                                     <th
                                         className={cn(cls.column, [
@@ -81,19 +69,19 @@ const Table: FC<Props> = ({ className, active, wrapperCls }) => {
                                         ])}
                                     >
                                         <Typography font="Inter-R" size={14}>
-                                            {idTransaction}
+                                            {item.id}
                                         </Typography>
                                     </th>
                                     <th className={cn(cls.column, [cls.sum])}>
                                         <Typography font="Inter-R" size={14}>
-                                            {type === "replenishment"
-                                                ? `+${sum} ₽`
-                                                : `-${sum} ₽`}
+                                            {isDeposit
+                                                ? `+${item.amount} ₽`
+                                                : `-${item.amount} ₽`}
                                         </Typography>
                                     </th>
                                     <th className={cn(cls.column, [cls.type])}>
                                         <Typography font="Inter-R" size={14}>
-                                            {type === "replenishment"
+                                            {isDeposit
                                                 ? "Пополнение"
                                                 : "Вывод средств"}
                                         </Typography>
@@ -105,7 +93,7 @@ const Table: FC<Props> = ({ className, active, wrapperCls }) => {
                                         ])}
                                     >
                                         <Typography font="Inter-R" size={14}>
-                                            {date}
+                                            {dateParserHandler(item.created_at)}
                                         </Typography>
                                     </th>
                                     <th
@@ -115,7 +103,7 @@ const Table: FC<Props> = ({ className, active, wrapperCls }) => {
                                         ])}
                                     >
                                         <Typography font="Inter-R" size={14}>
-                                            {description}
+                                            {item.description}
                                         </Typography>
                                     </th>
                                     <th
@@ -124,7 +112,7 @@ const Table: FC<Props> = ({ className, active, wrapperCls }) => {
                                         ])}
                                     >
                                         <Typography font="Inter-R" size={14}>
-                                            {idRansom}
+                                            {item.ads_id}
                                         </Typography>
                                     </th>
                                 </tr>

@@ -16,7 +16,7 @@ interface ModalStore {
     toggleModal: (params: TModalSlug) => void;
 }
 
-export const useModalStore = create<ModalStore>()(
+const useModalStore = create<ModalStore>()(
     devtools((set) => ({
         modalsStates: {},
         hideModal: ({ slug }) => {
@@ -50,5 +50,7 @@ export const useModalStore = create<ModalStore>()(
         },
     })),
 );
+
+export default useModalStore;
 
 export const showModalSelector = (state: ModalStore) => state.showModal;

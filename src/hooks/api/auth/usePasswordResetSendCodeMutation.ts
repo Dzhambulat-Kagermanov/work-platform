@@ -1,5 +1,5 @@
+import { serverErrorToastHandler } from "@/handlers";
 import { apiService } from "@/services";
-import { PasswordResetData } from "@/services/AuthService";
 import { useMutation } from "@tanstack/react-query";
 
 const usePasswordResetSendCodeMutation = () =>
@@ -8,6 +8,9 @@ const usePasswordResetSendCodeMutation = () =>
         mutationFn: async (phone: string) => {
             const res = await apiService.auth.passwordResetSendCode(phone);
             return res;
+        },
+        onError: (e) => {
+            serverErrorToastHandler(e, "Не удалось отправить код");
         },
     });
 

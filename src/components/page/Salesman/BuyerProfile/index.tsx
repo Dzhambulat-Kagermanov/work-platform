@@ -14,13 +14,16 @@ import { dateParserHandler } from "@/handlers";
 
 interface Props extends TClassName {}
 const BuyerProfilePage: FC<Props> = ({ className }) => {
-
     const { id } = useParams();
 
-    const { data: profile, isError, isLoading } = useGetBuyerQuery(typeof id === "string" ? id : "");
+    const {
+        data: profile,
+        isError,
+        isLoading,
+    } = useGetBuyerQuery(typeof id === "string" ? id : "");
 
     if (isLoading) {
-        return <PageLoader />
+        return <PageLoader />;
     }
 
     if (isError || !profile) {

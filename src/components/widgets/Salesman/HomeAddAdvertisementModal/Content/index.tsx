@@ -1,25 +1,47 @@
 "use client";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
-import { PRODUCTS } from "../constants/products";
 import { Item } from "../Item";
 import cls from "./index.module.scss";
+import { useGetSellerProductsQuery } from "@/hooks/api/seller";
+import { Loader } from "lucide-react";
 
-interface Props extends TClassName {}
-const Content: FC<Props> = ({ className }) => {
-    const [activeId, setActiveId] = useState<number>(PRODUCTS[0].id);
+interface Props extends TClassName {
+    selectedItem: number | null;
+    setSelectedItem: (value: number | null) => void;
+}
+const Content: FC<Props> = ({ className, setSelectedItem, selectedItem }) => {
+    const { data: products, isLoading } = useGetSellerProductsQuery();
+
+    if (!products || !products.length || isLoading) {
+        return (
+            <div className="flex items-center h-full flex-auto justify-center text-center">
+                {isLoading ? (
+                    <Loader className="animate-spin" />
+                ) : (
+                    "Товары не найдены"
+                )}
+            </div>
+        );
+    }
 
     return (
         <ul className={cn(cls.wrapper, [className])}>
-            {PRODUCTS.map(({ id, ...other }) => {
+            {products.map((item, index) => {
                 return (
                     <Item
-                        activeId={activeId}
-                        setActiveId={setActiveId}
-                        id={id}
-                        {...other}
-                        key={id}
+                        selectedItem={selectedItem}
+                        setSelectedItem={setSelectedItem}
+                        id={item.id}
+                        image={
+                            item.images && item.images.length
+                                ? item.images[0]
+                                : ""
+                        }
+                        title={item.name}
+                        number={"1"}
+                        key={index}
                         className={cn(cls.item)}
                     />
                 );

@@ -7,9 +7,12 @@ import { HomeTable } from "../HomeTable";
 import { ProductsTableBodyItem } from "@/components/entities/ProductsTableBodyItem";
 import { useGetSellerProductsQuery } from "@/hooks/api/seller";
 import { PageLoader } from "@/components/ui/loaders";
+import { usePagination } from "@/hooks/client";
 
 interface Props extends TClassName {}
 const HomeProductsContent: FC<Props> = ({ className }) => {
+    const { pagination, setPagination } = usePagination();
+
     const { data: products, isLoading } = useGetSellerProductsQuery();
 
     if (isLoading) {
@@ -38,12 +41,7 @@ const HomeProductsContent: FC<Props> = ({ className }) => {
                 "Конверсия",
                 "Объявлений",
             ]}
-            pagination={{
-                pages: {
-                    current: 1,
-                    max: 10,
-                },
-            }}
+            pagination={pagination}
             bodyCls={cn(cls.body)}
             bodyRowCls={cn(cls.body_row)}
             className={cn(cls.wrapper, [className])}

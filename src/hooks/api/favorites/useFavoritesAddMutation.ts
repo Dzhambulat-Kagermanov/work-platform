@@ -4,6 +4,7 @@ import { AddToFavoriteData } from "@/services/FavoritesService";
 import Product from "@/types/api/Product";
 import { getFavoritesKey } from "./useGetFavoritesQuery";
 import toast from "react-hot-toast";
+import { serverErrorToastHandler } from "@/handlers";
 const useFavoritesAddMutation = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -35,6 +36,9 @@ const useFavoritesAddMutation = () => {
             ]);
 
             toast.success("Товар успешно добавлен в избранное");
+        },
+        onError: (e) => {
+            serverErrorToastHandler(e, "Не удалось добавить товар в избранное");
         },
     });
 };

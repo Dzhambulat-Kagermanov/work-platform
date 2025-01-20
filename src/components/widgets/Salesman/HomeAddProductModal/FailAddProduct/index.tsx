@@ -11,8 +11,9 @@ import { useModalStore } from "@/store";
 
 interface Props extends TClassName {
     setStep: TState<TModalStep>;
+    closeModal: () => void;
 }
-const FailAddProduct: FC<Props> = ({ className, setStep }) => {
+const FailAddProduct: FC<Props> = ({ className, closeModal, setStep }) => {
     const hideModal = useModalStore((state) => state.hideModal);
     const handleCancelClick: MouseEventHandler = () => {
         hideModal({ slug: SALESMAN_ADD_PRODUCT_MODAL });

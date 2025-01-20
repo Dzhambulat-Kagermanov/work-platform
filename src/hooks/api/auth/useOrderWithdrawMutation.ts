@@ -1,8 +1,7 @@
+import { serverErrorToastHandler } from "@/handlers";
 import { apiService } from "@/services";
 import { OrderWithdrawalData } from "@/services/AuthService";
 import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
-import toast from "react-hot-toast";
 
 const useOrderWithdrawMutation = () =>
     useMutation({
@@ -12,12 +11,8 @@ const useOrderWithdrawMutation = () =>
 
             return res;
         },
-        onError: (e: Error) => {
-            const error = e as AxiosError<{ message: string }>;
-            toast.error(
-                error.response?.data?.message ??
-                    "Не удалось создать заявку на вывод",
-            );
+        onError: (e) => {
+            serverErrorToastHandler(e, "Не удалось создать заявку на вывод");
         },
     });
 

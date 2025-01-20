@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { sessionQueryKeys } from "./useSessionQuery";
 import { setQuerySessionDataHandler } from "@/lib";
+import { serverErrorToastHandler } from "@/handlers";
 
 const useRegisterEndMutation = () => {
     const queryClient = useQueryClient();
@@ -18,8 +19,8 @@ const useRegisterEndMutation = () => {
             queryClient.setQueryData(sessionQueryKeys, data.user);
             toast.success("Регистрация завершена успешно");
         },
-        onError: () => {
-            toast.error("Не удалось завершить регистрацию");
+        onError: (e) => {
+            serverErrorToastHandler(e, "Не удалось завершить регистрацию");
         },
     });
 };

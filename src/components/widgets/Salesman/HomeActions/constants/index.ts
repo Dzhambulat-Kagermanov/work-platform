@@ -50,10 +50,10 @@ export const ACTION_CONTENT: (
                       },
                       text: "Остановить",
                   },
-                  {
-                      onClick: () => {},
-                      text: "Редактировать",
-                  },
+                //   {
+                //       onClick: () => {},
+                //       text: "Редактировать",
+                //   },
                   {
                       onClick: () => {},
                       text: "Дублировать",
@@ -65,10 +65,6 @@ export const ACTION_CONTENT: (
                           });
                       },
                       text: "Архивировать",
-                  },
-                  {
-                      onClick: () => {},
-                      text: "Скопировать ссылку",
                   },
               ],
               [

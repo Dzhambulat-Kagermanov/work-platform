@@ -1,9 +1,9 @@
 "use client";
-import { FC, MouseEventHandler } from "react";
+import { FC, MouseEventHandler, useState } from "react";
 import { TClassName } from "@/types";
 import { Button, ModalBase } from "@/components/ui";
 import { cn } from "@/lib";
-import { SALESMAN_ADD_ADVERTISEMENT_MODAL } from "@/constants";
+import { ROUTES, SALESMAN_ADD_ADVERTISEMENT_MODAL } from "@/constants";
 import { Head } from "./Head";
 import { Content } from "./Content";
 import { useRouter } from "next/navigation";
@@ -18,9 +18,15 @@ export type TSalesmanSelectProductProps = {
 
 interface Props extends TClassName {}
 const HomeAddAdvertisementModal: FC<Props> = ({ className }) => {
+    const [selectedItem, setSelectedItem] = useState<number | null>(null);
+
     const router = useRouter();
     const handleClick: MouseEventHandler = () => {
-        router.push("/salesman/create-advertisement");
+        if (!selectedItem) {
+            return;
+        }
+
+        router.push(ROUTES.SALESMAN.CREATE_ADVERTISEMENTS);
     };
     return (
         <ModalBase
@@ -29,12 +35,17 @@ const HomeAddAdvertisementModal: FC<Props> = ({ className }) => {
         >
             <div className={cn(cls.content)}>
                 <Head className={cn(cls.head)} />
-                <Content className={cn(cls.subcontent)} />
+                <Content
+                    className={cn(cls.subcontent)}
+                    selectedItem={selectedItem}
+                    setSelectedItem={setSelectedItem}
+                />
                 <Button
                     theme="fill"
                     className={cn(cls.btn)}
                     onClick={handleClick}
                     wFull
+                    disabled={!selectedItem}
                 >
                     Создать объявление
                 </Button>

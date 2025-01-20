@@ -1,17 +1,30 @@
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export type PaginationValue = Record<"current" | "max", number>;
 
-const usePagination = () => {
-    const params = useSearchParams();
+type PaginationArgs = {
+    maxPages?: number;
+}
 
-    console.log(params);
+const usePagination = (args?: PaginationArgs) => {
+    // const params = useSearchParams();
 
     const [pagination, setPagination] = useState<PaginationValue>({
         current: 1,
-        max: 1,
+        max: args?.maxPages ?? 1,
     });
+
+    useEffect(() => {
+        
+        if (args?.maxPages) {
+            setPagination(prev => ({
+                ...prev,
+                max: args.maxPages ?? 1
+            }));
+        }
+
+    }, [args?.maxPages]);
 
     return {
         pagination,

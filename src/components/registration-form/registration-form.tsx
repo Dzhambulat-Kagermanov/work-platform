@@ -200,9 +200,6 @@ const RegistrationForm: FC<Props> = ({ className, role }) => {
                                             },
                                             {
                                                 onSuccess: () => {
-                                                    toast.success(
-                                                        "Код успешно отправлен",
-                                                    );
                                                     setCodeSendAgain(false);
                                                 },
                                             },

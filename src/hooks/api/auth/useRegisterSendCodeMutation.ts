@@ -1,3 +1,4 @@
+import { serverErrorToastHandler } from "@/handlers";
 import { apiService } from "@/services";
 import { RegisterSendCodeData } from "@/services/AuthService";
 import { useMutation } from "@tanstack/react-query";
@@ -16,10 +17,7 @@ const useRegisterSendCodeMutation = () =>
             toast.success("Код отправлен");
         },
         onError: (e) => {
-            const error = e as AxiosError<{ message: string }>;
-            toast.error(
-                error.response?.data.message ?? "Не удалось отправить код",
-            );
+            serverErrorToastHandler(e, "Не удалось отправить код");
         },
     });
 

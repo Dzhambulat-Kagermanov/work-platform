@@ -7,19 +7,42 @@ import { HomeTable } from "../HomeTable";
 import { Typography } from "@/components/ui";
 import { ArrowIcon } from "@/icons";
 import cls from "./index.module.scss";
+import { useGetAdsListQuery } from "@/hooks/api/seller";
+import { PageLoader } from "@/components/ui/loaders";
+import { PageErrorStub } from "@/components/ui/page-error-stub";
+import { usePagination } from "@/hooks/client";
 
 interface Props extends TClassName {}
 const HomeAdvertisementsContent: FC<Props> = ({ className }) => {
+    const { pagination, setPagination } = usePagination();
+
+    const { data: adveritsements, isLoading, isError } = useGetAdsListQuery();
+
+    if (isLoading) {
+        return <PageLoader />;
+    }
+
+    if (!adveritsements || isError) {
+        return <PageErrorStub />;
+    }
+
+    if (!adveritsements.data.length) {
+        return <PageErrorStub text="Объявления не найдены" />;
+    }
+
     return (
         <HomeTable
-            body={ADVERTISEMENTS.map(({ id, ...other }) => (
-                <AdvertisementsTableBodyItem id={id} key={id} {...other} />
+            body={adveritsements.data.map((item) => (
+                <AdvertisementsTableBodyItem
+                    item={item}
+                    key={`${item.name}${item.id}`}
+                />
             ))}
             head={[
                 <div className={cn(cls.head_advertisements)}>
                     <div className={cn(cls.square)} />
                     <Typography font="Inter-M" size={12}>
-                        Объявления (120)
+                        Объявления {adveritsements?.data.length}
                     </Typography>
                     <ArrowIcon
                         color="var(--grey-600)"
@@ -37,12 +60,7 @@ const HomeAdvertisementsContent: FC<Props> = ({ className }) => {
                 "Выкупы",
                 "CTR",
             ]}
-            pagination={{
-                pages: {
-                    current: 1,
-                    max: 10,
-                },
-            }}
+            pagination={pagination}
             bodyCls={cn(cls.body)}
             bodyRowCls={cn(cls.body_row)}
             className={cn(cls.wrapper, [className])}

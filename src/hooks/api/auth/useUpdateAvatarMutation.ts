@@ -1,7 +1,7 @@
+import { serverErrorToastHandler } from "@/handlers";
 import { apiService } from "@/services";
 import { UpdateProfileAvatarData } from "@/services/AuthService";
 import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 
 const useUpdateAvatarMutation = () => {
@@ -15,11 +15,8 @@ const useUpdateAvatarMutation = () => {
         onSuccess: () => {
             toast.success("Аватар успешно обновлен");
         },
-        onError: (e: Error) => {
-            const error = e as AxiosError<{ message: string }>;
-            toast.error(
-                error.response?.data?.message ?? "Не удалось обновить аватар",
-            );
+        onError: (e) => {
+            serverErrorToastHandler(e, "Не удалось обновить аватар");
         },
     });
 };

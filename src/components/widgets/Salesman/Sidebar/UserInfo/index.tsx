@@ -1,7 +1,6 @@
 import { FC, MouseEventHandler } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
-import Image from "next/image";
 import { Button, Typography } from "@/components/ui";
 import { PlusIcon } from "@/icons";
 import Link from "next/link";
@@ -26,14 +25,19 @@ const UserInfo: FC<Props> = ({ className, sidebarIsExpand }) => {
                 [cls.sidebarIsExpand]: sidebarIsExpand,
             })}
         >
-            <Link href={ROUTES.SALESMAN.PROFILE} className={cn(cls.link)}>
-                <Image
-                    src="/images/stub/avatar.png"
-                    alt="Аватар"
-                    width={45}
-                    height={45}
-                />
-            </Link>
+            {
+                userData?.avatar ?
+                    <Link href={ROUTES.SALESMAN.PROFILE} className={cn(cls.link)}>
+                        <img
+                            src="/images/stub/avatar.png"
+                            alt="Аватар"
+                            width={45}
+                            height={45}
+                        />
+                    </Link> 
+                : 
+                    <></>
+            }
             <div className={cn(cls.content_wrapper)}>
                 <div className={cn(cls.content)}>
                     <Typography font="Inter-SB" size={16} tag="h2">

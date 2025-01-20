@@ -1,6 +1,8 @@
+import { serverErrorToastHandler } from "@/handlers";
 import { apiService } from "@/services";
 import { RegisterVerifyCodeData } from "@/services/AuthService";
 import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const useRegisterVerifyCodeMutation = () =>
     useMutation({
@@ -9,6 +11,12 @@ const useRegisterVerifyCodeMutation = () =>
             const res = await apiService.auth.verifyCode(data);
 
             return res;
+        },
+        onSuccess: () => {
+            toast.success("Код успешно подтвержден");
+        },
+        onError: (e) => {
+            serverErrorToastHandler(e, "Не удалось подтвердить код");
         },
     });
 

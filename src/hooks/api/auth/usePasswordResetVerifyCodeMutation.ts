@@ -1,3 +1,4 @@
+import { serverErrorToastHandler } from "@/handlers";
 import { apiService } from "@/services";
 import { PasswordResetVerifyCodeData } from "@/services/AuthService";
 import { useMutation } from "@tanstack/react-query";
@@ -9,6 +10,9 @@ const usePasswordResetVerifyCodeMutation = () => {
             const res = await apiService.auth.passwordResetVerifyCode(data);
 
             return res;
+        },
+        onError: (e) => {
+            serverErrorToastHandler(e, "Не удалось подтвердить код");
         },
     });
 };

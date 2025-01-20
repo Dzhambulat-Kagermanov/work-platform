@@ -4,35 +4,32 @@ import { TClassName, TState } from "@/types";
 import { cn } from "@/lib";
 import Image from "next/image";
 import { Button, Input, Typography } from "@/components/ui";
-import { TModalStep } from "..";
+import { ProductInfo, TModalStep } from "..";
 import cls from "./index.module.scss";
-import { useModalStore } from "@/store";
-import { SALESMAN_ADD_PRODUCT_MODAL } from "@/constants";
 import { useGetWbProductMutation } from "@/hooks/api/seller";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
-import { WbProduct } from "@/types/api/Product";
+import { useSessionQuery } from "@/hooks/api/auth";
 
 interface Props extends TClassName {
     setStep: TState<TModalStep>;
     art: string;
     setArt: (value: string) => void;
-    setProductInfo: (value: WbProduct | null) => void;
+    setInfo: (value: ProductInfo) => void;
+    closeModal: () => void;
 }
 const AddProduct: FC<Props> = ({
     className,
-    setProductInfo,
+    setInfo,
     setStep,
     setArt,
     art,
+    closeModal,
 }) => {
+    const { data: userData } = useSessionQuery();
+
     const { mutate: getWbProductMutate, isPending: isPendingGet } =
         useGetWbProductMutation();
-
-    const hideModal = useModalStore((state) => state.hideModal);
-    const handleCancelClick: MouseEventHandler = () => {
-        hideModal({ slug: SALESMAN_ADD_PRODUCT_MODAL });
-    };
     const handleConfirmClick: MouseEventHandler = () => {
         getWbProductMutate(
             {
@@ -40,7 +37,10 @@ const AddProduct: FC<Props> = ({
             },
             {
                 onSuccess: (data) => {
-                    setProductInfo(data.product);
+                    setInfo(data);
+                    setStep(
+                        !!userData?.shop ? "addProductConfirmation" : "addShop",
+                    );
                     toast.success("Товар успешно найден");
                 },
                 onError: (e) => {
@@ -81,7 +81,7 @@ const AddProduct: FC<Props> = ({
                 <Button
                     size="mid"
                     disabled={isPendingGet}
-                    onClick={handleCancelClick}
+                    onClick={closeModal}
                     theme="outline"
                     className={cn(cls.btn, [cls.cancel_btn])}
                 >

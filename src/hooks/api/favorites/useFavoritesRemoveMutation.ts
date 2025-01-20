@@ -4,6 +4,7 @@ import { RemoveFromFavoriteData } from "@/services/FavoritesService";
 import { getFavoritesKey } from "./useGetFavoritesQuery";
 import Product from "@/types/api/Product";
 import toast from "react-hot-toast";
+import { serverErrorToastHandler } from "@/handlers";
 const useFavoritesRemoveMutation = () => {
     const queryClient = useQueryClient();
 
@@ -35,6 +36,12 @@ const useFavoritesRemoveMutation = () => {
             );
 
             toast.success("Товар успешно убран из избранного");
+        },
+        onError: (e) => {
+            serverErrorToastHandler(
+                e,
+                "Не удалось удалить товар из избранного",
+            );
         },
     });
 };
