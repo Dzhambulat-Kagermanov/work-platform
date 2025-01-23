@@ -26,7 +26,9 @@ const HomeAddAdvertisementModal: FC<Props> = ({ className }) => {
             return;
         }
 
-        router.push(ROUTES.SALESMAN.CREATE_ADVERTISEMENTS);
+        router.push(
+            `${ROUTES.SALESMAN.CREATE_ADVERTISEMENTS}?selectedWbItem=${selectedItem}`,
+        );
     };
     return (
         <ModalBase

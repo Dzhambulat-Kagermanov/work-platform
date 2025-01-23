@@ -6,9 +6,11 @@ import { Button, Typography } from "@/components/ui";
 import cls from "./index.module.scss";
 import { useModalStore } from "@/store";
 import { SALESMAN_BALANCE_UP_MODAL } from "@/constants";
+import { useGetBalanceQuery } from "@/hooks/api/auth";
 
 interface Props extends TClassName {}
 const Content: FC<Props> = ({ className }) => {
+    const { data: balance } = useGetBalanceQuery();
     const showModal = useModalStore((state) => state.showModal);
     const handleClick: MouseEventHandler = () => {
         showModal({ slug: SALESMAN_BALANCE_UP_MODAL });
@@ -21,7 +23,7 @@ const Content: FC<Props> = ({ className }) => {
                         Доступно
                     </Typography>
                     <Typography font="Inter-SB" size={26}>
-                        550 ₽
+                        {balance?.accessBalance ?? 0} ₽
                     </Typography>
                 </div>
                 <div className={cn(cls.freeze)}>
@@ -29,7 +31,7 @@ const Content: FC<Props> = ({ className }) => {
                         Заморожено в объявлениях
                     </Typography>
                     <Typography font="Inter-SB" size={26}>
-                        3 000 ₽
+                        {balance?.onConfirmation ?? 0} ₽
                     </Typography>
                 </div>
             </div>

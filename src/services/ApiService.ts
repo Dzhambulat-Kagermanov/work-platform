@@ -3,6 +3,7 @@ import CartService from "./CartService";
 import CategoriesService from "./CategoriesService";
 import ChatService from "./ChatService";
 import FavoritesService from "./FavoritesService";
+import OrdersService from "./OrdersService";
 import ProductsService from "./ProductsService";
 import SellerService from "./SellerService";
 import TariffsService from "./TariffsService";
@@ -18,6 +19,7 @@ class ApiService {
     tariffs: TariffsService = new TariffsService();
     seller: SellerService = new SellerService();
     users: UsersService = new UsersService();
+    orders: OrdersService = new OrdersService();
 
     constructor() {
         return this;

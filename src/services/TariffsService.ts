@@ -6,6 +6,13 @@ class TariffsService {
 
         return res.data;
     }
+    async getTariffByRansoms(ransoms: string) {
+        const res = await axios.get<{ tariff: TariffItem }>(
+            `/seller/tariff/${ransoms}`,
+        );
+
+        return res.data;
+    }
 }
 
 export default TariffsService;

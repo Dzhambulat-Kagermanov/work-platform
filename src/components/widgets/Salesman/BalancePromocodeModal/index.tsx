@@ -13,6 +13,7 @@ import { AxiosError } from "axios";
 export type ModalStep = "action" | "success";
 
 interface Props extends TClassName {}
+
 const BalancePromocodeModal: FC<Props> = ({ className }) => {
     const promocodeMutation = usePromocodeMutation();
 

@@ -31,7 +31,13 @@ const Item: FC<Props> = ({
             })}
             onClick={handleClick}
         >
-            <Image src={image} alt="Товар" width={40} height={40} />
+            <img
+                src={image}
+                alt="Товар"
+                width={40}
+                height={40}
+                className="w-10 min-w-10 h-10 object-cover"
+            />
             <div className={cn(cls.content)}>
                 <Typography font="Inter-M" size={16} tag="h2">
                     {title}

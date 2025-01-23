@@ -3,16 +3,37 @@ import { Checkbox, Toggle, Typography } from "@/components/ui";
 import { cn } from "@/lib";
 import cls from "./index.module.scss";
 import { WbProduct } from "@/types/api/Product";
+import { useSellerStore } from "@/store";
+import { addProductIdSelector, productIdsSelector, removeProductIdSelector } from "@/store/useSellerStore";
 
 interface Props {
     columnCls?: string;
     item: WbProduct;
 }
 const ProductsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
+
+    const selectedProducts = useSellerStore(productIdsSelector);
+    const removeSelectedProduct = useSellerStore(removeProductIdSelector);
+    const addSelectedProduct = useSellerStore(addProductIdSelector);
+
+    const checked = selectedProducts.some((el) => el === item.id);
+
+    const handeChange = () => {
+
+        if (checked) {
+            removeSelectedProduct(item.id);
+            return;
+        }
+
+        addSelectedProduct(item.id);
+
+    }
+
+
     return (
         <>
             <td className={cn(cls.column, [cls.product, columnCls])}>
-                <Checkbox className={cn(cls.checkbox)} defaultChecked={false} />
+                <Checkbox onChange={handeChange} checked={checked} className={cn(cls.checkbox)} />
                 <img
                     src={item.images[0] ?? ""}
                     alt="product"

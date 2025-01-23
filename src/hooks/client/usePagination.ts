@@ -5,7 +5,7 @@ export type PaginationValue = Record<"current" | "max", number>;
 
 type PaginationArgs = {
     maxPages?: number;
-}
+};
 
 const usePagination = (args?: PaginationArgs) => {
     // const params = useSearchParams();
@@ -16,14 +16,12 @@ const usePagination = (args?: PaginationArgs) => {
     });
 
     useEffect(() => {
-        
         if (args?.maxPages) {
-            setPagination(prev => ({
+            setPagination((prev) => ({
                 ...prev,
-                max: args.maxPages ?? 1
+                max: args.maxPages ?? 1,
             }));
         }
-
     }, [args?.maxPages]);
 
     return {

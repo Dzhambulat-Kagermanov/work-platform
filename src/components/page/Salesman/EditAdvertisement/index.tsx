@@ -50,9 +50,6 @@ const EditAdvertisementPage: FC<Props> = ({ className }) => {
                     <EditAdvertisementRansomsQnt
                         className={cn(cls.ransoms_qnt)}
                     />
-                    <EditAdvertisementRansomsQnt
-                        className={cn(cls.ransoms_qnt)}
-                    />
                 </div>
                 <EditAdvertisementResult className={cn(cls.result)} />
                 <EditAdvertisementLimitUp className={cn(cls.limits_up_modal)} />

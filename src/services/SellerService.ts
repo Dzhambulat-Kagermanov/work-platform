@@ -13,10 +13,10 @@ export type AdsIdsData = {
 class SellerService {
     async getProducts(query?: string) {
         const res = await axios.get<PaginationData<WbProduct[]>>(
-            `/seller/product${query ?? ""}`,
+            `/seller/products${query ?? ""}`,
         );
 
-        return res.data.data;
+        return res.data;
     }
     async stopProducts(productIds: number[]) {
         const res = await axios.post("/seller/products/stop", {

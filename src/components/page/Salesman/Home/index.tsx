@@ -11,7 +11,6 @@ import {
 import { HomeActions } from "@/components/widgets/Salesman/HomeActions";
 import { HomeAddProductModal } from "@/components/widgets/Salesman/HomeAddProductModal";
 import { HomeProductsContent } from "@/components/widgets/Salesman/HomeProductsContent";
-import { TChatType } from "@/components/widgets/Buyer/DeliverySidebar/types";
 import { HomeRansomsContent } from "@/components/widgets/Salesman/HomeRansomsContent";
 import { HomeAdvertisementsContent } from "@/components/widgets/Salesman/HomeAdvertisementsContent";
 import { HomeAdvertisementArchiveModal } from "@/components/widgets/Salesman/HomeAdvertisementArchiveModal";

@@ -14,7 +14,7 @@ interface Props extends TClassName {
 const Content: FC<Props> = ({ className, setSelectedItem, selectedItem }) => {
     const { data: products, isLoading } = useGetSellerProductsQuery();
 
-    if (!products || !products.length || isLoading) {
+    if (!products || !products.data.length || isLoading) {
         return (
             <div className="flex items-center h-full flex-auto justify-center text-center">
                 {isLoading ? (
@@ -28,7 +28,7 @@ const Content: FC<Props> = ({ className, setSelectedItem, selectedItem }) => {
 
     return (
         <ul className={cn(cls.wrapper, [className])}>
-            {products.map((item, index) => {
+            {products.data.map((item, index) => {
                 return (
                     <Item
                         selectedItem={selectedItem}

@@ -13,7 +13,6 @@ interface Props extends TClassName {
     wrapperCls?: string;
 }
 const Table: FC<Props> = ({ className, active, wrapperCls, transactions }) => {
-
     return (
         <div className={cn(cls.wrapper, [wrapperCls])}>
             <table className={cn(cls.table, [className])}>
@@ -52,73 +51,66 @@ const Table: FC<Props> = ({ className, active, wrapperCls, transactions }) => {
                     </tr>
                 </thead>
                 <tbody className={cn(cls.body)}>
-                    {transactions.map(
-                        (item, index) => {
-                            const isDeposit = item.transaction_type === "deposit";
-                            return (
-                                <tr
-                                    className={cn(cls.row, [], {
-                                        [cls.isReplenishment]:
-                                        isDeposit,
-                                    })}
-                                    key={index}
+                    {transactions.map((item, index) => {
+                        const isDeposit = item.transaction_type === "deposit";
+                        return (
+                            <tr
+                                className={cn(cls.row, [], {
+                                    [cls.isReplenishment]: isDeposit,
+                                })}
+                                key={index}
+                            >
+                                <th
+                                    className={cn(cls.column, [
+                                        cls.transaction_id,
+                                    ])}
                                 >
-                                    <th
-                                        className={cn(cls.column, [
-                                            cls.transaction_id,
-                                        ])}
-                                    >
-                                        <Typography font="Inter-R" size={14}>
-                                            {item.id}
-                                        </Typography>
-                                    </th>
-                                    <th className={cn(cls.column, [cls.sum])}>
-                                        <Typography font="Inter-R" size={14}>
-                                            {isDeposit
-                                                ? `+${item.amount} ₽`
-                                                : `-${item.amount} ₽`}
-                                        </Typography>
-                                    </th>
-                                    <th className={cn(cls.column, [cls.type])}>
-                                        <Typography font="Inter-R" size={14}>
-                                            {isDeposit
-                                                ? "Пополнение"
-                                                : "Вывод средств"}
-                                        </Typography>
-                                    </th>
-                                    <th
-                                        className={cn(cls.column, [
-                                            cls.blue,
-                                            cls.date,
-                                        ])}
-                                    >
-                                        <Typography font="Inter-R" size={14}>
-                                            {dateParserHandler(item.created_at)}
-                                        </Typography>
-                                    </th>
-                                    <th
-                                        className={cn(cls.column, [
-                                            cls.blue,
-                                            cls.description,
-                                        ])}
-                                    >
-                                        <Typography font="Inter-R" size={14}>
-                                            {item.description}
-                                        </Typography>
-                                    </th>
-                                    <th
-                                        className={cn(cls.column, [
-                                            cls.ransom_id,
-                                        ])}
-                                    >
-                                        <Typography font="Inter-R" size={14}>
-                                            {item.ads_id}
-                                        </Typography>
-                                    </th>
-                                </tr>
-                            );
-                        },
-                    )}
+                                    <Typography font="Inter-R" size={14}>
+                                        {item.id}
+                                    </Typography>
+                                </th>
+                                <th className={cn(cls.column, [cls.sum])}>
+                                    <Typography font="Inter-R" size={14}>
+                                        {isDeposit
+                                            ? `+${item.amount} ₽`
+                                            : `-${item.amount} ₽`}
+                                    </Typography>
+                                </th>
+                                <th className={cn(cls.column, [cls.type])}>
+                                    <Typography font="Inter-R" size={14}>
+                                        {isDeposit
+                                            ? "Пополнение"
+                                            : "Вывод средств"}
+                                    </Typography>
+                                </th>
+                                <th
+                                    className={cn(cls.column, [
+                                        cls.blue,
+                                        cls.date,
+                                    ])}
+                                >
+                                    <Typography font="Inter-R" size={14}>
+                                        {dateParserHandler(item.created_at)}
+                                    </Typography>
+                                </th>
+                                <th
+                                    className={cn(cls.column, [
+                                        cls.blue,
+                                        cls.description,
+                                    ])}
+                                >
+                                    <Typography font="Inter-R" size={14}>
+                                        {item.description}
+                                    </Typography>
+                                </th>
+                                <th className={cn(cls.column, [cls.ransom_id])}>
+                                    <Typography font="Inter-R" size={14}>
+                                        {item.ads_id}
+                                    </Typography>
+                                </th>
+                            </tr>
+                        );
+                    })}
                 </tbody>
             </table>
         </div>

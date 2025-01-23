@@ -43,6 +43,9 @@ type Product = {
     price_without_cashback: number;
     reviews: Review[];
     quantity?: number;
+    completed_buybacks_count?: number;
+    cr: number;
+    in_favorite?: number;
 } & Timestamps;
 
 export default Product;

@@ -1,0 +1,41 @@
+import axios from "@/axios";
+
+export type SendOrderMessageData = {
+    id: number;
+};
+
+class OrdersService {
+    async createOrder(id: number) {
+        // TODO: добавить тип ответа
+
+        const res = await axios.get<unknown>(`/buyer/create-order/${id}`);
+
+        return res.data;
+    }
+
+    async getOrders(query?: string) {
+        // TODO: добавить тип ответа
+
+        const res = await axios.get<unknown[]>(`/buyer/orders${query || ""}`);
+
+        return res.data;
+    }
+
+    async getOrder(id: number) {
+        // TODO: добавить тип ответа
+
+        const res = await axios.get<unknown>(`/buyer/orders/${id}`);
+
+        return res.data;
+    }
+
+    async sendOrderMessage({ id, ...data }: SendOrderMessageData) {
+        // TODO: добавить тип ответа
+
+        const res = await axios.post<unknown>(`/buyer/orders/${id}`, data);
+
+        return res.data;
+    }
+}
+
+export default OrdersService;

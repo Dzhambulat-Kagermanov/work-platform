@@ -10,7 +10,6 @@ import cls from "./index.module.scss";
 import { useGetBuyerQuery } from "@/hooks/api/users";
 import { PageLoader } from "@/components/ui/loaders";
 import { useParams } from "next/navigation";
-import { dateParserHandler } from "@/handlers";
 
 interface Props extends TClassName {}
 const BuyerProfilePage: FC<Props> = ({ className }) => {

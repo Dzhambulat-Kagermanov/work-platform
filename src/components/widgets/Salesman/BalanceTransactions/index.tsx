@@ -18,14 +18,12 @@ export type TActiveSwitchItem = "all" | TransactionType;
 
 interface Props extends TClassName {}
 const BalanceTransactions: FC<Props> = ({ className }) => {
-
     const [search, setSearch] = useState("");
     const [searchDebounce, setSearchDebounce] = useState("");
     const timeout = useRef<NodeJS.Timeout>(null);
     const [active, setActive] = useState<TActiveSwitchItem>("all");
 
     const query = () => {
-
         const result = [];
 
         if (active !== "all") {
@@ -38,12 +36,14 @@ const BalanceTransactions: FC<Props> = ({ className }) => {
             result.push(`search=${searchTrim}`);
         }
 
-
         return `${result.length ? "?" : ""}${result.join("&")}`;
+    };
 
-    }
-
-    const { data: transactions, isLoading, isError } = useGetTransactionsQuery(query());
+    const {
+        data: transactions,
+        isLoading,
+        isError,
+    } = useGetTransactionsQuery(query());
 
     const width = useScreen();
 
@@ -90,7 +90,6 @@ const BalanceTransactions: FC<Props> = ({ className }) => {
                             clearTimeout(timeout.current);
                         }
 
-
                         timeout.current = setTimeout(() => {
                             setSearchDebounce(value);
                         }, 600);
@@ -99,12 +98,17 @@ const BalanceTransactions: FC<Props> = ({ className }) => {
                 />
             </div>
             <div className={cn(cls.table_wrapper)}>
-                {
-                    !isLoading && transactions ? 
-                        <Table transactions={transactions} wrapperCls={cn(cls.table)} active={active} />
-                    : 
-                        isError ? <PageErrorStub /> : <PageLoader />
-                }
+                {!isLoading && transactions ? (
+                    <Table
+                        transactions={transactions}
+                        wrapperCls={cn(cls.table)}
+                        active={active}
+                    />
+                ) : isError ? (
+                    <PageErrorStub />
+                ) : (
+                    <PageLoader />
+                )}
                 {/* <Pagination
                     className={cn(cls.pagination)}
                     pagination={pagination}

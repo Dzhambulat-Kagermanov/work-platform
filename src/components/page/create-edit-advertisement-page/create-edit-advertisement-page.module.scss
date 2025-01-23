@@ -33,6 +33,10 @@
     border-bottom: 1px solid var(--white-400);
 }
 
+.statistic {
+    max-width: var(--elements-max-width);
+}
+
 @media screen and (max-width: 500px) {
     .card_wrapper {
         margin-top: 25px;

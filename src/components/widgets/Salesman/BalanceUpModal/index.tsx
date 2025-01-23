@@ -7,11 +7,39 @@ import { cn } from "@/lib";
 import { Action } from "./Action";
 import { Success } from "./Success";
 import cls from "./index.module.scss";
+import { RansomsType } from "@/components/page/Salesman/Balance";
+import { useTariffByRansomsQuery } from "@/hooks/api/tariffs";
+import { ModalLoader } from "@/components/ui/loaders";
 
 export type TModalStep = "action" | "success";
 
-interface Props extends TClassName {}
-const BalanceUpModal: FC<Props> = ({ className }) => {
+interface Props extends TClassName, Pick<RansomsType, "ransoms"> {}
+
+const BalanceUpModalContent: FC<
+    Props & {
+        step: TModalStep;
+        setStep: React.Dispatch<React.SetStateAction<TModalStep>>;
+    }
+> = ({ className, ransoms, step, setStep }) => {
+    const {
+        data: tariff,
+        isLoading,
+        isError,
+    } = useTariffByRansomsQuery(`${ransoms}`);
+    return (
+        <div className={cn(cls.content)}>
+            {isLoading ? (
+                <ModalLoader />
+            ) : step === "action" ? (
+                <Action className={cn(cls.action)} setStep={setStep} />
+            ) : (
+                <Success className={cn(cls.success)} />
+            )}
+        </div>
+    );
+};
+
+const BalanceUpModal: FC<Props> = ({ className, ransoms }) => {
     const [step, setStep] = useState<TModalStep>("action");
 
     return (
@@ -19,13 +47,11 @@ const BalanceUpModal: FC<Props> = ({ className }) => {
             slug={SALESMAN_BALANCE_UP_MODAL}
             className={cn(cls.wrapper, [className])}
         >
-            <div className={cn(cls.content)}>
-                {step === "action" ? (
-                    <Action className={cn(cls.action)} setStep={setStep} />
-                ) : (
-                    <Success className={cn(cls.success)} />
-                )}
-            </div>
+            <BalanceUpModalContent
+                step={step}
+                setStep={setStep}
+                ransoms={ransoms}
+            />
         </ModalBase>
     );
 };

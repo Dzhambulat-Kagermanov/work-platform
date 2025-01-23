@@ -64,7 +64,7 @@ const AddProductConfirmation: FC<Props> = ({
                         alt={info.product.name}
                         width={40}
                         height={40}
-                        className="object-cover"
+                        className="object-cover min-w-10 w-10 h-10"
                     />
                 ) : (
                     <></>

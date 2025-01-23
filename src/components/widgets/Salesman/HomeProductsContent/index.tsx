@@ -19,7 +19,7 @@ const HomeProductsContent: FC<Props> = ({ className }) => {
         return <PageLoader />;
     }
 
-    if (!products || !products.length) {
+    if (!products || !products.data.length) {
         return (
             <div className="p-2 text-center flex items-center justify-center">
                 <p>В данный момент товаров нет</p>
@@ -29,7 +29,7 @@ const HomeProductsContent: FC<Props> = ({ className }) => {
 
     return (
         <HomeTable
-            body={products.map((item, index) => (
+            body={products.data.map((item, index) => (
                 <ProductsTableBodyItem item={item} key={index} />
             ))}
             head={[

@@ -91,6 +91,20 @@ const LinksGroup: FC<Props> = ({
                 linkOnClick={linkOnClick}
                 sidebarIsExpand={sidebarIsExpand}
                 tag="li"
+                text="Тарифы"
+                icon={
+                    <CreditCardIcon
+                        color="var(--grey-200)"
+                        className={cn(cls.icon)}
+                    />
+                }
+                link={ROUTES.SALESMAN.BALANCE.TARIFFS}
+                className={cn(cls.item)}
+            />
+            <Item
+                linkOnClick={linkOnClick}
+                sidebarIsExpand={sidebarIsExpand}
+                tag="li"
                 text="Уведомления"
                 icon={
                     <NotificationIcon

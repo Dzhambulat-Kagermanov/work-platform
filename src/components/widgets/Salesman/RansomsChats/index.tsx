@@ -11,6 +11,7 @@ import { useScreen } from "@/hooks";
 import { XS_BIG } from "@/constants";
 import cls from "./index.module.scss";
 import { ChatStatus } from "@/types/api";
+import { useGetOrdersQuery } from "@/hooks/api/orders";
 
 interface Props extends TClassName {
     activeIdSTUB?: number;
@@ -23,6 +24,10 @@ const RansomsChats: FC<Props> = ({
     setActiveIdSTUB,
     activeIdSTUB,
 }) => {
+    const { data: orders } = useGetOrdersQuery();
+
+    console.log(orders);
+
     const width = useScreen();
     return (
         <section className={cn(cls.wrapper, [className])}>

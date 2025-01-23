@@ -40,14 +40,9 @@ const HomeAdvertisementsContent: FC<Props> = ({ className }) => {
             ))}
             head={[
                 <div className={cn(cls.head_advertisements)}>
-                    <div className={cn(cls.square)} />
                     <Typography font="Inter-M" size={12}>
                         Объявления {adveritsements?.data.length}
                     </Typography>
-                    <ArrowIcon
-                        color="var(--grey-600)"
-                        className={cn(cls.icon)}
-                    />
                 </div>,
                 "Статус",
                 "Товар",
@@ -57,8 +52,7 @@ const HomeAdvertisementsContent: FC<Props> = ({ className }) => {
                 "В сделках",
                 "Просмотры",
                 "В избранном",
-                "Выкупы",
-                "CTR",
+                "CR",
             ]}
             pagination={pagination}
             bodyCls={cn(cls.body)}

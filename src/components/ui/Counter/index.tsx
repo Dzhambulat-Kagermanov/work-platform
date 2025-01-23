@@ -7,22 +7,27 @@ import cls from "./index.module.scss";
 
 interface Props extends TClassName {
     label: string;
-    getValue?: TState<number>;
     labelCls?: string;
+    count: number;
+    setCount: React.Dispatch<React.SetStateAction<number>>;
+    min?: number;
+    max?: number;
 }
-const Counter: FC<Props> = ({ className, label, getValue, labelCls }) => {
-    const [count, setCount] = useState<number>(0);
-
+const Counter: FC<Props> = ({
+    className,
+    label,
+    count,
+    setCount,
+    labelCls,
+    min = 0,
+    max,
+}) => {
     const handleMinus: MouseEventHandler = () => {
-        setCount((cur) => cur - 1);
+        setCount((cur) => (cur - 1 < min ? cur : cur - 1));
     };
     const handlePlus: MouseEventHandler = () => {
-        setCount((cur) => cur + 1);
+        setCount((cur) => (max ? (cur + 1 > max ? cur : cur + 1) : cur + 1));
     };
-
-    useEffect(() => {
-        getValue && getValue(count);
-    }, [count]);
 
     return (
         <div className={cn(cls.wrapper, [className])}>
@@ -38,7 +43,7 @@ const Counter: FC<Props> = ({ className, label, getValue, labelCls }) => {
                 <button
                     onClick={handleMinus}
                     className={cn(cls.btn, [cls.minus])}
-                    disabled={count - 1 < 0}
+                    disabled={count - 1 < min}
                 >
                     <Typography font="Inter-R" size={24} tag="span">
                         -
@@ -49,6 +54,7 @@ const Counter: FC<Props> = ({ className, label, getValue, labelCls }) => {
                 </Typography>
                 <button
                     onClick={handlePlus}
+                    disabled={max ? count + 1 > max : false}
                     className={cn(cls.btn, [cls.plus])}
                 >
                     <Typography font="Inter-R" size={24} tag="span">

@@ -1,9 +1,9 @@
-import { CreateAdvertisementPage } from "@/components/page/Salesman/CreateAdvertisement";
+import { CreateEditAdvertisementPage } from "@/components/page/create-edit-advertisement-page";
 import { FC } from "react";
 
 interface Props {}
 const CreateAdvertisement: FC<Props> = ({}) => {
-    return <CreateAdvertisementPage />;
+    return <CreateEditAdvertisementPage product={null} />;
 };
 
 export default CreateAdvertisement;

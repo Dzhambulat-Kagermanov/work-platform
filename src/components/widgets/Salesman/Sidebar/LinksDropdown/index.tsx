@@ -6,6 +6,8 @@ import { cn } from "@/lib";
 import { Item } from "../Item";
 import cls from "./index.module.scss";
 import { TSalesmanHomePageType } from "../../HomePagesSwitcher";
+import { useGetSellerProductsQuery } from "@/hooks/api/seller";
+import { ROUTES } from "@/constants";
 
 interface Props extends TClassName {
     sidebarIsExpand?: boolean;
@@ -18,6 +20,7 @@ const LinksDropdown: FC<Props> = ({
     homePageType,
     linkOnClick,
 }) => {
+    const { data: products } = useGetSellerProductsQuery();
     return (
         <li className={cn(cls.wrapper, [className])}>
             <Dropdown
@@ -68,10 +71,10 @@ const LinksDropdown: FC<Props> = ({
                                         size={16}
                                         className={cn(cls.additional)}
                                     >
-                                        19
+                                        {products ? products.total : 0}
                                     </Typography>
                                 }
-                                link="/salesman"
+                                link={ROUTES.SALESMAN.MAIN}
                                 text="Товары"
                                 className={cn(cls.item, [cls.subitem])}
                             />
@@ -100,7 +103,7 @@ const LinksDropdown: FC<Props> = ({
                                         5
                                     </Typography>
                                 }
-                                link="/salesman"
+                                link={ROUTES.SALESMAN.MAIN}
                                 text="Объявления"
                                 className={cn(cls.item, [cls.subitem])}
                             />
@@ -129,7 +132,7 @@ const LinksDropdown: FC<Props> = ({
                                         37
                                     </Typography>
                                 }
-                                link="/salesman"
+                                link={ROUTES.SALESMAN.MAIN}
                                 text="Выкупы"
                                 className={cn(cls.item, [cls.subitem])}
                             />

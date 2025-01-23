@@ -11,6 +11,7 @@ export type TActionItemProps = {
     text: string;
     link?: string;
     onClick?: MouseEventHandler;
+    disabled?: boolean;
 };
 
 interface Props extends TClassName {
@@ -45,11 +46,15 @@ const Action: FC<Props> = ({ actionBtnText, actions, className }) => {
             <div className={cn(cls.actions_overlay)}>
                 <div className={cn(cls.actions_wrapper)}>
                     <nav className={cn(cls.actions)}>
-                        {actions.map(({ link, text, onClick }) => {
+                        {actions.map(({ link, text, onClick, disabled }) => {
+                            console.log(disabled);
                             return (
                                 <Typography
                                     other={{
                                         onClick: (e: MouseEvent) => {
+                                            if (disabled) {
+                                                return;
+                                            }
                                             handleLinkClick(e);
                                             onClick && onClick(e);
                                         },
@@ -57,7 +62,7 @@ const Action: FC<Props> = ({ actionBtnText, actions, className }) => {
                                     key={`${text}${link}`}
                                     font="Inter-SB"
                                     size={12}
-                                    className={cn(cls.action)}
+                                    className={cn(cls.action, disabled ? ["cursor-not-allowed opacity-50"] : ["cursor-pointer"])}
                                 >
                                     {link ? (
                                         <Link href={link}>{text}</Link>

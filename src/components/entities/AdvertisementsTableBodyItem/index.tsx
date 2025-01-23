@@ -4,13 +4,32 @@ import { cn } from "@/lib";
 import cls from "./index.module.scss";
 import { Product } from "@/types/api";
 import { dateParserHandler } from "@/handlers";
+import { useSellerStore } from "@/store";
+import { addAdIdSelector, adsIdsSelector, removeAdIdSelector } from "@/store/useSellerStore";
 
 interface Props {
     columnCls?: string;
     item: Product;
 }
 const AdvertisementsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
+
     const [date] = useState(dateParserHandler(item.created_at));
+
+    const selectedAds = useSellerStore(adsIdsSelector);
+    const removeSelectedAd = useSellerStore(removeAdIdSelector);
+    const addSelectedAd = useSellerStore(addAdIdSelector);
+    const checked = selectedAds.some((el) => el === item.id);
+
+    const handeChange = () => {
+
+        if (checked) {
+            removeSelectedAd(item.id);
+            return;
+        }
+
+        addSelectedAd(item.id);
+
+    }
 
     return (
         <>
@@ -19,7 +38,8 @@ const AdvertisementsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
                 <div className={cn(cls.advertisement_content)}>
                     <Checkbox
                         className={cn(cls.checkbox)}
-                        defaultChecked={false}
+                        checked={checked}
+                        onChange={handeChange}
                     />
                     <div className={cn(cls.info)}>
                         <Typography font="Inter-M" tag="h2" size={14}>
@@ -41,13 +61,11 @@ const AdvertisementsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
             {/* ТОВАР */}
             <td className={cn(cls.column, [cls.product, columnCls])}>
                 <div className={cn(cls.product_content)}>
-                    {item.product.images && item.product.images.length ? (
+                    {item?.product?.images && item.product?.images?.length ? (
                         <img
                             src={item.product.images[0]}
                             alt="product"
-                            width={40}
                             className="w-10 h-10 min-w-10 object-cover"
-                            height={40}
                         />
                     ) : (
                         <></>
@@ -57,7 +75,7 @@ const AdvertisementsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
                             {item.name}
                         </Typography>
                         <Typography font="Inter-R" tag="h3" size={14}>
-                            {item.product.wb_id}
+                            {item.product?.wb_id}
                         </Typography>
                     </div>
                 </div>
@@ -77,7 +95,8 @@ const AdvertisementsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
             {/* ВЫКУПЫ */}
             <td className={cn(cls.column, [cls.ransoms, columnCls])}>
                 <Typography font="Inter-R" size={14} tag="h4">
-                    {item.quantity}шт. / {5}шт.
+                    {item.completed_buybacks_count ?? 0}шт. /{" "}
+                    {item.redemption_count ?? 0}шт.
                 </Typography>
             </td>
             {/* БАЛАНС */}
@@ -87,33 +106,27 @@ const AdvertisementsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
                 </Typography>
             </td>
             {/* В ТРАНЗАКЦИЯХ */}
-            {/* <td className={cn(cls.column, [cls.in_transactions, columnCls])}>
+            <td className={cn(cls.column, [cls.in_transactions, columnCls])}>
                 <Typography font="Inter-R" size={14}>
                     {5} P
                 </Typography>
-            </td> */}
+            </td>
             {/* ПРОСМОТРЫ */}
             <td className={cn(cls.column, [cls.view, columnCls])}>
                 <Typography font="Inter-R" size={14} tag="h3">
-                    {item.views_count}
+                    {item.views_count ?? 0}
                 </Typography>
             </td>
             {/* В ИЗБРАННОМ */}
-            {/* <td className={cn(cls.column, [cls.in_favorite, columnCls])}>
+            <td className={cn(cls.column, [cls.in_favorite, columnCls])}>
                 <Typography font="Inter-R" size={14}>
-                    {inFavorite}
-                </Typography>
-            </td> */}
-            {/* ВЫКУПЫ КОЛ-ВО */}
-            <td className={cn(cls.column, [cls.ransoms_qnt, columnCls])}>
-                <Typography font="Inter-R" size={14} tag="h3">
-                    {item.quantity}
+                    {item.in_favorite ?? 0}
                 </Typography>
             </td>
             {/* CTR */}
             <td className={cn(cls.column, [cls.ctr, columnCls])}>
                 <Typography font="Inter-R" size={14} tag="h3">
-                    {5}%
+                    {item.cr ?? 0}%
                 </Typography>
             </td>
         </>
