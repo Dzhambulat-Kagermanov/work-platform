@@ -8,7 +8,6 @@ import toast from "react-hot-toast";
 import { ADS_LIST_QUERY_KEY } from "./useGetAdsListQuery";
 
 const useArchiveAdsMutation = () => {
-
     const resetAdIds = useSellerStore(resetAdIdsSelector);
     const queryClient = useQueryClient();
 
@@ -22,12 +21,12 @@ const useArchiveAdsMutation = () => {
         onSuccess: () => {
             toast.success("Объявления успешно архивированы");
             resetAdIds();
-            queryClient.invalidateQueries({ queryKey: [ADS_LIST_QUERY_KEY] })
+            queryClient.invalidateQueries({ queryKey: [ADS_LIST_QUERY_KEY] });
         },
         onError: (e) => {
             serverErrorToastHandler(e, "Не удалось архивировать объявления");
         },
     });
-}
+};
 
 export default useArchiveAdsMutation;

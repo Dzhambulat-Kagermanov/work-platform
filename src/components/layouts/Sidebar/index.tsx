@@ -22,11 +22,11 @@ const SidebarLayout: FC<Props> = ({ children }) => {
     const isProfilePath = path === ROUTES.SALESMAN.PROFILE;
     const isBuyerProfilePath = pathValidating(
         path,
-        "/salesman/buyer-profile/?",
+        `${ROUTES.SALESMAN.BUYER_PROFILE}/?`,
     );
     const isSalesmanProfilePath = pathValidating(
         path,
-        "/salesman/salesman-profile/?",
+        `${ROUTES.SALESMAN.SALESMAN_PROFILE}/?`,
     );
     const isTariffsPath = path === ROUTES.SALESMAN.BALANCE.TARIFFS;
 

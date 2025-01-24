@@ -8,7 +8,6 @@ import toast from "react-hot-toast";
 import { ADS_LIST_QUERY_KEY } from "./useGetAdsListQuery";
 
 const useDuplicateAdsMutation = () => {
-
     const resetAdIds = useSellerStore(resetAdIdsSelector);
 
     const queryClient = useQueryClient();
@@ -23,12 +22,12 @@ const useDuplicateAdsMutation = () => {
         onSuccess: () => {
             toast.success("Объявления успешно продублированы");
             resetAdIds();
-            queryClient.invalidateQueries({ queryKey: [ADS_LIST_QUERY_KEY] })
+            queryClient.invalidateQueries({ queryKey: [ADS_LIST_QUERY_KEY] });
         },
         onError: (e) => {
             serverErrorToastHandler(e, "Не удалось дублировать объявления");
         },
     });
-}
+};
 
 export default useDuplicateAdsMutation;

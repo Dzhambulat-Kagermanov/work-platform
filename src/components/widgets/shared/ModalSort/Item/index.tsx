@@ -4,12 +4,13 @@ import { TClassName, TTag } from "@/types";
 import { cn } from "@/lib";
 import { Typography } from "@/components/ui";
 import cls from "./index.module.scss";
+import { SortType } from "@/store/useFiltersStore";
+import { SlugSelectItem } from "../constants/slugs";
 
 interface Props extends TClassName, TTag {
     activeSlug: string;
-    setActiveSlug: (value: string) => void;
-    slug: string;
-    onClick?: MouseEventHandler;
+    setActiveSlug: (value: SortType) => void;
+    slug: SlugSelectItem;
 }
 const Item: FC<Props> = ({
     activeSlug,
@@ -17,22 +18,20 @@ const Item: FC<Props> = ({
     className,
     tag = "div",
     slug,
-    onClick,
 }) => {
     const Tag = tag;
     const handleClick = (e: MouseEvent) => {
-        setActiveSlug(slug);
-        onClick && onClick(e);
+        setActiveSlug(slug.value);
     };
     return (
         <Tag
             className={cn(cls.item, [className], {
-                [cls.active]: activeSlug === slug,
+                [cls.active]: activeSlug === slug.value,
             })}
             onClick={handleClick}
         >
             <Typography font="Inter-M" size={14} tag="h4">
-                {slug}
+                {slug.label}
             </Typography>
             <div className={cn(cls.circle)} />
         </Tag>

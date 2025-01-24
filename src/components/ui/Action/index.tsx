@@ -62,7 +62,12 @@ const Action: FC<Props> = ({ actionBtnText, actions, className }) => {
                                     key={`${text}${link}`}
                                     font="Inter-SB"
                                     size={12}
-                                    className={cn(cls.action, disabled ? ["cursor-not-allowed opacity-50"] : ["cursor-pointer"])}
+                                    className={cn(
+                                        cls.action,
+                                        disabled
+                                            ? ["cursor-not-allowed opacity-50"]
+                                            : ["cursor-pointer"],
+                                    )}
                                 >
                                     {link ? (
                                         <Link href={link}>{text}</Link>

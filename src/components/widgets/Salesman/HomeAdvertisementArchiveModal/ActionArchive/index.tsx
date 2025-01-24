@@ -16,17 +16,21 @@ interface Props extends TClassName {
 const ActionArchive: FC<Props> = ({ className, setStep }) => {
     const hideModal = useModalStore((state) => state.hideModal);
 
-    const selectedAds = useSellerStore(adsIdsSelector)
-    const { mutate: archiveAdsMutate, isPending: archiveAdsPending } = useArchiveAdsMutation();
+    const selectedAds = useSellerStore(adsIdsSelector);
+    const { mutate: archiveAdsMutate, isPending: archiveAdsPending } =
+        useArchiveAdsMutation();
 
     const handleConfirm: MouseEventHandler = () => {
-        archiveAdsMutate({
-            ad_ids: selectedAds,
-        }, {
-            onSuccess: () => {
-                setStep("success-archive");
-            }
-        });
+        archiveAdsMutate(
+            {
+                ad_ids: selectedAds,
+            },
+            {
+                onSuccess: () => {
+                    setStep("success-archive");
+                },
+            },
+        );
     };
     const handleCancel: MouseEventHandler = () => {
         hideModal({ slug: SALESMAN_ADVERTISEMENT_ARCHIVE_MODAL });

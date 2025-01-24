@@ -58,10 +58,12 @@ const ForgotForm: FC<Props> = ({ className }) => {
 
                 return errors;
             }}
-            onSubmit={(values, { setSubmitting, setErrors }) => {
+            onSubmit={(values, { setSubmitting }) => {
                 const onSettled = () => {
                     setSubmitting(false);
                 };
+
+                console.log(currentStep);
 
                 if (currentStep === "phone") {
                     passwordResetSendCode(values.phone, {
@@ -197,6 +199,7 @@ const ForgotForm: FC<Props> = ({ className }) => {
                         <></>
                     )}
                     <Button
+                        type="submit"
                         disabled={isSubmitting}
                         theme="fill"
                         size="mid"

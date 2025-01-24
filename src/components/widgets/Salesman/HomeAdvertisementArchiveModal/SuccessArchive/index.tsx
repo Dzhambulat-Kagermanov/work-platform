@@ -8,12 +8,11 @@ import cls from "./index.module.scss";
 import { useModalStore } from "@/store";
 import { SALESMAN_ADVERTISEMENT_ARCHIVE_MODAL } from "@/constants";
 
-interface Props extends TClassName {
-}
+interface Props extends TClassName {}
 const SuccessArchive: FC<Props> = ({ className }) => {
     const hideModal = useModalStore((state) => state.hideModal);
     const handleClick: MouseEventHandler = () => {
-         hideModal({ slug: SALESMAN_ADVERTISEMENT_ARCHIVE_MODAL });
+        hideModal({ slug: SALESMAN_ADVERTISEMENT_ARCHIVE_MODAL });
     };
 
     return (

@@ -1,12 +1,13 @@
 import axios from "@/axios";
 import { queryStringHandler } from "@/handlers";
+import { PaginationData } from "@/types/api";
 import Product from "@/types/api/Product";
 import { QueryItem } from "@/types/client";
 
 class ProductsService {
     async getProductsList(query: QueryItem[]) {
         try {
-            const res = await axios.get<Product[]>(
+            const res = await axios.get<PaginationData<Product[]>>(
                 `/products${queryStringHandler(query)}`,
             );
 

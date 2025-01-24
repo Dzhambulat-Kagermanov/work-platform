@@ -8,11 +8,10 @@ import toast from "react-hot-toast";
 import { ADS_LIST_QUERY_KEY } from "./useGetAdsListQuery";
 
 const useStopAdsMutation = () => {
-
     const resetAdIds = useSellerStore(resetAdIdsSelector);
     const queryClient = useQueryClient();
 
-    return  useMutation({
+    return useMutation({
         mutationKey: ["seller-stop-ads"],
         mutationFn: async (data: AdsIdsData) => {
             const res = await apiService.seller.stopAds(data);
@@ -22,12 +21,15 @@ const useStopAdsMutation = () => {
         onSuccess: () => {
             toast.success("Объявления успешно остановлены");
             resetAdIds();
-            queryClient.invalidateQueries({ queryKey: [ADS_LIST_QUERY_KEY] })
+            queryClient.invalidateQueries({ queryKey: [ADS_LIST_QUERY_KEY] });
         },
         onError: (e) => {
-            serverErrorToastHandler(e, "Не удалось остановить выбранные объявления");
+            serverErrorToastHandler(
+                e,
+                "Не удалось остановить выбранные объявления",
+            );
         },
     });
-}
+};
 
 export default useStopAdsMutation;

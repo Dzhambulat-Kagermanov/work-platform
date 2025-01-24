@@ -54,3 +54,4 @@ const useModalStore = create<ModalStore>()(
 export default useModalStore;
 
 export const showModalSelector = (state: ModalStore) => state.showModal;
+export const hideModalSelector = (state: ModalStore) => state.hideModal;

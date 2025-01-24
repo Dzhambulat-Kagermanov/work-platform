@@ -36,6 +36,10 @@ const RegistrationForm: FC<Props> = ({ className, role }) => {
 
     const { data: roles } = useRolesQuery();
 
+    const hideCodeAgain = () => {
+        setCodeSendAgain(true);
+    };
+
     useEffect(() => {
         (() => {
             if (!userData) {
@@ -183,16 +187,14 @@ const RegistrationForm: FC<Props> = ({ className, role }) => {
                                     className={cn(cls.timer)}
                                 >
                                     Запросить новый код можно через{" "}
-                                    <Timer
-                                        onComplete={() =>
-                                            setCodeSendAgain(true)
-                                        }
-                                    />{" "}
-                                    сек.
+                                    <Timer onComplete={hideCodeAgain} /> сек.
                                 </Typography>
                             ) : (
                                 <button
                                     type="button"
+                                    disabled={
+                                        registerSendCodeMutation.isPending
+                                    }
                                     onClick={() => {
                                         registerSendCodeMutation.mutate(
                                             {

@@ -5,14 +5,17 @@ import cls from "./index.module.scss";
 import { Product } from "@/types/api";
 import { dateParserHandler } from "@/handlers";
 import { useSellerStore } from "@/store";
-import { addAdIdSelector, adsIdsSelector, removeAdIdSelector } from "@/store/useSellerStore";
+import {
+    addAdIdSelector,
+    adsIdsSelector,
+    removeAdIdSelector,
+} from "@/store/useSellerStore";
 
 interface Props {
     columnCls?: string;
     item: Product;
 }
 const AdvertisementsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
-
     const [date] = useState(dateParserHandler(item.created_at));
 
     const selectedAds = useSellerStore(adsIdsSelector);
@@ -21,15 +24,13 @@ const AdvertisementsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
     const checked = selectedAds.some((el) => el === item.id);
 
     const handeChange = () => {
-
         if (checked) {
             removeSelectedAd(item.id);
             return;
         }
 
         addSelectedAd(item.id);
-
-    }
+    };
 
     return (
         <>

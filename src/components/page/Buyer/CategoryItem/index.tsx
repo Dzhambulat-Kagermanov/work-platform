@@ -35,7 +35,7 @@ const CategoryItemPage: FC<Props> = ({
                     subcategory={subcategory}
                 />
             </Container>
-            <FilterModalsLayout />
+            <FilterModalsLayout pageType="category" />
         </main>
     );
 };

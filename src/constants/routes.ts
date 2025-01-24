@@ -24,6 +24,8 @@ export const ROUTES = {
         FORGOT_PASSWORD: "/salesman/forgot-password",
         PROFILE: "/salesman/profile",
         SUPPORT: "/salesman/support",
+        SALESMAN_PROFILE: "/salesman/salesman-profile",
+        BUYER_PROFILE: "/salesman/buyer-profile",
         BALANCE: {
             VALUE: "/salesman/balance",
             TARIFFS: "/salesman/balance/tariffs",

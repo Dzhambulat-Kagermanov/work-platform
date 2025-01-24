@@ -6,7 +6,10 @@ import { cn } from "@/lib";
 import { Item } from "../Item";
 import cls from "./index.module.scss";
 import { TSalesmanHomePageType } from "../../HomePagesSwitcher";
-import { useGetSellerProductsQuery } from "@/hooks/api/seller";
+import {
+    useGetAdsListQuery,
+    useGetSellerProductsQuery,
+} from "@/hooks/api/seller";
 import { ROUTES } from "@/constants";
 
 interface Props extends TClassName {
@@ -21,6 +24,7 @@ const LinksDropdown: FC<Props> = ({
     linkOnClick,
 }) => {
     const { data: products } = useGetSellerProductsQuery();
+    const { data: ads } = useGetAdsListQuery();
     return (
         <li className={cn(cls.wrapper, [className])}>
             <Dropdown
@@ -100,7 +104,7 @@ const LinksDropdown: FC<Props> = ({
                                         size={16}
                                         className={cn(cls.additional)}
                                     >
-                                        5
+                                        {ads?.total ?? 0}
                                     </Typography>
                                 }
                                 link={ROUTES.SALESMAN.MAIN}
