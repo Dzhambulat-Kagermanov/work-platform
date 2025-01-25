@@ -38,7 +38,7 @@ const AccountPageContent: FC<Props> = ({ className }) => {
                 id={user?.id ?? 0}
                 name={user?.name ?? ""}
                 rating={user?.rating ?? 0}
-                registerDate={user ? dateParserHandler(user.created_at) : ""}
+                registerDate={`${user.created_at}`}
                 avatarImage={user?.avatar ?? ""}
                 background="/images/account/head-background.png"
             />
