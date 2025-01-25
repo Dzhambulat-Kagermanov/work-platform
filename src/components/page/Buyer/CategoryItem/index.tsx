@@ -33,6 +33,7 @@ const CategoryItemPage: FC<Props> = ({
                 <CategoryItemProducts
                     className={cn(cls.products)}
                     subcategory={subcategory}
+                    categoryId={categoryId}
                 />
             </Container>
             <FilterModalsLayout pageType="category" />

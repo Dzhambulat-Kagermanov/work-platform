@@ -1,47 +1,53 @@
 import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
-import { PRODUCTS } from "../constants/products";
 import { ProductItem } from "@/components/entities/ProductItem";
 import Link from "next/link";
 import cls from "./index.module.scss";
 import { ROUTES } from "@/constants";
+import { useProductsListByCategoryQuery } from "@/hooks/api/products";
+import { PageLoader } from "@/components/ui/loaders";
+import { PageErrorStub } from "@/components/ui/page-error-stub";
 
-interface Props extends TClassName {}
-const Content: FC<Props> = ({ className }) => {
+interface Props extends TClassName, Record<"categoryId" | "subcategory", string | undefined> {}
+const Content: FC<Props> = ({ className, categoryId, subcategory, }) => {
+
+    const { data: products, isLoading } = useProductsListByCategoryQuery({
+        categoryId,
+        subcategory,
+    });
+
+    if (isLoading) {
+        return <PageLoader />
+    }
+
+    if (!products || !products.data.length) {
+        return <PageErrorStub text="Товары не найдены" />;
+    }
+
     return (
         <ul className={cn(cls.group, [className])}>
-            {PRODUCTS.map(
-                ({
-                    id,
-                    images,
-                    name,
-                    previewImage,
-                    price,
-                    productDescription,
-                    quantities,
-                    salesmanId,
-                    isFavorite,
-                    tooltip,
-                }) => {
-                    return (
-                        <Link
-                            href={`${ROUTES.BUYER.PRODUCTS.ID(String(id))}`}
-                            key={id}
-                        >
-                            <ProductItem
-                                image={previewImage}
-                                name={name}
-                                price={price}
-                                quantities={quantities}
-                                tooltip={tooltip}
-                                tag="li"
-                                wrapperCls={cn(cls.item)}
-                            />
-                        </Link>
-                    );
-                },
-            )}
+            {products.data.map((item, index) => {
+                return (
+                    <Link
+                        href={ROUTES.BUYER.PRODUCTS.ID(item.id.toString())}
+                        key={index}
+                    >
+                        <ProductItem
+                            id={item.id}
+                            headCls={cn(cls.product_head)}
+                            name={item.product.name}
+                            tooltip={""}
+                            quantities={0}
+                            image={""}
+                            price={{
+                                price: Number(item.price_with_cashback),
+                                discount: Number(item.product.discount),
+                            }}
+                        />
+                    </Link>
+                );
+            })}
         </ul>
     );
 };

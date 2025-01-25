@@ -5,22 +5,27 @@ import { cn } from "@/lib";
 import { ProductItem } from "@/components/entities/ProductItem";
 import Link from "next/link";
 import cls from "./index.module.scss";
-import { apiService } from "@/services";
 import { ROUTES } from "@/constants";
-import Product from "@/types/api/Product";
 import { useProductsListQuery } from "@/hooks/api/products";
+import { PageErrorStub } from "@/components/ui/page-error-stub";
+import { PageLoader } from "@/components/ui/loaders";
 
 interface Props extends TClassName {}
 const Products: FC<Props> = ({ className }) => {
-    const { data: products } = useProductsListQuery();
 
-    if (!products || !products.length) {
-        return <></>;
+    const { data: products, isLoading } = useProductsListQuery();
+
+    if (isLoading) {
+        return <PageLoader />
+    }
+
+    if (!products || !products.data.length) {
+        return <PageErrorStub text="Товары не найдены" />;
     }
 
     return (
         <ul className={cn(cls.wrapper, [className])}>
-            {products.map((item, index) => {
+            {products.data.map((item, index) => {
                 return (
                     <Link
                         href={ROUTES.BUYER.PRODUCTS.ID(item.id.toString())}

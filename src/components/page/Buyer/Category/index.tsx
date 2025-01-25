@@ -7,17 +7,17 @@ import { Container, Typography } from "@/components/ui";
 import { CategoryCategories } from "@/components/widgets/Buyer/CategoryCategories";
 import { useCategoriesQuery } from "@/hooks/api/categories";
 import { PageLoader } from "@/components/ui/loaders";
+import { PageErrorStub } from "@/components/ui/page-error-stub";
 
 interface Props extends TClassName {}
 const CategoryPage: FC<Props> = ({ className }) => {
     const { data: categories, isLoading } = useCategoriesQuery();
-
     if (isLoading) {
-        <PageLoader />;
+        return <PageLoader />;
     }
 
     if (!categories || !categories.length) {
-        return <></>;
+        return <PageErrorStub />
     }
 
     return (

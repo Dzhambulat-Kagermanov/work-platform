@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
-import { CATEGORIES } from "./constants/categories";
 import cls from "./index.module.scss";
 import { CategoryItem as CategoryItemType } from "@/types/api";
 import { CategoryItem } from "@/components/entities/CategoryItem";

@@ -51,7 +51,7 @@ const CategoryItemCrumbs: FC<Props> = ({
                   {
                       link:
                           width > SM_BIG
-                              ? "#"
+                              ? `${ROUTES.BUYER.CATEGORY}?categoryId=${categoryId}&subcategory=-1`
                               : `${ROUTES.BUYER.CATEGORY}?categoryId=${categoryId}`,
                       text: category?.category_name ?? "",
                   },

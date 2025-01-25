@@ -8,6 +8,7 @@ import cls from "./index.module.scss";
 import { useFiltersStore, useModalStore } from "@/store";
 import {
     categoryPageFiltersSelector,
+    categoryPageSetFiltersSelector,
     mainPageFiltersSelector,
     mainPageSetFiltersSelector,
 } from "@/store/useFiltersStore";
@@ -22,7 +23,7 @@ const ModalPrice: FC<Props> = ({ className, pageType }) => {
     const mainPageFilters = useFiltersStore(mainPageFiltersSelector);
     const setMainPageFilters = useFiltersStore(mainPageSetFiltersSelector);
     const categoryPageFilters = useFiltersStore(categoryPageFiltersSelector);
-    const setCategoryPageFilters = useFiltersStore(mainPageSetFiltersSelector);
+    const setCategoryPageFilters = useFiltersStore(categoryPageSetFiltersSelector);
 
     const [priceFrom, setPriceFrom] = useState("");
     const [priceTo, setPriceTo] = useState("");

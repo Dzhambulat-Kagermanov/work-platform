@@ -1,8 +1,6 @@
 import { CategoryPage } from "@/components/page/Buyer/Category";
 import { CategoryItemPage } from "@/components/page/Buyer/CategoryItem";
 import { CategorySelectSubcategory } from "@/components/widgets/Buyer/CategorySelectSubcategory";
-import { apiService } from "@/services";
-import { notFound } from "next/navigation";
 import { FC } from "react";
 
 interface Props {
