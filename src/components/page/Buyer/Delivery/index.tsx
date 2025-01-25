@@ -30,7 +30,7 @@ const DeliveryPage: FC<Props> = ({ className, chatType }) => {
                     >
                         Назад
                     </BackButton>
-                    <div className={cn(cls.complex, ["modules-gap-top"])}>
+                    <div className={cn(cls.complex, ["modules-gap-top w-full"])}>
                         <DeliverySidebar
                             className={cn(cls.sidebar)}
                             chatType={chatType}

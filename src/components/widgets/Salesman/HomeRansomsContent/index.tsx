@@ -14,7 +14,7 @@ interface Props extends TClassName {
 const HomeRansomsContent: FC<Props> = ({ className, chatType }) => {
     return (
         <div className={cn(cls.wrapper, [className])}>
-            <div className={cn(cls.complex, ["modules-gap-top"])}>
+            <div className={cn(cls.complex, ["modules-gap-top w-full"])}>
                 <RansomsSidebar
                     className={cn(cls.sidebar)}
                     chatType={chatType}

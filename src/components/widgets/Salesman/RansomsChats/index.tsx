@@ -1,17 +1,17 @@
 "use client";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { TClassName, TState } from "@/types";
 import { cn } from "@/lib";
 import { Input, Typography } from "@/components/ui";
 import Image from "next/image";
 import { SearchIcon } from "@/icons";
-import { Chats } from "./Chats";
 import { MobileSwitcher } from "./MobileSwitcher";
 import { useScreen } from "@/hooks";
 import { XS_BIG } from "@/constants";
 import cls from "./index.module.scss";
 import { ChatStatus } from "@/types/api";
-import { useGetOrdersQuery } from "@/hooks/api/orders";
+import { useDebounce } from "use-debounce";
+import { Chats } from "../../Buyer/DeliveryChats/Chats";
 
 interface Props extends TClassName {
     activeIdSTUB?: number;
@@ -24,9 +24,9 @@ const RansomsChats: FC<Props> = ({
     setActiveIdSTUB,
     activeIdSTUB,
 }) => {
-    const { data: orders } = useGetOrdersQuery();
 
-    console.log(orders);
+    const [search, setSearch] = useState("");
+    const [searchDebounce] = useDebounce(search, 600);
 
     const width = useScreen();
     return (
@@ -51,6 +51,8 @@ const RansomsChats: FC<Props> = ({
                     </div>
                 )}
                 <Input
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
                     inpCls={cn(cls.inp)}
                     contentCls={cn(cls.inp_content)}
                     wrapperCls={cn(cls.inp_wrapper)}
@@ -64,9 +66,12 @@ const RansomsChats: FC<Props> = ({
             </div>
             <div className={cn(cls.chat_wrapper)}>
                 <Chats
+                    chatType={chatType}
+                    search={searchDebounce}
                     className={cn(cls.chat)}
                     activeIdSTUB={activeIdSTUB}
                     setActiveIdSTUB={setActiveIdSTUB}
+
                 />
             </div>
         </section>

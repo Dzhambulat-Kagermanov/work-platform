@@ -21,8 +21,12 @@ class OrdersService {
         return res.data;
     }
 
-    async getOrder(id: number) {
+    async getOrder(id?: number) {
         // TODO: добавить тип ответа
+
+        if (!id) {
+            return null;
+        }
 
         const res = await axios.get<unknown>(`/buyer/orders/${id}`);
 

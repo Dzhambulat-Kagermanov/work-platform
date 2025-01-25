@@ -1,8 +1,14 @@
+import { cn } from "@/lib";
+import { TClassName } from "@/types";
 import React from "react";
 
-const PageLoader: React.FC = () => {
+type PageLoaderProps = {} & TClassName
+
+const PageLoader: React.FC<PageLoaderProps> = ({
+    className
+}) => {
     return (
-        <div className="w-full h-[80dvh] min-h-[250px] flex items-center justify-center">
+        <div className={cn("w-full h-[80dvh] min-h-[250px] flex items-center justify-center", [className])}>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width={48}

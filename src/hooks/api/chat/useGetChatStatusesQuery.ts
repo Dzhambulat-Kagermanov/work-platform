@@ -9,6 +9,8 @@ const useGetChatStatusesQuery = () => {
 
             return res;
         },
+        staleTime: 90_000,
+        retry: 3,
     });
 };
 
