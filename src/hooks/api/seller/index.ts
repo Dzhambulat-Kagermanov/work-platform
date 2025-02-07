@@ -7,3 +7,5 @@ export { default as useGetAdQuery } from "./useGetAdQuery";
 export { default as useStopAdsMutation } from "./useStopAdsMutation";
 export { default as useArchiveAdsMutation } from "./useArchiveAdsMutation";
 export { default as useDuplicateAdsMutation } from "./useDuplicateAdsMutation";
+export { default as useGetWbProductQuery } from "./useGetWbProductQuery";
+export { default as useCreateAdvMutation } from "./useCreateAdvMutation";

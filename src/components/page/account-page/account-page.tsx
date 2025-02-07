@@ -13,7 +13,6 @@ import { MD_BIG, ROUTES } from "@/constants";
 import cls from "./account-page.module.scss";
 import { AuthWrapper } from "@/components/widgets/shared/wrappers";
 import { useGetStatisticsQuery, useSessionQuery } from "@/hooks/api/auth";
-import { dateParserHandler } from "@/handlers";
 import { RoleSlug } from "@/types/api";
 import { AccountStatistic } from "@/components/widgets/account-statistic";
 

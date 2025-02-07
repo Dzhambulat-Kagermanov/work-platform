@@ -1,4 +1,3 @@
-"use client";
 import React, { useState } from "react";
 import { cn } from "@/lib";
 import { Input, Typography } from "@/components/ui";
@@ -10,10 +9,10 @@ import { CreateAdvertisementResult } from "@/components/widgets/Salesman/CreateA
 import cls from "./create-edit-advertisement-page.module.scss";
 import { CreateAdvertisementPublishModal } from "@/components/widgets/Salesman/CreateAdvertisementPublishModal";
 import { CreateAdvertisementCancelModal } from "@/components/widgets/Salesman/CreateAdvertisementCancelModal";
-import { useSearchParams } from "next/navigation";
-import { EditAdvertisementStatistic } from "@/components/widgets/Salesman/EditAdvertisementStatistic";
 import { EditAdvertisementFeature } from "@/components/widgets/Salesman/EditAdvertisementFeature";
 import { WbProduct } from "@/types/api/Product";
+import { useCreateAdvMutation } from "@/hooks/api/seller";
+import toast from "react-hot-toast";
 
 type CreateEditAdvertisementPageProps = {
     currentAdv?: any;
@@ -23,9 +22,8 @@ type CreateEditAdvertisementPageProps = {
 const CreateEditAdvertisementPage: React.FC<
     CreateEditAdvertisementPageProps
 > = ({ currentAdv, product }) => {
-    const searchParams = useSearchParams();
 
-    const selectedWbItem = searchParams.get("selectedWbItem");
+    const { mutate: createAdvMutate, isPending: isAdvCreatePending } = useCreateAdvMutation();
 
     const [title, setTitle] = useState("");
     const [cashback, setCashback] = useState("");
@@ -33,6 +31,38 @@ const CreateEditAdvertisementPage: React.FC<
     const [instructions, setInstructions] = useState("");
     const [criterias, setCriterias] = useState("");
     const [count, setCount] = useState(0);
+    const [onePerUser, setOnePerUser] = useState(false);
+
+    const [resData, setResData] = useState(null);
+
+    const handleSubmit = () => {
+
+        const data = {
+            product_id: product.id,
+            name: title,
+            cashback_percentage: Number(cashback),
+            order_conditions: conditions,
+            redemption_instructions: instructions,
+            review_criteria: criterias,
+            one_per_user: onePerUser,
+            redemption_count: count
+        }
+
+        if (!currentAdv) {
+
+            createAdvMutate(data, {
+                onSuccess: (data) => {
+                    toast.success("Объявление создано");
+
+                    setResData(data);
+                    console.log(data);
+                }
+            });
+
+            return;
+        }
+
+    }
 
     return (
         <div className={cn(cls.main)}>
@@ -44,8 +74,8 @@ const CreateEditAdvertisementPage: React.FC<
                 доступен для заказа
             </Typography>
             <div className={cn(cls.content)}>
-                <CreateAdvertisementCardInfo className={cn(cls.card_wrapper)} />
-                <EditAdvertisementStatistic className={cn(cls.statistic)} />
+                <CreateAdvertisementCardInfo product={product} className={cn(cls.card_wrapper)} />
+                {/* <EditAdvertisementStatistic className={cn(cls.statistic)} /> */}
                 <Input
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
@@ -65,19 +95,25 @@ const CreateEditAdvertisementPage: React.FC<
                     setCriterias={setCriterias}
                     className={cn(cls.edit_area)}
                 />
-                <EditAdvertisementFeature />
+                <EditAdvertisementFeature 
+                    onePerUser={onePerUser}
+                    setOnePerUser={setOnePerUser}
+                />
                 <CreateAdvertisementRansomsQnt
                     count={count}
                     setCount={setCount}
                     className={cn(cls.ransoms_qnt)}
                 />
                 <CreateAdvertisementResult
+                    disabled={isAdvCreatePending}
+                    handleSubmit={handleSubmit}
                     price={800}
                     count={count}
                     cashback={cashback}
                     className={cn(cls.result)}
                 />
                 <CreateAdvertisementPublishModal
+                    submitData={resData}
                     className={cn(cls.publish_modal)}
                 />
                 <CreateAdvertisementCancelModal

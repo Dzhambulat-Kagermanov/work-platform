@@ -14,12 +14,16 @@ interface Props extends TClassName {
     count: number;
     cashback: string;
     price: number;
+    handleSubmit: () => void;
+    disabled: boolean;
 }
 const CreateAdvertisementResult: FC<Props> = ({
     className,
     count,
     cashback,
     price,
+    handleSubmit,
+    disabled,
 }) => {
     const showModal = useModalStore((state) => state.showModal);
     const handleCancel: MouseEventHandler = () => {
@@ -69,7 +73,8 @@ const CreateAdvertisementResult: FC<Props> = ({
                     size="mid"
                     theme="fill"
                     className={cn(cls.btn)}
-                    onClick={handlePublish}
+                    onClick={handleSubmit}
+                    disabled={disabled}
                 >
                     Опубликовать
                 </Button>

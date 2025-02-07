@@ -10,8 +10,10 @@ import { useRouter } from "next/navigation";
 import cls from "./index.module.scss";
 import { useModalStore } from "@/store";
 
-interface Props extends TClassName {}
-const CreateAdvertisementPublishModal: FC<Props> = ({ className }) => {
+interface Props extends TClassName {
+    submitData: any;
+}
+const CreateAdvertisementPublishModal: FC<Props> = ({ className, submitData }) => {
     const hideModal = useModalStore((state) => state.hideModal);
     const router = useRouter();
     const LINK = "www.wbdiscount.pro/99493903020";

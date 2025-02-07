@@ -10,7 +10,24 @@ export type AdsIdsData = {
     ad_ids: number[];
 };
 
+export type CreateAdvData = {
+
+}
+
 class SellerService {
+
+    async createAdv(data: CreateAdvData) {
+        // TODO: добавить типы
+        const res = await axios.post<{ ads: any, user:any }>(`/seller/ads`, data);
+
+        return res.data;
+    }
+    async getSellerWbProduct(id: string) {
+        const res = await axios.get<WbProduct>(`/wb/product/${id}`);
+
+        return res.data;
+    }
+
     async getProducts(query?: string) {
         const res = await axios.get<PaginationData<WbProduct[]>>(
             `/seller/products${query ?? ""}`,
