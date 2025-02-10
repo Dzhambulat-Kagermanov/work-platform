@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 import { GET_CHAT_LIST_QUERY } from "../chat/useGetChatListQuery";
 
 const useCreateOrderMutation = () => {
-
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -22,7 +21,7 @@ const useCreateOrderMutation = () => {
         onError: (e) => {
             serverErrorToastHandler(e, "Не удалось создать заказ");
         },
-    })
+    });
 };
 
 export default useCreateOrderMutation;

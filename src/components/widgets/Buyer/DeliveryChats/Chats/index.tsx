@@ -16,34 +16,39 @@ interface Props extends TClassName {
     chatType: ChatStatus;
     search: string;
 }
-const Chats: FC<Props> = ({ className, activeIdSTUB, setActiveIdSTUB, chatType, search }) => {
-
+const Chats: FC<Props> = ({
+    className,
+    activeIdSTUB,
+    setActiveIdSTUB,
+    chatType,
+    search,
+}) => {
     const query = () => {
-
-        const res = [{
-            key: "status",
-            value: chatType as string,
-        }];
+        const res = [
+            {
+                key: "status",
+                value: chatType as string,
+            },
+        ];
 
         if (search.trim()) {
             res.push({
                 key: "search",
                 value: search.trim(),
-            })
+            });
         }
 
         return res;
-
-    }
+    };
 
     const { data: chats, isLoading } = useGetChatListQuery(query());
 
     if (isLoading) {
-        return <PageLoader className="h-full" />
+        return <PageLoader className="h-full" />;
     }
 
     if (!chats || !chats.length) {
-        return <PageErrorStub text="Чаты не найдены" className="h-full" />
+        return <PageErrorStub text="Чаты не найдены" className="h-full" />;
     }
 
     return (

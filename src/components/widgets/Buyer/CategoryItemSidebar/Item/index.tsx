@@ -24,8 +24,7 @@ const Item: FC<Props> = ({
     return (
         <li
             className={cn(cls.item, [className], {
-                [cls.active]:
-                    !!(subcategory && Number(subcategory) === id),
+                [cls.active]: !!(subcategory && Number(subcategory) === id),
             })}
             key={title}
         >

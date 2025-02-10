@@ -47,7 +47,6 @@ const Action: FC<Props> = ({ actionBtnText, actions, className }) => {
                 <div className={cn(cls.actions_wrapper)}>
                     <nav className={cn(cls.actions)}>
                         {actions.map(({ link, text, onClick, disabled }) => {
-                            console.log(disabled);
                             return (
                                 <Typography
                                     other={{

@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export const GET_CHAT_LIST_QUERY = "chat-list-query";
 
-const useGetChatListQuery = (query: QueryItem[]) => (
+const useGetChatListQuery = (query: QueryItem[]) =>
     useQuery({
         queryKey: [GET_CHAT_LIST_QUERY, query],
         queryFn: async () => {
@@ -13,7 +13,6 @@ const useGetChatListQuery = (query: QueryItem[]) => (
         },
         staleTime: 45_000,
         retry: 3,
-    })
-);
+    });
 
 export default useGetChatListQuery;

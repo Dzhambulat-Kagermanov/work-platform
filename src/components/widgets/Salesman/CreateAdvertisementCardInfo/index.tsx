@@ -9,7 +9,7 @@ import { WbProduct } from "@/types/api/Product";
 interface Props extends TClassName {
     product: WbProduct;
 }
-const CreateAdvertisementCardInfo: FC<Props> = ({ className, product, }) => {
+const CreateAdvertisementCardInfo: FC<Props> = ({ className, product }) => {
     return (
         <section className={cn(cls.wrapper, [className])}>
             <AdvertisementProductCard

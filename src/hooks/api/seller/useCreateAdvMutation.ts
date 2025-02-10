@@ -1,7 +1,7 @@
 import { serverErrorToastHandler } from "@/handlers";
 import { apiService } from "@/services";
 import { CreateAdvData } from "@/services/SellerService";
-import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { ADS_LIST_QUERY_KEY } from "./useGetAdsListQuery";
 
@@ -21,7 +21,7 @@ const useCreateAdvMutation = () => {
         onError: (e) => {
             serverErrorToastHandler(e, "Не удалось создать объявление");
         },
-    })
+    });
 };
 
 export default useCreateAdvMutation;

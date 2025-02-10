@@ -1,19 +1,14 @@
-import { FC, MouseEventHandler } from "react";
+import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import Image from "next/image";
 import { Button, Typography } from "@/components/ui";
-import { useModalStore } from "@/store";
-import { SALESMAN_ADVERTISEMENT_STOP_MODAL } from "@/constants";
 import cls from "./index.module.scss";
 
-interface Props extends TClassName {}
-const FailStop: FC<Props> = ({ className }) => {
-    const hideModal = useModalStore((state) => state.hideModal);
-    const handleClick: MouseEventHandler = () => {
-        hideModal({ slug: SALESMAN_ADVERTISEMENT_STOP_MODAL });
-    };
-
+interface Props extends TClassName {
+    onClick: () => void;
+}
+const FailStop: FC<Props> = ({ className, onClick }) => {
     return (
         <div className={cn(cls.wrapper, [className])}>
             <Image
@@ -33,7 +28,7 @@ const FailStop: FC<Props> = ({ className }) => {
                 theme="fill"
                 className={cn(cls.btn)}
                 wFull
-                onClick={handleClick}
+                onClick={onClick}
             >
                 Понятно
             </Button>

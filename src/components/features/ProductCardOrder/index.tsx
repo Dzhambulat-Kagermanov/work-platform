@@ -18,7 +18,6 @@ const ProductCardOrder: FC<Props> = ({ className, id }) => {
     const userRoleCheck = !userData || userData.role.slug !== "seller";
 
     const handleClick = () => {
-
         if (!userRoleCheck) {
             return;
         }
@@ -26,7 +25,7 @@ const ProductCardOrder: FC<Props> = ({ className, id }) => {
         mutateCreateOrder(id, {
             onSuccess: () => {
                 router.push(ROUTES.BUYER.DELIVERY);
-            }
+            },
         });
     };
     return (

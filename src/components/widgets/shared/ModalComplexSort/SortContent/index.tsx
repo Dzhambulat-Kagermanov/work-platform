@@ -37,7 +37,7 @@ const SortContent: FC<Props> = ({ className, setSort, sort }) => {
                         ),
                         value: slug.value,
                         onClick: () => {
-                            setSort(slug.value)
+                            setSort(slug.value);
                         },
                     };
                 })}

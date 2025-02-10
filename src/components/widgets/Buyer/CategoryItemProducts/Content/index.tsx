@@ -9,16 +9,17 @@ import { useProductsListByCategoryQuery } from "@/hooks/api/products";
 import { PageLoader } from "@/components/ui/loaders";
 import { PageErrorStub } from "@/components/ui/page-error-stub";
 
-interface Props extends TClassName, Record<"categoryId" | "subcategory", string | undefined> {}
-const Content: FC<Props> = ({ className, categoryId, subcategory, }) => {
-
+interface Props
+    extends TClassName,
+        Record<"categoryId" | "subcategory", string | undefined> {}
+const Content: FC<Props> = ({ className, categoryId, subcategory }) => {
     const { data: products, isLoading } = useProductsListByCategoryQuery({
         categoryId,
         subcategory,
     });
 
     if (isLoading) {
-        return <PageLoader />
+        return <PageLoader />;
     }
 
     if (!products || !products.data.length) {

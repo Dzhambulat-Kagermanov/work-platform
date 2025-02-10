@@ -8,7 +8,12 @@ type PageErrorStubProps = {
 
 const PageErrorStub: React.FC<PageErrorStubProps> = ({ text, className }) => {
     return (
-        <div className={cn("text-center flex items-center justify-center w-full h-[75dvh] min-h-[250px]", [className])}>
+        <div
+            className={cn(
+                "text-center flex items-center justify-center w-full h-[75dvh] min-h-[250px]",
+                [className],
+            )}
+        >
             <h3 className="text-lg">
                 {text ?? "Не удалось загрузить страницу."}
             </h3>

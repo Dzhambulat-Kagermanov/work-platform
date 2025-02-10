@@ -22,7 +22,6 @@ const DeliveryChats: FC<Props> = ({
     setActiveIdSTUB,
     activeIdSTUB,
 }) => {
-
     const [search, setSearch] = useState("");
     const [searchDebounce] = useDebounce(search, 600);
 

@@ -8,19 +8,22 @@ import { FC } from "react";
 
 interface Props {}
 const CreateAdvertisement: FC<Props> = ({}) => {
-
     const searchParams = useSearchParams();
 
     const selectedWbItem = searchParams.get("selectedWbItem");
 
-    const { data: product, isLoading, isError } = useGetWbProductQuery(selectedWbItem as string);
+    const {
+        data: product,
+        isLoading,
+        isError,
+    } = useGetWbProductQuery(selectedWbItem as string);
 
     if (isLoading) {
-        return <PageLoader />
+        return <PageLoader />;
     }
 
     if (isError || !product) {
-        return <PageErrorStub />
+        return <PageErrorStub />;
     }
 
     return <CreateEditAdvertisementPage product={product} />;

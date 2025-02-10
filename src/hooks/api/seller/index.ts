@@ -9,3 +9,4 @@ export { default as useArchiveAdsMutation } from "./useArchiveAdsMutation";
 export { default as useDuplicateAdsMutation } from "./useDuplicateAdsMutation";
 export { default as useGetWbProductQuery } from "./useGetWbProductQuery";
 export { default as useCreateAdvMutation } from "./useCreateAdvMutation";
+export { default as useStopProductsMutation } from "./useStopProductsMutation";

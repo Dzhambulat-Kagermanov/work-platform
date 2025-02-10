@@ -39,21 +39,25 @@ const ModalSort: FC<Props> = ({ className, pageType }) => {
     }, []);
 
     return (
-        <ModalBase slug={SORT_MODAL} onClose={() => {
-            if (pageType === "home") {
-                setMainPageFilters({
-                    ...mainPageFilters,
-                    sortBy: sortItem,
-                });
-            }
+        <ModalBase
+            slug={SORT_MODAL}
+            onClose={() => {
+                if (pageType === "home") {
+                    setMainPageFilters({
+                        ...mainPageFilters,
+                        sortBy: sortItem,
+                    });
+                }
 
-            if (pageType === "category") {
-                setCategoryPageFilters({
-                    ...categoryPageFilters,
-                    sortBy: sortItem,
-                });
-            }
-        }} className={cn(cls.wrapper, [className])}>
+                if (pageType === "category") {
+                    setCategoryPageFilters({
+                        ...categoryPageFilters,
+                        sortBy: sortItem,
+                    });
+                }
+            }}
+            className={cn(cls.wrapper, [className])}
+        >
             <div className={cn(cls.content)}>
                 <Typography
                     tag="h2"

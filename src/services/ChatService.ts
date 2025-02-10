@@ -5,7 +5,9 @@ import { QueryItem } from "@/types/client";
 
 class ChatService {
     async getChatList(query: QueryItem[]) {
-        const res = await axios.get(`/buyer/orders${queryStringHandler(query)}`);
+        const res = await axios.get(
+            `/buyer/orders${queryStringHandler(query)}`,
+        );
 
         return res.data;
     }

@@ -27,8 +27,7 @@ const MIN_BETWEEN_PERCENT = 20;
 const MIN_BETWEEN_VALUE = Math.round(MAX / STEPS) * MIN_BETWEEN_PERCENT;
 
 interface Props extends TClassName, Pick<FilterModalsLayoutProps, "pageType"> {}
-const ModalComplexSort: FC<Props> = ({ className, pageType, }) => {
-
+const ModalComplexSort: FC<Props> = ({ className, pageType }) => {
     const hideModal = useModalStore(hideModalSelector);
 
     const mainPageFilters = useFiltersStore(mainPageFiltersSelector);
@@ -43,26 +42,26 @@ const ModalComplexSort: FC<Props> = ({ className, pageType, }) => {
     const [range, setRange] = useState<[number, number]>([MIN, MAX]);
 
     const handleApply = () => {
-
         if (priceFrom && priceTo) {
             const priceFromNumber = Number(priceFrom);
             const priceToNumber = Number(priceTo);
-    
+
             if (isNaN(priceFromNumber) || isNaN(priceToNumber)) {
                 toast.error("Цены введены некорректно");
                 return;
             }
-    
+
             if (
                 priceFromNumber &&
                 priceToNumber &&
                 priceFromNumber > priceToNumber
             ) {
-                toast.error("Начальная цена поиска должна быть меньше конечной");
+                toast.error(
+                    "Начальная цена поиска должна быть меньше конечной",
+                );
                 return;
             }
         }
-
 
         const data = {
             priceFrom: priceFrom.trim(),
@@ -87,11 +86,9 @@ const ModalComplexSort: FC<Props> = ({ className, pageType, }) => {
         }
 
         hideModal({ slug: COMPLEX_SORT_MODAL });
-        
     };
 
     useEffect(() => {
-
         if (pageType === "home") {
             setPriceFrom(mainPageFilters.priceFrom);
             setPriceTo(mainPageFilters.priceTo);
@@ -111,7 +108,6 @@ const ModalComplexSort: FC<Props> = ({ className, pageType, }) => {
             ]);
             setSort(categoryPageFilters.sortBy);
         }
-
     }, []);
 
     return (
@@ -126,7 +122,7 @@ const ModalComplexSort: FC<Props> = ({ className, pageType, }) => {
                     className={cn(cls.subcontent, [cls.sort_content])}
                 />
                 <div className={cn(cls.subcontent, [cls.price_content])}>
-                    <PriceContent 
+                    <PriceContent
                         priceFrom={priceFrom}
                         setPriceFrom={setPriceFrom}
                         priceTo={priceTo}

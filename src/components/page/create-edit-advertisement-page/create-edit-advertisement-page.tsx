@@ -22,8 +22,8 @@ type CreateEditAdvertisementPageProps = {
 const CreateEditAdvertisementPage: React.FC<
     CreateEditAdvertisementPageProps
 > = ({ currentAdv, product }) => {
-
-    const { mutate: createAdvMutate, isPending: isAdvCreatePending } = useCreateAdvMutation();
+    const { mutate: createAdvMutate, isPending: isAdvCreatePending } =
+        useCreateAdvMutation();
 
     const [title, setTitle] = useState("");
     const [cashback, setCashback] = useState("");
@@ -36,7 +36,6 @@ const CreateEditAdvertisementPage: React.FC<
     const [resData, setResData] = useState(null);
 
     const handleSubmit = () => {
-
         const data = {
             product_id: product.id,
             name: title,
@@ -45,24 +44,22 @@ const CreateEditAdvertisementPage: React.FC<
             redemption_instructions: instructions,
             review_criteria: criterias,
             one_per_user: onePerUser,
-            redemption_count: count
-        }
+            redemption_count: count,
+        };
 
         if (!currentAdv) {
-
             createAdvMutate(data, {
                 onSuccess: (data) => {
                     toast.success("Объявление создано");
 
                     setResData(data);
                     console.log(data);
-                }
+                },
             });
 
             return;
         }
-
-    }
+    };
 
     return (
         <div className={cn(cls.main)}>
@@ -74,7 +71,10 @@ const CreateEditAdvertisementPage: React.FC<
                 доступен для заказа
             </Typography>
             <div className={cn(cls.content)}>
-                <CreateAdvertisementCardInfo product={product} className={cn(cls.card_wrapper)} />
+                <CreateAdvertisementCardInfo
+                    product={product}
+                    className={cn(cls.card_wrapper)}
+                />
                 {/* <EditAdvertisementStatistic className={cn(cls.statistic)} /> */}
                 <Input
                     value={title}
@@ -95,7 +95,7 @@ const CreateEditAdvertisementPage: React.FC<
                     setCriterias={setCriterias}
                     className={cn(cls.edit_area)}
                 />
-                <EditAdvertisementFeature 
+                <EditAdvertisementFeature
                     onePerUser={onePerUser}
                     setOnePerUser={setOnePerUser}
                 />

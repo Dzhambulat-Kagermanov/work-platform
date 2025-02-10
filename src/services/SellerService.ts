@@ -10,15 +10,19 @@ export type AdsIdsData = {
     ad_ids: number[];
 };
 
-export type CreateAdvData = {
+export type ProductIdsData = {
+    product_ids: number[];
+};
 
-}
+export type CreateAdvData = {};
 
 class SellerService {
-
     async createAdv(data: CreateAdvData) {
         // TODO: добавить типы
-        const res = await axios.post<{ ads: any, user:any }>(`/seller/ads`, data);
+        const res = await axios.post<{ ads: any; user: any }>(
+            `/seller/ads`,
+            data,
+        );
 
         return res.data;
     }
@@ -35,22 +39,16 @@ class SellerService {
 
         return res.data;
     }
-    async stopProducts(productIds: number[]) {
-        const res = await axios.post("/seller/products/stop", {
-            product_ids: productIds,
-        });
+    async stopProducts(data: ProductIdsData) {
+        const res = await axios.post("/seller/products/stop", data);
         return res;
     }
-    async archiveProducts(productIds: number[]) {
-        const res = await axios.post("/seller/products/archive", {
-            product_ids: productIds,
-        });
+    async archiveProducts(data: ProductIdsData) {
+        const res = await axios.post("/seller/products/archive", data);
         return res;
     }
-    async duplicateProducts(productIds: number[]) {
-        const res = await axios.post("/seller/products/duplicate", {
-            product_ids: productIds,
-        });
+    async duplicateProducts(data: ProductIdsData) {
+        const res = await axios.post("/seller/products/duplicate", data);
         return res;
     }
     async fetchWbProduct(data: AddWbProductData) {

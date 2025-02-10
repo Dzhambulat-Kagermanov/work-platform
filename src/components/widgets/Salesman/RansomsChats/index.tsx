@@ -24,7 +24,6 @@ const RansomsChats: FC<Props> = ({
     setActiveIdSTUB,
     activeIdSTUB,
 }) => {
-
     const [search, setSearch] = useState("");
     const [searchDebounce] = useDebounce(search, 600);
 
@@ -71,7 +70,6 @@ const RansomsChats: FC<Props> = ({
                     className={cn(cls.chat)}
                     activeIdSTUB={activeIdSTUB}
                     setActiveIdSTUB={setActiveIdSTUB}
-
                 />
             </div>
         </section>

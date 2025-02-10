@@ -17,7 +17,7 @@ const CategoryPage: FC<Props> = ({ className }) => {
     }
 
     if (!categories || !categories.length) {
-        return <PageErrorStub />
+        return <PageErrorStub />;
     }
 
     return (

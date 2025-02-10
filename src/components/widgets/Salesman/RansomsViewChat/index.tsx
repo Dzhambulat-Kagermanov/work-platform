@@ -14,20 +14,29 @@ interface Props extends TClassName {
     activeId?: number;
 }
 const RansomsViewChat: FC<Props> = ({ className, setActiveSTUB, activeId }) => {
-    
     const { data: orderInfo, isLoading } = useGetOrderQuery(activeId);
 
     return (
         <section className={cn(cls.wrapper, [className])}>
-            {
-                orderInfo ?
-                    <>
-                        <HeadArea className={cn(cls.head)} setActiveSTUB={setActiveSTUB} />
-                        <MessagesArea className={cn(cls.messages)} />
-                        <ActionsArea className={cn(cls.actions)} />
-                    </> 
-                : isLoading ? <PageLoader className="w-full h-full" /> : <PageErrorStub className="w-full" text={!activeId ? "Чат не выбран" : "Не удалось загрузить чат"} />
-            }
+            {orderInfo ? (
+                <>
+                    <HeadArea
+                        className={cn(cls.head)}
+                        setActiveSTUB={setActiveSTUB}
+                    />
+                    <MessagesArea className={cn(cls.messages)} />
+                    <ActionsArea className={cn(cls.actions)} />
+                </>
+            ) : isLoading ? (
+                <PageLoader className="w-full h-full" />
+            ) : (
+                <PageErrorStub
+                    className="w-full"
+                    text={
+                        !activeId ? "Чат не выбран" : "Не удалось загрузить чат"
+                    }
+                />
+            )}
         </section>
     );
 };

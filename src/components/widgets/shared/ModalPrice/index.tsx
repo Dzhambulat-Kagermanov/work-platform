@@ -23,7 +23,9 @@ const ModalPrice: FC<Props> = ({ className, pageType }) => {
     const mainPageFilters = useFiltersStore(mainPageFiltersSelector);
     const setMainPageFilters = useFiltersStore(mainPageSetFiltersSelector);
     const categoryPageFilters = useFiltersStore(categoryPageFiltersSelector);
-    const setCategoryPageFilters = useFiltersStore(categoryPageSetFiltersSelector);
+    const setCategoryPageFilters = useFiltersStore(
+        categoryPageSetFiltersSelector,
+    );
 
     const [priceFrom, setPriceFrom] = useState("");
     const [priceTo, setPriceTo] = useState("");

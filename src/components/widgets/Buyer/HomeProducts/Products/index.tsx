@@ -12,11 +12,10 @@ import { PageLoader } from "@/components/ui/loaders";
 
 interface Props extends TClassName {}
 const Products: FC<Props> = ({ className }) => {
-
     const { data: products, isLoading } = useProductsListQuery();
 
     if (isLoading) {
-        return <PageLoader />
+        return <PageLoader />;
     }
 
     if (!products || !products.data.length) {
