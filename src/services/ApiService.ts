@@ -7,6 +7,7 @@ import OrdersService from "./OrdersService";
 import ProductsService from "./ProductsService";
 import SellerService from "./SellerService";
 import TariffsService from "./TariffsService";
+import TransactionsService from "./TransactionsService";
 import UsersService from "./UsersService";
 
 class ApiService {
@@ -20,6 +21,7 @@ class ApiService {
     seller: SellerService = new SellerService();
     users: UsersService = new UsersService();
     orders: OrdersService = new OrdersService();
+    transactions: TransactionsService = new TransactionsService();
 
     constructor() {
         return this;

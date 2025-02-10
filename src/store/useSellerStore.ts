@@ -7,15 +7,25 @@ type SellerStore = {} & IdsData &
         "addProductId" | "removeProductId" | "addAdId" | "removeAdId",
         (id: number) => void
     > &
-    Record<"resetStore" | "resetProductIds" | "resetAdIds", () => void>;
+    Record<"resetStore" | "resetProductIds" | "resetAdIds", () => void> &
+    Record<"productsSearch" | "adsSearch", string> &
+    Record<"setProductsSearch" | "setAdsSearch", (value: string) => void>;
 
 const DEFAULT_STATE = {
     productsIds: [],
+    productsSearch: "",
+    adsSearch: "",
     adsIds: [],
 };
 
 const useSellerStore = create<SellerStore>((set, get) => ({
     ...DEFAULT_STATE,
+    setProductsSearch: (productsSearch) => {
+        set({ productsSearch });
+    },
+    setAdsSearch: (adsSearch) => {
+        set({ adsSearch });
+    },
     addProductId: (id) => {
         set({ productsIds: [...get().productsIds, id] });
     },
@@ -57,3 +67,10 @@ export const resetProductIdsSelector = (store: SellerStore) =>
 export const resetAdIdsSelector = (store: SellerStore) => store.resetAdIds;
 export const resetSellerStoreSelector = (store: SellerStore) =>
     store.resetStore;
+
+export const productsSearchSelector = (store: SellerStore) =>
+    store.productsSearch;
+export const adsSearchSelector = (store: SellerStore) => store.adsSearch;
+export const setProductsSearchSelector = (store: SellerStore) =>
+    store.setProductsSearch;
+export const setAdsSearchSelector = (store: SellerStore) => store.setAdsSearch;

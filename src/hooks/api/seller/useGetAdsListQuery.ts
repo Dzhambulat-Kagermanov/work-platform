@@ -1,9 +1,10 @@
 import { apiService } from "@/services";
+import { QueryItem } from "@/types/client";
 import { useQuery } from "@tanstack/react-query";
 
 export const ADS_LIST_QUERY_KEY = "ads-list";
 
-const useGetAdsListQuery = (query?: string) =>
+const useGetAdsListQuery = (query: QueryItem[]) =>
     useQuery({
         queryKey: [ADS_LIST_QUERY_KEY, `ads-list-${query}`],
         queryFn: async () => {

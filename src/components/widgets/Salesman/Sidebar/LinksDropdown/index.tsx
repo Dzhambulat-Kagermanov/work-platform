@@ -127,15 +127,6 @@ const LinksDropdown: FC<Props> = ({
                                         className={cn(cls.icon)}
                                     />
                                 }
-                                additionalInfo={
-                                    <Typography
-                                        font="Inter-SB"
-                                        size={16}
-                                        className={cn(cls.additional)}
-                                    >
-                                        37
-                                    </Typography>
-                                }
                                 link={ROUTES.SALESMAN.MAIN}
                                 text="Выкупы"
                                 className={cn(cls.item, [cls.subitem])}

@@ -30,18 +30,23 @@ const BalanceTransactions: FC<Props> = ({ className }) => {
         const items = [];
 
         if (active !== "all") {
-            items.push(`type=${active}`);
+            items.push({
+                key: "type",
+                value: active,
+            });
         }
 
         const trimBuybackId = buybackId.trim();
 
         if (trimBuybackId) {
-            items.push(`buyback_id=${trimBuybackId}`);
+            items.push({
+                key: "buyback_id",
+                value: trimBuybackId,
+            })
         }
 
-        const result = items.join("&");
 
-        return `${items.length ? "?" : ""}${result}`;
+        return items;
     };
 
     const { data: transactions } = useGetTransactionsQuery(query());
@@ -88,7 +93,6 @@ const BalanceTransactions: FC<Props> = ({ className }) => {
                 <Table
                     wrapperCls={cn(cls.table)}
                     className={cn(cls.table_content)}
-                    active={active}
                     transactions={transactions}
                 />
                 {/* <Pagination

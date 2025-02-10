@@ -29,9 +29,9 @@ const HomePage: FC<Props> = ({ className, homePageType, chatType }) => {
 
     return (
         <div className={cn(cls.main, [className])}>
-            <Typography tag="h1" font="Inter-SB" size={30}>
+            {/* <Typography tag="h1" font="Inter-SB" size={30}>
                 Привет, {userData?.name}
-            </Typography>
+            </Typography> */}
             <HomeCrumbs
                 homePageType={homePageType}
                 className={cn(cls.crumbs)}

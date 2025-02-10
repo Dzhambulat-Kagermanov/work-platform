@@ -35,12 +35,12 @@ const Action: FC<Props> = ({ actionBtnText, actions, className }) => {
             })}
         >
             <button className={cn(cls.actions_btn)} onClick={handleBtnClick}>
-                <Typography font="Inter-SB" size={14}>
+                <Typography className="overflow-hidden text-ellipsis whitespace-nowrap" font="Inter-SB" size={14}>
                     {actionBtnText}
                 </Typography>
                 <ExpandArrowIcon
                     color="var(--grey-200)"
-                    className={cn(cls.icon)}
+                    className={cn(cls.icon, ["min-w-3"])}
                 />
             </button>
             <div className={cn(cls.actions_overlay)}>

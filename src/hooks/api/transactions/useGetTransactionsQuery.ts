@@ -1,11 +1,12 @@
 import { apiService } from "@/services";
+import { QueryItem } from "@/types/client";
 import { useQuery } from "@tanstack/react-query";
 
-const useGetTransactionsQuery = (query?: string) =>
+const useGetTransactionsQuery = (query: QueryItem[]) =>
     useQuery({
         queryKey: ["transactions", `transactions-${query}`],
         queryFn: async () => {
-            const res = await apiService.auth.getTransactions(query);
+            const res = await apiService.transactions.getTransactions(query);
 
             return res;
         },

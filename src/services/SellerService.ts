@@ -1,6 +1,8 @@
 import axios from "@/axios";
+import { queryStringHandler } from "@/handlers";
 import { PaginationData, Shop } from "@/types/api";
 import Product, { WbProduct } from "@/types/api/Product";
+import { QueryItem } from "@/types/client";
 
 export type AddWbProductData = {
     id: string;
@@ -32,9 +34,9 @@ class SellerService {
         return res.data;
     }
 
-    async getProducts(query?: string) {
+    async getProducts(query: QueryItem[]) {
         const res = await axios.get<PaginationData<WbProduct[]>>(
-            `/seller/products${query ?? ""}`,
+            `/seller/products${queryStringHandler(query)}`,
         );
 
         return res.data;
@@ -73,9 +75,9 @@ class SellerService {
 
         return res;
     }
-    async getAdsList(query?: string) {
+    async getAdsList(query: QueryItem[]) {
         const res = await axios.get<PaginationData<Product[]>>(
-            `/seller/ads${query ?? ""}`,
+            `/seller/ads${queryStringHandler(query)}`,
         );
         return res.data;
     }

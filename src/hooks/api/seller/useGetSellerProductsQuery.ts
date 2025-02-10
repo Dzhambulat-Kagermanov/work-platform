@@ -1,11 +1,15 @@
 import { apiService } from "@/services";
+import { QueryItem } from "@/types/client";
 import { useQuery } from "@tanstack/react-query";
 
 export const SELLER_PRODUCTS_QUERY_KEY = "seller-products";
 
-const useGetSellerProductsQuery = (query?: string) => {
+const useGetSellerProductsQuery = (query: QueryItem[]) => {
     return useQuery({
-        queryKey: [SELLER_PRODUCTS_QUERY_KEY],
+        queryKey: [
+            SELLER_PRODUCTS_QUERY_KEY,
+            `${SELLER_PRODUCTS_QUERY_KEY}${query}`,
+        ],
         queryFn: async () => {
             const res = await apiService.seller.getProducts(query);
 

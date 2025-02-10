@@ -2,7 +2,6 @@
 import { FC, useState } from "react";
 import { TClassName, TState } from "@/types";
 import { cn } from "@/lib";
-import { CHATS } from "../constants/chats";
 import { ChatItem } from "@/components/entities/ChatItem";
 import cls from "./index.module.scss";
 import { useGetChatListQuery } from "@/hooks/api/chat";
@@ -24,12 +23,10 @@ const Chats: FC<Props> = ({
     search,
 }) => {
     const query = () => {
-        const res = [
-            {
-                key: "status",
-                value: chatType as string,
-            },
-        ];
+        const res = [{
+            key: "status",
+            value: (chatType ?? "all") as string,
+        }];
 
         if (search.trim()) {
             res.push({

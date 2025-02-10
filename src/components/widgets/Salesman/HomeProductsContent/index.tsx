@@ -8,12 +8,32 @@ import { ProductsTableBodyItem } from "@/components/entities/ProductsTableBodyIt
 import { useGetSellerProductsQuery } from "@/hooks/api/seller";
 import { PageLoader } from "@/components/ui/loaders";
 import { usePagination } from "@/hooks/client";
+import { useSellerStore } from "@/store";
+import { productsSearchSelector } from "@/store/useSellerStore";
+import { QueryItem } from "@/types/client";
 
 interface Props extends TClassName {}
 const HomeProductsContent: FC<Props> = ({ className }) => {
     const { pagination, setPagination } = usePagination();
 
-    const { data: products, isLoading } = useGetSellerProductsQuery();
+    const productsSearch = useSellerStore(productsSearchSelector);
+
+    const query = () => {
+
+        const res = [];
+        
+        if (productsSearch) {
+            res.push({
+                key: "search",
+                value: productsSearch,
+            })
+        }
+
+        return res;
+
+    }
+
+    const { data: products, isLoading } = useGetSellerProductsQuery(query());
 
     if (isLoading) {
         return <PageLoader />;

@@ -23,7 +23,7 @@ const Switcher: FC<Props> = ({ active, setActive, className }) => {
             <SwitcherItem
                 active={active}
                 setActive={setActive}
-                type="replenishments"
+                type="deposit"
                 className={cn(cls.item)}
             >
                 Пополнения
@@ -31,7 +31,7 @@ const Switcher: FC<Props> = ({ active, setActive, className }) => {
             <SwitcherItem
                 active={active}
                 setActive={setActive}
-                type="withdrawals"
+                type="withdraw"
                 className={cn(cls.item)}
             >
                 Выводы

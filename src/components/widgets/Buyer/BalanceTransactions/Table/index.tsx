@@ -2,18 +2,15 @@ import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { Typography } from "@/components/ui";
-import { TRANSACTIONS } from "../constants/transactions";
 import cls from "./index.module.scss";
-import { TActiveSwitchItem } from "..";
 import { Transaction } from "@/types/api";
 import { dateParserHandler } from "@/handlers";
 
 interface Props extends TClassName {
-    active: TActiveSwitchItem;
     wrapperCls?: string;
     transactions?: Transaction[];
 }
-const Table: FC<Props> = ({ className, active, wrapperCls, transactions }) => {
+const Table: FC<Props> = ({ className, wrapperCls, transactions }) => {
     return (
         <div className={cn(cls.wrapper, [wrapperCls])}>
             <table className={cn(cls.table, [className])}>

@@ -1,22 +1,44 @@
 import { FC } from "react";
 import { TClassName } from "@/types";
-import { ADVERTISEMENTS } from "./constants/advertisements";
 import { AdvertisementsTableBodyItem } from "@/components/entities/AdvertisementsTableBodyItem";
 import { cn } from "@/lib";
 import { HomeTable } from "../HomeTable";
 import { Typography } from "@/components/ui";
-import { ArrowIcon } from "@/icons";
 import cls from "./index.module.scss";
 import { useGetAdsListQuery } from "@/hooks/api/seller";
 import { PageLoader } from "@/components/ui/loaders";
 import { PageErrorStub } from "@/components/ui/page-error-stub";
 import { usePagination } from "@/hooks/client";
+import { useSellerStore } from "@/store";
+import { adsSearchSelector } from "@/store/useSellerStore";
 
 interface Props extends TClassName {}
 const HomeAdvertisementsContent: FC<Props> = ({ className }) => {
+    const adsSearch = useSellerStore(adsSearchSelector);
+
+    const query = () => {
+
+        const res = [];
+        
+        if (adsSearch) {
+            res.push({
+                key: "search",
+                value: adsSearch,
+            })
+        }
+
+        return res;
+
+    }
+
+
     const { pagination, setPagination } = usePagination();
 
-    const { data: adveritsements, isLoading, isError } = useGetAdsListQuery();
+    const {
+        data: adveritsements,
+        isLoading,
+        isError,
+    } = useGetAdsListQuery(query());
 
     if (isLoading) {
         return <PageLoader />;
