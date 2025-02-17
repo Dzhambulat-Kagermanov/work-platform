@@ -12,7 +12,8 @@ import { CreateAdvertisementCancelModal } from "@/components/widgets/Salesman/Cr
 import { EditAdvertisementFeature } from "@/components/widgets/Salesman/EditAdvertisementFeature";
 import { WbProduct } from "@/types/api/Product";
 import { useCreateAdvMutation } from "@/hooks/api/seller";
-import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { ROUTES } from "@/constants";
 
 type CreateEditAdvertisementPageProps = {
     currentAdv?: any;
@@ -22,6 +23,7 @@ type CreateEditAdvertisementPageProps = {
 const CreateEditAdvertisementPage: React.FC<
     CreateEditAdvertisementPageProps
 > = ({ currentAdv, product }) => {
+    const router = useRouter();
     const { mutate: createAdvMutate, isPending: isAdvCreatePending } =
         useCreateAdvMutation();
 
@@ -49,11 +51,8 @@ const CreateEditAdvertisementPage: React.FC<
 
         if (!currentAdv) {
             createAdvMutate(data, {
-                onSuccess: (data) => {
-                    toast.success("Объявление создано");
-
-                    setResData(data);
-                    console.log(data);
+                onSuccess: () => {
+                    router.push(`${ROUTES.SALESMAN.MAIN}?homePageType=advertisements`)
                 },
             });
 
@@ -83,6 +82,8 @@ const CreateEditAdvertisementPage: React.FC<
                     label="Название объявления (видите только вы)"
                 />
                 <CreateAdvertisementCashback
+                    price={Number(product.price)}
+                    cashback={cashback}
                     setCashback={setCashback}
                     className={cn(cls.cashback)}
                 />

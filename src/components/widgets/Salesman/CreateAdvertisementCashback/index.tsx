@@ -7,8 +7,10 @@ import cls from "./index.module.scss";
 
 interface Props extends TClassName {
     setCashback: React.Dispatch<React.SetStateAction<string>>;
+    price: number;
+    cashback: string;
 }
-const CreateAdvertisementCashback: FC<Props> = ({ setCashback, className }) => {
+const CreateAdvertisementCashback: FC<Props> = ({ setCashback, price, cashback, className }) => {
     return (
         <section className={cn(cls.wrapper, [className])}>
             <Typography font="Inter-M" size={14} tag="h2">
@@ -42,7 +44,7 @@ const CreateAdvertisementCashback: FC<Props> = ({ setCashback, className }) => {
                 )}
             />
             <Typography font="Inter-M" size={18} tag="h4">
-                Кэшбек для покупателя = <span>0 ₽</span>
+                Кэшбек для покупателя = <span>{(price * (Number(cashback) / 100)).toFixed(2)} ₽</span>
             </Typography>
         </section>
     );

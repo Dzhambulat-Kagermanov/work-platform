@@ -2,6 +2,8 @@ import { create } from "zustand";
 
 type IdsData = Record<"productsIds" | "adsIds", number[]>;
 
+type SellerItemsFilter = "all" | "archived" | "stop" | "active";
+
 type SellerStore = {} & IdsData &
     Record<
         "addProductId" | "removeProductId" | "addAdId" | "removeAdId",

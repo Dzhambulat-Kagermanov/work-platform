@@ -23,8 +23,8 @@ const LinksDropdown: FC<Props> = ({
     homePageType,
     linkOnClick,
 }) => {
-    const { data: products } = useGetSellerProductsQuery();
-    const { data: ads } = useGetAdsListQuery();
+    const { data: products } = useGetSellerProductsQuery([]);
+    const { data: ads } = useGetAdsListQuery([]);
     return (
         <li className={cn(cls.wrapper, [className])}>
             <Dropdown

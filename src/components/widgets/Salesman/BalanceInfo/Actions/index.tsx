@@ -21,7 +21,7 @@ const Actions: FC<Props> = ({ className, ransoms, setRansoms }) => {
 
     return (
         <div className={cn(cls.wrapper, [className])}>
-            <div className={cn(cls.item, [cls.ransoms])}>
+            {/* <div className={cn(cls.item, [cls.ransoms])}>
                 <Typography font="Inter-R" size={12} tag="h3">
                     Выкупы
                 </Typography>
@@ -36,7 +36,7 @@ const Actions: FC<Props> = ({ className, ransoms, setRansoms }) => {
                         <PlusIcon color="var(--grey-100)" />
                     </button>
                 </div>
-            </div>
+            </div> */}
 
             <button
                 className={cn(cls.item, [cls.promocode])}

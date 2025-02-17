@@ -12,7 +12,7 @@ interface Props extends TClassName {
     setSelectedItem: (value: number | null) => void;
 }
 const Content: FC<Props> = ({ className, setSelectedItem, selectedItem }) => {
-    const { data: products, isLoading } = useGetSellerProductsQuery();
+    const { data: products, isLoading } = useGetSellerProductsQuery([]);
 
     if (!products || !products.data.length || isLoading) {
         return (

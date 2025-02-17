@@ -14,7 +14,7 @@ const HomePagesSwitcher: FC<Props> = ({ className }) => {
     const queryParams = useSearchParams();
     const activeSlug = queryParams.get("homePageType") as TSalesmanHomePageType;
 
-    const { data: products } = useGetSellerProductsQuery();
+    const { data: products } = useGetSellerProductsQuery([]);
 
     return (
         <nav className={cn(cls.wrapper, [className])}>

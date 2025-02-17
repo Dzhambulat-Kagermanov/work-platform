@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { ProductItem } from "@/components/entities/ProductItem";
@@ -36,7 +36,7 @@ const Products: FC<Props> = ({ className }) => {
                             name={item.product.name}
                             tooltip={""}
                             quantities={0}
-                            image={""}
+                            image={item.product.images && item.product.images.length ? item.product.images[0] : ""}
                             price={{
                                 price: Number(item.price_with_cashback),
                                 discount: Number(item.product.discount),
