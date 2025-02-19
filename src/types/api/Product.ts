@@ -21,6 +21,11 @@ export type WbProduct = {
     images: string[];
     status: string;
     category: number | string;
+    buybacks_progress?: string;
+    views?: number;
+    completed_buybacks_count?: number;
+    conversion?: number;
+    ads?: unknown[];
 } & Timestamps;
 
 type Product = {

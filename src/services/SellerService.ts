@@ -42,7 +42,7 @@ class SellerService {
         return res.data;
     }
     async stopProducts(data: ProductIdsData) {
-        const res = await axios.post("/seller/products/stop", data);
+        const res = await axios.post("/seller/product/stop", data);
         return res;
     }
     async archiveProducts(data: ProductIdsData) {

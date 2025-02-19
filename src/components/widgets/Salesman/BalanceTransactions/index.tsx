@@ -47,7 +47,7 @@ const BalanceTransactions: FC<Props> = ({ className }) => {
 
         if (searchTrim) {
             result.push({
-                key: "search",
+                key: "buyback_id",
                 value: searchTrim,
             })
         }
