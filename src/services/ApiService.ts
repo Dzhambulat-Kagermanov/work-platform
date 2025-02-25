@@ -1,4 +1,5 @@
 import AuthService from "./AuthService";
+import BalanceService from "./BalanceService";
 import CartService from "./CartService";
 import CategoriesService from "./CategoriesService";
 import ChatService from "./ChatService";
@@ -22,6 +23,7 @@ class ApiService {
     users: UsersService = new UsersService();
     orders: OrdersService = new OrdersService();
     transactions: TransactionsService = new TransactionsService();
+    balance: BalanceService = new BalanceService();
 
     constructor() {
         return this;

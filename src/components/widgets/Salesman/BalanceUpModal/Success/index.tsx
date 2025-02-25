@@ -7,8 +7,10 @@ import { useModalStore } from "@/store";
 import Image from "next/image";
 import cls from "./index.module.scss";
 
-interface Props extends TClassName {}
-const Success: FC<Props> = ({ className }) => {
+interface Props extends TClassName {
+    amount: string;
+}
+const Success: FC<Props> = ({ className, amount }) => {
     const hideModal = useModalStore((state) => state.hideModal);
     const handleConfirm: MouseEventHandler = () => {
         hideModal({ slug: SALESMAN_BALANCE_UP_MODAL });
@@ -28,7 +30,7 @@ const Success: FC<Props> = ({ className }) => {
                         Основной баланс пополнен
                     </Typography>
                     <Typography font="Inter-R" size={14} tag="h3">
-                        Вы пополнили баланс кабинета на 500 ₽
+                        Вы пополнили баланс кабинета на {amount} ₽
                     </Typography>
                 </div>
             </div>

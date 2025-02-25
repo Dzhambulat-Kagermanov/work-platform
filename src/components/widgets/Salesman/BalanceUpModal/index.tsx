@@ -21,19 +21,14 @@ const BalanceUpModalContent: FC<
         setStep: React.Dispatch<React.SetStateAction<TModalStep>>;
     }
 > = ({ className, ransoms, step, setStep }) => {
-    const {
-        data: tariff,
-        isLoading,
-        isError,
-    } = useTariffByRansomsQuery(`${ransoms}`);
+
+    const [amount, setAmount] = useState("");
     return (
         <div className={cn(cls.content)}>
-            {isLoading ? (
-                <ModalLoader />
-            ) : step === "action" ? (
-                <Action className={cn(cls.action)} setStep={setStep} />
+            {step === "action" ? (
+                <Action amount={amount} setAmount={setAmount} className={cn(cls.action)} setStep={setStep} />
             ) : (
-                <Success className={cn(cls.success)} />
+                <Success amount={amount} className={cn(cls.success)} />
             )}
         </div>
     );
