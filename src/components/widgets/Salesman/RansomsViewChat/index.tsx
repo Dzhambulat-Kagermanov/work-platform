@@ -16,12 +16,15 @@ interface Props extends TClassName {
 const RansomsViewChat: FC<Props> = ({ className, setActiveSTUB, activeId }) => {
     const { data: orderInfo, isLoading } = useGetOrderQuery(activeId);
 
+    console.log(orderInfo);
+
     return (
         <section className={cn(cls.wrapper, [className])}>
             {orderInfo ? (
                 <>
                     <HeadArea
                         className={cn(cls.head)}
+                        orderInfo={orderInfo}
                         setActiveSTUB={setActiveSTUB}
                     />
                     <MessagesArea className={cn(cls.messages)} />

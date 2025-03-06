@@ -5,18 +5,26 @@ import { QueryItem } from "@/types/client";
 import { useFiltersStore } from "@/store";
 import { mainPageFiltersSelector } from "@/store/useFiltersStore";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const useProductsListQuery = () => {
-    const router = useRouter();
     const mainPageFilters = useFiltersStore(mainPageFiltersSelector);
 
     const [queryItems, setQueryItems] = useState<QueryItem[]>([]);
 
-    // const pathname = usePathname();
+    const searchParams = useSearchParams();
 
     const queryItemsHandler = () => {
         const res: QueryItem[] = [];
+
+        const search = searchParams.get('search')
+
+        if (search) {
+            res.push({
+                key: "search",
+                value: search,
+            });
+        };
 
         if (mainPageFilters.cashbackFrom) {
             res.push({

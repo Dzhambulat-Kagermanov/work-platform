@@ -22,6 +22,7 @@ type FiltersStore = {
     setMainPageFilters: SetFiltersAction;
     categoryPage: Filters;
     setCategoryPageFilters: SetFiltersAction;
+    setMainPageDefaultFilters: () => void;
 };
 
 const DEFAULT_FILTERS: Filters = {
@@ -40,6 +41,13 @@ const useFiltersStore = create<FiltersStore>((set) => ({
         set({
             mainPage: {
                 ...filters,
+            },
+        });
+    },
+    setMainPageDefaultFilters: () => {
+        set({
+            mainPage: {
+                ...DEFAULT_FILTERS,
             },
         });
     },
@@ -65,3 +73,5 @@ export const categoryPageFiltersSelector = (store: FiltersStore) =>
     store.categoryPage;
 export const categoryPageSetFiltersSelector = (store: FiltersStore) =>
     store.setCategoryPageFilters;
+
+export const mainPageSetDefaultFilters = (store: FiltersStore) => store.setMainPageDefaultFilters;

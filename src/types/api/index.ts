@@ -18,3 +18,4 @@ export type { default as ProfileStatistic } from "./ProfileStatistic";
 export type { default as ChatStatusItem, ChatStatus } from "./ChatStatusItem";
 export type { default as TariffItem } from "./TariffItem";
 export type { default as PaginationData } from "./PaginationData";
+export type { default as Order, Message } from "./Order";

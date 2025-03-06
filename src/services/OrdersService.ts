@@ -1,4 +1,5 @@
 import axios from "@/axios";
+import { Order } from "@/types/api";
 
 export type SendOrderMessageData = {
     id: number;
@@ -8,7 +9,7 @@ class OrdersService {
     async createOrder(id: number) {
         // TODO: добавить тип ответа
 
-        const res = await axios.get<unknown>(`/buyer/create-order/${id}`);
+        const res = await axios.post<Order>(`/buyer/create-order/${id}`);
 
         return res.data;
     }
@@ -28,7 +29,7 @@ class OrdersService {
             return null;
         }
 
-        const res = await axios.get<unknown>(`/buyer/orders/${id}`);
+        const res = await axios.get<Order>(`/buyer/orders/${id}`);
 
         return res.data;
     }

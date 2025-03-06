@@ -29,8 +29,6 @@ const useFavoritesAddMutation = () => {
                 return;
             }
 
-            // TODO: добавить товар в queryClient
-
             queryClient.setQueryData(getFavoritesKey, [
                 ...(oldData ? oldData : []),
             ]);

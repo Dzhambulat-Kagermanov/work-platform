@@ -1,19 +1,23 @@
 import { FC } from "react";
-import { TClassName, TProductItemProps } from "@/types";
+import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { ProductCardAddFavorite } from "@/components/features/ProductCardAddFavorite";
 import { ProductCardOrder } from "@/components/features/ProductCardOrder";
 import cls from "./index.module.scss";
+import { Product } from "@/types/api";
 
-interface Props extends TClassName, Pick<TProductItemProps, "id"> {}
-const ContentActions: FC<Props> = ({ id, className }) => {
+interface Props extends TClassName {
+    product: Product;
+}
+const ContentActions: FC<Props> = ({ product, className }) => {
     return (
         <div className={cn(cls.wrapper, [className])}>
             <ProductCardAddFavorite
-                id={id}
+                id={product.id}
+                isFavorite={!!product.in_favorite}
                 className={cn(cls.btn, [cls.favorite])}
             />
-            <ProductCardOrder id={id} className={cn(cls.btn, [cls.order])} />
+            <ProductCardOrder id={product.id} className={cn(cls.btn, [cls.order])} />
         </div>
     );
 };

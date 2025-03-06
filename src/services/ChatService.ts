@@ -3,9 +3,18 @@ import { queryStringHandler } from "@/handlers";
 import { ChatStatusItem } from "@/types/api";
 import { QueryItem } from "@/types/client";
 
+type ChatListItem = {
+    id: number;
+    ad_name: string;
+    avatar: string | null;
+    last_message: string;
+    no_read_messages_count: number;
+    online: boolean;
+}
+
 class ChatService {
     async getChatList(query: QueryItem[]) {
-        const res = await axios.get(
+        const res = await axios.get<ChatListItem[]>(
             `/buyer/orders${queryStringHandler(query)}`,
         );
 

@@ -33,7 +33,7 @@ const Content: FC<Props> = memo(({ className, product }) => {
             ) : (
                 <></>
             )}
-            <ContentActions id={product.id} className={cn(cls.actions)} />
+            <ContentActions product={product} className={cn(cls.actions)} />
             {width > SM_MID && (
                 <ContentShop
                     salesmanId={product.user_id}

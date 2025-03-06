@@ -50,21 +50,21 @@ const Chats: FC<Props> = ({
 
     return (
         <ul className={cn(cls.wrapper, [className])}>
-            {/* {chats.map(
+            {chats.map(
                 (item) => {
                     return (
                         <ChatItem
+                            key={item.id}
                             tag="li"
                             setIsActive={setActiveIdSTUB}
-                            newMessagesQnt={newMessagesQnt}
-                            isActive={activeIdSTUB === id}
-                            key={id}
-                            avatar={avatar}
-                            isOnline={isOnline}
-                            id={id}
-                            lastOnlineTime={lastOnlineTime}
-                            productName={productName}
-                            lastMessage={lastMessage}
+                            newMessagesQnt={item.no_read_messages_count}
+                            isActive={activeIdSTUB === item.id}
+                            avatar={item.avatar ?? ""}
+                            isOnline={item.online}
+                            id={item.id}
+                            lastOnlineTime={""}
+                            productName={item.ad_name}
+                            lastMessage={item.last_message}
                             className={cn(cls.item)}
                             footerCls={cn(cls.item_footer)}
                             headCls={cn(cls.item_head)}
@@ -72,7 +72,7 @@ const Chats: FC<Props> = ({
                         />
                     );
                 },
-            )} */}
+            )}
         </ul>
     );
 };

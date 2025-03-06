@@ -2,7 +2,6 @@ import { FC } from "react";
 import cls from "./index.module.scss";
 import { TChatPlaqueProps, TClassName } from "@/types";
 import { cn } from "@/lib";
-import Image from "next/image";
 
 interface Props
     extends TClassName,
@@ -14,7 +13,12 @@ const ChatAvatarItem: FC<Props> = ({ isOnline, className, avatar }) => {
                 [cls.isOnline]: isOnline,
             })}
         >
-            <Image src={avatar} alt="Аватар" width={48} height={48} />
+            {
+                avatar ? 
+                    <img src={avatar} alt="Аватар" width={48} height={48} />
+                : 
+                    <></>
+            }
         </div>
     );
 };
