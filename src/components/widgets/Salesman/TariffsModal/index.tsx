@@ -8,11 +8,15 @@ import Image from "next/image";
 import { useModalStore } from "@/store";
 import cls from "./index.module.scss";
 import { TariffItem } from "@/types/api";
+import { useBuyTariffBuybacksMutation } from "@/hooks/api/tariffs";
 
 interface Props extends TClassName {
     tariff: TariffItem;
 }
 const TariffsModal: FC<Props> = ({ className, tariff }) => {
+
+    const { mutate, isPending } = useBuyTariffBuybacksMutation();
+
     const slug = `${SALESMAN_TARIFFS_MODAL}${tariff.id}`;
 
     const [count, setCount] = useState(tariff.buybacks_count);
@@ -20,7 +24,13 @@ const TariffsModal: FC<Props> = ({ className, tariff }) => {
 
     const hideModal = useModalStore((state) => state.hideModal);
     const handlePay: MouseEventHandler = () => {
-        hideModal({ slug });
+        mutate({
+            amount: count,
+        }, {
+            onSuccess: () => {
+                hideModal({ slug });
+            }
+        });
     };
     const handleCancel: MouseEventHandler = () => {
         hideModal({ slug });
@@ -57,6 +67,7 @@ const TariffsModal: FC<Props> = ({ className, tariff }) => {
                         theme="outline"
                         className={cn(cls.btn)}
                         onClick={handleCancel}
+                        disabled={isPending}
                     >
                         Отмена
                     </Button>
@@ -65,6 +76,7 @@ const TariffsModal: FC<Props> = ({ className, tariff }) => {
                         className={cn(cls.btn)}
                         theme="fill"
                         onClick={handlePay}
+                        disabled={isPending}
                     >
                         Оплатить
                     </Button>
