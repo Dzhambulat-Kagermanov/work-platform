@@ -31,7 +31,6 @@ const Gallery: FC<Props> = memo(({ className, images }) => {
             const childrenHeight =
                 //@ts-ignore
                 scrollbarRef.current.children[0].offsetHeight;
-            console.log(childrenHeight);
             const translateOffset =
                 (parentHeight - childrenHeight * images.length) /
                     (images.length - 1) +

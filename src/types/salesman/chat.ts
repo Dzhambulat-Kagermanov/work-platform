@@ -1,3 +1,4 @@
+import { Message } from "../api";
 import {
     TChatMessageConfirmActionProps,
     TChatMessageFailActionProps,
@@ -18,14 +19,6 @@ export type TChatMessageUserProps = {
 };
 export type TViewChatMessageGroupProps = {
     date: string;
-    messages: (
-        | TChatMessageUserUploadedFile
-        | TChatMessageFailActionProps
-        | TChatMessageReviewProps
-        | TChatMessageSalesmanProps
-        | TChatMessageUserProps
-        | TChatMessageReviewCreatingProps
-        | TChatMessageConfirmActionProps
-    )[];
+    messages: Message[];
 };
 ///////////////////////////////////////////////

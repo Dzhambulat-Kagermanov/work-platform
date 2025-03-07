@@ -63,8 +63,6 @@ const ForgotForm: FC<Props> = ({ className }) => {
                     setSubmitting(false);
                 };
 
-                console.log(currentStep);
-
                 if (currentStep === "phone") {
                     passwordResetSendCode(values.phone, {
                         onSuccess: () => {

@@ -13,7 +13,7 @@ const DeliveryViewChat: FC<Props> = ({ className, setActiveSTUB }) => {
     return (
         <section className={cn(cls.wrapper, [className])}>
             <HeadArea className={cn(cls.head)} setActiveSTUB={setActiveSTUB} />
-            <MessagesArea className={cn(cls.messages)} />
+            {/* <MessagesArea className={cn(cls.messages)} /> */}
             <ActionsArea className={cn(cls.actions)} />
         </section>
     );

@@ -1,17 +1,23 @@
 "use client";
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import Image from "next/image";
 import { Typography } from "@/components/ui";
 import { RansomsViewNotification } from "../../RansomsViewNotification";
 import { MessagesAreaGroup } from "../MessagesAreaGroup";
-import { MESSAGES, USER_IS_ONLINE } from "../constants/messages";
 import { RansomsReviewModal } from "../../RansomsReviewModal";
 import cls from "./index.module.scss";
+import { Message } from "@/types/api";
+import { dateParserHandler } from "@/handlers";
 
-interface Props extends TClassName {}
-const MessagesArea: FC<Props> = ({ className }) => {
+interface Props extends TClassName {
+    messages: Message[];
+}
+const MessagesArea: FC<Props> = ({ className, messages }) => {
+
+    const [messagesGroup, setMessagesGroup] = useState<{ date: string, messages: Message[] }[]>([]);
+
     const notificationRef = useRef<HTMLDivElement>(null);
     const groupOverlayRef = useRef<HTMLDivElement>(null);
 
@@ -23,9 +29,41 @@ const MessagesArea: FC<Props> = ({ className }) => {
         }
     }, []);
 
+    useEffect(() => {
+        
+        if (messages) {
+            const result: { [key: string]: Message[] } = {};
+
+            for (let i = 0; i < messages.length; i++) {
+                const message = messages[i];
+
+                const date = dateParserHandler(message.created_at);
+
+                if (result[date]) {
+                    result[date].push(message);
+                    continue;
+                }
+
+                result[date] = [message];
+
+            }
+
+            const items = Object.entries(result).map((el) => {
+                return {
+                    date: el[0],
+                    messages: el[1],
+                }
+            }); 
+
+            setMessagesGroup(items);
+
+        }
+
+    }, [messages]);
+
     return (
         <div className={cn(cls.wrapper, [className])}>
-            {MESSAGES.length ? (
+            {messagesGroup.length ? (
                 <>
                     <RansomsViewNotification
                         className={cn(cls.notification)}
@@ -37,14 +75,14 @@ const MessagesArea: FC<Props> = ({ className }) => {
                         className={cn(cls.messages_group_overlay)}
                     >
                         <div className={cn(cls.messages_group_wrapper)}>
-                            {MESSAGES.map(({ date, messages }) => {
+                            {messagesGroup.map((item, index) => {
                                 return (
                                     <MessagesAreaGroup
                                         className={cn(cls.messages_group)}
-                                        userIsOnline={USER_IS_ONLINE}
-                                        date={date}
-                                        messages={messages}
-                                        key={date}
+                                        userIsOnline={false}
+                                        date={item.date}
+                                        messages={item.messages}
+                                        key={index}
                                     />
                                 );
                             })}
