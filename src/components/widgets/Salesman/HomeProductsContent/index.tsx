@@ -19,19 +19,17 @@ const HomeProductsContent: FC<Props> = ({ className }) => {
     const productsSearch = useSellerStore(productsSearchSelector);
 
     const query = () => {
-
         const res = [];
-        
+
         if (productsSearch) {
             res.push({
                 key: "search",
                 value: productsSearch,
-            })
+            });
         }
 
         return res;
-
-    }
+    };
 
     const { data: products, isLoading } = useGetSellerProductsQuery(query());
 

@@ -8,6 +8,8 @@ import Image from "next/image";
 import cls from "./index.module.scss";
 import { useSessionQuery } from "@/hooks/api/auth";
 import { useAddWbProductMutation } from "@/hooks/api/seller";
+import { useQueryClient } from "@tanstack/react-query";
+import { SELLER_PRODUCTS_QUERY_KEY } from "@/hooks/api/seller/useGetSellerProductsQuery";
 
 interface Props extends TClassName {
     setStep: TState<TModalStep>;
@@ -23,6 +25,8 @@ const AddProductConfirmation: FC<Props> = ({
     const { data: userData } = useSessionQuery();
     const { mutate: addWbProductMutate, isPending } = useAddWbProductMutation();
 
+    const queryClient = useQueryClient();
+
     const handleBackClick: MouseEventHandler = () => {
         setStep(!userData?.shop ? "addShop" : "addProduct");
     };
@@ -33,6 +37,9 @@ const AddProductConfirmation: FC<Props> = ({
             },
             {
                 onSuccess: () => {
+                    queryClient.invalidateQueries({
+                        queryKey: [SELLER_PRODUCTS_QUERY_KEY],
+                    });
                     closeModal();
                 },
             },
