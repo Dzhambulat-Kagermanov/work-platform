@@ -33,6 +33,7 @@ type Product = {
     name: string;
     cashback_percentage: string;
     price_with_cashback: string;
+    price_without_cashback: number;
     order_conditions: string;
     redemption_instructions: string;
     review_criteria: string;
@@ -45,7 +46,6 @@ type Product = {
     user_id: number;
     product: WbProduct;
     shop: Shop;
-    price_without_cashback: number;
     reviews: Review[];
     quantity?: number;
     completed_buybacks_count?: number;

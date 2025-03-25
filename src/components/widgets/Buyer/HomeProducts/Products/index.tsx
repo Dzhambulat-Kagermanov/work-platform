@@ -36,9 +36,19 @@ const Products: FC<Props> = ({ className }) => {
                             name={item.product.name}
                             tooltip={""}
                             quantities={0}
-                            image={item.product.images && item.product.images.length ? item.product.images[0] : ""}
+                            image={
+                                item.product.images &&
+                                item.product.images.length
+                                    ? item.product.images[0]
+                                    : ""
+                            }
                             price={{
-                                price: Number(item.price_with_cashback),
+                                priceWithCashBack: Number(
+                                    item.price_with_cashback,
+                                ),
+                                priceWithoutCashBack: Number(
+                                    item.price_without_cashback,
+                                ),
                                 discount: Number(item.product.discount),
                             }}
                         />

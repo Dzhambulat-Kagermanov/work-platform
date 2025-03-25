@@ -15,7 +15,8 @@ import { useSessionQuery } from "@/hooks/api/auth";
 interface Props extends TTag {
     id: number;
     price: {
-        price: number;
+        priceWithCashBack: number;
+        priceWithoutCashBack: number;
         discount?: number;
     };
     tooltip?: string;
@@ -42,7 +43,8 @@ const ProductItem: FC<Props> = memo(
     }) => {
         const Tag = tag;
         const disc = price.discount;
-        const prc = price.price;
+        const priceWithCashBack = price.priceWithCashBack;
+        const priceWithoutCashBack = price.priceWithoutCashBack;
 
         const { data: userData } = useSessionQuery();
 
@@ -105,10 +107,7 @@ const ProductItem: FC<Props> = memo(
                 <div className={cn(cls.content, [contentCls])}>
                     <div className={cn(cls.price)}>
                         <Typography font="Inter-SB" size={18} tag="h5">
-                            {!!disc
-                                ? Math.round(prc - (prc / 100) * disc)
-                                : prc}{" "}
-                            ₽
+                            {Math.round(priceWithCashBack)} ₽
                         </Typography>
                         {tooltip && (
                             <div
@@ -121,22 +120,22 @@ const ProductItem: FC<Props> = memo(
                                 <HelpIcon color="var(--grey-300)" />
                             </div>
                         )}
-                        {!!disc && (
+                        {priceWithoutCashBack && (
                             <Typography font="Inter-R" size={14} tag="h6">
-                                {Math.round(prc)} ₽
+                                {Math.round(priceWithoutCashBack)} ₽
                             </Typography>
                         )}
                     </div>
                     <Typography font="Inter-R" size={14} tag="h3">
                         {name}
                     </Typography>
-                    {quantities && (
+                    {quantities ? (
                         <Typography
                             font="Inter-R"
                             size={14}
                             tag="h4"
                         >{`Осталось: ${quantities} шт`}</Typography>
-                    )}
+                    ) : null}
                 </div>
             </Tag>
         );
