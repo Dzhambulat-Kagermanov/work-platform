@@ -10,11 +10,13 @@ import { RansomsReviewModal } from "../../RansomsReviewModal"
 import cls from "./index.module.scss"
 import { Message } from "@/types/api"
 import { dateParserHandler } from "@/handlers"
+import Chat from '@/types/api/Chat'
 
 interface Props extends TClassName {
     messages: Message[]
+    status: Chat['status']
 }
-const MessagesArea: FC<Props> = ({ className, messages }) => {
+const MessagesArea: FC<Props> = ({ className, messages, status }) => {
 
     const [messagesGroup, setMessagesGroup] = useState<{ date: string, messages: Message[] }[]>([])
 
