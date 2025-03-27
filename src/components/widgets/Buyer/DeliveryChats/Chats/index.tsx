@@ -54,7 +54,6 @@ const Chats: FC<Props> = ({
         <ul className={cn(cls.wrapper, [className])}>
             {chats.map(
                 (item) => {
-                    console.log(item)
                     return (
                         <ChatItem
                             key={item.id}
