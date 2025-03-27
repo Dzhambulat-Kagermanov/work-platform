@@ -1,16 +1,11 @@
 import axios from "@/axios";
 import { queryStringHandler } from "@/handlers";
-import { ChatStatusItem } from "@/types/api";
+import { ChatStatusItem, Shop, User } from "@/types/api";
+import Chat from "@/types/api/Chat";
+import { WbProduct } from "@/types/api/Product";
 import { QueryItem } from "@/types/client";
 
-type ChatListItem = {
-    id: number;
-    ad_name: string;
-    avatar: string | null;
-    last_message: string;
-    no_read_messages_count: number;
-    online: boolean;
-}
+type ChatListItem = Chat;
 
 class ChatService {
     async getChatList(query: QueryItem[]) {
