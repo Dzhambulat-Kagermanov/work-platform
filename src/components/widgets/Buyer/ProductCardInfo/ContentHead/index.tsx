@@ -1,26 +1,27 @@
-"use client";
-import { FC, memo } from "react";
-import { TClassName, TProductItemProps, TSalesmanInfo } from "@/types";
-import { cn } from "@/lib";
-import { Typography } from "@/components/ui";
-import { Ratingbar } from "@/components/ui";
-import { TooltipButton } from "@/components/ui";
-import { useScreen } from "@/hooks";
-import { MD_LOW, SM_BIG, XS_BIG } from "@/constants";
-import cls from "./index.module.scss";
-import { Product } from "@/types/api";
+"use client"
+import { FC, memo } from "react"
+import { TClassName, TProductItemProps, TSalesmanInfo } from "@/types"
+import { cn } from "@/lib"
+import { Typography } from "@/components/ui"
+import { Ratingbar } from "@/components/ui"
+import { TooltipButton } from "@/components/ui"
+import { useScreen } from "@/hooks"
+import { MD_LOW, SM_BIG, XS_BIG } from "@/constants"
+import cls from "./index.module.scss"
+import { Product } from "@/types/api"
 
 interface Props extends TClassName {
-    product: Product;
+    product: Product
 }
 const ContentHead: FC<Props> = memo(({ product, className }) => {
-    const width = useScreen();
+
+    const width = useScreen()
     const dsc = product.product.discount
         ? (
-              +product.product.price -
-              (+product.product.price / 100) * +product.product.discount
-          ).toFixed(2)
-        : (product.product.price ?? 0);
+            +product.product.price -
+            (+product.product.price / 100) * +product.product.discount
+        ).toFixed(2)
+        : (product.product.price ?? 0)
 
     return (
         <div className={cn(cls.head, [className])}>
@@ -82,13 +83,13 @@ const ContentHead: FC<Props> = memo(({ product, className }) => {
                     !(width <= MD_LOW && width > SM_BIG) && (
                         <div className={cn(cls.discount_plaque)}>
                             <Typography font="Inter-M" size={14}>
-                                -{product.product.discount}%
+                                -{Number(product.product.discount)}%
                             </Typography>
                         </div>
                     )}
             </div>
         </div>
-    );
-});
+    )
+})
 
-export { ContentHead };
+export { ContentHead }
