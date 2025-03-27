@@ -12,6 +12,7 @@
     border: 1px solid var(--white-200);
     display: inline-flex;
     justify-content: space-between;
+    column-gap: 5px;
     align-items: center;
     margin: 6px 0 9px 0;
     border-radius: var(--blocks-radius);
@@ -28,4 +29,11 @@
     &:disabled {
         opacity: 0.5;
     }
+}
+.input{
+    font-family: Inter;
+    font-weight: normal;
+    font-size: 17px;
+    width: 60px;
+    text-align: center;
 }

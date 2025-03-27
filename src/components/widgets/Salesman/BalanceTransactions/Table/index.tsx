@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { TClassName } from "@/types";
-import { cn } from "@/lib";
+import { cn, endingsFormatter } from "@/lib";
 import { Typography } from "@/components/ui";
 import { TActiveSwitchItem } from "..";
 import cls from "./index.module.scss";
@@ -72,8 +72,8 @@ const Table: FC<Props> = ({ className, active, wrapperCls, transactions }) => {
                                 <th className={cn(cls.column, [cls.sum])}>
                                     <Typography font="Inter-R" size={14}>
                                         {isDeposit
-                                            ? `+${item.amount} ₽`
-                                            : `-${item.amount} ₽`}
+                                            ? `+${Number(item.amount)} ₽`
+                                            : `-${Number(item.amount)} ${endingsFormatter(Number(item.amount), ["Выкуп", "Выкупа", "Выкупов"])}`}
                                     </Typography>
                                 </th>
                                 <th className={cn(cls.column, [cls.type])}>

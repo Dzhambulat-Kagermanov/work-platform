@@ -1,32 +1,34 @@
-"use client";
-import { CreateEditAdvertisementPage } from "@/components/page/create-edit-advertisement-page";
-import { PageLoader } from "@/components/ui/loaders";
-import { PageErrorStub } from "@/components/ui/page-error-stub";
-import { useGetWbProductQuery } from "@/hooks/api/seller";
-import { useSearchParams } from "next/navigation";
-import { FC } from "react";
+"use client"
+import { CreateEditAdvertisementPage } from "@/components/page/create-edit-advertisement-page"
+import { PageLoader } from "@/components/ui/loaders"
+import { PageErrorStub } from "@/components/ui/page-error-stub"
+import { useGetWbProductQuery } from "@/hooks/api/seller"
+import { useSearchParams } from "next/navigation"
+import { FC } from "react"
 
-interface Props {}
-const CreateAdvertisement: FC<Props> = ({}) => {
-    const searchParams = useSearchParams();
+interface Props { }
+const CreateAdvertisement: FC<Props> = ({ }) => {
+    const searchParams = useSearchParams()
 
-    const selectedWbItem = searchParams.get("selectedWbItem");
+    const selectedWbItem = searchParams.get("selectedWbItem")
 
     const {
         data: product,
         isLoading,
         isError,
-    } = useGetWbProductQuery(selectedWbItem as string);
+    } = useGetWbProductQuery(selectedWbItem as string)
+
+
 
     if (isLoading) {
-        return <PageLoader />;
+        return <PageLoader />
     }
 
     if (isError || !product) {
-        return <PageErrorStub />;
+        return <PageErrorStub />
     }
 
-    return <CreateEditAdvertisementPage product={product} />;
-};
+    return <CreateEditAdvertisementPage product={product} />
+}
 
-export default CreateAdvertisement;
+export default CreateAdvertisement
