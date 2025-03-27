@@ -1,15 +1,15 @@
-"use client";
-import { FC } from "react";
-import { TChildren, TClassName } from "@/types";
-import { cn } from "@/lib";
-import { TModalSlug } from "@/store/useModalStore";
-import { useModalBase } from "@/hooks";
-import { PortalWrapper } from "../PortalWrapper";
-import cls from "./index.module.scss";
+"use client"
+import { FC, useEffect } from "react"
+import { TChildren, TClassName } from "@/types"
+import { cn } from "@/lib"
+import { TModalSlug } from "@/store/useModalStore"
+import { useModalBase } from "@/hooks"
+import { PortalWrapper } from "../PortalWrapper"
+import cls from "./index.module.scss"
 
 interface Props extends TClassName, TChildren, TModalSlug {
-    onClose?: () => void;
-    disableClose?: boolean;
+    onClose?: () => void
+    disableClose?: boolean
 }
 // slug - Уникальный идентификатор для конкретной модалки (ID)
 const ModalBase: FC<Props> = ({
@@ -21,15 +21,21 @@ const ModalBase: FC<Props> = ({
 }) => {
     const { modalState, visibleTransition, handleClose } = useModalBase({
         slug,
-    });
+    })
 
     const handleWrapperClick = () => {
         if (disableClose) {
-            return;
+            return
         }
-        onClose && onClose();
-        handleClose();
-    };
+        handleClose()
+    }
+
+    useEffect(() => {
+        if (!modalState) {
+            onClose && onClose()
+
+        }
+    }, [modalState])
 
     return (
         <PortalWrapper selector="#modals">
@@ -43,7 +49,7 @@ const ModalBase: FC<Props> = ({
                     <div
                         className={cls.content}
                         onClick={(e) => {
-                            e.stopPropagation();
+                            e.stopPropagation()
                         }}
                     >
                         {children}
@@ -53,6 +59,6 @@ const ModalBase: FC<Props> = ({
                 <></>
             )}
         </PortalWrapper>
-    );
-};
-export { ModalBase };
+    )
+}
+export { ModalBase }

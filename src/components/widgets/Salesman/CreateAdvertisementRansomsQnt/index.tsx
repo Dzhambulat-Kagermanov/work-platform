@@ -41,6 +41,7 @@ const CreateAdvertisementRansomsQnt: FC<Props> = ({
                         -
                     </Typography>
                 </button>
+
                 <input value={count} className={cls.input} onChange={(event) => {
                     setCount(+event.target.value)
                 }} />
