@@ -1,49 +1,51 @@
-"use client";
-import { FC, memo, useRef, useState } from "react";
-import { TClassName, TProductItemProps } from "@/types";
-import { cn } from "@/lib";
-import { ActionArrowIcon } from "@/icons";
-import Image from "next/image";
-import cls from "./index.module.scss";
+"use client"
+import { FC, memo, useRef, useState } from "react"
+import { TClassName, TProductItemProps } from "@/types"
+import { cn } from "@/lib"
+import { ActionArrowIcon } from "@/icons"
+import Image from "next/image"
+import cls from "./index.module.scss"
 
 interface Props
     extends TClassName,
-        Pick<TProductItemProps, "images" | "isFavorite"> {}
+    Pick<TProductItemProps, "images" | "isFavorite"> { }
 const Gallery: FC<Props> = memo(({ className, images }) => {
-    const scrollbarRef = useRef<HTMLDivElement>(null);
+    const scrollbarRef = useRef<HTMLDivElement>(null)
 
-    const [scrollbarPos, setScrollbarPos] = useState<[number, number]>([0, 0]);
-    const MAX_ITEMS_SCROLLBAR = 3;
-    const [active, setActive] = useState<string>(images[0]);
+    const [scrollbarPos, setScrollbarPos] = useState<[number, number]>([0, 0])
+
+    const MAX_ITEMS_SCROLLBAR = 3
+    const [active, setActive] = useState<string>(images[0])
     const imagesForRender =
         images.length >= MAX_ITEMS_SCROLLBAR
             ? images
             : [
-                  ...images,
-                  ...[...Array(MAX_ITEMS_SCROLLBAR - images.length)].map(() => {
-                      return null;
-                  }),
-              ];
+                ...images,
+                ...[...Array(MAX_ITEMS_SCROLLBAR - images.length)].map(() => {
+                    return null
+                }),
+            ]
 
     const handleSwipeClick = () => {
         if (scrollbarRef.current) {
-            const parentHeight = scrollbarRef.current.offsetHeight;
+            const parentHeight = scrollbarRef.current.offsetHeight
             const childrenHeight =
                 //@ts-ignore
-                scrollbarRef.current.children[0].offsetHeight;
+                scrollbarRef.current.children[0].offsetHeight
             const translateOffset =
                 (parentHeight - childrenHeight * images.length) /
-                    (images.length - 1) +
-                childrenHeight;
+                (images.length - 1) +
+                childrenHeight
+
 
             setScrollbarPos((cur) => {
                 if (cur[0] + 1 > images.length - MAX_ITEMS_SCROLLBAR) {
-                    return [0, 0];
+                    return [0, 0]
                 }
-                return [cur[0] + 1, cur[1] + translateOffset];
-            });
+                return [cur[0] + 1, cur[1] + translateOffset]
+            })
         }
-    };
+    }
 
     return (
         <section
@@ -59,36 +61,34 @@ const Gallery: FC<Props> = memo(({ className, images }) => {
                         translate: `0 -${scrollbarPos[1]}px`,
                     }}
                 >
-                    <div className="">
-                        {imagesForRender.map((image, index) => {
-                            if (image === null) {
-                                return (
-                                    <div
-                                        className={cn(cls.stub, [cls.item])}
-                                        key={index}
-                                    />
-                                );
-                            }
+                    {imagesForRender.map((image, index) => {
+                        if (image === null) {
                             return (
-                                <button
-                                    className={cn(cls.item, [], {
-                                        [cls.active_item]: active === image,
-                                    })}
-                                    onClick={() => {
-                                        setActive(image);
-                                    }}
-                                    key={image}
-                                >
-                                    <img
-                                        width={126}
-                                        height={167}
-                                        src={image}
-                                        alt="Продукт"
-                                    />
-                                </button>
-                            );
-                        })}
-                    </div>
+                                <div
+                                    className={cn(cls.stub, [cls.item])}
+                                    key={index}
+                                />
+                            )
+                        }
+                        return (
+                            <button
+                                className={cn(cls.item, [], {
+                                    [cls.active_item]: active === image,
+                                })}
+                                onClick={() => {
+                                    setActive(image)
+                                }}
+                                key={image}
+                            >
+                                <img
+                                    width={126}
+                                    height={167}
+                                    src={image}
+                                    alt="Продукт"
+                                />
+                            </button>
+                        )
+                    })}
                 </div>
             </div>
             <div className={cn(cls.active)}>
@@ -105,7 +105,7 @@ const Gallery: FC<Props> = memo(({ className, images }) => {
                 </div>
             )}
         </section>
-    );
-});
+    )
+})
 
-export { Gallery };
+export { Gallery }
