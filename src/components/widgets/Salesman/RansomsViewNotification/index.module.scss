@@ -27,7 +27,7 @@
         text-wrap: nowrap;
     }
 }
-.waitingOrder {
+.pending {
     background-color: var(--purple-600);
     .plaque {
         min-width: 155px;
@@ -41,7 +41,7 @@
         color: var(--grey-500);
     }
 }
-.waitingReceive {
+.awaiting_receipt {
     background-color: var(--blue-200);
     .plaque {
         color: var(--blue-300);
@@ -52,14 +52,14 @@
         }
     }
 }
-.confirmation {
+.completed {
     background-color: var(--orange-100);
     .plaque {
         background-color: var(--black-opacity-60);
         color: var(--white-100);
     }
 }
-.cashbackReceived {
+.cashback_received {
     background-color: var(--green-300);
     .plaque {
         color: var(--green-300);

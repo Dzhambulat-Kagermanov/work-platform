@@ -1,4 +1,5 @@
 import BoolNumber from "./BoolNumber";
+import { EnChatStatuses } from "./Chat";
 import Product from "./Product";
 import Timestamps from "./Timestamps";
 
@@ -18,7 +19,7 @@ type Order = {
     has_review_by_buyer: BoolNumber;
     has_review_by_seller: BoolNumber;
     is_archived: BoolNumber;
-    status: "pending";
+    status: EnChatStatuses;
     messages: Message[];
     ad: Product;
 } & Timestamps;

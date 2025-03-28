@@ -3,12 +3,23 @@ import Message from "./Message";
 import Timestamps from "./Timestamps";
 import User from "./User";
 
+enum EnChatStatuses {
+    "pending" = "pending",
+    "cancelled" = "cancelled",
+    "all" = "all",
+    "awaiting_receipt" = "awaiting_receipt",
+    "on_confirmation" = "on_confirmation",
+    "cashback_received" = "cashback_received",
+    "completed" = "completed",
+    "archive" = "archive",
+}
+
 type Chat = {
     id: number;
     ads_id: number;
     user_id: number;
     // status: "pending";
-    status: string;
+    status: EnChatStatuses;
     price: number;
     is_archived: number;
     has_review_by_seller: number;
@@ -20,3 +31,4 @@ type Chat = {
 } & Timestamps;
 
 export default Chat;
+export { EnChatStatuses };

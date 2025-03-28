@@ -69,6 +69,7 @@ const MessagesArea: FC<Props> = ({ className, messages, status }) => {
             {messagesGroup.length ? (
                 <>
                     <RansomsViewNotification
+                        status={status}
                         className={cn(cls.notification)}
                         //@ts-ignore
                         ref={notificationRef}
