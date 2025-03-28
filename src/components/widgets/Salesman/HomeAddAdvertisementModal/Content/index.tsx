@@ -1,18 +1,18 @@
-"use client";
-import { FC } from "react";
-import { TClassName } from "@/types";
-import { cn } from "@/lib";
-import { Item } from "../Item";
-import cls from "./index.module.scss";
-import { useGetSellerProductsQuery } from "@/hooks/api/seller";
-import { Loader } from "lucide-react";
+"use client"
+import { FC } from "react"
+import { TClassName } from "@/types"
+import { cn } from "@/lib"
+import { Item } from "../Item"
+import cls from "./index.module.scss"
+import { useGetSellerProductsQuery } from "@/hooks/api/seller"
+import { Loader } from "lucide-react"
 
 interface Props extends TClassName {
-    selectedItem: number | null;
-    setSelectedItem: (value: number | null) => void;
+    selectedItem: number | null
+    setSelectedItem: (value: number | null) => void
 }
 const Content: FC<Props> = ({ className, setSelectedItem, selectedItem }) => {
-    const { data: products, isLoading } = useGetSellerProductsQuery([]);
+    const { data: products, isLoading } = useGetSellerProductsQuery([])
 
     if (!products || !products.data.length || isLoading) {
         return (
@@ -23,7 +23,7 @@ const Content: FC<Props> = ({ className, setSelectedItem, selectedItem }) => {
                     "Товары не найдены"
                 )}
             </div>
-        );
+        )
     }
 
     return (
@@ -40,14 +40,14 @@ const Content: FC<Props> = ({ className, setSelectedItem, selectedItem }) => {
                                 : ""
                         }
                         title={item.name}
-                        number={"1"}
+                        number={item.wb_id + ''}
                         key={index}
                         className={cn(cls.item)}
                     />
-                );
+                )
             })}
         </ul>
-    );
-};
+    )
+}
 
-export { Content };
+export { Content }
