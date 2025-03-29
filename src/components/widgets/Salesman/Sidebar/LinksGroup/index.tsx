@@ -91,7 +91,6 @@ const LinksGroup: FC<Props> = ({
             <Item
                 linkOnClick={(e) => {
                     linkOnClick && linkOnClick()
-                    handleNotifications(e)
                 }}
                 sidebarIsExpand={sidebarIsExpand}
                 tag="li"
