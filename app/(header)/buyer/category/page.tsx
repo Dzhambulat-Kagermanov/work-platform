@@ -4,16 +4,23 @@ import { CategorySelectSubcategory } from "@/components/widgets/Buyer/CategorySe
 import { FC } from "react";
 
 interface Props {
-    searchParams: Promise<{ slug?: string; subcategory?: string }>;
+    searchParams: Promise<{ categoryId?: string; subcategory?: string }>;
 }
-const Category: FC<Props> = async ({ searchParams }) => {
-    const { slug, subcategory } = await searchParams;
 
-    return slug ? (
+const Category: FC<Props> = async ({ searchParams }) => {
+    const { categoryId, subcategory } = await searchParams;
+
+    return categoryId ? (
         subcategory ? (
-            <CategoryItemPage slug={slug} subcategory={subcategory} />
+            <CategoryItemPage
+                categoryId={categoryId}
+                subcategory={subcategory}
+            />
         ) : (
-            <CategorySelectSubcategory slug={slug} subcategory={subcategory} />
+            <CategorySelectSubcategory
+                categoryId={categoryId}
+                subcategory={subcategory}
+            />
         )
     ) : (
         <CategoryPage />

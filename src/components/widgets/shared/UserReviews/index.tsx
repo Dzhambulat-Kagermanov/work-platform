@@ -10,11 +10,12 @@ import { ReviewItem } from "@/components/entities/ReviewItem";
 import { ActionArrowIcon } from "@/icons";
 import { MD_BIG, SM_MID } from "@/constants";
 import cls from "./index.module.scss";
-import { TReviewItemProps } from "@/types/reviews";
 import { SwiperOptions } from "swiper/types";
+import { Review, RoleSlug } from "@/types/api";
 
 interface Props extends TClassName {
-    reviews: TReviewItemProps[];
+    reviews: Review[];
+    role?: RoleSlug;
     customBreakPoints?:
         | {
               [width: number]: SwiperOptions;
@@ -22,7 +23,12 @@ interface Props extends TClassName {
           }
         | undefined;
 }
-const UserReviews: FC<Props> = ({ className, reviews, customBreakPoints }) => {
+const UserReviews: FC<Props> = ({
+    className,
+    reviews,
+    role,
+    customBreakPoints,
+}) => {
     return (
         <Container tag="section" className={cn(cls.wrapper, [className])}>
             <div className={cn(cls.head)}>
@@ -32,7 +38,7 @@ const UserReviews: FC<Props> = ({ className, reviews, customBreakPoints }) => {
                     tag="h2"
                     className={cn(cls.title)}
                 >
-                    Отзывы о продавце
+                    Отзывы {role === "buyer" ? "покупателя" : "о продавце"}
                 </Typography>
                 <Typography font="Inter-R" size={25} className={cn(cls.title)}>
                     ({reviews.length})
@@ -59,21 +65,21 @@ const UserReviews: FC<Props> = ({ className, reviews, customBreakPoints }) => {
                     spaceBetween={15}
                     modules={[Navigation, Autoplay]}
                     speed={500}
-                    autoplay={{}}
+                    autoplay
                     navigation={{
                         enabled: true,
                         nextEl: `.${cls.next_btn}`,
                         prevEl: `.${cls.prev_btn}`,
                     }}
                 >
-                    {reviews.map((props, idx) => {
+                    {reviews.map((item, idx) => {
                         return (
                             <SwiperSlide
                                 className={cn(cls.item)}
                                 key={idx + "/"}
                             >
                                 <ReviewItem
-                                    {...props}
+                                    item={item}
                                     className={cn(cls.review)}
                                 />
                             </SwiperSlide>

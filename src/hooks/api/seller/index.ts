@@ -1,0 +1,12 @@
+export { default as useAddWbProductMutation } from "./useAddWbProductMutation";
+export { default as useGetWbProductMutation } from "./useGetWbProductMutation";
+export { default as useGetSellerProductsQuery } from "./useGetSellerProductsQuery";
+export { default as usePromocodeMutation } from "./usePromocodeMutation";
+export { default as useGetAdsListQuery } from "./useGetAdsListQuery";
+export { default as useGetAdQuery } from "./useGetAdQuery";
+export { default as useStopAdsMutation } from "./useStopAdsMutation";
+export { default as useArchiveAdsMutation } from "./useArchiveAdsMutation";
+export { default as useDuplicateAdsMutation } from "./useDuplicateAdsMutation";
+export { default as useGetWbProductQuery } from "./useGetWbProductQuery";
+export { default as useCreateAdvMutation } from "./useCreateAdvMutation";
+export { default as useStopProductsMutation } from "./useStopProductsMutation";

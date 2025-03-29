@@ -8,12 +8,14 @@ import { ShoppingBagIcon } from "@/icons";
 import { FooterUserInfo } from "../FooterUserInfo";
 import { usePathValidating } from "@/hooks";
 import cls from "./index.module.scss";
+import { useSessionQuery } from "@/hooks/api/auth";
 
 interface Props extends TClassName {
-    isAuth: boolean;
     actionForLinkClick: () => void;
 }
-const Footer: FC<Props> = ({ isAuth, className, actionForLinkClick }) => {
+const Footer: FC<Props> = ({ className, actionForLinkClick }) => {
+    const { data: user } = useSessionQuery();
+
     const isSalesmanPage = usePathValidating("/salesman/...");
 
     return (
@@ -33,13 +35,15 @@ const Footer: FC<Props> = ({ isAuth, className, actionForLinkClick }) => {
                         : "Вход для продавцов"}
                 </Typography>
             </Link>
-            {isAuth && (
+            {user ? (
                 <FooterUserInfo
-                    image="/images/stub/avatar.png"
-                    name="Покупатель №12345"
-                    phone="+7 (955) 000-0000"
+                    image={user.avatar ?? ""}
+                    name={user.name}
+                    phone={user.phone}
                     className={cn(cls.user_info)}
                 />
+            ) : (
+                <></>
             )}
         </div>
     );

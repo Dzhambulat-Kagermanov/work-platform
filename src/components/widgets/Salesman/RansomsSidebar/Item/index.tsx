@@ -6,11 +6,12 @@ import { cn } from "@/lib";
 import { FolderIcon } from "@/icons";
 import { TChatType } from "../types";
 import cls from "./index.module.scss";
+import { ChatStatus } from "@/types/api";
 
 interface Props extends TClassName {
     messageQnt: number;
-    type?: TChatType;
-    activeType?: TChatType;
+    type?: ChatStatus;
+    activeType?: ChatStatus;
     children: string;
 }
 const Item: FC<Props> = ({

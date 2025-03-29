@@ -6,9 +6,12 @@ import { Typography, DiscountPlaque } from "@/components/ui";
 import { useScreen } from "@/hooks";
 import { MD_LOW, XS_BIG } from "@/constants";
 import cls from "./index.module.scss";
+import { Order } from "@/types/api";
 
-interface Props extends TClassName {}
-const HeadAreaSalesmanInfo: FC<Props> = ({ className }) => {
+interface Props extends TClassName {
+    orderInfo: Order;
+}
+const HeadAreaSalesmanInfo: FC<Props> = ({ className, orderInfo }) => {
     const width = useScreen();
 
     return (
@@ -23,22 +26,22 @@ const HeadAreaSalesmanInfo: FC<Props> = ({ className }) => {
                     size={width > MD_LOW ? 16 : width > XS_BIG ? 14 : 10}
                     tag="h2"
                 >
-                    Ирина М.
+                    {orderInfo.ad.shop.wb_name}
                 </Typography>
-                <Typography
+                {/* <Typography
                     font="Inter-R"
                     size={width > XS_BIG ? 12 : 10}
                     tag="time"
                 >
-                    Офлайн: 28 минут
-                </Typography>
+                    Офлайн
+                </Typography> */}
             </div>
             <Typography
                 font="Inter-R"
                 size={width > MD_LOW ? 14 : width > XS_BIG ? 12 : 10}
                 tag="h3"
             >
-                Зарядка для iphone 20W type-c быстрое устройство
+                {orderInfo.ad.name}
             </Typography>
             {width > MD_LOW && (
                 <div className={cn(cls.product_info)}>

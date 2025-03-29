@@ -4,15 +4,16 @@ import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { Typography } from "@/components/ui";
 import { PlusIcon } from "@/icons";
-import Link from "next/link";
 import { useModalStore, useScreen } from "@/hooks";
 import { Paid } from "../Paid";
 import cls from "./index.module.scss";
 import { SALESMAN_BALANCE_PROMOCODE_MODAL } from "@/constants";
+import { RansomsType } from "@/components/page/Salesman/Balance";
 
-interface Props extends TClassName {}
-const Actions: FC<Props> = ({ className }) => {
+interface Props extends TClassName, RansomsType {}
+const Actions: FC<Props> = ({ className, ransoms, setRansoms }) => {
     const width = useScreen();
+
     const showModal = useModalStore((state) => state.showModal);
     const handlePromocode = () => {
         showModal({ slug: SALESMAN_BALANCE_PROMOCODE_MODAL });
@@ -20,22 +21,22 @@ const Actions: FC<Props> = ({ className }) => {
 
     return (
         <div className={cn(cls.wrapper, [className])}>
-            <Link
-                href={"/salesman/balance/tariffs"}
-                className={cn(cls.item, [cls.ransoms])}
-            >
+            {/* <div className={cn(cls.item, [cls.ransoms])}>
                 <Typography font="Inter-R" size={12} tag="h3">
                     Выкупы
                 </Typography>
-                <div className={cn(cls.info)}>
+                <div
+                    className={cn(cls.info)}
+                    onClick={() => setRansoms((prev) => prev + 1)}
+                >
                     <Typography font="Inter-R" size={12}>
-                        10 шт
+                        {ransoms} шт
                     </Typography>
                     <button className={cn(cls.plus_btn)}>
                         <PlusIcon color="var(--grey-100)" />
                     </button>
                 </div>
-            </Link>
+            </div> */}
 
             <button
                 className={cn(cls.item, [cls.promocode])}

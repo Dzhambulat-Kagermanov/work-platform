@@ -4,13 +4,14 @@ import Link from "next/link";
 import { Typography } from "@/components/ui";
 import { cn } from "@/lib";
 import { FolderIcon } from "@/icons";
-import { TChatType } from "../types";
 import cls from "./index.module.scss";
+import { ChatStatus } from "@/types/api";
+import { ROUTES } from "@/constants";
 
 interface Props extends TClassName {
     messageQnt: number;
-    type?: TChatType;
-    activeType?: TChatType;
+    type?: ChatStatus;
+    activeType?: ChatStatus;
     children: string;
 }
 const Item: FC<Props> = ({
@@ -24,7 +25,7 @@ const Item: FC<Props> = ({
 
     return (
         <Link
-            href={`/buyer/delivery${type ? `?chatType=${type}` : ""}`}
+            href={`${ROUTES.BUYER.DELIVERY}${type ? `?chatType=${type}` : ""}`}
             className={cn(cls.link, [className])}
         >
             <div className={cn(cls.folder)}>

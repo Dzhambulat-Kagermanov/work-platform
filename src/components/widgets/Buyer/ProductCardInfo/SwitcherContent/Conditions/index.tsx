@@ -1,31 +1,19 @@
-import { FC } from "react";
-import cls from "./index.module.scss";
-import { TClassName } from "@/types";
-import { cn } from "@/lib";
-import { Typography } from "@/components/ui";
+import { FC } from "react"
+import cls from "./index.module.scss"
+import { TClassName, TProductItemProps } from "@/types"
+import { cn } from "@/lib"
+import { Typography } from "@/components/ui"
+import { Product } from '@/types/api'
 
-interface Props extends TClassName {}
-const Conditions: FC<Props> = ({ className }) => {
+interface Props extends TClassName, Pick<TProductItemProps, 'productInstructions'> { }
+const Conditions: FC<Props> = ({ className, productInstructions }) => {
     return (
-        <ul className={cn(cls.wrapper, [className])}>
-            <li className={cn(cls.item)}>
-                <Typography font="Inter-R" size={14} tag="h4">
-                    Кэшбек начисляется полностью за оставление отзыва с
-                    фотографиями товара
-                </Typography>
-            </li>
-            <li className={cn(cls.item)}>
-                <Typography font="Inter-R" size={14} tag="h4">
-                    Начисление кэшбека в течение 72 часов после отзыва
-                </Typography>
-            </li>
-            <li className={cn(cls.item)}>
-                <Typography font="Inter-R" size={14} tag="h4">
-                    50% кэшбека если отзыв не прошел модерацию Вайлдберис
-                </Typography>
-            </li>
-        </ul>
-    );
-};
+        <div className={cn(cls.wrapper, [className])}>
+            <Typography font="Inter-R" size={14} tag="h4">
+                {productInstructions}
+            </Typography>
+        </div>
+    )
+}
 
-export { Conditions };
+export { Conditions }

@@ -36,7 +36,7 @@ const Item: FC<Props> = ({
             <Link href={slug ? `/salesman?homePageType=${slug}` : "/salesman"}>
                 {text}
             </Link>
-            {selectedProducts && width > SM_MID ? (
+            {/* {selectedProducts && width > SM_MID ? (
                 <button
                     className={cn(cls.selected_products)}
                     onClick={handleClick}
@@ -46,7 +46,7 @@ const Item: FC<Props> = ({
                     </Typography>
                     <PlusIcon color="var(--blue-100)" />
                 </button>
-            ) : null}
+            ) : null} */}
         </Typography>
     );
 };

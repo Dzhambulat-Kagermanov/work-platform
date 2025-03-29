@@ -1,6 +1,6 @@
 "use client";
 import { FC, MouseEventHandler } from "react";
-import { TClassName, TState } from "@/types";
+import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import Image from "next/image";
 import { Typography } from "@/components/ui";
@@ -8,8 +8,8 @@ import { TSalesmanSelectProductProps } from "..";
 import cls from "./index.module.scss";
 
 interface Props extends TClassName, TSalesmanSelectProductProps {
-    activeId: number;
-    setActiveId: TState<number>;
+    selectedItem: number | null;
+    setSelectedItem: (value: number | null) => void;
 }
 const Item: FC<Props> = ({
     className,
@@ -17,21 +17,27 @@ const Item: FC<Props> = ({
     number,
     title,
     id,
-    activeId,
-    setActiveId,
+    selectedItem,
+    setSelectedItem,
 }) => {
     const handleClick: MouseEventHandler = () => {
-        setActiveId(id);
+        setSelectedItem(id);
     };
 
     return (
         <li
             className={cn(cls.item, [className], {
-                [cls.active]: activeId === id,
+                [cls.active]: selectedItem === id,
             })}
             onClick={handleClick}
         >
-            <Image src={image} alt="Товар" width={40} height={40} />
+            <img
+                src={image}
+                alt="Товар"
+                width={40}
+                height={40}
+                className="w-10 min-w-10 h-10 object-cover"
+            />
             <div className={cn(cls.content)}>
                 <Typography font="Inter-M" size={16} tag="h2">
                     {title}

@@ -11,12 +11,16 @@ import {
     SALESMAN_SIDEBAR_MENU,
 } from "@/constants";
 import cls from "./index.module.scss";
+import { useGetChatStatusesQuery } from "@/hooks/api/chat";
+import { ChatStatus } from "@/types/api";
 
 interface Props extends TClassName {
-    chatType: TChatType;
+    chatType: ChatStatus;
 }
 const MobileSwitcher: FC<Props> = ({ className, chatType }) => {
     const width = useScreen();
+    const { data: chatStatuses, isLoading } = useGetChatStatusesQuery();
+
     const sidebarState = useModalStore(
         (state) => state.modalsStates[SALESMAN_SIDEBAR_MENU]?.modalState,
     );
@@ -24,67 +28,25 @@ const MobileSwitcher: FC<Props> = ({ className, chatType }) => {
     const IS_SWITCHER_RENDER =
         (sidebarState && width <= LG_LOW) || width <= MD_BIG_BETWEEN_MD_LOW;
 
+    if (isLoading || !chatStatuses || !chatStatuses.length) {
+        return <></>;
+    }
     return (
         <>
             {IS_SWITCHER_RENDER && (
                 <div className={cn(cls.wrapper, [className])}>
                     <ul className={cn(cls.switcher)}>
-                        <MobileSwitcherItem
-                            messageQnt={10}
-                            type={undefined}
-                            className={cn(cls.item)}
-                            activeType={chatType}
-                        >
-                            Все чаты
-                        </MobileSwitcherItem>
-                        <MobileSwitcherItem
-                            messageQnt={10}
-                            type="waitingOrder"
-                            className={cn(cls.item)}
-                            activeType={chatType}
-                        >
-                            Ожидание заказа
-                        </MobileSwitcherItem>
-                        <MobileSwitcherItem
-                            messageQnt={10}
-                            type="waitingReceive"
-                            className={cn(cls.item)}
-                            activeType={chatType}
-                        >
-                            Ожидание получения товара
-                        </MobileSwitcherItem>
-                        <MobileSwitcherItem
-                            messageQnt={10}
-                            type="confirmation"
-                            className={cn(cls.item)}
-                            activeType={chatType}
-                        >
-                            Подтверждение
-                        </MobileSwitcherItem>
-                        <MobileSwitcherItem
-                            messageQnt={10}
-                            type="cashbackReceived"
-                            className={cn(cls.item)}
-                            activeType={chatType}
-                        >
-                            Кэшбек получен
-                        </MobileSwitcherItem>
-                        <MobileSwitcherItem
-                            messageQnt={10}
-                            type="canceled"
-                            className={cn(cls.item)}
-                            activeType={chatType}
-                        >
-                            Отменен
-                        </MobileSwitcherItem>
-                        <MobileSwitcherItem
-                            messageQnt={10}
-                            type="archive"
-                            className={cn(cls.item)}
-                            activeType={chatType}
-                        >
-                            Архив
-                        </MobileSwitcherItem>
+                        {chatStatuses.map((item, index) => (
+                            <MobileSwitcherItem
+                                key={index}
+                                messageQnt={item.not_read}
+                                type={item.slug}
+                                className={cn(cls.item)}
+                                activeType={chatType}
+                            >
+                                {item.title}
+                            </MobileSwitcherItem>
+                        ))}
                     </ul>
                 </div>
             )}

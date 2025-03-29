@@ -11,6 +11,7 @@ export type TActionItemProps = {
     text: string;
     link?: string;
     onClick?: MouseEventHandler;
+    disabled?: boolean;
 };
 
 interface Props extends TClassName {
@@ -34,22 +35,25 @@ const Action: FC<Props> = ({ actionBtnText, actions, className }) => {
             })}
         >
             <button className={cn(cls.actions_btn)} onClick={handleBtnClick}>
-                <Typography font="Inter-SB" size={14}>
+                <Typography className="overflow-hidden text-ellipsis whitespace-nowrap" font="Inter-SB" size={14}>
                     {actionBtnText}
                 </Typography>
                 <ExpandArrowIcon
                     color="var(--grey-200)"
-                    className={cn(cls.icon)}
+                    className={cn(cls.icon, ["min-w-3"])}
                 />
             </button>
             <div className={cn(cls.actions_overlay)}>
                 <div className={cn(cls.actions_wrapper)}>
                     <nav className={cn(cls.actions)}>
-                        {actions.map(({ link, text, onClick }) => {
+                        {actions.map(({ link, text, onClick, disabled }) => {
                             return (
                                 <Typography
                                     other={{
                                         onClick: (e: MouseEvent) => {
+                                            if (disabled) {
+                                                return;
+                                            }
                                             handleLinkClick(e);
                                             onClick && onClick(e);
                                         },
@@ -57,7 +61,12 @@ const Action: FC<Props> = ({ actionBtnText, actions, className }) => {
                                     key={`${text}${link}`}
                                     font="Inter-SB"
                                     size={12}
-                                    className={cn(cls.action)}
+                                    className={cn(
+                                        cls.action,
+                                        disabled
+                                            ? ["cursor-not-allowed opacity-50"]
+                                            : ["cursor-pointer"],
+                                    )}
                                 >
                                     {link ? (
                                         <Link href={link}>{text}</Link>

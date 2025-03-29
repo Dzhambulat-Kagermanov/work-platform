@@ -1,22 +1,28 @@
 "use client";
-import { FC, memo } from "react";
+import { FC, memo, useEffect, useState } from "react";
 import { TTag } from "@/types";
 import { cn } from "@/lib";
-import Image from "next/image";
 import { FavoriteIcon, HelpIcon } from "@/icons";
 import { DiscountPlaque, Typography } from "@/components/ui";
 import cls from "./index.module.scss";
+import {
+    useFavoritesAddMutation,
+    useFavoritesRemoveMutation,
+    useGetFavoritesQuery,
+} from "@/hooks/api/favorites";
+import { useSessionQuery } from "@/hooks/api/auth";
 
 interface Props extends TTag {
+    id: number;
     price: {
-        price: number;
+        priceWithCashBack: number;
+        priceWithoutCashBack: number;
         discount?: number;
     };
     tooltip?: string;
     quantities?: number;
     name: string;
-    image: string;
-    isFavorite?: boolean;
+    image: string | null;
 
     wrapperCls?: string;
     headCls?: string;
@@ -27,17 +33,35 @@ const ProductItem: FC<Props> = memo(
         image,
         price,
         name,
-        isFavorite,
         quantities,
         tooltip,
         tag = "div",
         contentCls,
         headCls,
         wrapperCls,
+        id,
     }) => {
         const Tag = tag;
         const disc = price.discount;
-        const prc = price.price;
+        const priceWithCashBack = price.priceWithCashBack;
+        const priceWithoutCashBack = price.priceWithoutCashBack;
+
+        const { data: userData } = useSessionQuery();
+
+        const { data: favorites } = useGetFavoritesQuery();
+
+        const favoritesAddMutation = useFavoritesAddMutation();
+        const favoritesRemoveMutation = useFavoritesRemoveMutation();
+
+        const [isFavorite, setIsFavorite] = useState(false);
+
+        useEffect(() => {
+            if (favorites) {
+                setIsFavorite(favorites.some((el) => el.id === id));
+            }
+        }, [favorites]);
+
+        const addToFavorite = () => {};
 
         return (
             <Tag
@@ -48,12 +72,17 @@ const ProductItem: FC<Props> = memo(
                 })}
             >
                 <div className={cn(cls.head, [headCls])}>
-                    <Image src={image} alt="Товар" width={200} height={235} />
+                    {image ? (
+                        <img src={image} alt="Товар" width={200} height={235} />
+                    ) : (
+                        <></>
+                    )}
                     <div className={cn(cls.overlay)}>
-                        {isFavorite !== undefined ? (
+                        {userData && userData.role.slug === "buyer" ? (
                             <div
                                 onClick={(e) => {
                                     e.preventDefault();
+                                    addToFavorite();
                                 }}
                             >
                                 <FavoriteIcon
@@ -66,7 +95,7 @@ const ProductItem: FC<Props> = memo(
                                 />
                             </div>
                         ) : (
-                            <p />
+                            <></>
                         )}
                         {!!disc && (
                             <div className={cn(cls.discount)}>
@@ -78,10 +107,7 @@ const ProductItem: FC<Props> = memo(
                 <div className={cn(cls.content, [contentCls])}>
                     <div className={cn(cls.price)}>
                         <Typography font="Inter-SB" size={18} tag="h5">
-                            {!!disc
-                                ? Math.round(prc - (prc / 100) * disc)
-                                : prc}{" "}
-                            ₽
+                            {Math.round(priceWithCashBack)} ₽
                         </Typography>
                         {tooltip && (
                             <div
@@ -94,22 +120,22 @@ const ProductItem: FC<Props> = memo(
                                 <HelpIcon color="var(--grey-300)" />
                             </div>
                         )}
-                        {!!disc && (
+                        {priceWithoutCashBack && (
                             <Typography font="Inter-R" size={14} tag="h6">
-                                {Math.round(prc)} ₽
+                                {Math.round(priceWithoutCashBack)} ₽
                             </Typography>
                         )}
                     </div>
                     <Typography font="Inter-R" size={14} tag="h3">
                         {name}
                     </Typography>
-                    {quantities && (
+                    {quantities ? (
                         <Typography
                             font="Inter-R"
                             size={14}
                             tag="h4"
                         >{`Осталось: ${quantities} шт`}</Typography>
-                    )}
+                    ) : null}
                 </div>
             </Tag>
         );

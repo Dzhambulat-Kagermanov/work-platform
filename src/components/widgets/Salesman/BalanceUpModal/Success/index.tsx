@@ -1,18 +1,23 @@
-import { FC, MouseEventHandler } from "react";
-import { TClassName } from "@/types";
-import { cn } from "@/lib";
-import { Typography, Button } from "@/components/ui";
-import { SALESMAN_BALANCE_UP_MODAL } from "@/constants";
-import { useModalStore } from "@/store";
-import Image from "next/image";
-import cls from "./index.module.scss";
+import { FC, MouseEventHandler } from "react"
+import { TClassName, TState } from "@/types"
+import { cn } from "@/lib"
+import { Typography, Button } from "@/components/ui"
+import { SALESMAN_BALANCE_UP_MODAL } from "@/constants"
+import { useModalStore } from "@/store"
+import Image from "next/image"
+import cls from "./index.module.scss"
+import { TModalStep } from '..'
 
-interface Props extends TClassName {}
-const Success: FC<Props> = ({ className }) => {
-    const hideModal = useModalStore((state) => state.hideModal);
+interface Props extends TClassName {
+    amount: string
+    setStep: TState<TModalStep>
+}
+const Success: FC<Props> = ({ className, amount, setStep }) => {
+    const hideModal = useModalStore((state) => state.hideModal)
     const handleConfirm: MouseEventHandler = () => {
-        hideModal({ slug: SALESMAN_BALANCE_UP_MODAL });
-    };
+        hideModal({ slug: SALESMAN_BALANCE_UP_MODAL })
+        setStep('action')
+    }
 
     return (
         <div className={cn(cls.wrapper, [className])}>
@@ -28,7 +33,7 @@ const Success: FC<Props> = ({ className }) => {
                         Основной баланс пополнен
                     </Typography>
                     <Typography font="Inter-R" size={14} tag="h3">
-                        Вы пополнили баланс кабинета на 500 ₽
+                        Вы пополнили баланс кабинета на {amount} ₽
                     </Typography>
                 </div>
             </div>
@@ -43,7 +48,7 @@ const Success: FC<Props> = ({ className }) => {
                 </Button>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export { Success };
+export { Success }

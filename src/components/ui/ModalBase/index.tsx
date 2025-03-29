@@ -1,29 +1,45 @@
-"use client";
-import { FC } from "react";
-import { TChildren, TClassName } from "@/types";
-import { cn } from "@/lib";
-import { TModalSlug } from "@/store/useModalStore";
-import { useModalBase } from "@/hooks";
-import { PortalWrapper } from "../PortalWrapper";
-import cls from "./index.module.scss";
+"use client"
+import { FC, useEffect } from "react"
+import { TChildren, TClassName } from "@/types"
+import { cn } from "@/lib"
+import { TModalSlug } from "@/store/useModalStore"
+import { useModalBase } from "@/hooks"
+import { PortalWrapper } from "../PortalWrapper"
+import cls from "./index.module.scss"
 
 interface Props extends TClassName, TChildren, TModalSlug {
-    onClose?: () => void;
+    onClose?: () => void
+    disableClose?: boolean
 }
 // slug - Уникальный идентификатор для конкретной модалки (ID)
-const ModalBase: FC<Props> = ({ children, className, slug, onClose }) => {
+const ModalBase: FC<Props> = ({
+    children,
+    className,
+    slug,
+    onClose,
+    disableClose,
+}) => {
     const { modalState, visibleTransition, handleClose } = useModalBase({
         slug,
-    });
+    })
 
     const handleWrapperClick = () => {
-        onClose && onClose();
-        handleClose();
-    };
+        if (disableClose) {
+            return
+        }
+        handleClose()
+    }
+
+    useEffect(() => {
+        if (!modalState) {
+            onClose && onClose()
+
+        }
+    }, [modalState])
 
     return (
         <PortalWrapper selector="#modals">
-            {modalState && (
+            {modalState ? (
                 <section
                     onClick={handleWrapperClick}
                     className={cn(cls.wrapper, [className], {
@@ -33,14 +49,16 @@ const ModalBase: FC<Props> = ({ children, className, slug, onClose }) => {
                     <div
                         className={cls.content}
                         onClick={(e) => {
-                            e.stopPropagation();
+                            e.stopPropagation()
                         }}
                     >
                         {children}
                     </div>
                 </section>
+            ) : (
+                <></>
             )}
         </PortalWrapper>
-    );
-};
-export { ModalBase };
+    )
+}
+export { ModalBase }

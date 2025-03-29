@@ -6,6 +6,11 @@ import { cn } from "@/lib";
 import { Item } from "../Item";
 import cls from "./index.module.scss";
 import { TSalesmanHomePageType } from "../../HomePagesSwitcher";
+import {
+    useGetAdsListQuery,
+    useGetSellerProductsQuery,
+} from "@/hooks/api/seller";
+import { ROUTES } from "@/constants";
 
 interface Props extends TClassName {
     sidebarIsExpand?: boolean;
@@ -18,6 +23,8 @@ const LinksDropdown: FC<Props> = ({
     homePageType,
     linkOnClick,
 }) => {
+    const { data: products } = useGetSellerProductsQuery([]);
+    const { data: ads } = useGetAdsListQuery([]);
     return (
         <li className={cn(cls.wrapper, [className])}>
             <Dropdown
@@ -68,10 +75,10 @@ const LinksDropdown: FC<Props> = ({
                                         size={16}
                                         className={cn(cls.additional)}
                                     >
-                                        19
+                                        {products ? products.total : 0}
                                     </Typography>
                                 }
-                                link="/salesman"
+                                link={ROUTES.SALESMAN.MAIN}
                                 text="Товары"
                                 className={cn(cls.item, [cls.subitem])}
                             />
@@ -97,10 +104,10 @@ const LinksDropdown: FC<Props> = ({
                                         size={16}
                                         className={cn(cls.additional)}
                                     >
-                                        5
+                                        {ads?.total ?? 0}
                                     </Typography>
                                 }
-                                link="/salesman"
+                                link={ROUTES.SALESMAN.MAIN}
                                 text="Объявления"
                                 className={cn(cls.item, [cls.subitem])}
                             />
@@ -120,16 +127,7 @@ const LinksDropdown: FC<Props> = ({
                                         className={cn(cls.icon)}
                                     />
                                 }
-                                additionalInfo={
-                                    <Typography
-                                        font="Inter-SB"
-                                        size={16}
-                                        className={cn(cls.additional)}
-                                    >
-                                        37
-                                    </Typography>
-                                }
-                                link="/salesman"
+                                link={ROUTES.SALESMAN.MAIN}
                                 text="Выкупы"
                                 className={cn(cls.item, [cls.subitem])}
                             />

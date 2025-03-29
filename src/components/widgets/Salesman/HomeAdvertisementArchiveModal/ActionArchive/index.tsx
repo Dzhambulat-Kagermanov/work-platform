@@ -3,10 +3,12 @@ import { FC, MouseEventHandler } from "react";
 import { TClassName, TState } from "@/types";
 import { cn } from "@/lib";
 import { Button, Typography } from "@/components/ui";
-import { useModalStore } from "@/store";
+import { useModalStore, useSellerStore } from "@/store";
 import { TModalStep } from "..";
 import { SALESMAN_ADVERTISEMENT_ARCHIVE_MODAL } from "@/constants";
 import cls from "./index.module.scss";
+import { useArchiveAdsMutation } from "@/hooks/api/seller";
+import { adsIdsSelector } from "@/store/useSellerStore";
 
 interface Props extends TClassName {
     setStep: TState<TModalStep>;
@@ -14,8 +16,21 @@ interface Props extends TClassName {
 const ActionArchive: FC<Props> = ({ className, setStep }) => {
     const hideModal = useModalStore((state) => state.hideModal);
 
+    const selectedAds = useSellerStore(adsIdsSelector);
+    const { mutate: archiveAdsMutate, isPending: archiveAdsPending } =
+        useArchiveAdsMutation();
+
     const handleConfirm: MouseEventHandler = () => {
-        setStep("success-archive");
+        archiveAdsMutate(
+            {
+                ad_ids: selectedAds,
+            },
+            {
+                onSuccess: () => {
+                    setStep("success-archive");
+                },
+            },
+        );
     };
     const handleCancel: MouseEventHandler = () => {
         hideModal({ slug: SALESMAN_ADVERTISEMENT_ARCHIVE_MODAL });
@@ -34,6 +49,7 @@ const ActionArchive: FC<Props> = ({ className, setStep }) => {
                 <Button
                     size="mid"
                     theme="outline"
+                    disabled={archiveAdsPending}
                     className={cn(cls.btn)}
                     onClick={handleCancel}
                 >
@@ -42,6 +58,7 @@ const ActionArchive: FC<Props> = ({ className, setStep }) => {
                 <Button
                     size="mid"
                     theme="fill"
+                    disabled={archiveAdsPending}
                     className={cn(cls.btn)}
                     onClick={handleConfirm}
                 >

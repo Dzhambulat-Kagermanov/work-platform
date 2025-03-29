@@ -4,6 +4,7 @@ import { cn } from "@/lib";
 import { Typography } from "@/components/ui";
 import Link from "next/link";
 import cls from "./index.module.scss";
+import { ROUTES } from "@/constants";
 
 interface Props extends TClassName {}
 const Navbar: FC<Props> = ({ className }) => {
@@ -19,17 +20,17 @@ const Navbar: FC<Props> = ({ className }) => {
                     Покупателям
                 </Typography>
                 <div className={cn(cls.content)}>
-                    <Link href="/">
+                    <Link href={ROUTES.MAIN}>
                         <Typography font="Inter-R" size={14}>
                             Главная
                         </Typography>
                     </Link>
-                    <Link href="/buyer/category">
+                    <Link href={ROUTES.BUYER.CATEGORY}>
                         <Typography font="Inter-R" size={14}>
                             Категории
                         </Typography>
                     </Link>
-                    <Link href="/buyer/auth">
+                    <Link href={ROUTES.BUYER.AUTH}>
                         <Typography font="Inter-R" size={14}>
                             Вход
                         </Typography>
@@ -46,12 +47,12 @@ const Navbar: FC<Props> = ({ className }) => {
                     Продавцам
                 </Typography>
                 <div className={cn(cls.content)}>
-                    <Link href="/salesman/auth">
+                    <Link href={ROUTES.SALESMAN.AUTH}>
                         <Typography font="Inter-R" size={14}>
                             Вход
                         </Typography>
                     </Link>
-                    <Link href="/salesman/support">
+                    <Link href={ROUTES.SALESMAN.SUPPORT}>
                         <Typography font="Inter-R" size={14}>
                             Поддержка
                         </Typography>

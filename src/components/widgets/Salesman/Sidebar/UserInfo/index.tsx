@@ -1,16 +1,23 @@
 import { FC, MouseEventHandler } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
-import Image from "next/image";
 import { Button, Typography } from "@/components/ui";
 import { PlusIcon } from "@/icons";
 import Link from "next/link";
 import cls from "./index.module.scss";
+import { useGetBalanceQuery, useSessionQuery } from "@/hooks/api/auth";
+import { ROUTES } from "@/constants";
+import { useRouter } from "next/navigation";
 
 interface Props extends TClassName {
     sidebarIsExpand: boolean;
 }
 const UserInfo: FC<Props> = ({ className, sidebarIsExpand }) => {
+    const { data: userData } = useSessionQuery();
+    const { data: balance } = useGetBalanceQuery();
+
+    const router = useRouter();
+
     const handleBalanceUp: MouseEventHandler = () => {};
     return (
         <div
@@ -18,24 +25,28 @@ const UserInfo: FC<Props> = ({ className, sidebarIsExpand }) => {
                 [cls.sidebarIsExpand]: sidebarIsExpand,
             })}
         >
-            <Link href={"/salesman/profile"} className={cn(cls.link)}>
-                <Image
-                    src="/images/stub/avatar.png"
-                    alt="Аватар"
-                    width={45}
-                    height={45}
-                />
-            </Link>
+            {userData?.avatar ? (
+                <Link href={ROUTES.SALESMAN.PROFILE} className={cn(cls.link)}>
+                    <img
+                        src="/images/stub/avatar.png"
+                        alt="Аватар"
+                        width={45}
+                        height={45}
+                    />
+                </Link>
+            ) : (
+                <></>
+            )}
             <div className={cn(cls.content_wrapper)}>
                 <div className={cn(cls.content)}>
                     <Typography font="Inter-SB" size={16} tag="h2">
-                        Анастасия К
+                        {userData?.name}
                     </Typography>
                     <Typography font="Inter-R" size={14} tag="h3">
-                        +7 977 587 00 00
+                        {userData?.phone}
                     </Typography>
                     <Typography font="Inter-R" size={14} tag="h4">
-                        Баланс: 550 ₽
+                        Баланс: {balance?.accessBalance} ₽
                     </Typography>
                     <Button
                         size="mid"
@@ -43,7 +54,9 @@ const UserInfo: FC<Props> = ({ className, sidebarIsExpand }) => {
                         wFull
                         theme="fill"
                         className={cn(cls.btn)}
-                        onClick={handleBalanceUp}
+                        onClick={() =>
+                            router.push(ROUTES.SALESMAN.BALANCE.VALUE)
+                        }
                     >
                         Пополнить
                     </Button>
@@ -55,7 +68,7 @@ const UserInfo: FC<Props> = ({ className, sidebarIsExpand }) => {
                             Выкупы:
                         </Typography>
                         <Typography font="Inter-R" size={12}>
-                            84 шт
+                            {balance?.redemption_count ?? 0} шт
                         </Typography>
                         <button className={cn(cls.plus_btn)}>
                             <PlusIcon color="var(--grey-300)" />

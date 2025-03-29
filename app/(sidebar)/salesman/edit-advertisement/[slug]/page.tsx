@@ -1,9 +1,10 @@
-import { FC } from "react";
-import { EditAdvertisementPage } from "@/components/page/Salesman/EditAdvertisement";
+import { FC } from "react"
+import { CreateEditAdvertisementPage } from "@/components/page/create-edit-advertisement-page"
 
-interface Props {}
-const EditAdvertisement: FC<Props> = ({}) => {
-    return <EditAdvertisementPage />;
-};
+interface Props { }
+const EditAdvertisement: FC<Props> = ({ }) => {
+    //@ts-expect-error: Исправить потом
+    return <CreateEditAdvertisementPage product={null} />
+}
 
-export default EditAdvertisement;
+export default EditAdvertisement

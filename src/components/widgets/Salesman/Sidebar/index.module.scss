@@ -34,6 +34,9 @@
     background-color: var(--white-400);
     rotate: -90deg;
     transition: var(--tran-low);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     svg {
         transition: inherit;
         width: 20px;

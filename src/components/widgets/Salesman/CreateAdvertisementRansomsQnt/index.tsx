@@ -1,20 +1,30 @@
-"use client";
-import { FC, MouseEventHandler, useState } from "react";
-import { TClassName } from "@/types";
-import { cn } from "@/lib";
-import { Typography } from "@/components/ui";
-import cls from "./index.module.scss";
+"use client"
+import { FC, MouseEventHandler, useState } from "react"
+import { TClassName } from "@/types"
+import { cn } from "@/lib"
+import { Typography } from "@/components/ui"
+import cls from "./index.module.scss"
+import { useGetBalanceQuery } from "@/hooks/api/auth"
 
-interface Props extends TClassName {}
-const CreateAdvertisementRansomsQnt: FC<Props> = ({ className }) => {
-    const [count, setCount] = useState<number>(0);
+interface Props extends TClassName {
+    count: number
+    setCount: React.Dispatch<React.SetStateAction<number>>
+}
+const CreateAdvertisementRansomsQnt: FC<Props> = ({
+    className,
+    count,
+    setCount,
+}) => {
+    const { data: balance } = useGetBalanceQuery()
+
+    const availableRedemptions = balance?.redemption_count ?? 0
 
     const handleMinus: MouseEventHandler = () => {
-        setCount((cur) => cur - 1);
-    };
+        setCount((cur) => cur - 1)
+    }
     const handlePlus: MouseEventHandler = () => {
-        setCount((cur) => cur + 1);
-    };
+        setCount((cur) => cur + 1)
+    }
 
     return (
         <section className={cn(cls.wrapper, [className])}>
@@ -31,12 +41,14 @@ const CreateAdvertisementRansomsQnt: FC<Props> = ({ className }) => {
                         -
                     </Typography>
                 </button>
-                <Typography font="Inter-R" size={17} tag="span">
-                    {count}
-                </Typography>
+
+                <input value={count} className={cls.input} onChange={(event) => {
+                    setCount(+event.target.value)
+                }} />
                 <button
                     onClick={handlePlus}
                     className={cn(cls.btn, [cls.plus])}
+                    disabled={count + 1 > availableRedemptions}
                 >
                     <Typography font="Inter-R" size={24} tag="span">
                         +
@@ -44,10 +56,10 @@ const CreateAdvertisementRansomsQnt: FC<Props> = ({ className }) => {
                 </button>
             </div>
             <Typography font="Inter-R" size={12} tag="h3">
-                Доступно выкупов = 0 шт
+                Доступно выкупов = {availableRedemptions} шт
             </Typography>
         </section>
-    );
-};
+    )
+}
 
-export { CreateAdvertisementRansomsQnt };
+export { CreateAdvertisementRansomsQnt }

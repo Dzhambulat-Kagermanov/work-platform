@@ -1,3 +1,4 @@
+"use client";
 import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
@@ -7,23 +8,23 @@ import { CategoryItemSubcategories } from "../CategoryItemSubcategories";
 import cls from "./index.module.scss";
 
 interface Props extends TClassName {
-    slug: string;
+    categoryId: string;
     subcategory?: string;
 }
 const CategorySelectSubcategory: FC<Props> = ({
     className,
-    slug,
+    categoryId,
     subcategory,
 }) => {
     return (
         <Container tag="section" className={cn(cls.wrapper, [className])}>
             <CategoryItemCrumbs
                 subcategory={subcategory}
-                slug={slug}
+                categoryId={categoryId}
                 className={cn(cls.crumbs, ["modules-gap-top"])}
             />
             <CategoryItemSubcategories
-                slug={slug}
+                categoryId={categoryId}
                 className={cn(cls.subcategories, [
                     "modules-gap-top",
                     "modules-gap-bottom",

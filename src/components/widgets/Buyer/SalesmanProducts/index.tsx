@@ -1,13 +1,13 @@
-import { FC } from "react";
-import { TClassName } from "@/types";
-import { cn } from "@/lib";
-import { Container, Typography } from "@/components/ui";
-import { salesmanProducts } from "@/constants/stub";
-import { ProductItem } from "@/components/entities/ProductItem";
-import Link from "next/link";
-import cls from "./index.module.scss";
+import { FC } from "react"
+import { TClassName } from "@/types"
+import { cn } from "@/lib"
+import { Container, Typography } from "@/components/ui"
+import { salesmanProducts } from "@/constants/stub"
+import { ProductItem } from "@/components/entities/ProductItem"
+import Link from "next/link"
+import cls from "./index.module.scss"
 
-interface Props extends TClassName {}
+interface Props extends TClassName { }
 const SalesmanProducts: FC<Props> = ({ className }) => {
     return (
         <Container tag="section" className={cn(cls.wrapper, [className])}>
@@ -34,22 +34,23 @@ const SalesmanProducts: FC<Props> = ({ className }) => {
                         return (
                             <Link href={`/buyer/products/${id}`} key={id}>
                                 <ProductItem
+                                    id={id}
                                     wrapperCls={cn(cls.item)}
                                     image={previewImage}
                                     name={name}
+                                    //@ts-expect-error: Исправить потом
                                     price={price}
-                                    isFavorite={isFavorite}
                                     quantities={quantities}
                                     tag="li"
                                     tooltip={tooltip}
                                 />
                             </Link>
-                        );
+                        )
                     },
                 )}
             </ul>
         </Container>
-    );
-};
+    )
+}
 
-export { SalesmanProducts };
+export { SalesmanProducts }

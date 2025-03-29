@@ -30,10 +30,7 @@ const HomeAdvertisementArchiveModal: FC<Props> = ({ className }) => {
                         setStep={setStep}
                     />
                 ) : step === "success-archive" ? (
-                    <SuccessArchive
-                        className={cn(cls.success_archive)}
-                        setStep={setStep}
-                    />
+                    <SuccessArchive className={cn(cls.success_archive)} />
                 ) : (
                     <FailArchive className={cn(cls.fail_archive)} />
                 )}

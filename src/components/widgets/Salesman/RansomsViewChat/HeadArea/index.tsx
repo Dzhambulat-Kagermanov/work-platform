@@ -6,11 +6,13 @@ import { HeadAreaSalesmanInfo } from "../HeadAreaSalesmanInfo";
 import { HeadAreaOrderInfo } from "../HeadAreaOrderInfo";
 import { HeadAreaBackBtn } from "../HeadAreaBackBtn";
 import cls from "./index.module.scss";
+import { Order } from "@/types/api";
 
 interface Props extends TClassName {
     setActiveSTUB: TState<number | undefined>;
+    orderInfo: Order;
 }
-const HeadArea: FC<Props> = ({ className, setActiveSTUB }) => {
+const HeadArea: FC<Props> = ({ className, setActiveSTUB, orderInfo, }) => {
     return (
         <div className={cn(cls.wrapper, [className])}>
             <div className={cn(cls.content)}>
@@ -19,12 +21,17 @@ const HeadArea: FC<Props> = ({ className, setActiveSTUB }) => {
                     setActiveSTUB={setActiveSTUB}
                 />
                 <div className={cn(cls.images)}>
-                    <Image
-                        src={"/images/stub/avatar.png"}
-                        width={42}
-                        height={42}
-                        alt="Аватар"
-                    />
+                    {
+                        orderInfo.ad.product.images[0] ? 
+                            <img
+                                src={orderInfo.ad.product.images[0]}
+                                width={42}
+                                height={42}
+                                alt="Аватар"
+                            />
+                        : 
+                            <></>
+                    }
                     <div className={cn(cls.border)}>
                         <Image
                             src={"/images/stub/avatar.png"}
@@ -34,7 +41,7 @@ const HeadArea: FC<Props> = ({ className, setActiveSTUB }) => {
                         />
                     </div>
                 </div>
-                <HeadAreaSalesmanInfo className={cn(cls.salesman_info)} />
+                <HeadAreaSalesmanInfo orderInfo={orderInfo} className={cn(cls.salesman_info)} />
             </div>
             <HeadAreaOrderInfo className={cn(cls.order_info)} />
         </div>

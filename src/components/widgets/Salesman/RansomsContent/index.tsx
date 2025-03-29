@@ -1,5 +1,5 @@
 "use client";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { RansomsChats } from "../RansomsChats";
@@ -11,13 +11,14 @@ import {
     SALESMAN_SIDEBAR_MENU,
 } from "@/constants";
 import cls from "./index.module.scss";
-import { TChatType } from "../RansomsSidebar/types";
+import { ChatStatus } from "@/types/api";
 
 interface Props extends TClassName {
-    chatType: TChatType;
+    chatType: ChatStatus;
 }
 const RansomsContent: FC<Props> = ({ className, chatType }) => {
     const [activeId, setActiveId] = useState<number | undefined>(undefined);
+
     const width = useScreen();
     const sidebarState = useModalStore(
         (state) => state.modalsStates[SALESMAN_SIDEBAR_MENU]?.modalState,
@@ -40,11 +41,11 @@ const RansomsContent: FC<Props> = ({ className, chatType }) => {
             width > MD_BIG_BETWEEN_MD_LOW);
 
     return (
-        <section className={cn(cls.wrapper, [className])}>
+        <section className={cn(cls.wrapper, [className, "w-full"])}>
             {IS_RENDER_RANSOMS_CHAT && (
                 <RansomsChats
                     chatType={chatType}
-                    className={cn(cls.chats)}
+                    className={cn(cls.chat)}
                     activeIdSTUB={activeId}
                     setActiveIdSTUB={setActiveId}
                 />
@@ -52,6 +53,7 @@ const RansomsContent: FC<Props> = ({ className, chatType }) => {
             {IS_RENDER_RANSOMS_VIEW_CHAT && (
                 <RansomsViewChat
                     className={cn(cls.view)}
+                    activeId={activeId}
                     setActiveSTUB={setActiveId}
                 />
             )}

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { TClassName, TState } from "@/types";
 import { cn } from "@/lib";
 import { Input, Typography } from "@/components/ui";
@@ -6,13 +6,15 @@ import Image from "next/image";
 import { SearchIcon } from "@/icons";
 import { Chats } from "./Chats";
 import { MobileSwitcher } from "./MobileSwitcher";
-import { TChatType } from "../DeliverySidebar/types";
 import cls from "./index.module.scss";
+import { ChatStatus } from "@/types/api";
+import { useGetChatListQuery } from "@/hooks/api/chat";
+import { useDebounce } from "use-debounce";
 
 interface Props extends TClassName {
     activeIdSTUB?: number;
     setActiveIdSTUB: TState<number | undefined>;
-    chatType: TChatType;
+    chatType: ChatStatus;
 }
 const DeliveryChats: FC<Props> = ({
     className,
@@ -20,6 +22,9 @@ const DeliveryChats: FC<Props> = ({
     setActiveIdSTUB,
     activeIdSTUB,
 }) => {
+    const [search, setSearch] = useState("");
+    const [searchDebounce] = useDebounce(search, 600);
+
     return (
         <section className={cn(cls.wrapper, [className])}>
             <div className={cn(cls.head)}>
@@ -44,6 +49,8 @@ const DeliveryChats: FC<Props> = ({
                     contentCls={cn(cls.inp_content)}
                     wrapperCls={cn(cls.inp_wrapper)}
                     placeholder="Поиск..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
                     icon={<SearchIcon color="var(--grey-300)" />}
                 />
                 <MobileSwitcher
@@ -53,6 +60,8 @@ const DeliveryChats: FC<Props> = ({
             </div>
             <div className={cn(cls.chat_wrapper)}>
                 <Chats
+                    search={searchDebounce}
+                    chatType={chatType}
                     className={cn(cls.chat)}
                     activeIdSTUB={activeIdSTUB}
                     setActiveIdSTUB={setActiveIdSTUB}

@@ -1,12 +1,12 @@
 import { HomePage } from "@/components/page/Salesman/Home";
-import { TChatType } from "@/components/widgets/Buyer/DeliverySidebar/types";
 import { TSalesmanHomePageType } from "@/components/widgets/Salesman/HomePagesSwitcher";
+import { ChatStatus } from "@/types/api";
 import { FC } from "react";
 
 interface Props {
     searchParams: Promise<{
         homePageType: TSalesmanHomePageType;
-        chatType: TChatType;
+        chatType: ChatStatus;
     }>;
 }
 const Home: FC<Props> = async ({ searchParams }) => {

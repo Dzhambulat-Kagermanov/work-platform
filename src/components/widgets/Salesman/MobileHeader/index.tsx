@@ -4,7 +4,7 @@ import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { Logo } from "../../shared/Logo";
 import { useModalStore } from "@/store";
-import { SALESMAN_BURGER_MENU } from "@/constants";
+import { ROUTES, SALESMAN_BURGER_MENU } from "@/constants";
 import cls from "./index.module.scss";
 
 interface Props extends TClassName {}
@@ -16,11 +16,11 @@ const MobileHeader: FC<Props> = ({ className }) => {
     return (
         <header className={cn(cls.wrapper, [className])}>
             <button className={cn(cls.menu_open_btn)} onClick={handleClick}>
-                <span></span>
-                <span></span>
-                <span></span>
+                <span />
+                <span />
+                <span />
             </button>
-            <Logo link="/salesman" className={cn(cls.logo)} />
+            <Logo link={ROUTES.MAIN} className={cn(cls.logo)} />
         </header>
     );
 };

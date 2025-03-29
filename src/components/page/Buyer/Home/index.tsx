@@ -14,7 +14,7 @@ const HomePage: FC<Props> = ({ className }) => {
                 className={cn("modules-gap-top", ["modules-gap-bottom"])}
             />
             <HomeProducts className={cn("modules-gap-bottom")} />
-            <FilterModalsLayout />
+            <FilterModalsLayout pageType="home" />
         </main>
     );
 };

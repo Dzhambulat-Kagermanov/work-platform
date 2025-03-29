@@ -12,9 +12,9 @@
     backdrop-filter: blur(16px);
     max-height: 100vh;
     overflow: auto;
-    display: grid !important;
-    grid-template-columns: 1fr;
+    display: flex !important;
     align-items: center;
+    justify-content: center;
     padding: 20px 10px;
 
     &::-webkit-scrollbar {

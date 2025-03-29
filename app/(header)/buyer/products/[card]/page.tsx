@@ -1,16 +1,19 @@
-import { ProductCardPage } from "@/components/page/Buyer/ProductCard";
-import { notFound } from "next/navigation";
-import { FC } from "react";
-
+import { ProductCardPage } from "@/components/page/Buyer/ProductCard"
+import { notFound } from "next/navigation"
+import { FC } from "react"
+import { apiService } from "@/services"
 interface Props {
-    params: Promise<{ card: string }>;
+    params: Promise<{ card: string }>
 }
+
 const ProductCard: FC<Props> = async ({ params }) => {
-    const { card } = await params;
+    const { card } = await params
 
-    if (Number.isNaN(card)) return notFound();
+    const product = await apiService.products.getProductItem(card)
 
-    return <ProductCardPage id={+card} />;
-};
+    if (!product) return notFound()
 
-export default ProductCard;
+    return <ProductCardPage product={product} />
+}
+
+export default ProductCard

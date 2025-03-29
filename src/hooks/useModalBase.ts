@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { TModalSlug, useModalStore } from "../store/useModalStore";
+import { useModalStore } from "@/store";
 import { TRAN_MID } from "@/constants";
 import { useBodyClassName } from "./useBodyClassName";
+import { TModalSlug } from "@/store/useModalStore";
 
 interface Params extends TModalSlug {
     transitionSpeed?: number;

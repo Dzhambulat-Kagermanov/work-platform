@@ -1,9 +1,9 @@
-import { AccountPage } from "@/components/page/Buyer/Account";
+import { AccountPage } from "@/components/page/account-page";
 import { FC } from "react";
 
 interface Props {}
 const Account: FC<Props> = ({}) => {
-    return <AccountPage />;
+    return <AccountPage role="buyer" />;
 };
 
 export default Account;

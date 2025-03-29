@@ -12,4 +12,5 @@ export type TProductItemProps = {
     tooltip?: string;
     salesmanId: number;
     productDescription: string;
+    productInstructions: string;
 };

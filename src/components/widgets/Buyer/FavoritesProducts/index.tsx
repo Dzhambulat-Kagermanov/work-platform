@@ -1,53 +1,59 @@
-import { FC } from "react";
-import { TClassName } from "@/types";
-import { Container } from "@/components/ui";
-import { cn } from "@/lib";
-import cls from "./index.module.scss";
-import { favoriteProducts } from "@/constants/stub";
-import { ProductItem } from "@/components/entities/ProductItem";
-import Link from "next/link";
+"use client"
+import { FC } from "react"
+import { TClassName } from "@/types"
+import { Container } from "@/components/ui"
+import { cn } from "@/lib"
+import cls from "./index.module.scss"
+import { favoriteProducts } from "@/constants/stub"
+import { ProductItem } from "@/components/entities/ProductItem"
+import Link from "next/link"
+import { useGetFavoritesQuery } from "@/hooks/api/favorites"
+import { ROUTES } from "@/constants"
 
-interface Props extends TClassName {}
+interface Props extends TClassName { }
 const FavoritesProducts: FC<Props> = ({ className }) => {
+    const { data: favoritesData } = useGetFavoritesQuery()
+    if (!favoritesData || !favoritesData.length) {
+        return (
+            <div className="flex items-center justify-center text-center h-[80dvh] min-h-[250px]">
+                Товары не найдены
+            </div>
+        )
+    }
     return (
         <Container tag="section" className={cn(cls.wrapper, [className])}>
             <ul className={cn(cls.group)}>
-                {favoriteProducts.map(
-                    ({
-                        id,
-                        images,
-                        name,
-                        previewImage,
-                        price,
-                        productDescription,
-                        quantities,
-                        salesmanId,
-                        isFavorite,
-                        tooltip,
-                    }) => {
-                        return (
-                            <Link
-                                href={`/buyer/products/${id}`}
-                                key={id}
-                                className={cn(cls.link)}
-                            >
-                                <ProductItem
-                                    wrapperCls={cn(cls.item)}
-                                    image={previewImage}
-                                    name={name}
-                                    price={price}
-                                    isFavorite={isFavorite}
-                                    quantities={quantities}
-                                    tag="li"
-                                    tooltip={tooltip}
-                                />
-                            </Link>
-                        );
-                    },
-                )}
+                {favoritesData.map((item, index) => {
+                    return (
+                        <Link
+                            href={ROUTES.BUYER.PRODUCTS.ID(`${item.id}`)}
+                            key={index}
+                            className={cn(cls.link)}
+                        >
+                            <ProductItem
+                                id={item.id}
+                                wrapperCls={cn(cls.item)}
+                                image={
+                                    item.product.images.length
+                                        ? item.product.images[0]
+                                        : null
+                                }
+                                name={item.product.name}
+                                price={{
+                                    //@ts-expect-error: Исправить потом
+                                    price: +item.product.price,
+                                    discount: +item.product.discount,
+                                }}
+                                quantities={item.quantity}
+                                tag="li"
+                                tooltip={""}
+                            />
+                        </Link>
+                    )
+                })}
             </ul>
         </Container>
-    );
-};
+    )
+}
 
-export { FavoritesProducts };
+export { FavoritesProducts }

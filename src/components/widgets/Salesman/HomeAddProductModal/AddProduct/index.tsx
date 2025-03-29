@@ -4,21 +4,55 @@ import { TClassName, TState } from "@/types";
 import { cn } from "@/lib";
 import Image from "next/image";
 import { Button, Input, Typography } from "@/components/ui";
-import { TModalStep } from "..";
+import { ProductInfo, TModalStep } from "..";
 import cls from "./index.module.scss";
-import { useModalStore } from "@/store";
-import { SALESMAN_ADD_PRODUCT_MODAL } from "@/constants";
+import { useGetWbProductMutation } from "@/hooks/api/seller";
+import toast from "react-hot-toast";
+import { AxiosError } from "axios";
+import { useSessionQuery } from "@/hooks/api/auth";
 
 interface Props extends TClassName {
     setStep: TState<TModalStep>;
+    art: string;
+    setArt: (value: string) => void;
+    setInfo: (value: ProductInfo) => void;
+    closeModal: () => void;
 }
-const AddProduct: FC<Props> = ({ className, setStep }) => {
-    const hideModal = useModalStore((state) => state.hideModal);
-    const handleCancelClick: MouseEventHandler = () => {
-        hideModal({ slug: SALESMAN_ADD_PRODUCT_MODAL });
-    };
+const AddProduct: FC<Props> = ({
+    className,
+    setInfo,
+    setStep,
+    setArt,
+    art,
+    closeModal,
+}) => {
+    const { data: userData } = useSessionQuery();
+
+    const { mutate: getWbProductMutate, isPending: isPendingGet } =
+        useGetWbProductMutation();
     const handleConfirmClick: MouseEventHandler = () => {
-        setStep("addProductConfirmation");
+        getWbProductMutate(
+            {
+                id: art,
+            },
+            {
+                onSuccess: (data) => {
+                    setInfo(data);
+                    setStep(
+                        !!userData?.shop ? "addProductConfirmation" : "addShop",
+                    );
+                    toast.success("Товар успешно найден");
+                },
+                onError: (e) => {
+                    const error = e as AxiosError<{ message: string }>;
+                    toast.error(
+                        error.response?.data.message ??
+                            "Не удалось получить товар",
+                    );
+                    setStep("failAddProduct");
+                },
+            },
+        );
     };
 
     return (
@@ -37,13 +71,17 @@ const AddProduct: FC<Props> = ({ className, setStep }) => {
             </Typography>
             <Input
                 label="Артикул:"
+                value={art}
+                onChange={(e) => setArt(e.target.value.trim())}
+                disabled={isPendingGet}
                 wrapperCls={cn(cls.inp_wrapper)}
                 labelCls={cn(cls.inp_label)}
             />
             <div className={cn(cls.actions)}>
                 <Button
                     size="mid"
-                    onClick={handleCancelClick}
+                    disabled={isPendingGet}
+                    onClick={closeModal}
                     theme="outline"
                     className={cn(cls.btn, [cls.cancel_btn])}
                 >
@@ -51,6 +89,7 @@ const AddProduct: FC<Props> = ({ className, setStep }) => {
                 </Button>
                 <Button
                     size="mid"
+                    disabled={!art || isPendingGet}
                     onClick={handleConfirmClick}
                     theme="fill"
                     className={cn(cls.btn, [cls.cancel_btn])}

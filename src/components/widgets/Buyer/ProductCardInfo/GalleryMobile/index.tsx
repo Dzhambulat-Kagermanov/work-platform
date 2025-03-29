@@ -35,7 +35,7 @@ const GalleryMobile: FC<Props> = ({ className, images, isFavorite }) => {
                 {images.map((image) => {
                     return (
                         <SwiperSlide key={image} className={cn(cls.item)}>
-                            <Image
+                            <img
                                 src={image}
                                 alt="Продукт"
                                 width={360}

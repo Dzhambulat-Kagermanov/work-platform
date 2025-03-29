@@ -10,11 +10,13 @@ import { Group } from "./Group";
 import { useScreen } from "@/hooks";
 import { Footer } from "./Footer";
 import { ExpandArrowIcon } from "@/icons";
-import { isAuth } from "@/constants/stub";
 import cls from "./index.module.scss";
+import { useSessionQuery } from "@/hooks/api/auth";
 
 interface Props extends TClassName {}
 const BurgerMenu: FC<Props> = ({ className }) => {
+    const { data: user } = useSessionQuery();
+
     const screen = useScreen();
 
     const { modalState, visibleTransition, handleClose } = useModalBase({
@@ -44,12 +46,11 @@ const BurgerMenu: FC<Props> = ({ className }) => {
                             </button>
                         </div>
                         <Group
-                            isAuth={isAuth}
+                            isAuth={!!user}
                             className={cn(cls.group)}
                             actionForLinkClick={handleClose}
                         />
                         <Footer
-                            isAuth={isAuth}
                             className={cn(cls.footer)}
                             actionForLinkClick={handleClose}
                         />

@@ -30,12 +30,14 @@
     height: 48px;
 }
 .content {
+    flex-grow: 1;
 }
 .head {
     margin-bottom: 4px;
     display: flex;
     column-gap: 4px;
     align-items: center;
+    justify-content: space-between;
     h2 {
     }
     time {

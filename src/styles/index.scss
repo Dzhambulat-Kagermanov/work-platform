@@ -1,3 +1,6 @@
 @use "./normalize.scss";
 @use "./fonts.scss";
 @use "./global.scss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

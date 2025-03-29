@@ -1,30 +1,70 @@
-import { FC } from "react";
-import { TClassName } from "@/types";
-import { ADVERTISEMENTS } from "./constants/advertisements";
-import { AdvertisementsTableBodyItem } from "@/components/entities/AdvertisementsTableBodyItem";
-import { cn } from "@/lib";
-import { HomeTable } from "../HomeTable";
-import { Typography } from "@/components/ui";
-import { ArrowIcon } from "@/icons";
-import cls from "./index.module.scss";
+import { FC } from "react"
+import { TClassName } from "@/types"
+import { AdvertisementsTableBodyItem } from "@/components/entities/AdvertisementsTableBodyItem"
+import { cn } from "@/lib"
+import { HomeTable } from "../HomeTable"
+import { Typography } from "@/components/ui"
+import cls from "./index.module.scss"
+import { useGetAdsListQuery } from "@/hooks/api/seller"
+import { PageLoader } from "@/components/ui/loaders"
+import { PageErrorStub } from "@/components/ui/page-error-stub"
+import { usePagination } from "@/hooks/client"
+import { useSellerStore } from "@/store"
+import { adsSearchSelector } from "@/store/useSellerStore"
 
-interface Props extends TClassName {}
+interface Props extends TClassName { }
 const HomeAdvertisementsContent: FC<Props> = ({ className }) => {
+    const adsSearch = useSellerStore(adsSearchSelector)
+
+    const query = () => {
+
+        const res = []
+
+        if (adsSearch) {
+            res.push({
+                key: "search",
+                value: adsSearch,
+            })
+        }
+
+        return res
+
+    }
+
+
+    const { pagination, setPagination } = usePagination()
+
+    const {
+        data: adveritsements,
+        isLoading,
+        isError,
+    } = useGetAdsListQuery(query())
+
+    if (isLoading) {
+        return <PageLoader />
+    }
+
+    if (!adveritsements || isError) {
+        return <PageErrorStub />
+    }
+
+    if (!adveritsements.data.length) {
+        return <PageErrorStub text="Объявления не найдены" />
+    }
+
     return (
         <HomeTable
-            body={ADVERTISEMENTS.map(({ id, ...other }) => (
-                <AdvertisementsTableBodyItem id={id} key={id} {...other} />
+            body={adveritsements.data.map((item) => (
+                <AdvertisementsTableBodyItem
+                    item={item}
+                    key={`${item.name}${item.id}`}
+                />
             ))}
             head={[
                 <div className={cn(cls.head_advertisements)}>
-                    <div className={cn(cls.square)} />
                     <Typography font="Inter-M" size={12}>
-                        Объявления (120)
+                        Объявления {adveritsements?.data.length}
                     </Typography>
-                    <ArrowIcon
-                        color="var(--grey-600)"
-                        className={cn(cls.icon)}
-                    />
                 </div>,
                 "Статус",
                 "Товар",
@@ -34,15 +74,9 @@ const HomeAdvertisementsContent: FC<Props> = ({ className }) => {
                 "В сделках",
                 "Просмотры",
                 "В избранном",
-                "Выкупы",
-                "CTR",
+                "CR",
             ]}
-            pagination={{
-                pages: {
-                    current: 1,
-                    max: 10,
-                },
-            }}
+            pagination={pagination}
             bodyCls={cn(cls.body)}
             bodyRowCls={cn(cls.body_row)}
             className={cn(cls.wrapper, [className])}
@@ -52,7 +86,7 @@ const HomeAdvertisementsContent: FC<Props> = ({ className }) => {
             tableCls={cn(cls.table)}
             tableWrapperCls={cn(cls.table_wrapper)}
         />
-    );
-};
+    )
+}
 
-export { HomeAdvertisementsContent };
+export { HomeAdvertisementsContent }

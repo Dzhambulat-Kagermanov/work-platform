@@ -9,9 +9,12 @@ import { MessagesAreaGroup } from "../MessagesAreaGroup";
 import { MESSAGES, SALESMAN_IS_ONLINE } from "../constants/messages";
 import { DeliveryReviewModal } from "../../DeliveryReviewModal";
 import cls from "./index.module.scss";
+import { Message } from "@/types/api";
 
-interface Props extends TClassName {}
-const MessagesArea: FC<Props> = ({ className }) => {
+interface Props extends TClassName {
+    messages: Message[];
+}
+const MessagesArea: FC<Props> = ({ className, messages, }) => {
     const notificationRef = useRef<HTMLDivElement>(null);
     const groupOverlayRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
@@ -24,7 +27,7 @@ const MessagesArea: FC<Props> = ({ className }) => {
 
     return (
         <div className={cn(cls.wrapper, [className])}>
-            {MESSAGES.length ? (
+            {messages.length ? (
                 <>
                     <DeliveryViewNotification
                         className={cn(cls.notification)}

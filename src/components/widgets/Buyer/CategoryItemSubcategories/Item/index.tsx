@@ -5,16 +5,18 @@ import { Typography } from "@/components/ui";
 import Link from "next/link";
 import { ExpandArrowIcon } from "@/icons";
 import cls from "./index.module.scss";
+import { ROUTES } from "@/constants";
 
 interface Props extends TClassName, TSubcategoryItemProps {
-    slug: string;
+    categoryId: string;
+    id: number;
 }
-const Item: FC<Props> = ({ productsQnt, title, className, slug }) => {
+const Item: FC<Props> = ({ productsQnt, title, className, categoryId, id }) => {
     return (
         <li className={cn(cls.item, [className])}>
             <Link
                 className={cn(cls.link)}
-                href={`/buyer/category?slug=${slug}&subcategory=${title}`}
+                href={`${ROUTES.BUYER.CATEGORY}?categoryId=${categoryId}&subcategory=${id}`}
             >
                 <Typography font="Inter-M" size={18}>
                     {title} ({productsQnt})

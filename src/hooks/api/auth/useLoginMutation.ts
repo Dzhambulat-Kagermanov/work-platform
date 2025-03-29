@@ -1,16 +1,36 @@
-import { useMutation } from "@tanstack/react-query";
-import axios from "@/axios";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiService } from "@/services";
+import { LoginData } from "@/services/AuthService";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { ROUTES } from "@/constants";
+import { setQuerySessionDataHandler } from "@/lib";
 
-type LoginData = Record<"phone" | "password", string>;
+const useLoginMutation = () => {
+    const router = useRouter();
+    const queryClient = useQueryClient();
 
-const useLoginMutation = () =>
-    useMutation({
+    return useMutation({
         mutationKey: ["auth-login"],
         mutationFn: async (data: LoginData) => {
-            const res = await axios.post("/login", data);
+            const res = await apiService.auth.login(data);
 
-            return res.data;
+            return res;
+        },
+        onSuccess: (data) => {
+            const role = data.user.role.slug;
+            router.push(
+                role === "buyer"
+                    ? ROUTES.BUYER.ACCOUNT.VALUE
+                    : ROUTES.SALESMAN.PROFILE,
+            );
+            setQuerySessionDataHandler(queryClient, data.user);
+            toast.success("Авторизация прошла успешно");
+        },
+        onError: () => {
+            toast.error("Не удалось авторизоваться");
         },
     });
+};
 
 export default useLoginMutation;

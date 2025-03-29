@@ -9,6 +9,9 @@ import { MessagesAreaReview } from "../MessagesAreaReview";
 import { TViewChatMessageGroupProps } from "@/types/salesman/chat";
 import { ChatUploadFilesItem } from "@/components/entities/MessagesAreaUploadFiles";
 import cls from "./index.module.scss";
+import React from "react";
+import { dateParserHandler } from "@/handlers";
+import { useSessionQuery } from "@/hooks/api/auth";
 
 interface Props extends TClassName, TViewChatMessageGroupProps {
     userIsOnline: boolean;
@@ -19,6 +22,9 @@ const MessagesAreaGroup: FC<Props> = ({
     messages,
     userIsOnline,
 }) => {
+    const { data: userData } = useSessionQuery();
+    const role = userData?.role.slug;
+    const isSalesman = role === "seller";
     return (
         <div className={cn(cls.wrapper, [className])}>
             <Typography
@@ -30,67 +36,94 @@ const MessagesAreaGroup: FC<Props> = ({
                 {date}
             </Typography>
             <ul className={cn(cls.group)}>
-                {messages.map(({ message, type }, idx) => {
-                    if (type === "user" || type === "salesman")
-                        return (
-                            <ChatMessageItem
-                                whoReading="reading-salesman"
-                                tag="li"
-                                id={message.id}
-                                key={message.id}
-                                avatar={message.avatar}
-                                className={cn(cls.item)}
-                                message={message.message}
-                                messageCls={cn(cls.item_message)}
-                                messageGotTime={message.messageGotTime}
-                                name={type === "salesman" ? "Вы" : message.name}
-                                isOnline={type === "salesman" || userIsOnline}
-                                whomSend={
-                                    type === "salesman" ? "salesman" : "user"
-                                }
-                            />
-                        );
-                    if (type === "confirm-action" || type === "fail-action")
-                        return (
-                            <MessagesAreaActionType
-                                key={idx + "/"}
-                                tag="li"
-                                className={cn(cls.action)}
-                                type={type}
-                                message={message}
-                            />
-                        );
-                    if (type === "review")
-                        return (
-                            <MessagesAreaReview
-                                key={idx + "/"}
-                                message={message}
-                                type={type}
-                                className={cn(cls.review)}
-                                tag="li"
-                            />
-                        );
-                    if (type === "review-creating")
-                        return (
-                            <MessagesAreaReviewCreating
-                                key={idx + "/"}
-                                tag="li"
-                                className={cn(cls.review_creating)}
-                            />
-                        );
+                {messages.map((item, idx) => {
+                    // if (type === "user" || type === "salesman")
+                    //     return (
+                    //         <ChatMessageItem
+                    //             whoReading="reading-salesman"
+                    //             tag="li"
+                    //             id={message.id}
+                    //             key={message.id}
+                    //             avatar={message.avatar}
+                    //             className={cn(cls.item)}
+                    //             message={message.message}
+                    //             messageCls={cn(cls.item_message)}
+                    //             messageGotTime={message.messageGotTime}
+                    //             name={type === "salesman" ? "Вы" : message.name}
+                    //             isOnline={type === "salesman" || userIsOnline}
+                    //             whomSend={
+                    //                 type === "salesman" ? "salesman" : "user"
+                    //             }
+                    //         />
+                    //     );
+                    // if (type === "confirm-action" || type === "fail-action")
+                    //     return (
+                    //         <MessagesAreaActionType
+                    //             key={idx + "/"}
+                    //             tag="li"
+                    //             className={cn(cls.action)}
+                    //             type={type}
+                    //             message={message}
+                    //         />
+                    //     );
+                    // if (type === "review")
+                    //     return (
+                    //         <MessagesAreaReview
+                    //             key={idx + "/"}
+                    //             message={message}
+                    //             type={type}
+                    //             className={cn(cls.review)}
+                    //             tag="li"
+                    //         />
+                    //     );
+                    // if (type === "review-creating")
+                    //     return (
+                    //         <MessagesAreaReviewCreating
+                    //             key={idx + "/"}
+                    //             tag="li"
+                    //             className={cn(cls.review_creating)}
+                    //         />
+                    //     );
 
-                    if (type === "uploaded-file") {
-                        return (
-                            <ChatUploadFilesItem
-                                whoReading="reading-salesman"
-                                className={cn(cls.item, [cls.upload_files])}
-                                message={message}
-                                key={idx + "/"}
-                                type="uploaded-file"
-                                userIsOnline={userIsOnline}
-                            />
-                        );
-                    }
+                    // if (type === "uploaded-file") {
+                    //     return (
+                    //         <ChatUploadFilesItem
+                    //             whoReading="reading-salesman"
+                    //             className={cn(cls.item, [cls.upload_files])}
+                    //             message={message}
+                    //             key={idx + "/"}
+                    //             type="uploaded-file"
+                    //             userIsOnline={userIsOnline}
+                    //         />
+                    //     );
+                    // }
+                    return (
+                        <React.Fragment key={idx}>
+                            {
+                                (() => {
+                                    
+                                    if (item.type === "text") {
+                                        return (
+                                            <ChatMessageItem
+                                                whoReading={isSalesman ? "reading-user" : "reading-salesman"}
+                                                tag="li"
+                                                id={item.id}
+                                                avatar={""}
+                                                className={cn(cls.item)}
+                                                message={item.text}
+                                                messageCls={cn(cls.item_message)}
+                                                messageGotTime={dateParserHandler(item.created_at)}
+                                                name={""}
+                                                isOnline={false}
+                                                whomSend={isSalesman ? "salesman" : "user"}
+                                            />
+                                        )
+                                    }
+
+                                })()
+                            }
+                        </React.Fragment>
+                    )
                 })}
             </ul>
         </div>

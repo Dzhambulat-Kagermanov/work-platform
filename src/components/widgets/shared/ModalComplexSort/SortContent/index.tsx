@@ -4,9 +4,13 @@ import { cn } from "@/lib";
 import { Dropdown, Typography } from "@/components/ui";
 import { slugs } from "@/components/widgets/shared/ModalSort/constants/slugs";
 import cls from "./index.module.scss";
+import { SortType } from "@/store/useFiltersStore";
 
-interface Props extends TClassName {}
-const SortContent: FC<Props> = ({ className }) => {
+interface Props extends TClassName {
+    sort: SortType;
+    setSort: (value: SortType) => void;
+}
+const SortContent: FC<Props> = ({ className, setSort, sort }) => {
     return (
         <div className={cn(cls.wrapper, [className])}>
             <Typography font="Inter-SB" size={18} tag="h2">
@@ -19,7 +23,7 @@ const SortContent: FC<Props> = ({ className }) => {
                 }}
                 icon={<div className={cn(cls.circle)} />}
                 wrapperCls={cn(cls.drp_wrapper)}
-                defaultActiveValue={slugs[0]}
+                defaultActiveValue={sort || slugs[0].value}
                 items={slugs.map((slug) => {
                     return {
                         content: (
@@ -28,11 +32,13 @@ const SortContent: FC<Props> = ({ className }) => {
                                 size={16}
                                 className={cn(cls.drp_item)}
                             >
-                                {slug}
+                                {slug.label}
                             </Typography>
                         ),
-                        value: slug,
-                        onClick: () => {},
+                        value: slug.value,
+                        onClick: () => {
+                            setSort(slug.value);
+                        },
                     };
                 })}
             />

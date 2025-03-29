@@ -4,11 +4,11 @@ import { Typography } from "@/components/ui";
 import { cn } from "@/lib";
 import { Pagination, TPaginationProps } from "../../shared/Pagination";
 import cls from "./index.module.scss";
+import { PaginationValue } from "@/hooks/client/usePagination";
 
 interface Props extends TClassName {
     head: (string | ReactNode)[];
     body: ReactNode[];
-    pagination: TPaginationProps;
     headCls?: string;
     headRowCls?: string;
     headCol?: string;
@@ -16,6 +16,7 @@ interface Props extends TClassName {
     bodyRowCls?: string;
     tableCls?: string;
     tableWrapperCls?: string;
+    pagination: PaginationValue;
 }
 const HomeTable: FC<Props> = ({
     className,
@@ -71,7 +72,10 @@ const HomeTable: FC<Props> = ({
                     </tbody>
                 </table>
             </div>
-            <Pagination className={cn(cls.pagination)} {...pagination} />
+            <Pagination
+                className={cn(cls.pagination)}
+                pagination={pagination}
+            />
         </div>
     );
 };

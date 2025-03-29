@@ -8,7 +8,7 @@ import { LinksGroup } from "./LinksGroup";
 import { UserInfo } from "./UserInfo";
 import { TSalesmanHomePageType } from "../HomePagesSwitcher";
 import { useModalStore } from "@/store";
-import { SALESMAN_SIDEBAR_MENU } from "@/constants";
+import { ROUTES, SALESMAN_SIDEBAR_MENU } from "@/constants";
 import cls from "./index.module.scss";
 
 interface Props extends TClassName {
@@ -32,7 +32,7 @@ const Sidebar: FC<Props> = ({ className, homePageType }) => {
             })}
         >
             <div className={cn(cls.content)}>
-                <Logo className={cn(cls.logo)} link="/salesman" />
+                <Logo className={cn(cls.logo)} link={ROUTES.MAIN} />
                 <LinksGroup
                     sidebarIsExpand={!!isExpand}
                     className={cn(cls.group)}

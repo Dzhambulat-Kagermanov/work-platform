@@ -1,7 +1,7 @@
 "use client";
-import { FC, MouseEventHandler } from "react";
+import { FC, MouseEventHandler, useEffect } from "react";
 import { TClassName, TState } from "@/types";
-import { TModalStep } from "..";
+import { ProductInfo, TModalStep } from "..";
 import { Typography, Input, Button } from "@/components/ui";
 import { cn } from "@/lib";
 import Image from "next/image";
@@ -11,15 +11,28 @@ import { useModalStore } from "@/store";
 
 interface Props extends TClassName {
     setStep: TState<TModalStep>;
+    info: ProductInfo;
 }
-const AddShop: FC<Props> = ({ className, setStep }) => {
+const AddShop: FC<Props> = ({ className, setStep, info }) => {
     const hideModal = useModalStore((state) => state.hideModal);
     const handleCancelClick: MouseEventHandler = () => {
         hideModal({ slug: SALESMAN_ADD_PRODUCT_MODAL });
     };
-    const handleConfirmClick: MouseEventHandler = () => {
-        setStep("failAddShop");
+
+    const handleConfirmShop = () => {
+        setStep("addProductConfirmation");
     };
+
+    useEffect(() => {
+        if (!info || !info.shop) {
+            setStep("failAddShop");
+        }
+    }, []);
+
+    if (!info || !info.shop) {
+        return <></>;
+    }
+
     return (
         <div className={cn(cls.wrapper, [className])}>
             <Image
@@ -32,7 +45,7 @@ const AddShop: FC<Props> = ({ className, setStep }) => {
                 Добавление магазина
             </Typography>
             <Typography font="Inter-M" size={14} tag="h3">
-                Этот товар находится в магазине продавца “HASYAN”
+                Этот товар находится в магазине продавца {info.shop.wb_name}
                 <br />
                 <br />
                 Подтвердите добавление магазина в ваш профиль на Wbdiscount.{" "}
@@ -45,18 +58,24 @@ const AddShop: FC<Props> = ({ className, setStep }) => {
             <div className={cn(cls.inps)}>
                 <Input
                     label="ИНН"
+                    defaultValue={info.shop.inn}
                     wrapperCls={cn(cls.inp_wrapper)}
                     labelCls={cn(cls.inp_label)}
+                    readOnly
                 />
                 <Input
                     label="Наименование юр лица"
+                    defaultValue={info.shop.legal_name}
                     wrapperCls={cn(cls.inp_wrapper)}
                     labelCls={cn(cls.inp_label)}
+                    readOnly
                 />
                 <Input
                     label="Название магазина на Wildberries"
+                    defaultValue={info.shop.wb_name}
                     wrapperCls={cn(cls.inp_wrapper)}
                     labelCls={cn(cls.inp_label)}
+                    readOnly
                 />
             </div>
             <div className={cn(cls.actions)}>
@@ -70,7 +89,7 @@ const AddShop: FC<Props> = ({ className, setStep }) => {
                 </Button>
                 <Button
                     size="mid"
-                    onClick={handleConfirmClick}
+                    onClick={handleConfirmShop}
                     theme="fill"
                     className={cn(cls.btn, [cls.cancel_btn])}
                 >

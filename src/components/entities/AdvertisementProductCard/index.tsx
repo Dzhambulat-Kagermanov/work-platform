@@ -22,14 +22,14 @@ const AdvertisementProductCard: FC<Props> = ({
     const Tag = tag;
     return (
         <Tag className={cn(cls.item, [className])}>
-            <Image src={image} width={60} height={76} alt="Товар" />
+            <img src={image} width={60} height={76} alt="Товар" />
             <div className={cn(cls.content)}>
                 <Typography font="Inter-SB" size={16} tag="h2">
                     {name}
                 </Typography>
-                <Typography font="Inter-R" size={14} tag="h3">
+                {/* <Typography font="Inter-R" size={14} tag="h3">
                     <span>{number}</span> / {owner}
-                </Typography>
+                </Typography> */}
             </div>
         </Tag>
     );

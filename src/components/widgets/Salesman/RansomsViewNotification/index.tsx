@@ -1,22 +1,20 @@
-import { FC, forwardRef, Ref } from "react";
-import { cn } from "@/lib";
-import { TClassName } from "@/types";
-import { returnContent } from "./lib/returnContent";
-import cls from "./index.module.scss";
+import { FC, forwardRef, Ref } from "react"
+import { cn } from "@/lib"
+import { TClassName } from "@/types"
+import { returnContent } from "./lib/returnContent"
+import cls from "./index.module.scss"
+import Chat, { EnChatStatuses } from '@/types/api/Chat'
 
-export type TViewChatNotification =
-    | "waitingOrder"
-    | "waitingReceive"
-    | "confirmation"
-    | "cashbackReceived"
-    | undefined;
 
-interface Props extends TClassName {}
+interface Props extends TClassName {
+    status?: Chat['status']
+}
 const RansomsViewNotification: FC<Props> = forwardRef(
-    ({ className }, ref: Ref<HTMLDivElement> | undefined) => {
-        let notificationType: TViewChatNotification = "confirmation";
+    ({ className, status }, ref: Ref<HTMLDivElement> | undefined) => {
+
+        let notificationType: EnChatStatuses | undefined = status
         const { contentForDescription, contentForPlaque } =
-            returnContent(notificationType);
+            returnContent(notificationType)
         return (
             <>
                 {notificationType && (
@@ -34,8 +32,8 @@ const RansomsViewNotification: FC<Props> = forwardRef(
                     </div>
                 )}
             </>
-        );
+        )
     },
-);
+)
 
-export { RansomsViewNotification };
+export { RansomsViewNotification }

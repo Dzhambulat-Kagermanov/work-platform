@@ -1,42 +1,41 @@
-"use client";
-import { FC } from "react";
-import { TChildren } from "@/types";
-import { Sidebar } from "@/components/widgets/Salesman/Sidebar";
-import { cn, pathValidating } from "@/lib";
-import { useScreen } from "@/hooks";
-import { SM_BIG } from "@/constants";
-import { MobileHeader } from "@/components/widgets/Salesman/MobileHeader";
-import { BurgerMenu } from "@/components/widgets/Salesman/BurgerMenu";
-import { usePathname, useSearchParams } from "next/navigation";
-import { TSalesmanHomePageType } from "@/components/widgets/Salesman/HomePagesSwitcher";
-import cls from "./index.module.scss";
-import { NotificationMenu } from "@/components/widgets/Salesman/NotificationMenu";
+"use client"
+import { FC } from "react"
+import { TChildren } from "@/types"
+import { Sidebar } from "@/components/widgets/Salesman/Sidebar"
+import { cn, pathValidating } from "@/lib"
+import { useScreen } from "@/hooks"
+import { ROUTES, SM_BIG } from "@/constants"
+import { MobileHeader } from "@/components/widgets/Salesman/MobileHeader"
+import { BurgerMenu } from "@/components/widgets/Salesman/BurgerMenu"
+import { usePathname, useSearchParams } from "next/navigation"
+import { TSalesmanHomePageType } from "@/components/widgets/Salesman/HomePagesSwitcher"
+import cls from "./index.module.scss"
+import { NotificationMenu } from "@/components/widgets/Salesman/NotificationMenu"
 
-interface Props extends TChildren {}
+interface Props extends TChildren { }
 const SidebarLayout: FC<Props> = ({ children }) => {
-    const queryParams = useSearchParams();
+    const queryParams = useSearchParams()
     const homePageType = queryParams.get(
         "homePageType",
-    ) as TSalesmanHomePageType;
-    const width = useScreen();
-    const path = usePathname();
-    const isProfilePath = path === "/salesman/profile";
+    ) as TSalesmanHomePageType
+    const width = useScreen()
+    const path = usePathname()
+    const isProfilePath = path === ROUTES.SALESMAN.PROFILE
     const isBuyerProfilePath = pathValidating(
         path,
-        "/salesman/buyer-profile/?",
-    );
+        `${ROUTES.SALESMAN.BUYER_PROFILE}/?`,
+    )
     const isSalesmanProfilePath = pathValidating(
         path,
-        "/salesman/salesman-profile/?",
-    );
-    const isTariffsPath = path === "/salesman/balance/tariffs";
+        `${ROUTES.SALESMAN.SALESMAN_PROFILE}/?`,
+    )
+    const isTariffsPath = path === ROUTES.SALESMAN.BALANCE.TARIFFS
 
     return (
         <div className={cn(cls.wrapper)}>
-            {width > SM_BIG && <Sidebar homePageType={homePageType} />}
-            <NotificationMenu className={cn(cls.notifications_menu)} />
+            {width > SM_BIG ? <Sidebar homePageType={homePageType} /> : <></>}
             <main className={cn(cls.main)}>
-                {width <= SM_BIG && (
+                {width <= SM_BIG ? (
                     <>
                         <BurgerMenu
                             homePageType={homePageType}
@@ -44,6 +43,8 @@ const SidebarLayout: FC<Props> = ({ children }) => {
                         />
                         <MobileHeader className={cn(cls.header)} />
                     </>
+                ) : (
+                    <></>
                 )}
                 <div
                     className={cn(cls.content, [], {
@@ -58,7 +59,7 @@ const SidebarLayout: FC<Props> = ({ children }) => {
                 </div>
             </main>
         </div>
-    );
-};
+    )
+}
 
-export { SidebarLayout };
+export { SidebarLayout }

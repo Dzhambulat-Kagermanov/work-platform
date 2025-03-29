@@ -1,22 +1,60 @@
 "use client";
-import { FC, MouseEventHandler } from "react";
+import { FC, MouseEventHandler, useEffect } from "react";
 import { TClassName, TState } from "@/types";
-import { TModalStep } from "..";
+import { ProductInfo, TModalStep } from "..";
 import { cn } from "@/lib";
 import { Typography, Button } from "@/components/ui";
 import Image from "next/image";
 import cls from "./index.module.scss";
+import { useSessionQuery } from "@/hooks/api/auth";
+import { useAddWbProductMutation } from "@/hooks/api/seller";
+import { useQueryClient } from "@tanstack/react-query";
+import { SELLER_PRODUCTS_QUERY_KEY } from "@/hooks/api/seller/useGetSellerProductsQuery";
 
 interface Props extends TClassName {
     setStep: TState<TModalStep>;
+    info: ProductInfo;
+    closeModal: () => void;
 }
-const AddProductConfirmation: FC<Props> = ({ setStep, className }) => {
+const AddProductConfirmation: FC<Props> = ({
+    setStep,
+    className,
+    info,
+    closeModal,
+}) => {
+    const { data: userData } = useSessionQuery();
+    const { mutate: addWbProductMutate, isPending } = useAddWbProductMutation();
+
+    const queryClient = useQueryClient();
+
     const handleBackClick: MouseEventHandler = () => {
-        setStep("addProduct");
+        setStep(!userData?.shop ? "addShop" : "addProduct");
     };
     const handleNextClick: MouseEventHandler = () => {
-        setStep("failAddProduct");
+        addWbProductMutate(
+            {
+                id: `${info?.product.wb_id}`,
+            },
+            {
+                onSuccess: () => {
+                    queryClient.invalidateQueries({
+                        queryKey: [SELLER_PRODUCTS_QUERY_KEY],
+                    });
+                    closeModal();
+                },
+            },
+        );
     };
+
+    useEffect(() => {
+        if (!info || !info.product) {
+            setStep("failAddProduct");
+        }
+    }, []);
+
+    if (!info || !info.product) {
+        return <></>;
+    }
 
     return (
         <div className={cn(cls.wrapper, [className])}>
@@ -27,18 +65,23 @@ const AddProductConfirmation: FC<Props> = ({ setStep, className }) => {
                 Это ваш товар?
             </Typography>
             <div className={cn(cls.product)}>
-                <Image
-                    src={"/images/stub/product-stub.png"}
-                    alt="Товар"
-                    width={40}
-                    height={40}
-                />
+                {info.product.images && info.product.images.length ? (
+                    <img
+                        src={info.product.images[0]}
+                        alt={info.product.name}
+                        width={40}
+                        height={40}
+                        className="object-cover min-w-10 w-10 h-10"
+                    />
+                ) : (
+                    <></>
+                )}
                 <div className={cn(cls.info)}>
                     <Typography font="Inter-SB" size={14} tag="h3">
-                        Зарядка для iphone 20W typ-с Гарнитура
+                        {info?.product.name}
                     </Typography>
                     <Typography font="Inter-R" size={14} tag="h4">
-                        Продавец товаров 1
+                        {info.shop.wb_name}
                     </Typography>
                 </div>
             </div>
@@ -46,6 +89,7 @@ const AddProductConfirmation: FC<Props> = ({ setStep, className }) => {
                 <Button
                     size="mid"
                     onClick={handleBackClick}
+                    disabled={isPending}
                     theme="outline"
                     className={cn(cls.btn, [cls.cancel_btn])}
                 >
@@ -54,6 +98,7 @@ const AddProductConfirmation: FC<Props> = ({ setStep, className }) => {
                 <Button
                     size="mid"
                     onClick={handleNextClick}
+                    disabled={isPending}
                     theme="fill"
                     className={cn(cls.btn, [cls.cancel_btn])}
                 >

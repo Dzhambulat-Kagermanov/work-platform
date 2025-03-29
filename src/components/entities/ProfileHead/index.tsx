@@ -1,5 +1,5 @@
 "use client";
-import { CSSProperties, FC } from "react";
+import { CSSProperties, FC, useState } from "react";
 import { TClassName, TUserInfo } from "@/types";
 import { cn } from "@/lib";
 import { Container } from "@/components/ui";
@@ -9,6 +9,7 @@ import { useScreen } from "@/hooks";
 import { XS_BIG } from "@/constants";
 import { InfoMobileBackground, InfoMobileContent } from "./InfoMobile";
 import cls from "./index.module.scss";
+import { dateParserHandler } from "@/handlers";
 
 interface Props
     extends TClassName,
@@ -33,6 +34,8 @@ const ProfileHead: FC<Props> = ({
 }) => {
     const width = useScreen();
 
+    const [date] = useState(dateParserHandler(registerDate));
+
     return (
         <section
             className={cn(cls.wrapper)}
@@ -49,7 +52,7 @@ const ProfileHead: FC<Props> = ({
                     className={cn(cls.info_mobile_backg)}
                     contentCls={infoMobileBackgContentCls}
                     id={id}
-                    registerDate={registerDate}
+                    registerDate={date}
                 />
             )}
             <Container
@@ -67,7 +70,7 @@ const ProfileHead: FC<Props> = ({
                         id={id}
                         name={name}
                         rating={rating}
-                        registerDate={registerDate}
+                        registerDate={date}
                     />
                 )}
                 {width <= XS_BIG && (
