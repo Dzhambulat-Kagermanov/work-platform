@@ -1,26 +1,26 @@
-"use client";
-import { FC, Suspense } from "react";
-import { TClassName } from "@/types";
-import { cn } from "@/lib";
-import { HomeCrumbs } from "@/components/widgets/Salesman/HomeCrumbs";
+"use client"
+import { FC, Suspense } from "react"
+import { TClassName } from "@/types"
+import { cn } from "@/lib"
+import { HomeCrumbs } from "@/components/widgets/Salesman/HomeCrumbs"
 import {
     HomePagesSwitcher,
     TSalesmanHomePageType,
-} from "@/components/widgets/Salesman/HomePagesSwitcher";
-import { HomeActions } from "@/components/widgets/Salesman/HomeActions";
-import { HomeAddProductModal } from "@/components/widgets/Salesman/HomeAddProductModal";
-import { HomeProductsContent } from "@/components/widgets/Salesman/HomeProductsContent";
-import { HomeRansomsContent } from "@/components/widgets/Salesman/HomeRansomsContent";
-import { HomeAdvertisementsContent } from "@/components/widgets/Salesman/HomeAdvertisementsContent";
-import { HomeAdvertisementArchiveModal } from "@/components/widgets/Salesman/HomeAdvertisementArchiveModal";
-import { HomeAdvertisementStopModal } from "@/components/widgets/Salesman/HomeAdvertisementStopModal";
-import { HomeAddAdvertisementModal } from "@/components/widgets/Salesman/HomeAddAdvertisementModal";
-import cls from "./index.module.scss";
-import { ChatStatus } from "@/types/api";
+} from "@/components/widgets/Salesman/HomePagesSwitcher"
+import { HomeActions } from "@/components/widgets/Salesman/HomeActions"
+import { HomeAddProductModal } from "@/components/widgets/Salesman/HomeAddProductModal"
+import { HomeProductsContent } from "@/components/widgets/Salesman/HomeProductsContent"
+import { HomeRansomsContent } from "@/components/widgets/Salesman/HomeRansomsContent"
+import { HomeAdvertisementsContent } from "@/components/widgets/Salesman/HomeAdvertisementsContent"
+import { HomeAdvertisementArchiveModal } from "@/components/widgets/Salesman/HomeAdvertisementArchiveModal"
+import { HomeAdvertisementStopModal } from "@/components/widgets/Salesman/HomeAdvertisementStopModal"
+import { HomeAddAdvertisementModal } from "@/components/widgets/Salesman/HomeAddAdvertisementModal"
+import cls from "./index.module.scss"
+import { ChatStatus } from "@/types/api"
 
 interface Props extends TClassName {
-    homePageType: TSalesmanHomePageType;
-    chatType: ChatStatus;
+    homePageType: TSalesmanHomePageType
+    chatType: ChatStatus
 }
 const HomePage: FC<Props> = ({ className, homePageType, chatType }) => {
 
@@ -39,7 +39,9 @@ const HomePage: FC<Props> = ({ className, homePageType, chatType }) => {
             />
             {homePageType === null ? (
                 <>
-                    <HomeProductsContent className={cn(cls.products)} />
+                    <Suspense fallback={<></>}>
+                        <HomeProductsContent className={cn(cls.products)} />
+                    </Suspense>
                     <HomeAddProductModal
                         className={cn(cls.add_product_modal)}
                     />
@@ -51,9 +53,11 @@ const HomePage: FC<Props> = ({ className, homePageType, chatType }) => {
                 />
             ) : (
                 <>
-                    <HomeAdvertisementsContent
-                        className={cn(cls.advertisement)}
-                    />
+                    <Suspense fallback={<></>}>
+                        <HomeAdvertisementsContent
+                            className={cn(cls.advertisement)}
+                        />
+                    </Suspense>
                     <HomeAdvertisementArchiveModal
                         className={cn(cls.advertisement_action_modal)}
                     />
@@ -64,7 +68,7 @@ const HomePage: FC<Props> = ({ className, homePageType, chatType }) => {
                 </>
             )}
         </div>
-    );
-};
+    )
+}
 
-export { HomePage };
+export { HomePage }

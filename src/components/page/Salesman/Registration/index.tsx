@@ -1,13 +1,13 @@
-import { FC } from "react";
-import { TClassName } from "@/types";
-import { SignLayout } from "@/components/layouts/Sign";
-import { cn } from "@/lib";
-import { RegistrationForm } from "@/components";
-import { SalesmanAuthBackgroundLayout } from "@/components/layouts/SalesmanAuthBackground";
-import cls from "./index.module.scss";
-import { AuthWrapper } from "@/components/widgets/shared/wrappers";
+import { FC, Suspense } from "react"
+import { TClassName } from "@/types"
+import { SignLayout } from "@/components/layouts/Sign"
+import { cn } from "@/lib"
+import { RegistrationForm } from "@/components"
+import { SalesmanAuthBackgroundLayout } from "@/components/layouts/SalesmanAuthBackground"
+import cls from "./index.module.scss"
+import { AuthWrapper } from "@/components/widgets/shared/wrappers"
 
-interface Props extends TClassName {}
+interface Props extends TClassName { }
 const RegistrationPage: FC<Props> = ({ className }) => {
     return (
         <AuthWrapper reverse>
@@ -19,11 +19,13 @@ const RegistrationPage: FC<Props> = ({ className }) => {
                     className={cn(cls.main, [className])}
                     paddingStubCls={cn(cls.padding_stub)}
                 >
-                    <RegistrationForm role="seller" className={cn(cls.form)} />
+                    <Suspense fallback={<></>}>
+                        <RegistrationForm role="seller" className={cn(cls.form)} />
+                    </Suspense>
                 </SignLayout>
             </SalesmanAuthBackgroundLayout>
         </AuthWrapper>
-    );
-};
+    )
+}
 
-export { RegistrationPage };
+export { RegistrationPage }

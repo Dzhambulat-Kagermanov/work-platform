@@ -1,57 +1,57 @@
-"use client";
-import { FC, useEffect, useState } from "react";
-import { TClassName } from "@/types";
-import { cn } from "@/lib";
-import { Input, InputMaskSwitcher, Timer, Typography } from "@/components/ui";
-import { RegistrationFormSubmit } from "@/components/features/RegistrationFormSubmit";
-import { PHONE_MASKS } from "@/constants";
-import cls from "./index.module.scss";
-import { Formik } from "formik";
+"use client"
+import { FC, useEffect, useState } from "react"
+import { TClassName } from "@/types"
+import { cn } from "@/lib"
+import { Input, InputMaskSwitcher, Timer, Typography } from "@/components/ui"
+import { RegistrationFormSubmit } from "@/components/features/RegistrationFormSubmit"
+import { PHONE_MASKS } from "@/constants"
+import cls from "./index.module.scss"
+import { Formik } from "formik"
 import {
     useRegisterEndMutation,
     useRegisterSendCodeMutation,
     useSessionQuery,
-} from "@/hooks/api/auth";
-import useRegisterVerifyCodeMutation from "@/hooks/api/auth/useRegisterVerifyCodeMutation";
-import toast from "react-hot-toast";
-import useRolesQuery from "@/hooks/api/auth/useRolesQuery";
-import { useSearchParams } from "next/navigation";
-import { RoleSlug } from "@/types/api";
+} from "@/hooks/api/auth"
+import useRegisterVerifyCodeMutation from "@/hooks/api/auth/useRegisterVerifyCodeMutation"
+import toast from "react-hot-toast"
+import useRolesQuery from "@/hooks/api/auth/useRolesQuery"
+import { useSearchParams } from "next/navigation"
+import { RoleSlug } from "@/types/api"
 
 interface Props extends TClassName {
-    role: RoleSlug;
+    role: RoleSlug
 }
 const RegistrationForm: FC<Props> = ({ className, role }) => {
-    const params = useSearchParams();
+    const params = useSearchParams()
 
-    const { data: userData } = useSessionQuery();
+    const { data: userData } = useSessionQuery()
 
     const [currentStep, setCurrentStep] = useState<"send" | "verify" | "end">(
         params.get("currentStep") === "end" ? "end" : "send",
-    );
-    const [codeSendAgain, setCodeSendAgain] = useState(false);
-    const registerSendCodeMutation = useRegisterSendCodeMutation();
-    const registerVerifyCodeMutation = useRegisterVerifyCodeMutation();
-    const registerEndMutation = useRegisterEndMutation();
+    )
+    const [codeSendAgain, setCodeSendAgain] = useState(false)
+    const registerSendCodeMutation = useRegisterSendCodeMutation()
+    const registerVerifyCodeMutation = useRegisterVerifyCodeMutation()
+    const registerEndMutation = useRegisterEndMutation()
 
-    const { data: roles } = useRolesQuery();
+    const { data: roles } = useRolesQuery()
 
     const hideCodeAgain = () => {
-        setCodeSendAgain(true);
-    };
+        setCodeSendAgain(true)
+    }
 
     useEffect(() => {
         (() => {
             if (!userData) {
-                setCurrentStep("send");
-                return;
+                setCurrentStep("send")
+                return
             }
 
             if (!userData.is_configured) {
-                setCurrentStep("end");
+                setCurrentStep("end")
             }
-        })();
-    }, [userData]);
+        })()
+    }, [userData])
 
     return (
         <Formik
@@ -64,27 +64,27 @@ const RegistrationForm: FC<Props> = ({ className, role }) => {
             }}
             validate={(values) => {
                 const errors: {
-                    password?: string;
-                    passwordAgain?: string;
-                    name?: string;
-                } = {};
+                    password?: string
+                    passwordAgain?: string
+                    name?: string
+                } = {}
                 if (currentStep === "end") {
                     if (values.name.length < 2) {
-                        errors.name = "Имя должно быть не такое короткое";
+                        errors.name = "Имя должно быть не такое короткое"
                     }
                     if (values.password.length < 8) {
                         errors.password =
-                            "Пароль должен быть не менее 8 символов";
+                            "Пароль должен быть не менее 8 символов"
                     }
                     if (values.passwordAgain !== values.password) {
-                        errors.passwordAgain = "Пароли должны совпадать";
+                        errors.passwordAgain = "Пароли должны совпадать"
                     }
                 }
 
-                return errors;
+                return errors
             }}
             onSubmit={(values, { setSubmitting, setErrors }) => {
-                const onSettled = () => setSubmitting(false);
+                const onSettled = () => setSubmitting(false)
 
                 if (currentStep === "send") {
                     registerSendCodeMutation.mutate(
@@ -93,16 +93,16 @@ const RegistrationForm: FC<Props> = ({ className, role }) => {
                         },
                         {
                             onSuccess: () => {
-                                setCurrentStep("verify");
+                                setCurrentStep("verify")
                             },
                             onSettled,
                         },
-                    );
-                    return;
+                    )
+                    return
                 }
 
                 if (currentStep === "verify") {
-                    const selectedRole = roles?.find((el) => el.slug === role);
+                    const selectedRole = roles?.find((el) => el.slug === role)
                     registerVerifyCodeMutation.mutate(
                         {
                             phone: values.phone,
@@ -111,18 +111,18 @@ const RegistrationForm: FC<Props> = ({ className, role }) => {
                         },
                         {
                             onSuccess: () => {
-                                toast.success("Номер телефона подтвержден");
-                                setCurrentStep("end");
+                                toast.success("Номер телефона подтвержден")
+                                setCurrentStep("end")
                             },
                             onError: () => {
                                 setErrors({
                                     code: "Неверный код",
-                                });
+                                })
                             },
                             onSettled,
                         },
-                    );
-                    return;
+                    )
+                    return
                 }
 
                 if (currentStep === "end") {
@@ -135,7 +135,7 @@ const RegistrationForm: FC<Props> = ({ className, role }) => {
                         {
                             onSettled,
                         },
-                    );
+                    )
                 }
             }}
         >
@@ -160,7 +160,7 @@ const RegistrationForm: FC<Props> = ({ className, role }) => {
                             lazy={false}
                             placeholderChar="_"
                             onComplete={(value) => {
-                                setFieldValue("phone", value);
+                                setFieldValue("phone", value)
                             }}
                             disabled={currentStep === "verify"}
                             name="phone"
@@ -202,10 +202,10 @@ const RegistrationForm: FC<Props> = ({ className, role }) => {
                                             },
                                             {
                                                 onSuccess: () => {
-                                                    setCodeSendAgain(false);
+                                                    setCodeSendAgain(false)
                                                 },
                                             },
-                                        );
+                                        )
                                     }}
                                     className="underline text-left text-sm opacity-80"
                                 >
@@ -256,7 +256,7 @@ const RegistrationForm: FC<Props> = ({ className, role }) => {
                 </form>
             )}
         </Formik>
-    );
-};
+    )
+}
 
-export default RegistrationForm;
+export default RegistrationForm

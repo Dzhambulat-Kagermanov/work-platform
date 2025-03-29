@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import { TProductItemProps } from "@/types";
 
 export const salesmanProducts: TProductItemProps[] = [

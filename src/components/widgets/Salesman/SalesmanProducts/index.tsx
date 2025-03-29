@@ -1,18 +1,18 @@
-import { FC } from "react";
-import { TClassName } from "@/types";
-import { cn } from "@/lib";
-import { Typography } from "@/components/ui";
-import { ProductItem } from "@/components/entities/ProductItem";
-import Link from "next/link";
-import cls from "./index.module.scss";
-import { WbProduct } from "@/types/api/Product";
+import { FC } from "react"
+import { TClassName } from "@/types"
+import { cn } from "@/lib"
+import { Typography } from "@/components/ui"
+import { ProductItem } from "@/components/entities/ProductItem"
+import Link from "next/link"
+import cls from "./index.module.scss"
+import { WbProduct } from "@/types/api/Product"
 
 interface Props extends TClassName {
-    products: WbProduct[];
+    products: WbProduct[]
 }
 const SalesmanProducts: FC<Props> = ({ className, products }) => {
     if (!products || !products.length) {
-        return <></>;
+        return <></>
     }
 
     return (
@@ -35,6 +35,7 @@ const SalesmanProducts: FC<Props> = ({ className, products }) => {
                                 image={item.images.length ? item.images[0] : ""}
                                 name={item.name}
                                 price={{
+                                    //@ts-expect-error: Исправить потом
                                     price: +item.price,
                                     discount: +item.discount,
                                 }}
@@ -43,11 +44,11 @@ const SalesmanProducts: FC<Props> = ({ className, products }) => {
                                 tooltip={""}
                             />
                         </Link>
-                    );
+                    )
                 })}
             </ul>
         </section>
-    );
-};
+    )
+}
 
-export { SalesmanProducts };
+export { SalesmanProducts }

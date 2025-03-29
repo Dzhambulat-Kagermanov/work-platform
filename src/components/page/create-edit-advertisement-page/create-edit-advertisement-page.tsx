@@ -1,41 +1,42 @@
-import React, { useState } from "react";
-import { cn } from "@/lib";
-import { Input, Typography } from "@/components/ui";
-import { CreateAdvertisementCardInfo } from "@/components/widgets/Salesman/CreateAdvertisementCardInfo";
-import { CreateAdvertisementCashback } from "@/components/widgets/Salesman/CreateAdvertisementCashback";
-import { CreateAdvertisementEditArea } from "@/components/widgets/Salesman/CreateAdvertisementEditArea";
-import { CreateAdvertisementRansomsQnt } from "@/components/widgets/Salesman/CreateAdvertisementRansomsQnt";
-import { CreateAdvertisementResult } from "@/components/widgets/Salesman/CreateAdvertisementResult";
-import cls from "./create-edit-advertisement-page.module.scss";
-import { CreateAdvertisementPublishModal } from "@/components/widgets/Salesman/CreateAdvertisementPublishModal";
-import { CreateAdvertisementCancelModal } from "@/components/widgets/Salesman/CreateAdvertisementCancelModal";
-import { EditAdvertisementFeature } from "@/components/widgets/Salesman/EditAdvertisementFeature";
-import { WbProduct } from "@/types/api/Product";
-import { useCreateAdvMutation } from "@/hooks/api/seller";
-import { useRouter } from "next/navigation";
-import { ROUTES } from "@/constants";
+'use client'
+import React, { useState } from "react"
+import { cn } from "@/lib"
+import { Input, Typography } from "@/components/ui"
+import { CreateAdvertisementCardInfo } from "@/components/widgets/Salesman/CreateAdvertisementCardInfo"
+import { CreateAdvertisementCashback } from "@/components/widgets/Salesman/CreateAdvertisementCashback"
+import { CreateAdvertisementEditArea } from "@/components/widgets/Salesman/CreateAdvertisementEditArea"
+import { CreateAdvertisementRansomsQnt } from "@/components/widgets/Salesman/CreateAdvertisementRansomsQnt"
+import { CreateAdvertisementResult } from "@/components/widgets/Salesman/CreateAdvertisementResult"
+import cls from "./create-edit-advertisement-page.module.scss"
+import { CreateAdvertisementPublishModal } from "@/components/widgets/Salesman/CreateAdvertisementPublishModal"
+import { CreateAdvertisementCancelModal } from "@/components/widgets/Salesman/CreateAdvertisementCancelModal"
+import { EditAdvertisementFeature } from "@/components/widgets/Salesman/EditAdvertisementFeature"
+import { WbProduct } from "@/types/api/Product"
+import { useCreateAdvMutation } from "@/hooks/api/seller"
+import { useRouter } from "next/navigation"
+import { ROUTES } from "@/constants"
 
 type CreateEditAdvertisementPageProps = {
-    currentAdv?: any;
-    product: WbProduct;
-};
+    currentAdv?: any
+    product: WbProduct
+}
 
 const CreateEditAdvertisementPage: React.FC<
     CreateEditAdvertisementPageProps
 > = ({ currentAdv, product }) => {
-    const router = useRouter();
+    const router = useRouter()
     const { mutate: createAdvMutate, isPending: isAdvCreatePending } =
-        useCreateAdvMutation();
+        useCreateAdvMutation()
 
-    const [title, setTitle] = useState("");
-    const [cashback, setCashback] = useState("");
-    const [conditions, setConditions] = useState("");
-    const [instructions, setInstructions] = useState("");
-    const [criterias, setCriterias] = useState("");
-    const [count, setCount] = useState(0);
-    const [onePerUser, setOnePerUser] = useState(false);
+    const [title, setTitle] = useState("")
+    const [cashback, setCashback] = useState("")
+    const [conditions, setConditions] = useState("")
+    const [instructions, setInstructions] = useState("")
+    const [criterias, setCriterias] = useState("")
+    const [count, setCount] = useState(0)
+    const [onePerUser, setOnePerUser] = useState(false)
 
-    const [resData, setResData] = useState(null);
+    const [resData, setResData] = useState(null)
 
     const handleSubmit = () => {
         const data = {
@@ -47,18 +48,18 @@ const CreateEditAdvertisementPage: React.FC<
             review_criteria: criterias,
             one_per_user: onePerUser,
             redemption_count: count,
-        };
+        }
 
         if (!currentAdv) {
             createAdvMutate(data, {
                 onSuccess: () => {
                     router.push(`${ROUTES.SALESMAN.MAIN}?homePageType=advertisements`)
                 },
-            });
+            })
 
-            return;
+            return
         }
-    };
+    }
 
     return (
         <div className={cn(cls.main)}>
@@ -122,7 +123,7 @@ const CreateEditAdvertisementPage: React.FC<
                 />
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default CreateEditAdvertisementPage;
+export default CreateEditAdvertisementPage
