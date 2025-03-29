@@ -1,7 +1,4 @@
 export { default as useLoginMutation } from "./useLoginMutation";
-<<<<<<< HEAD
-export { default as useRegisterSendCode } from "./useRegisterSendCode";
-=======
 export { default as useRegisterSendCodeMutation } from "./useRegisterSendCodeMutation";
 export { default as useSessionQuery } from "./useSessionQuery";
 export { default as useRegisterEndMutation } from "./useRegisterEndMutation";
@@ -15,4 +12,3 @@ export { default as useCancelWithdrawMutation } from "./useCancelWithdrawMutatio
 export { default as usePasswordResetSendCodeMutation } from "./usePasswordResetSendCodeMutation";
 export { default as usePasswordResetMutation } from "./usePasswordResetMutation";
 export { default as usePasswordResetVerifyCodeMutation } from "./usePasswordResetVerifyCodeMutation";
->>>>>>> 1-backend-integration
