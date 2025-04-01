@@ -16,11 +16,11 @@ const Reviews: FC<Props> = ({ className, reviews }) => {
 
     return (
         <div className={cn(cls.wrapper, [className])}>
-            <ul className={cn(cls.group)}>
+            {reviews || reviews.length > 0 ?<ul className={cn(cls.group)}>
                 {reviews.map((item, index) => (
                     <ReviewItem key={index} item={item} />
                 ))}
-            </ul>
+            </ul> : }
         </div>
     );
 };
