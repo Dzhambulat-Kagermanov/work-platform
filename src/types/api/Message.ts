@@ -11,4 +11,16 @@ type Message = {
     color: string;
 } & Timestamps;
 
+type SendedMessage = {
+    success: boolean;
+    message: {
+        buyback_id: string;
+        sender_id: number;
+        text: string;
+        id: number;
+        files: string[];
+    } & Timestamps;
+};
+
+export { type SendedMessage };
 export default Message;

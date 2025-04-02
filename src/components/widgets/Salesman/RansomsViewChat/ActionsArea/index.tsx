@@ -1,26 +1,40 @@
 "use client";
-import { FC, useEffect, useState } from "react";
+import { FC, FormEventHandler, MouseEventHandler, useState } from "react";
 import { cn } from "@/lib";
 import { TClassName } from "@/types";
 import { ViewChatPlus } from "@/components/features/ViewChatPlus";
 import { Input } from "@/components/ui";
 import { ViewChatSendMessage } from "@/components/features/ViewChatSendMessage";
 import cls from "./index.module.scss";
-import { pusherClient } from "@/lib/pusher";
+import useSendMessageMutation from "@/hooks/api/chat/useSendMessageMutation";
 
-interface Props extends TClassName {}
-const ActionsArea: FC<Props> = ({ className }) => {
+interface Props extends TClassName {
+    activeId?: number;
+}
+const ActionsArea: FC<Props> = ({ className, activeId }) => {
+    if (!activeId) return null;
+
     const [message, setMessage] = useState<string>("");
 
-    useEffect(() => {
-        pusherClient.subscribe("buyer-chat");
-        pusherClient.bind("", (data: { message: string }) => {
-            console.log(`REAL TIME MESSAGE ${data.message}`);
-        });
-    }, []);
+    const formData = new FormData();
+    formData.append("text", message);
+
+    const sendMessage = useSendMessageMutation(activeId);
+
+    const handleSubmit: FormEventHandler = (event) => {
+        event.preventDefault();
+        sendMessage.mutate(
+            { chatId: activeId, formData },
+            {
+                onSettled: () => {
+                    setMessage("");
+                },
+            },
+        );
+    };
 
     return (
-        <div className={cn(cls.wrapper, [className])}>
+        <form className={cn(cls.wrapper, [className])} onSubmit={handleSubmit}>
             <ViewChatPlus className={cn(cls.plus_btn)} />
             <Input
                 value={message}
@@ -32,7 +46,7 @@ const ActionsArea: FC<Props> = ({ className }) => {
                 }}
             />
             <ViewChatSendMessage className={cn(cls.send_btn)} />
-        </div>
+        </form>
     );
 };
 
