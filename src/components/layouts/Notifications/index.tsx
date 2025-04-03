@@ -1,20 +1,22 @@
 "use client";
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef } from "react";
 import { cn } from "@/lib";
-import { TChildren, TNotificationItemProps } from "@/types";
-import { NOTIFICATIONS } from "./constants/notifications";
+import { TChildren } from "@/types";
 import { NotificationItem } from "@/components/entities/NotificationItem";
 import cls from "./index.module.scss";
+import { HIDING_MS, VISIBLE_DELAY_MS } from "./config/notifications-times";
+import {
+    allNotificationsSelector,
+    deleteTempNotificationSelector,
+    notificationsLayoutStateSelector,
+    resetTempNotificationsSelector,
+    setNotificationsLayoutStateSelector,
+    useSalesmanNotifications,
+} from "@/store/useSalesmanNotifications";
 
 interface Props extends TChildren {}
 const NotificationsLayout: FC<Props> = ({ children }) => {
-    const VISIBLE_DELAY_MS = 5000;
-    const HIDING_MS = 3000;
-    const [layoutState, setLayoutState] = useState<
-        "isHidden" | "isHiding" | "isVisible"
-    >("isVisible");
-    const [notifications, setNotifications] =
-        useState<TNotificationItemProps[]>(NOTIFICATIONS);
+    // REACT
     const hiddenTimeoutRef = useRef<{
         hidden: NodeJS.Timeout | null;
         hiding: NodeJS.Timeout | null;
@@ -23,6 +25,22 @@ const NotificationsLayout: FC<Props> = ({ children }) => {
         hiding: null,
     });
 
+    // ZUSTAND
+    const layoutState = useSalesmanNotifications(
+        notificationsLayoutStateSelector,
+    );
+    const resetTempNotifications = useSalesmanNotifications(
+        resetTempNotificationsSelector,
+    );
+    const setLayoutState = useSalesmanNotifications(
+        setNotificationsLayoutStateSelector,
+    );
+    const notifications = useSalesmanNotifications(allNotificationsSelector);
+    const deleteNotification = useSalesmanNotifications(
+        deleteTempNotificationSelector,
+    );
+
+    // HANDLERS
     const handleMouseover = () => {
         if (layoutState !== "isVisible") {
             setLayoutState("isVisible");
@@ -35,12 +53,21 @@ const NotificationsLayout: FC<Props> = ({ children }) => {
             }
         }
     };
+
+    // EFFECTS
+    useEffect(() => {
+        if (notifications.length) {
+            setLayoutState("isVisible");
+        }
+    }, [notifications]);
+
     useEffect(() => {
         if (layoutState === "isVisible") {
             hiddenTimeoutRef.current.hiding = setTimeout(() => {
                 setLayoutState("isHiding");
                 hiddenTimeoutRef.current.hidden = setTimeout(() => {
                     setLayoutState("isHidden");
+                    resetTempNotifications();
                 }, HIDING_MS);
             }, VISIBLE_DELAY_MS);
         }
@@ -66,7 +93,7 @@ const NotificationsLayout: FC<Props> = ({ children }) => {
                                     key={id}
                                     {...props}
                                     className={cn(cls.item)}
-                                    setNotificationsState={setNotifications}
+                                    deleteNotification={deleteNotification}
                                 />
                             );
                         })}

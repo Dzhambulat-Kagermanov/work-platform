@@ -1,25 +1,26 @@
-"use client"
-import { FC, MouseEventHandler } from "react"
-import { TClassName } from "@/types"
-import { Typography } from "@/components/ui"
+"use client";
+import { FC, MouseEventHandler } from "react";
+import { TClassName } from "@/types";
+import { Typography } from "@/components/ui";
 import {
     SupportIcon,
     AccountIcon,
     CreditCardIcon,
     NotificationIcon,
-} from "@/icons"
-import { cn } from "@/lib"
-import { Item } from "../Item"
-import { LinksDropdown } from "../LinksDropdown"
-import cls from "./index.module.scss"
-import { TSalesmanHomePageType } from "../../HomePagesSwitcher"
-import { ROUTES } from "@/constants"
-import { useGetBalanceQuery } from "@/hooks/api/auth"
+} from "@/icons";
+import { cn } from "@/lib";
+import { Item } from "../Item";
+import { LinksDropdown } from "../LinksDropdown";
+import cls from "./index.module.scss";
+import { TSalesmanHomePageType } from "../../HomePagesSwitcher";
+import { ROUTES, SALESMAN_NOTIFICATIONS_MODAL } from "@/constants";
+import { useGetBalanceQuery } from "@/hooks/api/auth";
+import { useModalStore } from "@/store";
 
 interface Props extends TClassName {
-    sidebarIsExpand?: boolean
-    linkOnClick?: () => void
-    homePageType: TSalesmanHomePageType
+    sidebarIsExpand?: boolean;
+    linkOnClick?: () => void;
+    homePageType: TSalesmanHomePageType;
 }
 const LinksGroup: FC<Props> = ({
     sidebarIsExpand,
@@ -27,7 +28,8 @@ const LinksGroup: FC<Props> = ({
     linkOnClick,
     homePageType,
 }) => {
-    const { data: balance } = useGetBalanceQuery()
+    const showModal = useModalStore((state) => state.showModal);
+    const { data: balance } = useGetBalanceQuery();
 
     return (
         <ul className={cn(cls.group, [className])}>
@@ -90,7 +92,7 @@ const LinksGroup: FC<Props> = ({
             />
             <Item
                 linkOnClick={(e) => {
-                    linkOnClick && linkOnClick()
+                    linkOnClick && linkOnClick();
                 }}
                 sidebarIsExpand={sidebarIsExpand}
                 tag="li"
@@ -105,7 +107,10 @@ const LinksGroup: FC<Props> = ({
                 className={cn(cls.item)}
             />
             <Item
-                linkOnClick={linkOnClick}
+                linkOnClick={(e) => {
+                    linkOnClick && linkOnClick();
+                    showModal({ slug: SALESMAN_NOTIFICATIONS_MODAL });
+                }}
                 sidebarIsExpand={sidebarIsExpand}
                 tag="li"
                 text="Уведомления"
@@ -127,7 +132,7 @@ const LinksGroup: FC<Props> = ({
                 }
             />
         </ul>
-    )
-}
+    );
+};
 
-export { LinksGroup }
+export { LinksGroup };

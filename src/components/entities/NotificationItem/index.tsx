@@ -10,7 +10,7 @@ import { TRAN_MID } from "@/constants";
 interface Props extends TClassName, TTag, TNotificationItemProps {
     type: "forMenu" | "forOverlay";
     // Если type === 'forOverlay'
-    setNotificationsState?: TState<TNotificationItemProps[]>;
+    deleteNotification?: (id: number) => void;
     isHiddenCls?: string;
     ///////////////////////
 }
@@ -23,17 +23,15 @@ const NotificationItem: FC<Props> = memo(
         tag = "div",
         type,
         id,
-        setNotificationsState,
+        deleteNotification,
         isHiddenCls,
     }) => {
         const [tranState, setTranState] = useState<boolean>(true);
         const handleClose: MouseEventHandler = (e) => {
             setTranState(false);
-            if (setNotificationsState)
+            if (deleteNotification)
                 setTimeout(() => {
-                    setNotificationsState((cur) =>
-                        cur.filter((params) => params.id !== id),
-                    );
+                    deleteNotification(id);
                 }, TRAN_MID);
         };
         const Tag = tag;
