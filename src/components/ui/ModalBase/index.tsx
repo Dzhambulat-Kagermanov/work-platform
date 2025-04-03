@@ -31,10 +31,9 @@ const ModalBase: FC<Props> = ({
     }
 
     useEffect(() => {
-        if (!modalState) {
-            onClose && onClose()
-
-        }
+        // if (!modalState) {
+        //     onClose && onClose()
+        // }
     }, [modalState])
 
     return (

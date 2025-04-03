@@ -79,6 +79,7 @@ const HomeAddProductModal: FC<Props> = ({ className }) => {
                         className={cn(cls.add_product_confirm)}
                         setStep={setStep}
                         closeModal={closeModal}
+                        setArt={setArt}
                     />
                 )}
             </div>

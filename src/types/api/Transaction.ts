@@ -1,7 +1,7 @@
 import Timestamps from "./Timestamps";
 
 export type TransactionType = "withdraw" | "deposit";
-export type CurrencyType = "cash";
+export type CurrencyType = "cash" | "buyback";
 
 type Transaction = {
     id: number;

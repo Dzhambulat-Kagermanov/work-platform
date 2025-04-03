@@ -52,11 +52,11 @@ const Table: FC<Props> = ({ className, active, wrapperCls, transactions }) => {
                 </thead>
                 <tbody className={cn(cls.body)}>
                     {transactions.map((item, index) => {
-                        const isDeposit = item.transaction_type === "deposit";
+                        const isBuyback = item.currency_type === "buyback";
                         return (
                             <tr
                                 className={cn(cls.row, [], {
-                                    [cls.isReplenishment]: isDeposit,
+                                    [cls.isReplenishment]: !isBuyback,
                                 })}
                                 key={index}
                             >
@@ -71,16 +71,16 @@ const Table: FC<Props> = ({ className, active, wrapperCls, transactions }) => {
                                 </th>
                                 <th className={cn(cls.column, [cls.sum])}>
                                     <Typography font="Inter-R" size={14}>
-                                        {isDeposit
+                                        {!isBuyback
                                             ? `+${Number(item.amount)} ₽`
                                             : `-${Number(item.amount)} ${endingsFormatter(Number(item.amount), ["Выкуп", "Выкупа", "Выкупов"])}`}
                                     </Typography>
                                 </th>
                                 <th className={cn(cls.column, [cls.type])}>
                                     <Typography font="Inter-R" size={14}>
-                                        {isDeposit
-                                            ? "Пополнение"
-                                            : "Вывод средств"}
+                                        {!isBuyback
+                                            ? "Вывод средств"
+                                            : "Выкуп"}
                                     </Typography>
                                 </th>
                                 <th

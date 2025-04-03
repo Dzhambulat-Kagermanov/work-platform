@@ -29,9 +29,14 @@ class SellerService {
         return res.data;
     }
     async getSellerWbProduct(id: string) {
-        const res = await axios.get<WbProduct>(`/wb/product/${id}`);
+        try {
+            const res = await axios.get<WbProduct>(`/wb/product/${id}`);
+            console.log(res);
+            return res.data;
+        } catch (error) {
+            return null;
+        }
 
-        return res.data;
     }
 
     async getProducts(query: QueryItem[]) {
@@ -60,7 +65,7 @@ class SellerService {
         return res.data;
     }
     async addWbProduct(data: AddWbProductData) {
-        const res = await axios.post<{ product: WbProduct }>(
+        const res = await axios.post<{ product: WbProduct, has_products: boolean }>(
             `/wb/add-product/${data.id}`,
         );
         return res.data;

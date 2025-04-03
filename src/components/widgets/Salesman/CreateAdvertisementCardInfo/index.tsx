@@ -16,8 +16,8 @@ const CreateAdvertisementCardInfo: FC<Props> = ({ className, product }) => {
                 className={cn(cls.card)}
                 image={product.images[0] ?? ""}
                 name={product.name}
-                number=""
-                owner={""}
+                number={product.wb_id.toString()}
+                owner={product.supplier_id.toString()}
             />
             {/* <div className={cn(cls.plaques)}>
                 <DiscountPlaque

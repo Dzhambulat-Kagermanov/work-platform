@@ -11,19 +11,25 @@ import cls from "./create-edit-advertisement-page.module.scss"
 import { CreateAdvertisementPublishModal } from "@/components/widgets/Salesman/CreateAdvertisementPublishModal"
 import { CreateAdvertisementCancelModal } from "@/components/widgets/Salesman/CreateAdvertisementCancelModal"
 import { EditAdvertisementFeature } from "@/components/widgets/Salesman/EditAdvertisementFeature"
-import { WbProduct } from "@/types/api/Product"
-import { useCreateAdvMutation } from "@/hooks/api/seller"
+import { useCreateAdvMutation, useGetWbProductQuery } from "@/hooks/api/seller"
 import { useRouter } from "next/navigation"
 import { ROUTES } from "@/constants"
+import { PageLoader } from "@/components/ui/loaders"
+import { PageErrorStub } from "@/components/ui/page-error-stub"
 
 type CreateEditAdvertisementPageProps = {
     currentAdv?: any
-    product: WbProduct
+    selectedWbItem: string
 }
 
 const CreateEditAdvertisementPage: React.FC<
     CreateEditAdvertisementPageProps
-> = ({ currentAdv, product }) => {
+> = ({ currentAdv, selectedWbItem }) => {
+        const {
+        data: product,
+        isLoading,
+        isError,
+    } = useGetWbProductQuery(selectedWbItem)
     const router = useRouter()
     const { mutate: createAdvMutate, isPending: isAdvCreatePending } =
         useCreateAdvMutation()
@@ -39,6 +45,9 @@ const CreateEditAdvertisementPage: React.FC<
     const [resData, setResData] = useState(null)
 
     const handleSubmit = () => {
+        if (!product) {
+            return;
+        }
         const data = {
             product_id: product.id,
             name: title,
@@ -59,6 +68,14 @@ const CreateEditAdvertisementPage: React.FC<
 
             return
         }
+    }
+
+    if (isLoading) {
+        return <PageLoader />
+    }
+
+    if (isError || !product) {
+        return <PageErrorStub />
     }
 
     return (
@@ -83,7 +100,7 @@ const CreateEditAdvertisementPage: React.FC<
                     label="Название объявления (видите только вы)"
                 />
                 <CreateAdvertisementCashback
-                    price={Number(product.price)}
+                    price={Number(product?.price ?? 0)}
                     cashback={cashback}
                     setCashback={setCashback}
                     className={cn(cls.cashback)}
@@ -97,10 +114,10 @@ const CreateEditAdvertisementPage: React.FC<
                     setCriterias={setCriterias}
                     className={cn(cls.edit_area)}
                 />
-                <EditAdvertisementFeature
+                {/* <EditAdvertisementFeature
                     onePerUser={onePerUser}
                     setOnePerUser={setOnePerUser}
-                />
+                /> */}
                 <CreateAdvertisementRansomsQnt
                     count={count}
                     setCount={setCount}
