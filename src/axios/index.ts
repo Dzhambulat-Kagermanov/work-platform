@@ -1,7 +1,8 @@
 import { authTokenKey } from "@/constants";
+import { BASE_URL } from "@/constants/api";
 import axios from "axios";
 const instanse = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL,
+    baseURL: BASE_URL,
 });
 
 instanse.interceptors.request.use((config) => {

@@ -6,16 +6,19 @@ import { NotificationItem } from "@/components/entities/NotificationItem";
 import cls from "./index.module.scss";
 import { HIDING_MS, VISIBLE_DELAY_MS } from "./config/notifications-times";
 import {
-    allNotificationsSelector,
+    addNotificationsSelector,
     deleteTempNotificationSelector,
     notificationsLayoutStateSelector,
     resetTempNotificationsSelector,
     setNotificationsLayoutStateSelector,
+    tempNotificationsSelector,
     useSalesmanNotifications,
 } from "@/store/useSalesmanNotifications";
+import { useGetNotifications } from "@/hooks/api/notifications";
 
 interface Props extends TChildren {}
 const NotificationsLayout: FC<Props> = ({ children }) => {
+    const notificationsQuery = useGetNotifications();
     // REACT
     const hiddenTimeoutRef = useRef<{
         hidden: NodeJS.Timeout | null;
@@ -26,6 +29,7 @@ const NotificationsLayout: FC<Props> = ({ children }) => {
     });
 
     // ZUSTAND
+    const notifications = useSalesmanNotifications(tempNotificationsSelector);
     const layoutState = useSalesmanNotifications(
         notificationsLayoutStateSelector,
     );
@@ -35,10 +39,16 @@ const NotificationsLayout: FC<Props> = ({ children }) => {
     const setLayoutState = useSalesmanNotifications(
         setNotificationsLayoutStateSelector,
     );
-    const notifications = useSalesmanNotifications(allNotificationsSelector);
     const deleteNotification = useSalesmanNotifications(
         deleteTempNotificationSelector,
     );
+    const addNotifications = useSalesmanNotifications(addNotificationsSelector);
+
+    useEffect(() => {
+        if (notificationsQuery.data) addNotifications(notificationsQuery.data);
+        console.log(notificationsQuery.status);
+    }, [notificationsQuery.status]);
+    console.log(notificationsQuery.status);
 
     // HANDLERS
     const handleMouseover = () => {

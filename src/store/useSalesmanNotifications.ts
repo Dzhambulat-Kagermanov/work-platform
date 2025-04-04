@@ -9,7 +9,7 @@ interface Props {
     notificationsLayoutState: TNotificationsLayoutStates;
 
     setNotificationsLayoutState: (newState: TNotificationsLayoutStates) => void;
-    addNotification: (newItem: TNotificationItemProps) => void;
+    addNotifications: (newItem: TNotificationItemProps[]) => void;
     resetTempNotifications: () => void;
     deleteTempNotification: (id: number) => void;
 }
@@ -18,9 +18,14 @@ const useSalesmanNotifications = create<Props>()((set, get) => ({
     notificationsLayoutState: "isHidden",
     tempNotifications: [],
     allNotifications: [],
-    addNotification(notification) {
+    addNotifications(notifications) {
         set((state) => ({
-            allNotifications: [...state.allNotifications, notification],
+            allNotifications: notifications,
+        }));
+        set((state) => ({
+            tempNotifications: notifications.filter((props) => {
+                return !props.is_read;
+            }),
         }));
     },
     deleteTempNotification(id) {
@@ -42,7 +47,7 @@ const notificationsLayoutStateSelector = (state: Props) =>
     state.notificationsLayoutState;
 const tempNotificationsSelector = (state: Props) => state.tempNotifications;
 const allNotificationsSelector = (state: Props) => state.allNotifications;
-const addNotificationSelector = (state: Props) => state.addNotification;
+const addNotificationsSelector = (state: Props) => state.addNotifications;
 const resetTempNotificationsSelector = (state: Props) =>
     state.resetTempNotifications;
 const setNotificationsLayoutStateSelector = (state: Props) =>
@@ -55,7 +60,7 @@ export {
     notificationsLayoutStateSelector,
     tempNotificationsSelector,
     allNotificationsSelector,
-    addNotificationSelector,
+    addNotificationsSelector,
     resetTempNotificationsSelector,
     setNotificationsLayoutStateSelector,
     deleteTempNotificationSelector,

@@ -20,7 +20,6 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
     reverse,
 }) => {
     const { data, isLoading, isError } = useSessionQuery();
-
     const router = useRouter();
 
     const pushToRegEnd = () => {

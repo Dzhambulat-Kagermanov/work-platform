@@ -44,7 +44,6 @@ const HomeProductsContent: FC<Props> = ({ className }) => {
             </div>
         );
     }
-    console.log(products.data[0]);
 
     return (
         <HomeTable
