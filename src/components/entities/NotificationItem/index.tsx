@@ -1,39 +1,42 @@
 "use client";
 import { FC, memo, MouseEventHandler, useState } from "react";
-import { TClassName, TNotificationItemProps, TState, TTag } from "@/types";
+import { TClassName, TNotificationItemProps, TTag } from "@/types";
 import { cn } from "@/lib";
 import { Typography } from "@/components/ui";
 import cls from "./index.module.scss";
 import { PlusIcon } from "@/icons";
 import { TRAN_MID } from "@/constants";
+import { title } from "process";
+import { dateParserHandler } from "@/handlers";
 
 interface Props extends TClassName, TTag, TNotificationItemProps {
     type: "forMenu" | "forOverlay";
     // Если type === 'forOverlay'
-    setNotificationsState?: TState<TNotificationItemProps[]>;
+    deleteNotification?: (id: number) => void;
     isHiddenCls?: string;
     ///////////////////////
 }
 const NotificationItem: FC<Props> = memo(
     ({
         className,
-        date,
-        subtitle,
-        title,
+        created_at,
+        text,
+        buyback_id,
+        is_read,
+        updated_at,
+        user_id,
         tag = "div",
         type,
         id,
-        setNotificationsState,
+        deleteNotification,
         isHiddenCls,
     }) => {
         const [tranState, setTranState] = useState<boolean>(true);
         const handleClose: MouseEventHandler = (e) => {
             setTranState(false);
-            if (setNotificationsState)
+            if (deleteNotification)
                 setTimeout(() => {
-                    setNotificationsState((cur) =>
-                        cur.filter((params) => params.id !== id),
-                    );
+                    deleteNotification(id);
                 }, TRAN_MID);
         };
         const Tag = tag;
@@ -60,11 +63,11 @@ const NotificationItem: FC<Props> = memo(
                             )}
                         </div>
                         <Typography font="Inter-R" size={12} tag="h3">
-                            {subtitle}
+                            {text}
                         </Typography>
                         {type === "forMenu" && (
                             <Typography font="Inter-R" size={12} tag="time">
-                                {date}
+                                {dateParserHandler(created_at)}
                             </Typography>
                         )}
                     </div>

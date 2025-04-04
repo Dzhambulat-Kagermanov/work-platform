@@ -1,13 +1,14 @@
-import { FC } from "react";
-import { TClassName } from "@/types";
+"use client";
+import { ButtonHTMLAttributes, FC } from "react";
 import { cn } from "@/lib";
 import Image from "next/image";
 import cls from "./index.module.scss";
 
-interface Props extends TClassName {}
-const ViewChatSendMessage: FC<Props> = ({ className }) => {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {}
+
+const ViewChatSendMessage: FC<Props> = ({ className, ...props }) => {
     return (
-        <button className={cn(cls.btn, [className])}>
+        <button {...props} className={cn(cls.btn, [className])}>
             <Image
                 src={"/images/delivery/send.svg"}
                 alt="Отправить"

@@ -24,13 +24,13 @@ const CreateAdvertisementPublishModal: FC<Props> = ({
         navigator.clipboard.writeText(LINK);
     };
     const handleNext = () => {
+        console.log(1);
         hideModal({ slug: SALESMAN_CREATE_ADVERTISEMENT_PUBLISH_MODAL });
         router.push("/salesman?homePageType=advertisement");
     };
 
     return (
         <ModalBase
-            onClose={handleNext}
             slug={SALESMAN_CREATE_ADVERTISEMENT_PUBLISH_MODAL}
             className={cn(cls.wrapper, [className])}
         >

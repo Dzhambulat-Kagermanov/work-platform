@@ -1,18 +1,40 @@
-'use client'
-import { FC, useState } from "react"
-import { cn } from "@/lib"
-import { TClassName } from "@/types"
-import { ViewChatPlus } from "@/components/features/ViewChatPlus"
-import { Input } from "@/components/ui"
-import { ViewChatSendMessage } from "@/components/features/ViewChatSendMessage"
-import cls from "./index.module.scss"
+"use client";
+import { FC, FormEventHandler, MouseEventHandler, useState } from "react";
+import { cn } from "@/lib";
+import { TClassName } from "@/types";
+import { ViewChatPlus } from "@/components/features/ViewChatPlus";
+import { Input } from "@/components/ui";
+import { ViewChatSendMessage } from "@/components/features/ViewChatSendMessage";
+import cls from "./index.module.scss";
+import useSendMessageMutation from "@/hooks/api/chat/useSendMessageMutation";
 
-interface Props extends TClassName { }
-const ActionsArea: FC<Props> = ({ className }) => {
-    const [message, setMessage] = useState<string>('')
+interface Props extends TClassName {
+    activeId?: number;
+}
+const ActionsArea: FC<Props> = ({ className, activeId }) => {
+    if (!activeId) return null;
+
+    const [message, setMessage] = useState<string>("");
+
+    const formData = new FormData();
+    formData.append("text", message);
+
+    const sendMessage = useSendMessageMutation(activeId);
+
+    const handleSubmit: FormEventHandler = (event) => {
+        event.preventDefault();
+        sendMessage.mutate(
+            { chatId: activeId, formData },
+            {
+                onSettled: () => {
+                    setMessage("");
+                },
+            },
+        );
+    };
 
     return (
-        <div className={cn(cls.wrapper, [className])}>
+        <form className={cn(cls.wrapper, [className])} onSubmit={handleSubmit}>
             <ViewChatPlus className={cn(cls.plus_btn)} />
             <Input
                 value={message}
@@ -20,12 +42,12 @@ const ActionsArea: FC<Props> = ({ className }) => {
                 inpCls={cn(cls.inp)}
                 placeholder="Написать сообщение"
                 onChange={(event) => {
-                    setMessage(event.target.value)
+                    setMessage(event.target.value);
                 }}
             />
             <ViewChatSendMessage className={cn(cls.send_btn)} />
-        </div>
-    )
-}
+        </form>
+    );
+};
 
-export { ActionsArea }
+export { ActionsArea };

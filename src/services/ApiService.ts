@@ -4,6 +4,7 @@ import CartService from "./CartService";
 import CategoriesService from "./CategoriesService";
 import ChatService from "./ChatService";
 import FavoritesService from "./FavoritesService";
+import { NotificationsService } from "./NotificationsService";
 import OrdersService from "./OrdersService";
 import ProductsService from "./ProductsService";
 import SellerService from "./SellerService";
@@ -24,6 +25,7 @@ class ApiService {
     orders: OrdersService = new OrdersService();
     transactions: TransactionsService = new TransactionsService();
     balance: BalanceService = new BalanceService();
+    notifications: NotificationsService = new NotificationsService();
 
     constructor() {
         return this;

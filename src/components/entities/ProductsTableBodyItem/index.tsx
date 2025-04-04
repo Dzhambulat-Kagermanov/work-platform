@@ -16,8 +16,6 @@ interface Props {
     item: WbProduct;
 }
 const ProductsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
-
-
     const { mutate: stopProductsMutate, isPending: stopProductsPending } =
         useStopProductsMutation();
 
@@ -41,7 +39,6 @@ const ProductsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
     };
 
     const handleToggle = () => {
-
         if (pending) {
             return;
         }
@@ -50,15 +47,17 @@ const ProductsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
             return;
         }
 
-        stopProductsMutate({
-            product_ids: [item.id],
-        }, {
-            onSuccess: () => {
-                setToggle(!toggle);
-            }
-        })
-
-    }
+        stopProductsMutate(
+            {
+                product_ids: [item.id],
+            },
+            {
+                onSuccess: () => {
+                    setToggle(!toggle);
+                },
+            },
+        );
+    };
 
     return (
         <>
@@ -80,12 +79,17 @@ const ProductsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
                         {item.name}
                     </Typography>
                     <Typography font="Inter-R" tag="h3" size={14}>
-                        {item.quantity_available}
+                        {item.wb_id}
                     </Typography>
                 </div>
             </td>
             <td className={cn(cls.column, [columnCls])}>
-                <Toggle disabled={pending} checked={toggle}  onChange={handleToggle} className={cn(cls.toggle)}  />
+                <Toggle
+                    disabled={pending}
+                    checked={toggle}
+                    onChange={handleToggle}
+                    className={cn(cls.toggle)}
+                />
             </td>
             <td className={cn(cls.column, [columnCls])}>
                 <Typography font="Inter-R" size={14} tag="h4">

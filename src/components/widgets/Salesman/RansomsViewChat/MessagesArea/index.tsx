@@ -1,68 +1,66 @@
-"use client"
-import { FC, useEffect, useRef, useState } from "react"
-import { TClassName } from "@/types"
-import { cn } from "@/lib"
-import Image from "next/image"
-import { Typography } from "@/components/ui"
-import { RansomsViewNotification } from "../../RansomsViewNotification"
-import { MessagesAreaGroup } from "../MessagesAreaGroup"
-import { RansomsReviewModal } from "../../RansomsReviewModal"
-import cls from "./index.module.scss"
-import { Message } from "@/types/api"
-import { dateParserHandler } from "@/handlers"
-import Chat from '@/types/api/Chat'
+"use client";
+import { FC, useEffect, useRef, useState } from "react";
+import { TClassName } from "@/types";
+import { cn } from "@/lib";
+import Image from "next/image";
+import { Typography } from "@/components/ui";
+import { RansomsViewNotification } from "../../RansomsViewNotification";
+import { MessagesAreaGroup } from "../MessagesAreaGroup";
+import { RansomsReviewModal } from "../../RansomsReviewModal";
+import cls from "./index.module.scss";
+import { Message } from "@/types/api";
+import { dateParserHandler } from "@/handlers";
+import Chat from "@/types/api/Chat";
 
 interface Props extends TClassName {
-    messages: Message[]
-    status: Chat['status']
+    messages: Message[];
+    status: Chat["status"];
 }
 const MessagesArea: FC<Props> = ({ className, messages, status }) => {
+    const [messagesGroup, setMessagesGroup] = useState<
+        { date: string; messages: Message[] }[]
+    >([]);
 
-    const [messagesGroup, setMessagesGroup] = useState<{ date: string, messages: Message[] }[]>([])
-
-    const notificationRef = useRef<HTMLDivElement>(null)
-    const groupOverlayRef = useRef<HTMLDivElement>(null)
+    const notificationRef = useRef<HTMLDivElement>(null);
+    const groupOverlayRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         setTimeout(() => {
             if (groupOverlayRef.current && notificationRef.current) {
-                groupOverlayRef.current.style.paddingTop = `${notificationRef.current.offsetHeight + 10
-                    }px`
+                groupOverlayRef.current.style.paddingTop = `${
+                    notificationRef.current.offsetHeight + 10
+                }px`;
             }
-        }, 0)
-    }, [])
+        }, 0);
+    }, []);
 
     useEffect(() => {
-
         if (messages) {
-            const result: { [key: string]: Message[] } = {}
+            const result: { [key: string]: Message[] } = {};
 
             for (let i = 0; i < messages.length; i++) {
-                const message = messages[i]
+                const message = messages[i];
 
-                const date = dateParserHandler(message.created_at)
+                const date = dateParserHandler(message.created_at);
 
                 if (result[date]) {
-                    result[date].push(message)
-                    continue
+                    result[date].push(message);
+                    continue;
                 }
 
-                result[date] = [message]
-
+                result[date] = [message];
             }
 
             const items = Object.entries(result).map((el) => {
                 return {
                     date: el[0],
                     messages: el[1],
-                }
-            })
+                };
+            });
 
-            setMessagesGroup(items)
-
+            setMessagesGroup(items);
         }
-
-    }, [messages])
+    }, [messages]);
 
     return (
         <div className={cn(cls.wrapper, [className])}>
@@ -88,7 +86,7 @@ const MessagesArea: FC<Props> = ({ className, messages, status }) => {
                                         messages={item.messages}
                                         key={index}
                                     />
-                                )
+                                );
                             })}
                         </div>
                     </div>
@@ -108,7 +106,7 @@ const MessagesArea: FC<Props> = ({ className, messages, status }) => {
                 </div>
             )}
         </div>
-    )
-}
+    );
+};
 
-export { MessagesArea }
+export { MessagesArea };
