@@ -15,7 +15,6 @@ const CreateAdvertisement: FC<Props> = () => {
         isLoading,
         isError,
     } = useGetWbProductQuery(searchParams.get("selectedWbItem") as string);
-    console.log(product);
 
     if (isLoading) {
         return <PageLoader />;

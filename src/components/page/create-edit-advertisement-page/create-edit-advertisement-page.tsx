@@ -76,13 +76,15 @@ const CreateEditAdvertisementPage: React.FC<
 
     return (
         <div className={cn(cls.main)}>
-            <Typography font="Inter-SB" size={30} tag="h1">
-                Создание объявления
-            </Typography>
-            <Typography font="Inter-R" size={16} tag="h2">
-                После успешной публикации ваш товар появится на сайте и будет
-                доступен для заказа
-            </Typography>
+            <div className={cls.head}>
+                <Typography font="Inter-SB" size={30} tag="h1">
+                    Создание объявления
+                </Typography>
+                <Typography font="Inter-R" size={16} tag="h2">
+                    После успешной публикации ваш товар появится на сайте и
+                    будет доступен для заказа
+                </Typography>
+            </div>
             <div className={cn(cls.content)}>
                 <CreateAdvertisementCardInfo
                     product={product}

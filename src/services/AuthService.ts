@@ -45,6 +45,7 @@ class AuthService {
         const res = await axios.post<{
             user: User;
             token: string;
+            message?: string;
         }>("/login", data);
 
         localStorage.setItem(authTokenKey, res.data.token);

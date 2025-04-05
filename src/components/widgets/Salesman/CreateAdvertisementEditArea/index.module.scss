@@ -7,11 +7,11 @@
     column-gap: 50px;
     display: flex;
     flex-wrap: wrap;
-    & > p {
-        max-width: 352px;
-        color: var(--grey-100);
-        margin-top: 23px;
-    }
+}
+.info {
+    max-width: 352px;
+    color: var(--grey-100);
+    margin-top: 23px;
 }
 .textarea_wrapper {
     max-width: var(--elements-max-width);
@@ -20,4 +20,7 @@
 .textarea {
     min-height: 170px;
     font-size: 14px;
+}
+.btn {
+    margin-top: 20px;
 }

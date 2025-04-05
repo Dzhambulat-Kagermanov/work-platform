@@ -33,15 +33,21 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
             !reverse &&
             (isError || (roles && data && roles.indexOf(data.role.slug) === -1))
         ) {
+            console.log(data);
+
             if (!data?.is_configured) {
+                console.log(1);
                 pushToRegEnd();
             } else {
+                console.log(2);
                 router.push(redirectLink ?? ROUTES.MAIN);
             }
         } else if (data) {
             if (!data.is_configured) {
+                console.log(3);
                 pushToRegEnd();
             } else if (reverse) {
+                console.log(4);
                 router.push(redirectLink ?? ROUTES.MAIN);
             }
         }

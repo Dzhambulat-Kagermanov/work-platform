@@ -4,6 +4,7 @@ import { cn } from "@/lib";
 import cls from "./index.module.scss";
 import { ReviewItem } from "@/components/entities/ReviewItem";
 import { Review } from "@/types/api";
+import { Typography } from "@/components/ui";
 
 interface Props extends TClassName {
     itemCls?: string;
@@ -11,7 +12,11 @@ interface Props extends TClassName {
 }
 const Reviews: FC<Props> = ({ className, reviews }) => {
     if (!reviews.length) {
-        return <></>;
+        return (
+            <Typography tag="h2" font="Inter-R" size={24} className={cls.stub}>
+                Отзывов нет :\
+            </Typography>
+        );
     }
 
     return (
