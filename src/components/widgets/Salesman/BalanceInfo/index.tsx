@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { Content } from "./Content";
