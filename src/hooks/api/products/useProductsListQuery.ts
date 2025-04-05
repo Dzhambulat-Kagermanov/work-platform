@@ -1,4 +1,3 @@
-"use client";
 import { useQuery } from "@tanstack/react-query";
 import { apiService } from "@/services";
 import { QueryItem } from "@/types/client";
@@ -17,14 +16,14 @@ const useProductsListQuery = () => {
     const queryItemsHandler = () => {
         const res: QueryItem[] = [];
 
-        const search = searchParams.get('search')
+        const search = searchParams.get("search");
 
         if (search) {
             res.push({
                 key: "search",
                 value: search,
             });
-        };
+        }
 
         if (mainPageFilters.cashbackFrom) {
             res.push({

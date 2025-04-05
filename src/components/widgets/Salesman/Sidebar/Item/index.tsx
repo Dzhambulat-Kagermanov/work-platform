@@ -1,4 +1,3 @@
-"use client";
 import { FC, MouseEventHandler, ReactNode } from "react";
 import { TClassName, TTag } from "@/types";
 import { cn } from "@/lib";

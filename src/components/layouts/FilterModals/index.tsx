@@ -1,4 +1,3 @@
-"use client";
 import { FC } from "react";
 import { ModalCashback } from "@/components/widgets/Buyer/ModalCashback";
 import { ModalPrice } from "@/components/widgets/shared/ModalPrice";

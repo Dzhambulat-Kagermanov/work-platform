@@ -1,4 +1,3 @@
-"use client";
 import { FC, MouseEventHandler, useState } from "react";
 import { TClassName, TState } from "@/types";
 import { cn } from "@/lib";
@@ -17,14 +16,12 @@ interface Props extends TClassName {
     amount: string;
     setAmount: TState<string>;
 }
-const Action: FC<Props> = ({ className, setStep, amount, setAmount, }) => {
-
+const Action: FC<Props> = ({ className, setStep, amount, setAmount }) => {
     const { refetch } = useGetBalanceQuery();
     const { mutate: balanceTopUpMutate, isPending } = useBalanceTopUpMutation();
 
     const hideModal = useModalStore((state) => state.hideModal);
     const handleUp: MouseEventHandler = () => {
-        
         balanceTopUpMutate(amount, {
             onSuccess: () => {
                 setStep("success");
@@ -32,9 +29,8 @@ const Action: FC<Props> = ({ className, setStep, amount, setAmount, }) => {
             },
             onError: () => {
                 toast.error("Не удалось пополнить баланс");
-            }
+            },
         });
-
     };
     const handleBack: MouseEventHandler = () => {
         hideModal({ slug: SALESMAN_BALANCE_UP_MODAL });
@@ -56,7 +52,13 @@ const Action: FC<Props> = ({ className, setStep, amount, setAmount, }) => {
                     <Typography font="Inter-R" size={14} tag="h3">
                         На основном балансе - 5600 ₽
                     </Typography> */}
-                    <Input placeholder="Введите сумму" type="number" value={amount} onChange={(e) => setAmount(e.target.value)} min={500} />
+                    <Input
+                        placeholder="Введите сумму"
+                        type="number"
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
+                        min={500}
+                    />
                 </div>
             </div>
             <div className={cn(cls.actions)}>

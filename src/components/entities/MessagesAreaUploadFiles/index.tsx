@@ -1,4 +1,3 @@
-"use client";
 import { FC } from "react";
 import { TChatMessageUserUploadedFile, TClassName } from "@/types";
 import { cn } from "@/lib";

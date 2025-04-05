@@ -1,4 +1,3 @@
-"use client";
 import { FC } from "react";
 import { TClassName } from "@/types";
 import { Container, Typography } from "@/components/ui";

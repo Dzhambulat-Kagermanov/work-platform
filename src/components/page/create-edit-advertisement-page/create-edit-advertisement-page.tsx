@@ -1,4 +1,3 @@
-"use client";
 import React, { useState } from "react";
 import { cn } from "@/lib";
 import { Input, Typography } from "@/components/ui";

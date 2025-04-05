@@ -1,4 +1,3 @@
-"use client";
 import { FC, useEffect, useState } from "react";
 import { TClassName } from "@/types";
 import { Button, ModalBase } from "@/components/ui";

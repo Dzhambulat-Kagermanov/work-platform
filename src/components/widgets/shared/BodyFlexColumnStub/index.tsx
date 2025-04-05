@@ -1,4 +1,3 @@
-"use client";
 import { useBodyClassName } from "@/hooks";
 import { FC, useEffect } from "react";
 

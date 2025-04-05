@@ -1,4 +1,3 @@
-"use client";
 import { FC, MouseEvent, MouseEventHandler, useState } from "react";
 import { TClassName } from "@/types";
 import { Typography } from "@/components/ui";
@@ -35,7 +34,11 @@ const Action: FC<Props> = ({ actionBtnText, actions, className }) => {
             })}
         >
             <button className={cn(cls.actions_btn)} onClick={handleBtnClick}>
-                <Typography className="overflow-hidden text-ellipsis whitespace-nowrap" font="Inter-SB" size={14}>
+                <Typography
+                    className="overflow-hidden text-ellipsis whitespace-nowrap"
+                    font="Inter-SB"
+                    size={14}
+                >
                     {actionBtnText}
                 </Typography>
                 <ExpandArrowIcon

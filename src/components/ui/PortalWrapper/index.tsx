@@ -1,4 +1,3 @@
-"use client";
 import { TChildren } from "@/types";
 import { useRef, useEffect, useState, FC } from "react";
 import { createPortal } from "react-dom";

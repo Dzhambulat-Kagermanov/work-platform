@@ -1,4 +1,3 @@
-"use client";
 import { ChangeEventHandler, FC, MouseEventHandler, useState } from "react";
 import { TClassName, TState } from "@/types";
 import { Typography, Button, Input } from "@/components/ui";

@@ -1,4 +1,3 @@
-"use client";
 import { FC, MouseEventHandler, useState } from "react";
 import { TClassName } from "@/types";
 import { Button, Counter, ModalBase, Typography } from "@/components/ui";
@@ -14,7 +13,6 @@ interface Props extends TClassName {
     tariff: TariffItem;
 }
 const TariffsModal: FC<Props> = ({ className, tariff }) => {
-
     const { mutate, isPending } = useBuyTariffBuybacksMutation();
 
     const slug = `${SALESMAN_TARIFFS_MODAL}${tariff.id}`;
@@ -24,13 +22,16 @@ const TariffsModal: FC<Props> = ({ className, tariff }) => {
 
     const hideModal = useModalStore((state) => state.hideModal);
     const handlePay: MouseEventHandler = () => {
-        mutate({
-            amount: count,
-        }, {
-            onSuccess: () => {
-                hideModal({ slug });
-            }
-        });
+        mutate(
+            {
+                amount: count,
+            },
+            {
+                onSuccess: () => {
+                    hideModal({ slug });
+                },
+            },
+        );
     };
     const handleCancel: MouseEventHandler = () => {
         hideModal({ slug });

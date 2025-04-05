@@ -1,4 +1,3 @@
-"use client";
 import { FC } from "react";
 import { TChatPlaqueProps, TClassName, TState, TTag } from "@/types";
 import { cn } from "@/lib";

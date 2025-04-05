@@ -1,4 +1,3 @@
-"use client";
 import { FC, memo, useEffect, useState } from "react";
 import { TTag } from "@/types";
 import { cn } from "@/lib";

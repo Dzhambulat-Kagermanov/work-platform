@@ -1,4 +1,3 @@
-"use client";
 import { FC, useRef } from "react";
 import { TClassName, TUserInfo } from "@/types";
 import { cn } from "@/lib";

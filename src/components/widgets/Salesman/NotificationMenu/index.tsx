@@ -1,4 +1,3 @@
-"use client";
 import { FC } from "react";
 import { TClassName } from "@/types";
 import { SALESMAN_NOTIFICATIONS_MODAL } from "@/constants";

@@ -1,4 +1,3 @@
-"use client";
 import { FC, forwardRef, InputHTMLAttributes, Ref } from "react";
 import { cn } from "@/lib";
 import { Button } from "../Button";

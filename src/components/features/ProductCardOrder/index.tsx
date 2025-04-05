@@ -1,4 +1,3 @@
-"use client";
 import { FC } from "react";
 import { TClassName, TProductItemProps } from "@/types";
 import { Button } from "@/components/ui";

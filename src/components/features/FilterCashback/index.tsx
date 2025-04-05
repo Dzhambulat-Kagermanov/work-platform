@@ -1,4 +1,3 @@
-"use client";
 import { ButtonHTMLAttributes, FC } from "react";
 import { cn } from "@/lib";
 import { Typography } from "@/components/ui";

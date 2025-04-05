@@ -1,4 +1,3 @@
-"use client";
 import { FC, MouseEventHandler, useEffect } from "react";
 import { TClassName, TState } from "@/types";
 import { ProductInfo, TModalStep } from "..";
@@ -9,7 +8,9 @@ import cls from "./index.module.scss";
 import { useSessionQuery } from "@/hooks/api/auth";
 import { useAddWbProductMutation } from "@/hooks/api/seller";
 import { useQueryClient } from "@tanstack/react-query";
-import useGetSellerProductsQuery, { SELLER_PRODUCTS_QUERY_KEY } from "@/hooks/api/seller/useGetSellerProductsQuery";
+import useGetSellerProductsQuery, {
+    SELLER_PRODUCTS_QUERY_KEY,
+} from "@/hooks/api/seller/useGetSellerProductsQuery";
 
 interface Props extends TClassName {
     setStep: TState<TModalStep>;
@@ -22,7 +23,7 @@ const AddProductConfirmation: FC<Props> = ({
     className,
     info,
     closeModal,
-    setArt
+    setArt,
 }) => {
     const { data: userData } = useSessionQuery();
     const { mutate: addWbProductMutate, isPending } = useAddWbProductMutation();

@@ -1,4 +1,3 @@
-"use client";
 import { FC, useRef, useState } from "react";
 import { cn } from "@/lib";
 import { TClassName } from "@/types";
@@ -42,9 +41,8 @@ const BalanceTransactions: FC<Props> = ({ className }) => {
             items.push({
                 key: "buyback_id",
                 value: trimBuybackId,
-            })
+            });
         }
-
 
         return items;
     };

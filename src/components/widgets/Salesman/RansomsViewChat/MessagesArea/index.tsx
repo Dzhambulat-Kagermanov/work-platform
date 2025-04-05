@@ -1,4 +1,3 @@
-"use client";
 import { FC, useEffect, useRef, useState } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";

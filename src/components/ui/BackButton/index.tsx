@@ -1,4 +1,3 @@
-"use client";
 import { cn } from "@/lib";
 import { ExpandArrowIcon } from "@/icons";
 import { Typography } from "@/components/ui";

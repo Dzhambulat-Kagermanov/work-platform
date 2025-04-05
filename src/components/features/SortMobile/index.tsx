@@ -1,4 +1,3 @@
-"use client";
 import { ButtonHTMLAttributes, FC, MouseEvent } from "react";
 import cls from "./index.module.scss";
 import { cn } from "@/lib";

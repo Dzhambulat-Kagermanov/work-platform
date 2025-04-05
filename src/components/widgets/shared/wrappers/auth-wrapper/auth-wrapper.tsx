@@ -1,4 +1,3 @@
-"use client";
 import { PageLoader } from "@/components/ui/loaders";
 import { ROUTES } from "@/constants";
 import { useSessionQuery } from "@/hooks/api/auth";

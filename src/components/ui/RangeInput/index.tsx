@@ -1,4 +1,3 @@
-"use client";
 import { Dispatch, FC, memo, ReactNode, SetStateAction } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
