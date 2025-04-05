@@ -2,16 +2,28 @@
 import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
-import { Input, InputMaskSwitcher } from "@/components/ui";
+import { Input, InputMaskSwitcher, Typography } from "@/components/ui";
 import { AuthFormSubmit } from "@/components/features/AuthFormSubmit";
 import { PHONE_MASKS } from "@/constants";
 import cls from "./index.module.scss";
 import { useLoginMutation } from "@/hooks/api/auth";
 import { Formik } from "formik";
 
-interface Props extends TClassName {}
-const AuthForm: FC<Props> = ({ className }) => {
-    const loginMutation = useLoginMutation();
+interface Props extends TClassName {
+    withoutErrorToast?: boolean;
+    noRedirectOnSuccess?: boolean;
+    onSuccess?: () => void;
+}
+const AuthForm: FC<Props> = ({
+    className,
+    withoutErrorToast,
+    noRedirectOnSuccess,
+    onSuccess,
+}) => {
+    const loginMutation = useLoginMutation({
+        withoutErrorToast,
+        noRedirectOnSuccess,
+    });
 
     return (
         <Formik
@@ -24,6 +36,9 @@ const AuthForm: FC<Props> = ({ className }) => {
                 loginMutation.mutate(values, {
                     onSettled: () => {
                         setSubmitting(false);
+                    },
+                    onSuccess: () => {
+                        onSuccess && onSuccess();
                     },
                 });
             }}
@@ -61,6 +76,17 @@ const AuthForm: FC<Props> = ({ className }) => {
                         onChange={handleChange}
                         disabled={isSubmitting}
                     />
+                    {loginMutation.isError &&
+                    loginMutation.error?.response?.data?.message ? (
+                        <Typography
+                            className={cls.error_message}
+                            font="Inter-R"
+                            tag="p"
+                            size={18}
+                        >
+                            {loginMutation.error.response.data.message}
+                        </Typography>
+                    ) : null}
                     <AuthFormSubmit
                         disabled={
                             isSubmitting || !values.password || !values.phone

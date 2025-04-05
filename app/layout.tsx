@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@/styles/index.scss";
 import { QueryClientLayout } from "@/components/layouts/QueryClient";
 import { Toaster } from "react-hot-toast";
+import { UnauthenticatedModal } from "@/components/widgets/shared/UnauthenticatedModal";
 
 export const dynamic = "auto";
 export const dynamicParams = true;
@@ -22,7 +23,10 @@ export default function RootLayout({
         <html lang="en">
             <body>
                 <Toaster />
-                <QueryClientLayout>{children}</QueryClientLayout>
+                <QueryClientLayout>
+                    {children}
+                    <UnauthenticatedModal />
+                </QueryClientLayout>
                 <div id="modals"></div>
             </body>
         </html>
