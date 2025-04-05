@@ -1,0 +1,432 @@
+app / header / buyer / auth / auth / page.tsx;
+import { AuthPage } from "@/components/page/Buyer/Auth";
+import { FC } from "react";
+
+interface Props {}
+const Auth: FC<Props> = ({}) => {
+    return <AuthPage />;
+};
+
+export default Auth;
+
+app / header / buyer / auth / forgot - password / page.tsx;
+import { ForgotPasswordPage } from "@/components/page/Buyer/ForgotPassword";
+import { FC } from "react";
+
+interface Props {}
+const ForgotPassword: FC<Props> = ({}) => {
+    return <ForgotPasswordPage />;
+};
+
+export default ForgotPassword;
+
+app / header / buyer / auth / registration / page.tsx;
+import { RegistrationPage } from "@/components/page/Buyer/Registration";
+import { FC } from "react";
+
+interface Props {}
+const Registration: FC<Props> = ({}) => {
+    return <RegistrationPage />;
+};
+
+export default Registration;
+
+app / header / buyer / account / page.tsx;
+import { AccountPage } from "@/components/page/account-page";
+import { FC } from "react";
+
+interface Props {}
+const Account: FC<Props> = ({}) => {
+    return <AccountPage role="buyer" />;
+};
+
+export default Account;
+
+app / header / buyer / category / page.tsx;
+import { CategoryPage } from "@/components/page/Buyer/Category";
+import { CategoryItemPage } from "@/components/page/Buyer/CategoryItem";
+import { CategorySelectSubcategory } from "@/components/widgets/Buyer/CategorySelectSubcategory";
+import { FC } from "react";
+
+interface Props {
+    searchParams: Promise<{ categoryId?: string; subcategory?: string }>;
+}
+
+const Category: FC<Props> = async ({ searchParams }) => {
+    const { categoryId, subcategory } = await searchParams;
+
+    return categoryId ? (
+        subcategory ? (
+            <CategoryItemPage
+                categoryId={categoryId}
+                subcategory={subcategory}
+            />
+        ) : (
+            <CategorySelectSubcategory
+                categoryId={categoryId}
+                subcategory={subcategory}
+            />
+        )
+    ) : (
+        <CategoryPage />
+    );
+};
+
+export default Category;
+
+app / header / buyer / category / [categoryId] / page.tsx;
+import { CategoryItemPage } from "@/components/page/Buyer/CategoryItem";
+import { FC } from "react";
+
+interface Props {
+    searchParams: Promise<{
+        categoryId: string;
+        subcategory: string;
+    }>;
+}
+const CategoryItem: FC<Props> = async ({ searchParams }) => {
+    const { categoryId, subcategory } = await searchParams;
+
+    return (
+        <CategoryItemPage categoryId={categoryId} subcategory={subcategory} />
+    );
+};
+
+export default CategoryItem;
+
+app / header / buyer / delivery / page.tsx;
+import { DeliveryPage } from "@/components/page/Buyer/Delivery";
+import { ChatStatus } from "@/types/api";
+import { FC } from "react";
+
+interface Props {
+    searchParams: Promise<{ chatType: ChatStatus }>;
+}
+const Delivery: FC<Props> = async ({ searchParams }) => {
+    const { chatType } = await searchParams;
+
+    return <DeliveryPage chatType={chatType} />;
+};
+
+export default Delivery;
+
+app / header / buyer / favorites / page.tsx;
+import { FC } from "react";
+import { FavoritesPage } from "@/components/page/Buyer/Favorites";
+
+interface Props {}
+const Favorites: FC<Props> = ({}) => {
+    return <FavoritesPage />;
+};
+
+export default Favorites;
+
+app / header / buyer / products / [card] / page.tsx;
+import { ProductCardPage } from "@/components/page/Buyer/ProductCard";
+import { notFound } from "next/navigation";
+import { FC } from "react";
+import { apiService } from "@/services";
+interface Props {
+    params: Promise<{ card: string }>;
+}
+
+const ProductCard: FC<Props> = async ({ params }) => {
+    const { card } = await params;
+
+    const product = await apiService.products.getProductItem(card);
+
+    if (!product) return notFound();
+
+    return <ProductCardPage product={product} />;
+};
+
+export default ProductCard;
+
+app / header / buyer / salesman / [id] / page.tsx;
+import SalesmanInfoPage from "@/components/page/salesman-page/salesman-page";
+import { FC } from "react";
+
+interface Props {}
+const SalesmanInfo: FC<Props> = ({}) => {
+    return <SalesmanInfoPage />;
+};
+
+export default SalesmanInfo;
+
+app / header / layout.tsx;
+import { TChildren } from "@/types";
+import { HeaderLayout } from "@/components/layouts/Header";
+import { FC } from "react";
+
+interface Props extends TChildren {}
+const Layout: FC<Props> = ({ children }) => {
+    return <HeaderLayout>{children}</HeaderLayout>;
+};
+
+export default Layout;
+
+app / (header & footer) / layout.tsx;
+import { FC } from "react";
+import { TChildren } from "@/types";
+import { HeaderFooter } from "@/components/layouts/HeaderFooter";
+
+interface Props extends TChildren {}
+const Layout: FC<Props> = ({ children }) => {
+    return <HeaderFooter>{children}</HeaderFooter>;
+};
+
+export default Layout;
+
+app / (header & footer) / page.tsx;
+import { HomePage } from "@/components/page/Buyer/Home";
+
+export default function Home() {
+    return <HomePage />;
+}
+
+app / (header & footer) / buyer / account / balance / page.tsx;
+import BalancePage from "@/components/page/Buyer/Balance";
+import { FC } from "react";
+
+interface Props {}
+const Balance: FC<Props> = ({}) => {
+    return <BalancePage />;
+};
+
+export default Balance;
+
+app / sidebar / salesman / balance / page.tsx;
+import { BalancePage } from "@/components/page/Salesman/Balance";
+import { FC } from "react";
+
+interface Props {}
+const Balance: FC<Props> = ({}) => {
+    return <BalancePage />;
+};
+
+export default Balance;
+
+app / sidebar / salesman / balance / tariffs / page.tsx;
+import { TariffsPage } from "@/components/page/Salesman/Tariffs";
+import { FC } from "react";
+
+interface Props {}
+const Tariffs: FC<Props> = ({}) => {
+    return <TariffsPage />;
+};
+
+export default Tariffs;
+
+app / sidebar / salesman / buyer - profile / [id] / page.tsx;
+import { FC } from "react";
+import { BuyerProfilePage } from "@/components/page/Salesman/BuyerProfile";
+
+interface Props {}
+const BuyerProfile: FC<Props> = ({}) => {
+    return <BuyerProfilePage />;
+};
+
+export default BuyerProfile;
+
+app / sidebar / salesman / create - advertisement / page.tsx;
+("use client");
+import { CreateEditAdvertisementPage } from "@/components/page/create-edit-advertisement-page";
+import { PageLoader } from "@/components/ui/loaders";
+import { PageErrorStub } from "@/components/ui/page-error-stub";
+import { useGetWbProductQuery } from "@/hooks/api/seller";
+import { useSearchParams } from "next/navigation";
+import { FC } from "react";
+
+interface Props {}
+const CreateAdvertisement: FC<Props> = () => {
+    const searchParams = useSearchParams();
+
+    const {
+        data: product,
+        isLoading,
+        isError,
+    } = useGetWbProductQuery(searchParams.get("selectedWbItem") as string);
+
+    if (isLoading) {
+        return <PageLoader />;
+    }
+
+    if (isError || !product) {
+        return <PageErrorStub />;
+    }
+
+    return <CreateEditAdvertisementPage product={product} />;
+};
+
+export default CreateAdvertisement;
+
+app / sidebar / salesman / create - advertisement / loading.tsx;
+import { TChildren } from "@/types";
+import { FC } from "react";
+
+interface Props extends TChildren {}
+
+const Loading: FC<Props> = ({ children }) => {
+    return <>{children}</>;
+};
+
+export default Loading;
+
+app / sidebar / salesman / edit - advertisement / [slug] / page.tsx;
+import { FC } from "react";
+import { CreateEditAdvertisementPage } from "@/components/page/create-edit-advertisement-page";
+
+interface Props {}
+const EditAdvertisement: FC<Props> = ({}) => {
+    //@ts-expect-error: Исправить потом
+    return <CreateEditAdvertisementPage product={null} />;
+};
+
+export default EditAdvertisement;
+
+app / sidebar / salesman / profile / page.tsx;
+import { AccountPage } from "@/components/page/account-page";
+import { FC } from "react";
+
+interface Props {}
+const Profile: FC<Props> = ({}) => {
+    return <AccountPage role="seller" />;
+};
+
+export default Profile;
+
+app / sidebar / salesman / salesman - profile / [id] / page.tsx;
+import SalesmanInfoPage from "@/components/page/salesman-page/salesman-page";
+import { FC } from "react";
+
+interface Props {}
+const SalesmanProfile: FC<Props> = ({}) => {
+    return <SalesmanInfoPage />;
+};
+
+export default SalesmanProfile;
+
+app / sidebar / salesman / support / page.tsx;
+import { SupportPage } from "@/components/page/Salesman/Support";
+import { FC } from "react";
+
+interface Props {}
+const Support: FC<Props> = ({}) => {
+    return <SupportPage />;
+};
+
+export default Support;
+
+app / sidebar / salesman / page.tsx;
+import { HomePage } from "@/components/page/Salesman/Home";
+import { TSalesmanHomePageType } from "@/components/widgets/Salesman/HomePagesSwitcher";
+import { ChatStatus } from "@/types/api";
+import { FC } from "react";
+
+interface Props {
+    searchParams: Promise<{
+        homePageType: TSalesmanHomePageType;
+        chatType: ChatStatus;
+    }>;
+}
+const Home: FC<Props> = async ({ searchParams }) => {
+    const { homePageType, chatType } = await searchParams;
+
+    return <HomePage homePageType={homePageType || null} chatType={chatType} />;
+};
+
+export default Home;
+
+app / sidebar / layout.tsx;
+import { FC, Suspense } from "react";
+import { SidebarLayout } from "@/components/layouts/Sidebar";
+import { TChildren } from "@/types";
+import { AuthWrapper } from "@/components/widgets/shared/wrappers";
+import { ROUTES } from "@/constants";
+import { NotificationsLayout } from "@/components/layouts/Notifications";
+
+interface Props extends TChildren {}
+const Sidebar: FC<Props> = ({ children }) => {
+    return (
+        <Suspense fallback={<></>}>
+            <AuthWrapper roles={["seller"]} redirectLink={ROUTES.SALESMAN.AUTH}>
+                <NotificationsLayout>
+                    <Suspense fallback={<></>}>
+                        <SidebarLayout>{children}</SidebarLayout>
+                    </Suspense>
+                </NotificationsLayout>
+            </AuthWrapper>
+        </Suspense>
+    );
+};
+
+export default Sidebar;
+
+app / auth / page.tsx;
+import { AuthPage } from "@/components/page/Salesman/Auth";
+import { FC } from "react";
+
+interface Props {}
+const Auth: FC<Props> = ({}) => {
+    return <AuthPage />;
+};
+
+export default Auth;
+
+app / forgot - password / page.tsx;
+import { ForgotPasswordPage } from "@/components/page/Salesman/ForgotPassword";
+import { FC } from "react";
+
+interface Props {}
+const ForgotPassword: FC<Props> = ({}) => {
+    return <ForgotPasswordPage />;
+};
+
+export default ForgotPassword;
+
+app / registration / page.tsx;
+import { RegistrationPage } from "@/components/page/Salesman/Registration";
+import { FC } from "react";
+
+interface Props {}
+const Registration: FC<Props> = ({}) => {
+    return <RegistrationPage />;
+};
+
+export default Registration;
+
+app / layout.tsx;
+import type { Metadata } from "next";
+import "@/styles/index.scss";
+import { QueryClientLayout } from "@/components/layouts/QueryClient";
+import { Toaster } from "react-hot-toast";
+import { UnauthenticatedModal } from "@/components/widgets/shared/UnauthenticatedModal";
+
+export const dynamic = "auto";
+export const dynamicParams = true;
+export const revalidate = false;
+export const fetchCache = "auto";
+
+export const metadata: Metadata = {
+    title: "Платформа",
+    description: "Описание",
+};
+
+export default function RootLayout({
+    children,
+}: Readonly<{
+    children: React.ReactNode;
+}>) {
+    return (
+        <html lang="en">
+            <body>
+                <Toaster />
+                <QueryClientLayout>
+                    {children}
+                    <UnauthenticatedModal />
+                </QueryClientLayout>
+                <div id="modals"></div>
+            </body>
+        </html>
+    );
+}
