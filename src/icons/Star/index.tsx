@@ -1,3 +1,4 @@
+"use client";
 import { FC, MouseEventHandler } from "react";
 import { TIcon } from "@/types";
 

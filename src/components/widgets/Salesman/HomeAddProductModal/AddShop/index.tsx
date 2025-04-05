@@ -1,3 +1,4 @@
+"use client";
 import { FC, MouseEventHandler, useEffect } from "react";
 import { TClassName, TState } from "@/types";
 import { ProductInfo, TModalStep } from "..";

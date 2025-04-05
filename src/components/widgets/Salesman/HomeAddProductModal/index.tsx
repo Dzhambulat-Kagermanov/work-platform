@@ -1,3 +1,4 @@
+"use client";
 import { FC, useState } from "react";
 import { ModalBase } from "@/components/ui";
 import { SALESMAN_ADD_PRODUCT_MODAL } from "@/constants";

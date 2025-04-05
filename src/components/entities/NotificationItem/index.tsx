@@ -1,3 +1,4 @@
+"use client";
 import { FC, memo, MouseEventHandler, useState } from "react";
 import { TClassName, TNotificationItemProps, TTag } from "@/types";
 import { cn } from "@/lib";

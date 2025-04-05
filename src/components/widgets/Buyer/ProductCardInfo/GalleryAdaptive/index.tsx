@@ -1,3 +1,4 @@
+"use client";
 import { useScreen } from "@/hooks";
 import { FC } from "react";
 import { Gallery } from "../Gallery";

@@ -1,3 +1,4 @@
+"use client";
 import { FC, useMemo } from "react";
 import { TClassName } from "@/types";
 import { BreadCrumbs, Container } from "@/components/ui";

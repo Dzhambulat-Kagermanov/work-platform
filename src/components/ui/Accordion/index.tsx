@@ -1,3 +1,4 @@
+"use client";
 import { FC, MouseEventHandler, ReactNode, useState } from "react";
 import { TChildren, TClassName } from "@/types";
 import { cn } from "@/lib";

@@ -1,3 +1,4 @@
+"use client";
 import { FC, MouseEventHandler } from "react";
 import { TClassName } from "@/types";
 import { Typography } from "@/components/ui";

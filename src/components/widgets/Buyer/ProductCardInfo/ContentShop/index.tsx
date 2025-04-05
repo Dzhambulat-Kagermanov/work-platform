@@ -1,14 +1,15 @@
-import { FC } from "react";
-import { TClassName, TProductItemProps, TSalesmanInfo } from "@/types";
-import { cn } from "@/lib";
-import { Typography } from "@/components/ui";
-import Link from "next/link";
-import Image from "next/image";
-import cls from "./index.module.scss";
+"use client"
+import { FC } from "react"
+import { TClassName, TProductItemProps, TSalesmanInfo } from "@/types"
+import { cn } from "@/lib"
+import { Typography } from "@/components/ui"
+import Link from "next/link"
+import Image from "next/image"
+import cls from "./index.module.scss"
 
 interface Props extends TClassName, Pick<TProductItemProps, "salesmanId"> {
-    shopName: string;
-    rating: string;
+    shopName: string
+    rating: string
 }
 const ContentShop: FC<Props> = ({
     salesmanId,
@@ -40,7 +41,7 @@ const ContentShop: FC<Props> = ({
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export { ContentShop };
+export { ContentShop }

@@ -1,3 +1,4 @@
+"use client";
 import { ButtonHTMLAttributes, FC } from "react";
 import { cn } from "@/lib";
 import Image from "next/image";

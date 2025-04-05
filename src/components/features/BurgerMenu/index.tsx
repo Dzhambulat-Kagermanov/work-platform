@@ -1,3 +1,4 @@
+"use client";
 import { ButtonHTMLAttributes, FC, MouseEvent } from "react";
 import { cn } from "@/lib";
 import { useModalStore } from "@/store";

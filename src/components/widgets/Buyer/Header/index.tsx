@@ -1,24 +1,25 @@
-import { FC, Suspense } from "react";
-import { TModuleClassName } from "@/types";
-import { cn } from "@/lib";
-import { Container, Typography } from "@/components/ui";
-import { Content } from "./Content";
-import Link from "next/link";
-import { useScreen } from "@/hooks";
-import { SM_BIG } from "@/constants";
-import { usePathname } from "next/navigation";
-import { pathValidating } from "@/lib";
-import cls from "./index.module.scss";
-import { useSessionQuery } from "@/hooks/api/auth";
+"use client"
+import { FC, Suspense } from "react"
+import { TModuleClassName } from "@/types"
+import { cn } from "@/lib"
+import { Container, Typography } from "@/components/ui"
+import { Content } from "./Content"
+import Link from "next/link"
+import { useScreen } from "@/hooks"
+import { SM_BIG } from "@/constants"
+import { usePathname } from "next/navigation"
+import { pathValidating } from "@/lib"
+import cls from "./index.module.scss"
+import { useSessionQuery } from "@/hooks/api/auth"
 
-interface Props extends TModuleClassName {}
+interface Props extends TModuleClassName { }
 const Header: FC<Props> = ({ className, wrapperClassName }) => {
-    const { data: user } = useSessionQuery();
+    const { data: user } = useSessionQuery()
 
-    const width = useScreen();
-    const path = usePathname();
+    const width = useScreen()
+    const path = usePathname()
 
-    const isSalesmanPages = pathValidating(path, "/salesman/...");
+    const isSalesmanPages = pathValidating(path, "/salesman/...")
 
     return (
         <header
@@ -52,7 +53,7 @@ const Header: FC<Props> = ({ className, wrapperClassName }) => {
                 </Suspense>
             </Container>
         </header>
-    );
-};
+    )
+}
 
-export { Header };
+export { Header }

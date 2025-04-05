@@ -1,3 +1,4 @@
+"use client";
 import { FC, memo } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";

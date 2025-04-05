@@ -1,3 +1,4 @@
+"use client";
 import { ButtonHTMLAttributes, FC } from "react";
 import { Button } from "@/components/ui";
 import { cn } from "@/lib";

@@ -1,3 +1,4 @@
+"use client";
 import { FC } from "react";
 import { TClassName, TTag } from "@/types";
 import { TCategoryItemProps } from "@/types";

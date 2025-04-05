@@ -1,3 +1,4 @@
+"use client";
 import { FC, Ref, useEffect, useRef } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
@@ -13,7 +14,7 @@ import { Message } from "@/types/api";
 interface Props extends TClassName {
     messages: Message[];
 }
-const MessagesArea: FC<Props> = ({ className, messages }) => {
+const MessagesArea: FC<Props> = ({ className, messages, }) => {
     const notificationRef = useRef<HTMLDivElement>(null);
     const groupOverlayRef = useRef<HTMLDivElement>(null);
     useEffect(() => {

@@ -1,3 +1,4 @@
+"use client";
 import { CreateEditAdvertisementPage } from "@/components/page/create-edit-advertisement-page";
 import { PageLoader } from "@/components/ui/loaders";
 import { PageErrorStub } from "@/components/ui/page-error-stub";

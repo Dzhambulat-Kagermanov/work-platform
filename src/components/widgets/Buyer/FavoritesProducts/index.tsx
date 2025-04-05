@@ -1,23 +1,24 @@
-import { FC } from "react";
-import { TClassName } from "@/types";
-import { Container } from "@/components/ui";
-import { cn } from "@/lib";
-import cls from "./index.module.scss";
-import { favoriteProducts } from "@/constants/stub";
-import { ProductItem } from "@/components/entities/ProductItem";
-import Link from "next/link";
-import { useGetFavoritesQuery } from "@/hooks/api/favorites";
-import { ROUTES } from "@/constants";
+"use client"
+import { FC } from "react"
+import { TClassName } from "@/types"
+import { Container } from "@/components/ui"
+import { cn } from "@/lib"
+import cls from "./index.module.scss"
+import { favoriteProducts } from "@/constants/stub"
+import { ProductItem } from "@/components/entities/ProductItem"
+import Link from "next/link"
+import { useGetFavoritesQuery } from "@/hooks/api/favorites"
+import { ROUTES } from "@/constants"
 
-interface Props extends TClassName {}
+interface Props extends TClassName { }
 const FavoritesProducts: FC<Props> = ({ className }) => {
-    const { data: favoritesData } = useGetFavoritesQuery();
+    const { data: favoritesData } = useGetFavoritesQuery()
     if (!favoritesData || !favoritesData.length) {
         return (
             <div className="flex items-center justify-center text-center h-[80dvh] min-h-[250px]">
                 Товары не найдены
             </div>
-        );
+        )
     }
     return (
         <Container tag="section" className={cn(cls.wrapper, [className])}>
@@ -48,11 +49,11 @@ const FavoritesProducts: FC<Props> = ({ className }) => {
                                 tooltip={""}
                             />
                         </Link>
-                    );
+                    )
                 })}
             </ul>
         </Container>
-    );
-};
+    )
+}
 
-export { FavoritesProducts };
+export { FavoritesProducts }

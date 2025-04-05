@@ -1,3 +1,4 @@
+"use client";
 import { FC } from "react";
 import { TClassName } from "@/types";
 import { Container } from "@/components/ui";

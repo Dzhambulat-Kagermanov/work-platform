@@ -1,3 +1,4 @@
+"use client";
 import { TChildren } from "@/types";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { FC } from "react";

@@ -1,3 +1,4 @@
+"use client";
 import { FC, useState } from "react";
 import { TClassName } from "@/types";
 import { Button, Input, ModalBase, Typography } from "@/components/ui";

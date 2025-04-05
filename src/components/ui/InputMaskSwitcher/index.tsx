@@ -1,3 +1,4 @@
+"use client";
 import { FC, useState } from "react";
 import { MaskInput, TMaskInputProps } from "../MaskInput";
 import { cn } from "@/lib";

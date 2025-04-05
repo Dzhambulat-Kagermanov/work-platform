@@ -1,3 +1,4 @@
+"use client";
 import { FC, useState } from "react";
 import { cn } from "@/lib";
 import { TClassName } from "@/types";
@@ -8,10 +9,7 @@ import { Table } from "./Table";
 import { useScreen } from "@/hooks";
 import { SM_MID } from "@/constants";
 import cls from "./index.module.scss";
-import {
-    useGetTransactionsProductsList,
-    useGetTransactionsQuery,
-} from "@/hooks/api/transactions";
+import { useGetTransactionsProductsList, useGetTransactionsQuery } from "@/hooks/api/transactions";
 import { PageLoader } from "@/components/ui/loaders";
 import { PageErrorStub } from "@/components/ui/page-error-stub";
 import { TransactionType } from "@/types/api";
@@ -35,14 +33,14 @@ const BalanceTransactions: FC<Props> = ({ className }) => {
             result.push({
                 key: "type",
                 value: active,
-            });
+            })
         }
 
         if (currentProduct) {
             result.push({
                 key: "product_id",
                 value: `${currentProduct}`,
-            });
+            })
         }
 
         const searchTrim = searchDebounce.trim();
@@ -51,7 +49,7 @@ const BalanceTransactions: FC<Props> = ({ className }) => {
             result.push({
                 key: "buyback_id",
                 value: searchTrim,
-            });
+            })
         }
 
         return result;
@@ -65,7 +63,7 @@ const BalanceTransactions: FC<Props> = ({ className }) => {
 
     const selectProduct = (id: number) => {
         setCurrentProduct(id);
-    };
+    }
 
     const width = useScreen();
 
@@ -84,22 +82,19 @@ const BalanceTransactions: FC<Props> = ({ className }) => {
                 setActive={setActive}
             />
             <div className={cn(cls.actions)}>
-                {transactionsProducts && transactionsProducts.length ? (
-                    <Action
-                        className={cn(cls.action, ["max-w-[200px]"])}
-                        actionBtnText={
-                            currentProduct
-                                ? `${transactionsProducts.find((el) => el.id === currentProduct)?.name ?? "-"}`
-                                : "Выбрать товар"
-                        }
-                        actions={transactionsProducts.map((el) => ({
-                            onClick: () => selectProduct(el.id),
-                            text: el.name,
-                        }))}
-                    />
-                ) : (
-                    <div />
-                )}
+                {
+                    transactionsProducts && transactionsProducts.length ? 
+                        <Action
+                            className={cn(cls.action, ["max-w-[200px]"])}
+                            actionBtnText={currentProduct ? `${transactionsProducts.find(el => el.id === currentProduct)?.name ?? "-"}` : "Выбрать товар"}
+                            actions={transactionsProducts.map((el) => ({
+                                onClick: () => selectProduct(el.id),
+                                text: el.name,
+                            }))}
+                        />
+                    : 
+                        <div />
+                }
                 <Input
                     icon={
                         <SearchIcon

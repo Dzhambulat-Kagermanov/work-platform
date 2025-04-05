@@ -1,3 +1,4 @@
+"use client";
 import { FC } from "react";
 import { AccountExit } from "@/components/features/AccountExit";
 import { cn } from "@/lib";

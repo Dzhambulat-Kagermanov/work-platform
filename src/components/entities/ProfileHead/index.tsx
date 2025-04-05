@@ -1,3 +1,4 @@
+"use client";
 import { CSSProperties, FC, useState } from "react";
 import { TClassName, TUserInfo } from "@/types";
 import { cn } from "@/lib";

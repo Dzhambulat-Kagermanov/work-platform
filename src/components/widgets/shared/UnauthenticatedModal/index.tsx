@@ -1,3 +1,4 @@
+"use client";
 import { FC } from "react";
 import { TClassName } from "@/types";
 import { ModalBase, Typography } from "@/components/ui";

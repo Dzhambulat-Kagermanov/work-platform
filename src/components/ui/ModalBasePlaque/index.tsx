@@ -1,3 +1,4 @@
+"use client";
 import { FC } from "react";
 import { TChildren, TClassName } from "@/types";
 import { cn } from "@/lib";

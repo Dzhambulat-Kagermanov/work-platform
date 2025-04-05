@@ -1,3 +1,4 @@
+"use client";
 import { FC, InputHTMLAttributes } from "react";
 import { cn } from "@/lib";
 import { Typography } from "../Typography";

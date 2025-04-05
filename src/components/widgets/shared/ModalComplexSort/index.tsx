@@ -1,3 +1,4 @@
+"use client";
 import { FC, MouseEvent, useEffect, useState } from "react";
 import { TClassName } from "@/types";
 import { ModalBasePlaque } from "@/components/ui/ModalBasePlaque";

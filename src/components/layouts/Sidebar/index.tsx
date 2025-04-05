@@ -1,3 +1,4 @@
+"use client";
 import { FC } from "react";
 import { TChildren } from "@/types";
 import { Sidebar } from "@/components/widgets/Salesman/Sidebar";
