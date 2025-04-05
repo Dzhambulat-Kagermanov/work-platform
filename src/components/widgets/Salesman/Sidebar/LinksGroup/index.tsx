@@ -16,6 +16,10 @@ import { TSalesmanHomePageType } from "../../HomePagesSwitcher";
 import { ROUTES, SALESMAN_NOTIFICATIONS_MODAL } from "@/constants";
 import { useGetBalanceQuery } from "@/hooks/api/auth";
 import { useModalStore } from "@/store";
+import {
+    useSalesmanNotifications,
+    allNotificationsSelector,
+} from "@/store/useSalesmanNotifications";
 
 interface Props extends TClassName {
     sidebarIsExpand?: boolean;
@@ -28,6 +32,7 @@ const LinksGroup: FC<Props> = ({
     linkOnClick,
     homePageType,
 }) => {
+    const allNotifications = useSalesmanNotifications(allNotificationsSelector);
     const showModal = useModalStore((state) => state.showModal);
     const { data: balance } = useGetBalanceQuery();
 
@@ -127,7 +132,7 @@ const LinksGroup: FC<Props> = ({
                         size={16}
                         className={cn(cls.notifications_addition)}
                     >
-                        0
+                        {allNotifications.length}
                     </Typography>
                 }
             />
