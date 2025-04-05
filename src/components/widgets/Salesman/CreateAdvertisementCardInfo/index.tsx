@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { TClassName } from "@/types";
 import { AdvertisementProductCard } from "@/components/entities/AdvertisementProductCard";
-import { DiscountPlaque, Typography } from "@/components/ui";
+import { Typography } from "@/components/ui";
 import { cn } from "@/lib";
 import cls from "./index.module.scss";
 import { WbProduct } from "@/types/api/Product";

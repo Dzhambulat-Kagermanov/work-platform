@@ -1,20 +1,21 @@
-"use client"
-import { FC } from "react"
-import { TClassName, TProductItemProps } from "@/types"
-import { cn } from "@/lib"
-import { Typography } from "@/components/ui"
-import { ProductItem } from "@/components/entities/ProductItem"
-import Link from "next/link"
-import cls from "./index.module.scss"
-import { useProductsRelatedQuery } from "@/hooks/api/products"
-import { ROUTES } from "@/constants"
+"use client";
+import { FC } from "react";
+import { TClassName, TProductItemProps } from "@/types";
+import { cn } from "@/lib";
+import { Typography } from "@/components/ui";
+import { ProductItem } from "@/components/entities/ProductItem";
+import Link from "next/link";
+import cls from "./index.module.scss";
+import { useProductsRelatedQuery } from "@/hooks/api/products";
+import { ROUTES } from "@/constants";
+import { priceDiscountCalculate } from "@/lib/priceDiscountCalculate";
 
-interface Props extends TClassName, Pick<TProductItemProps, "id"> { }
+interface Props extends TClassName, Pick<TProductItemProps, "id"> {}
 const SimilarProducts: FC<Props> = ({ id, className }) => {
-    const { data, isLoading, isError } = useProductsRelatedQuery(`${id}`)
+    const { data, isLoading, isError } = useProductsRelatedQuery(`${id}`);
 
     if (isLoading || isError || !data || !data.length) {
-        return <></>
+        return <></>;
     }
 
     return (
@@ -45,18 +46,20 @@ const SimilarProducts: FC<Props> = ({ id, className }) => {
                                 }
                                 name={item.product.name}
                                 price={{
-                                    //@ts-expect-error: Исправить потом
-                                    price: item.price_without_cashback,
-                                    discount: +item.product.discount,
+                                    priceWithCashBack: +priceDiscountCalculate({
+                                        price: +item.product.price,
+                                        discount: +item.product.discount,
+                                    }),
+                                    priceWithoutCashBack: +item.product.price,
                                 }}
                                 tooltip={""}
                             />
                         </Link>
-                    )
+                    );
                 })}
             </ul>
         </div>
-    )
-}
+    );
+};
 
-export { SimilarProducts }
+export { SimilarProducts };
