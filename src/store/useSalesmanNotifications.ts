@@ -1,4 +1,4 @@
-import { TNotificationItemProps } from "@/types";
+import { TNotificationItemProps, TUserInfo } from "@/types";
 import { create } from "zustand";
 
 type TNotificationsLayoutStates = "isHidden" | "isHiding" | "isVisible";
@@ -46,6 +46,7 @@ const useSalesmanNotifications = create<Props>()((set, get) => ({
 const notificationsLayoutStateSelector = (state: Props) =>
     state.notificationsLayoutState;
 const tempNotificationsSelector = (state: Props) => state.tempNotifications;
+
 const allNotificationsSelector = (state: Props) => state.allNotifications;
 const addNotificationsSelector = (state: Props) => state.addNotifications;
 const resetTempNotificationsSelector = (state: Props) =>

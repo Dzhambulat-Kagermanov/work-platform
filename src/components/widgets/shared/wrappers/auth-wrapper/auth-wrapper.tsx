@@ -2,6 +2,7 @@
 import { PageLoader } from "@/components/ui/loaders";
 import { ROUTES } from "@/constants";
 import { useSessionQuery } from "@/hooks/api/auth";
+import { setUserIdSelector, useProfile } from "@/store/useProfile";
 import { RoleSlug } from "@/types/api";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
@@ -19,9 +20,9 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
     redirectLink,
     reverse,
 }) => {
+    const setUserId = useProfile(setUserIdSelector);
     const { data, isLoading, isError } = useSessionQuery();
     const router = useRouter();
-
     const pushToRegEnd = () => {
         router.push(
             `${ROUTES[data?.role.slug === "buyer" ? "BUYER" : "SALESMAN"].REGISTRATION}?currentStep=end`,
@@ -29,7 +30,9 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
     };
 
     useEffect(() => {
-        console.log(data);
+        if (data) {
+            setUserId(data.id);
+        }
         if (
             !reverse &&
             (isError || (roles && data && roles.indexOf(data.role.slug) === -1))
