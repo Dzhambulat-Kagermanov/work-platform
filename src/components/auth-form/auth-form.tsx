@@ -82,7 +82,7 @@ const AuthForm: FC<Props> = ({
                             className={cls.error_message}
                             font="Inter-R"
                             tag="p"
-                            size={18}
+                            size={16}
                         >
                             {loginMutation.error.response.data.message}
                         </Typography>

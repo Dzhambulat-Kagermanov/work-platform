@@ -1,13 +1,13 @@
-import { FC } from "react"
-import { TClassName } from "@/types"
-import { AdvertisementProductCard } from "@/components/entities/AdvertisementProductCard"
-import { DiscountPlaque, Typography } from "@/components/ui"
-import { cn } from "@/lib"
-import cls from "./index.module.scss"
-import { WbProduct } from "@/types/api/Product"
+import { FC } from "react";
+import { TClassName } from "@/types";
+import { AdvertisementProductCard } from "@/components/entities/AdvertisementProductCard";
+import { DiscountPlaque, Typography } from "@/components/ui";
+import { cn } from "@/lib";
+import cls from "./index.module.scss";
+import { WbProduct } from "@/types/api/Product";
 
 interface Props extends TClassName {
-    product: WbProduct
+    product: WbProduct;
 }
 const CreateAdvertisementCardInfo: FC<Props> = ({ className, product }) => {
     return (
@@ -16,8 +16,8 @@ const CreateAdvertisementCardInfo: FC<Props> = ({ className, product }) => {
                 className={cn(cls.card)}
                 image={product.images[0] ?? ""}
                 name={product.name}
-                number=""
-                owner={""}
+                number={product.wb_id.toString() ?? "Нет данных"}
+                owner={product.brand}
             />
             {/* <div className={cn(cls.plaques)}>
                 <DiscountPlaque
@@ -40,7 +40,7 @@ const CreateAdvertisementCardInfo: FC<Props> = ({ className, product }) => {
                 Цена на Wildberries: <span>{product.price} Р</span>
             </Typography>
         </section>
-    )
-}
+    );
+};
 
-export { CreateAdvertisementCardInfo }
+export { CreateAdvertisementCardInfo };

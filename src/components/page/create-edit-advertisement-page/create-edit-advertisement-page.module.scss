@@ -1,20 +1,29 @@
 .main {
     --elements-max-width: 495px;
-    padding-bottom: 25px;
     color: var(--grey-500);
+}
+.head {
     & > h1 {
     }
     & > h2 {
     }
+    padding: var(--sidebar-content-padding-top)
+        var(--sidebar-content-padding-left) 0
+        var(--sidebar-content-padding-right);
 }
 .content {
+    padding: 0 var(--sidebar-content-padding-left)
+        var(--sidebar-content-padding-bottom)
+        var(--sidebar-content-padding-right);
+    margin-top: 60px;
+    padding-top: 60px;
     display: flex;
     flex-direction: column;
     row-gap: 45px;
+    background-color: var(--white-500);
 }
 .card_wrapper {
     max-width: var(--elements-max-width);
-    margin-top: 60px;
 }
 .name_inp_wrapper {
     max-width: var(--elements-max-width);
@@ -38,10 +47,9 @@
 }
 
 @media screen and (max-width: 500px) {
-    .card_wrapper {
-        margin-top: 25px;
-    }
     .content {
+        margin-top: 25px;
+        padding-top: 25px;
         grid-template-rows: 25px;
     }
     .main {
