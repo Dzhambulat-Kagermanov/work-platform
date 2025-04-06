@@ -1,16 +1,16 @@
-import { FC } from "react"
-import { TModuleClassName } from "@/types"
-import { cn } from "@/lib"
-import { Container } from "@/components/ui"
-import { Content } from "./Content"
-import { Switcher } from "./Switcher"
-import { SimilarProducts } from "./SimilarProducts"
-import { GalleryAdaptive } from "./GalleryAdaptive"
-import cls from "./index.module.scss"
-import Product from "@/types/api/Product"
+import { FC } from "react";
+import { TModuleClassName } from "@/types";
+import { cn } from "@/lib";
+import { Container } from "@/components/ui";
+import { Content } from "./Content";
+import { Switcher } from "./Switcher";
+import { SimilarProducts } from "./SimilarProducts";
+import { GalleryAdaptive } from "./GalleryAdaptive";
+import cls from "./index.module.scss";
+import Product from "@/types/api/Product";
 
 interface Props extends TModuleClassName {
-    product: Product
+    product: Product;
 }
 const ProductCardInfo: FC<Props> = ({
     className,
@@ -31,8 +31,6 @@ const ProductCardInfo: FC<Props> = ({
                     salesmanId={product.user_id}
                     id={product.id}
                     product={product}
-                    productDescription={product.product.description}
-                    productInstructions={product.redemption_instructions}
                     className={cn(cls.switcher)}
                 />
                 <SimilarProducts
@@ -41,7 +39,7 @@ const ProductCardInfo: FC<Props> = ({
                 />
             </Container>
         </div>
-    )
-}
+    );
+};
 
-export { ProductCardInfo }
+export { ProductCardInfo };

@@ -62,7 +62,7 @@ const Description: FC<Props> = ({ productDescription, className }) => {
                     size={FONT_SIZE}
                     tag="h2"
                 >
-                    {productDescription}
+                    {productDescription || "У данного товара нет описания :\\"}
                 </Typography>
             </div>
             {isExpand !== null && !isExpand && (

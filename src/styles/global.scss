@@ -164,3 +164,8 @@ html {
         --adaptive-container-width: 345px;
     }
 }
+@media screen and (max-width: 365px) {
+    body {
+        --adaptive-container-width: calc(100% - 20px);
+    }
+}

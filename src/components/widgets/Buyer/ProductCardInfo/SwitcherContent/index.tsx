@@ -1,42 +1,41 @@
-"use client"
-import { FC } from "react"
-import { TClassName, TProductItemProps } from "@/types"
-import { cn } from "@/lib"
-import { TContentType } from "../Switcher"
-import { Description } from "./Description"
-import { Conditions } from "./Conditions"
-import { Reviews } from "./Reviews"
-import { useScreen } from "@/hooks"
-import { SM_MID } from "@/constants"
-import { Typography } from "@/components/ui"
-import { ContentShop } from "../ContentShop"
-import cls from "./index.module.scss"
-import Product from "@/types/api/Product"
+"use client";
+import { FC } from "react";
+import { TClassName, TProductItemProps } from "@/types";
+import { cn } from "@/lib";
+import { TContentType } from "../Switcher";
+import { Description } from "./Description";
+import { Conditions } from "./Conditions";
+import { Reviews } from "./Reviews";
+import { useScreen } from "@/hooks";
+import { SM_MID } from "@/constants";
+import { Typography } from "@/components/ui";
+import { ContentShop } from "../ContentShop";
+import cls from "./index.module.scss";
+import Product from "@/types/api/Product";
 
-interface Props
-    extends TClassName,
-    Pick<TProductItemProps, "productDescription" | "salesmanId" | "productInstructions"> {
-    contentType: TContentType
-    product: Product
+interface Props extends TClassName, Pick<TProductItemProps, "salesmanId"> {
+    contentType: TContentType;
+    product: Product;
 }
 const SwitcherContent: FC<Props> = ({
-    salesmanId, productInstructions,
-    productDescription,
+    salesmanId,
     contentType,
     className,
     product,
 }) => {
-    const width = useScreen()
+    const width = useScreen();
 
     return (
         <div className={cn(cls.wrapper, [className])}>
             {width > SM_MID ? (
                 contentType === "conditions" ? (
                     <Conditions
-                        productInstructions={productInstructions} className={cn(cls.content, [cls.conditions])} />
+                        order_conditions={product.order_conditions}
+                        className={cn(cls.content, [cls.conditions])}
+                    />
                 ) : contentType === "description" ? (
                     <Description
-                        productDescription={productDescription}
+                        productDescription={product.product.description}
                         className={cn(cls.content, [cls.description])}
                     />
                 ) : (
@@ -58,7 +57,7 @@ const SwitcherContent: FC<Props> = ({
                             Условия заказа
                         </Typography>
                         <Conditions
-                            productInstructions={productInstructions}
+                            order_conditions={product.order_conditions}
                             className={cn(cls.content, [cls.conditions])}
                         />
                     </div>
@@ -72,7 +71,7 @@ const SwitcherContent: FC<Props> = ({
                             Описание товара
                         </Typography>
                         <Description
-                            productDescription={productDescription}
+                            productDescription={product.product.description}
                             className={cn(cls.content, [cls.description])}
                         />
                     </div>
@@ -100,7 +99,7 @@ const SwitcherContent: FC<Props> = ({
                 </>
             )}
         </div>
-    )
-}
+    );
+};
 
-export { SwitcherContent }
+export { SwitcherContent };

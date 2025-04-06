@@ -64,11 +64,11 @@ const ContentHead: FC<Props> = memo(({ product, className }) => {
                     size={width > XS_BIG ? 28 : 24}
                     tag="h5"
                 >
-                    {dsc || 0} ₽
+                    {(+dsc).toFixed(0) || 0} ₽
                 </Typography>
                 {dsc && (
                     <Typography font="Inter-M" size={20} tag="h6">
-                        {product.product.price} ₽
+                        {(+product.product.price).toFixed(0)} ₽
                     </Typography>
                 )}
                 {/* {tooltip && (

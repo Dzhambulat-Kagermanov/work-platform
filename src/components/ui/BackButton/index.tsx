@@ -15,7 +15,11 @@ interface Props extends TClassName, TChildren {
 const BackButton: FC<Props> = ({ className, children, href, hideWhen }) => {
     const router = useRouter();
     const handleClick = () => {
-        router.push(href || "/");
+        if (window.history.length > 1) {
+            router.back();
+        } else {
+            router.push("/");
+        }
     };
     const width = useScreen();
 
