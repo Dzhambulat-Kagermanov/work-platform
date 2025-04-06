@@ -7,5 +7,4 @@ export const useGetNotifications = () =>
     useQuery({
         queryFn: () => apiService.notifications.getNotifications(),
         queryKey: GET_NOTIFICATIONS,
-        refetchInterval: 30000,
     });

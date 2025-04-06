@@ -1,21 +1,37 @@
+import { pusherServer } from "@/utils/pusher-server";
 import { NextResponse } from "next/server";
-import Pusher from "pusher";
+import { parse } from "querystring";
 
-const pusher = new Pusher({
-    appId: process.env.NEXT_PUBLIC_PUSHER_APP_ID!,
-    key: process.env.NEXT_PUBLIC_PUSHER_KEY!,
-    secret: process.env.PUSHER_SECRET!,
-    cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER!,
-    useTLS: true,
-});
-
-export async function POST(request: Request) {
-    const { socket_id, channel_name } = await request.json();
-
+export async function POST(req: Request) {
     try {
-        const auth = pusher.authenticate(socket_id, channel_name);
-        return NextResponse.json(auth);
+        // Получаем тело запроса как текст
+        const bodyText = await req.text();
+        console.log("Raw body:", bodyText);
+
+        // Парсим данные в формате application/x-www-form-urlencoded
+        const params = new URLSearchParams(bodyText);
+        const socket_id = params.get("socket_id");
+        const channel_name = params.get("channel_name");
+
+        console.log("Parsed data:", { socket_id, channel_name });
+
+        if (!socket_id || !channel_name) {
+            throw new Error(`Missing required fields. Received: ${bodyText}`);
+        }
+
+        // Авторизация
+        const authResponse = pusherServer.authenticate(socket_id, channel_name);
+        console.log("Authentication successful");
+
+        return NextResponse.json(authResponse);
     } catch (error) {
-        return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+        console.error("Full error:", error);
+        return NextResponse.json(
+            {
+                error: "Authentication failed",
+                details: error instanceof Error ? error.message : String(error),
+            },
+            { status: 403 },
+        );
     }
 }

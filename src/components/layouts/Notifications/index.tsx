@@ -14,14 +14,15 @@ import {
     tempNotificationsSelector,
     useSalesmanNotifications,
 } from "@/store/useSalesmanNotifications";
-import { useGetNotifications } from "@/hooks/api/notifications";
-import { notificationsPusherConfig, pusherClient } from "@/lib/pusher";
+import { notificationsPusherConfig, pusherClient } from "@/utils/pusher-client";
 import { useProfile, userIdSelector } from "@/store/useProfile";
+import { useGetNotifications } from "@/hooks/api/notifications";
 
 interface Props extends TChildren {}
 const NotificationsLayout: FC<Props> = ({ children }) => {
+    const notificationsQuery = useGetNotifications();
     const userId = useProfile(userIdSelector);
-    // const notificationsQuery = useGetNotifications();
+
     // REACT
     const hiddenTimeoutRef = useRef<{
         hidden: NodeJS.Timeout | null;
@@ -47,27 +48,6 @@ const NotificationsLayout: FC<Props> = ({ children }) => {
     );
     const addNotifications = useSalesmanNotifications(addNotificationsSelector);
 
-    useEffect(() => {
-        const config = notificationsPusherConfig({
-            userId: userId as number,
-        });
-        const channel = pusherClient.subscribe(config.channel);
-        channel.bind(config.event, (data: any) => {
-            console.log("Получены данные:", data);
-        });
-
-        return () => {
-            channel.unbind(config.event);
-            pusherClient.unsubscribe(config.channel);
-        };
-    }, []);
-
-    // useEffect(() => {
-    //     if (notificationsQuery.data) addNotifications(notificationsQuery.data);
-    //     console.log(notificationsQuery.status);
-    // }, [notificationsQuery.status]);
-    // console.log(notificationsQuery.status);
-
     // HANDLERS
     const handleMouseover = () => {
         if (layoutState !== "isVisible") {
@@ -83,6 +63,27 @@ const NotificationsLayout: FC<Props> = ({ children }) => {
     };
 
     // EFFECTS
+    useEffect(() => {
+        if (userId) {
+            const config = notificationsPusherConfig({
+                userId: userId as number,
+            });
+            const channel = pusherClient.subscribe(config.channel);
+
+            channel.bind(config.event, (data: any) => {
+                console.log("Получены данные:", data);
+            });
+            return () => {
+                channel.unbind(config.event);
+                pusherClient.unsubscribe(config.channel);
+            };
+        }
+    }, [userId]);
+
+    useEffect(() => {
+        if (notificationsQuery.data) addNotifications(notificationsQuery.data);
+    }, [notificationsQuery.status]);
+
     useEffect(() => {
         if (notifications.length) {
             setLayoutState("isVisible");
