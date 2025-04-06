@@ -32,4 +32,6 @@ export const ROUTES = {
         },
         CREATE_ADVERTISEMENTS: "/salesman/create-advertisement",
     },
+    USER_CONDITIONS: "/user-conditions",
+    POLICY: "/policy",
 };
