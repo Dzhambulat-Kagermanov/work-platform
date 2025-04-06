@@ -4,8 +4,8 @@ import { TClassName, TState } from "@/types";
 import { RansomsViewChat as ViewChat } from "../../shared/RansomsViewChat";
 import { useGetOrderQuery } from "@/hooks/api/orders";
 import {
-    initSalesmanDataSelector,
-    salesmanDataSelector,
+    initBuyerDataSelector,
+    buyerDataSelector,
     useChat,
 } from "@/store/useChat";
 import { useProfile, userIdSelector } from "@/store/useProfile";
@@ -19,8 +19,8 @@ interface Props extends TClassName {
 const RansomsViewChat: FC<Props> = ({ className, setActiveSTUB, activeId }) => {
     const userId = useProfile(userIdSelector);
     const ordersQuery = useGetOrderQuery(activeId);
-    const initSalesmanData = useChat(initSalesmanDataSelector);
-    const salesmanChatData = useChat(salesmanDataSelector);
+    const initBuyerData = useChat(initBuyerDataSelector);
+    const buyerChatData = useChat(buyerDataSelector);
 
     // EFFECTS
     useEffect(() => {
@@ -42,12 +42,12 @@ const RansomsViewChat: FC<Props> = ({ className, setActiveSTUB, activeId }) => {
 
     useEffect(() => {
         if (ordersQuery.data && ordersQuery.status === "success")
-            initSalesmanData(ordersQuery.data);
+            initBuyerData(ordersQuery.data);
     }, [ordersQuery.status]);
 
     return (
         <ViewChat
-            chatData={salesmanChatData}
+            chatData={buyerChatData}
             isLoading={ordersQuery.isLoading}
             setActiveSTUB={setActiveSTUB}
             activeId={activeId}

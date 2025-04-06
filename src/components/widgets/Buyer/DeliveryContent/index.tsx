@@ -7,7 +7,7 @@ import { useScreen } from "@/hooks";
 import { MD_LOW } from "@/constants";
 import cls from "./index.module.scss";
 import { ChatStatus } from "@/types/api";
-import { RansomsViewChat } from "../../Salesman/RansomsViewChat";
+import { RansomsViewChat } from "../RansomsViewChat";
 
 interface Props extends TClassName {
     chatType: ChatStatus;
