@@ -4,6 +4,7 @@ import Pusher from "pusher-js";
 export const pusherClient = new Pusher(PUSHER_KEY, {
     cluster: PUSHER_CLUSTER,
 });
+
 export const chatPusherConfig = ({ userId }: { userId: number }) => ({
     channel: `chat-${userId}`,
     event: "MessageSent",

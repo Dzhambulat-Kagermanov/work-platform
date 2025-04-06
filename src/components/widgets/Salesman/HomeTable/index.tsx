@@ -72,10 +72,12 @@ const HomeTable: FC<Props> = ({
                     </tbody>
                 </table>
             </div>
-            <Pagination
-                className={cn(cls.pagination)}
-                pagination={pagination}
-            />
+            {body.length > 10 ? (
+                <Pagination
+                    className={cn(cls.pagination)}
+                    pagination={pagination}
+                />
+            ) : null}
         </div>
     );
 };
