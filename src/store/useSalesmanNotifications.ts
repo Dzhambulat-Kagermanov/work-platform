@@ -9,7 +9,8 @@ interface Props {
     notificationsLayoutState: TNotificationsLayoutStates;
 
     setNotificationsLayoutState: (newState: TNotificationsLayoutStates) => void;
-    addNotifications: (newItem: TNotificationItemProps[]) => void;
+    initNotifications: (newItem: TNotificationItemProps[]) => void;
+    addNotification: (newItem: TNotificationItemProps) => void;
     resetTempNotifications: () => void;
     deleteTempNotification: (id: number) => void;
 }
@@ -18,12 +19,25 @@ const useSalesmanNotifications = create<Props>()((set, get) => ({
     notificationsLayoutState: "isHidden",
     tempNotifications: [],
     allNotifications: [],
-    addNotifications(notifications) {
+    initNotifications(notifications) {
         set((state) => ({
             allNotifications: notifications,
         }));
         set((state) => ({
             tempNotifications: notifications.filter((props) => {
+                return !props.is_read;
+            }),
+        }));
+    },
+    addNotification: (notification) => {
+        set((state) => ({
+            allNotifications: [...state.allNotifications, notification],
+        }));
+        set((state) => ({
+            tempNotifications: [
+                ...state.tempNotifications,
+                notification,
+            ].filter((props) => {
                 return !props.is_read;
             }),
         }));
@@ -48,7 +62,8 @@ const notificationsLayoutStateSelector = (state: Props) =>
 const tempNotificationsSelector = (state: Props) => state.tempNotifications;
 
 const allNotificationsSelector = (state: Props) => state.allNotifications;
-const addNotificationsSelector = (state: Props) => state.addNotifications;
+const initNotificationsSelector = (state: Props) => state.initNotifications;
+const addNotificationSelector = (state: Props) => state.addNotification;
 const resetTempNotificationsSelector = (state: Props) =>
     state.resetTempNotifications;
 const setNotificationsLayoutStateSelector = (state: Props) =>
@@ -61,9 +76,10 @@ export {
     notificationsLayoutStateSelector,
     tempNotificationsSelector,
     allNotificationsSelector,
-    addNotificationsSelector,
+    initNotificationsSelector,
     resetTempNotificationsSelector,
     setNotificationsLayoutStateSelector,
     deleteTempNotificationSelector,
+    addNotificationSelector,
     type TNotificationsLayoutStates,
 };

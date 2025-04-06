@@ -47,6 +47,7 @@ const RansomsViewChat: FC<Props> = ({ className, setActiveSTUB, activeId }) => {
 
     return (
         <ViewChat
+            role="buyer"
             chatData={buyerChatData}
             isLoading={ordersQuery.isLoading}
             setActiveSTUB={setActiveSTUB}

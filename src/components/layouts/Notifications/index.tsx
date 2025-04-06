@@ -1,12 +1,13 @@
 "use client";
 import { FC, useEffect, useRef } from "react";
 import { cn } from "@/lib";
-import { TChildren } from "@/types";
+import { TChildren, TNotificationItemProps } from "@/types";
 import { NotificationItem } from "@/components/entities/NotificationItem";
 import cls from "./index.module.scss";
 import { HIDING_MS, VISIBLE_DELAY_MS } from "./config/notifications-times";
 import {
-    addNotificationsSelector,
+    addNotificationSelector,
+    initNotificationsSelector,
     deleteTempNotificationSelector,
     notificationsLayoutStateSelector,
     resetTempNotificationsSelector,
@@ -46,7 +47,10 @@ const NotificationsLayout: FC<Props> = ({ children }) => {
     const deleteNotification = useSalesmanNotifications(
         deleteTempNotificationSelector,
     );
-    const addNotifications = useSalesmanNotifications(addNotificationsSelector);
+    const initNotifications = useSalesmanNotifications(
+        initNotificationsSelector,
+    );
+    const addNotification = useSalesmanNotifications(addNotificationSelector);
 
     // HANDLERS
     const handleMouseover = () => {
@@ -70,7 +74,8 @@ const NotificationsLayout: FC<Props> = ({ children }) => {
             });
             const channel = pusherClient.subscribe(config.channel);
 
-            channel.bind(config.event, (data: any) => {
+            channel.bind(config.event, (data: TNotificationItemProps) => {
+                addNotification(data);
                 console.log("Получены данные:", data);
             });
             return () => {
@@ -81,7 +86,7 @@ const NotificationsLayout: FC<Props> = ({ children }) => {
     }, [userId]);
 
     useEffect(() => {
-        if (notificationsQuery.data) addNotifications(notificationsQuery.data);
+        if (notificationsQuery.data) initNotifications(notificationsQuery.data);
     }, [notificationsQuery.status]);
 
     useEffect(() => {
@@ -112,20 +117,22 @@ const NotificationsLayout: FC<Props> = ({ children }) => {
                     })}
                 >
                     <ul className={cn(cls.group)} onMouseOver={handleMouseover}>
-                        {notifications.map(({ id, ...props }) => {
-                            return (
-                                <NotificationItem
-                                    tag="li"
-                                    isHiddenCls={cn(cls.isHidden)}
-                                    id={id}
-                                    type="forOverlay"
-                                    key={id}
-                                    {...props}
-                                    className={cn(cls.item)}
-                                    deleteNotification={deleteNotification}
-                                />
-                            );
-                        })}
+                        {[...notifications]
+                            .reverse()
+                            .map(({ id, ...props }) => {
+                                return (
+                                    <NotificationItem
+                                        tag="li"
+                                        isHiddenCls={cn(cls.isHidden)}
+                                        id={id}
+                                        type="forOverlay"
+                                        key={id}
+                                        {...props}
+                                        className={cn(cls.item)}
+                                        deleteNotification={deleteNotification}
+                                    />
+                                );
+                            })}
                     </ul>
                 </div>
             ) : null}

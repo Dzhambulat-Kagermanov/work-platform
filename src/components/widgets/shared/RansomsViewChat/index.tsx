@@ -14,6 +14,7 @@ interface Props extends TClassName {
     activeId?: number;
     chatData?: Order;
     isLoading?: boolean;
+    role: "salesman" | "buyer";
 }
 const RansomsViewChat: FC<Props> = ({
     className,
@@ -21,6 +22,7 @@ const RansomsViewChat: FC<Props> = ({
     activeId,
     chatData,
     isLoading,
+    role,
 }) => {
     return (
         <section className={cn(cls.wrapper, [className])}>
