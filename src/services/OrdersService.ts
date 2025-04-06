@@ -22,6 +22,11 @@ class OrdersService {
         return res.data;
     }
 
+    async getSalesmanOrder(buybackId?: number) {
+        const res = await axios.get<Order>(`/messages/${buybackId}`);
+        return res.data;
+    }
+
     async getOrder(id?: number) {
         // TODO: добавить тип ответа
 

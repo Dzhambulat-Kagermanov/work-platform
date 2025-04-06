@@ -1,0 +1,32 @@
+.main {
+    margin: 60px auto;
+}
+.list {
+    padding-left: 40px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    font-size: 16px;
+}
+.subtitle {
+    margin-bottom: 20px;
+}
+.root_list {
+    display: flex;
+    flex-direction: column;
+    font-family: Inter;
+    font-weight: normal;
+    row-gap: 40px;
+}
+.time {
+    margin: 10px 0 40px 0;
+    display: block;
+    color: var(--grey-300);
+}
+
+@media screen and (max-width: 768px) {
+    .list {
+        padding-left: 20px;
+        font-size: 14px;
+    }
+}

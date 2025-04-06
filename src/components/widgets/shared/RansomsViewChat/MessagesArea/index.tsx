@@ -11,12 +11,14 @@ import cls from "./index.module.scss";
 import { Message } from "@/types/api";
 import { dateParserHandler } from "@/handlers";
 import Chat from "@/types/api/Chat";
+import { TRole } from "..";
 
 interface Props extends TClassName {
     messages: Message[];
     status: Chat["status"];
+    role: TRole;
 }
-const MessagesArea: FC<Props> = ({ className, messages, status }) => {
+const MessagesArea: FC<Props> = ({ className, messages, status, role }) => {
     const [messagesGroup, setMessagesGroup] = useState<
         { date: string; messages: Message[] }[]
     >([]);
@@ -77,7 +79,7 @@ const MessagesArea: FC<Props> = ({ className, messages, status }) => {
                         className={cn(cls.messages_group_overlay)}
                     >
                         <div className={cn(cls.messages_group_wrapper)}>
-                            {messagesGroup.map((item, index) => {
+                            {[...messagesGroup].reverse().map((item, index) => {
                                 return (
                                     <MessagesAreaGroup
                                         className={cn(cls.messages_group)}

@@ -2,14 +2,13 @@
 import { FC, useEffect } from "react";
 import { TClassName, TState } from "@/types";
 import { RansomsViewChat as ViewChat } from "../../shared/RansomsViewChat";
-import { useGetOrderQuery } from "@/hooks/api/orders";
 import {
     initSalesmanDataSelector,
     salesmanDataSelector,
     useChat,
 } from "@/store/useChat";
-import { useProfile, userIdSelector } from "@/store/useProfile";
 import { chatPusherConfig, pusherClient } from "@/utils/pusher-client";
+import { useGetSalesmanOrder } from "@/hooks/api/orders/useGetSalesmanOrder";
 
 interface Props extends TClassName {
     setActiveSTUB: TState<number | undefined>;
@@ -17,16 +16,15 @@ interface Props extends TClassName {
 }
 
 const RansomsViewChat: FC<Props> = ({ className, setActiveSTUB, activeId }) => {
-    const userId = useProfile(userIdSelector);
-    const ordersQuery = useGetOrderQuery(activeId);
+    const ordersQuery = useGetSalesmanOrder({ buybackId: activeId as number });
     const initSalesmanData = useChat(initSalesmanDataSelector);
     const salesmanChatData = useChat(salesmanDataSelector);
 
     // EFFECTS
     useEffect(() => {
-        if (userId) {
+        if (activeId) {
             const config = chatPusherConfig({
-                userId: userId as number,
+                userId: activeId as number,
             });
             const channel = pusherClient.subscribe(config.channel);
 
@@ -38,12 +36,12 @@ const RansomsViewChat: FC<Props> = ({ className, setActiveSTUB, activeId }) => {
                 pusherClient.unsubscribe(config.channel);
             };
         }
-    }, [userId]);
+    }, [activeId]);
 
     useEffect(() => {
         if (ordersQuery.data && ordersQuery.status === "success")
             initSalesmanData(ordersQuery.data);
-    }, [ordersQuery.status]);
+    }, [ordersQuery.status, activeId]);
 
     return (
         <ViewChat

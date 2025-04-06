@@ -1,5 +1,5 @@
 "use client";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { TClassName, TState } from "@/types";
 import { cn } from "@/lib";
 import { ChatItem } from "@/components/entities/ChatItem";
@@ -41,6 +41,10 @@ const Chats: FC<Props> = ({
     };
 
     const { data: chats, isLoading } = useGetChatListQuery(query());
+
+    useEffect(() => {
+        if (activeIdSTUB === undefined && chats) setActiveIdSTUB(chats[0].id);
+    }, [chats]);
 
     if (isLoading) {
         return <PageLoader className="h-full" />;

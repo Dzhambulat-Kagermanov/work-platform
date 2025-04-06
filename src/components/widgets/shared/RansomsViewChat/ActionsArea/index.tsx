@@ -7,11 +7,13 @@ import { Input } from "@/components/ui";
 import { ViewChatSendMessage } from "@/components/features/ViewChatSendMessage";
 import cls from "./index.module.scss";
 import useSendMessageMutation from "@/hooks/api/chat/useSendMessageMutation";
+import { TRole } from "..";
 
 interface Props extends TClassName {
     activeId?: number;
+    role: TRole;
 }
-const ActionsArea: FC<Props> = ({ className, activeId }) => {
+const ActionsArea: FC<Props> = ({ className, activeId, role }) => {
     if (!activeId) return null;
 
     const [message, setMessage] = useState<string>("");

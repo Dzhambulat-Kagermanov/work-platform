@@ -16,7 +16,6 @@ const useGetOrderQuery = (id?: number) =>
         },
         staleTime: 90_000,
         retry: 2,
-        refetchInterval: 30000,
     });
 
 export default useGetOrderQuery;

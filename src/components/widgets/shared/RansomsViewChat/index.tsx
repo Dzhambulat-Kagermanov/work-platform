@@ -9,12 +9,14 @@ import { PageLoader } from "@/components/ui/loaders";
 import { PageErrorStub } from "@/components/ui/page-error-stub";
 import { Order } from "@/types/api";
 
+export type TRole = "salesman" | "buyer";
+
 interface Props extends TClassName {
     setActiveSTUB: TState<number | undefined>;
     activeId?: number;
     chatData?: Order;
     isLoading?: boolean;
-    role: "salesman" | "buyer";
+    role: TRole;
 }
 const RansomsViewChat: FC<Props> = ({
     className,
@@ -34,16 +36,18 @@ const RansomsViewChat: FC<Props> = ({
                         setActiveSTUB={setActiveSTUB}
                     />
                     <MessagesArea
+                        role={role}
                         status={chatData.status}
                         messages={chatData?.messages}
                         className={cn(cls.messages)}
                     />
                     <ActionsArea
+                        role={role}
                         className={cn(cls.actions)}
                         activeId={activeId}
                     />
                 </>
-            ) : isLoading ? (
+            ) : activeId === undefined || isLoading ? (
                 <PageLoader className="w-full h-full" />
             ) : (
                 <PageErrorStub
