@@ -24,7 +24,6 @@ const CreateAdvertisementPublishModal: FC<Props> = ({
         navigator.clipboard.writeText(LINK);
     };
     const handleNext = () => {
-        console.log(1);
         hideModal({ slug: SALESMAN_CREATE_ADVERTISEMENT_PUBLISH_MODAL });
         router.push("/salesman?homePageType=advertisement");
     };

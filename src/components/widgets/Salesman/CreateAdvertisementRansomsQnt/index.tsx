@@ -1,30 +1,30 @@
-"use client"
-import { FC, MouseEventHandler, useState } from "react"
-import { TClassName } from "@/types"
-import { cn } from "@/lib"
-import { Typography } from "@/components/ui"
-import cls from "./index.module.scss"
-import { useGetBalanceQuery } from "@/hooks/api/auth"
+"use client";
+import { FC, MouseEventHandler, useState } from "react";
+import { TClassName } from "@/types";
+import { cn } from "@/lib";
+import { Typography } from "@/components/ui";
+import cls from "./index.module.scss";
+import { useGetBalanceQuery } from "@/hooks/api/auth";
 
 interface Props extends TClassName {
-    count: number
-    setCount: React.Dispatch<React.SetStateAction<number>>
+    count: number;
+    setCount: React.Dispatch<React.SetStateAction<number>>;
 }
 const CreateAdvertisementRansomsQnt: FC<Props> = ({
     className,
     count,
     setCount,
 }) => {
-    const { data: balance } = useGetBalanceQuery()
+    const { data: balance } = useGetBalanceQuery();
 
-    const availableRedemptions = balance?.redemption_count ?? 0
+    const availableRedemptions = balance?.redemption_count ?? 0;
 
     const handleMinus: MouseEventHandler = () => {
-        setCount((cur) => cur - 1)
-    }
+        setCount((cur) => cur - 1);
+    };
     const handlePlus: MouseEventHandler = () => {
-        setCount((cur) => cur + 1)
-    }
+        setCount((cur) => cur + 1);
+    };
 
     return (
         <section className={cn(cls.wrapper, [className])}>
@@ -42,9 +42,14 @@ const CreateAdvertisementRansomsQnt: FC<Props> = ({
                     </Typography>
                 </button>
 
-                <input value={count} className={cls.input} onChange={(event) => {
-                    setCount(+event.target.value)
-                }} />
+                <input
+                    type="number"
+                    value={count}
+                    className={cls.input}
+                    onChange={(event) => {
+                        setCount(+event.target.value);
+                    }}
+                />
                 <button
                     onClick={handlePlus}
                     className={cn(cls.btn, [cls.plus])}
@@ -59,7 +64,7 @@ const CreateAdvertisementRansomsQnt: FC<Props> = ({
                 Доступно выкупов = {availableRedemptions} шт
             </Typography>
         </section>
-    )
-}
+    );
+};
 
-export { CreateAdvertisementRansomsQnt }
+export { CreateAdvertisementRansomsQnt };

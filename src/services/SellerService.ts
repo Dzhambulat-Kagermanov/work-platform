@@ -31,12 +31,10 @@ class SellerService {
     async getSellerWbProduct(id: string) {
         try {
             const res = await axios.get<WbProduct>(`/wb/product/${id}`);
-            console.log(res);
             return res.data;
         } catch (error) {
             return null;
         }
-
     }
 
     async getProducts(query: QueryItem[]) {
@@ -46,6 +44,35 @@ class SellerService {
 
         return res.data;
     }
+
+    async updateAdvConditionsTemplate(template: string) {
+        const res = await axios.patch("/template/order_conditions", {
+            text: template,
+        });
+
+        return res.data;
+    }
+    async updateAdvInstructionsTemplate(template: string) {
+        const res = await axios.patch("/template/redemption_instructions", {
+            text: template,
+        });
+
+        return res.data;
+    }
+    async updateAdvCriteriaTemplate(template: string) {
+        const res = await axios.patch("/template/review_criteria", {
+            text: template,
+        });
+
+        return res.data;
+    }
+
+    async getAdvTemplates() {
+        const res = await axios.get("/template");
+
+        return res.data;
+    }
+
     async stopProducts(data: ProductIdsData) {
         const res = await axios.post("/seller/product/stop", data);
         return res;
@@ -65,9 +92,10 @@ class SellerService {
         return res.data;
     }
     async addWbProduct(data: AddWbProductData) {
-        const res = await axios.post<{ product: WbProduct, has_products: boolean }>(
-            `/wb/add-product/${data.id}`,
-        );
+        const res = await axios.post<{
+            product: WbProduct;
+            has_products: boolean;
+        }>(`/wb/add-product/${data.id}`);
         return res.data;
     }
     async applyPromocode(promocode: string) {

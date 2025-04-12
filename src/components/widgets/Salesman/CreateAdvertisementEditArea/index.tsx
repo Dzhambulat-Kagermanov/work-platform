@@ -3,6 +3,13 @@ import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { Button, Textarea, Typography } from "@/components/ui";
 import cls from "./index.module.scss";
+import { useModalStore } from "@/store";
+import { showModalSelector } from "@/store/useModalStore";
+import { SALESMAN_CREATE_ADVERTISEMENT_TEMPLATE_EDIT_MODAL } from "@/constants";
+import {
+    setTemplateEditTypeSelector,
+    useCreateAdvertisement,
+} from "@/store/useCreateAdvertisement";
 
 interface Props
     extends TClassName,
@@ -20,6 +27,11 @@ const CreateAdvertisementEditArea: FC<Props> = ({
     setCriterias,
     className,
 }) => {
+    const showModal = useModalStore(showModalSelector);
+    const setTemplateEditType = useCreateAdvertisement(
+        setTemplateEditTypeSelector,
+    );
+
     return (
         <section className={cn(cls.wrapper, [className])}>
             <div className={cn(cls.item)}>
@@ -46,6 +58,19 @@ const CreateAdvertisementEditArea: FC<Props> = ({
                         className={cls.btn}
                     >
                         Вставить шаблон
+                    </Button>
+                    <Button
+                        size="mid"
+                        onClick={() => {
+                            setTemplateEditType("conditions");
+                            showModal({
+                                slug: SALESMAN_CREATE_ADVERTISEMENT_TEMPLATE_EDIT_MODAL,
+                            });
+                        }}
+                        theme="fill"
+                        className={cls.btn}
+                    >
+                        Изменить шаблон
                     </Button>
                 </div>
             </div>
@@ -75,6 +100,19 @@ const CreateAdvertisementEditArea: FC<Props> = ({
                     >
                         Вставить шаблон
                     </Button>
+                    <Button
+                        size="mid"
+                        onClick={() => {
+                            setTemplateEditType("instructions");
+                            showModal({
+                                slug: SALESMAN_CREATE_ADVERTISEMENT_TEMPLATE_EDIT_MODAL,
+                            });
+                        }}
+                        theme="fill"
+                        className={cls.btn}
+                    >
+                        Изменить шаблон
+                    </Button>
                 </div>
             </div>
             <div className={cn(cls.item)}>
@@ -101,6 +139,19 @@ const CreateAdvertisementEditArea: FC<Props> = ({
                         }}
                     >
                         Вставить шаблон
+                    </Button>
+                    <Button
+                        size="mid"
+                        onClick={() => {
+                            setTemplateEditType("reviewsCriteria");
+                            showModal({
+                                slug: SALESMAN_CREATE_ADVERTISEMENT_TEMPLATE_EDIT_MODAL,
+                            });
+                        }}
+                        theme="fill"
+                        className={cls.btn}
+                    >
+                        Изменить шаблон
                     </Button>
                 </div>
             </div>

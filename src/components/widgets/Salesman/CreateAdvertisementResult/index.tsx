@@ -37,6 +37,15 @@ const CreateAdvertisementResult: FC<Props> = ({
     const totalPriceForCashback = priceWithCashback * count;
     const redemtionPay = count * 95;
 
+    console.log({
+        price,
+        cashback,
+        totalPriceForCashback,
+        priceWithCashback,
+        redemtionPay,
+        count,
+    });
+
     return (
         <section className={cn(cls.wrapper, [className])}>
             <Typography font="Inter-SB" size={20} tag="h2">

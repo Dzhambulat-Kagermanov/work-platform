@@ -15,6 +15,7 @@ import { WbProduct } from "@/types/api/Product";
 import { useCreateAdvMutation } from "@/hooks/api/seller";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants";
+import { CreateAdvertisementTemplateEditModal } from "@/components/widgets/Salesman/CreateAdvertisementTemplateEditModal";
 
 type CreateEditAdvertisementPageProps = {
     currentAdv?: any;
@@ -136,6 +137,7 @@ const CreateEditAdvertisementPage: React.FC<
                 <CreateAdvertisementCancelModal
                     className={cn(cls.cancel_modal)}
                 />
+                <CreateAdvertisementTemplateEditModal />
             </div>
         </div>
     );
