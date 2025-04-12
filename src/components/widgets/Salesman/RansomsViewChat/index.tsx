@@ -20,7 +20,8 @@ const RansomsViewChat: FC<Props> = ({ className }) => {
 
     const ordersQuery = useGetSalesmanOrder({ buybackId: activeId as number });
     const initSalesmanData = useChat(initSalesmanDataSelector);
-    const salesmanChatData = useChat(salesmanDataSelector);
+    const salesmanData = useChat(salesmanDataSelector);
+    console.log(ordersQuery.data);
 
     // EFFECTS
     useEffect(() => {
@@ -48,7 +49,7 @@ const RansomsViewChat: FC<Props> = ({ className }) => {
     return (
         <ViewChat
             role="salesman"
-            chatData={salesmanChatData}
+            chatData={salesmanData}
             isLoading={ordersQuery.isLoading}
             setActiveId={setActiveId}
             activeId={activeId}

@@ -4,15 +4,16 @@ import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { ChatItem } from "@/components/entities/ChatItem";
 import cls from "./index.module.scss";
-import { useGetChatListQuery } from "@/hooks/api/chat";
 import { ChatStatus } from "@/types/api";
 import { PageLoader } from "@/components/ui/loaders";
 import { PageErrorStub } from "@/components/ui/page-error-stub";
 import {
     salesmanActiveChatSelector,
+    setInitSalesmanChatsSelector,
     setSalesmanActiveChatSelector,
     useChat,
 } from "@/store/useChat";
+import { useGetChatListQuery } from "@/hooks/api/chat";
 
 interface Props extends TClassName {
     chatType: ChatStatus;
@@ -41,6 +42,12 @@ const Chats: FC<Props> = ({ className, chatType, search }) => {
     };
 
     const { data: chats, isLoading } = useGetChatListQuery(query());
+
+    const initChats = useChat(setInitSalesmanChatsSelector);
+
+    useEffect(() => {
+        if (chats) initChats(chats);
+    }, [chats]);
 
     useEffect(() => {
         if (activeId === undefined && chats) setActiveChatId(chats[0].id);

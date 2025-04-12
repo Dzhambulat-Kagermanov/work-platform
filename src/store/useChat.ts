@@ -1,8 +1,10 @@
 import { Order } from "@/types/api";
+import Chat from "@/types/api/Chat";
 import { create } from "zustand";
 
 type TSendMessage = Order["messages"][0]["text"];
-type TMessage = Order["messages"][0];
+type TChatMessage = Chat["messages"][0];
+type TOrderMessage = Order["messages"][0];
 
 interface TUseChat {
     buyerActiveChat?: Order["id"];
@@ -10,27 +12,27 @@ interface TUseChat {
     salesmanActiveChat?: Order["id"];
     setSalesmanActiveChat: (param: Order["id"] | undefined) => void;
 
-    initBuyerChats?: Order[];
-    setInitBuyerChats: (params: Order[]) => void;
-    addMessageForBuyerChat: (param: TMessage, id: Order["id"]) => void;
+    initBuyerChats?: Chat[];
+    setInitBuyerChats: (params: Chat[]) => void;
+    addMessageForBuyerChat: (param: TChatMessage, id: Chat["id"]) => void;
     sendBuyerMessage?: TSendMessage;
     sendBuyerFile?: Blob;
     buyerChatData?: Order;
     initBuyerData: (message: Order) => void;
     setSendBuyerMessage: (message: TSendMessage) => void;
     setSendBuyerFile: (file: Blob) => void;
-    addBuyerMessage: (message: TMessage) => void;
+    addBuyerMessage: (message: TOrderMessage) => void;
 
-    initSalesmanChats?: Order[];
-    setInitSalesmanChats: (params: Order[]) => void;
-    addMessageForSalesmanChat: (param: TMessage, id: Order["id"]) => void;
+    initSalesmanChats?: Chat[];
+    setInitSalesmanChats: (params: Chat[]) => void;
+    addMessageForSalesmanChat: (param: TChatMessage, id: Chat["id"]) => void;
     sendSalesmanMessage?: TSendMessage;
     sendSalesmanFile?: Blob;
     salesmanChatData?: Order;
     initSalesmanData: (message: Order) => void;
     setSendSalesmanMessage: (message: TSendMessage) => void;
     setSendSalesmanFile: (file: Blob) => void;
-    addSalesmanMessage: (message: TMessage) => void;
+    addSalesmanMessage: (message: TOrderMessage) => void;
 }
 
 const useChat = create<TUseChat>()((set, get) => ({
@@ -167,6 +169,11 @@ const salesmanDataSelector = (state: TUseChat) => state.salesmanChatData;
 const initSalesmanDataSelector = (state: TUseChat) => state.initSalesmanData;
 const setSendSalesmanMessageSelector = (state: TUseChat) =>
     state.setSendSalesmanMessage;
+const setInitSalesmanChatsSelector = (state: TUseChat) =>
+    state.setInitSalesmanChats;
+const setInitBuyerChatsSelector = (state: TUseChat) => state.setInitBuyerChats;
+const initSalesmanChatsSelector = (state: TUseChat) => state.initSalesmanChats;
+const initBuyerChatsSelector = (state: TUseChat) => state.setInitBuyerChats;
 const setSendSalesmanFileSelector = (state: TUseChat) =>
     state.setSendSalesmanFile;
 const addBuyerMessageSelector = (state: TUseChat) => state.addBuyerMessage;
@@ -195,4 +202,8 @@ export {
     addMessageForSalesmanChatSelector,
     salesmanActiveChatSelector,
     setSalesmanActiveChatSelector,
+    setInitSalesmanChatsSelector,
+    setInitBuyerChatsSelector,
+    initBuyerChatsSelector,
+    initSalesmanChatsSelector,
 };
