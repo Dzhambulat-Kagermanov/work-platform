@@ -1,10 +1,9 @@
 import { apiService } from "@/services";
-import { TTemplateEditType } from "@/store/useCreateAdvertisement";
 import { useQuery } from "@tanstack/react-query";
 
 export const GET_ADV_TEMPLATES_KEYS = ["create-advertisement", "templates"];
 
-export const useGetAdvTemplates = (type: TTemplateEditType) => {
+export const useGetAdvTemplates = () => {
     // let config: {
     //     request: (template: string) => Promise<unknown>;
     // };

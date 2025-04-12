@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler } from "react";
+import { FC, MouseEventHandler, useEffect } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { Button, Typography } from "@/components/ui";
@@ -8,6 +8,10 @@ import cls from "./index.module.scss";
 import { useGetBalanceQuery, useSessionQuery } from "@/hooks/api/auth";
 import { ROUTES } from "@/constants";
 import { useRouter } from "next/navigation";
+import {
+    setBalanceSelector,
+    useSalesmanBalance,
+} from "@/store/useSalesmanBalance";
 
 interface Props extends TClassName {
     sidebarIsExpand: boolean;
@@ -15,6 +19,11 @@ interface Props extends TClassName {
 const UserInfo: FC<Props> = ({ className, sidebarIsExpand }) => {
     const { data: userData } = useSessionQuery();
     const { data: balance } = useGetBalanceQuery();
+    const setBalance = useSalesmanBalance(setBalanceSelector);
+
+    useEffect(() => {
+        if (balance) setBalance(balance);
+    }, [balance]);
 
     const router = useRouter();
 

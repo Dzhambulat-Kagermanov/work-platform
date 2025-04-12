@@ -16,6 +16,7 @@ import { useCreateAdvMutation } from "@/hooks/api/seller";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants";
 import { CreateAdvertisementTemplateEditModal } from "@/components/widgets/Salesman/CreateAdvertisementTemplateEditModal";
+import { useGetAdvTemplates } from "@/hooks/api/seller/useGetAdvTemplates";
 
 type CreateEditAdvertisementPageProps = {
     currentAdv?: any;
@@ -25,6 +26,7 @@ type CreateEditAdvertisementPageProps = {
 const CreateEditAdvertisementPage: React.FC<
     CreateEditAdvertisementPageProps
 > = ({ currentAdv, product }) => {
+    const query = useGetAdvTemplates();
     const router = useRouter();
     const { mutate: createAdvMutate, isPending: isAdvCreatePending } =
         useCreateAdvMutation();
@@ -125,7 +127,7 @@ const CreateEditAdvertisementPage: React.FC<
                 <CreateAdvertisementResult
                     disabled={isAdvCreatePending}
                     handleSubmit={handleSubmit}
-                    price={800}
+                    price={+product.price}
                     count={count}
                     cashback={cashback}
                     className={cn(cls.result)}
