@@ -10,14 +10,15 @@ import {
     MD_BIG_BETWEEN_MD_LOW,
     SALESMAN_SIDEBAR_MENU,
 } from "@/constants";
+import { Order } from "@/types/api";
 
 interface Props extends TClassName {
-    setActiveSTUB: TState<number | undefined>;
+    setActiveId: (id: Order["id"] | undefined) => void;
 }
-const HeadAreaBackBtn: FC<Props> = ({ setActiveSTUB, className }) => {
+const HeadAreaBackBtn: FC<Props> = ({ setActiveId, className }) => {
     const width = useScreen();
     const handleClick = () => {
-        setActiveSTUB(undefined);
+        setActiveId(undefined);
     };
     const sidebarState = useModalStore(
         (state) => state.modalsStates[SALESMAN_SIDEBAR_MENU]?.modalState,

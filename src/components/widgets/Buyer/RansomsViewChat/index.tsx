@@ -50,7 +50,7 @@ const RansomsViewChat: FC<Props> = ({ className, setActiveSTUB, activeId }) => {
             role="buyer"
             chatData={buyerChatData}
             isLoading={ordersQuery.isLoading}
-            setActiveSTUB={setActiveSTUB}
+            setActiveId={setActiveSTUB}
             activeId={activeId}
             className={className}
         />

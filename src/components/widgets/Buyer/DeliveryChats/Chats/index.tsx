@@ -8,20 +8,20 @@ import { useGetChatListQuery } from "@/hooks/api/chat";
 import { ChatStatus } from "@/types/api";
 import { PageLoader } from "@/components/ui/loaders";
 import { PageErrorStub } from "@/components/ui/page-error-stub";
+import {
+    buyerActiveChatSelector,
+    setBuyerActiveChatSelector,
+    useChat,
+} from "@/store/useChat";
 
 interface Props extends TClassName {
-    activeIdSTUB?: number;
-    setActiveIdSTUB: TState<number | undefined>;
     chatType: ChatStatus;
     search: string;
 }
-const Chats: FC<Props> = ({
-    className,
-    activeIdSTUB,
-    setActiveIdSTUB,
-    chatType,
-    search,
-}) => {
+const Chats: FC<Props> = ({ className, chatType, search }) => {
+    const activeId = useChat(buyerActiveChatSelector);
+    const setActiveChatId = useChat(setBuyerActiveChatSelector);
+
     const query = () => {
         const res = [
             {
@@ -43,7 +43,7 @@ const Chats: FC<Props> = ({
     const { data: chats, isLoading } = useGetChatListQuery(query());
 
     useEffect(() => {
-        if (activeIdSTUB === undefined && chats) setActiveIdSTUB(chats[0].id);
+        if (activeId === undefined && chats) setActiveChatId(chats[0].id);
     }, [chats]);
 
     if (isLoading) {
@@ -61,9 +61,9 @@ const Chats: FC<Props> = ({
                     <ChatItem
                         key={item.id}
                         tag="li"
-                        setIsActive={setActiveIdSTUB}
+                        setIsActive={setActiveChatId}
                         newMessagesQnt={item.messages.length}
-                        isActive={activeIdSTUB === item.id}
+                        isActive={activeId === item.id}
                         avatar={item.user.avatar ?? ""}
                         isOnline={true}
                         id={item.id}

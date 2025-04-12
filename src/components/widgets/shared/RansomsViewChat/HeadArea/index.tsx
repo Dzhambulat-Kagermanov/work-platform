@@ -9,29 +9,28 @@ import cls from "./index.module.scss";
 import { Order } from "@/types/api";
 
 interface Props extends TClassName {
-    setActiveSTUB: TState<number | undefined>;
+    setActiveId: (id: Order["id"] | undefined) => void;
     orderInfo: Order;
 }
-const HeadArea: FC<Props> = ({ className, setActiveSTUB, orderInfo, }) => {
+const HeadArea: FC<Props> = ({ className, setActiveId, orderInfo }) => {
     return (
         <div className={cn(cls.wrapper, [className])}>
             <div className={cn(cls.content)}>
                 <HeadAreaBackBtn
                     className={cn(cls.back_btn)}
-                    setActiveSTUB={setActiveSTUB}
+                    setActiveId={setActiveId}
                 />
                 <div className={cn(cls.images)}>
-                    {
-                        orderInfo.ad.product.images[0] ? 
-                            <img
-                                src={orderInfo.ad.product.images[0]}
-                                width={42}
-                                height={42}
-                                alt="Аватар"
-                            />
-                        : 
-                            <></>
-                    }
+                    {orderInfo.ad.product.images[0] ? (
+                        <img
+                            src={orderInfo.ad.product.images[0]}
+                            width={42}
+                            height={42}
+                            alt="Аватар"
+                        />
+                    ) : (
+                        <></>
+                    )}
                     <div className={cn(cls.border)}>
                         <Image
                             src={"/images/stub/avatar.png"}
@@ -41,7 +40,10 @@ const HeadArea: FC<Props> = ({ className, setActiveSTUB, orderInfo, }) => {
                         />
                     </div>
                 </div>
-                <HeadAreaSalesmanInfo orderInfo={orderInfo} className={cn(cls.salesman_info)} />
+                <HeadAreaSalesmanInfo
+                    orderInfo={orderInfo}
+                    className={cn(cls.salesman_info)}
+                />
             </div>
             <HeadAreaOrderInfo className={cn(cls.order_info)} />
         </div>

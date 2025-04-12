@@ -12,7 +12,7 @@ import { Order } from "@/types/api";
 export type TRole = "salesman" | "buyer";
 
 interface Props extends TClassName {
-    setActiveSTUB: TState<number | undefined>;
+    setActiveId: (id: Order["id"] | undefined) => void;
     activeId?: number;
     chatData?: Order;
     isLoading?: boolean;
@@ -20,12 +20,14 @@ interface Props extends TClassName {
 }
 const RansomsViewChat: FC<Props> = ({
     className,
-    setActiveSTUB,
+    setActiveId,
     activeId,
     chatData,
     isLoading,
     role,
 }) => {
+    console.log(chatData, chatData?.messages);
+
     return (
         <section className={cn(cls.wrapper, [className])}>
             {chatData ? (
@@ -33,7 +35,7 @@ const RansomsViewChat: FC<Props> = ({
                     <HeadArea
                         className={cn(cls.head)}
                         orderInfo={chatData}
-                        setActiveSTUB={setActiveSTUB}
+                        setActiveId={setActiveId}
                     />
                     <MessagesArea
                         role={role}

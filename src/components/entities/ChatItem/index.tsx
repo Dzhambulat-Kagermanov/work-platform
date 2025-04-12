@@ -5,10 +5,11 @@ import { cn } from "@/lib";
 import { Typography } from "@/components/ui";
 import { ChatAvatarItem } from "../ChatAvatarItem";
 import cls from "./index.module.scss";
+import { Order } from "@/types/api";
 
 interface Props extends TClassName, TTag, TChatPlaqueProps {
     isActive: boolean;
-    setIsActive: TState<number | undefined>;
+    setIsActive: (id: Order["id"]) => void;
     headCls?: string;
     footerCls?: string;
     contentCls?: string;

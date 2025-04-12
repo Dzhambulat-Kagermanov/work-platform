@@ -12,12 +12,13 @@ import {
 } from "@/constants";
 import cls from "./index.module.scss";
 import { ChatStatus } from "@/types/api";
+import { buyerActiveChatSelector, useChat } from "@/store/useChat";
 
 interface Props extends TClassName {
     chatType: ChatStatus;
 }
 const RansomsContent: FC<Props> = ({ className, chatType }) => {
-    const [activeId, setActiveId] = useState<number | undefined>(undefined);
+    const activeId = useChat(buyerActiveChatSelector);
 
     const width = useScreen();
     const sidebarState = useModalStore(
@@ -43,19 +44,10 @@ const RansomsContent: FC<Props> = ({ className, chatType }) => {
     return (
         <section className={cn(cls.wrapper, [className, "w-full"])}>
             {IS_RENDER_RANSOMS_CHAT && (
-                <RansomsChats
-                    chatType={chatType}
-                    className={cn(cls.chat)}
-                    activeIdSTUB={activeId}
-                    setActiveIdSTUB={setActiveId}
-                />
+                <RansomsChats chatType={chatType} className={cn(cls.chat)} />
             )}
             {IS_RENDER_RANSOMS_VIEW_CHAT && (
-                <RansomsViewChat
-                    className={cn(cls.view)}
-                    activeId={activeId}
-                    setActiveSTUB={setActiveId}
-                />
+                <RansomsViewChat className={cn(cls.view)} />
             )}
         </section>
     );

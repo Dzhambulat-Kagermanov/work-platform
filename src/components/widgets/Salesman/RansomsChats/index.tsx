@@ -1,6 +1,6 @@
 "use client";
 import { FC, useState } from "react";
-import { TClassName, TState } from "@/types";
+import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { Input, Typography } from "@/components/ui";
 import Image from "next/image";
@@ -11,19 +11,12 @@ import { XS_BIG } from "@/constants";
 import cls from "./index.module.scss";
 import { ChatStatus } from "@/types/api";
 import { useDebounce } from "use-debounce";
-import { Chats } from "../../Buyer/DeliveryChats/Chats";
+import { Chats } from "./Chats";
 
 interface Props extends TClassName {
-    activeIdSTUB?: number;
-    setActiveIdSTUB: TState<number | undefined>;
     chatType: ChatStatus;
 }
-const RansomsChats: FC<Props> = ({
-    className,
-    chatType,
-    setActiveIdSTUB,
-    activeIdSTUB,
-}) => {
+const RansomsChats: FC<Props> = ({ className, chatType }) => {
     const [search, setSearch] = useState("");
     const [searchDebounce] = useDebounce(search, 600);
 
@@ -68,8 +61,6 @@ const RansomsChats: FC<Props> = ({
                     chatType={chatType}
                     search={searchDebounce}
                     className={cn(cls.chat)}
-                    activeIdSTUB={activeIdSTUB}
-                    setActiveIdSTUB={setActiveIdSTUB}
                 />
             </div>
         </section>
