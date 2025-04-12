@@ -22,8 +22,6 @@ const MessagesArea: FC<Props> = ({ className, messages, status, role }) => {
     const [messagesGroup, setMessagesGroup] = useState<
         { date: string; messages: Message[] }[]
     >([]);
-    console.log(messages);
-
     const notificationRef = useRef<HTMLDivElement>(null);
     const groupOverlayRef = useRef<HTMLDivElement>(null);
 

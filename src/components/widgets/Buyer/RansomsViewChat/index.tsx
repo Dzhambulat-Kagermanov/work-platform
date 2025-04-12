@@ -1,48 +1,30 @@
 "use client";
 import { FC, useEffect } from "react";
-import { TClassName, TState } from "@/types";
+import { TClassName } from "@/types";
 import { RansomsViewChat as ViewChat } from "../../shared/RansomsViewChat";
 import { useGetOrderQuery } from "@/hooks/api/orders";
 import {
     initBuyerDataSelector,
     buyerDataSelector,
     useChat,
+    buyerActiveChatSelector,
+    setBuyerActiveChatSelector,
 } from "@/store/useChat";
-import { useProfile, userIdSelector } from "@/store/useProfile";
-import { chatPusherConfig, pusherClient } from "@/utils/pusher-client";
 
-interface Props extends TClassName {
-    setActiveSTUB: TState<number | undefined>;
-    activeId?: number;
-}
+interface Props extends TClassName {}
 
-const RansomsViewChat: FC<Props> = ({ className, setActiveSTUB, activeId }) => {
-    const userId = useProfile(userIdSelector);
-    const ordersQuery = useGetOrderQuery(activeId);
+const RansomsViewChat: FC<Props> = ({ className }) => {
+    const activeId = useChat(buyerActiveChatSelector);
+    const setActiveId = useChat(setBuyerActiveChatSelector);
+
     const initBuyerData = useChat(initBuyerDataSelector);
     const buyerChatData = useChat(buyerDataSelector);
-
-    // EFFECTS
-    useEffect(() => {
-        if (userId) {
-            const config = chatPusherConfig({
-                userId: userId as number,
-            });
-            const channel = pusherClient.subscribe(config.channel);
-
-            channel.bind(config.event, (data: any) => {
-                console.log("Получены данные:", data);
-            });
-            return () => {
-                channel.unbind(config.event);
-                pusherClient.unsubscribe(config.channel);
-            };
-        }
-    }, [userId]);
+    const ordersQuery = useGetOrderQuery(activeId, !buyerChatData);
 
     useEffect(() => {
-        if (ordersQuery.data && ordersQuery.status === "success")
+        if (ordersQuery.data && ordersQuery.status === "success") {
             initBuyerData(ordersQuery.data);
+        }
     }, [ordersQuery.status]);
 
     return (
@@ -50,7 +32,7 @@ const RansomsViewChat: FC<Props> = ({ className, setActiveSTUB, activeId }) => {
             role="buyer"
             chatData={buyerChatData}
             isLoading={ordersQuery.isLoading}
-            setActiveId={setActiveSTUB}
+            setActiveId={setActiveId}
             activeId={activeId}
             className={className}
         />

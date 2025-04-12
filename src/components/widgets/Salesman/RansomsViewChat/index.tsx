@@ -21,7 +21,6 @@ const RansomsViewChat: FC<Props> = ({ className }) => {
     const ordersQuery = useGetSalesmanOrder({ buybackId: activeId as number });
     const initSalesmanData = useChat(initSalesmanDataSelector);
     const salesmanData = useChat(salesmanDataSelector);
-    console.log(ordersQuery.data);
 
     // EFFECTS
     useEffect(() => {

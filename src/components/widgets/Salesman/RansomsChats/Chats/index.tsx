@@ -66,6 +66,7 @@ const Chats: FC<Props> = ({ className, chatType, search }) => {
             {chats.map((item) => {
                 return (
                     <ChatItem
+                        role="salesman"
                         key={item.id}
                         tag="li"
                         setIsActive={setActiveChatId}

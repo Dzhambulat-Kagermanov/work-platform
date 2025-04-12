@@ -26,8 +26,6 @@ const RansomsViewChat: FC<Props> = ({
     isLoading,
     role,
 }) => {
-    console.log(chatData, chatData?.messages);
-
     return (
         <section className={cn(cls.wrapper, [className])}>
             {chatData ? (

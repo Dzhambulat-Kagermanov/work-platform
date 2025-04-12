@@ -1,14 +1,17 @@
 "use client";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { TChatPlaqueProps, TClassName, TState, TTag } from "@/types";
 import { cn } from "@/lib";
 import { Typography } from "@/components/ui";
 import { ChatAvatarItem } from "../ChatAvatarItem";
 import cls from "./index.module.scss";
-import { Order } from "@/types/api";
+import { Message, Order } from "@/types/api";
+import { useProfile, userIdSelector } from "@/store/useProfile";
+import { chatPusherConfig, pusherClient } from "@/utils/pusher-client";
 
 interface Props extends TClassName, TTag, TChatPlaqueProps {
     isActive: boolean;
+    addMessage: (message: Message) => void;
     setIsActive: (id: Order["id"]) => void;
     headCls?: string;
     footerCls?: string;
@@ -29,11 +32,33 @@ const ChatItem: FC<Props> = ({
     isActive,
     setIsActive,
     tag = "div",
+    addMessage,
 }) => {
+    const Tag = tag;
+
     const handleClick = () => {
         setIsActive(id);
     };
-    const Tag = tag;
+
+    // EFFECTS
+    useEffect(() => {
+        if (id) {
+            const config = chatPusherConfig({
+                userId: id as number,
+            });
+            const channel = pusherClient.subscribe(config.channel);
+
+            channel.bind(config.event, (data: Message) => {
+                addMessage(data);
+                console.log("Получены данные:", data);
+            });
+            return () => {
+                channel.unbind(config.event);
+                pusherClient.unsubscribe(config.channel);
+            };
+        }
+    }, [id]);
+
     return (
         <Tag
             className={cn(cls.item, [className], {

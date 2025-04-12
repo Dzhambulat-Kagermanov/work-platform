@@ -6,7 +6,7 @@ export const GET_ORDER_KEY = (id?: number) => [
     `order-detail-${id}`,
 ];
 
-const useGetOrderQuery = (id?: number) =>
+const useGetOrderQuery = (id?: number, enabled?: boolean) =>
     useQuery({
         queryKey: GET_ORDER_KEY(id),
         queryFn: async () => {
@@ -16,6 +16,7 @@ const useGetOrderQuery = (id?: number) =>
         },
         staleTime: 90_000,
         retry: 2,
+        enabled,
     });
 
 export default useGetOrderQuery;

@@ -16,40 +16,38 @@ interface ModalStore {
     toggleModal: (params: TModalSlug) => void;
 }
 
-const useModalStore = create<ModalStore>()(
-    devtools((set) => ({
-        modalsStates: {},
-        hideModal: ({ slug }) => {
-            set(({ modalsStates }) => ({
-                modalsStates: {
-                    ...modalsStates,
-                    [slug]: { modalState: false },
-                },
-            }));
-        },
-        showModal: ({ slug }) => {
-            set(({ modalsStates }) => ({
-                modalsStates: {
-                    ...modalsStates,
-                    [slug]: { modalState: true },
-                },
-            }));
-        },
-        toggleModal: ({ slug }) => {
-            set(({ modalsStates }) => ({
-                modalsStates: {
-                    ...modalsStates,
-                    [slug]:
-                        modalsStates[slug] !== undefined
-                            ? {
-                                  modalState: !modalsStates[slug].modalState,
-                              }
-                            : { modalState: true },
-                },
-            }));
-        },
-    })),
-);
+const useModalStore = create<ModalStore>()((set) => ({
+    modalsStates: {},
+    hideModal: ({ slug }) => {
+        set(({ modalsStates }) => ({
+            modalsStates: {
+                ...modalsStates,
+                [slug]: { modalState: false },
+            },
+        }));
+    },
+    showModal: ({ slug }) => {
+        set(({ modalsStates }) => ({
+            modalsStates: {
+                ...modalsStates,
+                [slug]: { modalState: true },
+            },
+        }));
+    },
+    toggleModal: ({ slug }) => {
+        set(({ modalsStates }) => ({
+            modalsStates: {
+                ...modalsStates,
+                [slug]:
+                    modalsStates[slug] !== undefined
+                        ? {
+                              modalState: !modalsStates[slug].modalState,
+                          }
+                        : { modalState: true },
+            },
+        }));
+    },
+}));
 
 export default useModalStore;
 

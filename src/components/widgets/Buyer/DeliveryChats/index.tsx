@@ -12,16 +12,9 @@ import { useGetChatListQuery } from "@/hooks/api/chat";
 import { useDebounce } from "use-debounce";
 
 interface Props extends TClassName {
-    activeIdSTUB?: number;
-    setActiveIdSTUB: TState<number | undefined>;
     chatType: ChatStatus;
 }
-const DeliveryChats: FC<Props> = ({
-    className,
-    chatType,
-    setActiveIdSTUB,
-    activeIdSTUB,
-}) => {
+const DeliveryChats: FC<Props> = ({ className, chatType }) => {
     const [search, setSearch] = useState("");
     const [searchDebounce] = useDebounce(search, 600);
 
@@ -63,8 +56,6 @@ const DeliveryChats: FC<Props> = ({
                     search={searchDebounce}
                     chatType={chatType}
                     className={cn(cls.chat)}
-                    activeIdSTUB={activeIdSTUB}
-                    setActiveIdSTUB={setActiveIdSTUB}
                 />
             </div>
         </section>

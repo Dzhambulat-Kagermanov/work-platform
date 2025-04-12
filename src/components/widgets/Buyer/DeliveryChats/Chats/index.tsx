@@ -1,6 +1,6 @@
 "use client";
 import { FC, useEffect } from "react";
-import { TClassName, TState } from "@/types";
+import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { ChatItem } from "@/components/entities/ChatItem";
 import cls from "./index.module.scss";
@@ -9,8 +9,12 @@ import { ChatStatus } from "@/types/api";
 import { PageLoader } from "@/components/ui/loaders";
 import { PageErrorStub } from "@/components/ui/page-error-stub";
 import {
+    addBuyerMessageSelector,
     buyerActiveChatSelector,
+    buyerDataSelector,
+    initBuyerChatsSelector,
     setBuyerActiveChatSelector,
+    updateBuyerDataSelector,
     useChat,
 } from "@/store/useChat";
 
@@ -21,6 +25,8 @@ interface Props extends TClassName {
 const Chats: FC<Props> = ({ className, chatType, search }) => {
     const activeId = useChat(buyerActiveChatSelector);
     const setActiveChatId = useChat(setBuyerActiveChatSelector);
+    const addMessage = useChat(addBuyerMessageSelector);
+    const updateBuyerData = useChat(updateBuyerDataSelector);
 
     const query = () => {
         const res = [
@@ -41,6 +47,14 @@ const Chats: FC<Props> = ({ className, chatType, search }) => {
     };
 
     const { data: chats, isLoading } = useGetChatListQuery(query());
+    const initBuyerChats = useChat(initBuyerChatsSelector);
+    const buyerChatData = useChat(buyerDataSelector);
+
+    useEffect(() => {
+        if (chats) {
+            initBuyerChats(chats);
+        }
+    }, [chats]);
 
     useEffect(() => {
         if (activeId === undefined && chats) setActiveChatId(chats[0].id);
@@ -59,9 +73,13 @@ const Chats: FC<Props> = ({ className, chatType, search }) => {
             {chats.map((item) => {
                 return (
                     <ChatItem
+                        addMessage={addMessage}
                         key={item.id}
                         tag="li"
-                        setIsActive={setActiveChatId}
+                        setIsActive={(id) => {
+                            setActiveChatId(id);
+                            updateBuyerData(id);
+                        }}
                         newMessagesQnt={item.messages.length}
                         isActive={activeId === item.id}
                         avatar={item.user.avatar ?? ""}
