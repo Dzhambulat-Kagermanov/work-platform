@@ -3,14 +3,11 @@ import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { BreadCrumbs, Typography } from "@/components/ui";
-import { TSalesmanHomePageType } from "../HomePagesSwitcher";
 import cls from "./index.module.scss";
 import { profileSelector, useProfile } from "@/store/useProfile";
 
-interface Props extends TClassName {
-    homePageType: TSalesmanHomePageType;
-}
-const HomeCrumbs: FC<Props> = ({ className, homePageType }) => {
+interface Props extends TClassName {}
+const ReferralCrumbs: FC<Props> = ({ className }) => {
     const profile = useProfile(profileSelector);
 
     return (
@@ -24,13 +21,7 @@ const HomeCrumbs: FC<Props> = ({ className, homePageType }) => {
                     { link: "#", text: "Продвижение" },
                     {
                         link: "#",
-                        text: `${
-                            homePageType === null
-                                ? "Товары"
-                                : homePageType === "advertisements"
-                                  ? "Объявления"
-                                  : "Выкупы"
-                        }`,
+                        text: `Выкупы`,
                     },
                 ]}
             />
@@ -38,4 +29,4 @@ const HomeCrumbs: FC<Props> = ({ className, homePageType }) => {
     );
 };
 
-export { HomeCrumbs };
+export { ReferralCrumbs };

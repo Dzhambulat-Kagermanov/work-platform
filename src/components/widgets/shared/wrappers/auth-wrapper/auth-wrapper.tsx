@@ -2,7 +2,11 @@
 import { PageLoader } from "@/components/ui/loaders";
 import { ROUTES } from "@/constants";
 import { useSessionQuery } from "@/hooks/api/auth";
-import { setUserIdSelector, useProfile } from "@/store/useProfile";
+import {
+    setProfileSelector,
+    setUserIdSelector,
+    useProfile,
+} from "@/store/useProfile";
 import { RoleSlug } from "@/types/api";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
@@ -21,6 +25,7 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
     reverse,
 }) => {
     const setUserId = useProfile(setUserIdSelector);
+    const setProfile = useProfile(setProfileSelector);
     const { data, isLoading, isError } = useSessionQuery();
     const router = useRouter();
     const pushToRegEnd = () => {
@@ -31,6 +36,7 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
 
     useEffect(() => {
         if (data) {
+            setProfile(data);
             setUserId(data.id);
         }
         if (

@@ -1,0 +1,35 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 35px;
+    max-width: 780px;
+}
+.link_wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.link {
+    padding: 5px 14px 3px 14px;
+    display: flex;
+    column-gap: 73px;
+    border: 1px solid var(--white-200);
+    border-radius: 8px;
+}
+
+@media screen and (max-width: 600px) {
+    .link {
+        column-gap: 10px;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .link {
+        p {
+            font-size: 13px;
+        }
+    }
+}

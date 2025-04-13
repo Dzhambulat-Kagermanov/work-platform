@@ -6,7 +6,7 @@ interface Props {
     userId?: TUserInfo["id"];
     setUserId: (id: TUserInfo["id"]) => void;
     profile?: User;
-    setProfile?: (profile: User) => void;
+    setProfile: (profile: User) => void;
 }
 
 const useProfile = create<Props>()((set, get) => ({

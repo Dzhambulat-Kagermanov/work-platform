@@ -1,0 +1,12 @@
+.main {
+    padding-bottom: 40px;
+}
+.statistic {
+    margin: 48px 0 70px 0;
+}
+
+@media screen and (max-width: 600px) {
+    .statistic {
+        margin: 28px 0 50px 0;
+    }
+}
