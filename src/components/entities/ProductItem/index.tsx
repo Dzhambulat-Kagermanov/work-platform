@@ -11,12 +11,12 @@ import {
     useGetFavoritesQuery,
 } from "@/hooks/api/favorites";
 import { useSessionQuery } from "@/hooks/api/auth";
+import { priceDiscountCalculate } from "@/lib/priceDiscountCalculate";
 
 interface Props extends TTag {
     id: number;
     price: {
-        priceWithCashBack: number;
-        priceWithoutCashBack: number;
+        price: number;
         discount?: number;
     };
     tooltip?: string;
@@ -43,8 +43,10 @@ const ProductItem: FC<Props> = memo(
     }) => {
         const Tag = tag;
         const disc = price.discount;
-        const priceWithCashBack = price.priceWithCashBack;
-        const priceWithoutCashBack = price.priceWithoutCashBack;
+        const dsc = priceDiscountCalculate({
+            price: +price.price,
+            discount: +(price.discount || 0),
+        });
 
         const { data: userData } = useSessionQuery();
 
@@ -107,7 +109,7 @@ const ProductItem: FC<Props> = memo(
                 <div className={cn(cls.content, [contentCls])}>
                     <div className={cn(cls.price)}>
                         <Typography font="Inter-SB" size={18} tag="h5">
-                            {Math.round(priceWithCashBack)} ₽
+                            {dsc} ₽
                         </Typography>
                         {tooltip && (
                             <div
@@ -120,9 +122,9 @@ const ProductItem: FC<Props> = memo(
                                 <HelpIcon color="var(--grey-300)" />
                             </div>
                         )}
-                        {priceWithoutCashBack && (
+                        {price.price && (
                             <Typography font="Inter-R" size={14} tag="h6">
-                                {Math.round(priceWithoutCashBack)} ₽
+                                {Math.round(price.price)} ₽
                             </Typography>
                         )}
                     </div>

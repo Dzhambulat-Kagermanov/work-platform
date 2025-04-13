@@ -4,4 +4,4 @@ export const priceDiscountCalculate = ({
 }: {
     discount?: number;
     price: number;
-}) => (discount ? (price - (price / 100) * discount).toFixed(2) : (price ?? 0));
+}) => (discount ? (price - (price / 100) * discount).toFixed(0) : (price ?? 0));

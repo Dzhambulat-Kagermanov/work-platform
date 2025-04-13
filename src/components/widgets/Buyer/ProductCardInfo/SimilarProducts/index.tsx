@@ -46,11 +46,8 @@ const SimilarProducts: FC<Props> = ({ id, className }) => {
                                 }
                                 name={item.product.name}
                                 price={{
-                                    priceWithCashBack: +priceDiscountCalculate({
-                                        price: +item.product.price,
-                                        discount: +item.product.discount,
-                                    }),
-                                    priceWithoutCashBack: +item.product.price,
+                                    price: +item.product.price,
+                                    discount: +item.product.discount,
                                 }}
                                 tooltip={""}
                             />

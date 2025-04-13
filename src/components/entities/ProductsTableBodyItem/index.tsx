@@ -10,14 +10,16 @@ import {
     removeProductIdSelector,
 } from "@/store/useSellerStore";
 import { useStopProductsMutation } from "@/hooks/api/seller";
+import { useQueryClient } from "@tanstack/react-query";
+import { ADS_LIST_QUERY_KEY } from "@/hooks/api/seller/useGetAdsListQuery";
 
 interface Props {
     columnCls?: string;
     item: WbProduct;
 }
 const ProductsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
-    const { mutate: stopProductsMutate, isPending: stopProductsPending } =
-        useStopProductsMutation();
+    const queryClient = useQueryClient();
+    const { mutate: stopProductsMutate, isPending } = useStopProductsMutation();
 
     const [toggle, setToggle] = useState(!item.is_archived);
 
@@ -27,9 +29,7 @@ const ProductsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
 
     const checked = selectedProducts.some((el) => el === item.id);
 
-    const pending = stopProductsPending;
-
-    const handeChange = () => {
+    const handleChange = () => {
         if (checked) {
             removeSelectedProduct(item.id);
             return;
@@ -39,11 +39,7 @@ const ProductsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
     };
 
     const handleToggle = () => {
-        if (pending) {
-            return;
-        }
-
-        if (toggle) {
+        if (isPending) {
             return;
         }
 
@@ -53,6 +49,9 @@ const ProductsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
             },
             {
                 onSuccess: () => {
+                    queryClient.invalidateQueries({
+                        queryKey: ADS_LIST_QUERY_KEY,
+                    });
                     setToggle(!toggle);
                 },
             },
@@ -63,7 +62,7 @@ const ProductsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
         <>
             <td className={cn(cls.column, [cls.product, columnCls])}>
                 <Checkbox
-                    onChange={handeChange}
+                    onChange={handleChange}
                     checked={checked}
                     className={cn(cls.checkbox)}
                 />
@@ -85,7 +84,7 @@ const ProductsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
             </td>
             <td className={cn(cls.column, [columnCls])}>
                 <Toggle
-                    disabled={pending}
+                    disabled={isPending}
                     checked={toggle}
                     onChange={handleToggle}
                     className={cn(cls.toggle)}

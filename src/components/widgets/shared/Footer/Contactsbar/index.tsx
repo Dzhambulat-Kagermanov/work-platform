@@ -47,8 +47,13 @@ const Contactsbar: FC<Props> = ({ className }) => {
                         width={14}
                         height={17}
                     />
-                    <Typography font="Inter-R" size={14}>
-                        Москва, ул. Мясницкая 19с1
+                    <Typography
+                        font="Inter-R"
+                        size={14}
+                        className={cls.address}
+                    >
+                        г. Москва, вн. тер. г. муниципальный округ Лефортово,
+                        ул. Авиамоторная,д. 50 стр. 2, помещ. 29/2
                     </Typography>
                 </li>
             </ul>

@@ -27,7 +27,8 @@ const UserInfo: FC<Props> = ({ className, sidebarIsExpand }) => {
 
     const router = useRouter();
 
-    const handleBalanceUp: MouseEventHandler = () => {};
+    // const handleBalanceUp: MouseEventHandler = () => {};
+
     return (
         <div
             className={cn(cls.wrapper, [className], {
@@ -48,8 +49,15 @@ const UserInfo: FC<Props> = ({ className, sidebarIsExpand }) => {
             )}
             <div className={cn(cls.content_wrapper)}>
                 <div className={cn(cls.content)}>
-                    <Typography font="Inter-SB" size={16} tag="h2">
-                        {userData?.name}
+                    <Typography
+                        font="Inter-SB"
+                        size={16}
+                        tag="h2"
+                        className={cn(cls.name, [], {
+                            [cls.isNotExpand]: !sidebarIsExpand,
+                        })}
+                    >
+                        {sidebarIsExpand ? userData?.name : userData?.name[0]}
                     </Typography>
                     <Typography font="Inter-R" size={14} tag="h3">
                         {userData?.phone}

@@ -67,7 +67,7 @@ const ContentHead: FC<Props> = memo(({ product, className }) => {
                     {(+dsc).toFixed(0) || 0} ₽
                 </Typography>
                 {dsc && (
-                    <Typography font="Inter-M" size={20} tag="h6">
+                    <Typography font="Inter-R" size={20} tag="h6">
                         {(+product.product.price).toFixed(0)} ₽
                     </Typography>
                 )}
@@ -80,7 +80,7 @@ const ContentHead: FC<Props> = memo(({ product, className }) => {
                 {product.product.discount &&
                     !(width <= MD_LOW && width > SM_BIG) && (
                         <div className={cn(cls.discount_plaque)}>
-                            <Typography font="Inter-M" size={14}>
+                            <Typography font="Inter-M" size={18}>
                                 -{Number(product.product.discount)}%
                             </Typography>
                         </div>

@@ -44,7 +44,7 @@ const SalesmanInfoPage: FC<Props> = ({ className }) => {
                 infoMobileContentCls={cn(cls.head_mobile_content)}
                 className={cn(cls.head)}
                 id={profile.id}
-                name={profile.name ?? ""}
+                name={profile.shop.legal_name ?? ""}
                 rating={profile.rating}
                 registerDate={profile.created_at ?? ""}
                 avatarImage={profile.avatar ?? ""}

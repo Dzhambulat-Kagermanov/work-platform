@@ -43,12 +43,7 @@ const Products: FC<Props> = ({ className }) => {
                                     : ""
                             }
                             price={{
-                                priceWithCashBack: Number(
-                                    item.price_with_cashback,
-                                ),
-                                priceWithoutCashBack: Number(
-                                    item.price_without_cashback,
-                                ),
+                                price: Number(item.price_without_cashback),
                                 discount: Number(item.product.discount),
                             }}
                         />
