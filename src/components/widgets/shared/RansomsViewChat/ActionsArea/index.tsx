@@ -8,14 +8,15 @@ import { ViewChatSendMessage } from "@/components/features/ViewChatSendMessage";
 import cls from "./index.module.scss";
 import useSendMessageMutation from "@/hooks/api/chat/useSendMessageMutation";
 import { TRole } from "..";
+import { useQueryClient } from "@tanstack/react-query";
+import { GET_CHAT_STATUSES_KEY } from "@/hooks/api/chat/useGetChatStatusesQuery";
 
 interface Props extends TClassName {
     activeId?: number;
     role: TRole;
 }
 const ActionsArea: FC<Props> = ({ className, activeId, role }) => {
-    if (!activeId) return null;
-
+    const queryClient = useQueryClient();
     const [message, setMessage] = useState<string>("");
 
     const formData = new FormData();
@@ -23,12 +24,17 @@ const ActionsArea: FC<Props> = ({ className, activeId, role }) => {
 
     const sendMessage = useSendMessageMutation(activeId);
 
+    if (!activeId) return null;
+
     const handleSubmit: FormEventHandler = (event) => {
         event.preventDefault();
         sendMessage.mutate(
             { chatId: activeId, formData },
             {
                 onSettled: () => {
+                    queryClient.invalidateQueries({
+                        queryKey: GET_CHAT_STATUSES_KEY,
+                    });
                     setMessage("");
                 },
             },
