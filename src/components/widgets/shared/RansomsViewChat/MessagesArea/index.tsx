@@ -63,8 +63,6 @@ const MessagesArea: FC<Props> = ({ className, messages, status, role }) => {
         }
     }, [messages]);
 
-    console.log({ messages, messagesGroup });
-
     return (
         <div className={cn(cls.wrapper, [className])}>
             {messagesGroup.length ? (

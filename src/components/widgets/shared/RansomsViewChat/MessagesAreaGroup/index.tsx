@@ -21,8 +21,6 @@ const MessagesAreaGroup: FC<Props> = memo(
         const { data: userData } = useSessionQuery();
         const role = userData?.role.slug;
         const isSalesman = role === "seller";
-        console.log({ messages1: messages });
-
         return (
             <div className={cn(cls.wrapper, [className])}>
                 <Typography
@@ -35,8 +33,6 @@ const MessagesAreaGroup: FC<Props> = memo(
                 </Typography>
                 <ul className={cn(cls.group)}>
                     {messages.map((item, idx) => {
-                        console.log(item);
-
                         // if (type === "user" || type === "salesman")
                         //     return (
                         //         <ChatMessageItem
