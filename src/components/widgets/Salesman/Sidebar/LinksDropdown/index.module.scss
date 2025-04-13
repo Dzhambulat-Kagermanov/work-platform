@@ -7,66 +7,66 @@
 }
 .dropdown_wrapper {
     .dropdown_active {
-        width: 100%;
-        padding-right: 11px;
-        border-radius: var(--blocks-radius);
-        transition: var(--tran-low);
+        width: 100% !important;
+        padding-right: 11px !important;
+        border-radius: var(--blocks-radius) !important;
+        transition: var(--tran-low) !important;
         &:hover {
-            background-color: var(--white-300);
+            background-color: var(--white-300) !important;
         }
     }
     .dropdown_item {
-        transition: var(--tran-low);
-        border-radius: var(--blocks-radius);
+        transition: var(--tran-low) !important;
+        border-radius: var(--blocks-radius) !important;
         &.active {
-            background-color: var(--white-300);
+            background-color: var(--white-300) !important;
         }
         &:first-child {
-            margin-top: 8px;
+            margin-top: 8px !important;
         }
         &:hover {
-            background-color: var(--white-300);
+            background-color: var(--white-300) !important;
         }
     }
     .dropdown_content {
-        display: flex;
-        flex-direction: column;
-        row-gap: 8px;
+        display: flex !important;
+        flex-direction: column !important;
+        row-gap: 8px !important ;
     }
 }
 .item {
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: 100% !important;
 }
 .subitem {
     svg {
-        transition: var(--tran-low);
+        transition: var(--tran-low) !important;
     }
 }
 .sidebarIsExpand {
     .text_overlay {
-        display: grid;
-        grid-template-columns: 1fr;
+        display: grid !important;
+        grid-template-columns: 1fr !important;
     }
     .subitem {
         svg {
-            opacity: 0;
+            opacity: 0 !important;
         }
     }
 }
 
 .dropdown_isExpand {
     .dropdown_active {
-        background-color: var(--white-300);
+        background-color: var(--white-300) !important;
     }
 }
 .additional {
-    flex-grow: 1;
-    text-align: end;
-    color: var(--purple-300);
+    flex-grow: 1 !important;
+    text-align: end !important;
+    color: var(--purple-300) !important;
 }
 
 .icon {
-    min-width: 24px;
-    width: 24px;
+    min-width: 24px !important;
+    width: 24px !important;
 }

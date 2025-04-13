@@ -1,5 +1,5 @@
 .dashboard {
-    padding: 24px 50px 50px;
+    padding: 24px 50px 50px !important;
     background-color: var(--white-300);
     display: flex;
     column-gap: 45px;
@@ -46,14 +46,14 @@
 
 @media screen and (max-width: 620px) {
     .dashboard {
-        padding: 24px 30px 40px;
+        padding: 24px 30px 40px !important;
         row-gap: 25px;
     }
 }
 @media screen and (max-width: 500px) {
     .dashboard {
-        padding: 0px;
-        margin-bottom: 10px;
+        padding: 0px !important;
+        padding-bottom: 10px !important;
     }
     .account {
         margin-top: 0 !important;
@@ -66,6 +66,6 @@
         margin: 0 10px;
     }
     .dashboard {
-        margin: 0 10px 10px 10px;
+        margin: 0 10px 10px 10px !important;
     }
 }
