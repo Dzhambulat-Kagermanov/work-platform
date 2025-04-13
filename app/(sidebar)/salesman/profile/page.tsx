@@ -3,7 +3,7 @@ import { FC } from "react";
 
 interface Props {}
 const Profile: FC<Props> = ({}) => {
-    return <AccountPage role="seller" />;
+    return <AccountPage role="seller" forSalesman />;
 };
 
 export default Profile;

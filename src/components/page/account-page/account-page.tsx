@@ -15,8 +15,9 @@ import { AuthWrapper } from "@/components/widgets/shared/wrappers";
 import { useGetStatisticsQuery, useSessionQuery } from "@/hooks/api/auth";
 import { RoleSlug } from "@/types/api";
 import { AccountStatistic } from "@/components/widgets/account-statistic";
+import { AccountNotifications } from "@/components/widgets/Buyer/AccountNotifications";
 
-const AccountPageContent: FC<Props> = ({ className }) => {
+const AccountPageContent: FC<Props> = ({ className, forSalesman }) => {
     const width = useScreen();
 
     const { data: user } = useSessionQuery();
@@ -42,12 +43,13 @@ const AccountPageContent: FC<Props> = ({ className }) => {
                 background="/images/account/head-background.png"
             />
             <Container className={cn(cls.dashboard)}>
-                <AccountForm className={cn(cls.form)} />
+                <AccountForm
+                    className={cn(cls.form)}
+                    forSalesman={forSalesman}
+                />
                 <div className={cn(cls.half)}>
                     <AccountBalance className={cn(cls.balance)} balance={1} />
-                    {/* <AccountNotifications
-                        className={cn(cls.notifications)}
-                    /> */}
+                    <AccountNotifications className={cn(cls.notifications)} />
                     <AccountStatistic
                         className={cn(cls.statistic)}
                         cashbackPaid={statistic?.cashback_paid ?? 0}
@@ -67,6 +69,7 @@ const AccountPageContent: FC<Props> = ({ className }) => {
 
 interface Props extends TClassName {
     role: RoleSlug;
+    forSalesman?: boolean;
 }
 const AccountPage: FC<Props> = (props) => {
     return (

@@ -23,7 +23,10 @@ const Content: FC<Props> = ({ className }) => {
                         Доступно
                     </Typography>
                     <Typography font="Inter-SB" size={26}>
-                        {balance?.accessBalance ?? 0} ₽
+                        {balance?.accessBalance
+                            ? (+balance.accessBalance).toFixed(0)
+                            : 0}{" "}
+                        ₽
                     </Typography>
                 </div>
                 <div className={cn(cls.freeze)}>

@@ -63,6 +63,8 @@ const MessagesArea: FC<Props> = ({ className, messages, status, role }) => {
         }
     }, [messages]);
 
+    console.log({ messages, messagesGroup });
+
     return (
         <div className={cn(cls.wrapper, [className])}>
             {messagesGroup.length ? (
@@ -78,7 +80,7 @@ const MessagesArea: FC<Props> = ({ className, messages, status, role }) => {
                         className={cn(cls.messages_group_overlay)}
                     >
                         <div className={cn(cls.messages_group_wrapper)}>
-                            {[...messagesGroup].reverse().map((item, index) => {
+                            {messagesGroup.map((item, index) => {
                                 return (
                                     <MessagesAreaGroup
                                         className={cn(cls.messages_group)}

@@ -47,7 +47,7 @@ const RansomsViewChat: FC<Props> = ({
                         activeId={activeId}
                     />
                 </>
-            ) : activeId === undefined || isLoading ? (
+            ) : isLoading ? (
                 <PageLoader className="w-full h-full" />
             ) : (
                 <PageErrorStub

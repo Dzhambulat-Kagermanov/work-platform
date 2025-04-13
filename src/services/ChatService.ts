@@ -10,8 +10,7 @@ type ChatListItem = Chat;
 class ChatService {
     async getChatList(query: QueryItem[]) {
         const res = await axios.get<ChatListItem[]>(
-            `/chat-list`,
-            // `/buyer/orders${queryStringHandler(query)}`,
+            `/chat-list${queryStringHandler(query)}`,
         );
 
         return res.data;

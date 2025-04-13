@@ -41,9 +41,9 @@ const AccountForm: FC<Props> = ({ className, forSalesman }) => {
                     email: user?.email || "",
                     password: "",
                     passwordAgain: "",
-                    shopName: "",
-                    legalName: "",
-                    tin: "",
+                    shopName: user?.shop?.wb_name || "",
+                    legalName: user?.shop?.legal_name || "",
+                    tin: user?.shop?.inn || "",
                 }}
                 validate={(values) => {
                     const errors: Partial<
@@ -130,7 +130,7 @@ const AccountForm: FC<Props> = ({ className, forSalesman }) => {
                                         inpCls={cn(cls.inp)}
                                         label="ИНН"
                                         onChange={handleChange}
-                                        name="TIN"
+                                        name="tin"
                                         value={values.tin}
                                         error={errors.tin}
                                     />

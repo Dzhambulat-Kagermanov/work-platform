@@ -48,10 +48,6 @@ const Chats: FC<Props> = ({ className, chatType, search }) => {
 
     const { data: chats, isLoading } = useGetChatListQuery(query());
     const initBuyerChats = useChat(initBuyerChatsSelector);
-    // const buyerChatData = useChat(buyerDataSelector);
-    // console.log(buyerChatData);
-
-    console.log(chats);
 
     useEffect(() => {
         if (chats) {
@@ -60,7 +56,8 @@ const Chats: FC<Props> = ({ className, chatType, search }) => {
     }, [chats]);
 
     useEffect(() => {
-        if (activeId === undefined && chats) setActiveChatId(chats[0].id);
+        if (activeId === undefined && chats && chats.length)
+            setActiveChatId(chats[0].id);
     }, [chats]);
 
     if (isLoading) {
