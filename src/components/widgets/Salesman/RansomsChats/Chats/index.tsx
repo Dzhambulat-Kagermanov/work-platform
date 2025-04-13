@@ -4,16 +4,18 @@ import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { ChatItem } from "@/components/entities/ChatItem";
 import cls from "./index.module.scss";
+import { useGetChatListQuery } from "@/hooks/api/chat";
 import { ChatStatus } from "@/types/api";
 import { PageLoader } from "@/components/ui/loaders";
 import { PageErrorStub } from "@/components/ui/page-error-stub";
 import {
+    addSalesmanMessageSelector,
     salesmanActiveChatSelector,
     setInitSalesmanChatsSelector,
     setSalesmanActiveChatSelector,
+    updateSalesmanDataSelector,
     useChat,
 } from "@/store/useChat";
-import { useGetChatListQuery } from "@/hooks/api/chat";
 
 interface Props extends TClassName {
     chatType: ChatStatus;
@@ -22,6 +24,8 @@ interface Props extends TClassName {
 const Chats: FC<Props> = ({ className, chatType, search }) => {
     const activeId = useChat(salesmanActiveChatSelector);
     const setActiveChatId = useChat(setSalesmanActiveChatSelector);
+    const addMessage = useChat(addSalesmanMessageSelector);
+    const updateSalesmanData = useChat(updateSalesmanDataSelector);
 
     const query = () => {
         const res = [
@@ -42,15 +46,17 @@ const Chats: FC<Props> = ({ className, chatType, search }) => {
     };
 
     const { data: chats, isLoading } = useGetChatListQuery(query());
-
     const initChats = useChat(setInitSalesmanChatsSelector);
 
     useEffect(() => {
-        if (chats) initChats(chats);
+        if (chats) {
+            initChats(chats);
+        }
     }, [chats]);
 
     useEffect(() => {
-        if (activeId === undefined && chats) setActiveChatId(chats[0].id);
+        if (activeId === undefined && chats && chats.length)
+            setActiveChatId(chats[0].id);
     }, [chats]);
 
     if (isLoading) {
@@ -66,10 +72,13 @@ const Chats: FC<Props> = ({ className, chatType, search }) => {
             {chats.map((item) => {
                 return (
                     <ChatItem
-                        role="salesman"
+                        addMessage={addMessage}
                         key={item.id}
                         tag="li"
-                        setIsActive={setActiveChatId}
+                        setIsActive={(id) => {
+                            setActiveChatId(id);
+                            updateSalesmanData(id);
+                        }}
                         newMessagesQnt={item.messages.length}
                         isActive={activeId === item.id}
                         avatar={item.user.avatar ?? ""}

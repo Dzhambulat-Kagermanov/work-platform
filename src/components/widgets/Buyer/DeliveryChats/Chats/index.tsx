@@ -11,7 +11,6 @@ import { PageErrorStub } from "@/components/ui/page-error-stub";
 import {
     addBuyerMessageSelector,
     buyerActiveChatSelector,
-    buyerDataSelector,
     initBuyerChatsSelector,
     setBuyerActiveChatSelector,
     updateBuyerDataSelector,
@@ -47,11 +46,11 @@ const Chats: FC<Props> = ({ className, chatType, search }) => {
     };
 
     const { data: chats, isLoading } = useGetChatListQuery(query());
-    const initBuyerChats = useChat(initBuyerChatsSelector);
+    const initChats = useChat(initBuyerChatsSelector);
 
     useEffect(() => {
         if (chats) {
-            initBuyerChats(chats);
+            initChats(chats);
         }
     }, [chats]);
 
