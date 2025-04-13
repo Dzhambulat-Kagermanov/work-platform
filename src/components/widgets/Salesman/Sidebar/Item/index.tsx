@@ -10,6 +10,7 @@ import { TSalesmanHomePageType } from "../../HomePagesSwitcher";
 
 interface Props extends TClassName, TTag {
     text: string;
+    textClassName?: string;
     icon?: ReactNode;
     link?: string;
     additionalInfo?: ReactNode;
@@ -29,6 +30,7 @@ const Item: FC<Props> = ({
     textOverlayCls,
     activeSlug,
     slug,
+    textClassName,
     linkOnClick,
     tag = "div",
 }) => {
@@ -60,7 +62,7 @@ const Item: FC<Props> = ({
                             <Typography
                                 font="Inter-SB"
                                 size={16}
-                                className={cn(cls.text)}
+                                className={cn(cls.text, [textClassName])}
                             >
                                 {text}
                             </Typography>

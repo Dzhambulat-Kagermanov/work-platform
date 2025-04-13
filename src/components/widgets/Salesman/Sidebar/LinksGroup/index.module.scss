@@ -13,5 +13,9 @@
     color: var(--purple-300);
 }
 .balance_addition {
+    white-space: nowrap;
     color: var(--green-100);
+}
+.balance_text {
+    width: 100%;
 }

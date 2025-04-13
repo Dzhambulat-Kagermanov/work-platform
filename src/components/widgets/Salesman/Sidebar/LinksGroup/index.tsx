@@ -74,6 +74,7 @@ const LinksGroup: FC<Props> = ({
                 className={cn(cls.item)}
             />
             <Item
+                textClassName={cls.balance_text}
                 linkOnClick={linkOnClick}
                 sidebarIsExpand={sidebarIsExpand}
                 tag="li"
@@ -92,7 +93,7 @@ const LinksGroup: FC<Props> = ({
                         size={16}
                         className={cn(cls.balance_addition)}
                     >
-                        {balance?.accessBalance ?? 0}₽
+                        {(+(balance?.accessBalance || 0)).toFixed(0)} ₽
                     </Typography>
                 }
             />

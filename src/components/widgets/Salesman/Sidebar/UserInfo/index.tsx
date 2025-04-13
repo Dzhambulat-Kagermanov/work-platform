@@ -63,7 +63,7 @@ const UserInfo: FC<Props> = ({ className, sidebarIsExpand }) => {
                         {userData?.phone}
                     </Typography>
                     <Typography font="Inter-R" size={14} tag="h4">
-                        Баланс: {balance?.accessBalance} ₽
+                        Баланс: {(+(balance?.accessBalance || 0)).toFixed(0)} ₽
                     </Typography>
                     <Button
                         size="mid"
