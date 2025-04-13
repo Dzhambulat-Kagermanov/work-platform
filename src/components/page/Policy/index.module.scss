@@ -8,6 +8,9 @@
     row-gap: 20px;
     font-size: 16px;
 }
+.title {
+    margin: 0 0 40px 0;
+}
 .subtitle {
     margin-bottom: 20px;
 }
@@ -17,11 +20,6 @@
     font-family: Inter;
     font-weight: normal;
     row-gap: 40px;
-}
-.time {
-    margin: 10px 0 40px 0;
-    display: block;
-    color: var(--grey-300);
 }
 
 @media screen and (max-width: 768px) {
