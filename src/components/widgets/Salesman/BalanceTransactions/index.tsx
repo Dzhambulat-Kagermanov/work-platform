@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState } from "react";
+import { FC, useLayoutEffect, useState } from "react";
 import { cn } from "@/lib";
 import { TClassName } from "@/types";
 import { Action, Input, Typography } from "@/components/ui";
@@ -68,6 +68,12 @@ const BalanceTransactions: FC<Props> = ({ className }) => {
         setCurrentProduct(id);
     };
 
+    useLayoutEffect(() => {
+        if (currentProduct === -1) {
+            setCurrentProduct(null);
+        }
+    }, [currentProduct]);
+
     const width = useScreen();
 
     return (
@@ -93,7 +99,17 @@ const BalanceTransactions: FC<Props> = ({ className }) => {
                                 ? `${transactionsProducts.find((el) => el.id === currentProduct)?.name ?? "-"}`
                                 : "Выбрать товар"
                         }
-                        actions={transactionsProducts.map((el) => ({
+                        actions={[
+                            ...(currentProduct
+                                ? [
+                                      {
+                                          id: -1,
+                                          name: "Все товары",
+                                      },
+                                  ]
+                                : []),
+                            ...transactionsProducts,
+                        ].map((el) => ({
                             onClick: () => selectProduct(el.id),
                             text: el.name,
                         }))}
