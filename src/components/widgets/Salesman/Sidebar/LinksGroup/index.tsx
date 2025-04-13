@@ -7,6 +7,7 @@ import {
     AccountIcon,
     CreditCardIcon,
     NotificationIcon,
+    ReferralIcon,
 } from "@/icons";
 import { cn } from "@/lib";
 import { Item } from "../Item";
@@ -135,6 +136,22 @@ const LinksGroup: FC<Props> = ({
                         {allNotifications.length}
                     </Typography>
                 }
+            />
+            <Item
+                linkOnClick={(e) => {
+                    linkOnClick && linkOnClick();
+                }}
+                sidebarIsExpand={sidebarIsExpand}
+                tag="li"
+                text="Реферальная программа"
+                icon={
+                    <ReferralIcon
+                        color="var(--grey-200)"
+                        className={cn(cls.icon)}
+                    />
+                }
+                link={ROUTES.SALESMAN.REFERRALS}
+                className={cn(cls.item)}
             />
         </ul>
     );

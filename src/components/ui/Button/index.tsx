@@ -12,6 +12,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement>, TTag {
     primaryColor?: string;
     secondColor?: string;
     beforeIcon?: ReactNode;
+    textClassName?: string;
 }
 const Button: FC<Props> = ({
     wFull,
@@ -24,6 +25,7 @@ const Button: FC<Props> = ({
     size = "big",
     tag = "button",
     beforeIcon,
+    textClassName,
     ...other
 }) => {
     const Tag = tag;
@@ -53,6 +55,7 @@ const Button: FC<Props> = ({
             <Typography
                 font="Inter-SB"
                 size={size === "big" || size === "mid" ? 16 : 14}
+                className={textClassName}
             >
                 {children}
             </Typography>

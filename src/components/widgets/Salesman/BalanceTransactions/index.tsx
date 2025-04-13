@@ -110,7 +110,7 @@ const BalanceTransactions: FC<Props> = ({ className }) => {
                     }
                     wrapperCls={cn(cls.inp_wrapper)}
                     inpCls={cn(cls.inp)}
-                    placeholder="Введите ID выкупа"
+                    placeholder="Введите ID объявления"
                     onChange={(e) => {
                         setSearch(e.target.value);
                     }}

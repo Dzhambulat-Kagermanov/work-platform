@@ -2,7 +2,7 @@
 import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
-import { Typography } from "@/components/ui";
+import { Button, Typography } from "@/components/ui";
 import { PlusIcon } from "@/icons";
 import { useModalStore, useScreen } from "@/hooks";
 import { Paid } from "../Paid";
@@ -38,14 +38,13 @@ const Actions: FC<Props> = ({ className, ransoms, setRansoms }) => {
                 </div>
             </div> */}
 
-            <button
-                className={cn(cls.item, [cls.promocode])}
+            <Button
+                theme="fill"
+                className={cn("", [cls.promocode])}
                 onClick={handlePromocode}
             >
-                <Typography font="Inter-R" size={12}>
-                    Ввести промокод
-                </Typography>
-            </button>
+                Ввести промокод
+            </Button>
             {width <= 700 && width > 550 && <Paid className={cn(cls.paid)} />}
         </div>
     );

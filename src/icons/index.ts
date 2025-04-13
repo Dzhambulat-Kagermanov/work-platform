@@ -19,3 +19,4 @@ export { SupportIcon } from "./Support";
 export { NotificationIcon } from "./Notification";
 export { ArrowIcon } from "./Arrow";
 export { CopyIcon } from "./Copy";
+export { ReferralIcon } from "./Referral";
