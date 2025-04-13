@@ -67,8 +67,18 @@ class SellerService {
         return res.data;
     }
 
-    async getAdvTemplates() {
-        const res = await axios.get("/template");
+    async getAdvConditionsTemplates() {
+        const res = await axios.get("/template/order_conditions");
+
+        return res.data;
+    }
+    async getAdvInstructionsTemplates() {
+        const res = await axios.get("/template/redemption_instructions");
+
+        return res.data;
+    }
+    async getAdvReviewsTemplates() {
+        const res = await axios.get("/template/review_criteria");
 
         return res.data;
     }

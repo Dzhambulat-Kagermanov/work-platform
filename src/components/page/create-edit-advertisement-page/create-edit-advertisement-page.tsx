@@ -10,13 +10,11 @@ import { CreateAdvertisementResult } from "@/components/widgets/Salesman/CreateA
 import cls from "./create-edit-advertisement-page.module.scss";
 import { CreateAdvertisementPublishModal } from "@/components/widgets/Salesman/CreateAdvertisementPublishModal";
 import { CreateAdvertisementCancelModal } from "@/components/widgets/Salesman/CreateAdvertisementCancelModal";
-import { EditAdvertisementFeature } from "@/components/widgets/Salesman/EditAdvertisementFeature";
 import { WbProduct } from "@/types/api/Product";
 import { useCreateAdvMutation } from "@/hooks/api/seller";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants";
 import { CreateAdvertisementTemplateEditModal } from "@/components/widgets/Salesman/CreateAdvertisementTemplateEditModal";
-import { useGetAdvTemplates } from "@/hooks/api/seller/useGetAdvTemplates";
 
 type CreateEditAdvertisementPageProps = {
     currentAdv?: any;
@@ -26,7 +24,6 @@ type CreateEditAdvertisementPageProps = {
 const CreateEditAdvertisementPage: React.FC<
     CreateEditAdvertisementPageProps
 > = ({ currentAdv, product }) => {
-    const query = useGetAdvTemplates();
     const router = useRouter();
     const { mutate: createAdvMutate, isPending: isAdvCreatePending } =
         useCreateAdvMutation();

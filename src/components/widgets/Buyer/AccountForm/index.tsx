@@ -16,8 +16,10 @@ import cls from "./index.module.scss";
 import { Formik } from "formik";
 import { useSessionQuery, useUpdateProfileMutation } from "@/hooks/api/auth";
 
-interface Props extends TClassName {}
-const AccountForm: FC<Props> = ({ className }) => {
+interface Props extends TClassName {
+    forSalesman?: boolean;
+}
+const AccountForm: FC<Props> = ({ className, forSalesman }) => {
     const { data: user } = useSessionQuery();
     const updateUserMutation = useUpdateProfileMutation();
 
@@ -39,6 +41,9 @@ const AccountForm: FC<Props> = ({ className }) => {
                     email: user?.email || "",
                     password: "",
                     passwordAgain: "",
+                    shopName: "",
+                    legalName: "",
+                    tin: "",
                 }}
                 validate={(values) => {
                     const errors: Partial<
@@ -117,6 +122,40 @@ const AccountForm: FC<Props> = ({ className }) => {
                                 value={values.phone}
                                 error={errors.phone}
                             />
+                            {forSalesman ? (
+                                <>
+                                    <Input
+                                        type="text"
+                                        wrapperCls={cn(cls.inp_wrapper)}
+                                        inpCls={cn(cls.inp)}
+                                        label="ИНН"
+                                        onChange={handleChange}
+                                        name="TIN"
+                                        value={values.tin}
+                                        error={errors.tin}
+                                    />
+                                    <Input
+                                        type="text"
+                                        wrapperCls={cn(cls.inp_wrapper)}
+                                        inpCls={cn(cls.inp)}
+                                        label="Наименование юр лица"
+                                        onChange={handleChange}
+                                        name="legalName"
+                                        value={values.legalName}
+                                        error={errors.legalName}
+                                    />
+                                    <Input
+                                        type="text"
+                                        wrapperCls={cn(cls.inp_wrapper)}
+                                        inpCls={cn(cls.inp)}
+                                        label="Название магазина на Wildberries"
+                                        onChange={handleChange}
+                                        name="shopName"
+                                        value={values.shopName}
+                                        error={errors.shopName}
+                                    />
+                                </>
+                            ) : null}
                             <Input
                                 type="email"
                                 wrapperCls={cn(cls.inp_wrapper)}

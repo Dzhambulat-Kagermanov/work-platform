@@ -48,8 +48,10 @@ const Chats: FC<Props> = ({ className, chatType, search }) => {
 
     const { data: chats, isLoading } = useGetChatListQuery(query());
     const initBuyerChats = useChat(initBuyerChatsSelector);
-    const buyerChatData = useChat(buyerDataSelector);
-    console.log(buyerChatData);
+    // const buyerChatData = useChat(buyerDataSelector);
+    // console.log(buyerChatData);
+
+    console.log(chats);
 
     useEffect(() => {
         if (chats) {

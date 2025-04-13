@@ -10,6 +10,7 @@ import {
     setTemplateEditTypeSelector,
     useCreateAdvertisement,
 } from "@/store/useCreateAdvertisement";
+import { useGetAdvTemplates } from "@/hooks/api/seller/useGetAdvTemplates";
 
 interface Props
     extends TClassName,
@@ -27,6 +28,10 @@ const CreateAdvertisementEditArea: FC<Props> = ({
     setCriterias,
     className,
 }) => {
+    const getAdvConditionsTemplatesQuery = useGetAdvTemplates("conditions");
+    const getAdvInstructionsTemplatesQuery = useGetAdvTemplates("instructions");
+    const getAdvReviewsTemplatesQuery = useGetAdvTemplates("reviewsCriteria");
+
     const showModal = useModalStore(showModalSelector);
     const setTemplateEditType = useCreateAdvertisement(
         setTemplateEditTypeSelector,

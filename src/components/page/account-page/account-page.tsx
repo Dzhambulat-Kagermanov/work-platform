@@ -46,8 +46,8 @@ const AccountPageContent: FC<Props> = ({ className }) => {
                 <div className={cn(cls.half)}>
                     <AccountBalance className={cn(cls.balance)} balance={1} />
                     {/* <AccountNotifications
-                    className={cn(cls.notifications)}
-                /> */}
+                        className={cn(cls.notifications)}
+                    /> */}
                     <AccountStatistic
                         className={cn(cls.statistic)}
                         cashbackPaid={statistic?.cashback_paid ?? 0}
