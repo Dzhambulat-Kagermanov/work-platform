@@ -6,6 +6,10 @@
         height: 10px;
     }
 }
+.stub {
+    align-self: center;
+    margin: auto 0;
+}
 .wrapper {
     box-shadow: 3px 0 5px 0 var(--black-opacity-10);
     z-index: var(--burger-menu-z);

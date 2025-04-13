@@ -58,7 +58,16 @@ const NotificationMenu: FC<Props> = ({ className }) => {
                                 );
                             })}
                         </ul>
-                    ) : null}
+                    ) : (
+                        <Typography
+                            font="Inter-R"
+                            tag="h2"
+                            size={18}
+                            className={cls.stub}
+                        >
+                            У вас пока нет уведомлений
+                        </Typography>
+                    )}
                 </section>
             )}
         </PortalWrapper>
