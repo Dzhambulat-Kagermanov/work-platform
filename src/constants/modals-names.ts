@@ -34,3 +34,5 @@ export const SALESMAN_NOTIFICATIONS_MODAL = "salesman-notifications";
 export const UNAUTHENTICATED_MODAL = "unauthenticated";
 export const SALESMAN_CREATE_ADVERTISEMENT_TEMPLATE_EDIT_MODAL =
     "salesman-create-advertisement-template-edit";
+export const SALESMAN_EDIT_ADVERTISEMENT_TEMPLATE_EDIT_MODAL =
+    "salesman-edit-advertisement-template-edit";

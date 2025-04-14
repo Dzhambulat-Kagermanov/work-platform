@@ -12,6 +12,7 @@
     border: 1px solid var(--white-200);
     display: inline-flex;
     justify-content: space-between;
+    column-gap: 5px;
     align-items: center;
     margin: 6px 0 9px 0;
     border-radius: var(--blocks-radius);
@@ -27,5 +28,19 @@
     transition: var(--tran-low);
     &:disabled {
         opacity: 0.5;
+    }
+}
+.input {
+    background-color: transparent;
+    font-family: Inter;
+    font-weight: normal;
+    font-size: 17px;
+    width: 60px;
+    text-align: center;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        /* display: none; <- Crashes Chrome on hover */
+        -webkit-appearance: none;
+        margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
     }
 }

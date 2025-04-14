@@ -51,6 +51,7 @@ type Product = {
     completed_buybacks_count?: number;
     cr: number;
     in_favorite?: number;
+    product_id: number;
 } & Timestamps;
 
 export default Product;

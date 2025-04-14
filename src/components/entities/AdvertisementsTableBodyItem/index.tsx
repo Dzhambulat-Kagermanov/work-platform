@@ -22,7 +22,7 @@ const AdvertisementsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
     const selectedAds = useSellerStore(adsIdsSelector);
     const removeSelectedAd = useSellerStore(removeAdIdSelector);
     const addSelectedAd = useSellerStore(addAdIdSelector);
-    const checked = selectedAds.some((el) => el === item.id);
+    const checked = selectedAds.some((el) => el.adsId === item.id);
     const { mutate: stopProductsMutate, isPending } = useStopAdsMutation();
 
     const handleChange = () => {
@@ -31,7 +31,7 @@ const AdvertisementsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
             return;
         }
 
-        addSelectedAd(item.id);
+        addSelectedAd({ adsId: item.id, productId: item.product_id });
     };
 
     const handleToggle = () => {
@@ -108,7 +108,7 @@ const AdvertisementsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
             {/* КЭШБЕК */}
             <td className={cn(cls.column, [cls.cashback, columnCls])}>
                 <DiscountPlaque customContent={(num) => `${num}%`}>
-                    {item.cashback_percentage}
+                    {+item.cashback_percentage}
                 </DiscountPlaque>
                 <DiscountPlaque
                     customContent={(num) => `${num} Р`}

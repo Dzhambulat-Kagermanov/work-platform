@@ -1,6 +1,7 @@
 import axios from "@/axios";
 import { queryStringHandler } from "@/handlers";
 import { PaginationData, Shop } from "@/types/api";
+import Ad from "@/types/api/Ad";
 import Product, { WbProduct } from "@/types/api/Product";
 import { TTemplate } from "@/types/api/Template";
 import { QueryItem } from "@/types/client";
@@ -42,6 +43,24 @@ class SellerService {
         const res = await axios.get<PaginationData<WbProduct[]>>(
             `/seller/products${queryStringHandler(query)}`,
         );
+
+        return res.data;
+    }
+    async updateAdv({
+        id,
+        ...body
+    }: Pick<
+        Ad,
+        | "id"
+        | "name"
+        | "cashback_percentage"
+        | "order_conditions"
+        | "review_criteria"
+        | "one_per_user"
+        | "is_archived"
+        | "redemption_instructions"
+    >) {
+        const res = await axios.patch(`/seller/ads/${id}`, body);
 
         return res.data;
     }
@@ -127,8 +146,8 @@ class SellerService {
         );
         return res.data;
     }
-    async getAd(id: number) {
-        const res = await axios.get<Product>(`/seller/ads/${id}`);
+    async getAd(id: Ad["id"]) {
+        const res = await axios.get<Ad>(`/seller/ads/${id}`);
         return res.data;
     }
     async archiveAds(data: AdsIdsData) {

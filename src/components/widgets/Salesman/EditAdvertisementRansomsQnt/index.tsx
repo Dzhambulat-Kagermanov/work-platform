@@ -1,13 +1,23 @@
 "use client";
-import { FC, MouseEventHandler, useState } from "react";
-import { TClassName } from "@/types";
+import { FC, MouseEventHandler } from "react";
+import { TClassName, TState } from "@/types";
 import { cn } from "@/lib";
 import { Typography } from "@/components/ui";
 import cls from "./index.module.scss";
+import { useGetBalanceQuery } from "@/hooks/api/auth";
 
-interface Props extends TClassName {}
-const EditAdvertisementRansomsQnt: FC<Props> = ({ className }) => {
-    const [count, setCount] = useState<number>(0);
+interface Props extends TClassName {
+    count: number;
+    setCount: TState<number>;
+}
+const EditAdvertisementRansomsQnt: FC<Props> = ({
+    className,
+    count,
+    setCount,
+}) => {
+    const { data: balance } = useGetBalanceQuery();
+
+    const availableRedemptions = balance?.redemption_count ?? 0;
 
     const handleMinus: MouseEventHandler = () => {
         setCount((cur) => cur - 1);
@@ -31,9 +41,15 @@ const EditAdvertisementRansomsQnt: FC<Props> = ({ className }) => {
                         -
                     </Typography>
                 </button>
-                <Typography font="Inter-R" size={17} tag="span">
-                    {count}
-                </Typography>
+
+                <input
+                    type="number"
+                    value={count}
+                    className={cls.input}
+                    onChange={(event) => {
+                        setCount(+event.target.value);
+                    }}
+                />
                 <button
                     onClick={handlePlus}
                     className={cn(cls.btn, [cls.plus])}
@@ -44,7 +60,7 @@ const EditAdvertisementRansomsQnt: FC<Props> = ({ className }) => {
                 </button>
             </div>
             <Typography font="Inter-R" size={12} tag="h3">
-                Доступно выкупов = 0 шт
+                Доступно выкупов = {availableRedemptions} шт
             </Typography>
         </section>
     );

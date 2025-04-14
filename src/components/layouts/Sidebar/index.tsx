@@ -29,6 +29,10 @@ const SidebarLayout: FC<Props> = ({ children }) => {
         path,
         `${ROUTES.SALESMAN.CREATE_ADVERTISEMENTS}/?`,
     );
+    const isSalesmanEditAdvertisementPath = pathValidating(
+        path,
+        `${ROUTES.SALESMAN.EDIT_ADVERTISEMENTS}/?`,
+    );
     const isSalesmanProfilePath = pathValidating(
         path,
         `${ROUTES.SALESMAN.SALESMAN_PROFILE}/?`,
@@ -58,7 +62,8 @@ const SidebarLayout: FC<Props> = ({ children }) => {
                             isBuyerProfilePath ||
                             isSalesmanProfilePath ||
                             isTariffsPath ||
-                            isSalesmanCreateAdvertisementPath,
+                            isSalesmanCreateAdvertisementPath ||
+                            isSalesmanEditAdvertisementPath,
                     })}
                 >
                     {children}

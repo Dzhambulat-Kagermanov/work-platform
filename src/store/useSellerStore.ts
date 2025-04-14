@@ -1,15 +1,15 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-type IdsData = Record<"productsIds" | "adsIds", number[]>;
-
 type SellerItemsFilter = "all" | "archived" | "stop" | "active";
 
-type SellerStore = {} & IdsData &
+type SellerStore = {} & Record<"productsIds", number[]> &
+    Record<"adsIds", { adsId: number; productId: number }[]> &
     Record<
-        "addProductId" | "removeProductId" | "addAdId" | "removeAdId",
+        "addProductId" | "removeAdId" | "removeProductId",
         (id: number) => void
     > &
+    Record<"addAdId", (params: { adsId: number; productId: number }) => void> &
     Record<"resetStore" | "resetProductIds" | "resetAdIds", () => void> &
     Record<"productsSearch" | "adsSearch", string> &
     Record<"setProductsSearch" | "setAdsSearch", (value: string) => void>;
@@ -38,11 +38,13 @@ const useSellerStore = create<SellerStore>()(
                 productsIds: [...get().productsIds.filter((el) => el !== id)],
             });
         },
-        addAdId: (id) => {
-            set({ adsIds: [...get().adsIds, id] });
+        addAdId: (params) => {
+            set({ adsIds: [...get().adsIds, params] });
         },
         removeAdId: (id) => {
-            set({ adsIds: [...get().adsIds.filter((el) => el !== id)] });
+            set({
+                adsIds: [...get().adsIds.filter((el) => el.adsId !== id)],
+            });
         },
         resetProductIds: () => {
             set({ productsIds: [] });

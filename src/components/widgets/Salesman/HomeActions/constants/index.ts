@@ -1,5 +1,5 @@
 import { TActionItemProps } from "@/components/ui/Action";
-import { SALESMAN_ADVERTISEMENT_ARCHIVE_MODAL } from "@/constants";
+import { ROUTES, SALESMAN_ADVERTISEMENT_ARCHIVE_MODAL } from "@/constants";
 import { TSalesmanHomePageType } from "../../HomePagesSwitcher";
 import { useSellerStore } from "@/store";
 import { adsIdsSelector, productIdsSelector } from "@/store/useSellerStore";
@@ -9,6 +9,7 @@ import {
     useStopProductsMutation,
 } from "@/hooks/api/seller";
 import useArchiveProductsMutation from "@/hooks/api/seller/useArchiveProductsMutation";
+import { useRouter } from "next/navigation";
 
 export const ACTION_CONTENT: (
     showModal: (param: { slug: string }) => void,
@@ -16,7 +17,7 @@ export const ACTION_CONTENT: (
 ) => TActionItemProps[][] = (showModal, homePageType) => {
     const selectedProducts = useSellerStore(productIdsSelector);
     const selectedAds = useSellerStore(adsIdsSelector);
-
+    const router = useRouter();
     const { mutate: stopProductsMutate, isPending: stopProductsPending } =
         useStopProductsMutation();
     const { mutate: archiveProductsMutate, isPending: archiveProductsPending } =
@@ -41,7 +42,7 @@ export const ACTION_CONTENT: (
     };
 
     const adsData = {
-        ad_ids: selectedAds,
+        ad_ids: selectedAds.map((el) => el.adsId),
     };
 
     return homePageType === null
@@ -133,6 +134,19 @@ export const ACTION_CONTENT: (
                       },
                       text: "Архивировать",
                       disabled: disabledAds,
+                  },
+                  {
+                      onClick: () => {
+                          if (selectedAds.length > 1) {
+                              return;
+                          }
+
+                          router.push(
+                              `${ROUTES.SALESMAN.EDIT_ADVERTISEMENTS}?selectedWbItem=${selectedAds[0].productId}&editAdv=${selectedAds[0].adsId}`,
+                          );
+                      },
+                      text: "Редактировать",
+                      disabled: selectedAds.length > 1,
                   },
               ],
               [

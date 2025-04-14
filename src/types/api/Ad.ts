@@ -8,14 +8,14 @@ type Ad = {
     id: number;
     product_id: number;
     name: string;
-    cashback_percentage: number;
+    cashback_percentage: string;
     price_with_cashback: number;
     order_conditions: string;
     redemption_instructions: string;
     review_criteria: string;
     redemption_count: number;
     views_count: number;
-    one_per_user: number;
+    one_per_user: number | boolean;
     is_archived: number;
     status: number;
     balance: string;

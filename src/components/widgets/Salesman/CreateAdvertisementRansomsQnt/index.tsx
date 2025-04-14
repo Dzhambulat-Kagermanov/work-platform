@@ -1,6 +1,6 @@
 "use client";
-import { FC, MouseEventHandler, useState } from "react";
-import { TClassName } from "@/types";
+import { FC, MouseEventHandler } from "react";
+import { TClassName, TState } from "@/types";
 import { cn } from "@/lib";
 import { Typography } from "@/components/ui";
 import cls from "./index.module.scss";
@@ -8,7 +8,7 @@ import { useGetBalanceQuery } from "@/hooks/api/auth";
 
 interface Props extends TClassName {
     count: number;
-    setCount: React.Dispatch<React.SetStateAction<number>>;
+    setCount: TState<number>;
 }
 const CreateAdvertisementRansomsQnt: FC<Props> = ({
     className,

@@ -23,7 +23,7 @@ const ActionArchive: FC<Props> = ({ className, setStep }) => {
     const handleConfirm: MouseEventHandler = () => {
         archiveAdsMutate(
             {
-                ad_ids: selectedAds,
+                ad_ids: selectedAds.map((el) => el.adsId),
             },
             {
                 onSuccess: () => {
