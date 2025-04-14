@@ -25,6 +25,9 @@ interface Props extends TClassName {
     homePageType: TSalesmanHomePageType;
 }
 const HomeActions: FC<Props> = ({ className, homePageType }) => {
+    const [actionsIsExpand, setActionsIsExpand] = useState<boolean>(false);
+    const [productsIsExpand, setProductsIsExpand] = useState<boolean>(false);
+
     const setProductsSearch = useSellerStore(setProductsSearchSelector);
     const setAdsSearch = useSellerStore(setAdsSearchSelector);
 
@@ -91,11 +94,27 @@ const HomeActions: FC<Props> = ({ className, homePageType }) => {
                             className={cn(cls.action)}
                             actionBtnText="Действия"
                             actions={actionContent[0]}
+                            expandState={actionsIsExpand}
+                            onExpand={() => {
+                                setActionsIsExpand((cur) => !cur);
+                                setProductsIsExpand(false);
+                            }}
+                            onClose={() => {
+                                setActionsIsExpand(false);
+                            }}
                         />
                         <Action
                             className={cn(cls.action)}
                             actionBtnText="Все товары"
                             actions={actionContent[1]}
+                            expandState={productsIsExpand}
+                            onExpand={() => {
+                                setProductsIsExpand((cur) => !cur);
+                                setActionsIsExpand(false);
+                            }}
+                            onClose={() => {
+                                setProductsIsExpand(false);
+                            }}
                         />
                     </div>
                     <Input

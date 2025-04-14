@@ -18,21 +18,33 @@ interface Props extends TClassName {
     disabled?: boolean;
     actions: TActionItemProps[];
     actionBtnText: string;
+    expandState?: boolean;
+    onExpand?: () => void;
+    onClose?: () => void;
 }
-const Action: FC<Props> = ({ actionBtnText, actions, className, disabled }) => {
+const Action: FC<Props> = ({
+    actionBtnText,
+    actions,
+    className,
+    disabled,
+    expandState,
+    onExpand,
+    onClose,
+}) => {
     const [isExpand, setIsExpand] = useState<boolean>(false);
 
     const handleBtnClick: MouseEventHandler = () => {
-        setIsExpand((cur) => !cur);
+        onExpand ? onExpand() : setIsExpand((cur) => !cur);
     };
     const handleLinkClick: MouseEventHandler = () => {
-        setIsExpand(false);
+        onClose ? onClose() : setIsExpand(false);
     };
 
     return (
         <div
             className={cn(cls.wrapper, [className], {
-                [cls.expand]: isExpand,
+                [cls.expand]:
+                    expandState !== undefined ? expandState : isExpand,
             })}
         >
             <button

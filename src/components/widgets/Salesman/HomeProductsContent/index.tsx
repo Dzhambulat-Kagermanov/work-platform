@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import cls from "./index.module.scss";
@@ -10,13 +10,13 @@ import { usePagination } from "@/hooks/client";
 import { useSellerStore } from "@/store";
 import { productsSearchSelector } from "@/store/useSellerStore";
 import toast from "react-hot-toast";
-import { Info } from "lucide-react";
 
 interface Props extends TClassName {}
 const HomeProductsContent: FC<Props> = ({ className }) => {
     const { pagination, setPagination } = usePagination();
 
     const productsSearch = useSellerStore(productsSearchSelector);
+    console.log(productsSearch);
 
     const query = () => {
         const res = [];
@@ -31,7 +31,15 @@ const HomeProductsContent: FC<Props> = ({ className }) => {
         return res;
     };
 
-    const { data: products, isLoading } = useGetSellerProductsQuery(query());
+    const {
+        data: products,
+        isLoading,
+        refetch,
+    } = useGetSellerProductsQuery(query());
+
+    useEffect(() => {
+        if (productsSearch) refetch();
+    }, [productsSearch]);
 
     if (isLoading) {
         return <PageLoader />;

@@ -6,15 +6,14 @@ import { cn } from "@/lib";
 import Link from "next/link";
 import { TSalesmanHomePageType } from "..";
 import cls from "./index.module.scss";
-import { PlusIcon } from "@/icons";
 import { useScreen } from "@/hooks";
-import { SM_MID } from "@/constants";
 
 interface Props extends TClassName {
     slug?: TSalesmanHomePageType;
     text: string;
     activeSlug: TSalesmanHomePageType;
     selectedProducts: number;
+    onClick?: () => void;
 }
 const Item: FC<Props> = ({
     activeSlug,
@@ -22,11 +21,15 @@ const Item: FC<Props> = ({
     text,
     className,
     selectedProducts,
+    onClick,
 }) => {
     const width = useScreen();
     const handleClick: MouseEventHandler = () => {};
     return (
         <Typography
+            other={{
+                onClick,
+            }}
             font="Inter-SB"
             size={14}
             className={cn(cls.wrapper, [className], {

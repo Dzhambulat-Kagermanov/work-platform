@@ -1,55 +1,57 @@
-import { FC } from "react"
-import { TClassName } from "@/types"
-import { AdvertisementsTableBodyItem } from "@/components/entities/AdvertisementsTableBodyItem"
-import { cn } from "@/lib"
-import { HomeTable } from "../HomeTable"
-import { Typography } from "@/components/ui"
-import cls from "./index.module.scss"
-import { useGetAdsListQuery } from "@/hooks/api/seller"
-import { PageLoader } from "@/components/ui/loaders"
-import { PageErrorStub } from "@/components/ui/page-error-stub"
-import { usePagination } from "@/hooks/client"
-import { useSellerStore } from "@/store"
-import { adsSearchSelector } from "@/store/useSellerStore"
+import { FC, useEffect } from "react";
+import { TClassName } from "@/types";
+import { AdvertisementsTableBodyItem } from "@/components/entities/AdvertisementsTableBodyItem";
+import { cn } from "@/lib";
+import { HomeTable } from "../HomeTable";
+import { Typography } from "@/components/ui";
+import cls from "./index.module.scss";
+import { useGetAdsListQuery } from "@/hooks/api/seller";
+import { PageLoader } from "@/components/ui/loaders";
+import { PageErrorStub } from "@/components/ui/page-error-stub";
+import { usePagination } from "@/hooks/client";
+import { useSellerStore } from "@/store";
+import { adsSearchSelector } from "@/store/useSellerStore";
 
-interface Props extends TClassName { }
+interface Props extends TClassName {}
 const HomeAdvertisementsContent: FC<Props> = ({ className }) => {
-    const adsSearch = useSellerStore(adsSearchSelector)
+    const adsSearch = useSellerStore(adsSearchSelector);
 
     const query = () => {
-
-        const res = []
+        const res = [];
 
         if (adsSearch) {
             res.push({
                 key: "search",
                 value: adsSearch,
-            })
+            });
         }
 
-        return res
+        return res;
+    };
 
-    }
-
-
-    const { pagination, setPagination } = usePagination()
+    const { pagination, setPagination } = usePagination();
 
     const {
         data: adveritsements,
         isLoading,
         isError,
-    } = useGetAdsListQuery(query())
+        refetch,
+    } = useGetAdsListQuery(query());
+
+    useEffect(() => {
+        if (adsSearch) refetch();
+    }, [adsSearch]);
 
     if (isLoading) {
-        return <PageLoader />
+        return <PageLoader />;
     }
 
     if (!adveritsements || isError) {
-        return <PageErrorStub />
+        return <PageErrorStub />;
     }
 
     if (!adveritsements.data.length) {
-        return <PageErrorStub text="Объявления не найдены" />
+        return <PageErrorStub text="Объявления не найдены" />;
     }
 
     return (
@@ -86,7 +88,7 @@ const HomeAdvertisementsContent: FC<Props> = ({ className }) => {
             tableCls={cn(cls.table)}
             tableWrapperCls={cn(cls.table_wrapper)}
         />
-    )
-}
+    );
+};
 
-export { HomeAdvertisementsContent }
+export { HomeAdvertisementsContent };
