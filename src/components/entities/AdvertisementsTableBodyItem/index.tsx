@@ -10,6 +10,7 @@ import {
     adsIdsSelector,
     removeAdIdSelector,
 } from "@/store/useSellerStore";
+import { useStopAdsMutation } from "@/hooks/api/seller";
 
 interface Props {
     columnCls?: string;
@@ -17,19 +18,40 @@ interface Props {
 }
 const AdvertisementsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
     const [date] = useState(dateParserHandler(item.created_at));
-
+    const [toggle, setToggle] = useState(!item.is_archived);
     const selectedAds = useSellerStore(adsIdsSelector);
     const removeSelectedAd = useSellerStore(removeAdIdSelector);
     const addSelectedAd = useSellerStore(addAdIdSelector);
     const checked = selectedAds.some((el) => el === item.id);
+    const { mutate: stopProductsMutate, isPending } = useStopAdsMutation();
 
-    const handeChange = () => {
+    const handleChange = () => {
         if (checked) {
             removeSelectedAd(item.id);
             return;
         }
 
         addSelectedAd(item.id);
+    };
+
+    const handleToggle = () => {
+        if (isPending) {
+            return;
+        }
+
+        stopProductsMutate(
+            {
+                ad_ids: [item.id],
+            },
+            {
+                onSuccess: () => {
+                    // queryClient.invalidateQueries({
+                    //     queryKey: ADS_LIST_QUERY_KEY,
+                    // });
+                    setToggle(!toggle);
+                },
+            },
+        );
     };
 
     return (
@@ -40,7 +62,7 @@ const AdvertisementsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
                     <Checkbox
                         className={cn(cls.checkbox)}
                         checked={checked}
-                        onChange={handeChange}
+                        onChange={handleChange}
                     />
                     <div className={cn(cls.info)}>
                         <Typography font="Inter-M" tag="h2" size={14}>
@@ -55,6 +77,8 @@ const AdvertisementsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
             {/* СТАТУС */}
             <td className={cn(cls.column, [cls.status, columnCls])}>
                 <Toggle
+                    checked={toggle}
+                    onChange={handleToggle}
                     className={cn(cls.toggle)}
                     defaultChecked={!!item.status}
                 />

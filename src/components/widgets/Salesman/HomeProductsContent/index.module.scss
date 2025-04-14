@@ -1,3 +1,17 @@
 .table {
     min-width: 1300px;
 }
+.tooltip {
+    display: flex;
+    align-items: center;
+    column-gap: 3px;
+    line-height: 90%;
+    button {
+        font-size: 10px;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        border: 1px solid var(--purple-300);
+        line-height: 50%;
+    }
+}

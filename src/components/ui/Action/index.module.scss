@@ -55,6 +55,10 @@
             transition: var(--tran-low);
         }
     }
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
 }
 .expand {
     .actions_overlay {

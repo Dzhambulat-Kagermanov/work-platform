@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { devtools } from "zustand/middleware";
 
 type IdsData = Record<"productsIds" | "adsIds", number[]>;
 
@@ -20,38 +21,40 @@ const DEFAULT_STATE = {
     adsIds: [],
 };
 
-const useSellerStore = create<SellerStore>((set, get) => ({
-    ...DEFAULT_STATE,
-    setProductsSearch: (productsSearch) => {
-        set({ productsSearch });
-    },
-    setAdsSearch: (adsSearch) => {
-        set({ adsSearch });
-    },
-    addProductId: (id) => {
-        set({ productsIds: [...get().productsIds, id] });
-    },
-    removeProductId: (id) => {
-        set({
-            productsIds: [...get().productsIds.filter((el) => el !== id)],
-        });
-    },
-    addAdId: (id) => {
-        set({ adsIds: [...get().adsIds, id] });
-    },
-    removeAdId: (id) => {
-        set({ adsIds: [...get().adsIds.filter((el) => el !== id)] });
-    },
-    resetProductIds: () => {
-        set({ productsIds: [] });
-    },
-    resetAdIds: () => {
-        set({ adsIds: [] });
-    },
-    resetStore: () => {
-        set({ ...DEFAULT_STATE });
-    },
-}));
+const useSellerStore = create<SellerStore>()(
+    devtools((set, get) => ({
+        ...DEFAULT_STATE,
+        setProductsSearch: (productsSearch) => {
+            set({ productsSearch });
+        },
+        setAdsSearch: (adsSearch) => {
+            set({ adsSearch });
+        },
+        addProductId: (id) => {
+            set({ productsIds: [...get().productsIds, id] });
+        },
+        removeProductId: (id) => {
+            set({
+                productsIds: [...get().productsIds.filter((el) => el !== id)],
+            });
+        },
+        addAdId: (id) => {
+            set({ adsIds: [...get().adsIds, id] });
+        },
+        removeAdId: (id) => {
+            set({ adsIds: [...get().adsIds.filter((el) => el !== id)] });
+        },
+        resetProductIds: () => {
+            set({ productsIds: [] });
+        },
+        resetAdIds: () => {
+            set({ adsIds: [] });
+        },
+        resetStore: () => {
+            set({ ...DEFAULT_STATE });
+        },
+    })),
+);
 
 export default useSellerStore;
 

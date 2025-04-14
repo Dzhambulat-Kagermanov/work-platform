@@ -15,6 +15,8 @@ import { ACTION_CONTENT } from "./constants";
 import cls from "./index.module.scss";
 import { useDebounce } from "use-debounce";
 import {
+    adsIdsSelector,
+    productIdsSelector,
     setAdsSearchSelector,
     setProductsSearchSelector,
 } from "@/store/useSellerStore";
@@ -25,6 +27,9 @@ interface Props extends TClassName {
 const HomeActions: FC<Props> = ({ className, homePageType }) => {
     const setProductsSearch = useSellerStore(setProductsSearchSelector);
     const setAdsSearch = useSellerStore(setAdsSearchSelector);
+
+    const productsIds = useSellerStore(productIdsSelector);
+    const adsIds = useSellerStore(adsIdsSelector);
 
     const [search, setSearch] = useState("");
     const [searchDebounce, setSearchDebounce] = useDebounce(search, 600);
@@ -58,7 +63,6 @@ const HomeActions: FC<Props> = ({ className, homePageType }) => {
             {homePageType !== "ransoms" && (
                 <div className={cn(cls.wrapper, [className])}>
                     <div className={cn(cls.content)}>
-                        {/*@ts-ignore*/}
                         <Button
                             onClick={
                                 homePageType === null
@@ -79,6 +83,11 @@ const HomeActions: FC<Props> = ({ className, homePageType }) => {
                             {homePageType === null ? "товар" : "объявление"}
                         </Button>
                         <Action
+                            disabled={
+                                (homePageType === "advertisements" &&
+                                    !adsIds.length) ||
+                                (homePageType === null && !productsIds.length)
+                            }
                             className={cn(cls.action)}
                             actionBtnText="Действия"
                             actions={actionContent[0]}

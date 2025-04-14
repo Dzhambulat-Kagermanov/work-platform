@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
-import { PRODUCTS } from "./constants/products";
 import cls from "./index.module.scss";
 import { HomeTable } from "../HomeTable";
 import { ProductsTableBodyItem } from "@/components/entities/ProductsTableBodyItem";
@@ -10,7 +9,8 @@ import { PageLoader } from "@/components/ui/loaders";
 import { usePagination } from "@/hooks/client";
 import { useSellerStore } from "@/store";
 import { productsSearchSelector } from "@/store/useSellerStore";
-import { QueryItem } from "@/types/client";
+import toast from "react-hot-toast";
+import { Info } from "lucide-react";
 
 interface Props extends TClassName {}
 const HomeProductsContent: FC<Props> = ({ className }) => {
@@ -52,7 +52,16 @@ const HomeProductsContent: FC<Props> = ({ className }) => {
             ))}
             head={[
                 "Товар",
-                "Статус",
+                <span className={cls.tooltip}>
+                    Статус{" "}
+                    <button
+                        onClick={() => {
+                            toast.error("Отключает все активные объявления");
+                        }}
+                    >
+                        ?
+                    </button>
+                </span>,
                 "Выкупов",
                 "Просмотры",
                 "Выкупы",

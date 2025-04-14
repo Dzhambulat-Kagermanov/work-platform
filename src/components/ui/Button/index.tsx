@@ -6,7 +6,7 @@ import cls from "./index.module.scss";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement>, TTag {
     theme: "fill" | "outline" | "cancel";
-    children: string;
+    children: string | string[];
     size?: "big" | "mid" | "low";
     wFull?: boolean;
     primaryColor?: string;

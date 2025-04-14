@@ -15,10 +15,11 @@ export type TActionItemProps = {
 };
 
 interface Props extends TClassName {
+    disabled?: boolean;
     actions: TActionItemProps[];
     actionBtnText: string;
 }
-const Action: FC<Props> = ({ actionBtnText, actions, className }) => {
+const Action: FC<Props> = ({ actionBtnText, actions, className, disabled }) => {
     const [isExpand, setIsExpand] = useState<boolean>(false);
 
     const handleBtnClick: MouseEventHandler = () => {
@@ -34,8 +35,16 @@ const Action: FC<Props> = ({ actionBtnText, actions, className }) => {
                 [cls.expand]: isExpand,
             })}
         >
-            <button className={cn(cls.actions_btn)} onClick={handleBtnClick}>
-                <Typography className="overflow-hidden text-ellipsis whitespace-nowrap" font="Inter-SB" size={14}>
+            <button
+                className={cn(cls.actions_btn)}
+                onClick={handleBtnClick}
+                disabled={disabled}
+            >
+                <Typography
+                    className="overflow-hidden text-ellipsis whitespace-nowrap"
+                    font="Inter-SB"
+                    size={14}
+                >
                     {actionBtnText}
                 </Typography>
                 <ExpandArrowIcon
