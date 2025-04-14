@@ -2,6 +2,7 @@ import axios from "@/axios";
 import { queryStringHandler } from "@/handlers";
 import { PaginationData, Shop } from "@/types/api";
 import Product, { WbProduct } from "@/types/api/Product";
+import { TTemplate } from "@/types/api/Template";
 import { QueryItem } from "@/types/client";
 
 export type AddWbProductData = {
@@ -68,23 +69,25 @@ class SellerService {
     }
 
     async getAdvConditionsTemplates() {
-        const res = await axios.get("/template/order_conditions");
+        const res = await axios.get<TTemplate>("/template/order_conditions");
 
         return res.data;
     }
     async getAdvInstructionsTemplates() {
-        const res = await axios.get("/template/redemption_instructions");
+        const res = await axios.get<TTemplate>(
+            "/template/redemption_instructions",
+        );
 
         return res.data;
     }
     async getAdvReviewsTemplates() {
-        const res = await axios.get("/template/review_criteria");
+        const res = await axios.get<TTemplate>("/template/review_criteria");
 
         return res.data;
     }
 
     async stopProducts(data: ProductIdsData) {
-        const res = await axios.post("/seller/product/stop", data);
+        const res = await axios.post("/seller/products/stop", data);
         return res;
     }
     async archiveProducts(data: ProductIdsData) {

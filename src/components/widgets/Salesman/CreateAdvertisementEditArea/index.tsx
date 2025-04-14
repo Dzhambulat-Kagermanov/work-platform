@@ -24,8 +24,8 @@ const CreateAdvertisementEditArea: FC<Props> = ({
     setConditions,
     instructions,
     setInstructions,
-    criterias,
-    setCriterias,
+    criterias: criteria,
+    setCriterias: setCriteria,
     className,
 }) => {
     const getAdvConditionsTemplatesQuery = useGetAdvTemplates("conditions");
@@ -55,9 +55,14 @@ const CreateAdvertisementEditArea: FC<Props> = ({
                     <Button
                         size="mid"
                         onClick={() => {
-                            setConditions(
-                                conditions + "\nШаблон для условий заказа",
-                            );
+                            if (getAdvConditionsTemplatesQuery.data?.text)
+                                setConditions(
+                                    conditions
+                                        ? conditions +
+                                              `\n${getAdvConditionsTemplatesQuery.data.text}`
+                                        : getAdvConditionsTemplatesQuery.data
+                                              .text,
+                                );
                         }}
                         theme="fill"
                         className={cls.btn}
@@ -96,9 +101,14 @@ const CreateAdvertisementEditArea: FC<Props> = ({
                     <Button
                         size="mid"
                         onClick={() => {
-                            setInstructions(
-                                instructions + "\nШаблон для инструкций выкупа",
-                            );
+                            if (getAdvInstructionsTemplatesQuery.data?.text)
+                                setInstructions(
+                                    instructions
+                                        ? instructions +
+                                              `\n${getAdvInstructionsTemplatesQuery.data.text}`
+                                        : getAdvInstructionsTemplatesQuery.data
+                                              .text,
+                                );
                         }}
                         theme="fill"
                         className={cls.btn}
@@ -125,8 +135,8 @@ const CreateAdvertisementEditArea: FC<Props> = ({
                     textareaCls={cn(cls.textarea)}
                     label="Критерии отзыва:"
                     wrapperCls={cn(cls.textarea_wrapper)}
-                    value={criterias}
-                    onChange={(e) => setCriterias(e.target.value)}
+                    value={criteria}
+                    onChange={(e) => setCriteria(e.target.value)}
                 />
                 <div className={cls.info}>
                     <Typography font="Inter-R" size={12}>
@@ -138,9 +148,13 @@ const CreateAdvertisementEditArea: FC<Props> = ({
                         theme="fill"
                         className={cls.btn}
                         onClick={() => {
-                            setCriterias(
-                                criterias + "\nШаблон для критериев отзыва",
-                            );
+                            if (getAdvReviewsTemplatesQuery.data?.text)
+                                setCriteria(
+                                    criteria
+                                        ? criteria +
+                                              `\n${getAdvReviewsTemplatesQuery.data.text}`
+                                        : getAdvReviewsTemplatesQuery.data.text,
+                                );
                         }}
                     >
                         Вставить шаблон
