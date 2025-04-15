@@ -15,6 +15,8 @@ import { useCreateAdvMutation } from "@/hooks/api/seller";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/constants";
 import { CreateAdvertisementTemplateEditModal } from "@/components/widgets/Salesman/CreateAdvertisementTemplateEditModal";
+import { useQueryClient } from "@tanstack/react-query";
+import { ADS_LIST_QUERY_KEY } from "@/hooks/api/seller/useGetAdsListQuery";
 
 type CreateEditAdvertisementPageProps = {
     currentAdv?: any;
@@ -24,6 +26,7 @@ type CreateEditAdvertisementPageProps = {
 const CreateEditAdvertisementPage: React.FC<
     CreateEditAdvertisementPageProps
 > = ({ currentAdv, product }) => {
+    const queryClient = useQueryClient();
     const router = useRouter();
     const { mutate: createAdvMutate, isPending: isAdvCreatePending } =
         useCreateAdvMutation();
@@ -56,6 +59,9 @@ const CreateEditAdvertisementPage: React.FC<
         if (!currentAdv) {
             createAdvMutate(data, {
                 onSuccess: () => {
+                    queryClient.invalidateQueries({
+                        queryKey: ADS_LIST_QUERY_KEY,
+                    });
                     router.push(
                         `${ROUTES.SALESMAN.MAIN}?homePageType=advertisements`,
                     );

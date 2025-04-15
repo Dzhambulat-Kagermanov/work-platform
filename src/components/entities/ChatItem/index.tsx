@@ -6,7 +6,6 @@ import { Typography } from "@/components/ui";
 import { ChatAvatarItem } from "../ChatAvatarItem";
 import cls from "./index.module.scss";
 import { Message, Order } from "@/types/api";
-import { useProfile, userIdSelector } from "@/store/useProfile";
 import { chatPusherConfig, pusherClient } from "@/utils/pusher-client";
 
 interface Props extends TClassName, TTag, TChatPlaqueProps {

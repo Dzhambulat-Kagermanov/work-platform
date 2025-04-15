@@ -8,7 +8,6 @@ import { Chats } from "./Chats";
 import { MobileSwitcher } from "./MobileSwitcher";
 import cls from "./index.module.scss";
 import { ChatStatus } from "@/types/api";
-import { useGetChatListQuery } from "@/hooks/api/chat";
 import { useDebounce } from "use-debounce";
 
 interface Props extends TClassName {

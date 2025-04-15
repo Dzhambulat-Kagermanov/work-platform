@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { TClassName, TState } from "@/types";
+import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { ActionsArea } from "./ActionsArea";
 import { MessagesArea } from "./MessagesArea";

@@ -1,9 +1,9 @@
 import { apiService } from "@/services";
 import { useQuery } from "@tanstack/react-query";
 
-export const GET_SALESMAN_ORDERS = (buybackId: number) => [
-    "salesman",
-    `order-${buybackId}`,
+export const GET_SALESMAN_ORDERS = (id?: number) => [
+    "order-detail",
+    `order-detail-${id}`,
 ];
 
 export const useGetSalesmanOrder = ({ buybackId }: { buybackId: number }) =>

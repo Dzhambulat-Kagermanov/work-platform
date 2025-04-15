@@ -45,6 +45,7 @@ const ActionsArea: FC<Props> = ({ className, activeId, role }) => {
         <form className={cn(cls.wrapper, [className])} onSubmit={handleSubmit}>
             <ViewChatPlus className={cn(cls.plus_btn)} />
             <Input
+                contentCls={cls.inp_content}
                 value={message}
                 wrapperCls={cn(cls.inp_wrapper)}
                 inpCls={cn(cls.inp)}
@@ -53,7 +54,10 @@ const ActionsArea: FC<Props> = ({ className, activeId, role }) => {
                     setMessage(event.target.value);
                 }}
             />
-            <ViewChatSendMessage className={cn(cls.send_btn)} />
+            <ViewChatSendMessage
+                className={cn(cls.send_btn)}
+                disabled={!message}
+            />
         </form>
     );
 };

@@ -23,7 +23,7 @@ class OrdersService {
     }
 
     async getSalesmanOrder(buybackId?: number) {
-        const res = await axios.get<Order>(`/messages/${buybackId}`);
+        const res = await axios.get<Order>(`/seller/buybacks/${buybackId}`);
         return res.data;
     }
 

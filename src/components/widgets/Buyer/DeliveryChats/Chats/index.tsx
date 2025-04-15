@@ -12,6 +12,7 @@ import {
     addBuyerMessageSelector,
     buyerActiveChatSelector,
     initBuyerChatsSelector,
+    isMobileVersionSelector,
     setBuyerActiveChatSelector,
     updateBuyerDataSelector,
     useChat,
@@ -26,6 +27,7 @@ const Chats: FC<Props> = ({ className, chatType, search }) => {
     const setActiveChatId = useChat(setBuyerActiveChatSelector);
     const addMessage = useChat(addBuyerMessageSelector);
     const updateBuyerData = useChat(updateBuyerDataSelector);
+    const isMobileVersion = useChat(isMobileVersionSelector);
 
     const query = () => {
         const res = [
@@ -48,6 +50,7 @@ const Chats: FC<Props> = ({ className, chatType, search }) => {
     const { data: chats, isLoading } = useGetChatListQuery(query());
     const initChats = useChat(initBuyerChatsSelector);
 
+    // EFFECTS
     useEffect(() => {
         if (chats) {
             initChats(chats);
@@ -55,7 +58,7 @@ const Chats: FC<Props> = ({ className, chatType, search }) => {
     }, [chats]);
 
     useEffect(() => {
-        if (activeId === undefined && chats && chats.length)
+        if (activeId === undefined && chats && chats.length && !isMobileVersion)
             setActiveChatId(chats[0].id);
     }, [chats]);
 

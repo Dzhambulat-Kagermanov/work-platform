@@ -8,6 +8,9 @@ type TChatMessage = Chat["messages"][0];
 type TOrderMessage = Order["messages"][0];
 
 interface TUseChat {
+    isMobileVersion?: boolean;
+    setIsMobileVersion: (value: boolean) => void;
+
     buyerActiveChat?: Order["id"];
     setBuyerActiveChat: (param: Order["id"] | undefined) => void;
     salesmanActiveChat?: Order["id"];
@@ -38,159 +41,179 @@ interface TUseChat {
     addSalesmanMessage: (message: TOrderMessage) => void;
 }
 
-const useChat = create<TUseChat>()((set, get) => ({
-    updateBuyerDataSelector: (id) => {
-        //@ts-ignore
-        set((state) => {
-            const initBuyerChats = get().initBuyerChats;
+const useChat = create<TUseChat>()(
+    devtools((set, get) => ({
+        updateBuyerDataSelector: (id) => {
+            //@ts-ignore
+            set((state) => {
+                const initBuyerChats = get().initBuyerChats;
 
-            if (state.buyerChatData && initBuyerChats) {
-                const item = initBuyerChats.find((props) => props.id === id);
+                if (state.buyerChatData && initBuyerChats) {
+                    const item = initBuyerChats.find(
+                        (props) => props.id === id,
+                    );
 
-                return {
-                    ...state,
-                    buyerChatData: {
-                        ...state.buyerChatData,
-                        messages: item ? item.messages : [],
-                    },
-                };
-            }
-            return state;
-        });
-    },
-    updateSalesmanDataSelector: (id) => {
-        //@ts-ignore
-        set((state) => {
-            const initSalesmanChats = get().initSalesmanChats;
+                    return {
+                        ...state,
+                        buyerChatData: {
+                            ...state.buyerChatData,
+                            messages: item ? item.messages : [],
+                        },
+                    };
+                }
+                return state;
+            });
+        },
+        updateSalesmanDataSelector: (id) => {
+            //@ts-ignore
+            set((state) => {
+                const initSalesmanChats = get().initSalesmanChats;
 
-            if (state.salesmanChatData && initSalesmanChats) {
-                const item = initSalesmanChats.find((props) => props.id === id);
+                if (state.salesmanChatData && initSalesmanChats) {
+                    const item = initSalesmanChats.find(
+                        (props) => props.id === id,
+                    );
 
-                return {
-                    ...state,
-                    salesmanChatData: {
-                        ...state.salesmanChatData,
-                        messages: item ? item.messages : [],
-                    },
-                };
-            }
-            return state;
-        });
-    },
-    setBuyerActiveChat: (buyerActiveChat) => {
-        set({ buyerActiveChat });
-    },
-    setSalesmanActiveChat: (salesmanActiveChat) => {
-        set({ salesmanActiveChat });
-    },
-    setInitBuyerChats: (initBuyerChats) => {
-        set({ initBuyerChats });
-    },
-    setInitSalesmanChats: (initSalesmanChats) => {
-        set({ initSalesmanChats });
-    },
-    setSendBuyerMessage: (message) => {
-        set({
-            sendBuyerMessage: message,
-        });
-    },
-    setSendBuyerFile: (file) => {
-        set({
-            sendBuyerFile: file,
-        });
-    },
-    setSendSalesmanMessage: (message) => {
-        set({
-            sendSalesmanMessage: message,
-        });
-    },
-    setSendSalesmanFile: (file) => {
-        set({
-            sendSalesmanFile: file,
-        });
-    },
-    initSalesmanData: (messages) => {
-        set({
-            salesmanChatData: messages,
-        });
-    },
-    initBuyerData: (messages) => {
-        set({
-            buyerChatData: messages,
-        });
-    },
-    addBuyerMessage: (message) => {
-        set((state) => {
-            console.log(!!state.buyerChatData);
+                    return {
+                        ...state,
+                        salesmanChatData: {
+                            ...state.salesmanChatData,
+                            messages: item ? item.messages : [],
+                        },
+                    };
+                }
+                return state;
+            });
+        },
+        setIsMobileVersion: (isMobileVersion) => {
+            set({ isMobileVersion });
+        },
+        setBuyerActiveChat: (buyerActiveChat) => {
+            set({ buyerActiveChat });
+        },
+        setSalesmanActiveChat: (salesmanActiveChat) => {
+            set({ salesmanActiveChat });
+        },
+        setInitBuyerChats: (initBuyerChats) => {
+            set({ initBuyerChats });
+        },
+        setInitSalesmanChats: (initSalesmanChats) => {
+            set({ initSalesmanChats });
+        },
+        setSendBuyerMessage: (message) => {
+            set({
+                sendBuyerMessage: message,
+            });
+        },
+        setSendBuyerFile: (file) => {
+            set({
+                sendBuyerFile: file,
+            });
+        },
+        setSendSalesmanMessage: (message) => {
+            set({
+                sendSalesmanMessage: message,
+            });
+        },
+        setSendSalesmanFile: (file) => {
+            set({
+                sendSalesmanFile: file,
+            });
+        },
+        initSalesmanData: (messages) => {
+            set({
+                salesmanChatData: messages,
+            });
+        },
+        initBuyerData: (messages) => {
+            set({
+                buyerChatData: messages,
+            });
+        },
+        addBuyerMessage: (message) => {
+            set((state) => {
+                console.log(!!state.buyerChatData);
 
-            if (state.buyerChatData) {
-                return {
-                    ...state,
-                    buyerChatData: {
-                        ...state.buyerChatData,
-                        messages: [...state.buyerChatData.messages, message],
-                    },
-                };
-            }
-            return state;
-        });
-    },
-    addSalesmanMessage: (message) => {
-        set((state) => {
-            if (state.salesmanChatData) {
-                return {
-                    ...state,
-                    salesmanChatData: {
-                        ...state.salesmanChatData,
-                        messages: [...state.salesmanChatData.messages, message],
-                    },
-                };
-            }
-            return state;
-        });
-    },
-    addMessageForBuyerChat: (message, id) => {
-        set((state) => {
-            if (state.initBuyerChats) {
-                const item = state.initBuyerChats.find((props) => {
-                    return props.id === id;
-                });
+                if (state.buyerChatData) {
+                    return {
+                        ...state,
+                        buyerChatData: {
+                            ...state.buyerChatData,
+                            messages: [
+                                ...state.buyerChatData.messages,
+                                message,
+                            ],
+                        },
+                    };
+                }
+                return state;
+            });
+        },
+        addSalesmanMessage: (message) => {
+            set((state) => {
+                if (state.salesmanChatData) {
+                    console.log(state.salesmanChatData);
 
-                if (!item) return state;
+                    return {
+                        ...state,
+                        salesmanChatData: {
+                            ...state.salesmanChatData,
+                            messages: [
+                                ...state.salesmanChatData.messages,
+                                message,
+                            ],
+                        },
+                    };
+                }
+                return state;
+            });
+        },
+        addMessageForBuyerChat: (message, id) => {
+            set((state) => {
+                if (state.initBuyerChats) {
+                    const item = state.initBuyerChats.find((props) => {
+                        return props.id === id;
+                    });
 
-                return {
-                    ...state,
-                    initSalesmanChats: [
-                        ...state.initBuyerChats,
-                        { ...item, messages: [...item.messages, message] },
-                    ],
-                };
-            }
-            return state;
-        });
-    },
-    addMessageForSalesmanChat: (message, id) => {
-        set((state) => {
-            if (state.initSalesmanChats) {
-                const item = state.initSalesmanChats.find((props) => {
-                    return props.id === id;
-                });
+                    if (!item) return state;
 
-                if (!item) return state;
+                    return {
+                        ...state,
+                        initSalesmanChats: [
+                            ...state.initBuyerChats,
+                            { ...item, messages: [...item.messages, message] },
+                        ],
+                    };
+                }
+                return state;
+            });
+        },
+        addMessageForSalesmanChat: (message, id) => {
+            set((state) => {
+                if (state.initSalesmanChats) {
+                    const item = state.initSalesmanChats.find((props) => {
+                        return props.id === id;
+                    });
 
-                return {
-                    ...state,
-                    initSalesmanChats: [
-                        ...state.initSalesmanChats,
-                        { ...item, messages: [...item.messages, message] },
-                    ],
-                };
-            }
-            return state;
-        });
-    },
-}));
+                    if (!item) return state;
 
+                    return {
+                        ...state,
+                        initSalesmanChats: [
+                            ...state.initSalesmanChats,
+                            { ...item, messages: [...item.messages, message] },
+                        ],
+                    };
+                }
+                return state;
+            });
+        },
+    })),
+);
+
+const isMobileVersionSelector = (state: TUseChat) => state.isMobileVersion;
+const setIsMobileVersionSelector = (state: TUseChat) =>
+    state.setIsMobileVersion;
 const buyerActiveChatSelector = (state: TUseChat) => state.buyerActiveChat;
 const setBuyerActiveChatSelector = (state: TUseChat) =>
     state.setBuyerActiveChat;
@@ -259,4 +282,6 @@ export {
     initSalesmanChatsSelector,
     updateBuyerDataSelector,
     updateSalesmanDataSelector,
+    isMobileVersionSelector,
+    setIsMobileVersionSelector,
 };

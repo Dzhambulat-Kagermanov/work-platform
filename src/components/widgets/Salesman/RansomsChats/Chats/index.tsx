@@ -10,6 +10,7 @@ import { PageLoader } from "@/components/ui/loaders";
 import { PageErrorStub } from "@/components/ui/page-error-stub";
 import {
     addSalesmanMessageSelector,
+    isMobileVersionSelector,
     salesmanActiveChatSelector,
     setInitSalesmanChatsSelector,
     setSalesmanActiveChatSelector,
@@ -26,6 +27,7 @@ const Chats: FC<Props> = ({ className, chatType, search }) => {
     const setActiveChatId = useChat(setSalesmanActiveChatSelector);
     const addMessage = useChat(addSalesmanMessageSelector);
     const updateSalesmanData = useChat(updateSalesmanDataSelector);
+    const isMobileVersion = useChat(isMobileVersionSelector);
 
     const query = () => {
         const res = [
@@ -48,14 +50,17 @@ const Chats: FC<Props> = ({ className, chatType, search }) => {
     const { data: chats, isLoading } = useGetChatListQuery(query());
     const initChats = useChat(setInitSalesmanChatsSelector);
 
+    // EFFECTS
     useEffect(() => {
         if (chats) {
             initChats(chats);
         }
     }, [chats]);
 
+    console.log(isMobileVersion, activeId);
+
     useEffect(() => {
-        if (activeId === undefined && chats && chats.length)
+        if (activeId === undefined && chats && chats.length && !isMobileVersion)
             setActiveChatId(chats[0].id);
     }, [chats]);
 

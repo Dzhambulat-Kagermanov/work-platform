@@ -9,6 +9,11 @@
     --placeholderColor: var(--grey-200);
 }
 .inp {
+    padding: 0;
+    height: 100%;
+}
+.inp_content {
+    height: 100%;
 }
 
 @media screen and (max-width: 1044px) {

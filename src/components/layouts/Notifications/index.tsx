@@ -18,6 +18,8 @@ import {
 import { notificationsPusherConfig, pusherClient } from "@/utils/pusher-client";
 import { useProfile, userIdSelector } from "@/store/useProfile";
 import { useGetNotifications } from "@/hooks/api/notifications";
+import { useQueryClient } from "@tanstack/react-query";
+import { GET_CHAT_LIST_QUERY } from "@/hooks/api/chat/useGetChatListQuery";
 
 interface Props extends TChildren {}
 const NotificationsLayout: FC<Props> = ({ children }) => {
@@ -66,6 +68,8 @@ const NotificationsLayout: FC<Props> = ({ children }) => {
         }
     };
 
+    const queryClient = useQueryClient();
+
     // EFFECTS
     useEffect(() => {
         if (userId) {
@@ -75,8 +79,10 @@ const NotificationsLayout: FC<Props> = ({ children }) => {
             const channel = pusherClient.subscribe(config.channel);
 
             channel.bind(config.event, (data: TNotificationItemProps) => {
+                queryClient.invalidateQueries({
+                    queryKey: [GET_CHAT_LIST_QUERY],
+                });
                 addNotification(data);
-                console.log("Получены данные:", data);
             });
             return () => {
                 channel.unbind(config.event);
