@@ -31,6 +31,7 @@ const RansomsViewChat: FC<Props> = ({
             {chatData ? (
                 <>
                     <HeadArea
+                        role={role}
                         className={cn(cls.head)}
                         orderInfo={chatData}
                         setActiveId={setActiveId}

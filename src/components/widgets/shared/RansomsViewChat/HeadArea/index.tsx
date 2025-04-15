@@ -7,16 +7,19 @@ import { HeadAreaOrderInfo } from "../HeadAreaOrderInfo";
 import { HeadAreaBackBtn } from "../HeadAreaBackBtn";
 import cls from "./index.module.scss";
 import { Order } from "@/types/api";
+import { TRole } from "..";
 
 interface Props extends TClassName {
     setActiveId: (id: Order["id"] | undefined) => void;
     orderInfo: Order;
+    role: TRole;
 }
-const HeadArea: FC<Props> = ({ className, setActiveId, orderInfo }) => {
+const HeadArea: FC<Props> = ({ className, setActiveId, orderInfo, role }) => {
     return (
         <div className={cn(cls.wrapper, [className])}>
             <div className={cn(cls.content)}>
                 <HeadAreaBackBtn
+                    role={role}
                     className={cn(cls.back_btn)}
                     setActiveId={setActiveId}
                 />

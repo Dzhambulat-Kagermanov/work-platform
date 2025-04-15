@@ -57,8 +57,6 @@ const Chats: FC<Props> = ({ className, chatType, search }) => {
         }
     }, [chats]);
 
-    console.log(isMobileVersion, activeId);
-
     useEffect(() => {
         if (activeId === undefined && chats && chats.length && !isMobileVersion)
             setActiveChatId(chats[0].id);

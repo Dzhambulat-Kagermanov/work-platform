@@ -24,8 +24,6 @@ const RansomsViewChat: FC<Props> = ({ className }) => {
 
     useEffect(() => {
         if (ordersQuery.data && ordersQuery.status === "success") {
-            console.log(ordersQuery.data);
-
             initSalesmanData(ordersQuery.data);
         }
     }, [ordersQuery.status, activeId]);

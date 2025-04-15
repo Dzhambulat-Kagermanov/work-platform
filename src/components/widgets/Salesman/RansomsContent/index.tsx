@@ -12,13 +12,13 @@ import {
 } from "@/constants";
 import cls from "./index.module.scss";
 import { ChatStatus } from "@/types/api";
-import { buyerActiveChatSelector, useChat } from "@/store/useChat";
+import { salesmanActiveChatSelector, useChat } from "@/store/useChat";
 
 interface Props extends TClassName {
     chatType: ChatStatus;
 }
 const RansomsContent: FC<Props> = ({ className, chatType }) => {
-    const activeId = useChat(buyerActiveChatSelector);
+    const activeId = useChat(salesmanActiveChatSelector);
 
     const width = useScreen();
     const sidebarState = useModalStore(
