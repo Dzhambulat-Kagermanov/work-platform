@@ -10,6 +10,11 @@ import {
 } from "@/hooks/api/seller";
 import useArchiveProductsMutation from "@/hooks/api/seller/useArchiveProductsMutation";
 import { useRouter } from "next/navigation";
+import {
+    setFilterAdsQuerySelector,
+    setFilterProductsQuerySelector,
+    useSalesmanActionsFilter,
+} from "@/store/useSalesmanActionsFilter";
 
 export const ACTION_CONTENT: (
     showModal: (param: { slug: string }) => void,
@@ -18,6 +23,13 @@ export const ACTION_CONTENT: (
     const selectedProducts = useSellerStore(productIdsSelector);
     const selectedAds = useSellerStore(adsIdsSelector);
     const router = useRouter();
+    const setFilterProductsQuery = useSalesmanActionsFilter(
+        setFilterProductsQuerySelector,
+    );
+    const setFilterAdsQuery = useSalesmanActionsFilter(
+        setFilterAdsQuerySelector,
+    );
+
     const { mutate: stopProductsMutate, isPending: stopProductsPending } =
         useStopProductsMutation();
     const { mutate: archiveProductsMutate, isPending: archiveProductsPending } =
@@ -73,19 +85,27 @@ export const ACTION_CONTENT: (
               ],
               [
                   {
-                      onClick: () => {},
+                      onClick: () => {
+                          setFilterProductsQuery("all");
+                      },
                       text: "Все товары",
                   },
                   {
-                      onClick: () => {},
+                      onClick: () => {
+                          setFilterProductsQuery("active");
+                      },
                       text: "Активные",
                   },
                   {
-                      onClick: () => {},
+                      onClick: () => {
+                          setFilterProductsQuery("stop");
+                      },
                       text: "Остановленные",
                   },
                   {
-                      onClick: () => {},
+                      onClick: () => {
+                          setFilterProductsQuery("archive");
+                      },
                       text: "Архивированные",
                   },
               ],
@@ -151,19 +171,27 @@ export const ACTION_CONTENT: (
               ],
               [
                   {
-                      onClick: () => {},
+                      onClick: () => {
+                          setFilterAdsQuery("all");
+                      },
                       text: "Все объявления",
                   },
                   {
-                      onClick: () => {},
+                      onClick: () => {
+                          setFilterAdsQuery("active");
+                      },
                       text: "Активные",
                   },
                   {
-                      onClick: () => {},
+                      onClick: () => {
+                          setFilterAdsQuery("stop");
+                      },
                       text: "Остановленные",
                   },
                   {
-                      onClick: () => {},
+                      onClick: () => {
+                          setFilterAdsQuery("archive");
+                      },
                       text: "Архивированные",
                   },
               ],

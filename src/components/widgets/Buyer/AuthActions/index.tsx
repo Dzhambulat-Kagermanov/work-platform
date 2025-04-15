@@ -80,7 +80,7 @@ const AuthActions: FC<Props> = ({ className, type }) => {
                 Продолжая, вы подтверждаете, что ознакомились с{" "}
                 <Link
                     className={cn(cls.link)}
-                    href={"https://mpboost.pro/docs/privacy-policy.pdf"}
+                    href="/policy"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
@@ -89,7 +89,7 @@ const AuthActions: FC<Props> = ({ className, type }) => {
                 {" и "}
                 <Link
                     className={cn(cls.link)}
-                    href={"https://mpboost.pro/docs/policy-mpboost-pro.pdf"}
+                    href="/user-conditions"
                     target="_blank"
                     rel="noopener noreferrer"
                 >

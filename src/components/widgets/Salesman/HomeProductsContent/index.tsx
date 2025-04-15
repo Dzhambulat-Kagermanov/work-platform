@@ -16,7 +16,6 @@ const HomeProductsContent: FC<Props> = ({ className }) => {
     const { pagination, setPagination } = usePagination();
 
     const productsSearch = useSellerStore(productsSearchSelector);
-    console.log(productsSearch);
 
     const query = () => {
         const res = [];

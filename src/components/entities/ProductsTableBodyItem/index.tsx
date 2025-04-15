@@ -21,7 +21,7 @@ const ProductsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
     const queryClient = useQueryClient();
     const { mutate: stopProductsMutate, isPending } = useStopProductsMutation();
 
-    const [toggle, setToggle] = useState(!item.is_archived);
+    const [toggle, setToggle] = useState(!!item.status);
 
     const selectedProducts = useSellerStore(productIdsSelector);
     const removeSelectedProduct = useSellerStore(removeProductIdSelector);

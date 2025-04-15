@@ -18,7 +18,7 @@ interface Props {
 }
 const AdvertisementsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
     const [date] = useState(dateParserHandler(item.created_at));
-    const [toggle, setToggle] = useState(!item.is_archived);
+    const [toggle, setToggle] = useState(!!item.status);
     const selectedAds = useSellerStore(adsIdsSelector);
     const removeSelectedAd = useSellerStore(removeAdIdSelector);
     const addSelectedAd = useSellerStore(addAdIdSelector);
