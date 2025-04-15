@@ -6,6 +6,7 @@ import { Typography } from "@/components/ui";
 import Link from "next/link";
 import cls from "./index.module.scss";
 import { useSessionQuery } from "@/hooks/api/auth";
+import { ROUTES } from "@/constants";
 
 interface Props extends TClassName {
     type:
@@ -76,7 +77,7 @@ const AuthActions: FC<Props> = ({ className, type }) => {
                 size={10}
                 className={cn(cls.info, [cls.text])}
             >
-                Продолжая, вы подтверждаете, что ознакомились с 
+                Продолжая, вы подтверждаете, что ознакомились с{" "}
                 <Link
                     className={cn(cls.link)}
                     href={"https://mpboost.pro/docs/privacy-policy.pdf"}
@@ -85,7 +86,7 @@ const AuthActions: FC<Props> = ({ className, type }) => {
                 >
                     политикой конфиденциальности
                 </Link>
-                 и 
+                {" и "}
                 <Link
                     className={cn(cls.link)}
                     href={"https://mpboost.pro/docs/policy-mpboost-pro.pdf"}
@@ -95,6 +96,22 @@ const AuthActions: FC<Props> = ({ className, type }) => {
                     публичной офертой
                 </Link>
             </Typography>
+            <Link
+                href={
+                    type === "forSalesmanAuth" ||
+                    type === "forSalesmanRegistration"
+                        ? ROUTES.BUYER.AUTH
+                        : ROUTES.SALESMAN.AUTH
+                }
+                className={cn(cls.text, [cls.forget_password, cls.link])}
+            >
+                <Typography font="Inter-SB" size={14}>
+                    {type === "forSalesmanAuth" ||
+                    type === "forSalesmanRegistration"
+                        ? "Войти как покупатель"
+                        : "Войти как продавец"}
+                </Typography>
+            </Link>
         </div>
     );
 };

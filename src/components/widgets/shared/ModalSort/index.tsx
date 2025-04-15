@@ -41,8 +41,6 @@ const ModalSort: FC<Props> = ({ className, pageType }) => {
         }
     }, []);
 
-    console.log(mainPageFilters);
-
     return (
         <ModalBase
             slug={SORT_MODAL}
