@@ -70,35 +70,64 @@ const useProductsListByCategoryQuery = (data: ProductsListQueryArgs | null) => {
         if (categoryPageFilters.sortBy) {
             switch (categoryPageFilters.sortBy) {
                 case "PRICE_DESC":
+                    res.push({
+                        key: "sort",
+                        value: "price_with_cashback",
+                    });
+                    res.push({
+                        key: "order",
+                        value: "desc",
+                    });
                 case "CASHBACK_AMOUNT":
                     res.push({
-                        key: "price_with_cashback",
+                        key: "sort",
+                        value: "price_with_cashback",
+                    });
+                    res.push({
+                        key: "order",
                         value: "desc",
                     });
                     break;
                 case "POPULAR":
                     res.push({
-                        key: "popular",
+                        key: "sort",
+                        value: "popular",
+                    });
+                    res.push({
+                        key: "order",
                         value: "desc",
                     });
                     break;
                 case "PRODUCT_RATING":
                     res.push({
-                        key: "rating_product",
+                        key: "sort",
+                        value: "rating_product",
+                    });
+                    res.push({
+                        key: "order",
                         value: "desc",
                     });
                     break;
                 case "SELLER_RATING":
                     res.push({
-                        key: "rating_seller",
+                        key: "sort",
+                        value: "rating_seller",
+                    });
+                    res.push({
+                        key: "order",
                         value: "desc",
                     });
                     break;
                 case "PUBLICATION_DATE":
                     res.push({
-                        key: "created_at",
+                        key: "sort",
+                        value: "created_at",
+                    });
+                    res.push({
+                        key: "order",
                         value: "desc",
                     });
+
                     break;
             }
         }

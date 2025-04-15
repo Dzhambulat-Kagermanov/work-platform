@@ -25,11 +25,12 @@ const HeadArea: FC<Props> = ({ className, setActiveId, orderInfo, role }) => {
                 />
                 <div className={cn(cls.images)}>
                     {orderInfo.ad.product.images[0] ? (
-                        <img
+                        <Image
                             src={orderInfo.ad.product.images[0]}
                             width={42}
                             height={42}
                             alt="Аватар"
+                            className={cls.image}
                         />
                     ) : (
                         <></>
@@ -40,6 +41,7 @@ const HeadArea: FC<Props> = ({ className, setActiveId, orderInfo, role }) => {
                             width={42}
                             height={42}
                             alt="Аватар"
+                            className={cls.image}
                         />
                     </div>
                 </div>

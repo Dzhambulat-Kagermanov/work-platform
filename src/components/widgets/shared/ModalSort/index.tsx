@@ -15,9 +15,12 @@ import useFiltersStore, {
     mainPageSetFiltersSelector,
     SortType,
 } from "@/store/useFiltersStore";
+import { useModalStore } from "@/store";
+import { hideModalSelector } from "@/store/useModalStore";
 
 interface Props extends TClassName, Pick<FilterModalsLayoutProps, "pageType"> {}
 const ModalSort: FC<Props> = ({ className, pageType }) => {
+    const hideModal = useModalStore(hideModalSelector);
     const mainPageFilters = useFiltersStore(mainPageFiltersSelector);
     const setMainPageFilters = useFiltersStore(mainPageSetFiltersSelector);
 
@@ -37,6 +40,8 @@ const ModalSort: FC<Props> = ({ className, pageType }) => {
             setSortItem(categoryPageFilters.sortBy);
         }
     }, []);
+
+    console.log(mainPageFilters);
 
     return (
         <ModalBase
@@ -71,6 +76,9 @@ const ModalSort: FC<Props> = ({ className, pageType }) => {
                     {slugs.map((slug) => {
                         return (
                             <Item
+                                onClick={() => {
+                                    hideModal({ slug: SORT_MODAL });
+                                }}
                                 activeSlug={sortItem}
                                 setActiveSlug={setSortItem}
                                 key={slug.value}

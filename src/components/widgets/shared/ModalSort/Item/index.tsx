@@ -1,5 +1,5 @@
 "use client";
-import { FC, MouseEvent, MouseEventHandler } from "react";
+import { FC, MouseEvent } from "react";
 import { TClassName, TTag } from "@/types";
 import { cn } from "@/lib";
 import { Typography } from "@/components/ui";
@@ -11,6 +11,7 @@ interface Props extends TClassName, TTag {
     activeSlug: string;
     setActiveSlug: (value: SortType) => void;
     slug: SlugSelectItem;
+    onClick?: () => void;
 }
 const Item: FC<Props> = ({
     activeSlug,
@@ -18,9 +19,11 @@ const Item: FC<Props> = ({
     className,
     tag = "div",
     slug,
+    onClick,
 }) => {
     const Tag = tag;
     const handleClick = (e: MouseEvent) => {
+        onClick && onClick();
         setActiveSlug(slug.value);
     };
     return (
