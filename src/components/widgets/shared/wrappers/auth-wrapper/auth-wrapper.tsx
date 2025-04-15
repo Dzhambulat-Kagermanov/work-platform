@@ -14,6 +14,7 @@ import React, { useEffect } from "react";
 type AuthWrapperProps = {
     roles?: RoleSlug[];
     redirectLink?: string;
+    sellerRedirectLink?: string;
     reverse?: boolean;
     isRegister?: boolean;
 } & React.PropsWithChildren;
@@ -23,6 +24,7 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
     children,
     redirectLink,
     reverse,
+    sellerRedirectLink,
 }) => {
     const setUserId = useProfile(setUserIdSelector);
     const setProfile = useProfile(setProfileSelector);
@@ -46,13 +48,21 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
             if (!data?.is_configured) {
                 pushToRegEnd();
             } else {
-                router.push(redirectLink ?? ROUTES.MAIN);
+                router.push(
+                    sellerRedirectLink && data.role.slug === "seller"
+                        ? sellerRedirectLink
+                        : (redirectLink ?? ROUTES.MAIN),
+                );
             }
         } else if (data) {
             if (!data.is_configured) {
                 pushToRegEnd();
             } else if (reverse) {
-                router.push(redirectLink ?? ROUTES.MAIN);
+                router.push(
+                    sellerRedirectLink && data.role.slug === "seller"
+                        ? sellerRedirectLink
+                        : (redirectLink ?? ROUTES.MAIN),
+                );
             }
         }
         if (!isLoading) {

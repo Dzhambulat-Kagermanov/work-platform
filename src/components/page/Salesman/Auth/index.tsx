@@ -11,7 +11,11 @@ import { ROUTES } from "@/constants";
 interface Props extends TClassName {}
 const AuthPage: FC<Props> = ({ className }) => {
     return (
-        <AuthWrapper reverse redirectLink={ROUTES.MAIN}>
+        <AuthWrapper
+            reverse
+            redirectLink={ROUTES.MAIN}
+            sellerRedirectLink={ROUTES.SALESMAN.MAIN}
+        >
             <SalesmanAuthBackgroundLayout>
                 <SignLayout
                     logo="/images/shared/logo-v2.svg"

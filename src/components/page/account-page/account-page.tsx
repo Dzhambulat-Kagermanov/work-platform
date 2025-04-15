@@ -58,9 +58,7 @@ const AccountPageContent: FC<Props> = ({ className, forSalesman }) => {
                         successfulBuybacks={statistic?.success_buybacks ?? 0}
                     />
                 </div>
-                {width > MD_BIG && (
-                    <ExitBtnMobile className={cn(cls.exit_btn_mobile)} />
-                )}
+                <ExitBtnMobile className={cn(cls.exit_btn_mobile)} />
                 <ExitAccountModal className={cn(cls.exit_account_modal)} />
             </Container>
         </main>
