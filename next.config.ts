@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
         remotePatterns: [
             {
                 protocol: "https",
-                hostname: "basket-01.wbbasket.ru",
+                hostname: "basket-1.wbbasket.ru",
                 port: "",
                 pathname: "/**", // Разрешает все подпути
             },

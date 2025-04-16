@@ -112,8 +112,8 @@ const MessagesAreaGroup: FC<Props> = memo(
                                                 id={item.id}
                                                 avatar={
                                                     item.whoSend === "buyer"
-                                                        ? salesmanAvatar || ""
-                                                        : buyerAvatar || ""
+                                                        ? buyerAvatar || ""
+                                                        : salesmanAvatar || ""
                                                 }
                                                 className={cn(cls.item)}
                                                 message={item.text}
@@ -127,8 +127,8 @@ const MessagesAreaGroup: FC<Props> = memo(
                                                 isOnline={false}
                                                 whomSend={
                                                     item.whoSend === "buyer"
-                                                        ? "user"
-                                                        : "salesman"
+                                                        ? "salesman"
+                                                        : "user"
                                                 }
                                             />
                                         );

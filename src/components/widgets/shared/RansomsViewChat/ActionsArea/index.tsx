@@ -46,14 +46,15 @@ const ActionsArea: FC<Props> = ({ className, activeId, role }) => {
     if (!activeId) return null;
 
     const handleSubmit: FormEventHandler = (event) => {
+        event.preventDefault();
+        const formData = new FormData();
+        if (message) formData.append("text", message);
         if (filesBlob?.length) {
-            const formData = new FormData();
-            if (message) formData.append("text", message);
             filesBlob.forEach((blob) => {
                 formData.append("files[]", blob.data);
             });
-
-            event.preventDefault();
+        }
+        if (Array.from(formData.entries()).length) {
             sendMessage.mutate(
                 { chatId: activeId, formData },
                 {
