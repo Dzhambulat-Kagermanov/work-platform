@@ -10,6 +10,7 @@ interface Props extends TClassName {}
 const ActionsArea: FC<Props> = ({ className }) => {
     return (
         <div className={cn(cls.wrapper, [className])}>
+            {/*@ts-ignore*/}
             <ViewChatPlus className={cn(cls.plus_btn)} />
             <Input
                 wrapperCls={cn(cls.inp_wrapper)}

@@ -13,12 +13,11 @@ const ChatAvatarItem: FC<Props> = ({ isOnline, className, avatar }) => {
                 [cls.isOnline]: isOnline,
             })}
         >
-            {
-                avatar ? 
-                    <img src={avatar} alt="Аватар" width={48} height={48} />
-                : 
-                    <></>
-            }
+            {avatar ? (
+                <img src={avatar} alt="Аватар" width={48} height={48} />
+            ) : (
+                <></>
+            )}
         </div>
     );
 };

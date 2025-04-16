@@ -1,3 +1,5 @@
+import { base64ToBlob } from "@/lib/base64ToBlob";
+import { blobToBase64 } from "@/lib/blobToBase64";
 import { Order } from "@/types/api";
 import Chat from "@/types/api/Chat";
 import { create } from "zustand";
@@ -6,6 +8,16 @@ import { devtools } from "zustand/middleware";
 type TSendMessage = Order["messages"][0]["text"];
 type TChatMessage = Chat["messages"][0];
 type TOrderMessage = Order["messages"][0];
+type TSendFile = {
+    data: string;
+    id: string;
+    filePreviewURL: string;
+};
+type TGetFile = {
+    data: Blob;
+    id: string;
+    filePreviewURL: string;
+};
 
 interface TUseChat {
     isMobileVersion?: boolean;
@@ -21,24 +33,28 @@ interface TUseChat {
     updateBuyerDataSelector: (id: number) => void;
     addMessageForBuyerChat: (param: TChatMessage, id: Chat["id"]) => void;
     sendBuyerMessage?: TSendMessage;
-    sendBuyerFile?: Blob;
+    sendBuyerFiles?: TSendFile[];
     buyerChatData?: Order;
     initBuyerData: (message: Order) => void;
     setSendBuyerMessage: (message: TSendMessage) => void;
-    setSendBuyerFile: (file: Blob) => void;
+    setSendBuyerFiles: (file: TGetFile) => void;
+    removeSendBuyerFile: (file: TSendFile) => void;
     addBuyerMessage: (message: TOrderMessage) => void;
+    getSendBuyerFiles: () => TGetFile | undefined;
 
     initSalesmanChats?: Chat[];
     setInitSalesmanChats: (params: Chat[]) => void;
     updateSalesmanDataSelector: (id: number) => void;
     addMessageForSalesmanChat: (param: TChatMessage, id: Chat["id"]) => void;
     sendSalesmanMessage?: TSendMessage;
-    sendSalesmanFile?: Blob;
+    sendSalesmanFiles?: TSendFile[];
     salesmanChatData?: Order;
     initSalesmanData: (message: Order) => void;
     setSendSalesmanMessage: (message: TSendMessage) => void;
-    setSendSalesmanFile: (file: Blob) => void;
+    setSendSalesmanFiles: (file: TGetFile) => void;
+    removeSendSalesmanFile: (file: TSendFile) => void;
     addSalesmanMessage: (message: TOrderMessage) => void;
+    getSendSalesmanFiles: () => TGetFile | undefined;
 }
 
 const useChat = create<TUseChat>()(
@@ -105,19 +121,67 @@ const useChat = create<TUseChat>()(
                 sendBuyerMessage: message,
             });
         },
-        setSendBuyerFile: (file) => {
+        setSendBuyerFiles: async (file) => {
+            const files = get().sendBuyerFiles;
+            const saveFile: TSendFile = {
+                ...file,
+                data: await blobToBase64(file.data),
+            };
+
             set({
-                sendBuyerFile: file,
+                sendBuyerFiles: [...(files ? files : []), saveFile],
             });
+        },
+        removeSendBuyerFile: (file) => {
+            const files = get().sendBuyerFiles;
+            if (files)
+                set({
+                    sendBuyerFiles: files.filter((props) => {
+                        return props.id !== file.id;
+                    }),
+                });
+        },
+        removeSendSalesmanFile: (file) => {
+            const files = get().sendSalesmanFiles;
+            if (files)
+                set({
+                    sendSalesmanFiles: files.filter((props) => {
+                        return props.id !== file.id;
+                    }),
+                });
+        },
+        getSendBuyerFiles: () => {
+            const files = get().sendBuyerFiles;
+            if (files) {
+                return files.map((file) => ({
+                    ...files,
+                    data: base64ToBlob(file.data),
+                }));
+            }
+        },
+        getSendSalesmanFiles: () => {
+            const files = get().sendSalesmanFiles;
+            if (files) {
+                return files.map((file) => ({
+                    ...files,
+                    data: base64ToBlob(file.data),
+                }));
+            }
         },
         setSendSalesmanMessage: (message) => {
             set({
                 sendSalesmanMessage: message,
             });
         },
-        setSendSalesmanFile: (file) => {
+        setSendSalesmanFiles: async (file) => {
+            const files = get().sendSalesmanFiles;
+            const saveFile: TSendFile = {
+                ...file,
+                data: await blobToBase64(file.data),
+            };
+
             set({
-                sendSalesmanFile: file,
+                sendSalesmanFiles: [...(files ? files : []), saveFile],
             });
         },
         initSalesmanData: (messages) => {
@@ -226,15 +290,15 @@ const addMessageForSalesmanChatSelector = (state: TUseChat) =>
 const addMessageForBuyerChatSelector = (state: TUseChat) =>
     state.addMessageForBuyerChat;
 const sendBuyerMessageSelector = (state: TUseChat) => state.sendBuyerMessage;
-const sendBuyerFileSelector = (state: TUseChat) => state.sendBuyerFile;
+const sendBuyerFilesSelector = (state: TUseChat) => state.sendBuyerFiles;
 const buyerDataSelector = (state: TUseChat) => state.buyerChatData;
 const initBuyerDataSelector = (state: TUseChat) => state.initBuyerData;
 const setSendBuyerMessageSelector = (state: TUseChat) =>
     state.setSendBuyerMessage;
-const setSendBuyerFileSelector = (state: TUseChat) => state.setSendBuyerFile;
+const setSendBuyerFilesSelector = (state: TUseChat) => state.setSendBuyerFiles;
 const sendSalesmanMessageSelector = (state: TUseChat) =>
     state.sendSalesmanMessage;
-const sendSalesmanFileSelector = (state: TUseChat) => state.sendSalesmanFile;
+const sendSalesmanFilesSelector = (state: TUseChat) => state.sendSalesmanFiles;
 const salesmanDataSelector = (state: TUseChat) => state.salesmanChatData;
 const initSalesmanDataSelector = (state: TUseChat) => state.initSalesmanData;
 const setSendSalesmanMessageSelector = (state: TUseChat) =>
@@ -244,8 +308,8 @@ const setInitSalesmanChatsSelector = (state: TUseChat) =>
 const setInitBuyerChatsSelector = (state: TUseChat) => state.setInitBuyerChats;
 const initSalesmanChatsSelector = (state: TUseChat) => state.initSalesmanChats;
 const initBuyerChatsSelector = (state: TUseChat) => state.setInitBuyerChats;
-const setSendSalesmanFileSelector = (state: TUseChat) =>
-    state.setSendSalesmanFile;
+const setSendSalesmanFilesSelector = (state: TUseChat) =>
+    state.setSendSalesmanFiles;
 const addBuyerMessageSelector = (state: TUseChat) => state.addBuyerMessage;
 const addSalesmanMessageSelector = (state: TUseChat) =>
     state.addSalesmanMessage;
@@ -253,21 +317,29 @@ const updateBuyerDataSelector = (state: TUseChat) =>
     state.updateBuyerDataSelector;
 const updateSalesmanDataSelector = (state: TUseChat) =>
     state.updateSalesmanDataSelector;
+const removeSendBuyerFileSelector = (state: TUseChat) =>
+    state.removeSendBuyerFile;
+const removeSendSalesmanFileSelector = (state: TUseChat) =>
+    state.removeSendSalesmanFile;
+const getSendBuyerFilesSelector = (state: TUseChat) => state.getSendBuyerFiles;
+const getSendSalesmanFilesSelector = (state: TUseChat) =>
+    state.getSendSalesmanFiles;
 
 export {
     useChat,
+    type TSendFile,
     sendBuyerMessageSelector,
-    sendBuyerFileSelector,
+    sendBuyerFilesSelector,
     buyerDataSelector,
     initBuyerDataSelector,
     setSendBuyerMessageSelector,
-    setSendBuyerFileSelector,
+    setSendBuyerFilesSelector,
     sendSalesmanMessageSelector,
-    sendSalesmanFileSelector,
+    sendSalesmanFilesSelector,
     salesmanDataSelector,
     initSalesmanDataSelector,
     setSendSalesmanMessageSelector,
-    setSendSalesmanFileSelector,
+    setSendSalesmanFilesSelector,
     addBuyerMessageSelector,
     addSalesmanMessageSelector,
     buyerActiveChatSelector,
@@ -284,4 +356,8 @@ export {
     updateSalesmanDataSelector,
     isMobileVersionSelector,
     setIsMobileVersionSelector,
+    removeSendBuyerFileSelector,
+    removeSendSalesmanFileSelector,
+    getSendBuyerFilesSelector,
+    getSendSalesmanFilesSelector,
 };

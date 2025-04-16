@@ -10,6 +10,11 @@ import useSendMessageMutation from "@/hooks/api/chat/useSendMessageMutation";
 import { TRole } from "..";
 import { useQueryClient } from "@tanstack/react-query";
 import { GET_CHAT_STATUSES_KEY } from "@/hooks/api/chat/useGetChatStatusesQuery";
+import {
+    sendBuyerFilesSelector,
+    sendSalesmanFilesSelector,
+    useChat,
+} from "@/store/useChat";
 
 interface Props extends TClassName {
     activeId?: number;
@@ -17,16 +22,24 @@ interface Props extends TClassName {
 }
 const ActionsArea: FC<Props> = ({ className, activeId, role }) => {
     const queryClient = useQueryClient();
+    const files = useChat(
+        role === "buyer" ? sendBuyerFilesSelector : sendSalesmanFilesSelector,
+    );
     const [message, setMessage] = useState<string>("");
-
-    const formData = new FormData();
-    formData.append("text", message);
 
     const sendMessage = useSendMessageMutation(activeId);
 
     if (!activeId) return null;
 
     const handleSubmit: FormEventHandler = (event) => {
+        const formData = new FormData();
+        if (message) formData.append("text", message);
+        if (files) {
+            files.forEach((blob) => {
+                formData.append("files[]", blob.data);
+            });
+        }
+
         event.preventDefault();
         sendMessage.mutate(
             { chatId: activeId, formData },
@@ -43,7 +56,7 @@ const ActionsArea: FC<Props> = ({ className, activeId, role }) => {
 
     return (
         <form className={cn(cls.wrapper, [className])} onSubmit={handleSubmit}>
-            <ViewChatPlus className={cn(cls.plus_btn)} />
+            <ViewChatPlus className={cn(cls.plus_btn)} role={role} />
             <Input
                 contentCls={cls.inp_content}
                 value={message}

@@ -20,7 +20,7 @@ const MessagesAreaGroup: FC<Props> = memo(
     ({ date, className, messages, userIsOnline }) => {
         const { data: userData } = useSessionQuery();
         const role = userData?.role.slug;
-        const isSalesman = role === "seller";
+
         return (
             <div className={cn(cls.wrapper, [className])}>
                 <Typography
@@ -99,11 +99,7 @@ const MessagesAreaGroup: FC<Props> = memo(
                                     if (item.type === "text") {
                                         return (
                                             <ChatMessageItem
-                                                whoReading={
-                                                    isSalesman
-                                                        ? "reading-user"
-                                                        : "reading-salesman"
-                                                }
+                                                whoReading={"reading-salesman"}
                                                 tag="li"
                                                 id={item.id}
                                                 avatar={""}
@@ -118,9 +114,9 @@ const MessagesAreaGroup: FC<Props> = memo(
                                                 name={""}
                                                 isOnline={false}
                                                 whomSend={
-                                                    isSalesman
-                                                        ? "salesman"
-                                                        : "user"
+                                                    item.whoSend === "buyer"
+                                                        ? "user"
+                                                        : "salesman"
                                                 }
                                             />
                                         );

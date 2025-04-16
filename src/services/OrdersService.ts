@@ -28,8 +28,6 @@ class OrdersService {
     }
 
     async getOrder(id?: number) {
-        // TODO: добавить тип ответа
-
         if (!id) {
             return null;
         }

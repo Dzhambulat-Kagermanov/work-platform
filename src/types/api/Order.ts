@@ -1,6 +1,7 @@
 import BoolNumber from "./BoolNumber";
 import { EnChatStatuses } from "./Chat";
 import Product from "./Product";
+import Role from "./Role";
 import Timestamps from "./Timestamps";
 
 export type Message = {
@@ -11,6 +12,7 @@ export type Message = {
     system_type: null;
     text: string;
     type: "text";
+    whoSend: Role["slug"];
 } & Timestamps;
 
 type Order = {
@@ -22,6 +24,7 @@ type Order = {
     status: EnChatStatuses;
     messages: Message[];
     ad: Product;
+    whoSend: Role["slug"];
 } & Timestamps;
 
 export default Order;
