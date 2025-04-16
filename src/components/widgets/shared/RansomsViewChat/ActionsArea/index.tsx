@@ -43,8 +43,6 @@ const ActionsArea: FC<Props> = ({ className, activeId, role }) => {
             ? resetSendBuyerFilesSelector
             : resetSendSalesmanFilesSelector,
     );
-    console.log(filesBlob);
-
     if (!activeId) return null;
 
     const handleSubmit: FormEventHandler = (event) => {

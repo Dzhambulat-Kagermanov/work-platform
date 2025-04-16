@@ -23,6 +23,11 @@ interface TUseChat {
     isMobileVersion?: boolean;
     setIsMobileVersion: (value: boolean) => void;
 
+    buyerAvatar?: string;
+    setBuyerAvatar: (avatar: string) => void;
+    salesmanAvatar?: string;
+    setSalesmanAvatar: (avatar: string) => void;
+
     buyerActiveChat?: Order["id"];
     setBuyerActiveChat: (param: Order["id"] | undefined) => void;
     salesmanActiveChat?: Order["id"];
@@ -330,10 +335,14 @@ const removeSendSalesmanFileSelector = (state: TUseChat) =>
 const getSendBuyerFilesSelector = (state: TUseChat) => state.getSendBuyerFiles;
 const getSendSalesmanFilesSelector = (state: TUseChat) =>
     state.getSendSalesmanFiles;
-export const resetSendBuyerFilesSelector = (state: TUseChat) =>
+const resetSendBuyerFilesSelector = (state: TUseChat) =>
     state.resetSendBuyerFiles;
-export const resetSendSalesmanFilesSelector = (state: TUseChat) =>
+const resetSendSalesmanFilesSelector = (state: TUseChat) =>
     state.resetSendSalesmanFiles;
+const buyerAvatarSelector = (state: TUseChat) => state.buyerAvatar;
+const setBuyerAvatarSelector = (state: TUseChat) => state.setBuyerAvatar;
+const salesmanAvatarSelector = (state: TUseChat) => state.salesmanAvatar;
+const setSalesmanAvatarSelector = (state: TUseChat) => state.setSalesmanAvatar;
 
 export {
     useChat,
@@ -370,4 +379,10 @@ export {
     removeSendSalesmanFileSelector,
     getSendBuyerFilesSelector,
     getSendSalesmanFilesSelector,
+    resetSendBuyerFilesSelector,
+    resetSendSalesmanFilesSelector,
+    buyerAvatarSelector,
+    setBuyerAvatarSelector,
+    salesmanAvatarSelector,
+    setSalesmanAvatarSelector,
 };
