@@ -8,16 +8,16 @@ import { devtools } from "zustand/middleware";
 type TSendMessage = Order["messages"][0]["text"];
 type TChatMessage = Chat["messages"][0];
 type TOrderMessage = Order["messages"][0];
-type TSendFile = {
-    data: string;
+
+type TGeneralFile<T> = {
     id: string;
     filePreviewURL: string;
+    name: string;
+    size: number;
+    data: T;
 };
-type TGetFile = {
-    data: Blob;
-    id: string;
-    filePreviewURL: string;
-};
+type TSendFile = TGeneralFile<string>;
+type TGetFile = TGeneralFile<Blob>;
 
 interface TUseChat {
     isMobileVersion?: boolean;
@@ -38,7 +38,7 @@ interface TUseChat {
     initBuyerData: (message: Order) => void;
     setSendBuyerMessage: (message: TSendMessage) => void;
     setSendBuyerFiles: (file: TGetFile) => void;
-    removeSendBuyerFile: (file: TSendFile) => void;
+    removeSendBuyerFile: (id: TSendFile["id"]) => void;
     addBuyerMessage: (message: TOrderMessage) => void;
     getSendBuyerFiles: () => TGetFile | undefined;
 
@@ -52,7 +52,7 @@ interface TUseChat {
     initSalesmanData: (message: Order) => void;
     setSendSalesmanMessage: (message: TSendMessage) => void;
     setSendSalesmanFiles: (file: TGetFile) => void;
-    removeSendSalesmanFile: (file: TSendFile) => void;
+    removeSendSalesmanFile: (id: TSendFile["id"]) => void;
     addSalesmanMessage: (message: TOrderMessage) => void;
     getSendSalesmanFiles: () => TGetFile | undefined;
 }
@@ -132,21 +132,21 @@ const useChat = create<TUseChat>()(
                 sendBuyerFiles: [...(files ? files : []), saveFile],
             });
         },
-        removeSendBuyerFile: (file) => {
+        removeSendBuyerFile: (id) => {
             const files = get().sendBuyerFiles;
             if (files)
                 set({
                     sendBuyerFiles: files.filter((props) => {
-                        return props.id !== file.id;
+                        return props.id !== id;
                     }),
                 });
         },
-        removeSendSalesmanFile: (file) => {
+        removeSendSalesmanFile: (id) => {
             const files = get().sendSalesmanFiles;
             if (files)
                 set({
                     sendSalesmanFiles: files.filter((props) => {
-                        return props.id !== file.id;
+                        return props.id !== id;
                     }),
                 });
         },

@@ -29,7 +29,13 @@ const ViewChatPlus: FC<Props> = ({ className, role }) => {
             const blob = new Blob([file], { type: file.type });
             const filePreviewURL = URL.createObjectURL(file);
 
-            setSendFiles({ data: blob, id: nanoid(), filePreviewURL });
+            setSendFiles({
+                data: blob,
+                id: nanoid(),
+                filePreviewURL,
+                name: file.name,
+                size: file.size,
+            });
         }
     };
 

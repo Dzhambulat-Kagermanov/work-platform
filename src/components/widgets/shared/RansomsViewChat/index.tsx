@@ -8,6 +8,7 @@ import cls from "./index.module.scss";
 import { PageLoader } from "@/components/ui/loaders";
 import { PageErrorStub } from "@/components/ui/page-error-stub";
 import { Order } from "@/types/api";
+import { ImageSendArea } from "./ImageSendArea";
 
 export type TRole = "salesman" | "buyer";
 
@@ -42,6 +43,7 @@ const RansomsViewChat: FC<Props> = ({
                         messages={chatData?.messages}
                         className={cn(cls.messages)}
                     />
+                    <ImageSendArea role={role} />
                     <ActionsArea
                         role={role}
                         className={cn(cls.actions)}
