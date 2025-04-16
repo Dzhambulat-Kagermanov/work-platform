@@ -42,7 +42,6 @@ const HeadAreaBackBtn: FC<Props> = ({ setActiveId, className, role }) => {
         ) {
             setIsMobileVersion(true);
         } else {
-            console.log(2);
             setIsMobileVersion(false);
         }
     }, [width]);
