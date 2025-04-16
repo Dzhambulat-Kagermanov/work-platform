@@ -12,6 +12,11 @@ import cls from "./index.module.scss";
 import React from "react";
 import { dateParserHandler } from "@/handlers";
 import { useSessionQuery } from "@/hooks/api/auth";
+import {
+    buyerAvatarSelector,
+    salesmanAvatarSelector,
+    useChat,
+} from "@/store/useChat";
 
 interface Props extends TClassName, TViewChatMessageGroupProps {
     userIsOnline: boolean;
@@ -20,6 +25,9 @@ const MessagesAreaGroup: FC<Props> = memo(
     ({ date, className, messages, userIsOnline }) => {
         const { data: userData } = useSessionQuery();
         const role = userData?.role.slug;
+
+        const buyerAvatar = useChat(buyerAvatarSelector);
+        const salesmanAvatar = useChat(salesmanAvatarSelector);
 
         return (
             <div className={cn(cls.wrapper, [className])}>
@@ -102,7 +110,11 @@ const MessagesAreaGroup: FC<Props> = memo(
                                                 whoReading={"reading-salesman"}
                                                 tag="li"
                                                 id={item.id}
-                                                avatar={""}
+                                                avatar={
+                                                    item.whoSend === "buyer"
+                                                        ? salesmanAvatar || ""
+                                                        : buyerAvatar || ""
+                                                }
                                                 className={cn(cls.item)}
                                                 message={item.text}
                                                 messageCls={cn(

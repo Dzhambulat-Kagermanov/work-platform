@@ -34,8 +34,6 @@ const useGetSellerProductsQuery = (query: QueryItem[]) => {
             break;
     }
 
-    console.log({ filterQueryItem, filterQuery });
-
     return useQuery({
         queryKey: [
             SELLER_PRODUCTS_QUERY_KEY,

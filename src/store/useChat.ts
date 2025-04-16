@@ -283,6 +283,12 @@ const useChat = create<TUseChat>()(
         resetSendSalesmanFiles: () => {
             set(() => ({ sendSalesmanFiles: [] }));
         },
+        setBuyerAvatar: (avatar) => {
+            set({ buyerAvatar: avatar });
+        },
+        setSalesmanAvatar: (avatar) => {
+            set({ salesmanAvatar: avatar });
+        },
     })),
 );
 
