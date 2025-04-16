@@ -40,7 +40,8 @@ interface TUseChat {
     setSendBuyerFiles: (file: TGetFile) => void;
     removeSendBuyerFile: (id: TSendFile["id"]) => void;
     addBuyerMessage: (message: TOrderMessage) => void;
-    getSendBuyerFiles: () => TGetFile | undefined;
+    getSendBuyerFiles: () => TGetFile[] | undefined;
+    resetSendBuyerFiles: () => void;
 
     initSalesmanChats?: Chat[];
     setInitSalesmanChats: (params: Chat[]) => void;
@@ -54,7 +55,8 @@ interface TUseChat {
     setSendSalesmanFiles: (file: TGetFile) => void;
     removeSendSalesmanFile: (id: TSendFile["id"]) => void;
     addSalesmanMessage: (message: TOrderMessage) => void;
-    getSendSalesmanFiles: () => TGetFile | undefined;
+    getSendSalesmanFiles: () => TGetFile[] | undefined;
+    resetSendSalesmanFiles: () => void;
 }
 
 const useChat = create<TUseChat>()(
@@ -154,7 +156,6 @@ const useChat = create<TUseChat>()(
             const files = get().sendBuyerFiles;
             if (files) {
                 return files.map((file) => ({
-                    ...files,
                     data: base64ToBlob(file.data),
                 }));
             }
@@ -163,7 +164,6 @@ const useChat = create<TUseChat>()(
             const files = get().sendSalesmanFiles;
             if (files) {
                 return files.map((file) => ({
-                    ...files,
                     data: base64ToBlob(file.data),
                 }));
             }
@@ -272,6 +272,12 @@ const useChat = create<TUseChat>()(
                 return state;
             });
         },
+        resetSendBuyerFiles: () => {
+            set(() => ({ sendBuyerFiles: [] }));
+        },
+        resetSendSalesmanFiles: () => {
+            set(() => ({ sendSalesmanFiles: [] }));
+        },
     })),
 );
 
@@ -324,6 +330,10 @@ const removeSendSalesmanFileSelector = (state: TUseChat) =>
 const getSendBuyerFilesSelector = (state: TUseChat) => state.getSendBuyerFiles;
 const getSendSalesmanFilesSelector = (state: TUseChat) =>
     state.getSendSalesmanFiles;
+export const resetSendBuyerFilesSelector = (state: TUseChat) =>
+    state.resetSendBuyerFiles;
+export const resetSendSalesmanFilesSelector = (state: TUseChat) =>
+    state.resetSendSalesmanFiles;
 
 export {
     useChat,

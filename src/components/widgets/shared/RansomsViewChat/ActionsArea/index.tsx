@@ -11,10 +11,16 @@ import { TRole } from "..";
 import { useQueryClient } from "@tanstack/react-query";
 import { GET_CHAT_STATUSES_KEY } from "@/hooks/api/chat/useGetChatStatusesQuery";
 import {
+    getSendBuyerFilesSelector,
+    getSendSalesmanFilesSelector,
+    resetSendBuyerFilesSelector,
+    resetSendSalesmanFilesSelector,
     sendBuyerFilesSelector,
     sendSalesmanFilesSelector,
     useChat,
 } from "@/store/useChat";
+import toast from "react-hot-toast";
+import { AxiosError } from "axios";
 
 interface Props extends TClassName {
     activeId?: number;
@@ -25,33 +31,51 @@ const ActionsArea: FC<Props> = ({ className, activeId, role }) => {
     const files = useChat(
         role === "buyer" ? sendBuyerFilesSelector : sendSalesmanFilesSelector,
     );
+    const filesBlob = useChat(
+        role === "buyer"
+            ? getSendBuyerFilesSelector
+            : getSendSalesmanFilesSelector,
+    )();
     const [message, setMessage] = useState<string>("");
-
     const sendMessage = useSendMessageMutation(activeId);
+    const resetFiles = useChat(
+        role === "buyer"
+            ? resetSendBuyerFilesSelector
+            : resetSendSalesmanFilesSelector,
+    );
+    console.log(filesBlob);
 
     if (!activeId) return null;
 
     const handleSubmit: FormEventHandler = (event) => {
-        const formData = new FormData();
-        if (message) formData.append("text", message);
-        if (files) {
-            files.forEach((blob) => {
+        if (filesBlob?.length) {
+            const formData = new FormData();
+            if (message) formData.append("text", message);
+            filesBlob.forEach((blob) => {
                 formData.append("files[]", blob.data);
             });
-        }
 
-        event.preventDefault();
-        sendMessage.mutate(
-            { chatId: activeId, formData },
-            {
-                onSettled: () => {
-                    queryClient.invalidateQueries({
-                        queryKey: GET_CHAT_STATUSES_KEY,
-                    });
-                    setMessage("");
+            event.preventDefault();
+            sendMessage.mutate(
+                { chatId: activeId, formData },
+                {
+                    onError: (err) => {
+                        const error = err as AxiosError<{ message: string }>;
+
+                        toast.error(error.response?.data.message as string);
+                    },
+                    onSettled: () => {
+                        queryClient.invalidateQueries({
+                            queryKey: GET_CHAT_STATUSES_KEY,
+                        });
+                        setMessage("");
+                    },
+                    onSuccess: () => {
+                        resetFiles();
+                    },
                 },
-            },
-        );
+            );
+        }
     };
 
     return (
@@ -69,7 +93,7 @@ const ActionsArea: FC<Props> = ({ className, activeId, role }) => {
             />
             <ViewChatSendMessage
                 className={cn(cls.send_btn)}
-                disabled={!message}
+                disabled={!message && !filesBlob?.length}
             />
         </form>
     );
