@@ -3,6 +3,7 @@ import { PageLoader } from "@/components/ui/loaders";
 import { ROUTES } from "@/constants";
 import { useSessionQuery } from "@/hooks/api/auth";
 import {
+    profileSelector,
     setProfileSelector,
     setUserIdSelector,
     useProfile,
@@ -26,6 +27,7 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
     reverse,
     sellerRedirectLink,
 }) => {
+    const profile = useProfile(profileSelector);
     const setUserId = useProfile(setUserIdSelector);
     const setProfile = useProfile(setProfileSelector);
     const { data, isLoading, isError } = useSessionQuery();
@@ -57,12 +59,14 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
         } else if (data) {
             if (!data.is_configured) {
                 pushToRegEnd();
-            } else if (reverse) {
-                router.push(
-                    sellerRedirectLink && data.role.slug === "seller"
-                        ? sellerRedirectLink
-                        : (redirectLink ?? ROUTES.MAIN),
-                );
+            } else if (reverse && !profile) {
+                setTimeout(() => {
+                    router.push(
+                        sellerRedirectLink && data.role.slug === "seller"
+                            ? sellerRedirectLink
+                            : (redirectLink ?? ROUTES.MAIN),
+                    );
+                }, 1000);
             }
         }
         if (!isLoading) {
