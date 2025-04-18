@@ -55,7 +55,7 @@ const LinksDropdown: FC<Props> = ({
                 noSwitchActiveWhenSelect
                 expandType="inline"
                 defaultActiveValue="title"
-                disabled={sidebarIsExpand === false}
+                disable={false}
                 items={[
                     {
                         content: (
