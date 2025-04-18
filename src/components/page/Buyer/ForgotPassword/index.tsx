@@ -14,7 +14,7 @@ const ForgotPasswordPage: FC<Props> = ({ className }) => {
         <AuthWrapper reverse redirectLink={ROUTES.BUYER.ACCOUNT.VALUE}>
             <SignLayout
                 logo="/images/shared/logo-v2.svg"
-                title="Восстановление пароля"
+                title="Восстановление пароля тест"
                 className={cn(cls.forgot, [className])}
             >
                 <ForgotForm className={cn(cls.form)} />
