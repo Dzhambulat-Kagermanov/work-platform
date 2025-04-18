@@ -1,13 +1,13 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { apiService } from "@/services";
 import { QueryItem } from "@/types/client";
 import { useFiltersStore } from "@/store";
 import { mainPageFiltersSelector } from "@/store/useFiltersStore";
 import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
-const useProductsListQuery = () => {
+const useProductsListQuery = (limit = 24) => {
     const mainPageFilters = useFiltersStore(mainPageFiltersSelector);
 
     const [queryItems, setQueryItems] = useState<QueryItem[]>([]);
@@ -125,13 +125,39 @@ const useProductsListQuery = () => {
         queryItemsHandler();
     }, [mainPageFilters]);
 
-    return useQuery({
+    return useInfiniteQuery({
         queryKey: ["products-list", queryItems],
-        queryFn: async () => {
-            const res = await apiService.products.getProductsList(
-                queryItems || [],
-            );
+        queryFn: async ({ pageParam }) => {
+            // Добавляем параметры пагинации
+            const paginationParams: QueryItem[] = [
+                { key: 'page', value: `${pageParam}` },
+                { key: 'limit', value: `${limit}` }
+            ];
+            
+            // Объединяем все параметры запроса
+            const allParams = [...(queryItems || []), ...paginationParams];
+            
+            // Запрос к API
+            const res = await apiService.products.getProductsList(allParams);
             return res;
+        },
+        initialPageParam: 1,
+        getNextPageParam: (lastPage, allPages) => {
+            // Проверяем, есть ли ещё страницы для загрузки
+            if (!lastPage) return undefined;
+            
+            const totalItems = lastPage.total || 0;
+            const loadedItemsCount = allPages.reduce((count, page) => {
+                return count + (page?.data?.length || 0);
+            }, 0);
+            
+            // Если загружены все товары, больше страниц нет
+            if (loadedItemsCount >= totalItems) {
+                return undefined;
+            }
+            
+            // Иначе возвращаем номер следующей страницы
+            return allPages.length + 1;
         },
         staleTime: 30_000,
         retry: 3,
