@@ -18,7 +18,7 @@ const BalancePage: FC<Props> = ({ className }) => {
                         href="/buyer/account"
                         className={cn(cls.back_btn, ["modules-gap-both"])}
                     >
-                        Баланс / Финансы
+                        Баланс / Финансы тест
                     </BackButton>
                     <BalanceInfo className={cn(cls.info)} />
                     <BalanceTransactions className={cn(cls.transactions)} />
