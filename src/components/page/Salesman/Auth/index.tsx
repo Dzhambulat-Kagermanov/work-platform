@@ -19,7 +19,7 @@ const AuthPage: FC<Props> = ({ className }) => {
             <SalesmanAuthBackgroundLayout>
                 <SignLayout
                     logo="/images/shared/logo-v2.svg"
-                    title="Авторизация продавца"
+                    title="Авторизация тест продавца"
                     authActions="forSalesmanAuth"
                     className={cn(cls.main, [className])}
                     paddingStubCls={cn(cls.padding_stub)}
