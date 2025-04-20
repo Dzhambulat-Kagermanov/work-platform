@@ -60,6 +60,13 @@ const LinksDropdown: FC<Props> = ({
                         }
                         text="Продвижение"
                         className={cn(cls.item)}
+                        linkOnClick={(e) => {
+                            // Раскрываем сайдбар при нажатии на иконку домика
+                            if (sidebarIsExpand === false && collapseSidebar) {
+                                e.preventDefault();
+                                collapseSidebar(e);
+                            }
+                        }}
                     />
                 }
                 disable={sidebarIsExpand === false}
