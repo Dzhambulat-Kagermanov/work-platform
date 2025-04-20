@@ -1,4 +1,5 @@
-import { FC } from "react";
+"use client";
+import { FC, useEffect, useState, MouseEventHandler } from "react";
 import { TClassName } from "@/types";
 import { Dropdown, Typography } from "@/components/ui";
 import { HomeIcon } from "@/icons";
@@ -16,19 +17,33 @@ interface Props extends TClassName {
     sidebarIsExpand?: boolean;
     linkOnClick?: () => void;
     homePageType: TSalesmanHomePageType;
+    collapseSidebar?: MouseEventHandler;
 }
 const LinksDropdown: FC<Props> = ({
     className,
     sidebarIsExpand,
     homePageType,
     linkOnClick,
+    collapseSidebar,
 }) => {
     const { data: products } = useGetSellerProductsQuery([]);
     const { data: ads } = useGetAdsListQuery([]);
+
+    // Use internal state to track dropdown state
+    const [isDropdownExpanded, setIsDropdownExpanded] = useState(false);
+    
+    // Monitor sidebar collapse state and close dropdown if sidebar collapses
+    useEffect(() => {
+        if (sidebarIsExpand === false) {
+            setIsDropdownExpanded(false);
+        }
+    }, [sidebarIsExpand]);
+    
+
     return (
         <li className={cn(cls.wrapper, [className])}>
             <Dropdown
-                isExpandState={false}
+                isExpandState={isDropdownExpanded}
                 wrapperCls={cn(cls.dropdown_wrapper, [], {
                     [cls.sidebarIsExpand]:
                         sidebarIsExpand || sidebarIsExpand === undefined,
@@ -47,11 +62,11 @@ const LinksDropdown: FC<Props> = ({
                         className={cn(cls.item)}
                     />
                 }
+                disable={sidebarIsExpand === false}
                 activeItemCls={cn(cls.dropdown_active)}
                 contentCls={cn(cls.dropdown_content)}
                 itemCls={cn(cls.dropdown_item)}
                 isExpandCls={cn(cls.dropdown_isExpand)}
-                noCollapseWhenSelect
                 noSwitchActiveWhenSelect
                 expandType="inline"
                 defaultActiveValue="title"
@@ -61,7 +76,17 @@ const LinksDropdown: FC<Props> = ({
                             <Item
                                 slug={null}
                                 activeSlug={homePageType}
-                                linkOnClick={linkOnClick}
+                                linkOnClick={(e) => {
+                                    linkOnClick && linkOnClick();
+                                    // Если пользователь кликнул по элементу, сворачиваем сайдбар
+                                    if (collapseSidebar && sidebarIsExpand !== false) {
+                                        e.preventDefault();
+                                        // Сначала закрываем дропдаун
+                                        setIsDropdownExpanded(false);
+                                        // Затем сворачиваем сайдбар
+                                        collapseSidebar(e);
+                                    }
+                                }}
                                 sidebarIsExpand={sidebarIsExpand}
                                 icon={
                                     <HomeIcon
@@ -90,7 +115,17 @@ const LinksDropdown: FC<Props> = ({
                             <Item
                                 slug="advertisements"
                                 activeSlug={homePageType}
-                                linkOnClick={linkOnClick}
+                                linkOnClick={(e) => {
+                                    linkOnClick && linkOnClick();
+                                    // Если пользователь кликнул по элементу, сворачиваем сайдбар
+                                    if (collapseSidebar && sidebarIsExpand !== false) {
+                                        e.preventDefault();
+                                        // Сначала закрываем дропдаун
+                                        setIsDropdownExpanded(false);
+                                        // Затем сворачиваем сайдбар
+                                        collapseSidebar(e);
+                                    }
+                                }}
                                 sidebarIsExpand={sidebarIsExpand}
                                 icon={
                                     <HomeIcon
@@ -119,7 +154,17 @@ const LinksDropdown: FC<Props> = ({
                             <Item
                                 slug="ransoms"
                                 activeSlug={homePageType}
-                                linkOnClick={linkOnClick}
+                                linkOnClick={(e) => {
+                                    linkOnClick && linkOnClick();
+                                    // Если пользователь кликнул по элементу, сворачиваем сайдбар
+                                    if (collapseSidebar && sidebarIsExpand !== false) {
+                                        e.preventDefault();
+                                        // Сначала закрываем дропдаун
+                                        setIsDropdownExpanded(false);
+                                        // Затем сворачиваем сайдбар
+                                        collapseSidebar(e);
+                                    }
+                                }}
                                 sidebarIsExpand={sidebarIsExpand}
                                 icon={
                                     <HomeIcon
