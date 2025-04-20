@@ -37,6 +37,7 @@ const Sidebar: FC<Props> = ({ className, homePageType }) => {
                     sidebarIsExpand={!!isExpand}
                     className={cn(cls.group)}
                     homePageType={homePageType}
+                    collapseSidebar={handleExpand}
                 />
                 <UserInfo
                     className={cn(cls.info)}

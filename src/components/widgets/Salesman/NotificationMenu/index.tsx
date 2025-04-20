@@ -54,6 +54,7 @@ const NotificationMenu: FC<Props> = ({ className }) => {
                                         key={id}
                                         {...props}
                                         type="forMenu"
+                                        title="Уведомление"
                                     />
                                 );
                             })}

@@ -26,12 +26,14 @@ interface Props extends TClassName {
     sidebarIsExpand?: boolean;
     linkOnClick?: () => void;
     homePageType: TSalesmanHomePageType;
+    collapseSidebar?: MouseEventHandler;
 }
 const LinksGroup: FC<Props> = ({
     sidebarIsExpand,
     className,
     linkOnClick,
     homePageType,
+    collapseSidebar,
 }) => {
     const allNotifications = useSalesmanNotifications(allNotificationsSelector);
     const showModal = useModalStore((state) => state.showModal);
@@ -44,6 +46,7 @@ const LinksGroup: FC<Props> = ({
                 linkOnClick={linkOnClick}
                 className={cn(cls.dropdown)}
                 sidebarIsExpand={sidebarIsExpand}
+                collapseSidebar={collapseSidebar}
             />
             <Item
                 linkOnClick={linkOnClick}
