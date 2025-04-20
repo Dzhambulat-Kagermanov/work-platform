@@ -6,7 +6,6 @@ import { Typography } from "@/components/ui";
 import cls from "./index.module.scss";
 import { PlusIcon } from "@/icons";
 import { TRAN_MID } from "@/constants";
-import { title } from "process";
 import { dateParserHandler } from "@/handlers";
 
 interface Props extends TClassName, TTag, TNotificationItemProps {
@@ -14,6 +13,7 @@ interface Props extends TClassName, TTag, TNotificationItemProps {
     // Если type === 'forOverlay'
     deleteNotification?: (id: number) => void;
     isHiddenCls?: string;
+    title?: string; // Added title prop
     ///////////////////////
 }
 const NotificationItem: FC<Props> = memo(
@@ -30,6 +30,7 @@ const NotificationItem: FC<Props> = memo(
         id,
         deleteNotification,
         isHiddenCls,
+        title = "Уведомление", // Default title if none provided
     }) => {
         const [tranState, setTranState] = useState<boolean>(true);
         const handleClose: MouseEventHandler = (e) => {
