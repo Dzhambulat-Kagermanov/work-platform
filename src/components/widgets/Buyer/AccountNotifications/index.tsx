@@ -1,12 +1,19 @@
+"use client";
 import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { AccountContentBlock, Typography } from "@/components/ui";
 import Image from "next/image";
 import cls from "./index.module.scss";
+import Link from "next/link";
+import { useGetTelegramLink } from "@/hooks/api/users/useGetTelegramLink";
 
 interface Props extends TClassName {}
 const AccountNotifications: FC<Props> = ({ className }) => {
+    const getTelegramLink = useGetTelegramLink();
+
+    console.log(getTelegramLink.data);
+
     return (
         <AccountContentBlock
             tag="section"
@@ -14,7 +21,14 @@ const AccountNotifications: FC<Props> = ({ className }) => {
             className={cn(cls.wrapper, [className])}
             contentWrapperCls={cn(cls.content)}
         >
-            <button className={cn(cls.notification_link)}>
+            <button
+                className={cn(cls.notification_link)}
+                disabled={!getTelegramLink.data?.link}
+            >
+                <Link
+                    href={getTelegramLink.data?.link || "#"}
+                    target="_blank"
+                />
                 <Image
                     src="/images/shared/social/telegram-original.svg"
                     alt="Telegram"

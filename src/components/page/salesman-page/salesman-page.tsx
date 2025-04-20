@@ -23,6 +23,7 @@ const SalesmanInfoPage: FC<Props> = ({ className }) => {
         isLoading,
         isError,
     } = useGetSellerQuery(typeof id === "string" ? id : "");
+    console.log(profile);
 
     if (isLoading) {
         return <PageLoader />;

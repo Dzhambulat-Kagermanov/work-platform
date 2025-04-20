@@ -1,5 +1,5 @@
 "use client";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { RansomsChats } from "../RansomsChats";
@@ -12,7 +12,11 @@ import {
 } from "@/constants";
 import cls from "./index.module.scss";
 import { ChatStatus } from "@/types/api";
-import { salesmanActiveChatSelector, useChat } from "@/store/useChat";
+import {
+    salesmanActiveChatSelector,
+    setIsMobileVersionSelector,
+    useChat,
+} from "@/store/useChat";
 
 interface Props extends TClassName {
     chatType: ChatStatus;
@@ -24,6 +28,18 @@ const RansomsContent: FC<Props> = ({ className, chatType }) => {
     const sidebarState = useModalStore(
         (state) => state.modalsStates[SALESMAN_SIDEBAR_MENU]?.modalState,
     );
+    const setIsMobileVersion = useChat(setIsMobileVersionSelector);
+
+    useEffect(() => {
+        if (
+            (sidebarState && width <= LG_LOW) ||
+            width <= MD_BIG_BETWEEN_MD_LOW
+        ) {
+            setIsMobileVersion(true);
+        } else {
+            setIsMobileVersion(false);
+        }
+    }, [width]);
 
     const IS_RENDER_RANSOMS_CHAT =
         ((sidebarState && activeId === undefined) ||

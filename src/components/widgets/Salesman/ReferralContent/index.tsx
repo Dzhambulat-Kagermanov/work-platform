@@ -1,18 +1,28 @@
 "use client";
-import { FC, MouseEventHandler } from "react";
+import { FC, MouseEventHandler, useEffect } from "react";
 import cls from "./index.module.scss";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { Typography } from "@/components/ui";
 import { CopyIcon } from "lucide-react";
 import Link from "next/link";
+import { profileSelector, useProfile } from "@/store/useProfile";
+import { useReferralLink } from "@/hooks/api/seller/useReferralLink";
 
 interface Props extends TClassName {}
 
 const ReferralContent: FC<Props> = ({ className }) => {
+    const profile = useProfile(profileSelector);
     const handleCopy: MouseEventHandler = () => {
         navigator.clipboard.writeText("https://wbdiscount.pro/seller/balance");
     };
+
+    const referralLink = useReferralLink();
+
+    useEffect(() => {
+        if (profile?.id) referralLink.mutate(profile.id);
+    }, []);
+
     return (
         <section className={cn(cls.wrapper, [className])}>
             <Typography font="Inter-R" tag="p" size={14} className={cls.text}>

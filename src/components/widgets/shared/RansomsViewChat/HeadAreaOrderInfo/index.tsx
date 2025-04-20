@@ -6,9 +6,12 @@ import { cn } from "@/lib";
 import { useModalStore, useScreen } from "@/hooks";
 import { BUYER_DELIVERY_CHAT_ORDER_INFO_MODAL, MD_LOW } from "@/constants";
 import cls from "./index.module.scss";
+import { Order } from "@/types/api";
 
-interface Props extends TClassName {}
-const HeadAreaOrderInfo: FC<Props> = ({ className }) => {
+interface Props extends TClassName {
+    adsId: Order["ads_id"];
+}
+const HeadAreaOrderInfo: FC<Props> = ({ className, adsId }) => {
     const showModal = useModalStore((state) => state.showModal);
     const handleModalOpen = () => {
         showModal({ slug: BUYER_DELIVERY_CHAT_ORDER_INFO_MODAL });
@@ -20,7 +23,7 @@ const HeadAreaOrderInfo: FC<Props> = ({ className }) => {
             {width > MD_LOW ? (
                 <div className={cn(cls.wrapper, [className])}>
                     <Typography font="Inter-R" size={12} tag="h6">
-                        Заказ #739923
+                        Заказ #{adsId}
                     </Typography>
                 </div>
             ) : (

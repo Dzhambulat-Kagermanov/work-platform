@@ -146,6 +146,11 @@ class SellerService {
         );
         return res.data;
     }
+    async referralLink(userId: number) {
+        const res = await axios.post(`/referral/${userId}`);
+        return res.data;
+    }
+
     async getAd(id: Ad["id"]) {
         const res = await axios.get<Ad>(`/seller/ads/${id}`);
         return res.data;

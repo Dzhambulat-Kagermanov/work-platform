@@ -66,6 +66,7 @@ interface TUseChat {
 
 const useChat = create<TUseChat>()(
     devtools((set, get) => ({
+        isMobileVersion: true,
         updateBuyerDataSelector: (id) => {
             //@ts-ignore
             set((state) => {

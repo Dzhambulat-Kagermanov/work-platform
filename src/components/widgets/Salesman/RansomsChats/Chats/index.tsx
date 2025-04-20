@@ -17,6 +17,8 @@ import {
     updateSalesmanDataSelector,
     useChat,
 } from "@/store/useChat";
+import { dateParserHandler } from "@/handlers";
+import { formatTimeToHHMM } from "@/lib/formatTimeToHHMM";
 
 interface Props extends TClassName {
     chatType: ChatStatus;
@@ -85,9 +87,11 @@ const Chats: FC<Props> = ({ className, chatType, search }) => {
                         newMessagesQnt={item.messages.length}
                         isActive={activeId === item.id}
                         avatar={item.user.avatar ?? ""}
-                        isOnline={true}
+                        isOnline={item.user.is_online}
                         id={item.id}
-                        lastOnlineTime={"18:00"}
+                        lastOnlineTime={formatTimeToHHMM(
+                            item.updated_at || item.created_at || "",
+                        )}
                         productName={item.ad.product.name}
                         lastMessage={
                             item.messages[item.messages.length - 1]?.text || ""

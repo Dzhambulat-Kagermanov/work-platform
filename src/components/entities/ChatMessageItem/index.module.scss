@@ -53,6 +53,7 @@
 .reading-user {
     &.user {
         margin: 0 0 0 auto;
+        justify-content: flex-end;
         .content {
             border: var(--chat-main-border);
             border-radius: 10px 0 10px 10px;
@@ -67,6 +68,7 @@
         }
     }
     &.salesman {
+        justify-content: flex-start;
         .content {
             background-color: var(--white-300);
             border-radius: 0 10px 10px;

@@ -29,7 +29,7 @@ const ContentHead: FC<Props> = memo(({ product, className }) => {
                 tag="h2"
                 className={cn(cls.title)}
             >
-                {product.name}
+                {product.product.name}
             </Typography>
             {width <= SM_BIG && (
                 <div className={cn(cls.products_info)}>

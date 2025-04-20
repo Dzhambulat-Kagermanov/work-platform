@@ -15,6 +15,7 @@ type User = {
     shop: Shop;
     role: Role;
     email: string | null;
+    is_online: boolean;
 } & Pick<Timestamps, "created_at">;
 
 export type Seller = {

@@ -11,8 +11,6 @@ const ProductCard: FC<Props> = async ({ params }) => {
 
     const product = await apiService.products.getProductItem(card);
 
-    console.log(product);
-
     if (!product) return notFound();
 
     return <ProductCardPage product={product} />;

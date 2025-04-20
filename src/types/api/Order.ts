@@ -25,6 +25,7 @@ type Order = {
     messages: Message[];
     ad: Product;
     whoSend: Role["slug"];
+    ads_id: number;
 } & Timestamps;
 
 export default Order;

@@ -109,7 +109,7 @@ const ProductItem: FC<Props> = memo(
                 <div className={cn(cls.content, [contentCls])}>
                     <div className={cn(cls.price)}>
                         <Typography font="Inter-SB" size={18} tag="h5">
-                            {dsc} ₽
+                            {(+dsc).toFixed(0)} ₽
                         </Typography>
                         {tooltip && (
                             <div
@@ -124,7 +124,7 @@ const ProductItem: FC<Props> = memo(
                         )}
                         {price.price && (
                             <Typography font="Inter-R" size={14} tag="h6">
-                                {Math.round(price.price)} ₽
+                                {Math.round(price.price).toFixed(0)} ₽
                             </Typography>
                         )}
                     </div>

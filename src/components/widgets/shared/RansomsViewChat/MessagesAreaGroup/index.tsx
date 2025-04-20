@@ -107,11 +107,15 @@ const MessagesAreaGroup: FC<Props> = memo(
                                     if (item.type === "text") {
                                         return (
                                             <ChatMessageItem
-                                                whoReading={"reading-salesman"}
+                                                whoReading={
+                                                    role === "buyer"
+                                                        ? "reading-user"
+                                                        : "reading-salesman"
+                                                }
                                                 tag="li"
                                                 id={item.id}
                                                 avatar={
-                                                    item.whoSend === "buyer"
+                                                    item.whoSend !== "buyer"
                                                         ? buyerAvatar || ""
                                                         : salesmanAvatar || ""
                                                 }

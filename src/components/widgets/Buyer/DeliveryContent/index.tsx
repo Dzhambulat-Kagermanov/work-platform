@@ -1,14 +1,18 @@
 "use client";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { DeliveryChats } from "../DeliveryChats";
 import { useScreen } from "@/hooks";
-import { MD_LOW } from "@/constants";
+import { LG_LOW, MD_BIG_BETWEEN_MD_LOW, MD_LOW } from "@/constants";
 import cls from "./index.module.scss";
 import { ChatStatus } from "@/types/api";
 import { RansomsViewChat } from "../RansomsViewChat";
-import { buyerActiveChatSelector, useChat } from "@/store/useChat";
+import {
+    buyerActiveChatSelector,
+    setIsMobileVersionSelector,
+    useChat,
+} from "@/store/useChat";
 
 interface Props extends TClassName {
     chatType: ChatStatus;
@@ -16,6 +20,16 @@ interface Props extends TClassName {
 const DeliveryContent: FC<Props> = ({ className, chatType }) => {
     const width = useScreen();
     const activeId = useChat(buyerActiveChatSelector);
+
+    const setIsMobileVersion = useChat(setIsMobileVersionSelector);
+
+    useEffect(() => {
+        if (width <= MD_LOW) {
+            setIsMobileVersion(true);
+        } else {
+            setIsMobileVersion(false);
+        }
+    }, [width]);
 
     return (
         <section className={cn(cls.wrapper, [className])}>
