@@ -106,7 +106,7 @@ const Products: FC<Props> = ({ className }) => {
             </ul>
             {isFetchingNextPage && (
                 <div className={cls.loadingMore}>
-                    <PageLoader />
+                    <PageLoader className="h-auto min-h-0" />
                 </div>
             )}
             {!hasNextPage && !isFetchingNextPage && !noProductsFound && (
