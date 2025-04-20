@@ -14,3 +14,16 @@
         gap: 5px;
     }
 }
+
+.loadingMore {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0; 
+}
+
+.endMessage {
+    text-align: center; 
+    padding: 20px 0; 
+    color: var(--gray-500); 
+}
