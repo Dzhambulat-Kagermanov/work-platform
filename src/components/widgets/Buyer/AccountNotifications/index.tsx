@@ -12,8 +12,6 @@ interface Props extends TClassName {}
 const AccountNotifications: FC<Props> = ({ className }) => {
     const getTelegramLink = useGetTelegramLink();
 
-    console.log(getTelegramLink.data);
-
     return (
         <AccountContentBlock
             tag="section"

@@ -15,6 +15,7 @@ import { PasswordChangedModal } from "../../shared/PasswordChangedModal";
 import cls from "./index.module.scss";
 import { Formik } from "formik";
 import { useSessionQuery, useUpdateProfileMutation } from "@/hooks/api/auth";
+import { SwitchRoleButton } from "@/components/features/SwitchRoleButton";
 
 interface Props extends TClassName {
     forSalesman?: boolean;
@@ -31,7 +32,12 @@ const AccountForm: FC<Props> = ({ className, forSalesman }) => {
             title="Личная информация"
             className={cn(cls.wrapper, [className])}
             endChildren={
-                width > MD_BIG && <AccountExit className={cn(cls.exit_btn)} />
+                width > MD_BIG && (
+                    <div className={cls.actions}>
+                        <AccountExit className={cn(cls.exit_btn)} />
+                        <SwitchRoleButton  />
+                    </div>
+                )
             }
         >
             <Formik

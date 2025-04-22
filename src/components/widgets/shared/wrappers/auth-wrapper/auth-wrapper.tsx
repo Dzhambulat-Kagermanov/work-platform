@@ -3,14 +3,19 @@ import { PageLoader } from "@/components/ui/loaders";
 import { ROUTES } from "@/constants";
 import { useSessionQuery } from "@/hooks/api/auth";
 import {
+    isSwitchRedirectSelector,
     profileSelector,
     setProfileSelector,
     setUserIdSelector,
     useProfile,
 } from "@/store/useProfile";
 import { RoleSlug } from "@/types/api";
+import { reverse } from "dns";
 import { useRouter } from "next/navigation";
+import router from "next/router";
 import React, { useEffect } from "react";
+import { isError } from "util";
+import profile from "../../../../../../_pages/salesman/profile";
 
 type AuthWrapperProps = {
     roles?: RoleSlug[];
@@ -37,6 +42,7 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
             `${ROUTES[data?.role.slug === "buyer" ? "BUYER" : "SALESMAN"].REGISTRATION}?currentStep=end`,
         );
     };
+    const isSwitchRedirect = useProfile(isSwitchRedirectSelector);
 
     useEffect(() => {
         if (data) {
@@ -48,8 +54,9 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
             (isError || (roles && data && roles.indexOf(data.role.slug) === -1))
         ) {
             if (!data?.is_configured) {
+                console.log(1);
                 pushToRegEnd();
-            } else {
+            } else if (!isSwitchRedirect) {
                 router.push(
                     sellerRedirectLink && data.role.slug === "seller"
                         ? sellerRedirectLink
@@ -59,14 +66,14 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
         } else if (data) {
             if (!data.is_configured) {
                 pushToRegEnd();
+                console.log(3);
             } else if (reverse && !profile) {
-                setTimeout(() => {
-                    router.push(
-                        sellerRedirectLink && data.role.slug === "seller"
-                            ? sellerRedirectLink
-                            : (redirectLink ?? ROUTES.MAIN),
-                    );
-                }, 1000);
+                console.log(4);
+                router.push(
+                    sellerRedirectLink && data.role.slug === "seller"
+                        ? sellerRedirectLink
+                        : (redirectLink ?? ROUTES.MAIN),
+                );
             }
         }
         if (!isLoading) {

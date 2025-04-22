@@ -16,10 +16,9 @@ import { useGetStatisticsQuery, useSessionQuery } from "@/hooks/api/auth";
 import { RoleSlug } from "@/types/api";
 import { AccountStatistic } from "@/components/widgets/account-statistic";
 import { AccountNotifications } from "@/components/widgets/Buyer/AccountNotifications";
+import { SwitchRoleButton } from "@/components/features/SwitchRoleButton";
 
 const AccountPageContent: FC<Props> = ({ className, forSalesman }) => {
-    const width = useScreen();
-
     const { data: user } = useSessionQuery();
     const { data: statistic } = useGetStatisticsQuery();
 
@@ -59,6 +58,7 @@ const AccountPageContent: FC<Props> = ({ className, forSalesman }) => {
                     />
                 </div>
                 <ExitBtnMobile className={cn(cls.exit_btn_mobile)} />
+
                 <ExitAccountModal className={cn(cls.exit_account_modal)} />
             </Container>
         </main>

@@ -14,6 +14,10 @@ class UsersService {
         const res = await axios.get<{ link: string }>(`/get-telegram-link`);
         return res.data;
     }
+    async roleSwitch() {
+        const res = await axios.post<{ message: string }>(`/role-switch`);
+        return res.data;
+    }
 }
 
 export default UsersService;

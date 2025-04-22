@@ -28,6 +28,7 @@ const TariffsContent: FC<Props> = ({ className }) => {
                             {tariffs.map((item, index) => {
                                 return (
                                     <TariffsItem
+                                    isMostPopular={index=== 1}
                                         tariff={item}
                                         key={index}
                                         className={cn(cls.item)}

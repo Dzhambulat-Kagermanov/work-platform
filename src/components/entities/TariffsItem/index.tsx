@@ -4,16 +4,24 @@ import { TClassName, TTag } from "@/types";
 import { cn } from "@/lib";
 import { Button, DiscountPlaque, Typography } from "@/components/ui";
 import { useModalStore } from "@/store";
-import { SALESMAN_TARIFFS_MODAL } from "@/constants";
+import { LG_LOW, SALESMAN_TARIFFS_MODAL } from "@/constants";
 import cls from "./index.module.scss";
 import { TariffItem } from "@/types/api";
 import { TariffsModal } from "@/components/widgets/Salesman/TariffsModal";
 import Image from "next/image";
+import { useScreen } from "@/hooks";
 
 interface Props extends TClassName, TTag {
     tariff: TariffItem;
+    isMostPopular?: boolean;
 }
-const TariffsItem: FC<Props> = ({ className, tariff, tag = "div" }) => {
+const TariffsItem: FC<Props> = ({
+    isMostPopular,
+    className,
+    tariff,
+    tag = "div",
+}) => {
+    const width = useScreen();
     const showModal = useModalStore((state) => state.showModal);
     const handleClick: MouseEventHandler = () => {
         showModal({
@@ -25,6 +33,19 @@ const TariffsItem: FC<Props> = ({ className, tariff, tag = "div" }) => {
         <>
             <TariffsModal tariff={tariff} className={cn(cls.modal)} />
             <Tag className={cn(cls.wrapper, [className])}>
+                {isMostPopular && width >= LG_LOW ? (
+                    <div className={cls.most_popular_arrow}>
+                        <Image
+                            src="/images/salesman/tariffs/most-popular-arrow.svg"
+                            alt="Самый популярный тариф"
+                            width={62}
+                            height={62}
+                        />
+                        <Typography font="Inter-M" tag="p" size={14}>
+                            Самый популярный
+                        </Typography>
+                    </div>
+                ) : null}
                 <div className={cn(cls.head)}>
                     <Typography font="Inter-M" size={20} tag="h2">
                         {tariff.name}
