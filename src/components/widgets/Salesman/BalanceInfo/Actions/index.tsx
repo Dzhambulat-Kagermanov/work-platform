@@ -21,7 +21,7 @@ const Actions: FC<Props> = ({ className, ransoms, setRansoms }) => {
 
     return (
         <div className={cn(cls.wrapper, [className])}>
-            {/* <div className={cn(cls.item, [cls.ransoms])}>
+            <div className={cn(cls.item, [cls.ransoms])}>
                 <Typography font="Inter-R" size={12} tag="h3">
                     Выкупы
                 </Typography>
@@ -29,22 +29,23 @@ const Actions: FC<Props> = ({ className, ransoms, setRansoms }) => {
                     className={cn(cls.info)}
                     onClick={() => setRansoms((prev) => prev + 1)}
                 >
-                    <Typography font="Inter-R" size={12}>
+                    <Typography font="Inter-R" size={12} >
                         {ransoms} шт
                     </Typography>
                     <button className={cn(cls.plus_btn)}>
                         <PlusIcon color="var(--grey-100)" />
                     </button>
                 </div>
-            </div> */}
+            </div>
 
-            <Button
-                theme="fill"
-                className={cn("", [cls.promocode])}
+            <button
+                className={cn(cls.item, [cls.promocode])}
                 onClick={handlePromocode}
             >
-                Ввести промокод
-            </Button>
+                <Typography font="Inter-R" size={12} tag="p">
+                    Ввести промокод
+                </Typography>
+            </button>
             {width <= 700 && width > 550 && <Paid className={cn(cls.paid)} />}
         </div>
     );

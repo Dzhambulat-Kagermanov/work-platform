@@ -19,14 +19,6 @@
     display: contents;
     flex-grow: 1;
     overflow: auto;
-
-    &::-webkit-scrollbar {
-        width: 3px;
-        background-color: transparent;
-    }
-    &::-webkit-scrollbar-thumb {
-        background-color: var(--grey-100);
-    }
 }
 .messages_group_wrapper {
     flex-grow: 1;
@@ -37,6 +29,13 @@
     max-height: 100%;
     display: flex;
     row-gap: 40px;
+    &::-webkit-scrollbar {
+        width: 3px;
+        background-color: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--grey-100);
+    }
 }
 .messages_group {
     &:last-child {

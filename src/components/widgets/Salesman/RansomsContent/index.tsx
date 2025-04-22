@@ -39,7 +39,7 @@ const RansomsContent: FC<Props> = ({ className, chatType }) => {
         } else {
             setIsMobileVersion(false);
         }
-    }, [width]);
+    }, [width, sidebarState]);
 
     const IS_RENDER_RANSOMS_CHAT =
         ((sidebarState && activeId === undefined) ||

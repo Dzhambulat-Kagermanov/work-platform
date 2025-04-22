@@ -16,8 +16,10 @@
     .info {
         display: flex;
         align-items: center;
-
         column-gap: 14px;
+        & > p {
+            white-space: nowrap;
+        }
     }
     .plus_btn {
         svg {
@@ -27,7 +29,10 @@
     }
 }
 .promocode {
-    padding: 8px 14px;
+    padding: 6px 21px;
+    p {
+        white-space: nowrap;
+    }
 }
 @media screen and (max-width: 1044px) {
     .wrapper {
@@ -57,5 +62,10 @@
     }
     .item {
         flex: 1;
+    }
+}
+@media screen and (max-width: 360px) {
+    .wrapper {
+        flex-wrap: wrap;
     }
 }
