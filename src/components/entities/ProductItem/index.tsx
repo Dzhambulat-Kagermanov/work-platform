@@ -51,19 +51,44 @@ const ProductItem: FC<Props> = memo(
         const { data: userData } = useSessionQuery();
 
         const { data: favorites } = useGetFavoritesQuery();
-
-        const favoritesAddMutation = useFavoritesAddMutation();
-        const favoritesRemoveMutation = useFavoritesRemoveMutation();
+        const { mutate: favoritesAddMutate, isPending: favoritesAddPending } =
+            useFavoritesAddMutation();
+        const {
+            mutate: favoritesRemoveMutate,
+            isPending: favoritesRemovePending,
+        } = useFavoritesRemoveMutation();
 
         const [isFavorite, setIsFavorite] = useState(false);
 
         useEffect(() => {
             if (favorites) {
-                setIsFavorite(favorites.some((el) => el.id === id));
+                setIsFavorite(favorites.some((el) => el.product.id === id));
             }
         }, [favorites]);
 
-        const addToFavorite = () => {};
+        const handleFavorite = () => {
+            const body = {
+                product_id: id,
+                quantity: 1,
+            };
+
+            if (isFavorite) {
+                setIsFavorite(false);
+                favoritesRemoveMutate(body, {
+                    onError: () => {
+                        setIsFavorite(true);
+                    },
+                });
+                return;
+            }
+
+            setIsFavorite(true);
+            favoritesAddMutate(body, {
+                onError: () => {
+                    setIsFavorite(false);
+                },
+            });
+        };
 
         return (
             <Tag
@@ -81,10 +106,10 @@ const ProductItem: FC<Props> = memo(
                     )}
                     <div className={cn(cls.overlay)}>
                         {userData && userData.role.slug === "buyer" ? (
-                            <div
+                            <button
                                 onClick={(e) => {
                                     e.preventDefault();
-                                    addToFavorite();
+                                    handleFavorite();
                                 }}
                             >
                                 <FavoriteIcon
@@ -95,7 +120,7 @@ const ProductItem: FC<Props> = memo(
                                           }
                                         : { stroke: "var(--white-100)" })}
                                 />
-                            </div>
+                            </button>
                         ) : (
                             <></>
                         )}

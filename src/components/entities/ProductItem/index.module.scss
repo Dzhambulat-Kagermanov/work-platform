@@ -23,7 +23,7 @@
     position: absolute;
     display: flex;
     flex-flow: column;
-    & > div:first-child {
+    & > button:first-child {
         pointer-events: none;
         display: flex;
         justify-content: flex-end;

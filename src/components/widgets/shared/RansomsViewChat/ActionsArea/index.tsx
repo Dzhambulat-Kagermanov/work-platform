@@ -91,8 +91,11 @@ const ActionsArea: FC<Props> = ({ className, activeId, role }) => {
                 }}
             />
             <ViewChatSendMessage
+                isSending={sendMessage.isPending}
                 className={cn(cls.send_btn)}
-                disabled={!message && !filesBlob?.length}
+                disabled={
+                    (!message && !filesBlob?.length) || sendMessage.isPending
+                }
             />
         </form>
     );

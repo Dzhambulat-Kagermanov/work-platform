@@ -29,10 +29,14 @@ const useFavoritesRemoveMutation = () => {
             if (!oldData) {
                 return;
             }
+            console.log(
+                oldData,
+                oldData.filter((el) => el.product.id !== data.req.product_id),
+            );
 
             queryClient.setQueryData(
                 getFavoritesKey,
-                oldData.filter((el) => el.id !== data.req.product_id),
+                oldData.filter((el) => el.product.id !== data.req.product_id),
             );
 
             toast.success("Товар успешно убран из избранного");

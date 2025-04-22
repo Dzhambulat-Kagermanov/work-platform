@@ -29,11 +29,14 @@ const useFavoritesAddMutation = () => {
                 queryClient.getQueryData<Product[]>(getFavoritesKey);
 
             if (!oldData) {
+                console.log(1);
                 return;
             }
+            console.log(oldData[0], data);
 
             queryClient.setQueryData(getFavoritesKey, [
                 ...(oldData ? oldData : []),
+                // data.res.data.ad,
             ]);
 
             toast.success("Товар успешно добавлен в избранное");

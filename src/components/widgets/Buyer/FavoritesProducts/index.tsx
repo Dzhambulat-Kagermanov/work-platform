@@ -20,10 +20,12 @@ const FavoritesProducts: FC<Props> = ({ className }) => {
             </div>
         );
     }
+    console.log(favoritesData);
+
     return (
         <Container tag="section" className={cn(cls.wrapper, [className])}>
             <ul className={cn(cls.group)}>
-                {favoritesData.map((item, index) => {
+                {favoritesData.map(({ product: item }, index) => {
                     return (
                         <Link
                             href={ROUTES.BUYER.PRODUCTS.ID(`${item.id}`)}

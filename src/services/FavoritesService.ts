@@ -11,7 +11,9 @@ export type RemoveFromFavoriteData = {
 
 class FavoritesService {
     async getFavorites() {
-        const res = await axios.get<{ favorites: Product[] }>("/favorites");
+        const res = await axios.get<{
+            favorites: { product: Product; name: string; price: string }[];
+        }>("/favorites");
 
         return res.data;
     }
