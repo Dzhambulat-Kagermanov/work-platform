@@ -29,7 +29,7 @@ const MessagesArea: FC<Props> = ({ className, messages, status, role }) => {
         setTimeout(() => {
             if (groupOverlayRef.current && notificationRef.current) {
                 groupOverlayRef.current.style.paddingTop = `${
-                    notificationRef.current.offsetHeight + 10
+                    notificationRef.current.offsetHeight + 20
                 }px`;
             }
         }, 0);
@@ -73,12 +73,12 @@ const MessagesArea: FC<Props> = ({ className, messages, status, role }) => {
                         //@ts-ignore
                         ref={notificationRef}
                     />
-                    <div
-                        ref={groupOverlayRef}
-                        className={cn(cls.messages_group_overlay)}
-                    >
-                        <div className={cn(cls.messages_group_wrapper)}>
-                            {messagesGroup.map((item, index) => {
+                    <div className={cn(cls.messages_group_overlay)}>
+                        <div
+                            className={cn(cls.messages_group_wrapper)}
+                            ref={groupOverlayRef}
+                        >
+                            {[...messagesGroup].reverse().map((item, index) => {
                                 return (
                                     <MessagesAreaGroup
                                         className={cn(cls.messages_group)}
