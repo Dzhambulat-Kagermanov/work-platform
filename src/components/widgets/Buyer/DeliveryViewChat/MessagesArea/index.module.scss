@@ -27,6 +27,20 @@
         background-color: var(--grey-100);
     }
 }
+
+.loading_indicator {
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.load_trigger {
+    height: 5px;
+    width: 100%;
+    position: relative;
+    top: 0;
+}
 .messages_group_wrapper {
     padding: 15px 40px 0 50px;
     height: 1px;

@@ -23,12 +23,27 @@
 .messages_group_wrapper {
     flex-grow: 1;
     overflow: auto;
-    flex-direction: column-reverse;
+    flex-direction: column; /* Changed from column-reverse to column */
     padding: 15px 40px 15px 50px;
     height: 1px;
     max-height: 100%;
     display: flex;
     row-gap: 40px;
+    
+    .loading_indicator {
+        padding: 10px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        order: -1; /* Ensure it appears at the top in the column-reverse layout */
+    }
+    
+    .load_trigger {
+        height: 5px;
+        width: 100%;
+        position: relative;
+        order: -2; /* Place it above the loading indicator */
+    }
     &::-webkit-scrollbar {
         width: 3px;
         background-color: transparent;
