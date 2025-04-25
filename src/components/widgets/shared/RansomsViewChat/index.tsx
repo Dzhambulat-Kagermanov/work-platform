@@ -31,6 +31,7 @@ const RansomsViewChat: FC<Props> = ({
     // State to store all messages and visible messages for pagination
     const [allMessages, setAllMessages] = useState<Message[]>([]);
     const [visibleMessages, setVisibleMessages] = useState<Message[]>([]);
+    const [hasMore, setHasMore] = useState(true); // State to track if there are more messages to load
     const pageSize = 10; // Number of messages to load per page
 
     // Sort messages by date and initialize the visible messages
@@ -43,14 +44,17 @@ const RansomsViewChat: FC<Props> = ({
                 return timeA - timeB; // Oldest first (ascending order)
             });
             
-            // Store all messages for pagination
-            setAllMessages(sortedMessages);
-            
-            // Show the most recent messages initially
+            // Всегда показываем только последние pageSize сообщений при первой загрузке
+            // Остальные сообщения будут загружаться при скролле
             if (sortedMessages.length > pageSize) {
-                setVisibleMessages(sortedMessages.slice(-pageSize)); // Last 10 messages
+                // Сохраняем только последние pageSize сообщений в видимых
+                setVisibleMessages(sortedMessages.slice(-pageSize)); // Последние 10 сообщений
+                // А в allMessages сохраняем только более старые сообщения (кроме последних pageSize)
+                setAllMessages(sortedMessages.slice(0, -pageSize));
             } else {
-                setVisibleMessages(sortedMessages); // All messages if fewer than pageSize
+                // Если всего сообщений меньше чем pageSize, показываем их все
+                setVisibleMessages(sortedMessages);
+                setAllMessages([]); // Нет сообщений для подгрузки
             }
         } else {
             setAllMessages([]);
@@ -65,31 +69,30 @@ const RansomsViewChat: FC<Props> = ({
         // Simulate loading delay
         await new Promise(resolve => setTimeout(resolve, 500));
         
-        if (!allMessages || !Array.isArray(allMessages)) {
+        if (!allMessages || !Array.isArray(allMessages) || allMessages.length === 0) {
+            setHasMore(false);
             return [];
         }
         
-        // Find the oldest visible message index
-        const oldestVisibleMessageId = visibleMessages[0]?.id;
-        const oldestVisibleIndex = allMessages.findIndex(msg => msg.id === oldestVisibleMessageId);
+        // Определяем, сколько сообщений загрузить
+        const batchSize = Math.min(pageSize, allMessages.length);
         
-        if (oldestVisibleIndex <= 0) {
-            // Already showing the oldest messages
+        // Берем последнюю порцию сообщений из allMessages (они самые старые из тех, что остались)
+        const messagesToLoad = allMessages.slice(-batchSize);
+        
+        if (messagesToLoad.length === 0) {
+            setHasMore(false);
             return [];
         }
         
-        // Calculate how many more messages we can load
-        const startIndex = Math.max(0, oldestVisibleIndex - pageSize);
-        const newMessages = allMessages.slice(startIndex, oldestVisibleIndex);
+        // Убираем загруженные сообщения из allMessages
+        setAllMessages(prev => prev.slice(0, -batchSize));
         
-        if (newMessages.length === 0) {
-            return [];
-        }
+        // Добавляем загруженные сообщения в начало списка видимых сообщений
+        setVisibleMessages(prev => [...messagesToLoad, ...prev]);
         
-        // Add new messages to the beginning of visible messages
-        setVisibleMessages(prev => [...newMessages, ...prev]);
-        return newMessages;
-    }, [allMessages, visibleMessages, pageSize]);
+        return messagesToLoad;
+    }, [allMessages, pageSize]);
 
     return (
         <section className={cn(cls.wrapper, [className])}>
@@ -108,6 +111,7 @@ const RansomsViewChat: FC<Props> = ({
                         className={cn(cls.messages)}
                         fetchMoreMessages={fetchMoreMessages}
                         pageSize={pageSize}
+                        activeId={activeId}
                     />
                     <ImageSendArea role={role} />
                     <ActionsArea

@@ -1,0 +1,38 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px 16px;
+    gap: 24px;
+
+    @media (max-width: 768px) {
+        padding: 16px;
+    }
+}
+
+.back_btn {
+    align-self: flex-start;
+}
+
+.head {
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+.head_mobile_content {
+    margin-top: 16px;
+}
+
+.statistic {
+    margin-bottom: 24px;
+}
+
+.products {
+    margin-bottom: 24px;
+}
+
+.reviews {
+    margin-bottom: 24px;
+}

@@ -2,6 +2,7 @@ import { FC, useEffect } from "react";
 import { TClassName, TState } from "@/types";
 import { cn } from "@/lib";
 import Image from "next/image";
+import Link from "next/link";
 import { HeadAreaSalesmanInfo } from "../HeadAreaSalesmanInfo";
 import { HeadAreaOrderInfo } from "../HeadAreaOrderInfo";
 import { HeadAreaBackBtn } from "../HeadAreaBackBtn";
@@ -19,6 +20,19 @@ interface Props extends TClassName {
     orderInfo: Order;
     role: TRole;
 }
+// Helper function to get the buyer ID from the order info
+const getBuyerId = (order: Order): number => {
+    // Try to find a message from the buyer to extract their ID
+    if (order.messages && order.messages.length > 0) {
+        const buyerMessage = order.messages.find(msg => msg.whoSend === 'buyer');
+        if (buyerMessage && buyerMessage.sender_id) {
+            return buyerMessage.sender_id;
+        }
+    }
+    // Fallback to using the first message's sender ID or a default ID
+    return order.messages?.[0]?.sender_id || 1;
+};
+
 const HeadArea: FC<Props> = ({ className, setActiveId, orderInfo, role }) => {
     const BUYER_AVATAR_STUB = "/images/stub/avatar.png";
     const setBuyerAvatar = useChat(setBuyerAvatarSelector);
@@ -53,13 +67,16 @@ const HeadArea: FC<Props> = ({ className, setActiveId, orderInfo, role }) => {
                         <></>
                     )}
                     <div className={cn(cls.border)}>
-                        <Image
-                            src={BUYER_AVATAR_STUB}
-                            width={42}
-                            height={42}
-                            alt="Аватар"
-                            className={cls.image}
-                        />
+                        <Link href={`/buyer/profile/${getBuyerId(orderInfo)}`}>
+                            <Image
+                                src={BUYER_AVATAR_STUB}
+                                width={42}
+                                height={42}
+                                alt="Аватар покупателя"
+                                className={cls.image}
+                                title="Перейти в профиль покупателя"
+                            />
+                        </Link>
                     </div>
                 </div>
                 <HeadAreaSalesmanInfo

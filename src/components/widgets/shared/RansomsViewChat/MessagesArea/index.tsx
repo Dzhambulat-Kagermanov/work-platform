@@ -60,9 +60,11 @@ interface Props extends TClassName {
     // Optional pagination props
     fetchMoreMessages?: () => Promise<Message[]>;
     pageSize?: number;
+    // ID активного чата для отслеживания изменений
+    activeId?: number;
 }
 
-const MessagesArea: FC<Props> = ({ className, messages: initialMessages, status, role, fetchMoreMessages, pageSize = 10 }) => {
+const MessagesArea: FC<Props> = ({ className, messages: initialMessages, status, role, fetchMoreMessages, pageSize = 10, activeId }) => {
     // State for pagination
     const [messages, setMessages] = useState<Message[]>(initialMessages || []);
     const [isLoading, setIsLoading] = useState(false);
@@ -77,6 +79,9 @@ const MessagesArea: FC<Props> = ({ className, messages: initialMessages, status,
     
     // Use a ref to keep track of message IDs we've already seen to prevent duplicates
     const processedMessageIds = useRef<Set<number | string>>(new Set());
+    
+    // ID последнего активного чата для отслеживания изменений
+    const lastActiveIdRef = useRef<number | undefined>(activeId);
     
     // State for message groups
     const [messagesGroup, setMessagesGroup] = useState<Array<{ date: string; messages: Message[] }>>([]);
@@ -132,6 +137,22 @@ const MessagesArea: FC<Props> = ({ className, messages: initialMessages, status,
             }
         };
     }, [loadMoreMessages, isLoading, hasMore]);
+
+    // Сброс обработанных сообщений при смене активного чата
+    useEffect(() => {
+        // Если активный ID изменился
+        if (activeId !== lastActiveIdRef.current) {
+            console.log(`ActiveId changed from ${lastActiveIdRef.current} to ${activeId} - resetting messages`);
+            // Сбрасываем состояние сообщений
+            setMessages([]);
+            // Очищаем набор обработанных ID
+            processedMessageIds.current.clear();
+            // Обновляем ссылку на последний активный ID
+            lastActiveIdRef.current = activeId;
+            // Сбрасываем флаг первой загрузки, чтобы скролл пошел вниз
+            setIsFirstLoad(true);
+        }
+    }, [activeId]);
 
     // Update messages when initialMessages change
     useEffect(() => {

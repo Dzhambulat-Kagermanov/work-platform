@@ -80,8 +80,15 @@ const Chats: FC<Props> = ({ className, chatType, search }) => {
                         key={item.id}
                         tag="li"
                         setIsActive={(id) => {
-                            setActiveChatId(id);
-                            updateBuyerData(id);
+                            // Проверим, отличается ли выбранный ID от текущего
+                            if (activeId !== id) {
+                                console.log(`Switching chat from ${activeId} to ${id}`);
+                                // Сначала очистим хранилище сообщений через resetProcessedMessageIds
+                                // Это сделаем прямо перед сменой активного ID
+                                setActiveChatId(id);
+                                // Обновляем данные для нового чата
+                                updateBuyerData(id);
+                            }
                         }}
                         newMessagesQnt={item.messages.length}
                         isActive={activeId === item.id}
