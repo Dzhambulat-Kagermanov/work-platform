@@ -1,5 +1,5 @@
 "use client";
-import { FC, MouseEventHandler, useEffect } from "react";
+import { FC, MouseEventHandler, useEffect, useState } from "react";
 import cls from "./index.module.scss";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
@@ -13,15 +13,27 @@ interface Props extends TClassName {}
 
 const ReferralContent: FC<Props> = ({ className }) => {
     const profile = useProfile(profileSelector);
+    const [referralUrl, setReferralUrl] = useState<string>("");
+    
+    const referralLinkMutation = useReferralLink();
+    
     const handleCopy: MouseEventHandler = () => {
-        navigator.clipboard.writeText("https://wbdiscount.pro/seller/balance");
+        if (referralUrl) {
+            navigator.clipboard.writeText(referralUrl);
+        }
     };
 
-    const referralLink = useReferralLink();
-
     useEffect(() => {
-        if (profile?.id) referralLink.mutate(profile.id);
-    }, []);
+        if (profile?.id) {
+            referralLinkMutation.mutate(profile.id, {
+                onSuccess: (data) => {
+                    if (data && data.url) {
+                        setReferralUrl(data.url);
+                    }
+                }
+            });
+        }
+    }, [profile?.id]);
 
     return (
         <section className={cn(cls.wrapper, [className])}>
@@ -40,9 +52,13 @@ const ReferralContent: FC<Props> = ({ className }) => {
                 </Typography>
                 <div className={cls.link}>
                     <Typography font="Inter-M" tag="p" size={14}>
-                        https://wbdiscount.pro/seller/balance
+                        {referralUrl || "Загрузка ссылки..."}
                     </Typography>
-                    <button className={cn(cls.btn)} onClick={handleCopy}>
+                    <button 
+                        className={cn(cls.btn)} 
+                        onClick={handleCopy}
+                        disabled={!referralUrl}
+                    >
                         <CopyIcon
                             className={cn(cls.icon)}
                             color="var(--grey-600)"
