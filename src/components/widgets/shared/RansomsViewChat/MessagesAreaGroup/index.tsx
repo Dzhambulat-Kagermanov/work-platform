@@ -25,11 +25,22 @@ const MessagesAreaGroup: FC<Props> = ({
     messages,
     userIsOnline,
 }) => {
-    // Sort messages chronologically within each date group
+    // Sort messages chronologically within each date group and remove duplicates
     const sortedMessages = useMemo(() => {
         if (!Array.isArray(messages)) return [];
         
-        return [...messages].sort((a, b) => {
+        // Use a map to track message IDs to remove duplicates
+        const uniqueMessages = new Map();
+        
+        // Keep only one copy of each message based on ID
+        messages.forEach(msg => {
+            if (msg.id && !uniqueMessages.has(msg.id)) {
+                uniqueMessages.set(msg.id, msg);
+            }
+        });
+        
+        // Convert back to array and sort chronologically
+        return [...uniqueMessages.values()].sort((a, b) => {
             const timeA = new Date(a.created_at || a.updated_at || 0).getTime();
             const timeB = new Date(b.created_at || b.updated_at || 0).getTime();
             return timeA - timeB; // Ascending order - oldest first

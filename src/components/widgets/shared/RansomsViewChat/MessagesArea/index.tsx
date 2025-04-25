@@ -75,6 +75,9 @@ const MessagesArea: FC<Props> = ({ className, messages: initialMessages, status,
     const notificationRef = useRef<HTMLDivElement>(null);
     const groupOverlayRef = useRef<HTMLDivElement>(null);
     
+    // Use a ref to keep track of message IDs we've already seen to prevent duplicates
+    const processedMessageIds = useRef<Set<number | string>>(new Set());
+    
     // State for message groups
     const [messagesGroup, setMessagesGroup] = useState<Array<{ date: string; messages: Message[] }>>([]);
 
@@ -132,8 +135,36 @@ const MessagesArea: FC<Props> = ({ className, messages: initialMessages, status,
 
     // Update messages when initialMessages change
     useEffect(() => {
-        setMessages(initialMessages || []);
-        setIsFirstLoad(true);
+        if (!initialMessages || !Array.isArray(initialMessages)) {
+            setMessages([]);
+            processedMessageIds.current.clear();
+            return;
+        }
+        
+        // Filter out messages we've already processed to prevent duplicates
+        const uniqueMessages = initialMessages.filter(msg => {
+            if (!msg.id || processedMessageIds.current.has(msg.id)) {
+                return false; // Skip if no ID or we've already processed this message
+            }
+            
+            // Add this message ID to our processed set
+            processedMessageIds.current.add(msg.id);
+            return true;
+        });
+        
+        // Update the messages state with the filtered new messages
+        if (uniqueMessages.length > 0) {
+            setMessages(prev => [...prev, ...uniqueMessages]);
+        } else if (messages.length === 0 && initialMessages.length > 0) {
+            // If we have no messages yet, but initialMessages has some, use them directly
+            setMessages(initialMessages);
+            // Record all these IDs as processed
+            initialMessages.forEach(msg => {
+                if (msg.id) processedMessageIds.current.add(msg.id);
+            });
+        }
+        
+        setIsFirstLoad(messages.length === 0);
         setHasMore(true);
     }, [initialMessages]);
 
