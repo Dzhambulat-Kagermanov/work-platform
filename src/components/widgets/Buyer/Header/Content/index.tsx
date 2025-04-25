@@ -25,10 +25,12 @@ const Content: FC<Props> = ({ className }) => {
     const setMainPageDefaultFilters = useFiltersStore(mainPageSetDefaultFilters);
 
     return (
-        <Formik onSubmit={(values) => {
-            router.push(`/?search=${values.search}`);
-            setMainPageDefaultFilters();
-        }} initialValues={{
+        <Formik 
+            onSubmit={() => {
+                // Empty onSubmit as we're handling submission in the Form component
+                // This prevents the default Formik submission behavior
+            }}
+            initialValues={{
             search: searchParams.get("search"),
         }}>
             {
@@ -36,7 +38,21 @@ const Content: FC<Props> = ({ className }) => {
                     handleChange,
                     values,
                 }) => (
-                    <Form className={cn(cls.content, [className, cls.cont])}>
+                    <Form className={cn(cls.content, [className, cls.cont])} onSubmit={(e) => {
+                        // Prevent the default form submission that triggers RSC requests
+                        e.preventDefault();
+                        
+                        // Handle search directly without router navigation
+                        const searchValue = values.search || '';
+                        const params = new URLSearchParams(window.location.search);
+                        params.set('search', searchValue);
+                        
+                        // Update URL without causing navigation
+                        window.history.pushState({}, '', `/?${params.toString()}`);
+                        
+                        // Apply filters without triggering RSC requests
+                        setMainPageDefaultFilters();
+                    }}>
                         {width > MD_LOW && <Logo className={cn(cls.logo)} />}
                         {width <= SM_BIG && <BurgerMenu />}
                         <Input

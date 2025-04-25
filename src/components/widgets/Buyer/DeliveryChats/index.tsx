@@ -40,7 +40,7 @@ const DeliveryChats: FC<Props> = ({ className, chatType }) => {
                     inpCls={cn(cls.inp)}
                     contentCls={cn(cls.inp_content)}
                     wrapperCls={cn(cls.inp_wrapper)}
-                    placeholder="Поиск..."
+                    placeholder="Поиск.1.."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     icon={<SearchIcon color="var(--grey-300)" />}
