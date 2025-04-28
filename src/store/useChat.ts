@@ -190,52 +190,131 @@ const useChat = create<TUseChat>()(
                 sendSalesmanFiles: [...(files ? files : []), saveFile],
             });
         },
-        initSalesmanData: (messages) => {
+        initSalesmanData: (data) => {
+            console.log('Initializing salesman data:', data);
+            
+            // Проверка на пагинированные сообщения (API возвращает их в формате messages.data)
+            let messagesArray: TOrderMessage[] = [];
+            
+            if (data?.messages) {
+                // Проверяем, является ли messages объектом с пагинацией
+                // @ts-ignore - игнорируем ошибку TypeScript, т.к. API может вернуть пагинированные данные
+                if (typeof data.messages === 'object' && data.messages !== null && 
+                    'data' in data.messages && Array.isArray(data.messages.data)) {
+                    console.log('Found paginated messages with', (data.messages as any).data.length, 'items');
+                    messagesArray = (data.messages as any).data;
+                }
+                // Если messages - это массив, используем его напрямую
+                else if (Array.isArray(data.messages)) {
+                    console.log('Found direct messages array with', data.messages.length, 'items');
+                    messagesArray = data.messages;
+                }
+            }
+            
             set({
-                salesmanChatData: messages,
+                salesmanChatData: {
+                    ...data,
+                    messages: messagesArray,
+                },
             });
         },
-        initBuyerData: (messages) => {
+        initBuyerData: (data) => {
+            console.log('Initializing buyer data:', data);
+            
+            // Проверка на пагинированные сообщения (API возвращает их в формате messages.data)
+            let messagesArray: TOrderMessage[] = [];
+            
+            if (data?.messages) {
+                // Проверяем, является ли messages объектом с пагинацией
+                // @ts-ignore - игнорируем ошибку TypeScript, т.к. API может вернуть пагинированные данные
+                if (typeof data.messages === 'object' && data.messages !== null && 
+                    'data' in data.messages && Array.isArray(data.messages.data)) {
+                    console.log('Found paginated messages with', (data.messages as any).data.length, 'items');
+                    messagesArray = (data.messages as any).data;
+                }
+                // Если messages - это массив, используем его напрямую
+                else if (Array.isArray(data.messages)) {
+                    console.log('Found direct messages array with', data.messages.length, 'items');
+                    messagesArray = data.messages;
+                }
+            }
+            
             set({
-                buyerChatData: messages,
+                buyerChatData: {
+                    ...data,
+                    // Устанавливаем обработанный массив сообщений
+                    messages: messagesArray,
+                },
             });
         },
         addBuyerMessage: (message) => {
             set((state) => {
-                console.log(!!state.buyerChatData);
-
-                if (state.buyerChatData) {
-                    return {
-                        ...state,
-                        buyerChatData: {
-                            ...state.buyerChatData,
-                            messages: [
-                                ...state.buyerChatData.messages,
-                                message,
-                            ],
-                        },
-                    };
+                console.log('buyerChatData exists:', !!state.buyerChatData);
+                
+                // Если buyerChatData отсутствует, возвращаем состояние без изменений
+                if (!state.buyerChatData) {
+                    console.log('buyerChatData is missing');
+                    return state;
                 }
-                return state;
+                
+                // Создаем новый массив сообщений, предотвращая любые ошибки итерации
+                let newMessages: TOrderMessage[] = [];
+                
+                // Проверяем, существует ли поле messages и является ли оно массивом
+                if (state.buyerChatData.messages && Array.isArray(state.buyerChatData.messages)) {
+                    console.log('messages array exists with length:', state.buyerChatData.messages.length);
+                    // Копируем существующие сообщения в новый массив
+                    newMessages = [...state.buyerChatData.messages];
+                } else {
+                    console.log('messages array does not exist or is not an array');
+                }
+                
+                // Добавляем новое сообщение в массив
+                newMessages.push(message);
+                
+                // Возвращаем обновленное состояние с новым массивом сообщений
+                return {
+                    ...state,
+                    buyerChatData: {
+                        ...state.buyerChatData,
+                        messages: newMessages,
+                    },
+                };
             });
         },
         addSalesmanMessage: (message) => {
             set((state) => {
-                if (state.salesmanChatData) {
-                    console.log(state.salesmanChatData);
-
-                    return {
-                        ...state,
-                        salesmanChatData: {
-                            ...state.salesmanChatData,
-                            messages: [
-                                ...state.salesmanChatData.messages,
-                                message,
-                            ],
-                        },
-                    };
+                console.log('salesmanChatData exists:', !!state.salesmanChatData);
+                
+                // Если salesmanChatData отсутствует, возвращаем состояние без изменений
+                if (!state.salesmanChatData) {
+                    console.log('salesmanChatData is missing');
+                    return state;
                 }
-                return state;
+                
+                // Создаем новый массив сообщений, предотвращая любые ошибки итерации
+                let newMessages: TOrderMessage[] = [];
+                
+                // Проверяем, существует ли поле messages и является ли оно массивом
+                if (state.salesmanChatData.messages && Array.isArray(state.salesmanChatData.messages)) {
+                    console.log('messages array exists with length:', state.salesmanChatData.messages.length);
+                    // Копируем существующие сообщения в новый массив
+                    newMessages = [...state.salesmanChatData.messages];
+                } else {
+                    console.log('messages array does not exist or is not an array');
+                }
+                
+                // Добавляем новое сообщение в массив
+                newMessages.push(message);
+                
+                // Возвращаем обновленное состояние с новым массивом сообщений
+                return {
+                    ...state,
+                    salesmanChatData: {
+                        ...state.salesmanChatData,
+                        messages: newMessages,
+                    },
+                };
             });
         },
         addMessageForBuyerChat: (message, id) => {

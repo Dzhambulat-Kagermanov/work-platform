@@ -158,38 +158,81 @@ const MessagesArea: FC<Props> = ({ className, messages: initialMessages, status,
 
     // Update messages when initialMessages change
     useEffect(() => {
+        console.log('initialMessages изменились:', initialMessages?.length, 'сообщений');
+        
+        // Если initialMessages пусты или не массив, очищаем состояние
         if (!initialMessages || !Array.isArray(initialMessages)) {
+            console.log('Нет входящих сообщений, очищаем состояние');
             setMessages([]);
             processedMessageIds.current.clear();
             return;
         }
         
-        // Filter out messages we've already processed to prevent duplicates
-        const uniqueMessages = initialMessages.filter(msg => {
-            if (!msg.id || processedMessageIds.current.has(msg.id)) {
-                return false; // Skip if no ID or we've already processed this message
-            }
-            
-            // Add this message ID to our processed set
-            processedMessageIds.current.add(msg.id);
-            return true;
-        });
-        
-        // Update the messages state with the filtered new messages
-        if (uniqueMessages.length > 0) {
-            setMessages(prev => [...prev, ...uniqueMessages]);
-        } else if (messages.length === 0 && initialMessages.length > 0) {
-            // If we have no messages yet, but initialMessages has some, use them directly
+        // При изменении активного чата, полностью перезаписываем сообщения
+        if (activeId !== lastActiveIdRef.current) {
+            console.log('Активный чат изменился, полная замена сообщений');
             setMessages(initialMessages);
-            // Record all these IDs as processed
+            
+            // Очищаем и обновляем обработанные ID
+            processedMessageIds.current.clear();
             initialMessages.forEach(msg => {
                 if (msg.id) processedMessageIds.current.add(msg.id);
             });
+            
+            return;
         }
         
+        // Проверка на новые сообщения (отправленные пользователем или полученные)
+        if (initialMessages.length > 0) {
+            console.log('Обрабатываем новые сообщения');
+            
+            // Проверяем, если кол-во initialMessages совпадает или меньше текущих сообщений в чате,
+            // но они могут быть разные - полностью заменяем сообщения
+            if (initialMessages.length <= messages.length && !deepEqual(initialMessages, messages)) {
+                console.log('Обновлены существующие сообщения, заменяем всё');
+                setMessages(initialMessages);
+                processedMessageIds.current.clear();
+                initialMessages.forEach(msg => {
+                    if (msg.id) processedMessageIds.current.add(msg.id);
+                });
+                return;
+            }
+            
+            // Находим только новые сообщения, которых ещё нет
+            const currentIds = new Set(messages.map(msg => msg.id));
+            const newMessages = initialMessages.filter(msg => !currentIds.has(msg.id));
+            
+            if (newMessages.length > 0) {
+                console.log(`Добавляем ${newMessages.length} новых сообщений к существующим`);
+                setMessages(prev => [...prev, ...newMessages]);
+                // Добавляем новые ID в обработанные
+                newMessages.forEach(msg => {
+                    if (msg.id) processedMessageIds.current.add(msg.id);
+                });
+            } else if (messages.length === 0) {
+                console.log('У нас нет сообщений, но они пришли - используем все');
+                setMessages(initialMessages);
+                initialMessages.forEach(msg => {
+                    if (msg.id) processedMessageIds.current.add(msg.id);
+                });
+            }
+        }
+        
+        // Устанавливаем флаг первой загрузки и возможности подгрузить больше
         setIsFirstLoad(messages.length === 0);
         setHasMore(true);
-    }, [initialMessages]);
+    }, [initialMessages, activeId, messages]);
+    
+    // Вспомогательная функция для глубокого сравнения массивов сообщений
+    function deepEqual(arr1: Message[], arr2: Message[]): boolean {
+        if (arr1.length !== arr2.length) return false;
+        
+        // Сравниваем элементы по id
+        const arr1Ids = arr1.map(item => item.id).sort().join(',');
+        const arr2Ids = arr2.map(item => item.id).sort().join(',');
+        
+        return arr1Ids === arr2Ids;
+    }
 
     // Set initial padding for notification
     useEffect(() => {
@@ -202,30 +245,7 @@ const MessagesArea: FC<Props> = ({ className, messages: initialMessages, status,
         }, 0);
     }, []);
 
-    // Update messages when initialMessages changes
-    useEffect(() => {
-        if (initialMessages?.length) {
-            if (isFirstLoad) {
-                setMessages(initialMessages);
-            } else {
-                // Make sure messages is an array before using map
-                if (Array.isArray(messages) && messages.length > 0) {
-                    // Keep existing messages and add new ones
-                    const existingIds = new Set(messages.map(msg => msg.id));
-                    const newMessages = initialMessages.filter(msg => !existingIds.has(msg.id));
-                    
-                    if (newMessages.length > 0) {
-                        setMessages(prev => [...prev, ...newMessages]);
-                    }
-                } else {
-                    // If messages is not a valid array, just set it to initialMessages
-                    setMessages(initialMessages);
-                }
-            }
-        }
-        
-        setIsFirstLoad(false);
-    }, [initialMessages, isFirstLoad]);
+    // Этот эффект удалён, так как его функциональность объединена с предыдущим эффектом
 
     // Group messages by date whenever messages change
     useEffect(() => {
@@ -290,13 +310,13 @@ const MessagesArea: FC<Props> = ({ className, messages: initialMessages, status,
 
     return (
         <div className={cn(cls.wrapper, [className])}>
-            {isFirstLoad || isLoading ? (
-                // Показываем индикатор загрузки во время первой загрузки или при подгрузке сообщений
+            {isLoading && !messages.length ? (
+                // Показываем индикатор загрузки только во время первой загрузки
                 <div className={cn(cls.loading)}>
                     <PageLoader className="w-full h-full" />
                 </div>
-            ) : messagesGroup.length ? (
-                // Если есть сообщения, отображаем чат
+            ) : activeId && orderData ? (
+                // Если активный ID и данные заказа есть, показываем чат
                 <>
                     <RansomsViewNotification
                         status={status}
@@ -314,22 +334,35 @@ const MessagesArea: FC<Props> = ({ className, messages: initialMessages, status,
                                 {isLoading && <div className={cls.loader} />}
                             </div>
                             <div className={cn(cls.messages_wrapper)}>
-                                {messagesGroup.map((item, index) => (
-                                    <MessagesAreaGroup
-                                        className={cn(cls.messages_group)}
-                                        userIsOnline={false}
-                                        date={item.date}
-                                        messages={item.messages}
-                                        key={index}
-                                    />
-                                ))}
+                                {Array.isArray(messages) && messages.length > 0 ? (
+                                    // Отображаем группы сообщений, если они есть
+                                    messagesGroup.map((group, index) => (
+                                        <MessagesAreaGroup
+                                            className={cn(cls.messages_group)}
+                                            userIsOnline={false}
+                                            date={group.date}
+                                            messages={group.messages}
+                                            key={index}
+                                        />
+                                    ))
+                                ) : (
+                                    // Если нет сообщений, но чат активен, показываем сообщение о пустом чате
+                                    <div className={cn(cls.no_messages)}>
+                                        <Typography font="Inter-M" size={16}>
+                                            В этом чате пока нет сообщений
+                                        </Typography>
+                                        <Typography font="Inter-R" size={14} className="text-gray-500 mt-2">
+                                            Отправьте сообщение, чтобы начать общение
+                                        </Typography>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
                     <RansomsReviewModal className={cn(cls.review_modal)} />
                 </>
             ) : (
-                // Если нет сообщений после загрузки, показываем сообщение
+                // Если нет активного ID или данных заказа, показываем сообщение о выборе заказа
                 <div className={cn(cls.empty)}>
                     <Image
                         src={"/images/delivery/chat.svg"}
