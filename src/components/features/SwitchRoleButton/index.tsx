@@ -26,16 +26,18 @@ const SwitchRoleButton: FC<Props> = ({ className }) => {
 
     const handleClick = () => {
         setIsSwitchRedirect(true);
+        
+        // Determine target route before role switch
+        const targetRoute = profile?.role.slug === "buyer" 
+            ? ROUTES.SALESMAN.PROFILE 
+            : ROUTES.BUYER.ACCOUNT.VALUE;
+            
         roleSwitch.mutate(undefined, {
             onSettled: async () => {
                 await queryClient.invalidateQueries({
                     queryKey: sessionQueryKeys,
                 });
-                if (profile?.role.slug === "buyer") {
-                    router.push(ROUTES.SALESMAN.PROFILE);
-                } else {
-                    router.push(ROUTES.BUYER.ACCOUNT.VALUE);
-                }
+                router.push(targetRoute);
             },
         });
     };
@@ -51,7 +53,9 @@ const SwitchRoleButton: FC<Props> = ({ className }) => {
             theme="fill"
             size="low"
         >
-            Переключиться на продавца
+            {profile?.role.slug === "buyer" 
+                ? "Переключиться на продавца" 
+                : "Переключиться на покупателя"}
         </Button>
     );
 };

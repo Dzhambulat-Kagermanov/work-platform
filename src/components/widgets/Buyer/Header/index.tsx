@@ -11,6 +11,7 @@ import { usePathname } from "next/navigation"
 import { pathValidating } from "@/lib"
 import cls from "./index.module.scss"
 import { useSessionQuery } from "@/hooks/api/auth"
+import { SwitchRoleButton } from "@/components/features/SwitchRoleButton"
 
 interface Props extends TModuleClassName { }
 const Header: FC<Props> = ({ className, wrapperClassName }) => {
@@ -29,25 +30,29 @@ const Header: FC<Props> = ({ className, wrapperClassName }) => {
             ])}
         >
             <Container className={cn(cls.container, [className])}>
-                {width > SM_BIG && !user ? (
-                    <Link
-                        href={
-                            isSalesmanPages ? "/buyer/auth" : "/salesman/auth"
-                        }
-                    >
-                        <Typography
-                            font="Inter-M"
-                            size={12}
-                            className={cn(cls.entrance_link)}
+                <div className={cn(cls.headerTop)}>
+                    {user ? (
+                        <SwitchRoleButton className={cn(cls.switchRoleButton)} />
+                    ) : width > SM_BIG ? (
+                        <Link
+                            href={
+                                isSalesmanPages ? "/buyer/auth" : "/salesman/auth"
+                            }
                         >
-                            {isSalesmanPages
-                                ? "Вход для покупателей"
-                                : "Вход для продавцов"}
-                        </Typography>
-                    </Link>
-                ) : (
-                    <></>
-                )}
+                            <Typography
+                                font="Inter-M"
+                                size={12}
+                                className={cn(cls.entrance_link)}
+                            >
+                                {isSalesmanPages
+                                    ? "Вход для покупателей"
+                                    : "Вход для продавцов"}
+                            </Typography>
+                        </Link>
+                    ) : (
+                        <></>
+                    )}
+                </div>
                 <Suspense fallback={<></>}>
                     <Content className={cn(cls.content)} />
                 </Suspense>
