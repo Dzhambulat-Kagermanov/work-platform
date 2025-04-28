@@ -9,9 +9,9 @@ import cls from "./index.module.scss";
 import { Order } from "@/types/api";
 
 interface Props extends TClassName {
-    adsId: Order["ads_id"];
+    orderId: Order["id"];
 }
-const HeadAreaOrderInfo: FC<Props> = ({ className, adsId }) => {
+const HeadAreaOrderInfo: FC<Props> = ({ className, orderId }) => {
     const showModal = useModalStore((state) => state.showModal);
     const handleModalOpen = () => {
         showModal({ slug: BUYER_DELIVERY_CHAT_ORDER_INFO_MODAL });
@@ -23,7 +23,7 @@ const HeadAreaOrderInfo: FC<Props> = ({ className, adsId }) => {
             {width > MD_LOW ? (
                 <div className={cn(cls.wrapper, [className])}>
                     <Typography font="Inter-R" size={12} tag="h6">
-                        Заказ #{adsId}
+                        Заказ #{orderId}
                     </Typography>
                 </div>
             ) : (

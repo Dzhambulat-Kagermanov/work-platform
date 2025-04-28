@@ -19,13 +19,14 @@ const RansomsViewChat: FC<Props> = ({ className }) => {
 
     const initBuyerData = useChat(initBuyerDataSelector);
     const buyerChatData = useChat(buyerDataSelector);
-    const ordersQuery = useGetOrderQuery(activeId, !buyerChatData);
+    // Всегда выполнять запрос при изменении activeId, независимо от наличия данных в buyerChatData
+    const ordersQuery = useGetOrderQuery(activeId, activeId !== undefined);
 
     useEffect(() => {
         if (ordersQuery.data && ordersQuery.status === "success") {
             initBuyerData(ordersQuery.data);
         }
-    }, [ordersQuery.status]);
+    }, [ordersQuery.status, activeId]);
 
     return (
         <ViewChat
