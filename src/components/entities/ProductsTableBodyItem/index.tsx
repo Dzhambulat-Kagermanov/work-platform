@@ -12,6 +12,7 @@ import {
 import { useStopProductsMutation } from "@/hooks/api/seller";
 import { useQueryClient } from "@tanstack/react-query";
 import { ADS_LIST_QUERY_KEY } from "@/hooks/api/seller/useGetAdsListQuery";
+import { SELLER_PRODUCTS_QUERY_KEY } from "@/hooks/api/seller/useGetSellerProductsQuery";
 
 interface Props {
     columnCls?: string;
@@ -49,9 +50,14 @@ const ProductsTableBodyItem: FC<Props> = ({ item, columnCls }) => {
             },
             {
                 onSuccess: () => {
+                    // Invalidate both ads and products queries to refresh the data
                     queryClient.invalidateQueries({
                         queryKey: ADS_LIST_QUERY_KEY,
                     });
+                    queryClient.invalidateQueries({
+                        queryKey: [SELLER_PRODUCTS_QUERY_KEY],
+                    });
+                    // Update the toggle state to the opposite of the current state
                     setToggle(!toggle);
                 },
             },
