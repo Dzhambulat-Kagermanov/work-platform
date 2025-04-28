@@ -78,14 +78,19 @@ const AuthForm: FC<Props> = ({
                     />
                     {loginMutation.isError &&
                     loginMutation.error?.response?.data?.message ? (
-                        <Typography
-                            className={cls.error_message}
-                            font="Inter-R"
-                            tag="p"
-                            size={16}
-                        >
-                            {loginMutation.error.response.data.message}
-                        </Typography>
+                        <div className={cls.error_container}>
+                            <Typography
+                                className={cls.error_message}
+                                font="Inter-R"
+                                tag="p"
+                                size={16}
+                            >
+                                {loginMutation.error.response.data.message.includes('не найден') ? 
+                                    'Пользователь с таким номером телефона не зарегистрирован.' : 
+                                    loginMutation.error.response.data.message
+                                }
+                            </Typography>
+                        </div>
                     ) : null}
                     <AuthFormSubmit
                         disabled={

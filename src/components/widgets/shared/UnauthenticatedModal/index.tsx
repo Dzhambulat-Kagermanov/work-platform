@@ -23,13 +23,26 @@ const UnauthenticatedModal: FC<Props> = ({ className }) => {
                 <Typography font="Inter-M" size={24} tag="h2">
                     Войти
                 </Typography>
-                <AuthForm
-                    noRedirectOnSuccess
-                    withoutErrorToast
-                    onSuccess={() => {
-                        hideModal({ slug: UNAUTHENTICATED_MODAL });
-                    }}
-                />
+                <div className={cls.authOptions}>
+                    <AuthForm
+                        noRedirectOnSuccess
+                        withoutErrorToast
+                        onSuccess={() => {
+                            hideModal({ slug: UNAUTHENTICATED_MODAL });
+                        }}
+                    />
+                    <button 
+                        className={cls.registrationButton}
+                        onClick={() => {
+                            // Close current modal and open registration
+                            hideModal({ slug: UNAUTHENTICATED_MODAL });
+                            // Navigate to registration page or trigger registration modal
+                            window.location.href = '/auth/register';
+                        }}
+                    >
+                        Регистрация
+                    </button>
+                </div>
             </div>
         </ModalBase>
     );

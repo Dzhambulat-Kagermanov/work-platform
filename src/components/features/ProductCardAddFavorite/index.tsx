@@ -8,11 +8,16 @@ import {
     useFavoritesAddMutation,
     useFavoritesRemoveMutation,
 } from "@/hooks/api/favorites";
+import { useSessionQuery } from "@/hooks/api/auth";
+import useModalStore, { showModalSelector } from "@/store/useModalStore";
+import { UNAUTHENTICATED_MODAL } from "@/constants";
 
 interface Props
     extends TClassName,
         Pick<TProductItemProps, "id" | "isFavorite"> {}
 const ProductCardAddFavorite: FC<Props> = ({ className, id, isFavorite }) => {
+    const showModal = useModalStore(showModalSelector);
+    const { data: userData } = useSessionQuery();
     const { mutate: favoritesAddMutate, isPending: favoritesAddPending } =
         useFavoritesAddMutation();
     const { mutate: favoritesRemoveMutate, isPending: favoritesRemovePending } =
@@ -23,6 +28,13 @@ const ProductCardAddFavorite: FC<Props> = ({ className, id, isFavorite }) => {
     const disabled = favoritesAddPending || favoritesRemovePending;
 
     const handleClick = (e: MouseEvent) => {
+        // Check if user is logged in
+        if (!userData) {
+            // Show auth modal instead of making API call that would fail
+            showModal({ slug: UNAUTHENTICATED_MODAL });
+            return;
+        }
+
         const body = {
             product_id: id,
             quantity: 1,

@@ -41,9 +41,15 @@ const useFavoritesAddMutation = () => {
 
             toast.success("Товар успешно добавлен в избранное");
         },
-        onError: (e) => {
+        onError: (e: any) => {
+            // Show the authentication modal
             showModal({ slug: UNAUTHENTICATED_MODAL });
-            serverErrorToastHandler(e, "Не удалось добавить товар в избранное");
+            
+            // Only show error toast if it's not an authentication error
+            const isAuthError = e?.response?.data?.message === 'Unauthenticated';
+            if (!isAuthError) {
+                serverErrorToastHandler(e, "Не удалось добавить товар в избранное");
+            }
         },
     });
 };
