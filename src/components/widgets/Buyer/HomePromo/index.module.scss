@@ -1,10 +1,16 @@
-.container {
+.outerContainer {
+    padding: 0;
+}
+
+.promoBox {
     border-radius: 15px;
-    border: 1px solid var(--white-200);
     overflow: hidden;
-    img {
-        width: 100%;
-        height: 170px;
-        object-fit: cover;
-    }
+    font-size: 0; /* Removes any whitespace */
+}
+
+.bannerImage {
+    width: 100%;
+    background-size: 100% 100%; /* Ensures exact fit without distortion */
+    background-position: center;
+    background-repeat: no-repeat;
 }

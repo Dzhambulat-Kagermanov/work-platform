@@ -3,7 +3,6 @@ import { FC } from "react";
 import { TClassName } from "@/types";
 import { cn } from "@/lib";
 import { Container } from "@/components/ui";
-import Image from "next/image";
 import cls from "./index.module.scss";
 import { useScreen } from "@/hooks";
 import { SM_BIG } from "@/constants";
@@ -11,23 +10,32 @@ import { SM_BIG } from "@/constants";
 interface Props extends TClassName {}
 const HomePromo: FC<Props> = ({ className }) => {
     const width = useScreen();
+    
     return (
-        <Container tag="section" className={cn(cls.container, [className])}>
-            {width > SM_BIG ? (
-                <Image
-                    src="/images/home/promo/background-lg.png"
-                    alt="Акция"
-                    width={1350}
-                    height={170}
-                />
-            ) : (
-                <Image
-                    src="/images/home/promo/background-md.png"
-                    alt="Акция"
-                    width={600}
-                    height={400}
-                />
-            )}
+        <Container tag="section" className={cn(cls.outerContainer, [className])}>
+            <div className={cls.promoBox}>
+                {width > SM_BIG ? (
+                    <div 
+                        className={cls.bannerImage} 
+                        style={{ 
+                            backgroundImage: "url('/images/home/promo/background-lg.png')",
+                            aspectRatio: "2708/348" // Actual ratio of the desktop image
+                        }} 
+                        role="img"
+                        aria-label="Акция"
+                    />
+                ) : (
+                    <div 
+                        className={cls.bannerImage} 
+                        style={{ 
+                            backgroundImage: "url('/images/home/promo/background-md.png')",
+                            aspectRatio: "1035/510" // Actual ratio of the mobile image
+                        }}
+                        role="img"
+                        aria-label="Акция"
+                    />
+                )}
+            </div>
         </Container>
     );
 };
