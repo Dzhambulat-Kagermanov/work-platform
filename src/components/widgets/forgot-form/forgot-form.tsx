@@ -138,6 +138,9 @@ const ForgotForm: FC<Props> = ({ className }) => {
                                 disabled={
                                     isSubmitting || currentStep !== "code"
                                 }
+                                name="code"
+                                value={values.code}
+                                onChange={handleChange}
                                 error={errors.code}
                             />
                             {!codeSendAgain ? (
