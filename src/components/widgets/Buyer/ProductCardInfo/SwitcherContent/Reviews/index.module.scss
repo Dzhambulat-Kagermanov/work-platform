@@ -4,6 +4,19 @@
         grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
         gap: 20px;
     }
+    
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+        gap: 20px;
+        
+        .pageInfo {
+            font-size: 14px;
+            color: var(--plaque-black-300);
+        }
+    }
 }
 @media screen and (max-width: 788px) {
     .wrapper {

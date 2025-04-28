@@ -36,6 +36,15 @@ class ProductsService {
             console.error(error);
         }
     }
+    
+    async getProductFeedbacks(productId: string, page: number = 1) {
+        try {
+            const res = await axios.get(`/product/${productId}/feedbacks/${page}`);
+            return res.data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
 }
 
 export default ProductsService;

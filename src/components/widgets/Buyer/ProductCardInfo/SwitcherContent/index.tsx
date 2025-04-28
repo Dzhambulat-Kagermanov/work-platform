@@ -43,6 +43,7 @@ const SwitcherContent: FC<Props> = ({
                         reviews={product.reviews}
                         className={cn(cls.reviews)}
                         itemCls={cn(cls.content)}
+                        productId={product.product.id.toString()}
                     />
                 )
             ) : (
@@ -94,6 +95,7 @@ const SwitcherContent: FC<Props> = ({
                             reviews={product.reviews}
                             className={cn(cls.reviews)}
                             itemCls={cn(cls.content)}
+                            productId={product.product.id.toString()}
                         />
                     </div>
                 </>
