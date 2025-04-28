@@ -8,32 +8,52 @@ import { CopyIcon } from "lucide-react";
 import Link from "next/link";
 import { profileSelector, useProfile } from "@/store/useProfile";
 import { useReferralLink } from "@/hooks/api/seller/useReferralLink";
+import { useSearchParams } from "next/navigation";
+import axios from "axios";
 
 interface Props extends TClassName {}
 
 const ReferralContent: FC<Props> = ({ className }) => {
     const profile = useProfile(profileSelector);
     const [referralUrl, setReferralUrl] = useState<string>("");
+    const [copySuccess, setCopySuccess] = useState(false);
+    const searchParams = useSearchParams();
     
     const referralLinkMutation = useReferralLink();
     
     const handleCopy: MouseEventHandler = () => {
         if (referralUrl) {
             navigator.clipboard.writeText(referralUrl);
+            setCopySuccess(true);
+            setTimeout(() => setCopySuccess(false), 2000);
         }
     };
 
+    // Generate referral URL with the user's ID
     useEffect(() => {
         if (profile?.id) {
-            referralLinkMutation.mutate(profile.id, {
-                onSuccess: (data) => {
-                    if (data && data.url) {
-                        setReferralUrl(data.url);
-                    }
-                }
-            });
+            // Create the URL with the ?ref={USER_ID} format
+            const baseUrl = window.location.origin;
+            const referralPath = `${baseUrl}?ref=${profile.id}`;
+            setReferralUrl(referralPath);
         }
     }, [profile?.id]);
+
+    // Process the referral parameter if it exists
+    useEffect(() => {
+        const refParam = searchParams.get('ref');
+        if (refParam) {
+            // Call the POST API to save the referral
+            const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || ''}/referral/${refParam}`;
+            axios.post(apiUrl)
+                .then(response => {
+                    console.log('Referral registered successfully:', response.data);
+                })
+                .catch(error => {
+                    console.error('Error registering referral:', error);
+                });
+        }
+    }, [searchParams]);
 
     return (
         <section className={cn(cls.wrapper, [className])}>
@@ -58,11 +78,18 @@ const ReferralContent: FC<Props> = ({ className }) => {
                         className={cn(cls.btn)} 
                         onClick={handleCopy}
                         disabled={!referralUrl}
+                        title="Скопировать ссылку"
                     >
-                        <CopyIcon
-                            className={cn(cls.icon)}
-                            color="var(--grey-600)"
-                        />
+                        {copySuccess ? (
+                            <span className={cls.copy_success}>
+                                Скопировано!
+                            </span>
+                        ) : (
+                            <CopyIcon
+                                className={cn(cls.icon)}
+                                color="var(--grey-600)"
+                            />
+                        )}
                     </button>
                 </div>
             </div>
