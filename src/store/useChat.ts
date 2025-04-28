@@ -205,12 +205,17 @@ const useChat = create<TUseChat>()(
                 console.log(!!state.buyerChatData);
 
                 if (state.buyerChatData) {
+                    // Ensure messages is an array before spreading
+                    const currentMessages = Array.isArray(state.buyerChatData.messages) 
+                        ? state.buyerChatData.messages 
+                        : [];
+                        
                     return {
                         ...state,
                         buyerChatData: {
                             ...state.buyerChatData,
                             messages: [
-                                ...state.buyerChatData.messages,
+                                ...currentMessages,
                                 message,
                             ],
                         },
@@ -219,24 +224,14 @@ const useChat = create<TUseChat>()(
                 return state;
             });
         },
-        addSalesmanMessage: (message) => {
-            set((state) => {
-                if (state.salesmanChatData) {
-                    console.log(state.salesmanChatData);
-
-                    return {
-                        ...state,
-                        salesmanChatData: {
-                            ...state.salesmanChatData,
-                            messages: [
-                                ...state.salesmanChatData.messages,
-                                message,
-                            ],
-                        },
-                    };
-                }
-                return state;
-            });
+        removeSendBuyerFile: (id) => {
+            const files = get().sendBuyerFiles;
+            if (files)
+                set({
+                    sendBuyerFiles: files.filter((props) => {
+                        return props.id !== id;
+                    }),
+                });
         },
         addMessageForBuyerChat: (message, id) => {
             set((state) => {
@@ -273,6 +268,28 @@ const useChat = create<TUseChat>()(
                             ...state.initSalesmanChats,
                             { ...item, messages: [...item.messages, message] },
                         ],
+                    };
+                }
+                return state;
+            });
+        },
+        addSalesmanMessage: (message) => {
+            set((state) => {
+                if (state.salesmanChatData) {
+                    // Ensure messages is an array before spreading
+                    const currentMessages = Array.isArray(state.salesmanChatData.messages) 
+                        ? state.salesmanChatData.messages 
+                        : [];
+                        
+                    return {
+                        ...state,
+                        salesmanChatData: {
+                            ...state.salesmanChatData,
+                            messages: [
+                                ...currentMessages,
+                                message,
+                            ],
+                        },
                     };
                 }
                 return state;
