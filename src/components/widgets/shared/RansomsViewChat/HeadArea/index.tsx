@@ -87,6 +87,7 @@ const HeadArea: FC<Props> = ({ className, setActiveId, orderInfo, role }) => {
             <HeadAreaOrderInfo
                 key={orderInfo.id}
                 orderId={orderInfo.id}
+                orderData={orderInfo}
                 className={cn(cls.order_info)}
             />
         </div>

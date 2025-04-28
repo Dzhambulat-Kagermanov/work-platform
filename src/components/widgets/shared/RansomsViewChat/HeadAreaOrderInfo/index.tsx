@@ -10,6 +10,7 @@ import { Order } from "@/types/api";
 
 interface Props extends TClassName {
     orderId: Order["id"];
+    orderData?: Order; // Добавляем полный объект Order для доступа к created_at
 }
 const HeadAreaOrderInfo: FC<Props> = ({ className, orderId }) => {
     const showModal = useModalStore((state) => state.showModal);

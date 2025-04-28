@@ -58,10 +58,11 @@ const Chats: FC<Props> = ({ className, chatType, search }) => {
         }
     }, [chats]);
 
-    useEffect(() => {
-        if (activeId === undefined && chats && chats.length && !isMobileVersion)
-            setActiveChatId(chats[0].id);
-    }, [chats]);
+    // Убрано автоматическое выделение первого чата
+    // useEffect(() => {
+    //     if (activeId === undefined && chats && chats.length && !isMobileVersion)
+    //         setActiveChatId(chats[0].id);
+    // }, [chats]);
 
     if (isLoading) {
         return <PageLoader className="h-full" />;

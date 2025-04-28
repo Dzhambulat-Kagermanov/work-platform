@@ -9,7 +9,7 @@ import { MessagesAreaGroup } from "../MessagesAreaGroup";
 import { SALESMAN_IS_ONLINE } from "../constants/messages";
 import { DeliveryReviewModal } from "../../DeliveryReviewModal";
 import cls from "./index.module.scss";
-import { Message } from "@/types/api";
+import { Message, Order } from "@/types/api";
 import { PageLoader } from "@/components/ui/loaders";
 import { TViewChatMessageGroupProps } from "@/types/buyer/chat";
 
@@ -18,8 +18,9 @@ interface Props extends TClassName {
     fetchMoreMessages?: (page: number, pageSize?: number) => Promise<Message[]>;
     chatId?: string;
     pageSize?: number; // Number of messages to load per page
+    orderData?: Order; // Данные заказа для расчета времени ожидания
 }
-const MessagesArea: FC<Props> = ({ className, messages: initialMessages, fetchMoreMessages, chatId, pageSize = 10 }) => {
+const MessagesArea: FC<Props> = ({ className, messages: initialMessages, fetchMoreMessages, chatId, pageSize = 10, orderData }) => {
     const [messages, setMessages] = useState<Message[]>(initialMessages || []);
     const [isLoading, setIsLoading] = useState(false);
     const [page, setPage] = useState(1);
@@ -178,6 +179,8 @@ const MessagesArea: FC<Props> = ({ className, messages: initialMessages, fetchMo
                 <>
                     <DeliveryViewNotification
                         className={cn(cls.notification)}
+                        orderData={orderData}
+                        notificationType="waitingOrder"
                         //@ts-ignore
                         ref={notificationRef}
                     />

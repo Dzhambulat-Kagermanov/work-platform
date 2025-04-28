@@ -1,9 +1,13 @@
 import { Timer, Typography } from "@/components/ui"
 import { EnChatStatuses } from '@/types/api/Chat'
+import { Order } from "@/types/api"
 import { ReactNode } from "react"
+import { formatDistanceToNow, differenceInSeconds } from 'date-fns'
+import { ru } from 'date-fns/locale'
 
 export const returnContent = (
     type?: EnChatStatuses,
+    orderData?: Order,
 ): {
     contentForDescription: ReactNode
     contentForPlaque: ReactNode
@@ -12,11 +16,25 @@ export const returnContent = (
     let contentForDescription: ReactNode = null
     switch (type) {
         case EnChatStatuses.pending:
+            // Расчет оставшегося времени на основе created_at
+            const calculateRemainingSeconds = (): number => {
+                if (!orderData?.created_at) return 1800; // 30 минут по умолчанию если нет created_at
+                
+                const createdDate = new Date(orderData.created_at);
+                const now = new Date();
+                
+                // 30 минут (1800 секунд) минус прошедшее время с момента создания
+                const timePassedSec = differenceInSeconds(now, createdDate);
+                const remainingSec = Math.max(0, 1800 - timePassedSec);
+                
+                return remainingSec;
+            };
+
             contentForPlaque = (
                 <Typography font="Inter-M" size={12} tag="h5">
                     Ожидание заказа{' '}
                     <time>
-                        <Timer second={1800} format="MM:SS" />
+                        <Timer second={calculateRemainingSeconds()} format="MM:SS" />
                     </time>
                 </Typography>
             )

@@ -8,7 +8,7 @@ import { RansomsViewNotification } from "../../RansomsViewNotification";
 import { MessagesAreaGroup } from "../MessagesAreaGroup";
 import { RansomsReviewModal } from "../../RansomsReviewModal";
 import cls from "./index.module.scss";
-import { Message } from "@/types/api";
+import { Message, Order } from "@/types/api";
 import { dateParserHandler } from "@/handlers";
 import Chat from "@/types/api/Chat";
 import { TRole } from "..";
@@ -62,9 +62,11 @@ interface Props extends TClassName {
     pageSize?: number;
     // ID активного чата для отслеживания изменений
     activeId?: number;
+    // Полные данные заказа для расчета времени ожидания
+    orderData?: Order;
 }
 
-const MessagesArea: FC<Props> = ({ className, messages: initialMessages, status, role, fetchMoreMessages, pageSize = 10, activeId }) => {
+const MessagesArea: FC<Props> = ({ className, messages: initialMessages, status, role, fetchMoreMessages, pageSize = 10, activeId, orderData }) => {
     // State for pagination
     const [messages, setMessages] = useState<Message[]>(initialMessages || []);
     const [isLoading, setIsLoading] = useState(false);
@@ -288,10 +290,17 @@ const MessagesArea: FC<Props> = ({ className, messages: initialMessages, status,
 
     return (
         <div className={cn(cls.wrapper, [className])}>
-            {messagesGroup.length ? (
+            {isFirstLoad || isLoading ? (
+                // Показываем индикатор загрузки во время первой загрузки или при подгрузке сообщений
+                <div className={cn(cls.loading)}>
+                    <PageLoader className="w-full h-full" />
+                </div>
+            ) : messagesGroup.length ? (
+                // Если есть сообщения, отображаем чат
                 <>
                     <RansomsViewNotification
                         status={status}
+                        orderData={orderData}
                         className={cn(cls.notification)}
                         //@ts-ignore
                         ref={notificationRef}
@@ -301,34 +310,26 @@ const MessagesArea: FC<Props> = ({ className, messages: initialMessages, status,
                             className={cn(cls.messages_group_wrapper)}
                             ref={groupOverlayRef}
                         >
-                            {/* Loading indicator for pagination */}
-                            {isLoading && (
-                                <div className={cn(cls.loading_indicator)}>
-                                    <Typography font="Inter-SB" size={14} className="mr-2">
-                                        Загрузка предыдущих сообщений...
-                                    </Typography>
-                                    <PageLoader className="h-8" />
-                                </div>
-                            )}
-                            
-                            {/* Trigger element for intersection observer */}
-                            <div ref={loadTriggerRef} className={cn(cls.load_trigger)}></div>
-
-                            {/* Display message groups in chronological order (oldest to newest) */}
-                            {messagesGroup.map((item, index) => (
-                                <MessagesAreaGroup
-                                    className={cn(cls.messages_group)}
-                                    userIsOnline={false}
-                                    date={item.date}
-                                    messages={item.messages}
-                                    key={index}
-                                />
-                            ))}
+                            <div ref={loadTriggerRef} className={cls.load_more_trigger}>
+                                {isLoading && <div className={cls.loader} />}
+                            </div>
+                            <div className={cn(cls.messages_wrapper)}>
+                                {messagesGroup.map((item, index) => (
+                                    <MessagesAreaGroup
+                                        className={cn(cls.messages_group)}
+                                        userIsOnline={false}
+                                        date={item.date}
+                                        messages={item.messages}
+                                        key={index}
+                                    />
+                                ))}
+                            </div>
                         </div>
                     </div>
                     <RansomsReviewModal className={cn(cls.review_modal)} />
                 </>
             ) : (
+                // Если нет сообщений после загрузки, показываем сообщение
                 <div className={cn(cls.empty)}>
                     <Image
                         src={"/images/delivery/chat.svg"}

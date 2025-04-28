@@ -112,6 +112,7 @@ const RansomsViewChat: FC<Props> = ({
                         fetchMoreMessages={fetchMoreMessages}
                         pageSize={pageSize}
                         activeId={activeId}
+                        orderData={chatData}
                     />
                     <ImageSendArea role={role} />
                     <ActionsArea
@@ -120,15 +121,14 @@ const RansomsViewChat: FC<Props> = ({
                         activeId={activeId}
                     />
                 </>
-            ) : isLoading ? (
-                <PageLoader className="w-full h-full" />
-            ) : (
+            ) : !activeId ? (
                 <PageErrorStub
                     className="w-full"
-                    text={
-                        !activeId ? "Чат не выбран" : "Не удалось загрузить чат"
-                    }
+                    text="Чат не выбран"
                 />
+            ) : (
+                // Если есть activeId, но нет данных, всегда показываем загрузку
+                <PageLoader className="w-full h-full" />
             )}
         </section>
     );

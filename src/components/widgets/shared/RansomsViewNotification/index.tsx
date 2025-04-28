@@ -4,17 +4,19 @@ import { TClassName } from "@/types"
 import { returnContent } from "./lib/returnContent"
 import cls from "./index.module.scss"
 import Chat, { EnChatStatuses } from '@/types/api/Chat'
+import { Order } from "@/types/api"
 
 
 interface Props extends TClassName {
     status?: Chat['status']
+    orderData?: Order
 }
 const RansomsViewNotification: FC<Props> = forwardRef(
-    ({ className, status }, ref: Ref<HTMLDivElement> | undefined) => {
+    ({ className, status, orderData }, ref: Ref<HTMLDivElement> | undefined) => {
 
         let notificationType: EnChatStatuses | undefined = status
         const { contentForDescription, contentForPlaque } =
-            returnContent(notificationType)
+            returnContent(notificationType, orderData)
         return (
             <>
                 {notificationType && (

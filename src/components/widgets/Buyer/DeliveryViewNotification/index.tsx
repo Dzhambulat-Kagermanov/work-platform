@@ -3,6 +3,7 @@ import { cn } from "@/lib";
 import { TClassName } from "@/types";
 import { returnContent } from "./lib/returnContent";
 import cls from "./index.module.scss";
+import { Order } from "@/types/api";
 
 export type TViewChatNotification =
     | "waitingOrder"
@@ -12,12 +13,16 @@ export type TViewChatNotification =
     | "cashbackReceived"
     | undefined;
 
-interface Props extends TClassName {}
+interface Props extends TClassName {
+    orderData?: Order;
+    notificationType?: TViewChatNotification;
+}
 const DeliveryViewNotification: FC<Props> = forwardRef(
-    ({ className }, ref: Ref<HTMLDivElement> | undefined) => {
-        let notificationType: TViewChatNotification = "waitingOrder";
+    ({ className, orderData, notificationType: type }, ref: Ref<HTMLDivElement> | undefined) => {
+        // Если тип не указан, используем "waitingOrder" по умолчанию
+        let notificationType: TViewChatNotification = type || "waitingOrder";
         const { contentForDescription, contentForPlaque } =
-            returnContent(notificationType);
+            returnContent(notificationType, orderData);
         return (
             <>
                 {notificationType && (

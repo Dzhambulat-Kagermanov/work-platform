@@ -1,9 +1,12 @@
 import { Timer, Typography } from "@/components/ui";
 import { TViewChatNotification } from "..";
 import { ReactNode } from "react";
+import { Order } from "@/types/api";
+import { differenceInSeconds } from 'date-fns';
 
 export const returnContent = (
     type: TViewChatNotification,
+    orderData?: Order,
 ): {
     contentForDescription: ReactNode;
     contentForPlaque: ReactNode;
@@ -12,9 +15,23 @@ export const returnContent = (
     let contentForDescription: ReactNode;
     switch (type) {
         case "waitingOrder":
+            // Расчет оставшегося времени на основе created_at
+            const calculateRemainingSeconds = (): number => {
+                if (!orderData?.created_at) return 1800; // 30 минут по умолчанию если нет created_at
+                
+                const createdDate = new Date(orderData.created_at);
+                const now = new Date();
+                
+                // 30 минут (1800 секунд) минус прошедшее время с момента создания
+                const timePassedSec = differenceInSeconds(now, createdDate);
+                const remainingSec = Math.max(0, 1800 - timePassedSec);
+                
+                return remainingSec;
+            };
+
             contentForPlaque = (
                 <Typography font="Inter-M" size={12} tag="h5">
-                    Ожидание заказа <Timer second={1800} format="MM:SS" />
+                    Ожидание заказа <Timer second={calculateRemainingSeconds()} format="MM:SS" />
                 </Typography>
             );
             contentForDescription = (

@@ -5,7 +5,8 @@ import { ActionsArea } from "./ActionsArea";
 import { MessagesArea } from "./MessagesArea";
 import { HeadArea } from "./HeadArea";
 import cls from "./index.module.scss";
-import { Message, RoleSlug, BoolNumber } from "@/types/api";
+import { Message, RoleSlug, BoolNumber, Order } from "@/types/api";
+import { EnChatStatuses } from "@/types/api/Chat";
 
 interface Props extends TClassName {
     setActiveSTUB: TState<number | undefined>;
@@ -13,6 +14,22 @@ interface Props extends TClassName {
 const DeliveryViewChat: FC<Props> = ({ className, setActiveSTUB }) => {
     // Mock initial messages (start with fewer messages to demonstrate pagination)
     const [initialMessages, setInitialMessages] = useState<Message[]>([]);
+    
+    // Моковые данные заказа с полем created_at
+    const [orderData, setOrderData] = useState<Order>({
+        id: 123,
+        ads_id: 456,
+        price: 1000,
+        has_review_by_buyer: 0 as BoolNumber,
+        has_review_by_seller: 0 as BoolNumber,
+        is_archived: 0 as BoolNumber,
+        status: EnChatStatuses.pending,
+        messages: [],
+        ad: {} as any,
+        whoSend: 'seller',
+        created_at: new Date(Date.now() - 600000).toISOString(), // 10 минут назад
+        updated_at: new Date().toISOString()
+    });
     
     // Mock data for demonstration purposes
     useEffect(() => {
@@ -72,6 +89,7 @@ const DeliveryViewChat: FC<Props> = ({ className, setActiveSTUB }) => {
                 fetchMoreMessages={fetchMoreMessages}
                 pageSize={5} // Load 5 messages at a time to make pagination more obvious
                 chatId="demo-chat"
+                orderData={orderData}
             />
             <ActionsArea className={cn(cls.actions)} />
         </section>
